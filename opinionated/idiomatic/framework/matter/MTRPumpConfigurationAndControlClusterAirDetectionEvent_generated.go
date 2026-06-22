@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterAirDetectionEventAdopt(id objc.ID) *MT
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccade))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccade), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccade), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccade))
 }
 
 // NewMTRPumpConfigurationAndControlClusterAirDetectionEvent creates a new MTRPumpConfigurationAndControlClusterAirDetectionEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterAirDetectionEvent() *MTRPumpConfigu
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterAirDetectionEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterAirDetectionEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterAirDetectionEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterAirDetectionEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterAirDetectionEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterAirDetectionEventable = (*MTRPumpConfigurationAndControlClusterAirDetectionEvent)(nil)

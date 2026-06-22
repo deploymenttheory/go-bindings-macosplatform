@@ -48,1038 +48,768 @@ func textFieldAdopt(id objc.ID) *TextField {
 	return x
 }
 
-// WithPlaceholderString the string the text field displays when empty to help the user understand the text field’s purpose.
-func (x *TextField) WithPlaceholderString(placeholderString string) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-	return x
+// WithPlaceholderString sets the string the text field displays when empty to help the user understand the text field’s purpose.
+func (tf *TextField) WithPlaceholderString(placeholderString string) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	return tf
 }
 
-// WithPlaceholderAttributedString the attributed string the text field displays when empty to help the user understand the text field’s purpose.
-func (x *TextField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-	return x
+// WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
+func (tf *TextField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	return tf
 }
 
-// WithBackgroundColor the color of the background the text field’s cell draws behind the text.
-func (x *TextField) WithBackgroundColor(backgroundColor *Color) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
+func (tf *TextField) WithBackgroundColor(backgroundColor *Color) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return tf
 }
 
-// WithDrawsBackground a Boolean value that controls whether the text field’s cell draws a background color behind the text.
-func (x *TextField) WithDrawsBackground(drawsBackground bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean value that controls whether the text field’s cell draws a background color behind the text.
+func (tf *TextField) WithDrawsBackground(drawsBackground bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return tf
 }
 
-// WithTextColor the color of the text field’s content.
-func (x *TextField) WithTextColor(textColor *Color) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-	return x
+// WithTextColor sets the color of the text field’s content.
+func (tf *TextField) WithTextColor(textColor *Color) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	return tf
 }
 
-// WithBordered a Boolean value that controls whether the text field draws a solid black border around its contents.
-func (x *TextField) WithBordered(bordered bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value that controls whether the text field draws a solid black border around its contents.
+func (tf *TextField) WithBordered(bordered bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBordered:"), bordered)
+	return tf
 }
 
-// WithBezeled a Boolean value that controls whether the text field draws a bezeled background around its contents.
-func (x *TextField) WithBezeled(bezeled bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value that controls whether the text field draws a bezeled background around its contents.
+func (tf *TextField) WithBezeled(bezeled bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBezeled:"), bezeled)
+	return tf
 }
 
-// WithEditable a Boolean value that controls whether the user can edit the value in the text field.
-func (x *TextField) WithEditable(editable bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value that controls whether the user can edit the value in the text field.
+func (tf *TextField) WithEditable(editable bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setEditable:"), editable)
+	return tf
 }
 
-// WithSelectable a Boolean value that determines whether the user can select the content of the text field.
-func (x *TextField) WithSelectable(selectable bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value that determines whether the user can select the content of the text field.
+func (tf *TextField) WithSelectable(selectable bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSelectable:"), selectable)
+	return tf
 }
 
-// WithBezelStyle the text field’s bezel style, square or rounded.
-func (x *TextField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
-	return x
+// WithBezelStyle sets the text field’s bezel style, square or rounded.
+func (tf *TextField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	return tf
 }
 
-// WithPreferredMaxLayoutWidth the maximum width of the text field’s intrinsic content size.
-func (x *TextField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
-	return x
+// WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
+func (tf *TextField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	return tf
 }
 
-// WithMaximumNumberOfLines the maximum number of lines a wrapping text field displays before clipping or truncating the text.
-func (x *TextField) WithMaximumNumberOfLines(maximumNumberOfLines int) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
-	return x
+// WithMaximumNumberOfLines sets the maximum number of lines a wrapping text field displays before clipping or truncating the text.
+func (tf *TextField) WithMaximumNumberOfLines(maximumNumberOfLines int) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	return tf
 }
 
-// WithAllowsDefaultTighteningForTruncation a Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
-func (x *TextField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
-	return x
+// WithAllowsDefaultTighteningForTruncation sets a Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
+func (tf *TextField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	return tf
 }
 
-// WithLineBreakStrategy the strategy that the system uses to break lines when laying out multiple lines of text.
-func (x *TextField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
-	return x
+// WithLineBreakStrategy sets the strategy that the system uses to break lines when laying out multiple lines of text.
+func (tf *TextField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	return tf
 }
 
 // WithAllowsWritingTools sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAllowsWritingTools(allowsWritingTools bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
-	return x
+func (tf *TextField) WithAllowsWritingTools(allowsWritingTools bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	return tf
 }
 
 // WithAllowsWritingToolsAffordance sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
-	return x
+func (tf *TextField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	return tf
 }
 
 // WithPlaceholderStrings sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithPlaceholderStrings(items ...obj.Object) *TextField {
+func (tf *TextField) WithPlaceholderStrings(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderStrings:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	return tf
 }
 
 // WithPlaceholderAttributedStrings sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithPlaceholderAttributedStrings(items ...obj.Object) *TextField {
+func (tf *TextField) WithPlaceholderAttributedStrings(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	return tf
 }
 
-// WithResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
-func (x *TextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
-	return x
+// WithResolvesNaturalAlignmentWithBaseWritingDirection sets specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
+func (tf *TextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	return tf
 }
 
-// WithAutomaticTextCompletionEnabled a Boolean value that indicates whether the text field automatically completes text as the user types.
-func (x *TextField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
-	return x
+// WithAutomaticTextCompletionEnabled sets a Boolean value that indicates whether the text field automatically completes text as the user types.
+func (tf *TextField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	return tf
 }
 
-// WithAllowsCharacterPickerTouchBarItem a Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
-func (x *TextField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
-	return x
+// WithAllowsCharacterPickerTouchBarItem sets a Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
+func (tf *TextField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	return tf
 }
 
-// WithAllowsEditingTextAttributes a Boolean value that controls whether the user can change font attributes of the text field’s string.
-func (x *TextField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value that controls whether the user can change font attributes of the text field’s string.
+func (tf *TextField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return tf
 }
 
-// WithImportsGraphics a Boolean value that controls whether the user can drag image files into the text field.
-func (x *TextField) WithImportsGraphics(importsGraphics bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value that controls whether the user can drag image files into the text field.
+func (tf *TextField) WithImportsGraphics(importsGraphics bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return tf
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *TextField) WithTarget(target obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (tf *TextField) WithTarget(target obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return tf
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *TextField) WithTag(tag int) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (tf *TextField) WithTag(tag int) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTag:"), tag)
+	return tf
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *TextField) WithIgnoresMultiClick(ignoresMultiClick bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (tf *TextField) WithIgnoresMultiClick(ignoresMultiClick bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return tf
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *TextField) WithContinuous(continuous bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (tf *TextField) WithContinuous(continuous bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setContinuous:"), continuous)
+	return tf
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *TextField) WithEnabled(enabled bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (tf *TextField) WithEnabled(enabled bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setEnabled:"), enabled)
+	return tf
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *TextField) WithRefusesFirstResponder(refusesFirstResponder bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (tf *TextField) WithRefusesFirstResponder(refusesFirstResponder bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return tf
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *TextField) WithHighlighted(highlighted bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (tf *TextField) WithHighlighted(highlighted bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHighlighted:"), highlighted)
+	return tf
 }
 
-// WithControlSize the size of the control.
-func (x *TextField) WithControlSize(controlSize ControlSize) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (tf *TextField) WithControlSize(controlSize ControlSize) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setControlSize:"), controlSize)
+	return tf
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *TextField) WithFormatter(formatter obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (tf *TextField) WithFormatter(formatter obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return tf
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *TextField) WithObjectValue(objectValue obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (tf *TextField) WithObjectValue(objectValue obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return tf
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *TextField) WithStringValue(stringValue string) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (tf *TextField) WithStringValue(stringValue string) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return tf
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *TextField) WithAttributedStringValue(attributedStringValue obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (tf *TextField) WithAttributedStringValue(attributedStringValue obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return tf
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *TextField) WithIntValue(intValue int) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (tf *TextField) WithIntValue(intValue int) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIntValue:"), intValue)
+	return tf
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *TextField) WithIntegerValue(integerValue int) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (tf *TextField) WithIntegerValue(integerValue int) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIntegerValue:"), integerValue)
+	return tf
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *TextField) WithFloatValue(floatValue float32) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (tf *TextField) WithFloatValue(floatValue float32) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFloatValue:"), floatValue)
+	return tf
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *TextField) WithDoubleValue(doubleValue float64) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (tf *TextField) WithDoubleValue(doubleValue float64) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return tf
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *TextField) WithFont(font *Font) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (tf *TextField) WithFont(font *Font) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return tf
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *TextField) WithUsesSingleLineMode(usesSingleLineMode bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (tf *TextField) WithUsesSingleLineMode(usesSingleLineMode bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return tf
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *TextField) WithLineBreakMode(lineBreakMode LineBreakMode) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (tf *TextField) WithLineBreakMode(lineBreakMode LineBreakMode) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return tf
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *TextField) WithAlignment(alignment TextAlignment) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (tf *TextField) WithAlignment(alignment TextAlignment) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAlignment:"), alignment)
+	return tf
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *TextField) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (tf *TextField) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return tf
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *TextField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (tf *TextField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return tf
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithCell(cell CellProvider) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (tf *TextField) WithCell(cell CellProvider) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return tf
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithSubviews(items ...ViewProvider) *TextField {
+func (tf *TextField) WithSubviews(items ...ViewProvider) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSubviews:"), _arr)
+	return tf
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithHidden(hidden bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (tf *TextField) WithHidden(hidden bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHidden:"), hidden)
+	return tf
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (tf *TextField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return tf
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAutoresizesSubviews(autoresizesSubviews bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (tf *TextField) WithAutoresizesSubviews(autoresizesSubviews bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return tf
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (tf *TextField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return tf
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *TextField) WithFrame(frame corefoundation.CGRect) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (tf *TextField) WithFrame(frame corefoundation.CGRect) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrame:"), frame)
+	return tf
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithFrameRotation(frameRotation float64) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (tf *TextField) WithFrameRotation(frameRotation float64) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return tf
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithFrameCenterRotation(frameCenterRotation float64) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (tf *TextField) WithFrameCenterRotation(frameCenterRotation float64) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return tf
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithBoundsRotation(boundsRotation float64) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (tf *TextField) WithBoundsRotation(boundsRotation float64) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return tf
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *TextField) WithBounds(bounds corefoundation.CGRect) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (tf *TextField) WithBounds(bounds corefoundation.CGRect) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBounds:"), bounds)
+	return tf
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithCanDrawConcurrently(canDrawConcurrently bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (tf *TextField) WithCanDrawConcurrently(canDrawConcurrently bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return tf
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *TextField) WithNeedsDisplay(needsDisplay bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (tf *TextField) WithNeedsDisplay(needsDisplay bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return tf
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (tf *TextField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return tf
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithWantsRestingTouches(wantsRestingTouches bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (tf *TextField) WithWantsRestingTouches(wantsRestingTouches bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return tf
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (tf *TextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return tf
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (tf *TextField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return tf
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithWantsLayer(wantsLayer bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (tf *TextField) WithWantsLayer(wantsLayer bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return tf
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithLayer(layer obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (tf *TextField) WithLayer(layer obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return tf
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (tf *TextField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return tf
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithNeedsLayout(needsLayout bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (tf *TextField) WithNeedsLayout(needsLayout bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return tf
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAlphaValue(alphaValue float64) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (tf *TextField) WithAlphaValue(alphaValue float64) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return tf
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (tf *TextField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return tf
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithBackgroundFilters(items ...obj.Object) *TextField {
+func (tf *TextField) WithBackgroundFilters(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return tf
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithCompositingFilter(compositingFilter obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (tf *TextField) WithCompositingFilter(compositingFilter obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return tf
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithContentFilters(items ...obj.Object) *TextField {
+func (tf *TextField) WithContentFilters(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setContentFilters:"), _arr)
+	return tf
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithShadow(shadow *Shadow) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (tf *TextField) WithShadow(shadow *Shadow) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return tf
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithClipsToBounds(clipsToBounds bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (tf *TextField) WithClipsToBounds(clipsToBounds bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return tf
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (tf *TextField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return tf
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithToolTip(toolTip string) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (tf *TextField) WithToolTip(toolTip string) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return tf
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (tf *TextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return tf
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (tf *TextField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return tf
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithNextKeyView(nextKeyView ViewProvider) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (tf *TextField) WithNextKeyView(nextKeyView ViewProvider) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return tf
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithFocusRingType(focusRingType FocusRingType) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (tf *TextField) WithFocusRingType(focusRingType FocusRingType) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return tf
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField {
+func (tf *TextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return tf
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (tf *TextField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return tf
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (tf *TextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return tf
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (tf *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return tf
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (tf *TextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return tf
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (tf *TextField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return tf
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (tf *TextField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return tf
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (tf *TextField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return tf
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (tf *TextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return tf
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (tf *TextField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return tf
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (tf *TextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return tf
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *TextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (tf *TextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return tf
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *TextField) WithNextResponder(nextResponder ResponderProvider) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (tf *TextField) WithNextResponder(nextResponder ResponderProvider) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return tf
 }
 
-// WithMenu returns the responder’s menu.
-func (x *TextField) WithMenu(menu *Menu) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (tf *TextField) WithMenu(menu *Menu) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return tf
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *TextField) WithUserActivity(userActivity obj.Object) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (tf *TextField) WithUserActivity(userActivity obj.Object) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return tf
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *TextField) WithTouchBar(touchBar *TouchBar) *TextField {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (tf *TextField) WithTouchBar(touchBar *TouchBar) *TextField {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return tf
 }
 
 // SelectText ends editing in the text field and, if it’s selectable, selects the entire text content.
-func (x *TextField) SelectText(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectText:"), objref.IDOf(sender))
+func (tf *TextField) SelectText(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("selectText:"), objref.IDOf(sender))
 }
 
 // TextShouldBeginEditing requests permission to begin editing a text object.
-func (x *TextField) TextShouldBeginEditing(textObject *Text) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("textShouldBeginEditing:"), objref.IDOf(textObject))
+func (tf *TextField) TextShouldBeginEditing(textObject *Text) bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("textShouldBeginEditing:"), objref.IDOf(textObject))
 	return _r
 }
 
 // TextShouldEndEditing performs validation on the text field’s new value.
-func (x *TextField) TextShouldEndEditing(textObject *Text) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("textShouldEndEditing:"), objref.IDOf(textObject))
+func (tf *TextField) TextShouldEndEditing(textObject *Text) bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("textShouldEndEditing:"), objref.IDOf(textObject))
 	return _r
 }
 
 // TextDidBeginEditing posts a notification to the default notification center that the text is about to go into edit mode.
-func (x *TextField) TextDidBeginEditing(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
+func (tf *TextField) TextDidBeginEditing(notification obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
 }
 
 // TextDidEndEditing posts a notification when the text is no longer in edit mode.
-func (x *TextField) TextDidEndEditing(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
+func (tf *TextField) TextDidEndEditing(notification obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
 }
 
 // TextDidChange posts a notification when the text changes, and forwards the message to the text field’s cell if it responds.
-func (x *TextField) TextDidChange(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
+func (tf *TextField) TextDidChange(notification obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
 }
 
 // PlaceholderString wraps the corresponding Objective-C method.
-func (x *TextField) PlaceholderString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
+func (tf *TextField) PlaceholderString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("placeholderString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPlaceholderString wraps the corresponding Objective-C method.
-func (x *TextField) SetPlaceholderString(placeholderString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-}
-
 // PlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *TextField) PlaceholderAttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
+func (tf *TextField) PlaceholderAttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
 }
 
-// SetPlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *TextField) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-}
-
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *TextField) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (tf *TextField) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
-}
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *TextField) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
-func (x *TextField) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+func (tf *TextField) DrawsBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("drawsBackground"))
 	return _r
-}
-
-// SetDrawsBackground wraps the corresponding Objective-C method.
-func (x *TextField) SetDrawsBackground(drawsBackground bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
 // TextColor wraps the corresponding Objective-C method.
-func (x *TextField) TextColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textColor"))
+func (tf *TextField) TextColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// SetTextColor wraps the corresponding Objective-C method.
-func (x *TextField) SetTextColor(textColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-}
-
 // IsBordered wraps the corresponding Objective-C method.
-func (x *TextField) IsBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBordered"))
+func (tf *TextField) IsBordered() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("isBordered"))
 	return _r
-}
-
-// SetBordered wraps the corresponding Objective-C method.
-func (x *TextField) SetBordered(bordered bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 }
 
 // IsBezeled wraps the corresponding Objective-C method.
-func (x *TextField) IsBezeled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBezeled"))
+func (tf *TextField) IsBezeled() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("isBezeled"))
 	return _r
-}
-
-// SetBezeled wraps the corresponding Objective-C method.
-func (x *TextField) SetBezeled(bezeled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 }
 
 // IsEditable wraps the corresponding Objective-C method.
-func (x *TextField) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+func (tf *TextField) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("isEditable"))
 	return _r
-}
-
-// SetEditable wraps the corresponding Objective-C method.
-func (x *TextField) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
 // IsSelectable wraps the corresponding Objective-C method.
-func (x *TextField) IsSelectable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectable"))
+func (tf *TextField) IsSelectable() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("isSelectable"))
 	return _r
-}
-
-// SetSelectable wraps the corresponding Objective-C method.
-func (x *TextField) SetSelectable(selectable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 }
 
 // BezelStyle wraps the corresponding Objective-C method.
-func (x *TextField) BezelStyle() TextFieldBezelStyle {
-	_r := objc.Send[TextFieldBezelStyle](objref.IDOf(x), objc.RegisterName("bezelStyle"))
+func (tf *TextField) BezelStyle() TextFieldBezelStyle {
+	_r := objc.Send[TextFieldBezelStyle](objref.IDOf(tf), objc.RegisterName("bezelStyle"))
 	return _r
-}
-
-// SetBezelStyle wraps the corresponding Objective-C method.
-func (x *TextField) SetBezelStyle(bezelStyle TextFieldBezelStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 }
 
 // PreferredMaxLayoutWidth wraps the corresponding Objective-C method.
-func (x *TextField) PreferredMaxLayoutWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredMaxLayoutWidth"))
+func (tf *TextField) PreferredMaxLayoutWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(tf), objc.RegisterName("preferredMaxLayoutWidth"))
 	return _r
-}
-
-// SetPreferredMaxLayoutWidth wraps the corresponding Objective-C method.
-func (x *TextField) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 }
 
 // MaximumNumberOfLines wraps the corresponding Objective-C method.
-func (x *TextField) MaximumNumberOfLines() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfLines"))
+func (tf *TextField) MaximumNumberOfLines() int {
+	_r := objc.Send[int](objref.IDOf(tf), objc.RegisterName("maximumNumberOfLines"))
 	return _r
-}
-
-// SetMaximumNumberOfLines wraps the corresponding Objective-C method.
-func (x *TextField) SetMaximumNumberOfLines(maximumNumberOfLines int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
 }
 
 // AllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
-func (x *TextField) AllowsDefaultTighteningForTruncation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDefaultTighteningForTruncation"))
+func (tf *TextField) AllowsDefaultTighteningForTruncation() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("allowsDefaultTighteningForTruncation"))
 	return _r
-}
-
-// SetAllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
-func (x *TextField) SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
 }
 
 // LineBreakStrategy wraps the corresponding Objective-C method.
-func (x *TextField) LineBreakStrategy() LineBreakStrategy {
-	_r := objc.Send[LineBreakStrategy](objref.IDOf(x), objc.RegisterName("lineBreakStrategy"))
+func (tf *TextField) LineBreakStrategy() LineBreakStrategy {
+	_r := objc.Send[LineBreakStrategy](objref.IDOf(tf), objc.RegisterName("lineBreakStrategy"))
 	return _r
-}
-
-// SetLineBreakStrategy wraps the corresponding Objective-C method.
-func (x *TextField) SetLineBreakStrategy(lineBreakStrategy LineBreakStrategy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
 }
 
 // AllowsWritingTools wraps the corresponding Objective-C method.
-func (x *TextField) AllowsWritingTools() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsWritingTools"))
+func (tf *TextField) AllowsWritingTools() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("allowsWritingTools"))
 	return _r
-}
-
-// SetAllowsWritingTools wraps the corresponding Objective-C method.
-func (x *TextField) SetAllowsWritingTools(allowsWritingTools bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 }
 
 // AllowsWritingToolsAffordance wraps the corresponding Objective-C method.
-func (x *TextField) AllowsWritingToolsAffordance() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsWritingToolsAffordance"))
+func (tf *TextField) AllowsWritingToolsAffordance() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("allowsWritingToolsAffordance"))
 	return _r
-}
-
-// SetAllowsWritingToolsAffordance wraps the corresponding Objective-C method.
-func (x *TextField) SetAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 }
 
 // PlaceholderStrings wraps the corresponding Objective-C method.
 //
 // PlaceholderStrings returns the collection as a Go slice.
-func (x *TextField) PlaceholderStrings() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderStrings"))
+func (tf *TextField) PlaceholderStrings() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("placeholderStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
-}
-
-// SetPlaceholderStrings wraps the corresponding Objective-C method.
-func (x *TextField) SetPlaceholderStrings(placeholderStrings []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderStrings:"), purego.SliceToNSArray(placeholderStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // PlaceholderAttributedStrings wraps the corresponding Objective-C method.
 //
 // PlaceholderAttributedStrings returns the collection as a Go slice.
-func (x *TextField) PlaceholderAttributedStrings() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedStrings"))
+func (tf *TextField) PlaceholderAttributedStrings() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("placeholderAttributedStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPlaceholderAttributedStrings wraps the corresponding Objective-C method.
-func (x *TextField) SetPlaceholderAttributedStrings(placeholderAttributedStrings []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedStrings:"), purego.SliceToNSArray(placeholderAttributedStrings, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// ResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
-func (x *TextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection"))
+// ResolvesNaturalAlignmentWithBaseWritingDirection reports whether specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+func (tf *TextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection"))
 	return _r
-}
-
-// SetResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
-func (x *TextField) SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
 }
 
 // IsAutomaticTextCompletionEnabled wraps the corresponding Objective-C method.
-func (x *TextField) IsAutomaticTextCompletionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticTextCompletionEnabled"))
+func (tf *TextField) IsAutomaticTextCompletionEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("isAutomaticTextCompletionEnabled"))
 	return _r
-}
-
-// SetAutomaticTextCompletionEnabled wraps the corresponding Objective-C method.
-func (x *TextField) SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
 }
 
 // AllowsCharacterPickerTouchBarItem wraps the corresponding Objective-C method.
-func (x *TextField) AllowsCharacterPickerTouchBarItem() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCharacterPickerTouchBarItem"))
+func (tf *TextField) AllowsCharacterPickerTouchBarItem() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("allowsCharacterPickerTouchBarItem"))
 	return _r
-}
-
-// SetAllowsCharacterPickerTouchBarItem wraps the corresponding Objective-C method.
-func (x *TextField) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
 }
 
 // AllowsEditingTextAttributes wraps the corresponding Objective-C method.
-func (x *TextField) AllowsEditingTextAttributes() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEditingTextAttributes"))
+func (tf *TextField) AllowsEditingTextAttributes() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("allowsEditingTextAttributes"))
 	return _r
-}
-
-// SetAllowsEditingTextAttributes wraps the corresponding Objective-C method.
-func (x *TextField) SetAllowsEditingTextAttributes(allowsEditingTextAttributes bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 }
 
 // ImportsGraphics wraps the corresponding Objective-C method.
-func (x *TextField) ImportsGraphics() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("importsGraphics"))
+func (tf *TextField) ImportsGraphics() bool {
+	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("importsGraphics"))
 	return _r
 }
 
-// SetImportsGraphics wraps the corresponding Objective-C method.
-func (x *TextField) SetImportsGraphics(importsGraphics bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-}
-
 // SetTitleWithMnemonic sets the text field’s string value using the embedded character as the keyboard mnemonic.
-func (x *TextField) SetTitleWithMnemonic(stringWithAmpersand string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
+func (tf *TextField) SetTitleWithMnemonic(stringWithAmpersand string) {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
-
-// TextFieldable is the interface implemented by [TextField], for mocking and DI.
-type TextFieldable interface {
-	obj.Object
-	WithPlaceholderString(placeholderString string) *TextField
-	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextField
-	WithBackgroundColor(backgroundColor *Color) *TextField
-	WithDrawsBackground(drawsBackground bool) *TextField
-	WithTextColor(textColor *Color) *TextField
-	WithBordered(bordered bool) *TextField
-	WithBezeled(bezeled bool) *TextField
-	WithEditable(editable bool) *TextField
-	WithSelectable(selectable bool) *TextField
-	WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextField
-	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TextField
-	WithMaximumNumberOfLines(maximumNumberOfLines int) *TextField
-	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TextField
-	WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *TextField
-	WithAllowsWritingTools(allowsWritingTools bool) *TextField
-	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TextField
-	WithPlaceholderStrings(items ...obj.Object) *TextField
-	WithPlaceholderAttributedStrings(items ...obj.Object) *TextField
-	WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextField
-	WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextField
-	WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextField
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextField
-	WithImportsGraphics(importsGraphics bool) *TextField
-	WithTarget(target obj.Object) *TextField
-	WithTag(tag int) *TextField
-	WithIgnoresMultiClick(ignoresMultiClick bool) *TextField
-	WithContinuous(continuous bool) *TextField
-	WithEnabled(enabled bool) *TextField
-	WithRefusesFirstResponder(refusesFirstResponder bool) *TextField
-	WithHighlighted(highlighted bool) *TextField
-	WithControlSize(controlSize ControlSize) *TextField
-	WithFormatter(formatter obj.Object) *TextField
-	WithObjectValue(objectValue obj.Object) *TextField
-	WithStringValue(stringValue string) *TextField
-	WithAttributedStringValue(attributedStringValue obj.Object) *TextField
-	WithIntValue(intValue int) *TextField
-	WithIntegerValue(integerValue int) *TextField
-	WithFloatValue(floatValue float32) *TextField
-	WithDoubleValue(doubleValue float64) *TextField
-	WithFont(font *Font) *TextField
-	WithUsesSingleLineMode(usesSingleLineMode bool) *TextField
-	WithLineBreakMode(lineBreakMode LineBreakMode) *TextField
-	WithAlignment(alignment TextAlignment) *TextField
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextField
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField
-	WithCell(cell CellProvider) *TextField
-	WithSubviews(items ...ViewProvider) *TextField
-	WithHidden(hidden bool) *TextField
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField
-	WithAutoresizesSubviews(autoresizesSubviews bool) *TextField
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextField
-	WithFrame(frame corefoundation.CGRect) *TextField
-	WithFrameRotation(frameRotation float64) *TextField
-	WithFrameCenterRotation(frameCenterRotation float64) *TextField
-	WithBoundsRotation(boundsRotation float64) *TextField
-	WithBounds(bounds corefoundation.CGRect) *TextField
-	WithCanDrawConcurrently(canDrawConcurrently bool) *TextField
-	WithNeedsDisplay(needsDisplay bool) *TextField
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField
-	WithWantsRestingTouches(wantsRestingTouches bool) *TextField
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextField
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextField
-	WithWantsLayer(wantsLayer bool) *TextField
-	WithLayer(layer obj.Object) *TextField
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextField
-	WithNeedsLayout(needsLayout bool) *TextField
-	WithAlphaValue(alphaValue float64) *TextField
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextField
-	WithBackgroundFilters(items ...obj.Object) *TextField
-	WithCompositingFilter(compositingFilter obj.Object) *TextField
-	WithContentFilters(items ...obj.Object) *TextField
-	WithShadow(shadow *Shadow) *TextField
-	WithClipsToBounds(clipsToBounds bool) *TextField
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField
-	WithToolTip(toolTip string) *TextField
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextField
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField
-	WithNextKeyView(nextKeyView ViewProvider) *TextField
-	WithFocusRingType(focusRingType FocusRingType) *TextField
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextField
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextField
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextField
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextField
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextField
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextField
-	WithNextResponder(nextResponder ResponderProvider) *TextField
-	WithMenu(menu *Menu) *TextField
-	WithUserActivity(userActivity obj.Object) *TextField
-	WithTouchBar(touchBar *TouchBar) *TextField
-	SelectText(sender obj.Object)
-	TextShouldBeginEditing(textObject *Text) bool
-	TextShouldEndEditing(textObject *Text) bool
-	TextDidBeginEditing(notification obj.Object)
-	TextDidEndEditing(notification obj.Object)
-	TextDidChange(notification obj.Object)
-	PlaceholderString() string
-	SetPlaceholderString(placeholderString string)
-	PlaceholderAttributedString() obj.Object
-	SetPlaceholderAttributedString(placeholderAttributedString obj.Object)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	DrawsBackground() bool
-	SetDrawsBackground(drawsBackground bool)
-	TextColor() *Color
-	SetTextColor(textColor *Color)
-	IsBordered() bool
-	SetBordered(bordered bool)
-	IsBezeled() bool
-	SetBezeled(bezeled bool)
-	IsEditable() bool
-	SetEditable(editable bool)
-	IsSelectable() bool
-	SetSelectable(selectable bool)
-	BezelStyle() TextFieldBezelStyle
-	SetBezelStyle(bezelStyle TextFieldBezelStyle)
-	PreferredMaxLayoutWidth() float64
-	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
-	MaximumNumberOfLines() int
-	SetMaximumNumberOfLines(maximumNumberOfLines int)
-	AllowsDefaultTighteningForTruncation() bool
-	SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool)
-	LineBreakStrategy() LineBreakStrategy
-	SetLineBreakStrategy(lineBreakStrategy LineBreakStrategy)
-	AllowsWritingTools() bool
-	SetAllowsWritingTools(allowsWritingTools bool)
-	AllowsWritingToolsAffordance() bool
-	SetAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool)
-	PlaceholderStrings() []string
-	SetPlaceholderStrings(placeholderStrings []string)
-	PlaceholderAttributedStrings() []obj.Object
-	SetPlaceholderAttributedStrings(placeholderAttributedStrings []obj.Object)
-	ResolvesNaturalAlignmentWithBaseWritingDirection() bool
-	SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool)
-	IsAutomaticTextCompletionEnabled() bool
-	SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool)
-	AllowsCharacterPickerTouchBarItem() bool
-	SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool)
-	AllowsEditingTextAttributes() bool
-	SetAllowsEditingTextAttributes(allowsEditingTextAttributes bool)
-	ImportsGraphics() bool
-	SetImportsGraphics(importsGraphics bool)
-	SetTitleWithMnemonic(stringWithAmpersand string)
-}
-
-var _ TextFieldable = (*TextField)(nil)
 
 // isTextField marks TextField — and, by embedding promotion, its
 // subclasses — as a member of the TextField hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TextField) isTextField() {}
+func (tf *TextField) isTextField() {}
 
 var _ TextFieldProvider = (*TextField)(nil)
 

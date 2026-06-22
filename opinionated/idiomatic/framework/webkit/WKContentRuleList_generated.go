@@ -46,24 +46,24 @@ func wKContentRuleListAdopt(id objc.ID) *WKContentRuleList {
 }
 
 // Description returns the object's -description text.
-func (x *WKContentRuleList) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wcrl *WKContentRuleList) Description() string {
+	return rt.Description(objref.IDOf(wcrl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKContentRuleList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wcrl *WKContentRuleList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wcrl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKContentRuleList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wcrl *WKContentRuleList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wcrl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKContentRuleList) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wcrl *WKContentRuleList) String() string {
+	return rt.Description(objref.IDOf(wcrl))
 }
 
 // NewWKContentRuleList creates a new WKContentRuleList.
@@ -73,18 +73,10 @@ func NewWKContentRuleList() *WKContentRuleList {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *WKContentRuleList) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (wcrl *WKContentRuleList) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wcrl), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// WKContentRuleListable is the interface implemented by [WKContentRuleList], for mocking and DI.
-type WKContentRuleListable interface {
-	obj.Object
-	Identifier() string
-}
-
-var _ WKContentRuleListable = (*WKContentRuleList)(nil)

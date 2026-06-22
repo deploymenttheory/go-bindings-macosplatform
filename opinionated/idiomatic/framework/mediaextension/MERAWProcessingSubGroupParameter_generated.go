@@ -7,7 +7,6 @@ package mediaextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,27 +50,18 @@ func NewRAWProcessingSubGroupParameterWithNameDescriptionParameters(name string,
 	return rAWProcessingSubGroupParameterAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
-func (x *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProcessingSubGroupParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the extension enables the parameter.
+func (rpsgp *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProcessingSubGroupParameter {
+	objc.Send[objc.ID](objref.IDOf(rpsgp), objc.RegisterName("setEnabled:"), enabled)
+	return rpsgp
 }
 
 // SubGroupParameters wraps the corresponding Objective-C method.
 //
 // SubGroupParameters returns the collection as a Go slice.
-func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingParameter {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subGroupParameters"))
+func (rpsgp *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingParameter {
+	_arr := objc.Send[objc.ID](objref.IDOf(rpsgp), objc.RegisterName("subGroupParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RAWProcessingParameter { return RAWProcessingParameterFromID(_id) })
 }
-
-// RAWProcessingSubGroupParameterable is the interface implemented by [RAWProcessingSubGroupParameter], for mocking and DI.
-type RAWProcessingSubGroupParameterable interface {
-	obj.Object
-	WithEnabled(enabled bool) *RAWProcessingSubGroupParameter
-	SubGroupParameters() []*RAWProcessingParameter
-}
-
-var _ RAWProcessingSubGroupParameterable = (*RAWProcessingSubGroupParameter)(nil)
 
 var _ RAWProcessingParameterProvider = (*RAWProcessingSubGroupParameter)(nil)

@@ -46,87 +46,70 @@ func gamepadAdopt(id objc.ID) *Gamepad {
 	return x
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *Gamepad {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (g *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *Gamepad {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return g
 }
 
-// SaveSnapshot saves a snapshot of all of the profile’s elements.
-func (x *Gamepad) SaveSnapshot() *GamepadSnapshot {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveSnapshot"))
+// SaveSnapshot returns saves a snapshot of all of the profile’s elements.
+func (g *Gamepad) SaveSnapshot() *GamepadSnapshot {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("saveSnapshot"))
 	return GamepadSnapshotFromID(_r)
 }
 
-// Controller a profile keeps a reference to the controller that this profile is mapping input from.
-func (x *Gamepad) Controller() *Controller {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controller"))
+// Controller returns a profile keeps a reference to the controller that this profile is mapping input from.
+func (g *Gamepad) Controller() *Controller {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
-// Dpad required to be analog in the Standard profile. All the elements of this directional input are thus analog.
-func (x *Gamepad) Dpad() *ControllerDirectionPad {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dpad"))
+// Dpad returns required to be analog in the Standard profile. All the elements of this directional input are thus analog.
+func (g *Gamepad) Dpad() *ControllerDirectionPad {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("dpad"))
 	return ControllerDirectionPadFromID(_r)
 }
 
-// ButtonA all face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
-func (x *Gamepad) ButtonA() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonA"))
+// ButtonA returns all face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
+func (g *Gamepad) ButtonA() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonA"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonB wraps the corresponding Objective-C method.
-func (x *Gamepad) ButtonB() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonB"))
+func (g *Gamepad) ButtonB() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonB"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonX wraps the corresponding Objective-C method.
-func (x *Gamepad) ButtonX() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonX"))
+func (g *Gamepad) ButtonX() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonY wraps the corresponding Objective-C method.
-func (x *Gamepad) ButtonY() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonY"))
+func (g *Gamepad) ButtonY() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonY"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// LeftShoulder shoulder buttons are required to be analog inputs.
-func (x *Gamepad) LeftShoulder() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftShoulder"))
+// LeftShoulder returns shoulder buttons are required to be analog inputs.
+func (g *Gamepad) LeftShoulder() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("leftShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// RightShoulder shoulder buttons are required to be analog inputs.
-func (x *Gamepad) RightShoulder() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightShoulder"))
+// RightShoulder returns shoulder buttons are required to be analog inputs.
+func (g *Gamepad) RightShoulder() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("rightShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
-
-// Gamepadable is the interface implemented by [Gamepad], for mocking and DI.
-type Gamepadable interface {
-	obj.Object
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *Gamepad
-	SaveSnapshot() *GamepadSnapshot
-	Controller() *Controller
-	Dpad() *ControllerDirectionPad
-	ButtonA() *ControllerButtonInput
-	ButtonB() *ControllerButtonInput
-	ButtonX() *ControllerButtonInput
-	ButtonY() *ControllerButtonInput
-	LeftShoulder() *ControllerButtonInput
-	RightShoulder() *ControllerButtonInput
-}
-
-var _ Gamepadable = (*Gamepad)(nil)
 
 // isGamepad marks Gamepad — and, by embedding promotion, its
 // subclasses — as a member of the Gamepad hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Gamepad) isGamepad() {}
+func (g *Gamepad) isGamepad() {}
 
 var _ GamepadProvider = (*Gamepad)(nil)
 

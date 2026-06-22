@@ -46,24 +46,24 @@ func mapItemDetailSelectionAccessoryPresentationStyleAdopt(id objc.ID) *MapItemD
 }
 
 // Description returns the object's -description text.
-func (x *MapItemDetailSelectionAccessoryPresentationStyle) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) Description() string {
+	return rt.Description(objref.IDOf(midsaps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapItemDetailSelectionAccessoryPresentationStyle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(midsaps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapItemDetailSelectionAccessoryPresentationStyle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(midsaps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapItemDetailSelectionAccessoryPresentationStyle) String() string {
-	return rt.Description(objref.IDOf(x))
+func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) String() string {
+	return rt.Description(objref.IDOf(midsaps))
 }
 
 // NewMapItemDetailSelectionAccessoryPresentationStyle creates a new MapItemDetailSelectionAccessoryPresentationStyle.
@@ -71,10 +71,3 @@ func NewMapItemDetailSelectionAccessoryPresentationStyle() *MapItemDetailSelecti
 	_id := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("new"))
 	return mapItemDetailSelectionAccessoryPresentationStyleAdopt(_id)
 }
-
-// MapItemDetailSelectionAccessoryPresentationStyleable is the interface implemented by [MapItemDetailSelectionAccessoryPresentationStyle], for mocking and DI.
-type MapItemDetailSelectionAccessoryPresentationStyleable interface {
-	obj.Object
-}
-
-var _ MapItemDetailSelectionAccessoryPresentationStyleable = (*MapItemDetailSelectionAccessoryPresentationStyle)(nil)

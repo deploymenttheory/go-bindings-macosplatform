@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,61 +51,37 @@ func NewVirtioConsolePortConfiguration() *VirtioConsolePortConfiguration {
 	return virtioConsolePortConfigurationAdopt(_id)
 }
 
-// WithName the name of the port.
-func (x *VirtioConsolePortConfiguration) WithName(name string) *VirtioConsolePortConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the port.
+func (vcpc *VirtioConsolePortConfiguration) WithName(name string) *VirtioConsolePortConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vcpc), objc.RegisterName("setName:"), purego.NSString(name))
+	return vcpc
 }
 
-// WithIsConsole a Boolean value that indicates whether this port is a console.
-func (x *VirtioConsolePortConfiguration) WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsConsole:"), isConsole)
-	return x
+// WithIsConsole sets a Boolean value that indicates whether this port is a console.
+func (vcpc *VirtioConsolePortConfiguration) WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vcpc), objc.RegisterName("setIsConsole:"), isConsole)
+	return vcpc
 }
 
-// WithAttachment the serial port attachment.
-func (x *VirtioConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-	return x
+// WithAttachment sets the serial port attachment.
+func (vcpc *VirtioConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vcpc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return vcpc
 }
 
-// Name the console port's name. The default behavior is to not use a name unless set.
-func (x *VirtioConsolePortConfiguration) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the console port's name. The default behavior is to not use a name unless set.
+func (vcpc *VirtioConsolePortConfiguration) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vcpc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *VirtioConsolePortConfiguration) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// IsConsole the console port may be marked for use as the system console. The default is false.
-func (x *VirtioConsolePortConfiguration) IsConsole() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConsole"))
+// IsConsole reports whether the console port may be marked for use as the system console. The default is false.
+func (vcpc *VirtioConsolePortConfiguration) IsConsole() bool {
+	_r := objc.Send[bool](objref.IDOf(vcpc), objc.RegisterName("isConsole"))
 	return _r
 }
-
-// SetIsConsole wraps the corresponding Objective-C method.
-func (x *VirtioConsolePortConfiguration) SetIsConsole(isConsole bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsConsole:"), isConsole)
-}
-
-// VirtioConsolePortConfigurationable is the interface implemented by [VirtioConsolePortConfiguration], for mocking and DI.
-type VirtioConsolePortConfigurationable interface {
-	obj.Object
-	WithName(name string) *VirtioConsolePortConfiguration
-	WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration
-	WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration
-	Name() string
-	SetName(name string)
-	IsConsole() bool
-	SetIsConsole(isConsole bool)
-}
-
-var _ VirtioConsolePortConfigurationable = (*VirtioConsolePortConfiguration)(nil)
 
 var _ ConsolePortConfigurationProvider = (*VirtioConsolePortConfiguration)(nil)

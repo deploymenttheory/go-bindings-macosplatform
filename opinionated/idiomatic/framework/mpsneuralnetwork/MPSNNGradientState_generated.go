@@ -46,36 +46,29 @@ func nNGradientStateAdopt(id objc.ID) *NNGradientState {
 }
 
 // Description returns the object's -description text.
-func (x *NNGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ngs *NNGradientState) Description() string {
+	return rt.Description(objref.IDOf(ngs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ngs *NNGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ngs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ngs *NNGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ngs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNGradientState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ngs *NNGradientState) String() string {
+	return rt.Description(objref.IDOf(ngs))
 }
-
-// NNGradientStateable is the interface implemented by [NNGradientState], for mocking and DI.
-type NNGradientStateable interface {
-	obj.Object
-}
-
-var _ NNGradientStateable = (*NNGradientState)(nil)
 
 // isNNGradientState marks NNGradientState — and, by embedding promotion, its
 // subclasses — as a member of the NNGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNGradientState) isNNGradientState() {}
+func (ngs *NNGradientState) isNNGradientState() {}
 
 var _ NNGradientStateProvider = (*NNGradientState)(nil)

@@ -44,24 +44,24 @@ func mTRThermostatClusterPresetStructAdopt(id objc.ID) *MTRThermostatClusterPres
 }
 
 // Description returns the object's -description text.
-func (x *MTRThermostatClusterPresetStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcps *MTRThermostatClusterPresetStruct) Description() string {
+	return rt.Description(objref.IDOf(mtcps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterPresetStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtcps *MTRThermostatClusterPresetStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtcps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterPresetStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtcps *MTRThermostatClusterPresetStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtcps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThermostatClusterPresetStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcps *MTRThermostatClusterPresetStruct) String() string {
+	return rt.Description(objref.IDOf(mtcps))
 }
 
 // NewMTRThermostatClusterPresetStruct creates a new MTRThermostatClusterPresetStruct.
@@ -71,131 +71,76 @@ func NewMTRThermostatClusterPresetStruct() *MTRThermostatClusterPresetStruct {
 }
 
 // WithPresetHandle sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterPresetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
-	return x
+func (mtcps *MTRThermostatClusterPresetStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterPresetStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
+	return mtcps
 }
 
 // WithPresetScenario sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
-	return x
+func (mtcps *MTRThermostatClusterPresetStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
+	return mtcps
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetStruct) WithName(name string) *MTRThermostatClusterPresetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mtcps *MTRThermostatClusterPresetStruct) WithName(name string) *MTRThermostatClusterPresetStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setName:"), purego.NSString(name))
+	return mtcps
 }
 
 // WithCoolingSetpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetStruct) WithCoolingSetpoint(coolingSetpoint obj.Object) *MTRThermostatClusterPresetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoolingSetpoint:"), objref.IDOf(coolingSetpoint))
-	return x
+func (mtcps *MTRThermostatClusterPresetStruct) WithCoolingSetpoint(coolingSetpoint obj.Object) *MTRThermostatClusterPresetStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setCoolingSetpoint:"), objref.IDOf(coolingSetpoint))
+	return mtcps
 }
 
 // WithHeatingSetpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetStruct) WithHeatingSetpoint(heatingSetpoint obj.Object) *MTRThermostatClusterPresetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeatingSetpoint:"), objref.IDOf(heatingSetpoint))
-	return x
+func (mtcps *MTRThermostatClusterPresetStruct) WithHeatingSetpoint(heatingSetpoint obj.Object) *MTRThermostatClusterPresetStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setHeatingSetpoint:"), objref.IDOf(heatingSetpoint))
+	return mtcps
 }
 
 // WithBuiltIn sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetStruct) WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterPresetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
-	return x
+func (mtcps *MTRThermostatClusterPresetStruct) WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterPresetStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
+	return mtcps
 }
 
 // PresetHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) PresetHandle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetHandle"))
+func (mtcps *MTRThermostatClusterPresetStruct) PresetHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("presetHandle"))
 	return obj.Wrap(_r)
-}
-
-// SetPresetHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) SetPresetHandle(presetHandle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
 }
 
 // PresetScenario wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) PresetScenario() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetScenario"))
+func (mtcps *MTRThermostatClusterPresetStruct) PresetScenario() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("presetScenario"))
 	return obj.Wrap(_r)
 }
 
-// SetPresetScenario wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) SetPresetScenario(presetScenario obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mtcps *MTRThermostatClusterPresetStruct) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // CoolingSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) CoolingSetpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coolingSetpoint"))
+func (mtcps *MTRThermostatClusterPresetStruct) CoolingSetpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("coolingSetpoint"))
 	return obj.Wrap(_r)
-}
-
-// SetCoolingSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) SetCoolingSetpoint(coolingSetpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoolingSetpoint:"), objref.IDOf(coolingSetpoint))
 }
 
 // HeatingSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) HeatingSetpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heatingSetpoint"))
+func (mtcps *MTRThermostatClusterPresetStruct) HeatingSetpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("heatingSetpoint"))
 	return obj.Wrap(_r)
-}
-
-// SetHeatingSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) SetHeatingSetpoint(heatingSetpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeatingSetpoint:"), objref.IDOf(heatingSetpoint))
 }
 
 // BuiltIn wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) BuiltIn() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("builtIn"))
+func (mtcps *MTRThermostatClusterPresetStruct) BuiltIn() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("builtIn"))
 	return obj.Wrap(_r)
 }
-
-// SetBuiltIn wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetStruct) SetBuiltIn(builtIn obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
-}
-
-// MTRThermostatClusterPresetStructable is the interface implemented by [MTRThermostatClusterPresetStruct], for mocking and DI.
-type MTRThermostatClusterPresetStructable interface {
-	obj.Object
-	WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterPresetStruct
-	WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetStruct
-	WithName(name string) *MTRThermostatClusterPresetStruct
-	WithCoolingSetpoint(coolingSetpoint obj.Object) *MTRThermostatClusterPresetStruct
-	WithHeatingSetpoint(heatingSetpoint obj.Object) *MTRThermostatClusterPresetStruct
-	WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterPresetStruct
-	PresetHandle() obj.Object
-	SetPresetHandle(presetHandle obj.Object)
-	PresetScenario() obj.Object
-	SetPresetScenario(presetScenario obj.Object)
-	Name() string
-	SetName(name string)
-	CoolingSetpoint() obj.Object
-	SetCoolingSetpoint(coolingSetpoint obj.Object)
-	HeatingSetpoint() obj.Object
-	SetHeatingSetpoint(heatingSetpoint obj.Object)
-	BuiltIn() obj.Object
-	SetBuiltIn(builtIn obj.Object)
-}
-
-var _ MTRThermostatClusterPresetStructable = (*MTRThermostatClusterPresetStruct)(nil)

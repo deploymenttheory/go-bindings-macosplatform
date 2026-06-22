@@ -46,24 +46,24 @@ func screenshotOutputAdopt(id objc.ID) *ScreenshotOutput {
 }
 
 // Description returns the object's -description text.
-func (x *ScreenshotOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (so *ScreenshotOutput) Description() string {
+	return rt.Description(objref.IDOf(so))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScreenshotOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (so *ScreenshotOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(so), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScreenshotOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (so *ScreenshotOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(so), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScreenshotOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (so *ScreenshotOutput) String() string {
+	return rt.Description(objref.IDOf(so))
 }
 
 // NewScreenshotOutput creates a new ScreenshotOutput.
@@ -72,69 +72,38 @@ func NewScreenshotOutput() *ScreenshotOutput {
 	return screenshotOutputAdopt(_id)
 }
 
-// WithSdrImage an output property that specifies the standard dynamic range version of the screenshot.
-func (x *ScreenshotOutput) WithSdrImage(sdrImage obj.Object) *ScreenshotOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
-	return x
+// WithSdrImage sets an output property that specifies the standard dynamic range version of the screenshot.
+func (so *ScreenshotOutput) WithSdrImage(sdrImage obj.Object) *ScreenshotOutput {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
+	return so
 }
 
-// WithHdrImage an output property that specifies the high dynamic range version of the screenshot.
-func (x *ScreenshotOutput) WithHdrImage(hdrImage obj.Object) *ScreenshotOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
-	return x
+// WithHdrImage sets an output property that specifies the high dynamic range version of the screenshot.
+func (so *ScreenshotOutput) WithHdrImage(hdrImage obj.Object) *ScreenshotOutput {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
+	return so
 }
 
-// WithFileURL a URL property that specifies the location of the saved image.
-func (x *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
-	return x
+// WithFileURL sets a URL property that specifies the location of the saved image.
+func (so *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
+	return so
 }
 
-// SdrImage SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
-func (x *ScreenshotOutput) SdrImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sdrImage"))
+// SdrImage returns SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
+func (so *ScreenshotOutput) SdrImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("sdrImage"))
 	return obj.Wrap(_r)
 }
 
-// SetSdrImage wraps the corresponding Objective-C method.
-func (x *ScreenshotOutput) SetSdrImage(sdrImage obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
-}
-
-// HdrImage SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
-func (x *ScreenshotOutput) HdrImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hdrImage"))
+// HdrImage returns SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
+func (so *ScreenshotOutput) HdrImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("hdrImage"))
 	return obj.Wrap(_r)
 }
 
-// SetHdrImage wraps the corresponding Objective-C method.
-func (x *ScreenshotOutput) SetHdrImage(hdrImage obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
-}
-
-// FileURL SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
-func (x *ScreenshotOutput) FileURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+// FileURL returns SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
+func (so *ScreenshotOutput) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
-
-// SetFileURL wraps the corresponding Objective-C method.
-func (x *ScreenshotOutput) SetFileURL(fileURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
-}
-
-// ScreenshotOutputable is the interface implemented by [ScreenshotOutput], for mocking and DI.
-type ScreenshotOutputable interface {
-	obj.Object
-	WithSdrImage(sdrImage obj.Object) *ScreenshotOutput
-	WithHdrImage(hdrImage obj.Object) *ScreenshotOutput
-	WithFileURL(fileURL string) *ScreenshotOutput
-	SdrImage() obj.Object
-	SetSdrImage(sdrImage obj.Object)
-	HdrImage() obj.Object
-	SetHdrImage(hdrImage obj.Object)
-	FileURL() obj.Object
-	SetFileURL(fileURL string)
-}
-
-var _ ScreenshotOutputable = (*ScreenshotOutput)(nil)

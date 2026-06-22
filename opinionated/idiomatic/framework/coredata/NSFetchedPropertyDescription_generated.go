@@ -52,94 +52,70 @@ func NewFetchedPropertyDescription() *FetchedPropertyDescription {
 	return fetchedPropertyDescriptionAdopt(_id)
 }
 
-// WithFetchRequest the fetch request of the receiver.
-func (x *FetchedPropertyDescription) WithFetchRequest(fetchRequest obj.Object) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
-	return x
+// WithFetchRequest sets the fetch request of the receiver.
+func (fpd *FetchedPropertyDescription) WithFetchRequest(fetchRequest obj.Object) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
+	return fpd
 }
 
-// WithName the name of the receiver.
-func (x *FetchedPropertyDescription) WithName(name string) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (fpd *FetchedPropertyDescription) WithName(name string) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setName:"), purego.NSString(name))
+	return fpd
 }
 
-// WithOptional a Boolean value that indicates whether the receiver is optional.
-func (x *FetchedPropertyDescription) WithOptional(optional bool) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
-	return x
+// WithOptional sets a Boolean value that indicates whether the receiver is optional.
+func (fpd *FetchedPropertyDescription) WithOptional(optional bool) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setOptional:"), optional)
+	return fpd
 }
 
-// WithTransient a Boolean value that indicates whether the receiver is transient.
-func (x *FetchedPropertyDescription) WithTransient(transient bool) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
-	return x
+// WithTransient sets a Boolean value that indicates whether the receiver is transient.
+func (fpd *FetchedPropertyDescription) WithTransient(transient bool) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setTransient:"), transient)
+	return fpd
 }
 
-// WithUserInfo the user info dictionary of the receiver.
-func (x *FetchedPropertyDescription) WithUserInfo(userInfo obj.Object) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info dictionary of the receiver.
+func (fpd *FetchedPropertyDescription) WithUserInfo(userInfo obj.Object) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return fpd
 }
 
-// WithIndexed a Boolean value that indicates whether the receiver should be indexed for searching.
-func (x *FetchedPropertyDescription) WithIndexed(indexed bool) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
-	return x
+// WithIndexed sets a Boolean value that indicates whether the receiver should be indexed for searching.
+func (fpd *FetchedPropertyDescription) WithIndexed(indexed bool) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setIndexed:"), indexed)
+	return fpd
 }
 
-// WithVersionHashModifier the version hash modifier for the receiver.
-func (x *FetchedPropertyDescription) WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
-	return x
+// WithVersionHashModifier sets the version hash modifier for the receiver.
+func (fpd *FetchedPropertyDescription) WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
+	return fpd
 }
 
-// WithIndexedBySpotlight a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
-func (x *FetchedPropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
-	return x
+// WithIndexedBySpotlight sets a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+func (fpd *FetchedPropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
+	return fpd
 }
 
-// WithStoredInExternalRecord a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
-func (x *FetchedPropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
-	return x
+// WithStoredInExternalRecord sets a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+func (fpd *FetchedPropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
+	return fpd
 }
 
-// WithRenamingIdentifier the renaming identifier for the receiver.
-func (x *FetchedPropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
-	return x
+// WithRenamingIdentifier sets the renaming identifier for the receiver.
+func (fpd *FetchedPropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
+	return fpd
 }
 
 // FetchRequest wraps the corresponding Objective-C method.
-func (x *FetchedPropertyDescription) FetchRequest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+func (fpd *FetchedPropertyDescription) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
-
-// SetFetchRequest wraps the corresponding Objective-C method.
-func (x *FetchedPropertyDescription) SetFetchRequest(fetchRequest obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
-}
-
-// FetchedPropertyDescriptionable is the interface implemented by [FetchedPropertyDescription], for mocking and DI.
-type FetchedPropertyDescriptionable interface {
-	obj.Object
-	WithFetchRequest(fetchRequest obj.Object) *FetchedPropertyDescription
-	WithName(name string) *FetchedPropertyDescription
-	WithOptional(optional bool) *FetchedPropertyDescription
-	WithTransient(transient bool) *FetchedPropertyDescription
-	WithUserInfo(userInfo obj.Object) *FetchedPropertyDescription
-	WithIndexed(indexed bool) *FetchedPropertyDescription
-	WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription
-	WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription
-	WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription
-	WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription
-	FetchRequest() obj.Object
-	SetFetchRequest(fetchRequest obj.Object)
-}
-
-var _ FetchedPropertyDescriptionable = (*FetchedPropertyDescription)(nil)
 
 var _ PropertyDescriptionProvider = (*FetchedPropertyDescription)(nil)

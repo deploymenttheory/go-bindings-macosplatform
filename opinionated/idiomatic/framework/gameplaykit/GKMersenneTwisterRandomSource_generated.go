@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,31 +58,16 @@ func NewMersenneTwisterRandomSourceWithSeed(seed uint64) *MersenneTwisterRandomS
 	return mersenneTwisterRandomSourceAdopt(_id)
 }
 
-// WithSeed the seed value that determines the random source’s behavior.
-func (x *MersenneTwisterRandomSource) WithSeed(seed uint64) *MersenneTwisterRandomSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-	return x
+// WithSeed sets the seed value that determines the random source’s behavior.
+func (mtrs *MersenneTwisterRandomSource) WithSeed(seed uint64) *MersenneTwisterRandomSource {
+	objc.Send[objc.ID](objref.IDOf(mtrs), objc.RegisterName("setSeed:"), seed)
+	return mtrs
 }
 
-// Seed the seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
-func (x *MersenneTwisterRandomSource) Seed() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("seed"))
+// Seed returns the seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+func (mtrs *MersenneTwisterRandomSource) Seed() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(mtrs), objc.RegisterName("seed"))
 	return _r
 }
-
-// SetSeed wraps the corresponding Objective-C method.
-func (x *MersenneTwisterRandomSource) SetSeed(seed uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-}
-
-// MersenneTwisterRandomSourceable is the interface implemented by [MersenneTwisterRandomSource], for mocking and DI.
-type MersenneTwisterRandomSourceable interface {
-	obj.Object
-	WithSeed(seed uint64) *MersenneTwisterRandomSource
-	Seed() uint64
-	SetSeed(seed uint64)
-}
-
-var _ MersenneTwisterRandomSourceable = (*MersenneTwisterRandomSource)(nil)
 
 var _ RandomSourceProvider = (*MersenneTwisterRandomSource)(nil)

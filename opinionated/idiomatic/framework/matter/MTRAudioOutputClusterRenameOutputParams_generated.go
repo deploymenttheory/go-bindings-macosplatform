@@ -44,24 +44,24 @@ func mTRAudioOutputClusterRenameOutputParamsAdopt(id objc.ID) *MTRAudioOutputClu
 }
 
 // Description returns the object's -description text.
-func (x *MTRAudioOutputClusterRenameOutputParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) Description() string {
+	return rt.Description(objref.IDOf(maocrop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAudioOutputClusterRenameOutputParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maocrop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAudioOutputClusterRenameOutputParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maocrop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAudioOutputClusterRenameOutputParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) String() string {
+	return rt.Description(objref.IDOf(maocrop))
 }
 
 // NewMTRAudioOutputClusterRenameOutputParams creates a new MTRAudioOutputClusterRenameOutputParams.
@@ -71,91 +71,52 @@ func NewMTRAudioOutputClusterRenameOutputParams() *MTRAudioOutputClusterRenameOu
 }
 
 // WithIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAudioOutputClusterRenameOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterRenameOutputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
-	return x
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setIndex:"), objref.IDOf(index))
+	return maocrop
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRAudioOutputClusterRenameOutputParams) WithName(name string) *MTRAudioOutputClusterRenameOutputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithName(name string) *MTRAudioOutputClusterRenameOutputParams {
+	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setName:"), purego.NSString(name))
+	return maocrop
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAudioOutputClusterRenameOutputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterRenameOutputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return maocrop
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAudioOutputClusterRenameOutputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterRenameOutputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return maocrop
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterRenameOutputParams) Index() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("index"))
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) Index() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
-// SetIndex wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterRenameOutputParams) SetIndex(index obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterRenameOutputParams) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterRenameOutputParams) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAudioOutputClusterRenameOutputParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterRenameOutputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAudioOutputClusterRenameOutputParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterRenameOutputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRAudioOutputClusterRenameOutputParamsable is the interface implemented by [MTRAudioOutputClusterRenameOutputParams], for mocking and DI.
-type MTRAudioOutputClusterRenameOutputParamsable interface {
-	obj.Object
-	WithIndex(index obj.Object) *MTRAudioOutputClusterRenameOutputParams
-	WithName(name string) *MTRAudioOutputClusterRenameOutputParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterRenameOutputParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterRenameOutputParams
-	Index() obj.Object
-	SetIndex(index obj.Object)
-	Name() string
-	SetName(name string)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRAudioOutputClusterRenameOutputParamsable = (*MTRAudioOutputClusterRenameOutputParams)(nil)

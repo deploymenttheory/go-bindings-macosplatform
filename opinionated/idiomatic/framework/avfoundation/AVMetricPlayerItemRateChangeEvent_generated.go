@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,37 +46,27 @@ func metricPlayerItemRateChangeEventAdopt(id objc.ID) *MetricPlayerItemRateChang
 }
 
 // Rate returns the playback rate after the rate change event.
-func (x *MetricPlayerItemRateChangeEvent) Rate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
+func (mpirce *MetricPlayerItemRateChangeEvent) Rate() float64 {
+	_r := objc.Send[float64](objref.IDOf(mpirce), objc.RegisterName("rate"))
 	return _r
 }
 
 // PreviousRate returns the playback rate before the rate change event.
-func (x *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("previousRate"))
+func (mpirce *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(mpirce), objc.RegisterName("previousRate"))
 	return _r
 }
 
 // Variant returns the variant being played at the time of rate change. If no value is present, returns nil.
-func (x *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variant"))
+func (mpirce *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(mpirce), objc.RegisterName("variant"))
 	return AssetVariantFromID(_r)
 }
-
-// MetricPlayerItemRateChangeEventable is the interface implemented by [MetricPlayerItemRateChangeEvent], for mocking and DI.
-type MetricPlayerItemRateChangeEventable interface {
-	obj.Object
-	Rate() float64
-	PreviousRate() float64
-	Variant() *AssetVariant
-}
-
-var _ MetricPlayerItemRateChangeEventable = (*MetricPlayerItemRateChangeEvent)(nil)
 
 // isMetricPlayerItemRateChangeEvent marks MetricPlayerItemRateChangeEvent — and, by embedding promotion, its
 // subclasses — as a member of the MetricPlayerItemRateChangeEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetricPlayerItemRateChangeEvent) isMetricPlayerItemRateChangeEvent() {}
+func (mpirce *MetricPlayerItemRateChangeEvent) isMetricPlayerItemRateChangeEvent() {}
 
 var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemRateChangeEvent)(nil)
 

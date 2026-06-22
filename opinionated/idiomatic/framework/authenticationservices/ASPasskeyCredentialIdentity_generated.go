@@ -46,24 +46,24 @@ func passkeyCredentialIdentityAdopt(id objc.ID) *PasskeyCredentialIdentity {
 }
 
 // Description returns the object's -description text.
-func (x *PasskeyCredentialIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pci *PasskeyCredentialIdentity) Description() string {
+	return rt.Description(objref.IDOf(pci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PasskeyCredentialIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pci *PasskeyCredentialIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PasskeyCredentialIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pci *PasskeyCredentialIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PasskeyCredentialIdentity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pci *PasskeyCredentialIdentity) String() string {
+	return rt.Description(objref.IDOf(pci))
 }
 
 // NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier initializes a passkey credential identity.
@@ -73,45 +73,45 @@ func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDU
 	return passkeyCredentialIdentityAdopt(_id)
 }
 
-// WithRank an indicator that enables you to prioritize credential identities relative to each other.
-func (x *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdentity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
-	return x
+// WithRank sets an indicator that enables you to prioritize credential identities relative to each other.
+func (pci *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdentity {
+	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setRank:"), rank)
+	return pci
 }
 
-// RelyingPartyIdentifier the relying party identifier of this passkey credential. This field is reported as the serviceIdentifier property of ASCredentialIdentity.
-func (x *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
+// RelyingPartyIdentifier returns the relying party identifier of this passkey credential. This field is reported as the serviceIdentifier property of ASCredentialIdentity.
+func (pci *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UserName the user name of this passkey credential. This field is reported as the user property of ASCredentialIdentity.
-func (x *PasskeyCredentialIdentity) UserName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userName"))
+// UserName returns the user name of this passkey credential. This field is reported as the user property of ASCredentialIdentity.
+func (pci *PasskeyCredentialIdentity) UserName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("userName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CredentialID the credential ID of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
-func (x *PasskeyCredentialIdentity) CredentialID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
+// CredentialID returns the credential ID of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
+func (pci *PasskeyCredentialIdentity) CredentialID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("credentialID"))
 	return obj.Wrap(_r)
 }
 
-// UserHandle the user handle of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
-func (x *PasskeyCredentialIdentity) UserHandle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userHandle"))
+// UserHandle returns the user handle of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
+func (pci *PasskeyCredentialIdentity) UserHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("userHandle"))
 	return obj.Wrap(_r)
 }
 
 // RecordIdentifier get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
-func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
+func (pci *PasskeyCredentialIdentity) RecordIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -119,27 +119,7 @@ func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
 }
 
 // Rank get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
-func (x *PasskeyCredentialIdentity) Rank() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+func (pci *PasskeyCredentialIdentity) Rank() int {
+	_r := objc.Send[int](objref.IDOf(pci), objc.RegisterName("rank"))
 	return _r
 }
-
-// SetRank wraps the corresponding Objective-C method.
-func (x *PasskeyCredentialIdentity) SetRank(rank int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
-}
-
-// PasskeyCredentialIdentityable is the interface implemented by [PasskeyCredentialIdentity], for mocking and DI.
-type PasskeyCredentialIdentityable interface {
-	obj.Object
-	WithRank(rank int) *PasskeyCredentialIdentity
-	RelyingPartyIdentifier() string
-	UserName() string
-	CredentialID() obj.Object
-	UserHandle() obj.Object
-	RecordIdentifier() string
-	Rank() int
-	SetRank(rank int)
-}
-
-var _ PasskeyCredentialIdentityable = (*PasskeyCredentialIdentity)(nil)

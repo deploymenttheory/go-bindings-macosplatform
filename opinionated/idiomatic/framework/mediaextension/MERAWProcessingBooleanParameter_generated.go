@@ -5,11 +5,11 @@
 package mediaextension
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RAWProcessingBooleanParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingBooleanParameter.
@@ -79,54 +79,36 @@ func NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralVa
 	return rAWProcessingBooleanParameterAdopt(_id)
 }
 
-// WithCurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingBooleanParameter) WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-	return x
+// WithCurrentValue sets get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+func (rpbp *RAWProcessingBooleanParameter) WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter {
+	objc.Send[objc.ID](objref.IDOf(rpbp), objc.RegisterName("setCurrentValue:"), currentValue)
+	return rpbp
 }
 
-// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
-func (x *RAWProcessingBooleanParameter) WithEnabled(enabled bool) *RAWProcessingBooleanParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the extension enables the parameter.
+func (rpbp *RAWProcessingBooleanParameter) WithEnabled(enabled bool) *RAWProcessingBooleanParameter {
+	objc.Send[objc.ID](objref.IDOf(rpbp), objc.RegisterName("setEnabled:"), enabled)
+	return rpbp
 }
 
 // HasNeutralValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to NO.
-func (x *RAWProcessingBooleanParameter) HasNeutralValue() (ok bool, outNeutralValue bool) {
+func (rpbp *RAWProcessingBooleanParameter) HasNeutralValue() (ok bool, outNeutralValue bool) {
 	var _out0 bool
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rpbp), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // HasCameraValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to NO.
-func (x *RAWProcessingBooleanParameter) HasCameraValue() (ok bool, outCameraValue bool) {
+func (rpbp *RAWProcessingBooleanParameter) HasCameraValue() (ok bool, outCameraValue bool) {
 	var _out0 bool
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rpbp), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
-// CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingBooleanParameter) CurrentValue() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("currentValue"))
+// CurrentValue reports whether get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+func (rpbp *RAWProcessingBooleanParameter) CurrentValue() bool {
+	_r := objc.Send[bool](objref.IDOf(rpbp), objc.RegisterName("currentValue"))
 	return _r
 }
-
-// SetCurrentValue wraps the corresponding Objective-C method.
-func (x *RAWProcessingBooleanParameter) SetCurrentValue(currentValue bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-}
-
-// RAWProcessingBooleanParameterable is the interface implemented by [RAWProcessingBooleanParameter], for mocking and DI.
-type RAWProcessingBooleanParameterable interface {
-	obj.Object
-	WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter
-	WithEnabled(enabled bool) *RAWProcessingBooleanParameter
-	HasNeutralValue() (ok bool, outNeutralValue bool)
-	HasCameraValue() (ok bool, outCameraValue bool)
-	CurrentValue() bool
-	SetCurrentValue(currentValue bool)
-}
-
-var _ RAWProcessingBooleanParameterable = (*RAWProcessingBooleanParameter)(nil)
 
 var _ RAWProcessingParameterProvider = (*RAWProcessingBooleanParameter)(nil)

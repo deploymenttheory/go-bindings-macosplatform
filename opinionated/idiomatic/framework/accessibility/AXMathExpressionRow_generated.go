@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,17 +53,9 @@ func NewMathExpressionRowWithExpressions(expressions []*MathExpression) *MathExp
 // Expressions wraps the corresponding Objective-C method.
 //
 // Expressions returns the collection as a Go slice.
-func (x *MathExpressionRow) Expressions() []*MathExpression {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressions"))
+func (mer *MathExpressionRow) Expressions() []*MathExpression {
+	_arr := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("expressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
-
-// MathExpressionRowable is the interface implemented by [MathExpressionRow], for mocking and DI.
-type MathExpressionRowable interface {
-	obj.Object
-	Expressions() []*MathExpression
-}
-
-var _ MathExpressionRowable = (*MathExpressionRow)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionRow)(nil)

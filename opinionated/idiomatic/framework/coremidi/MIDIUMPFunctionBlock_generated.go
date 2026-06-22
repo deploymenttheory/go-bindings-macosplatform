@@ -46,116 +46,98 @@ func uMPFunctionBlockAdopt(id objc.ID) *UMPFunctionBlock {
 }
 
 // Description returns the object's -description text.
-func (x *UMPFunctionBlock) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ufb *UMPFunctionBlock) Description() string {
+	return rt.Description(objref.IDOf(ufb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UMPFunctionBlock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ufb *UMPFunctionBlock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ufb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UMPFunctionBlock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ufb *UMPFunctionBlock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ufb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UMPFunctionBlock) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ufb *UMPFunctionBlock) String() string {
+	return rt.Description(objref.IDOf(ufb))
 }
 
-// Name a string containing the Function Block's name.
-func (x *UMPFunctionBlock) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns a string containing the Function Block's name.
+func (ufb *UMPFunctionBlock) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ufb), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FunctionBlockID the device-unique ID for this Function Block.
-func (x *UMPFunctionBlock) FunctionBlockID() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("functionBlockID"))
+// FunctionBlockID returns the device-unique ID for this Function Block.
+func (ufb *UMPFunctionBlock) FunctionBlockID() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ufb), objc.RegisterName("functionBlockID"))
 	return _r
 }
 
-// Direction the direction of the Function Block: input, output, or bidirectional.
-func (x *UMPFunctionBlock) Direction() UMPFunctionBlockDirection {
-	_r := objc.Send[UMPFunctionBlockDirection](objref.IDOf(x), objc.RegisterName("direction"))
+// Direction returns the direction of the Function Block: input, output, or bidirectional.
+func (ufb *UMPFunctionBlock) Direction() UMPFunctionBlockDirection {
+	_r := objc.Send[UMPFunctionBlockDirection](objref.IDOf(ufb), objc.RegisterName("direction"))
 	return _r
 }
 
-// FirstGroup the first Group spanned by this Function Block.
-func (x *UMPFunctionBlock) FirstGroup() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("firstGroup"))
+// FirstGroup returns the first Group spanned by this Function Block.
+func (ufb *UMPFunctionBlock) FirstGroup() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ufb), objc.RegisterName("firstGroup"))
 	return _r
 }
 
-// TotalGroupsSpanned the total number of groups spanned by this Function Block.
-func (x *UMPFunctionBlock) TotalGroupsSpanned() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("totalGroupsSpanned"))
+// TotalGroupsSpanned returns the total number of groups spanned by this Function Block.
+func (ufb *UMPFunctionBlock) TotalGroupsSpanned() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ufb), objc.RegisterName("totalGroupsSpanned"))
 	return _r
 }
 
-// MaxSysEx8Streams the maximum number of simultaneous Sysex8 streams.
-func (x *UMPFunctionBlock) MaxSysEx8Streams() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("maxSysEx8Streams"))
+// MaxSysEx8Streams returns the maximum number of simultaneous Sysex8 streams.
+func (ufb *UMPFunctionBlock) MaxSysEx8Streams() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ufb), objc.RegisterName("maxSysEx8Streams"))
 	return _r
 }
 
-// MIDI1Info MIDI 1.0 speed information.
-func (x *UMPFunctionBlock) MIDI1Info() UMPFunctionBlockMIDI1Info {
-	_r := objc.Send[UMPFunctionBlockMIDI1Info](objref.IDOf(x), objc.RegisterName("MIDI1Info"))
+// MIDI1Info returns MIDI 1.0 speed information.
+func (ufb *UMPFunctionBlock) MIDI1Info() UMPFunctionBlockMIDI1Info {
+	_r := objc.Send[UMPFunctionBlockMIDI1Info](objref.IDOf(ufb), objc.RegisterName("MIDI1Info"))
 	return _r
 }
 
-// UIHint a hint for UI about the primary usage of this Function Block.
-func (x *UMPFunctionBlock) UIHint() UMPFunctionBlockUIHint {
-	_r := objc.Send[UMPFunctionBlockUIHint](objref.IDOf(x), objc.RegisterName("UIHint"))
+// UIHint returns a hint for UI about the primary usage of this Function Block.
+func (ufb *UMPFunctionBlock) UIHint() UMPFunctionBlockUIHint {
+	_r := objc.Send[UMPFunctionBlockUIHint](objref.IDOf(ufb), objc.RegisterName("UIHint"))
 	return _r
 }
 
-// UMPEndpoint the UMP Endpoint to which this Function Block is registered. If the function block does not belong to an endpoint this property will be nil.
-func (x *UMPFunctionBlock) UMPEndpoint() *UMPEndpoint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UMPEndpoint"))
+// UMPEndpoint returns the UMP Endpoint to which this Function Block is registered. If the function block does not belong to an endpoint this property will be nil.
+func (ufb *UMPFunctionBlock) UMPEndpoint() *UMPEndpoint {
+	_r := objc.Send[objc.ID](objref.IDOf(ufb), objc.RegisterName("UMPEndpoint"))
 	return UMPEndpointFromID(_r)
 }
 
-// MidiCIDevice retrieve the MIDICIDevice class interface if the Function Block supports MIDI-CI. If a Function Block was created as a MIDICIDevice object, this property will provide an in-place MIDICIDevice interface that may be used with MIDI-CI API. If the device was not created as a MIDICIDevice, this method returns nil.
-func (x *UMPFunctionBlock) MidiCIDevice() *CIDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("midiCIDevice"))
+// MidiCIDevice returns retrieve the MIDICIDevice class interface if the Function Block supports MIDI-CI. If a Function Block was created as a MIDICIDevice object, this property will provide an in-place MIDICIDevice interface that may be used with MIDI-CI API. If the device was not created as a MIDICIDevice, this method returns nil.
+func (ufb *UMPFunctionBlock) MidiCIDevice() *CIDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(ufb), objc.RegisterName("midiCIDevice"))
 	return CIDeviceFromID(_r)
 }
 
-// IsEnabled the enable state of this Function Block.
-func (x *UMPFunctionBlock) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether the enable state of this Function Block.
+func (ufb *UMPFunctionBlock) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ufb), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// UMPFunctionBlockable is the interface implemented by [UMPFunctionBlock], for mocking and DI.
-type UMPFunctionBlockable interface {
-	obj.Object
-	Name() string
-	FunctionBlockID() uint8
-	Direction() UMPFunctionBlockDirection
-	FirstGroup() uint8
-	TotalGroupsSpanned() uint8
-	MaxSysEx8Streams() uint8
-	MIDI1Info() UMPFunctionBlockMIDI1Info
-	UIHint() UMPFunctionBlockUIHint
-	UMPEndpoint() *UMPEndpoint
-	MidiCIDevice() *CIDevice
-	IsEnabled() bool
-}
-
-var _ UMPFunctionBlockable = (*UMPFunctionBlock)(nil)
 
 // isUMPFunctionBlock marks UMPFunctionBlock — and, by embedding promotion, its
 // subclasses — as a member of the UMPFunctionBlock hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *UMPFunctionBlock) isUMPFunctionBlock() {}
+func (ufb *UMPFunctionBlock) isUMPFunctionBlock() {}
 
 var _ UMPFunctionBlockProvider = (*UMPFunctionBlock)(nil)

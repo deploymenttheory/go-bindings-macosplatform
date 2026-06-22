@@ -44,24 +44,24 @@ func mTRDeviceTypeRevisionAdopt(id objc.ID) *MTRDeviceTypeRevision {
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceTypeRevision) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdtr *MTRDeviceTypeRevision) Description() string {
+	return rt.Description(objref.IDOf(mdtr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceTypeRevision) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdtr *MTRDeviceTypeRevision) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdtr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceTypeRevision) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdtr *MTRDeviceTypeRevision) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdtr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceTypeRevision) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdtr *MTRDeviceTypeRevision) String() string {
+	return rt.Description(objref.IDOf(mdtr))
 }
 
 // NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision the provided deviceTypeID must be in the range 0xVVVV0000-0xVVVVBFFF, where VVVV is the vendor identifier (0 for standard device types). The provided deviceTypeRevision must be in the range 1-65535.
@@ -79,29 +79,19 @@ func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *MTRDescripto
 }
 
 // DeviceTypeID wraps the corresponding Objective-C method.
-func (x *MTRDeviceTypeRevision) DeviceTypeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypeID"))
+func (mdtr *MTRDeviceTypeRevision) DeviceTypeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("deviceTypeID"))
 	return obj.Wrap(_r)
 }
 
 // DeviceTypeRevision wraps the corresponding Objective-C method.
-func (x *MTRDeviceTypeRevision) DeviceTypeRevision() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypeRevision"))
+func (mdtr *MTRDeviceTypeRevision) DeviceTypeRevision() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("deviceTypeRevision"))
 	return obj.Wrap(_r)
 }
 
 // TypeInformation returns the MTRDeviceType corresponding to deviceTypeID, or nil if deviceTypeID does not represent a known device type.
-func (x *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeInformation"))
+func (mdtr *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("typeInformation"))
 	return MTRDeviceTypeFromID(_r)
 }
-
-// MTRDeviceTypeRevisionable is the interface implemented by [MTRDeviceTypeRevision], for mocking and DI.
-type MTRDeviceTypeRevisionable interface {
-	obj.Object
-	DeviceTypeID() obj.Object
-	DeviceTypeRevision() obj.Object
-	TypeInformation() *MTRDeviceType
-}
-
-var _ MTRDeviceTypeRevisionable = (*MTRDeviceTypeRevision)(nil)

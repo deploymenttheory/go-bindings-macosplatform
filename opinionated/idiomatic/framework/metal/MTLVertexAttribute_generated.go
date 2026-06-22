@@ -46,24 +46,24 @@ func vertexAttributeAdopt(id objc.ID) *VertexAttribute {
 }
 
 // Description returns the object's -description text.
-func (x *VertexAttribute) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (va *VertexAttribute) Description() string {
+	return rt.Description(objref.IDOf(va))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VertexAttribute) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (va *VertexAttribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(va), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VertexAttribute) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (va *VertexAttribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(va), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VertexAttribute) String() string {
-	return rt.Description(objref.IDOf(x))
+func (va *VertexAttribute) String() string {
+	return rt.Description(objref.IDOf(va))
 }
 
 // NewVertexAttribute creates a new VertexAttribute.
@@ -73,8 +73,8 @@ func NewVertexAttribute() *VertexAttribute {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *VertexAttribute) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (va *VertexAttribute) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,44 +82,31 @@ func (x *VertexAttribute) Name() string {
 }
 
 // AttributeIndex wraps the corresponding Objective-C method.
-func (x *VertexAttribute) AttributeIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("attributeIndex"))
+func (va *VertexAttribute) AttributeIndex() int {
+	_r := objc.Send[int](objref.IDOf(va), objc.RegisterName("attributeIndex"))
 	return _r
 }
 
 // AttributeType wraps the corresponding Objective-C method.
-func (x *VertexAttribute) AttributeType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("attributeType"))
+func (va *VertexAttribute) AttributeType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(va), objc.RegisterName("attributeType"))
 	return _r
 }
 
 // IsActive wraps the corresponding Objective-C method.
-func (x *VertexAttribute) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+func (va *VertexAttribute) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isActive"))
 	return _r
 }
 
 // IsPatchData wraps the corresponding Objective-C method.
-func (x *VertexAttribute) IsPatchData() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchData"))
+func (va *VertexAttribute) IsPatchData() bool {
+	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isPatchData"))
 	return _r
 }
 
 // IsPatchControlPointData wraps the corresponding Objective-C method.
-func (x *VertexAttribute) IsPatchControlPointData() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchControlPointData"))
+func (va *VertexAttribute) IsPatchControlPointData() bool {
+	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isPatchControlPointData"))
 	return _r
 }
-
-// VertexAttributeable is the interface implemented by [VertexAttribute], for mocking and DI.
-type VertexAttributeable interface {
-	obj.Object
-	Name() string
-	AttributeIndex() int
-	AttributeType() DataType
-	IsActive() bool
-	IsPatchData() bool
-	IsPatchControlPointData() bool
-}
-
-var _ VertexAttributeable = (*VertexAttribute)(nil)

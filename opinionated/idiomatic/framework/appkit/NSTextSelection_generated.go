@@ -46,24 +46,24 @@ func textSelectionAdopt(id objc.ID) *TextSelection {
 }
 
 // Description returns the object's -description text.
-func (x *TextSelection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextSelection) Description() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextSelection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ts *TextSelection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextSelection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ts *TextSelection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextSelection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextSelection) String() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTextSelectionWithRangesAffinityGranularity creates a new text selection with the ranges, selection affinity, and granularity you provide.
@@ -87,106 +87,70 @@ func NewTextSelectionWithRangeAffinityGranularity(range_ *TextRange, affinity Te
 	return textSelectionAdopt(_id)
 }
 
-// WithAnchorPositionOffset represents the anchor position offset from the beginning of a line fragment in the visual order for the initial tap or click location.
-func (x *TextSelection) WithAnchorPositionOffset(anchorPositionOffset float64) *TextSelection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPositionOffset:"), anchorPositionOffset)
-	return x
+// WithAnchorPositionOffset sets represents the anchor position offset from the beginning of a line fragment in the visual order for the initial tap or click location.
+func (ts *TextSelection) WithAnchorPositionOffset(anchorPositionOffset float64) *TextSelection {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setAnchorPositionOffset:"), anchorPositionOffset)
+	return ts
 }
 
-// WithLogical a Boolean value that indicates whether the framework interprets the selection as logical or visual.
-func (x *TextSelection) WithLogical(logical bool) *TextSelection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogical:"), logical)
-	return x
+// WithLogical sets a Boolean value that indicates whether the framework interprets the selection as logical or visual.
+func (ts *TextSelection) WithLogical(logical bool) *TextSelection {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setLogical:"), logical)
+	return ts
 }
 
-// WithTypingAttributes the template attributes the framework uses for characters that replace the contents of this selection.
-func (x *TextSelection) WithTypingAttributes(typingAttributes obj.Object) *TextSelection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
-	return x
+// WithTypingAttributes sets the template attributes the framework uses for characters that replace the contents of this selection.
+func (ts *TextSelection) WithTypingAttributes(typingAttributes obj.Object) *TextSelection {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
+	return ts
 }
 
 // TextSelectionWithTextRanges creates a subselection of the current text selection with the ranges you specify.
-func (x *TextSelection) TextSelectionWithTextRanges(textRanges []*TextRange) *TextSelection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelectionWithTextRanges:"), purego.SliceToNSArray(textRanges, func(_v *TextRange) objc.ID { return objref.IDOf(_v) }))
+func (ts *TextSelection) TextSelectionWithTextRanges(textRanges []*TextRange) *TextSelection {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("textSelectionWithTextRanges:"), purego.SliceToNSArray(textRanges, func(_v *TextRange) objc.ID { return objref.IDOf(_v) }))
 	return TextSelectionFromID(_r)
 }
 
 // TextRanges wraps the corresponding Objective-C method.
 //
 // TextRanges returns the collection as a Go slice.
-func (x *TextSelection) TextRanges() []*TextRange {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRanges"))
+func (ts *TextSelection) TextRanges() []*TextRange {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("textRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
 // Granularity wraps the corresponding Objective-C method.
-func (x *TextSelection) Granularity() TextSelectionGranularity {
-	_r := objc.Send[TextSelectionGranularity](objref.IDOf(x), objc.RegisterName("granularity"))
+func (ts *TextSelection) Granularity() TextSelectionGranularity {
+	_r := objc.Send[TextSelectionGranularity](objref.IDOf(ts), objc.RegisterName("granularity"))
 	return _r
 }
 
 // Affinity wraps the corresponding Objective-C method.
-func (x *TextSelection) Affinity() TextSelectionAffinity {
-	_r := objc.Send[TextSelectionAffinity](objref.IDOf(x), objc.RegisterName("affinity"))
+func (ts *TextSelection) Affinity() TextSelectionAffinity {
+	_r := objc.Send[TextSelectionAffinity](objref.IDOf(ts), objc.RegisterName("affinity"))
 	return _r
 }
 
 // IsTransient wraps the corresponding Objective-C method.
-func (x *TextSelection) IsTransient() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransient"))
+func (ts *TextSelection) IsTransient() bool {
+	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isTransient"))
 	return _r
 }
 
 // AnchorPositionOffset wraps the corresponding Objective-C method.
-func (x *TextSelection) AnchorPositionOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("anchorPositionOffset"))
+func (ts *TextSelection) AnchorPositionOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("anchorPositionOffset"))
 	return _r
-}
-
-// SetAnchorPositionOffset wraps the corresponding Objective-C method.
-func (x *TextSelection) SetAnchorPositionOffset(anchorPositionOffset float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPositionOffset:"), anchorPositionOffset)
 }
 
 // IsLogical wraps the corresponding Objective-C method.
-func (x *TextSelection) IsLogical() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLogical"))
+func (ts *TextSelection) IsLogical() bool {
+	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isLogical"))
 	return _r
 }
 
-// SetLogical wraps the corresponding Objective-C method.
-func (x *TextSelection) SetLogical(logical bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogical:"), logical)
-}
-
 // TypingAttributes wraps the corresponding Objective-C method.
-func (x *TextSelection) TypingAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typingAttributes"))
+func (ts *TextSelection) TypingAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("typingAttributes"))
 	return obj.Wrap(_r)
 }
-
-// SetTypingAttributes wraps the corresponding Objective-C method.
-func (x *TextSelection) SetTypingAttributes(typingAttributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
-}
-
-// TextSelectionable is the interface implemented by [TextSelection], for mocking and DI.
-type TextSelectionable interface {
-	obj.Object
-	WithAnchorPositionOffset(anchorPositionOffset float64) *TextSelection
-	WithLogical(logical bool) *TextSelection
-	WithTypingAttributes(typingAttributes obj.Object) *TextSelection
-	TextSelectionWithTextRanges(textRanges []*TextRange) *TextSelection
-	TextRanges() []*TextRange
-	Granularity() TextSelectionGranularity
-	Affinity() TextSelectionAffinity
-	IsTransient() bool
-	AnchorPositionOffset() float64
-	SetAnchorPositionOffset(anchorPositionOffset float64)
-	IsLogical() bool
-	SetLogical(logical bool)
-	TypingAttributes() obj.Object
-	SetTypingAttributes(typingAttributes obj.Object)
-}
-
-var _ TextSelectionable = (*TextSelection)(nil)

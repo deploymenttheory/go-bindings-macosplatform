@@ -48,73 +48,62 @@ func scannerFeatureAdopt(id objc.ID) *ScannerFeature {
 }
 
 // Description returns the object's -description text.
-func (x *ScannerFeature) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sf *ScannerFeature) Description() string {
+	return rt.Description(objref.IDOf(sf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScannerFeature) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sf *ScannerFeature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScannerFeature) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sf *ScannerFeature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScannerFeature) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sf *ScannerFeature) String() string {
+	return rt.Description(objref.IDOf(sf))
 }
 
-// Type ￼Scanner feature type.
-func (x *ScannerFeature) Type() ScannerFeatureType {
-	_r := objc.Send[ScannerFeatureType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns ￼Scanner feature type.
+func (sf *ScannerFeature) Type() ScannerFeatureType {
+	_r := objc.Send[ScannerFeatureType](objref.IDOf(sf), objc.RegisterName("type"))
 	return _r
 }
 
-// InternalName ￼The internal name of this feature.
-func (x *ScannerFeature) InternalName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("internalName"))
+// InternalName returns ￼The internal name of this feature.
+func (sf *ScannerFeature) InternalName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("internalName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// HumanReadableName the human readable name of this feature.
-func (x *ScannerFeature) HumanReadableName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("humanReadableName"))
+// HumanReadableName returns the human readable name of this feature.
+func (sf *ScannerFeature) HumanReadableName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("humanReadableName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Tooltip ￼Tooltip text describing the feature.
-func (x *ScannerFeature) Tooltip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tooltip"))
+// Tooltip returns ￼Tooltip text describing the feature.
+func (sf *ScannerFeature) Tooltip() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("tooltip"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ScannerFeatureable is the interface implemented by [ScannerFeature], for mocking and DI.
-type ScannerFeatureable interface {
-	obj.Object
-	Type() ScannerFeatureType
-	InternalName() string
-	HumanReadableName() string
-	Tooltip() string
-}
-
-var _ ScannerFeatureable = (*ScannerFeature)(nil)
 
 // isScannerFeature marks ScannerFeature — and, by embedding promotion, its
 // subclasses — as a member of the ScannerFeature hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ScannerFeature) isScannerFeature() {}
+func (sf *ScannerFeature) isScannerFeature() {}
 
 var _ ScannerFeatureProvider = (*ScannerFeature)(nil)

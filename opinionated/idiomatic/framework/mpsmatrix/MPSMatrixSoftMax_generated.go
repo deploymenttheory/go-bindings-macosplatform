@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,85 +44,58 @@ func matrixSoftMaxAdopt(id objc.ID) *MatrixSoftMax {
 	return x
 }
 
-// WithSourceRows the number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-func (x *MatrixSoftMax) WithSourceRows(sourceRows int) *MatrixSoftMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRows:"), sourceRows)
-	return x
+// WithSourceRows sets the number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (msm *MatrixSoftMax) WithSourceRows(sourceRows int) *MatrixSoftMax {
+	objc.Send[objc.ID](objref.IDOf(msm), objc.RegisterName("setSourceRows:"), sourceRows)
+	return msm
 }
 
-// WithSourceColumns the number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-func (x *MatrixSoftMax) WithSourceColumns(sourceColumns int) *MatrixSoftMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceColumns:"), sourceColumns)
-	return x
+// WithSourceColumns sets the number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (msm *MatrixSoftMax) WithSourceColumns(sourceColumns int) *MatrixSoftMax {
+	objc.Send[objc.ID](objref.IDOf(msm), objc.RegisterName("setSourceColumns:"), sourceColumns)
+	return msm
 }
 
-// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSoftMax) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
-	return x
+// WithSourceMatrixOrigin sets the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (msm *MatrixSoftMax) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMax {
+	objc.Send[objc.ID](objref.IDOf(msm), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return msm
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSoftMax) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (msm *MatrixSoftMax) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMax {
+	objc.Send[objc.ID](objref.IDOf(msm), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return msm
 }
 
-// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-func (x *MatrixSoftMax) WithBatchStart(batchStart int) *MatrixSoftMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (msm *MatrixSoftMax) WithBatchStart(batchStart int) *MatrixSoftMax {
+	objc.Send[objc.ID](objref.IDOf(msm), objc.RegisterName("setBatchStart:"), batchStart)
+	return msm
 }
 
-// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-func (x *MatrixSoftMax) WithBatchSize(batchSize int) *MatrixSoftMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (msm *MatrixSoftMax) WithBatchSize(batchSize int) *MatrixSoftMax {
+	objc.Send[objc.ID](objref.IDOf(msm), objc.RegisterName("setBatchSize:"), batchSize)
+	return msm
 }
 
-// SourceRows the number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-func (x *MatrixSoftMax) SourceRows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceRows"))
+// SourceRows returns the number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (msm *MatrixSoftMax) SourceRows() int {
+	_r := objc.Send[int](objref.IDOf(msm), objc.RegisterName("sourceRows"))
 	return _r
 }
 
-// SetSourceRows wraps the corresponding Objective-C method.
-func (x *MatrixSoftMax) SetSourceRows(sourceRows int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRows:"), sourceRows)
-}
-
-// SourceColumns the number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-func (x *MatrixSoftMax) SourceColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceColumns"))
+// SourceColumns returns the number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (msm *MatrixSoftMax) SourceColumns() int {
+	_r := objc.Send[int](objref.IDOf(msm), objc.RegisterName("sourceColumns"))
 	return _r
 }
-
-// SetSourceColumns wraps the corresponding Objective-C method.
-func (x *MatrixSoftMax) SetSourceColumns(sourceColumns int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceColumns:"), sourceColumns)
-}
-
-// MatrixSoftMaxable is the interface implemented by [MatrixSoftMax], for mocking and DI.
-type MatrixSoftMaxable interface {
-	obj.Object
-	WithSourceRows(sourceRows int) *MatrixSoftMax
-	WithSourceColumns(sourceColumns int) *MatrixSoftMax
-	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMax
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMax
-	WithBatchStart(batchStart int) *MatrixSoftMax
-	WithBatchSize(batchSize int) *MatrixSoftMax
-	SourceRows() int
-	SetSourceRows(sourceRows int)
-	SourceColumns() int
-	SetSourceColumns(sourceColumns int)
-}
-
-var _ MatrixSoftMaxable = (*MatrixSoftMax)(nil)
 
 // isMatrixSoftMax marks MatrixSoftMax — and, by embedding promotion, its
 // subclasses — as a member of the MatrixSoftMax hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MatrixSoftMax) isMatrixSoftMax() {}
+func (msm *MatrixSoftMax) isMatrixSoftMax() {}
 
 var _ MatrixSoftMaxProvider = (*MatrixSoftMax)(nil)
 

@@ -51,32 +51,22 @@ func NewCNNGroupNormalizationGradientState() *CNNGroupNormalizationGradientState
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNGroupNormalizationGradientState) WithReadCount(readCount int) *CNNGroupNormalizationGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cgngs *CNNGroupNormalizationGradientState) WithReadCount(readCount int) *CNNGroupNormalizationGradientState {
+	objc.Send[objc.ID](objref.IDOf(cgngs), objc.RegisterName("setReadCount:"), readCount)
+	return cgngs
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNGroupNormalizationGradientState) WithLabel(label string) *CNNGroupNormalizationGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cgngs *CNNGroupNormalizationGradientState) WithLabel(label string) *CNNGroupNormalizationGradientState {
+	objc.Send[objc.ID](objref.IDOf(cgngs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cgngs
 }
 
-// GroupNormalization the MPSCNNGroupNormalization object that created this state object.
-func (x *CNNGroupNormalizationGradientState) GroupNormalization() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupNormalization"))
+// GroupNormalization returns the MPSCNNGroupNormalization object that created this state object.
+func (cgngs *CNNGroupNormalizationGradientState) GroupNormalization() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cgngs), objc.RegisterName("groupNormalization"))
 	return obj.Wrap(_r)
 }
-
-// CNNGroupNormalizationGradientStateable is the interface implemented by [CNNGroupNormalizationGradientState], for mocking and DI.
-type CNNGroupNormalizationGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNGroupNormalizationGradientState
-	WithLabel(label string) *CNNGroupNormalizationGradientState
-	GroupNormalization() obj.Object
-}
-
-var _ CNNGroupNormalizationGradientStateable = (*CNNGroupNormalizationGradientState)(nil)
 
 var _ NNGradientStateProvider = (*CNNGroupNormalizationGradientState)(nil)
 

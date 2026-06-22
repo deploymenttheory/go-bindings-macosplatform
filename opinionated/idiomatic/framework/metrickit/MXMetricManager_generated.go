@@ -46,24 +46,24 @@ func metricManagerAdopt(id objc.ID) *MetricManager {
 }
 
 // Description returns the object's -description text.
-func (x *MetricManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mm *MetricManager) Description() string {
+	return rt.Description(objref.IDOf(mm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mm *MetricManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mm *MetricManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetricManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mm *MetricManager) String() string {
+	return rt.Description(objref.IDOf(mm))
 }
 
 // NewMetricManager creates a new MetricManager.
@@ -72,27 +72,18 @@ func NewMetricManager() *MetricManager {
 	return metricManagerAdopt(_id)
 }
 
-// PastPayloads a list of past metric payloads received.
+// PastPayloads returns a list of past metric payloads received.
 //
 // PastPayloads returns the collection as a Go slice.
-func (x *MetricManager) PastPayloads() []*MetricPayload {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pastPayloads"))
+func (mm *MetricManager) PastPayloads() []*MetricPayload {
+	_arr := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("pastPayloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricPayload { return MetricPayloadFromID(_id) })
 }
 
-// PastDiagnosticPayloads a list of past diagnostic payloads received.
+// PastDiagnosticPayloads returns a list of past diagnostic payloads received.
 //
 // PastDiagnosticPayloads returns the collection as a Go slice.
-func (x *MetricManager) PastDiagnosticPayloads() []*DiagnosticPayload {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pastDiagnosticPayloads"))
+func (mm *MetricManager) PastDiagnosticPayloads() []*DiagnosticPayload {
+	_arr := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("pastDiagnosticPayloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DiagnosticPayload { return DiagnosticPayloadFromID(_id) })
 }
-
-// MetricManagerable is the interface implemented by [MetricManager], for mocking and DI.
-type MetricManagerable interface {
-	obj.Object
-	PastPayloads() []*MetricPayload
-	PastDiagnosticPayloads() []*DiagnosticPayload
-}
-
-var _ MetricManagerable = (*MetricManager)(nil)

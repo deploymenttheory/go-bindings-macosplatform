@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewCNNPoolingAverageGradientNode() *CNNPoolingAverageGradientNode {
 	return cNNPoolingAverageGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingAverageGradientNode) WithLabel(label string) *CNNPoolingAverageGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cpagn *CNNPoolingAverageGradientNode) WithLabel(label string) *CNNPoolingAverageGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cpagn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cpagn
 }
-
-// CNNPoolingAverageGradientNodeable is the interface implemented by [CNNPoolingAverageGradientNode], for mocking and DI.
-type CNNPoolingAverageGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingAverageGradientNode
-}
-
-var _ CNNPoolingAverageGradientNodeable = (*CNNPoolingAverageGradientNode)(nil)
 
 var _ CNNPoolingGradientNodeProvider = (*CNNPoolingAverageGradientNode)(nil)
 

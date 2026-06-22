@@ -44,24 +44,24 @@ func scriptControllerAdopt(id objc.ID) *ScriptController {
 }
 
 // Description returns the object's -description text.
-func (x *ScriptController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *ScriptController) Description() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScriptController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sc *ScriptController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScriptController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sc *ScriptController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScriptController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *ScriptController) String() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // NewScriptController creates a new ScriptController.
@@ -71,126 +71,81 @@ func NewScriptController() *ScriptController {
 }
 
 // WithScriptView sets the property and returns the receiver so calls can be chained.
-func (x *ScriptController) WithScriptView(scriptView *ScriptView) *ScriptController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptView:"), objref.IDOf(scriptView))
-	return x
+func (sc *ScriptController) WithScriptView(scriptView *ScriptView) *ScriptController {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptView:"), objref.IDOf(scriptView))
+	return sc
 }
 
 // WithResultView sets the property and returns the receiver so calls can be chained.
-func (x *ScriptController) WithResultView(resultView obj.Object) *ScriptController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultView:"), objref.IDOf(resultView))
-	return x
+func (sc *ScriptController) WithResultView(resultView obj.Object) *ScriptController {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setResultView:"), objref.IDOf(resultView))
+	return sc
 }
 
 // WithScript sets the property and returns the receiver so calls can be chained.
-func (x *ScriptController) WithScript(script *Script) *ScriptController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
-	return x
+func (sc *ScriptController) WithScript(script *Script) *ScriptController {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScript:"), objref.IDOf(script))
+	return sc
 }
 
 // WithLanguage sets the property and returns the receiver so calls can be chained.
-func (x *ScriptController) WithLanguage(language *Language) *ScriptController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
-	return x
+func (sc *ScriptController) WithLanguage(language *Language) *ScriptController {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLanguage:"), objref.IDOf(language))
+	return sc
 }
 
 // CompileScript wraps the corresponding Objective-C method.
-func (x *ScriptController) CompileScript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compileScript:"), objref.IDOf(sender))
+func (sc *ScriptController) CompileScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("compileScript:"), objref.IDOf(sender))
 }
 
 // RecordScript wraps the corresponding Objective-C method.
-func (x *ScriptController) RecordScript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordScript:"), objref.IDOf(sender))
+func (sc *ScriptController) RecordScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("recordScript:"), objref.IDOf(sender))
 }
 
 // RunScript wraps the corresponding Objective-C method.
-func (x *ScriptController) RunScript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runScript:"), objref.IDOf(sender))
+func (sc *ScriptController) RunScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("runScript:"), objref.IDOf(sender))
 }
 
 // StopScript wraps the corresponding Objective-C method.
-func (x *ScriptController) StopScript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopScript:"), objref.IDOf(sender))
+func (sc *ScriptController) StopScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("stopScript:"), objref.IDOf(sender))
 }
 
 // ScriptView wraps the corresponding Objective-C method.
-func (x *ScriptController) ScriptView() *ScriptView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptView"))
+func (sc *ScriptController) ScriptView() *ScriptView {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptView"))
 	return ScriptViewFromID(_r)
 }
 
-// SetScriptView wraps the corresponding Objective-C method.
-func (x *ScriptController) SetScriptView(scriptView *ScriptView) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptView:"), objref.IDOf(scriptView))
-}
-
 // ResultView wraps the corresponding Objective-C method.
-func (x *ScriptController) ResultView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultView"))
+func (sc *ScriptController) ResultView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("resultView"))
 	return obj.Wrap(_r)
 }
 
-// SetResultView wraps the corresponding Objective-C method.
-func (x *ScriptController) SetResultView(resultView obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultView:"), objref.IDOf(resultView))
-}
-
 // Script wraps the corresponding Objective-C method.
-func (x *ScriptController) Script() *Script {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("script"))
+func (sc *ScriptController) Script() *Script {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("script"))
 	return ScriptFromID(_r)
 }
 
-// SetScript wraps the corresponding Objective-C method.
-func (x *ScriptController) SetScript(script *Script) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
-}
-
 // Language wraps the corresponding Objective-C method.
-func (x *ScriptController) Language() *Language {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (sc *ScriptController) Language() *Language {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
-// SetLanguage wraps the corresponding Objective-C method.
-func (x *ScriptController) SetLanguage(language *Language) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
-}
-
 // ScriptState wraps the corresponding Objective-C method.
-func (x *ScriptController) ScriptState() ScriptState {
-	_r := objc.Send[ScriptState](objref.IDOf(x), objc.RegisterName("scriptState"))
+func (sc *ScriptController) ScriptState() ScriptState {
+	_r := objc.Send[ScriptState](objref.IDOf(sc), objc.RegisterName("scriptState"))
 	return _r
 }
 
 // IsCompiling wraps the corresponding Objective-C method.
-func (x *ScriptController) IsCompiling() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompiling"))
+func (sc *ScriptController) IsCompiling() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isCompiling"))
 	return _r
 }
-
-// ScriptControllerable is the interface implemented by [ScriptController], for mocking and DI.
-type ScriptControllerable interface {
-	obj.Object
-	WithScriptView(scriptView *ScriptView) *ScriptController
-	WithResultView(resultView obj.Object) *ScriptController
-	WithScript(script *Script) *ScriptController
-	WithLanguage(language *Language) *ScriptController
-	CompileScript(sender obj.Object)
-	RecordScript(sender obj.Object)
-	RunScript(sender obj.Object)
-	StopScript(sender obj.Object)
-	ScriptView() *ScriptView
-	SetScriptView(scriptView *ScriptView)
-	ResultView() obj.Object
-	SetResultView(resultView obj.Object)
-	Script() *Script
-	SetScript(script *Script)
-	Language() *Language
-	SetLanguage(language *Language)
-	ScriptState() ScriptState
-	IsCompiling() bool
-}
-
-var _ ScriptControllerable = (*ScriptController)(nil)

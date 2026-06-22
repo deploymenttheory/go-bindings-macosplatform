@@ -44,24 +44,24 @@ func mTRLevelControlClusterMoveToClosestFrequencyParamsAdopt(id objc.ID) *MTRLev
 }
 
 // Description returns the object's -description text.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) Description() string {
+	return rt.Description(objref.IDOf(mlccmtcfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mlccmtcfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mlccmtcfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) String() string {
+	return rt.Description(objref.IDOf(mlccmtcfp))
 }
 
 // NewMTRLevelControlClusterMoveToClosestFrequencyParams creates a new MTRLevelControlClusterMoveToClosestFrequencyParams.
@@ -71,68 +71,37 @@ func NewMTRLevelControlClusterMoveToClosestFrequencyParams() *MTRLevelControlClu
 }
 
 // WithFrequency sets the property and returns the receiver so calls can be chained.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) WithFrequency(frequency obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), objref.IDOf(frequency))
-	return x
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) WithFrequency(frequency obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("setFrequency:"), objref.IDOf(frequency))
+	return mlccmtcfp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mlccmtcfp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mlccmtcfp
 }
 
 // Frequency wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) Frequency() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frequency"))
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) Frequency() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("frequency"))
 	return obj.Wrap(_r)
 }
 
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) SetFrequency(frequency obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), objref.IDOf(frequency))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRLevelControlClusterMoveToClosestFrequencyParamsable is the interface implemented by [MTRLevelControlClusterMoveToClosestFrequencyParams], for mocking and DI.
-type MTRLevelControlClusterMoveToClosestFrequencyParamsable interface {
-	obj.Object
-	WithFrequency(frequency obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams
-	Frequency() obj.Object
-	SetFrequency(frequency obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRLevelControlClusterMoveToClosestFrequencyParamsable = (*MTRLevelControlClusterMoveToClosestFrequencyParams)(nil)

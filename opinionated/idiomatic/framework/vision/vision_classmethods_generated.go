@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ZeroCircle returns a VNCircle object with center at the Origin [0.0; 0.0] and zero radius.
@@ -40,7 +41,7 @@ func ModelForMLModelError(model obj.Object) (result *CoreMLModel, err error) {
 	return CoreMLModelFromID(_r), nil
 }
 
-// SupportedSymbologies obtain the collection of barcode symbologies currently recognized by the Vision framework. Calling this method could be a potentially expensive operation.
+// SupportedSymbologies returns obtain the collection of barcode symbologies currently recognized by the Vision framework. Calling this method could be a potentially expensive operation.
 //
 // SupportedSymbologies returns the collection as a Go slice.
 func SupportedSymbologies() []obj.Object {

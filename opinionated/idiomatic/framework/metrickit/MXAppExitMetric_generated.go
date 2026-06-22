@@ -7,7 +7,6 @@ package metrickit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewAppExitMetric() *AppExitMetric {
 	return appExitMetricAdopt(_id)
 }
 
-// ForegroundExitData cumulative foreground exit data. This includes application exit data when the application was on screen and visible to the user.
-func (x *AppExitMetric) ForegroundExitData() *ForegroundExitData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("foregroundExitData"))
+// ForegroundExitData returns cumulative foreground exit data. This includes application exit data when the application was on screen and visible to the user.
+func (aem *AppExitMetric) ForegroundExitData() *ForegroundExitData {
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("foregroundExitData"))
 	return ForegroundExitDataFromID(_r)
 }
 
-// BackgroundExitData cumulative background exit data. This includes application exit data when the application was off screen and not visible to the user.
-func (x *AppExitMetric) BackgroundExitData() *BackgroundExitData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundExitData"))
+// BackgroundExitData returns cumulative background exit data. This includes application exit data when the application was off screen and not visible to the user.
+func (aem *AppExitMetric) BackgroundExitData() *BackgroundExitData {
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("backgroundExitData"))
 	return BackgroundExitDataFromID(_r)
 }
-
-// AppExitMetricable is the interface implemented by [AppExitMetric], for mocking and DI.
-type AppExitMetricable interface {
-	obj.Object
-	ForegroundExitData() *ForegroundExitData
-	BackgroundExitData() *BackgroundExitData
-}
-
-var _ AppExitMetricable = (*AppExitMetric)(nil)
 
 var _ MetricProvider = (*AppExitMetric)(nil)

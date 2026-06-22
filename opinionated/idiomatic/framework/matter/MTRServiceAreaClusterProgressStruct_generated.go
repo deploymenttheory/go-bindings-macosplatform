@@ -44,24 +44,24 @@ func mTRServiceAreaClusterProgressStructAdopt(id objc.ID) *MTRServiceAreaCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRServiceAreaClusterProgressStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msacps *MTRServiceAreaClusterProgressStruct) Description() string {
+	return rt.Description(objref.IDOf(msacps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServiceAreaClusterProgressStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msacps *MTRServiceAreaClusterProgressStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msacps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServiceAreaClusterProgressStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msacps *MTRServiceAreaClusterProgressStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msacps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServiceAreaClusterProgressStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msacps *MTRServiceAreaClusterProgressStruct) String() string {
+	return rt.Description(objref.IDOf(msacps))
 }
 
 // NewMTRServiceAreaClusterProgressStruct creates a new MTRServiceAreaClusterProgressStruct.
@@ -71,68 +71,37 @@ func NewMTRServiceAreaClusterProgressStruct() *MTRServiceAreaClusterProgressStru
 }
 
 // WithAreaID sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterProgressStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterProgressStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
-	return x
+func (msacps *MTRServiceAreaClusterProgressStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterProgressStruct {
+	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
+	return msacps
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterProgressStruct) WithStatus(status obj.Object) *MTRServiceAreaClusterProgressStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (msacps *MTRServiceAreaClusterProgressStruct) WithStatus(status obj.Object) *MTRServiceAreaClusterProgressStruct {
+	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return msacps
 }
 
 // WithTotalOperationalTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterProgressStruct) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRServiceAreaClusterProgressStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
-	return x
+func (msacps *MTRServiceAreaClusterProgressStruct) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRServiceAreaClusterProgressStruct {
+	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
+	return msacps
 }
 
 // AreaID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterProgressStruct) AreaID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaID"))
+func (msacps *MTRServiceAreaClusterProgressStruct) AreaID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("areaID"))
 	return obj.Wrap(_r)
-}
-
-// SetAreaID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterProgressStruct) SetAreaID(areaID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterProgressStruct) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (msacps *MTRServiceAreaClusterProgressStruct) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("status"))
 	return obj.Wrap(_r)
-}
-
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterProgressStruct) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
 // TotalOperationalTime wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalOperationalTime"))
+func (msacps *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("totalOperationalTime"))
 	return obj.Wrap(_r)
 }
-
-// SetTotalOperationalTime wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterProgressStruct) SetTotalOperationalTime(totalOperationalTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
-}
-
-// MTRServiceAreaClusterProgressStructable is the interface implemented by [MTRServiceAreaClusterProgressStruct], for mocking and DI.
-type MTRServiceAreaClusterProgressStructable interface {
-	obj.Object
-	WithAreaID(areaID obj.Object) *MTRServiceAreaClusterProgressStruct
-	WithStatus(status obj.Object) *MTRServiceAreaClusterProgressStruct
-	WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRServiceAreaClusterProgressStruct
-	AreaID() obj.Object
-	SetAreaID(areaID obj.Object)
-	Status() obj.Object
-	SetStatus(status obj.Object)
-	TotalOperationalTime() obj.Object
-	SetTotalOperationalTime(totalOperationalTime obj.Object)
-}
-
-var _ MTRServiceAreaClusterProgressStructable = (*MTRServiceAreaClusterProgressStruct)(nil)

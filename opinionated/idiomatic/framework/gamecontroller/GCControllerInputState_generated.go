@@ -48,36 +48,29 @@ func controllerInputStateAdopt(id objc.ID) *ControllerInputState {
 }
 
 // Description returns the object's -description text.
-func (x *ControllerInputState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cis *ControllerInputState) Description() string {
+	return rt.Description(objref.IDOf(cis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ControllerInputState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cis *ControllerInputState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ControllerInputState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cis *ControllerInputState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ControllerInputState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cis *ControllerInputState) String() string {
+	return rt.Description(objref.IDOf(cis))
 }
-
-// ControllerInputStateable is the interface implemented by [ControllerInputState], for mocking and DI.
-type ControllerInputStateable interface {
-	obj.Object
-}
-
-var _ ControllerInputStateable = (*ControllerInputState)(nil)
 
 // isControllerInputState marks ControllerInputState — and, by embedding promotion, its
 // subclasses — as a member of the ControllerInputState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ControllerInputState) isControllerInputState() {}
+func (cis *ControllerInputState) isControllerInputState() {}
 
 var _ ControllerInputStateProvider = (*ControllerInputState)(nil)

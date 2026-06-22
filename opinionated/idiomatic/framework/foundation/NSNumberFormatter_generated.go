@@ -53,410 +53,410 @@ func NewNumberFormatter() *NumberFormatter {
 }
 
 // WithFormattingContext sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithFormattingContext(formattingContext FormattingContext) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
-	return x
+func (nf *NumberFormatter) WithFormattingContext(formattingContext FormattingContext) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormattingContext:"), formattingContext)
+	return nf
 }
 
 // WithMinimumGroupingDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMinimumGroupingDigits(minimumGroupingDigits int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumGroupingDigits:"), minimumGroupingDigits)
-	return x
+func (nf *NumberFormatter) WithMinimumGroupingDigits(minimumGroupingDigits int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumGroupingDigits:"), minimumGroupingDigits)
+	return nf
 }
 
 // WithNumberStyle sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithNumberStyle(numberStyle NumberFormatterStyle) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberStyle:"), numberStyle)
-	return x
+func (nf *NumberFormatter) WithNumberStyle(numberStyle NumberFormatterStyle) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNumberStyle:"), numberStyle)
+	return nf
 }
 
 // WithLocale sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithLocale(locale *Locale) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+func (nf *NumberFormatter) WithLocale(locale *Locale) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return nf
 }
 
 // WithGeneratesDecimalNumbers sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithGeneratesDecimalNumbers(generatesDecimalNumbers bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneratesDecimalNumbers:"), generatesDecimalNumbers)
-	return x
+func (nf *NumberFormatter) WithGeneratesDecimalNumbers(generatesDecimalNumbers bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setGeneratesDecimalNumbers:"), generatesDecimalNumbers)
+	return nf
 }
 
 // WithFormatterBehavior sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithFormatterBehavior(formatterBehavior NumberFormatterBehavior) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
-	return x
+func (nf *NumberFormatter) WithFormatterBehavior(formatterBehavior NumberFormatterBehavior) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
+	return nf
 }
 
 // WithNegativeFormat sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithNegativeFormat(negativeFormat StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativeFormat:"), objref.IDOf(negativeFormat))
-	return x
+func (nf *NumberFormatter) WithNegativeFormat(negativeFormat StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeFormat:"), objref.IDOf(negativeFormat))
+	return nf
 }
 
 // WithTextAttributesForNegativeValues sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithTextAttributesForNegativeValues(textAttributesForNegativeValues obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNegativeValues:"), objref.IDOf(textAttributesForNegativeValues))
-	return x
+func (nf *NumberFormatter) WithTextAttributesForNegativeValues(textAttributesForNegativeValues obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeValues:"), objref.IDOf(textAttributesForNegativeValues))
+	return nf
 }
 
 // WithPositiveFormat sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPositiveFormat(positiveFormat StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositiveFormat:"), objref.IDOf(positiveFormat))
-	return x
+func (nf *NumberFormatter) WithPositiveFormat(positiveFormat StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveFormat:"), objref.IDOf(positiveFormat))
+	return nf
 }
 
 // WithTextAttributesForPositiveValues sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithTextAttributesForPositiveValues(textAttributesForPositiveValues obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForPositiveValues:"), objref.IDOf(textAttributesForPositiveValues))
-	return x
+func (nf *NumberFormatter) WithTextAttributesForPositiveValues(textAttributesForPositiveValues obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveValues:"), objref.IDOf(textAttributesForPositiveValues))
+	return nf
 }
 
 // WithAllowsFloats sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithAllowsFloats(allowsFloats bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFloats:"), allowsFloats)
-	return x
+func (nf *NumberFormatter) WithAllowsFloats(allowsFloats bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAllowsFloats:"), allowsFloats)
+	return nf
 }
 
 // WithDecimalSeparator sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithDecimalSeparator(decimalSeparator StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecimalSeparator:"), objref.IDOf(decimalSeparator))
-	return x
+func (nf *NumberFormatter) WithDecimalSeparator(decimalSeparator StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setDecimalSeparator:"), objref.IDOf(decimalSeparator))
+	return nf
 }
 
 // WithAlwaysShowsDecimalSeparator sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithAlwaysShowsDecimalSeparator(alwaysShowsDecimalSeparator bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysShowsDecimalSeparator:"), alwaysShowsDecimalSeparator)
-	return x
+func (nf *NumberFormatter) WithAlwaysShowsDecimalSeparator(alwaysShowsDecimalSeparator bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAlwaysShowsDecimalSeparator:"), alwaysShowsDecimalSeparator)
+	return nf
 }
 
 // WithCurrencyDecimalSeparator sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithCurrencyDecimalSeparator(currencyDecimalSeparator StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyDecimalSeparator:"), objref.IDOf(currencyDecimalSeparator))
-	return x
+func (nf *NumberFormatter) WithCurrencyDecimalSeparator(currencyDecimalSeparator StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyDecimalSeparator:"), objref.IDOf(currencyDecimalSeparator))
+	return nf
 }
 
 // WithUsesGroupingSeparator sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithUsesGroupingSeparator(usesGroupingSeparator bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesGroupingSeparator:"), usesGroupingSeparator)
-	return x
+func (nf *NumberFormatter) WithUsesGroupingSeparator(usesGroupingSeparator bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setUsesGroupingSeparator:"), usesGroupingSeparator)
+	return nf
 }
 
 // WithGroupingSeparator sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithGroupingSeparator(groupingSeparator StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupingSeparator:"), objref.IDOf(groupingSeparator))
-	return x
+func (nf *NumberFormatter) WithGroupingSeparator(groupingSeparator StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setGroupingSeparator:"), objref.IDOf(groupingSeparator))
+	return nf
 }
 
 // WithZeroSymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithZeroSymbol(zeroSymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroSymbol:"), objref.IDOf(zeroSymbol))
-	return x
+func (nf *NumberFormatter) WithZeroSymbol(zeroSymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setZeroSymbol:"), objref.IDOf(zeroSymbol))
+	return nf
 }
 
 // WithTextAttributesForZero sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithTextAttributesForZero(textAttributesForZero obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForZero:"), objref.IDOf(textAttributesForZero))
-	return x
+func (nf *NumberFormatter) WithTextAttributesForZero(textAttributesForZero obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForZero:"), objref.IDOf(textAttributesForZero))
+	return nf
 }
 
 // WithNilSymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithNilSymbol(nilSymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNilSymbol:"), objref.IDOf(nilSymbol))
-	return x
+func (nf *NumberFormatter) WithNilSymbol(nilSymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNilSymbol:"), objref.IDOf(nilSymbol))
+	return nf
 }
 
 // WithTextAttributesForNil sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithTextAttributesForNil(textAttributesForNil obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNil:"), objref.IDOf(textAttributesForNil))
-	return x
+func (nf *NumberFormatter) WithTextAttributesForNil(textAttributesForNil obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNil:"), objref.IDOf(textAttributesForNil))
+	return nf
 }
 
 // WithNotANumberSymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithNotANumberSymbol(notANumberSymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotANumberSymbol:"), objref.IDOf(notANumberSymbol))
-	return x
+func (nf *NumberFormatter) WithNotANumberSymbol(notANumberSymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNotANumberSymbol:"), objref.IDOf(notANumberSymbol))
+	return nf
 }
 
 // WithTextAttributesForNotANumber sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithTextAttributesForNotANumber(textAttributesForNotANumber obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNotANumber:"), objref.IDOf(textAttributesForNotANumber))
-	return x
+func (nf *NumberFormatter) WithTextAttributesForNotANumber(textAttributesForNotANumber obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNotANumber:"), objref.IDOf(textAttributesForNotANumber))
+	return nf
 }
 
 // WithPositiveInfinitySymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPositiveInfinitySymbol(positiveInfinitySymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositiveInfinitySymbol:"), objref.IDOf(positiveInfinitySymbol))
-	return x
+func (nf *NumberFormatter) WithPositiveInfinitySymbol(positiveInfinitySymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveInfinitySymbol:"), objref.IDOf(positiveInfinitySymbol))
+	return nf
 }
 
 // WithTextAttributesForPositiveInfinity sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForPositiveInfinity:"), objref.IDOf(textAttributesForPositiveInfinity))
-	return x
+func (nf *NumberFormatter) WithTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveInfinity:"), objref.IDOf(textAttributesForPositiveInfinity))
+	return nf
 }
 
 // WithNegativeInfinitySymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithNegativeInfinitySymbol(negativeInfinitySymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativeInfinitySymbol:"), objref.IDOf(negativeInfinitySymbol))
-	return x
+func (nf *NumberFormatter) WithNegativeInfinitySymbol(negativeInfinitySymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeInfinitySymbol:"), objref.IDOf(negativeInfinitySymbol))
+	return nf
 }
 
 // WithTextAttributesForNegativeInfinity sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNegativeInfinity:"), objref.IDOf(textAttributesForNegativeInfinity))
-	return x
+func (nf *NumberFormatter) WithTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeInfinity:"), objref.IDOf(textAttributesForNegativeInfinity))
+	return nf
 }
 
 // WithPositivePrefix sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPositivePrefix(positivePrefix StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositivePrefix:"), objref.IDOf(positivePrefix))
-	return x
+func (nf *NumberFormatter) WithPositivePrefix(positivePrefix StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositivePrefix:"), objref.IDOf(positivePrefix))
+	return nf
 }
 
 // WithPositiveSuffix sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPositiveSuffix(positiveSuffix StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositiveSuffix:"), objref.IDOf(positiveSuffix))
-	return x
+func (nf *NumberFormatter) WithPositiveSuffix(positiveSuffix StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveSuffix:"), objref.IDOf(positiveSuffix))
+	return nf
 }
 
 // WithNegativePrefix sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithNegativePrefix(negativePrefix StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativePrefix:"), objref.IDOf(negativePrefix))
-	return x
+func (nf *NumberFormatter) WithNegativePrefix(negativePrefix StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativePrefix:"), objref.IDOf(negativePrefix))
+	return nf
 }
 
 // WithNegativeSuffix sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithNegativeSuffix(negativeSuffix StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativeSuffix:"), objref.IDOf(negativeSuffix))
-	return x
+func (nf *NumberFormatter) WithNegativeSuffix(negativeSuffix StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeSuffix:"), objref.IDOf(negativeSuffix))
+	return nf
 }
 
 // WithCurrencyCode sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithCurrencyCode(currencyCode StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyCode:"), objref.IDOf(currencyCode))
-	return x
+func (nf *NumberFormatter) WithCurrencyCode(currencyCode StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyCode:"), objref.IDOf(currencyCode))
+	return nf
 }
 
 // WithCurrencySymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithCurrencySymbol(currencySymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencySymbol:"), objref.IDOf(currencySymbol))
-	return x
+func (nf *NumberFormatter) WithCurrencySymbol(currencySymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencySymbol:"), objref.IDOf(currencySymbol))
+	return nf
 }
 
 // WithInternationalCurrencySymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithInternationalCurrencySymbol(internationalCurrencySymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInternationalCurrencySymbol:"), objref.IDOf(internationalCurrencySymbol))
-	return x
+func (nf *NumberFormatter) WithInternationalCurrencySymbol(internationalCurrencySymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setInternationalCurrencySymbol:"), objref.IDOf(internationalCurrencySymbol))
+	return nf
 }
 
 // WithPercentSymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPercentSymbol(percentSymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentSymbol:"), objref.IDOf(percentSymbol))
-	return x
+func (nf *NumberFormatter) WithPercentSymbol(percentSymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPercentSymbol:"), objref.IDOf(percentSymbol))
+	return nf
 }
 
 // WithPerMillSymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPerMillSymbol(perMillSymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerMillSymbol:"), objref.IDOf(perMillSymbol))
-	return x
+func (nf *NumberFormatter) WithPerMillSymbol(perMillSymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPerMillSymbol:"), objref.IDOf(perMillSymbol))
+	return nf
 }
 
 // WithMinusSign sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMinusSign(minusSign StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinusSign:"), objref.IDOf(minusSign))
-	return x
+func (nf *NumberFormatter) WithMinusSign(minusSign StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinusSign:"), objref.IDOf(minusSign))
+	return nf
 }
 
 // WithPlusSign sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPlusSign(plusSign StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlusSign:"), objref.IDOf(plusSign))
-	return x
+func (nf *NumberFormatter) WithPlusSign(plusSign StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPlusSign:"), objref.IDOf(plusSign))
+	return nf
 }
 
 // WithExponentSymbol sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithExponentSymbol(exponentSymbol StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExponentSymbol:"), objref.IDOf(exponentSymbol))
-	return x
+func (nf *NumberFormatter) WithExponentSymbol(exponentSymbol StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setExponentSymbol:"), objref.IDOf(exponentSymbol))
+	return nf
 }
 
 // WithGroupingSize sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithGroupingSize(groupingSize int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupingSize:"), groupingSize)
-	return x
+func (nf *NumberFormatter) WithGroupingSize(groupingSize int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setGroupingSize:"), groupingSize)
+	return nf
 }
 
 // WithSecondaryGroupingSize sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithSecondaryGroupingSize(secondaryGroupingSize int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryGroupingSize:"), secondaryGroupingSize)
-	return x
+func (nf *NumberFormatter) WithSecondaryGroupingSize(secondaryGroupingSize int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setSecondaryGroupingSize:"), secondaryGroupingSize)
+	return nf
 }
 
 // WithMultiplier sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMultiplier(multiplier NumberProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiplier:"), objref.IDOf(multiplier))
-	return x
+func (nf *NumberFormatter) WithMultiplier(multiplier NumberProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMultiplier:"), objref.IDOf(multiplier))
+	return nf
 }
 
 // WithFormatWidth sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithFormatWidth(formatWidth int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatWidth:"), formatWidth)
-	return x
+func (nf *NumberFormatter) WithFormatWidth(formatWidth int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormatWidth:"), formatWidth)
+	return nf
 }
 
 // WithPaddingCharacter sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPaddingCharacter(paddingCharacter StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingCharacter:"), objref.IDOf(paddingCharacter))
-	return x
+func (nf *NumberFormatter) WithPaddingCharacter(paddingCharacter StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPaddingCharacter:"), objref.IDOf(paddingCharacter))
+	return nf
 }
 
 // WithPaddingPosition sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPaddingPosition(paddingPosition NumberFormatterPadPosition) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingPosition:"), paddingPosition)
-	return x
+func (nf *NumberFormatter) WithPaddingPosition(paddingPosition NumberFormatterPadPosition) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPaddingPosition:"), paddingPosition)
+	return nf
 }
 
 // WithRoundingMode sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithRoundingMode(roundingMode NumberFormatterRoundingMode) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundingMode:"), roundingMode)
-	return x
+func (nf *NumberFormatter) WithRoundingMode(roundingMode NumberFormatterRoundingMode) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingMode:"), roundingMode)
+	return nf
 }
 
 // WithRoundingIncrement sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithRoundingIncrement(roundingIncrement NumberProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundingIncrement:"), objref.IDOf(roundingIncrement))
-	return x
+func (nf *NumberFormatter) WithRoundingIncrement(roundingIncrement NumberProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingIncrement:"), objref.IDOf(roundingIncrement))
+	return nf
 }
 
 // WithMinimumIntegerDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMinimumIntegerDigits(minimumIntegerDigits int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumIntegerDigits:"), minimumIntegerDigits)
-	return x
+func (nf *NumberFormatter) WithMinimumIntegerDigits(minimumIntegerDigits int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumIntegerDigits:"), minimumIntegerDigits)
+	return nf
 }
 
 // WithMaximumIntegerDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMaximumIntegerDigits(maximumIntegerDigits int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumIntegerDigits:"), maximumIntegerDigits)
-	return x
+func (nf *NumberFormatter) WithMaximumIntegerDigits(maximumIntegerDigits int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximumIntegerDigits:"), maximumIntegerDigits)
+	return nf
 }
 
 // WithMinimumFractionDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMinimumFractionDigits(minimumFractionDigits int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFractionDigits:"), minimumFractionDigits)
-	return x
+func (nf *NumberFormatter) WithMinimumFractionDigits(minimumFractionDigits int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumFractionDigits:"), minimumFractionDigits)
+	return nf
 }
 
 // WithMaximumFractionDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMaximumFractionDigits(maximumFractionDigits int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumFractionDigits:"), maximumFractionDigits)
-	return x
+func (nf *NumberFormatter) WithMaximumFractionDigits(maximumFractionDigits int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximumFractionDigits:"), maximumFractionDigits)
+	return nf
 }
 
 // WithMinimum sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMinimum(minimum NumberProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimum:"), objref.IDOf(minimum))
-	return x
+func (nf *NumberFormatter) WithMinimum(minimum NumberProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimum:"), objref.IDOf(minimum))
+	return nf
 }
 
 // WithMaximum sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMaximum(maximum NumberProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximum:"), objref.IDOf(maximum))
-	return x
+func (nf *NumberFormatter) WithMaximum(maximum NumberProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximum:"), objref.IDOf(maximum))
+	return nf
 }
 
 // WithCurrencyGroupingSeparator sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithCurrencyGroupingSeparator(currencyGroupingSeparator StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyGroupingSeparator:"), objref.IDOf(currencyGroupingSeparator))
-	return x
+func (nf *NumberFormatter) WithCurrencyGroupingSeparator(currencyGroupingSeparator StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyGroupingSeparator:"), objref.IDOf(currencyGroupingSeparator))
+	return nf
 }
 
 // WithLenient sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithLenient(lenient bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLenient:"), lenient)
-	return x
+func (nf *NumberFormatter) WithLenient(lenient bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setLenient:"), lenient)
+	return nf
 }
 
 // WithUsesSignificantDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithUsesSignificantDigits(usesSignificantDigits bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSignificantDigits:"), usesSignificantDigits)
-	return x
+func (nf *NumberFormatter) WithUsesSignificantDigits(usesSignificantDigits bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setUsesSignificantDigits:"), usesSignificantDigits)
+	return nf
 }
 
 // WithMinimumSignificantDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMinimumSignificantDigits(minimumSignificantDigits int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSignificantDigits:"), minimumSignificantDigits)
-	return x
+func (nf *NumberFormatter) WithMinimumSignificantDigits(minimumSignificantDigits int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumSignificantDigits:"), minimumSignificantDigits)
+	return nf
 }
 
 // WithMaximumSignificantDigits sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithMaximumSignificantDigits(maximumSignificantDigits int) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSignificantDigits:"), maximumSignificantDigits)
-	return x
+func (nf *NumberFormatter) WithMaximumSignificantDigits(maximumSignificantDigits int) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximumSignificantDigits:"), maximumSignificantDigits)
+	return nf
 }
 
 // WithPartialStringValidationEnabled sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithPartialStringValidationEnabled(partialStringValidationEnabled bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPartialStringValidationEnabled:"), partialStringValidationEnabled)
-	return x
+func (nf *NumberFormatter) WithPartialStringValidationEnabled(partialStringValidationEnabled bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPartialStringValidationEnabled:"), partialStringValidationEnabled)
+	return nf
 }
 
 // WithHasThousandSeparators sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithHasThousandSeparators(hasThousandSeparators bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasThousandSeparators:"), hasThousandSeparators)
-	return x
+func (nf *NumberFormatter) WithHasThousandSeparators(hasThousandSeparators bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setHasThousandSeparators:"), hasThousandSeparators)
+	return nf
 }
 
 // WithThousandSeparator sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithThousandSeparator(thousandSeparator StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThousandSeparator:"), objref.IDOf(thousandSeparator))
-	return x
+func (nf *NumberFormatter) WithThousandSeparator(thousandSeparator StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setThousandSeparator:"), objref.IDOf(thousandSeparator))
+	return nf
 }
 
 // WithLocalizesFormat sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithLocalizesFormat(localizesFormat bool) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizesFormat:"), localizesFormat)
-	return x
+func (nf *NumberFormatter) WithLocalizesFormat(localizesFormat bool) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setLocalizesFormat:"), localizesFormat)
+	return nf
 }
 
 // WithFormat sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithFormat(format StringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), objref.IDOf(format))
-	return x
+func (nf *NumberFormatter) WithFormat(format StringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormat:"), objref.IDOf(format))
+	return nf
 }
 
 // WithAttributedStringForZero sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithAttributedStringForZero(attributedStringForZero AttributedStringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringForZero:"), objref.IDOf(attributedStringForZero))
-	return x
+func (nf *NumberFormatter) WithAttributedStringForZero(attributedStringForZero AttributedStringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForZero:"), objref.IDOf(attributedStringForZero))
+	return nf
 }
 
 // WithAttributedStringForNil sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithAttributedStringForNil(attributedStringForNil AttributedStringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringForNil:"), objref.IDOf(attributedStringForNil))
-	return x
+func (nf *NumberFormatter) WithAttributedStringForNil(attributedStringForNil AttributedStringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForNil:"), objref.IDOf(attributedStringForNil))
+	return nf
 }
 
 // WithAttributedStringForNotANumber sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithAttributedStringForNotANumber(attributedStringForNotANumber AttributedStringProvider) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringForNotANumber:"), objref.IDOf(attributedStringForNotANumber))
-	return x
+func (nf *NumberFormatter) WithAttributedStringForNotANumber(attributedStringForNotANumber AttributedStringProvider) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForNotANumber:"), objref.IDOf(attributedStringForNotANumber))
+	return nf
 }
 
 // WithRoundingBehavior sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundingBehavior:"), objref.IDOf(roundingBehavior))
-	return x
+func (nf *NumberFormatter) WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingBehavior:"), objref.IDOf(roundingBehavior))
+	return nf
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *NumberFormatter) WithScriptingProperties(scriptingProperties obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (nf *NumberFormatter) WithScriptingProperties(scriptingProperties obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return nf
 }
 
 // StringFromNumber wraps the corresponding Objective-C method.
-func (x *NumberFormatter) StringFromNumber(number *Number) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromNumber:"), objref.IDOf(number))
+func (nf *NumberFormatter) StringFromNumber(number *Number) string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("stringFromNumber:"), objref.IDOf(number))
 	if _r == 0 {
 		return ""
 	}
@@ -464,1021 +464,483 @@ func (x *NumberFormatter) StringFromNumber(number *Number) string {
 }
 
 // NumberFromString wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NumberFromString(string_ string) *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberFromString:"), purego.NSString(string_))
+func (nf *NumberFormatter) NumberFromString(string_ string) *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("numberFromString:"), purego.NSString(string_))
 	return NumberFromID(_r)
 }
 
 // FormattingContext wraps the corresponding Objective-C method.
-func (x *NumberFormatter) FormattingContext() FormattingContext {
-	_r := objc.Send[FormattingContext](objref.IDOf(x), objc.RegisterName("formattingContext"))
+func (nf *NumberFormatter) FormattingContext() FormattingContext {
+	_r := objc.Send[FormattingContext](objref.IDOf(nf), objc.RegisterName("formattingContext"))
 	return _r
-}
-
-// SetFormattingContext wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetFormattingContext(formattingContext FormattingContext) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 }
 
 // MinimumGroupingDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MinimumGroupingDigits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumGroupingDigits"))
+func (nf *NumberFormatter) MinimumGroupingDigits() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumGroupingDigits"))
 	return _r
-}
-
-// SetMinimumGroupingDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMinimumGroupingDigits(minimumGroupingDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumGroupingDigits:"), minimumGroupingDigits)
 }
 
 // NumberStyle wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NumberStyle() NumberFormatterStyle {
-	_r := objc.Send[NumberFormatterStyle](objref.IDOf(x), objc.RegisterName("numberStyle"))
+func (nf *NumberFormatter) NumberStyle() NumberFormatterStyle {
+	_r := objc.Send[NumberFormatterStyle](objref.IDOf(nf), objc.RegisterName("numberStyle"))
 	return _r
-}
-
-// SetNumberStyle wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetNumberStyle(numberStyle NumberFormatterStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberStyle:"), numberStyle)
 }
 
 // Locale wraps the corresponding Objective-C method.
-func (x *NumberFormatter) Locale() *Locale {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+func (nf *NumberFormatter) Locale() *Locale {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// SetLocale wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetLocale(locale *Locale) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-}
-
 // GeneratesDecimalNumbers wraps the corresponding Objective-C method.
-func (x *NumberFormatter) GeneratesDecimalNumbers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generatesDecimalNumbers"))
+func (nf *NumberFormatter) GeneratesDecimalNumbers() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("generatesDecimalNumbers"))
 	return _r
-}
-
-// SetGeneratesDecimalNumbers wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetGeneratesDecimalNumbers(generatesDecimalNumbers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneratesDecimalNumbers:"), generatesDecimalNumbers)
 }
 
 // FormatterBehavior wraps the corresponding Objective-C method.
-func (x *NumberFormatter) FormatterBehavior() NumberFormatterBehavior {
-	_r := objc.Send[NumberFormatterBehavior](objref.IDOf(x), objc.RegisterName("formatterBehavior"))
+func (nf *NumberFormatter) FormatterBehavior() NumberFormatterBehavior {
+	_r := objc.Send[NumberFormatterBehavior](objref.IDOf(nf), objc.RegisterName("formatterBehavior"))
 	return _r
-}
-
-// SetFormatterBehavior wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetFormatterBehavior(formatterBehavior NumberFormatterBehavior) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
 }
 
 // NegativeFormat wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NegativeFormat() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negativeFormat"))
+func (nf *NumberFormatter) NegativeFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeFormat"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetNegativeFormat wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetNegativeFormat(negativeFormat string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativeFormat:"), purego.NSString(negativeFormat))
 }
 
 // TextAttributesForNegativeValues wraps the corresponding Objective-C method.
-func (x *NumberFormatter) TextAttributesForNegativeValues() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttributesForNegativeValues"))
+func (nf *NumberFormatter) TextAttributesForNegativeValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNegativeValues"))
 	return obj.Wrap(_r)
-}
-
-// SetTextAttributesForNegativeValues wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetTextAttributesForNegativeValues(textAttributesForNegativeValues obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNegativeValues:"), objref.IDOf(textAttributesForNegativeValues))
 }
 
 // PositiveFormat wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PositiveFormat() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positiveFormat"))
+func (nf *NumberFormatter) PositiveFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveFormat"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPositiveFormat wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPositiveFormat(positiveFormat string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositiveFormat:"), purego.NSString(positiveFormat))
 }
 
 // TextAttributesForPositiveValues wraps the corresponding Objective-C method.
-func (x *NumberFormatter) TextAttributesForPositiveValues() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttributesForPositiveValues"))
+func (nf *NumberFormatter) TextAttributesForPositiveValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForPositiveValues"))
 	return obj.Wrap(_r)
-}
-
-// SetTextAttributesForPositiveValues wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetTextAttributesForPositiveValues(textAttributesForPositiveValues obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForPositiveValues:"), objref.IDOf(textAttributesForPositiveValues))
 }
 
 // AllowsFloats wraps the corresponding Objective-C method.
-func (x *NumberFormatter) AllowsFloats() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsFloats"))
+func (nf *NumberFormatter) AllowsFloats() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("allowsFloats"))
 	return _r
-}
-
-// SetAllowsFloats wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetAllowsFloats(allowsFloats bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFloats:"), allowsFloats)
 }
 
 // DecimalSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) DecimalSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalSeparator"))
+func (nf *NumberFormatter) DecimalSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("decimalSeparator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetDecimalSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetDecimalSeparator(decimalSeparator string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecimalSeparator:"), purego.NSString(decimalSeparator))
 }
 
 // AlwaysShowsDecimalSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) AlwaysShowsDecimalSeparator() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alwaysShowsDecimalSeparator"))
+func (nf *NumberFormatter) AlwaysShowsDecimalSeparator() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("alwaysShowsDecimalSeparator"))
 	return _r
-}
-
-// SetAlwaysShowsDecimalSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetAlwaysShowsDecimalSeparator(alwaysShowsDecimalSeparator bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysShowsDecimalSeparator:"), alwaysShowsDecimalSeparator)
 }
 
 // CurrencyDecimalSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) CurrencyDecimalSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyDecimalSeparator"))
+func (nf *NumberFormatter) CurrencyDecimalSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyDecimalSeparator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCurrencyDecimalSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetCurrencyDecimalSeparator(currencyDecimalSeparator string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyDecimalSeparator:"), purego.NSString(currencyDecimalSeparator))
 }
 
 // UsesGroupingSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) UsesGroupingSeparator() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesGroupingSeparator"))
+func (nf *NumberFormatter) UsesGroupingSeparator() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("usesGroupingSeparator"))
 	return _r
-}
-
-// SetUsesGroupingSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetUsesGroupingSeparator(usesGroupingSeparator bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesGroupingSeparator:"), usesGroupingSeparator)
 }
 
 // GroupingSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) GroupingSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupingSeparator"))
+func (nf *NumberFormatter) GroupingSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("groupingSeparator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetGroupingSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetGroupingSeparator(groupingSeparator string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupingSeparator:"), purego.NSString(groupingSeparator))
 }
 
 // ZeroSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) ZeroSymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zeroSymbol"))
+func (nf *NumberFormatter) ZeroSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("zeroSymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetZeroSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetZeroSymbol(zeroSymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroSymbol:"), purego.NSString(zeroSymbol))
 }
 
 // TextAttributesForZero wraps the corresponding Objective-C method.
-func (x *NumberFormatter) TextAttributesForZero() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttributesForZero"))
+func (nf *NumberFormatter) TextAttributesForZero() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForZero"))
 	return obj.Wrap(_r)
-}
-
-// SetTextAttributesForZero wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetTextAttributesForZero(textAttributesForZero obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForZero:"), objref.IDOf(textAttributesForZero))
 }
 
 // NilSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NilSymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nilSymbol"))
+func (nf *NumberFormatter) NilSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("nilSymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetNilSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetNilSymbol(nilSymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNilSymbol:"), purego.NSString(nilSymbol))
 }
 
 // TextAttributesForNil wraps the corresponding Objective-C method.
-func (x *NumberFormatter) TextAttributesForNil() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttributesForNil"))
+func (nf *NumberFormatter) TextAttributesForNil() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNil"))
 	return obj.Wrap(_r)
-}
-
-// SetTextAttributesForNil wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetTextAttributesForNil(textAttributesForNil obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNil:"), objref.IDOf(textAttributesForNil))
 }
 
 // NotANumberSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NotANumberSymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notANumberSymbol"))
+func (nf *NumberFormatter) NotANumberSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("notANumberSymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetNotANumberSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetNotANumberSymbol(notANumberSymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotANumberSymbol:"), purego.NSString(notANumberSymbol))
 }
 
 // TextAttributesForNotANumber wraps the corresponding Objective-C method.
-func (x *NumberFormatter) TextAttributesForNotANumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttributesForNotANumber"))
+func (nf *NumberFormatter) TextAttributesForNotANumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNotANumber"))
 	return obj.Wrap(_r)
-}
-
-// SetTextAttributesForNotANumber wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetTextAttributesForNotANumber(textAttributesForNotANumber obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNotANumber:"), objref.IDOf(textAttributesForNotANumber))
 }
 
 // PositiveInfinitySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PositiveInfinitySymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positiveInfinitySymbol"))
+func (nf *NumberFormatter) PositiveInfinitySymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveInfinitySymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPositiveInfinitySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPositiveInfinitySymbol(positiveInfinitySymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositiveInfinitySymbol:"), purego.NSString(positiveInfinitySymbol))
 }
 
 // TextAttributesForPositiveInfinity wraps the corresponding Objective-C method.
-func (x *NumberFormatter) TextAttributesForPositiveInfinity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttributesForPositiveInfinity"))
+func (nf *NumberFormatter) TextAttributesForPositiveInfinity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForPositiveInfinity"))
 	return obj.Wrap(_r)
-}
-
-// SetTextAttributesForPositiveInfinity wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForPositiveInfinity:"), objref.IDOf(textAttributesForPositiveInfinity))
 }
 
 // NegativeInfinitySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NegativeInfinitySymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negativeInfinitySymbol"))
+func (nf *NumberFormatter) NegativeInfinitySymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeInfinitySymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetNegativeInfinitySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetNegativeInfinitySymbol(negativeInfinitySymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativeInfinitySymbol:"), purego.NSString(negativeInfinitySymbol))
 }
 
 // TextAttributesForNegativeInfinity wraps the corresponding Objective-C method.
-func (x *NumberFormatter) TextAttributesForNegativeInfinity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttributesForNegativeInfinity"))
+func (nf *NumberFormatter) TextAttributesForNegativeInfinity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNegativeInfinity"))
 	return obj.Wrap(_r)
 }
 
-// SetTextAttributesForNegativeInfinity wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAttributesForNegativeInfinity:"), objref.IDOf(textAttributesForNegativeInfinity))
-}
-
 // PositivePrefix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PositivePrefix() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positivePrefix"))
+func (nf *NumberFormatter) PositivePrefix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positivePrefix"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPositivePrefix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPositivePrefix(positivePrefix string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositivePrefix:"), purego.NSString(positivePrefix))
 }
 
 // PositiveSuffix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PositiveSuffix() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positiveSuffix"))
+func (nf *NumberFormatter) PositiveSuffix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveSuffix"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPositiveSuffix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPositiveSuffix(positiveSuffix string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositiveSuffix:"), purego.NSString(positiveSuffix))
 }
 
 // NegativePrefix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NegativePrefix() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negativePrefix"))
+func (nf *NumberFormatter) NegativePrefix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativePrefix"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetNegativePrefix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetNegativePrefix(negativePrefix string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativePrefix:"), purego.NSString(negativePrefix))
 }
 
 // NegativeSuffix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) NegativeSuffix() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negativeSuffix"))
+func (nf *NumberFormatter) NegativeSuffix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeSuffix"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetNegativeSuffix wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetNegativeSuffix(negativeSuffix string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNegativeSuffix:"), purego.NSString(negativeSuffix))
 }
 
 // CurrencyCode wraps the corresponding Objective-C method.
-func (x *NumberFormatter) CurrencyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+func (nf *NumberFormatter) CurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCurrencyCode wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetCurrencyCode(currencyCode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyCode:"), purego.NSString(currencyCode))
 }
 
 // CurrencySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) CurrencySymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencySymbol"))
+func (nf *NumberFormatter) CurrencySymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencySymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCurrencySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetCurrencySymbol(currencySymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencySymbol:"), purego.NSString(currencySymbol))
 }
 
 // InternationalCurrencySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) InternationalCurrencySymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("internationalCurrencySymbol"))
+func (nf *NumberFormatter) InternationalCurrencySymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("internationalCurrencySymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetInternationalCurrencySymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetInternationalCurrencySymbol(internationalCurrencySymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInternationalCurrencySymbol:"), purego.NSString(internationalCurrencySymbol))
 }
 
 // PercentSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PercentSymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentSymbol"))
+func (nf *NumberFormatter) PercentSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("percentSymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPercentSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPercentSymbol(percentSymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentSymbol:"), purego.NSString(percentSymbol))
 }
 
 // PerMillSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PerMillSymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("perMillSymbol"))
+func (nf *NumberFormatter) PerMillSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("perMillSymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPerMillSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPerMillSymbol(perMillSymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerMillSymbol:"), purego.NSString(perMillSymbol))
 }
 
 // MinusSign wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MinusSign() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minusSign"))
+func (nf *NumberFormatter) MinusSign() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("minusSign"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetMinusSign wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMinusSign(minusSign string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinusSign:"), purego.NSString(minusSign))
 }
 
 // PlusSign wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PlusSign() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("plusSign"))
+func (nf *NumberFormatter) PlusSign() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("plusSign"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPlusSign wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPlusSign(plusSign string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlusSign:"), purego.NSString(plusSign))
 }
 
 // ExponentSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) ExponentSymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exponentSymbol"))
+func (nf *NumberFormatter) ExponentSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("exponentSymbol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetExponentSymbol wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetExponentSymbol(exponentSymbol string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExponentSymbol:"), purego.NSString(exponentSymbol))
 }
 
 // GroupingSize wraps the corresponding Objective-C method.
-func (x *NumberFormatter) GroupingSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupingSize"))
+func (nf *NumberFormatter) GroupingSize() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("groupingSize"))
 	return _r
-}
-
-// SetGroupingSize wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetGroupingSize(groupingSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupingSize:"), groupingSize)
 }
 
 // SecondaryGroupingSize wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SecondaryGroupingSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryGroupingSize"))
+func (nf *NumberFormatter) SecondaryGroupingSize() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("secondaryGroupingSize"))
 	return _r
-}
-
-// SetSecondaryGroupingSize wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetSecondaryGroupingSize(secondaryGroupingSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryGroupingSize:"), secondaryGroupingSize)
 }
 
 // Multiplier wraps the corresponding Objective-C method.
-func (x *NumberFormatter) Multiplier() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiplier"))
+func (nf *NumberFormatter) Multiplier() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("multiplier"))
 	return NumberFromID(_r)
-}
-
-// SetMultiplier wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMultiplier(multiplier *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiplier:"), objref.IDOf(multiplier))
 }
 
 // FormatWidth wraps the corresponding Objective-C method.
-func (x *NumberFormatter) FormatWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("formatWidth"))
+func (nf *NumberFormatter) FormatWidth() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("formatWidth"))
 	return _r
-}
-
-// SetFormatWidth wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetFormatWidth(formatWidth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatWidth:"), formatWidth)
 }
 
 // PaddingCharacter wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PaddingCharacter() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingCharacter"))
+func (nf *NumberFormatter) PaddingCharacter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("paddingCharacter"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPaddingCharacter wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPaddingCharacter(paddingCharacter string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingCharacter:"), purego.NSString(paddingCharacter))
 }
 
 // PaddingPosition wraps the corresponding Objective-C method.
-func (x *NumberFormatter) PaddingPosition() NumberFormatterPadPosition {
-	_r := objc.Send[NumberFormatterPadPosition](objref.IDOf(x), objc.RegisterName("paddingPosition"))
+func (nf *NumberFormatter) PaddingPosition() NumberFormatterPadPosition {
+	_r := objc.Send[NumberFormatterPadPosition](objref.IDOf(nf), objc.RegisterName("paddingPosition"))
 	return _r
-}
-
-// SetPaddingPosition wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPaddingPosition(paddingPosition NumberFormatterPadPosition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingPosition:"), paddingPosition)
 }
 
 // RoundingMode wraps the corresponding Objective-C method.
-func (x *NumberFormatter) RoundingMode() NumberFormatterRoundingMode {
-	_r := objc.Send[NumberFormatterRoundingMode](objref.IDOf(x), objc.RegisterName("roundingMode"))
+func (nf *NumberFormatter) RoundingMode() NumberFormatterRoundingMode {
+	_r := objc.Send[NumberFormatterRoundingMode](objref.IDOf(nf), objc.RegisterName("roundingMode"))
 	return _r
-}
-
-// SetRoundingMode wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetRoundingMode(roundingMode NumberFormatterRoundingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundingMode:"), roundingMode)
 }
 
 // RoundingIncrement wraps the corresponding Objective-C method.
-func (x *NumberFormatter) RoundingIncrement() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roundingIncrement"))
+func (nf *NumberFormatter) RoundingIncrement() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("roundingIncrement"))
 	return NumberFromID(_r)
-}
-
-// SetRoundingIncrement wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetRoundingIncrement(roundingIncrement *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundingIncrement:"), objref.IDOf(roundingIncrement))
 }
 
 // MinimumIntegerDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MinimumIntegerDigits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumIntegerDigits"))
+func (nf *NumberFormatter) MinimumIntegerDigits() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumIntegerDigits"))
 	return _r
-}
-
-// SetMinimumIntegerDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMinimumIntegerDigits(minimumIntegerDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumIntegerDigits:"), minimumIntegerDigits)
 }
 
 // MaximumIntegerDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MaximumIntegerDigits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumIntegerDigits"))
+func (nf *NumberFormatter) MaximumIntegerDigits() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumIntegerDigits"))
 	return _r
-}
-
-// SetMaximumIntegerDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMaximumIntegerDigits(maximumIntegerDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumIntegerDigits:"), maximumIntegerDigits)
 }
 
 // MinimumFractionDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MinimumFractionDigits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumFractionDigits"))
+func (nf *NumberFormatter) MinimumFractionDigits() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumFractionDigits"))
 	return _r
-}
-
-// SetMinimumFractionDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMinimumFractionDigits(minimumFractionDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFractionDigits:"), minimumFractionDigits)
 }
 
 // MaximumFractionDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MaximumFractionDigits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumFractionDigits"))
+func (nf *NumberFormatter) MaximumFractionDigits() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumFractionDigits"))
 	return _r
-}
-
-// SetMaximumFractionDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMaximumFractionDigits(maximumFractionDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumFractionDigits:"), maximumFractionDigits)
 }
 
 // Minimum wraps the corresponding Objective-C method.
-func (x *NumberFormatter) Minimum() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimum"))
+func (nf *NumberFormatter) Minimum() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("minimum"))
 	return NumberFromID(_r)
-}
-
-// SetMinimum wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMinimum(minimum *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimum:"), objref.IDOf(minimum))
 }
 
 // Maximum wraps the corresponding Objective-C method.
-func (x *NumberFormatter) Maximum() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximum"))
+func (nf *NumberFormatter) Maximum() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("maximum"))
 	return NumberFromID(_r)
 }
 
-// SetMaximum wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMaximum(maximum *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximum:"), objref.IDOf(maximum))
-}
-
 // CurrencyGroupingSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) CurrencyGroupingSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyGroupingSeparator"))
+func (nf *NumberFormatter) CurrencyGroupingSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyGroupingSeparator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCurrencyGroupingSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetCurrencyGroupingSeparator(currencyGroupingSeparator string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyGroupingSeparator:"), purego.NSString(currencyGroupingSeparator))
 }
 
 // IsLenient wraps the corresponding Objective-C method.
-func (x *NumberFormatter) IsLenient() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLenient"))
+func (nf *NumberFormatter) IsLenient() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("isLenient"))
 	return _r
-}
-
-// SetLenient wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetLenient(lenient bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLenient:"), lenient)
 }
 
 // UsesSignificantDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) UsesSignificantDigits() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesSignificantDigits"))
+func (nf *NumberFormatter) UsesSignificantDigits() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("usesSignificantDigits"))
 	return _r
-}
-
-// SetUsesSignificantDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetUsesSignificantDigits(usesSignificantDigits bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSignificantDigits:"), usesSignificantDigits)
 }
 
 // MinimumSignificantDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MinimumSignificantDigits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumSignificantDigits"))
+func (nf *NumberFormatter) MinimumSignificantDigits() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumSignificantDigits"))
 	return _r
-}
-
-// SetMinimumSignificantDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMinimumSignificantDigits(minimumSignificantDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSignificantDigits:"), minimumSignificantDigits)
 }
 
 // MaximumSignificantDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) MaximumSignificantDigits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumSignificantDigits"))
+func (nf *NumberFormatter) MaximumSignificantDigits() int {
+	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumSignificantDigits"))
 	return _r
-}
-
-// SetMaximumSignificantDigits wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetMaximumSignificantDigits(maximumSignificantDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSignificantDigits:"), maximumSignificantDigits)
 }
 
 // IsPartialStringValidationEnabled wraps the corresponding Objective-C method.
-func (x *NumberFormatter) IsPartialStringValidationEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPartialStringValidationEnabled"))
+func (nf *NumberFormatter) IsPartialStringValidationEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("isPartialStringValidationEnabled"))
 	return _r
-}
-
-// SetPartialStringValidationEnabled wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetPartialStringValidationEnabled(partialStringValidationEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPartialStringValidationEnabled:"), partialStringValidationEnabled)
 }
 
 // HasThousandSeparators wraps the corresponding Objective-C method.
-func (x *NumberFormatter) HasThousandSeparators() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasThousandSeparators"))
+func (nf *NumberFormatter) HasThousandSeparators() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("hasThousandSeparators"))
 	return _r
-}
-
-// SetHasThousandSeparators wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetHasThousandSeparators(hasThousandSeparators bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasThousandSeparators:"), hasThousandSeparators)
 }
 
 // ThousandSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) ThousandSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thousandSeparator"))
+func (nf *NumberFormatter) ThousandSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("thousandSeparator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetThousandSeparator wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetThousandSeparator(thousandSeparator string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThousandSeparator:"), purego.NSString(thousandSeparator))
 }
 
 // LocalizesFormat wraps the corresponding Objective-C method.
-func (x *NumberFormatter) LocalizesFormat() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("localizesFormat"))
+func (nf *NumberFormatter) LocalizesFormat() bool {
+	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("localizesFormat"))
 	return _r
 }
 
-// SetLocalizesFormat wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetLocalizesFormat(localizesFormat bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizesFormat:"), localizesFormat)
-}
-
 // Format wraps the corresponding Objective-C method.
-func (x *NumberFormatter) Format() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+func (nf *NumberFormatter) Format() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("format"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetFormat wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetFormat(format string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), purego.NSString(format))
-}
-
 // AttributedStringForZero wraps the corresponding Objective-C method.
-func (x *NumberFormatter) AttributedStringForZero() *AttributedString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForZero"))
+func (nf *NumberFormatter) AttributedStringForZero() *AttributedString {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForZero"))
 	return AttributedStringFromID(_r)
-}
-
-// SetAttributedStringForZero wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetAttributedStringForZero(attributedStringForZero *AttributedString) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringForZero:"), objref.IDOf(attributedStringForZero))
 }
 
 // AttributedStringForNil wraps the corresponding Objective-C method.
-func (x *NumberFormatter) AttributedStringForNil() *AttributedString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForNil"))
+func (nf *NumberFormatter) AttributedStringForNil() *AttributedString {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForNil"))
 	return AttributedStringFromID(_r)
-}
-
-// SetAttributedStringForNil wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetAttributedStringForNil(attributedStringForNil *AttributedString) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringForNil:"), objref.IDOf(attributedStringForNil))
 }
 
 // AttributedStringForNotANumber wraps the corresponding Objective-C method.
-func (x *NumberFormatter) AttributedStringForNotANumber() *AttributedString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForNotANumber"))
+func (nf *NumberFormatter) AttributedStringForNotANumber() *AttributedString {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForNotANumber"))
 	return AttributedStringFromID(_r)
 }
 
-// SetAttributedStringForNotANumber wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetAttributedStringForNotANumber(attributedStringForNotANumber *AttributedString) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringForNotANumber:"), objref.IDOf(attributedStringForNotANumber))
-}
-
 // RoundingBehavior wraps the corresponding Objective-C method.
-func (x *NumberFormatter) RoundingBehavior() *DecimalNumberHandler {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roundingBehavior"))
+func (nf *NumberFormatter) RoundingBehavior() *DecimalNumberHandler {
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("roundingBehavior"))
 	return DecimalNumberHandlerFromID(_r)
 }
-
-// SetRoundingBehavior wraps the corresponding Objective-C method.
-func (x *NumberFormatter) SetRoundingBehavior(roundingBehavior *DecimalNumberHandler) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundingBehavior:"), objref.IDOf(roundingBehavior))
-}
-
-// NumberFormatterable is the interface implemented by [NumberFormatter], for mocking and DI.
-type NumberFormatterable interface {
-	obj.Object
-	WithFormattingContext(formattingContext FormattingContext) *NumberFormatter
-	WithMinimumGroupingDigits(minimumGroupingDigits int) *NumberFormatter
-	WithNumberStyle(numberStyle NumberFormatterStyle) *NumberFormatter
-	WithLocale(locale *Locale) *NumberFormatter
-	WithGeneratesDecimalNumbers(generatesDecimalNumbers bool) *NumberFormatter
-	WithFormatterBehavior(formatterBehavior NumberFormatterBehavior) *NumberFormatter
-	WithNegativeFormat(negativeFormat StringProvider) *NumberFormatter
-	WithTextAttributesForNegativeValues(textAttributesForNegativeValues obj.Object) *NumberFormatter
-	WithPositiveFormat(positiveFormat StringProvider) *NumberFormatter
-	WithTextAttributesForPositiveValues(textAttributesForPositiveValues obj.Object) *NumberFormatter
-	WithAllowsFloats(allowsFloats bool) *NumberFormatter
-	WithDecimalSeparator(decimalSeparator StringProvider) *NumberFormatter
-	WithAlwaysShowsDecimalSeparator(alwaysShowsDecimalSeparator bool) *NumberFormatter
-	WithCurrencyDecimalSeparator(currencyDecimalSeparator StringProvider) *NumberFormatter
-	WithUsesGroupingSeparator(usesGroupingSeparator bool) *NumberFormatter
-	WithGroupingSeparator(groupingSeparator StringProvider) *NumberFormatter
-	WithZeroSymbol(zeroSymbol StringProvider) *NumberFormatter
-	WithTextAttributesForZero(textAttributesForZero obj.Object) *NumberFormatter
-	WithNilSymbol(nilSymbol StringProvider) *NumberFormatter
-	WithTextAttributesForNil(textAttributesForNil obj.Object) *NumberFormatter
-	WithNotANumberSymbol(notANumberSymbol StringProvider) *NumberFormatter
-	WithTextAttributesForNotANumber(textAttributesForNotANumber obj.Object) *NumberFormatter
-	WithPositiveInfinitySymbol(positiveInfinitySymbol StringProvider) *NumberFormatter
-	WithTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity obj.Object) *NumberFormatter
-	WithNegativeInfinitySymbol(negativeInfinitySymbol StringProvider) *NumberFormatter
-	WithTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity obj.Object) *NumberFormatter
-	WithPositivePrefix(positivePrefix StringProvider) *NumberFormatter
-	WithPositiveSuffix(positiveSuffix StringProvider) *NumberFormatter
-	WithNegativePrefix(negativePrefix StringProvider) *NumberFormatter
-	WithNegativeSuffix(negativeSuffix StringProvider) *NumberFormatter
-	WithCurrencyCode(currencyCode StringProvider) *NumberFormatter
-	WithCurrencySymbol(currencySymbol StringProvider) *NumberFormatter
-	WithInternationalCurrencySymbol(internationalCurrencySymbol StringProvider) *NumberFormatter
-	WithPercentSymbol(percentSymbol StringProvider) *NumberFormatter
-	WithPerMillSymbol(perMillSymbol StringProvider) *NumberFormatter
-	WithMinusSign(minusSign StringProvider) *NumberFormatter
-	WithPlusSign(plusSign StringProvider) *NumberFormatter
-	WithExponentSymbol(exponentSymbol StringProvider) *NumberFormatter
-	WithGroupingSize(groupingSize int) *NumberFormatter
-	WithSecondaryGroupingSize(secondaryGroupingSize int) *NumberFormatter
-	WithMultiplier(multiplier NumberProvider) *NumberFormatter
-	WithFormatWidth(formatWidth int) *NumberFormatter
-	WithPaddingCharacter(paddingCharacter StringProvider) *NumberFormatter
-	WithPaddingPosition(paddingPosition NumberFormatterPadPosition) *NumberFormatter
-	WithRoundingMode(roundingMode NumberFormatterRoundingMode) *NumberFormatter
-	WithRoundingIncrement(roundingIncrement NumberProvider) *NumberFormatter
-	WithMinimumIntegerDigits(minimumIntegerDigits int) *NumberFormatter
-	WithMaximumIntegerDigits(maximumIntegerDigits int) *NumberFormatter
-	WithMinimumFractionDigits(minimumFractionDigits int) *NumberFormatter
-	WithMaximumFractionDigits(maximumFractionDigits int) *NumberFormatter
-	WithMinimum(minimum NumberProvider) *NumberFormatter
-	WithMaximum(maximum NumberProvider) *NumberFormatter
-	WithCurrencyGroupingSeparator(currencyGroupingSeparator StringProvider) *NumberFormatter
-	WithLenient(lenient bool) *NumberFormatter
-	WithUsesSignificantDigits(usesSignificantDigits bool) *NumberFormatter
-	WithMinimumSignificantDigits(minimumSignificantDigits int) *NumberFormatter
-	WithMaximumSignificantDigits(maximumSignificantDigits int) *NumberFormatter
-	WithPartialStringValidationEnabled(partialStringValidationEnabled bool) *NumberFormatter
-	WithHasThousandSeparators(hasThousandSeparators bool) *NumberFormatter
-	WithThousandSeparator(thousandSeparator StringProvider) *NumberFormatter
-	WithLocalizesFormat(localizesFormat bool) *NumberFormatter
-	WithFormat(format StringProvider) *NumberFormatter
-	WithAttributedStringForZero(attributedStringForZero AttributedStringProvider) *NumberFormatter
-	WithAttributedStringForNil(attributedStringForNil AttributedStringProvider) *NumberFormatter
-	WithAttributedStringForNotANumber(attributedStringForNotANumber AttributedStringProvider) *NumberFormatter
-	WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter
-	WithScriptingProperties(scriptingProperties obj.Object) *NumberFormatter
-	StringFromNumber(number *Number) string
-	NumberFromString(string_ string) *Number
-	FormattingContext() FormattingContext
-	SetFormattingContext(formattingContext FormattingContext)
-	MinimumGroupingDigits() int
-	SetMinimumGroupingDigits(minimumGroupingDigits int)
-	NumberStyle() NumberFormatterStyle
-	SetNumberStyle(numberStyle NumberFormatterStyle)
-	Locale() *Locale
-	SetLocale(locale *Locale)
-	GeneratesDecimalNumbers() bool
-	SetGeneratesDecimalNumbers(generatesDecimalNumbers bool)
-	FormatterBehavior() NumberFormatterBehavior
-	SetFormatterBehavior(formatterBehavior NumberFormatterBehavior)
-	NegativeFormat() string
-	SetNegativeFormat(negativeFormat string)
-	TextAttributesForNegativeValues() obj.Object
-	SetTextAttributesForNegativeValues(textAttributesForNegativeValues obj.Object)
-	PositiveFormat() string
-	SetPositiveFormat(positiveFormat string)
-	TextAttributesForPositiveValues() obj.Object
-	SetTextAttributesForPositiveValues(textAttributesForPositiveValues obj.Object)
-	AllowsFloats() bool
-	SetAllowsFloats(allowsFloats bool)
-	DecimalSeparator() string
-	SetDecimalSeparator(decimalSeparator string)
-	AlwaysShowsDecimalSeparator() bool
-	SetAlwaysShowsDecimalSeparator(alwaysShowsDecimalSeparator bool)
-	CurrencyDecimalSeparator() string
-	SetCurrencyDecimalSeparator(currencyDecimalSeparator string)
-	UsesGroupingSeparator() bool
-	SetUsesGroupingSeparator(usesGroupingSeparator bool)
-	GroupingSeparator() string
-	SetGroupingSeparator(groupingSeparator string)
-	ZeroSymbol() string
-	SetZeroSymbol(zeroSymbol string)
-	TextAttributesForZero() obj.Object
-	SetTextAttributesForZero(textAttributesForZero obj.Object)
-	NilSymbol() string
-	SetNilSymbol(nilSymbol string)
-	TextAttributesForNil() obj.Object
-	SetTextAttributesForNil(textAttributesForNil obj.Object)
-	NotANumberSymbol() string
-	SetNotANumberSymbol(notANumberSymbol string)
-	TextAttributesForNotANumber() obj.Object
-	SetTextAttributesForNotANumber(textAttributesForNotANumber obj.Object)
-	PositiveInfinitySymbol() string
-	SetPositiveInfinitySymbol(positiveInfinitySymbol string)
-	TextAttributesForPositiveInfinity() obj.Object
-	SetTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity obj.Object)
-	NegativeInfinitySymbol() string
-	SetNegativeInfinitySymbol(negativeInfinitySymbol string)
-	TextAttributesForNegativeInfinity() obj.Object
-	SetTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity obj.Object)
-	PositivePrefix() string
-	SetPositivePrefix(positivePrefix string)
-	PositiveSuffix() string
-	SetPositiveSuffix(positiveSuffix string)
-	NegativePrefix() string
-	SetNegativePrefix(negativePrefix string)
-	NegativeSuffix() string
-	SetNegativeSuffix(negativeSuffix string)
-	CurrencyCode() string
-	SetCurrencyCode(currencyCode string)
-	CurrencySymbol() string
-	SetCurrencySymbol(currencySymbol string)
-	InternationalCurrencySymbol() string
-	SetInternationalCurrencySymbol(internationalCurrencySymbol string)
-	PercentSymbol() string
-	SetPercentSymbol(percentSymbol string)
-	PerMillSymbol() string
-	SetPerMillSymbol(perMillSymbol string)
-	MinusSign() string
-	SetMinusSign(minusSign string)
-	PlusSign() string
-	SetPlusSign(plusSign string)
-	ExponentSymbol() string
-	SetExponentSymbol(exponentSymbol string)
-	GroupingSize() int
-	SetGroupingSize(groupingSize int)
-	SecondaryGroupingSize() int
-	SetSecondaryGroupingSize(secondaryGroupingSize int)
-	Multiplier() *Number
-	SetMultiplier(multiplier *Number)
-	FormatWidth() int
-	SetFormatWidth(formatWidth int)
-	PaddingCharacter() string
-	SetPaddingCharacter(paddingCharacter string)
-	PaddingPosition() NumberFormatterPadPosition
-	SetPaddingPosition(paddingPosition NumberFormatterPadPosition)
-	RoundingMode() NumberFormatterRoundingMode
-	SetRoundingMode(roundingMode NumberFormatterRoundingMode)
-	RoundingIncrement() *Number
-	SetRoundingIncrement(roundingIncrement *Number)
-	MinimumIntegerDigits() int
-	SetMinimumIntegerDigits(minimumIntegerDigits int)
-	MaximumIntegerDigits() int
-	SetMaximumIntegerDigits(maximumIntegerDigits int)
-	MinimumFractionDigits() int
-	SetMinimumFractionDigits(minimumFractionDigits int)
-	MaximumFractionDigits() int
-	SetMaximumFractionDigits(maximumFractionDigits int)
-	Minimum() *Number
-	SetMinimum(minimum *Number)
-	Maximum() *Number
-	SetMaximum(maximum *Number)
-	CurrencyGroupingSeparator() string
-	SetCurrencyGroupingSeparator(currencyGroupingSeparator string)
-	IsLenient() bool
-	SetLenient(lenient bool)
-	UsesSignificantDigits() bool
-	SetUsesSignificantDigits(usesSignificantDigits bool)
-	MinimumSignificantDigits() int
-	SetMinimumSignificantDigits(minimumSignificantDigits int)
-	MaximumSignificantDigits() int
-	SetMaximumSignificantDigits(maximumSignificantDigits int)
-	IsPartialStringValidationEnabled() bool
-	SetPartialStringValidationEnabled(partialStringValidationEnabled bool)
-	HasThousandSeparators() bool
-	SetHasThousandSeparators(hasThousandSeparators bool)
-	ThousandSeparator() string
-	SetThousandSeparator(thousandSeparator string)
-	LocalizesFormat() bool
-	SetLocalizesFormat(localizesFormat bool)
-	Format() string
-	SetFormat(format string)
-	AttributedStringForZero() *AttributedString
-	SetAttributedStringForZero(attributedStringForZero *AttributedString)
-	AttributedStringForNil() *AttributedString
-	SetAttributedStringForNil(attributedStringForNil *AttributedString)
-	AttributedStringForNotANumber() *AttributedString
-	SetAttributedStringForNotANumber(attributedStringForNotANumber *AttributedString)
-	RoundingBehavior() *DecimalNumberHandler
-	SetRoundingBehavior(roundingBehavior *DecimalNumberHandler)
-}
-
-var _ NumberFormatterable = (*NumberFormatter)(nil)
 
 var _ FormatterProvider = (*NumberFormatter)(nil)

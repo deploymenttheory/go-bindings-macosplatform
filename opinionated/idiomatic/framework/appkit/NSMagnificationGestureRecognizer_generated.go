@@ -52,115 +52,88 @@ func NewMagnificationGestureRecognizer() *MagnificationGestureRecognizer {
 	return magnificationGestureRecognizerAdopt(_id)
 }
 
-// WithMagnification the amount of magnification to apply.
-func (x *MagnificationGestureRecognizer) WithMagnification(magnification float64) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:"), magnification)
-	return x
+// WithMagnification sets the amount of magnification to apply.
+func (mgr *MagnificationGestureRecognizer) WithMagnification(magnification float64) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setMagnification:"), magnification)
+	return mgr
 }
 
-// WithTarget the object that implements the action method.
-func (x *MagnificationGestureRecognizer) WithTarget(target obj.Object) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that implements the action method.
+func (mgr *MagnificationGestureRecognizer) WithTarget(target obj.Object) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return mgr
 }
 
-// WithState the current state of the gesture recognizer.
-func (x *MagnificationGestureRecognizer) WithState(state GestureRecognizerState) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the current state of the gesture recognizer.
+func (mgr *MagnificationGestureRecognizer) WithState(state GestureRecognizerState) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setState:"), state)
+	return mgr
 }
 
-// WithEnabled a Boolean value indicating whether the gesture recognizer is able to handle events.
-func (x *MagnificationGestureRecognizer) WithEnabled(enabled bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
+func (mgr *MagnificationGestureRecognizer) WithEnabled(enabled bool) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setEnabled:"), enabled)
+	return mgr
 }
 
-// WithPressureConfiguration configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
-func (x *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+// WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+func (mgr *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return mgr
 }
 
-// WithDelaysPrimaryMouseButtonEvents a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
-func (x *MagnificationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
-	return x
+// WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+func (mgr *MagnificationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	return mgr
 }
 
-// WithDelaysSecondaryMouseButtonEvents a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
-func (x *MagnificationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
-	return x
+// WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+func (mgr *MagnificationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	return mgr
 }
 
-// WithDelaysOtherMouseButtonEvents a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
-func (x *MagnificationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
-	return x
+// WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+func (mgr *MagnificationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	return mgr
 }
 
-// WithDelaysKeyEvents a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
-func (x *MagnificationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
-	return x
+// WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+func (mgr *MagnificationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	return mgr
 }
 
-// WithDelaysMagnificationEvents a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
-func (x *MagnificationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
-	return x
+// WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+func (mgr *MagnificationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	return mgr
 }
 
-// WithDelaysRotationEvents a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
-func (x *MagnificationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
-	return x
+// WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+func (mgr *MagnificationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	return mgr
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MagnificationGestureRecognizer) WithName(name string) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mgr *MagnificationGestureRecognizer) WithName(name string) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setName:"), purego.NSString(name))
+	return mgr
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (mgr *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *MagnificationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return mgr
 }
 
 // Magnification wraps the corresponding Objective-C method.
-func (x *MagnificationGestureRecognizer) Magnification() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("magnification"))
+func (mgr *MagnificationGestureRecognizer) Magnification() float64 {
+	_r := objc.Send[float64](objref.IDOf(mgr), objc.RegisterName("magnification"))
 	return _r
 }
-
-// SetMagnification wraps the corresponding Objective-C method.
-func (x *MagnificationGestureRecognizer) SetMagnification(magnification float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:"), magnification)
-}
-
-// MagnificationGestureRecognizerable is the interface implemented by [MagnificationGestureRecognizer], for mocking and DI.
-type MagnificationGestureRecognizerable interface {
-	obj.Object
-	WithMagnification(magnification float64) *MagnificationGestureRecognizer
-	WithTarget(target obj.Object) *MagnificationGestureRecognizer
-	WithState(state GestureRecognizerState) *MagnificationGestureRecognizer
-	WithEnabled(enabled bool) *MagnificationGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer
-	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer
-	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer
-	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer
-	WithDelaysKeyEvents(delaysKeyEvents bool) *MagnificationGestureRecognizer
-	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer
-	WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer
-	WithName(name string) *MagnificationGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *MagnificationGestureRecognizer
-	Magnification() float64
-	SetMagnification(magnification float64)
-}
-
-var _ MagnificationGestureRecognizerable = (*MagnificationGestureRecognizer)(nil)
 
 var _ GestureRecognizerProvider = (*MagnificationGestureRecognizer)(nil)

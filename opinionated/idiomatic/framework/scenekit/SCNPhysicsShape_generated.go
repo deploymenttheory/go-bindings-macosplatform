@@ -46,24 +46,24 @@ func physicsShapeAdopt(id objc.ID) *PhysicsShape {
 }
 
 // Description returns the object's -description text.
-func (x *PhysicsShape) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *PhysicsShape) Description() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsShape) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ps *PhysicsShape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsShape) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ps *PhysicsShape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicsShape) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *PhysicsShape) String() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // NewPhysicsShape creates a new PhysicsShape.
@@ -73,31 +73,21 @@ func NewPhysicsShape() *PhysicsShape {
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *PhysicsShape) Options() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+func (ps *PhysicsShape) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
 // SourceObject wraps the corresponding Objective-C method.
-func (x *PhysicsShape) SourceObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceObject"))
+func (ps *PhysicsShape) SourceObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("sourceObject"))
 	return obj.Wrap(_r)
 }
 
 // Transforms wraps the corresponding Objective-C method.
 //
 // Transforms returns the collection as a Go slice.
-func (x *PhysicsShape) Transforms() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transforms"))
+func (ps *PhysicsShape) Transforms() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("transforms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// PhysicsShapeable is the interface implemented by [PhysicsShape], for mocking and DI.
-type PhysicsShapeable interface {
-	obj.Object
-	Options() obj.Object
-	SourceObject() obj.Object
-	Transforms() []obj.Object
-}
-
-var _ PhysicsShapeable = (*PhysicsShape)(nil)

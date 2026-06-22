@@ -46,24 +46,24 @@ func metricEventStreamAdopt(id objc.ID) *MetricEventStream {
 }
 
 // Description returns the object's -description text.
-func (x *MetricEventStream) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mes *MetricEventStream) Description() string {
+	return rt.Description(objref.IDOf(mes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricEventStream) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mes *MetricEventStream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricEventStream) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mes *MetricEventStream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetricEventStream) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mes *MetricEventStream) String() string {
+	return rt.Description(objref.IDOf(mes))
 }
 
 // NewMetricEventStream creates a new MetricEventStream.
@@ -73,20 +73,11 @@ func NewMetricEventStream() *MetricEventStream {
 }
 
 // SubscribeToMetricEvents subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
-func (x *MetricEventStream) SubscribeToMetricEvents(metricEventClasses []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeToMetricEvents:"), purego.SliceToNSArray(metricEventClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mes *MetricEventStream) SubscribeToMetricEvents(metricEventClasses []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mes), objc.RegisterName("subscribeToMetricEvents:"), purego.SliceToNSArray(metricEventClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SubscribeToAllMetricEvents subscribe to all metric event classes.
-func (x *MetricEventStream) SubscribeToAllMetricEvents() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeToAllMetricEvents"))
+func (mes *MetricEventStream) SubscribeToAllMetricEvents() {
+	objc.Send[objc.ID](objref.IDOf(mes), objc.RegisterName("subscribeToAllMetricEvents"))
 }
-
-// MetricEventStreamable is the interface implemented by [MetricEventStream], for mocking and DI.
-type MetricEventStreamable interface {
-	obj.Object
-	SubscribeToMetricEvents(metricEventClasses []obj.Object)
-	SubscribeToAllMetricEvents()
-}
-
-var _ MetricEventStreamable = (*MetricEventStream)(nil)

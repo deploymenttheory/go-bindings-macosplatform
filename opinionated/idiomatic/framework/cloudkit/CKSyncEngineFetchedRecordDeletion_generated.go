@@ -46,24 +46,24 @@ func syncEngineFetchedRecordDeletionAdopt(id objc.ID) *SyncEngineFetchedRecordDe
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineFetchedRecordDeletion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sefrd *SyncEngineFetchedRecordDeletion) Description() string {
+	return rt.Description(objref.IDOf(sefrd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineFetchedRecordDeletion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sefrd *SyncEngineFetchedRecordDeletion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sefrd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineFetchedRecordDeletion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sefrd *SyncEngineFetchedRecordDeletion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sefrd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineFetchedRecordDeletion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sefrd *SyncEngineFetchedRecordDeletion) String() string {
+	return rt.Description(objref.IDOf(sefrd))
 }
 
 // NewSyncEngineFetchedRecordDeletion creates a new SyncEngineFetchedRecordDeletion.
@@ -72,23 +72,14 @@ func NewSyncEngineFetchedRecordDeletion() *SyncEngineFetchedRecordDeletion {
 	return syncEngineFetchedRecordDeletionAdopt(_id)
 }
 
-// RecordID the deleted record's unique identifier.
-func (x *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
+// RecordID returns the deleted record's unique identifier.
+func (sefrd *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(sefrd), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
-// RecordType the record type of the deleted record.
-func (x *SyncEngineFetchedRecordDeletion) RecordType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+// RecordType returns the record type of the deleted record.
+func (sefrd *SyncEngineFetchedRecordDeletion) RecordType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sefrd), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)
 }
-
-// SyncEngineFetchedRecordDeletionable is the interface implemented by [SyncEngineFetchedRecordDeletion], for mocking and DI.
-type SyncEngineFetchedRecordDeletionable interface {
-	obj.Object
-	RecordID() *RecordID
-	RecordType() obj.Object
-}
-
-var _ SyncEngineFetchedRecordDeletionable = (*SyncEngineFetchedRecordDeletion)(nil)

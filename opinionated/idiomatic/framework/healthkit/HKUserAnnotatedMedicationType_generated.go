@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewUserAnnotatedMedicationType() *UserAnnotatedMedicationType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKUserAnnotatedMedicationType")), objc.RegisterName("new"))
 	return userAnnotatedMedicationTypeAdopt(_id)
 }
-
-// UserAnnotatedMedicationTypeable is the interface implemented by [UserAnnotatedMedicationType], for mocking and DI.
-type UserAnnotatedMedicationTypeable interface {
-	obj.Object
-}
-
-var _ UserAnnotatedMedicationTypeable = (*UserAnnotatedMedicationType)(nil)
 
 var _ ObjectTypeProvider = (*UserAnnotatedMedicationType)(nil)

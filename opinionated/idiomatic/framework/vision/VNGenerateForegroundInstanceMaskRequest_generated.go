@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewGenerateForegroundInstanceMaskRequest() *GenerateForegroundInstanceMaskR
 	return generateForegroundInstanceMaskRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *GenerateForegroundInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (gfimr *GenerateForegroundInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gfimr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return gfimr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *GenerateForegroundInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (gfimr *GenerateForegroundInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gfimr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return gfimr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *GenerateForegroundInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (gfimr *GenerateForegroundInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gfimr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return gfimr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *GenerateForegroundInstanceMaskRequest) WithRevision(revision int) *GenerateForegroundInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (gfimr *GenerateForegroundInstanceMaskRequest) WithRevision(revision int) *GenerateForegroundInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gfimr), objc.RegisterName("setRevision:"), revision)
+	return gfimr
 }
-
-// GenerateForegroundInstanceMaskRequestable is the interface implemented by [GenerateForegroundInstanceMaskRequest], for mocking and DI.
-type GenerateForegroundInstanceMaskRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest
-	WithRevision(revision int) *GenerateForegroundInstanceMaskRequest
-}
-
-var _ GenerateForegroundInstanceMaskRequestable = (*GenerateForegroundInstanceMaskRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*GenerateForegroundInstanceMaskRequest)(nil)
 

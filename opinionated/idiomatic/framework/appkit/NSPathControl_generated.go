@@ -56,723 +56,575 @@ func NewPathControl() *PathControl {
 }
 
 // WithEditable sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithEditable(editable bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+func (pc *PathControl) WithEditable(editable bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEditable:"), editable)
+	return pc
 }
 
 // WithAllowedTypes sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithAllowedTypes(items ...obj.Object) *PathControl {
+func (pc *PathControl) WithAllowedTypes(items ...obj.Object) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTypes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTypes:"), _arr)
+	return pc
 }
 
 // WithPlaceholderString sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithPlaceholderString(placeholderString string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-	return x
+func (pc *PathControl) WithPlaceholderString(placeholderString string) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	return pc
 }
 
 // WithPlaceholderAttributedString sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-	return x
+func (pc *PathControl) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	return pc
 }
 
-// WithURL the path value displayed by the receiver.
-func (x *PathControl) WithURL(uRL string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets the path value displayed by the receiver.
+func (pc *PathControl) WithURL(uRL string) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return pc
 }
 
-// WithPathStyle the receiver’s path style.
-func (x *PathControl) WithPathStyle(pathStyle PathStyle) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathStyle:"), pathStyle)
-	return x
+// WithPathStyle sets the receiver’s path style.
+func (pc *PathControl) WithPathStyle(pathStyle PathStyle) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathStyle:"), pathStyle)
+	return pc
 }
 
 // WithPathItems sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithPathItems(items ...*PathControlItem) *PathControl {
+func (pc *PathControl) WithPathItems(items ...*PathControlItem) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v *PathControlItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathItems:"), _arr)
+	return pc
 }
 
-// WithBackgroundColor the receiver’s background color.
-func (x *PathControl) WithBackgroundColor(backgroundColor *Color) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the receiver’s background color.
+func (pc *PathControl) WithBackgroundColor(backgroundColor *Color) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return pc
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *PathControl) WithTarget(target obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (pc *PathControl) WithTarget(target obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return pc
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *PathControl) WithTag(tag int) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (pc *PathControl) WithTag(tag int) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTag:"), tag)
+	return pc
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *PathControl) WithIgnoresMultiClick(ignoresMultiClick bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (pc *PathControl) WithIgnoresMultiClick(ignoresMultiClick bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return pc
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *PathControl) WithContinuous(continuous bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (pc *PathControl) WithContinuous(continuous bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContinuous:"), continuous)
+	return pc
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *PathControl) WithEnabled(enabled bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (pc *PathControl) WithEnabled(enabled bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEnabled:"), enabled)
+	return pc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *PathControl) WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (pc *PathControl) WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return pc
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *PathControl) WithHighlighted(highlighted bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (pc *PathControl) WithHighlighted(highlighted bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHighlighted:"), highlighted)
+	return pc
 }
 
-// WithControlSize the size of the control.
-func (x *PathControl) WithControlSize(controlSize ControlSize) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (pc *PathControl) WithControlSize(controlSize ControlSize) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlSize:"), controlSize)
+	return pc
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *PathControl) WithFormatter(formatter obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (pc *PathControl) WithFormatter(formatter obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return pc
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *PathControl) WithObjectValue(objectValue obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (pc *PathControl) WithObjectValue(objectValue obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return pc
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *PathControl) WithStringValue(stringValue string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (pc *PathControl) WithStringValue(stringValue string) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return pc
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *PathControl) WithAttributedStringValue(attributedStringValue obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (pc *PathControl) WithAttributedStringValue(attributedStringValue obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return pc
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *PathControl) WithIntValue(intValue int) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (pc *PathControl) WithIntValue(intValue int) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntValue:"), intValue)
+	return pc
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *PathControl) WithIntegerValue(integerValue int) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (pc *PathControl) WithIntegerValue(integerValue int) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return pc
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *PathControl) WithFloatValue(floatValue float32) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (pc *PathControl) WithFloatValue(floatValue float32) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFloatValue:"), floatValue)
+	return pc
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *PathControl) WithDoubleValue(doubleValue float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (pc *PathControl) WithDoubleValue(doubleValue float64) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return pc
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *PathControl) WithFont(font *Font) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (pc *PathControl) WithFont(font *Font) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return pc
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *PathControl) WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (pc *PathControl) WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return pc
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *PathControl) WithLineBreakMode(lineBreakMode LineBreakMode) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (pc *PathControl) WithLineBreakMode(lineBreakMode LineBreakMode) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return pc
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *PathControl) WithAlignment(alignment TextAlignment) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (pc *PathControl) WithAlignment(alignment TextAlignment) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlignment:"), alignment)
+	return pc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *PathControl) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (pc *PathControl) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return pc
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *PathControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (pc *PathControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return pc
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithCell(cell CellProvider) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (pc *PathControl) WithCell(cell CellProvider) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return pc
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithSubviews(items ...ViewProvider) *PathControl {
+func (pc *PathControl) WithSubviews(items ...ViewProvider) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSubviews:"), _arr)
+	return pc
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithHidden(hidden bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (pc *PathControl) WithHidden(hidden bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHidden:"), hidden)
+	return pc
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (pc *PathControl) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return pc
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithAutoresizesSubviews(autoresizesSubviews bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (pc *PathControl) WithAutoresizesSubviews(autoresizesSubviews bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return pc
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (pc *PathControl) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return pc
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *PathControl) WithFrame(frame corefoundation.CGRect) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (pc *PathControl) WithFrame(frame corefoundation.CGRect) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrame:"), frame)
+	return pc
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithFrameRotation(frameRotation float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (pc *PathControl) WithFrameRotation(frameRotation float64) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return pc
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithFrameCenterRotation(frameCenterRotation float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (pc *PathControl) WithFrameCenterRotation(frameCenterRotation float64) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return pc
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithBoundsRotation(boundsRotation float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (pc *PathControl) WithBoundsRotation(boundsRotation float64) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return pc
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *PathControl) WithBounds(bounds corefoundation.CGRect) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (pc *PathControl) WithBounds(bounds corefoundation.CGRect) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBounds:"), bounds)
+	return pc
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithCanDrawConcurrently(canDrawConcurrently bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (pc *PathControl) WithCanDrawConcurrently(canDrawConcurrently bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return pc
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *PathControl) WithNeedsDisplay(needsDisplay bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (pc *PathControl) WithNeedsDisplay(needsDisplay bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return pc
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (pc *PathControl) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return pc
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithWantsRestingTouches(wantsRestingTouches bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (pc *PathControl) WithWantsRestingTouches(wantsRestingTouches bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return pc
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (pc *PathControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return pc
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (pc *PathControl) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return pc
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithWantsLayer(wantsLayer bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (pc *PathControl) WithWantsLayer(wantsLayer bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return pc
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithLayer(layer obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (pc *PathControl) WithLayer(layer obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return pc
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (pc *PathControl) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return pc
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithNeedsLayout(needsLayout bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (pc *PathControl) WithNeedsLayout(needsLayout bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return pc
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithAlphaValue(alphaValue float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (pc *PathControl) WithAlphaValue(alphaValue float64) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return pc
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (pc *PathControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return pc
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithBackgroundFilters(items ...obj.Object) *PathControl {
+func (pc *PathControl) WithBackgroundFilters(items ...obj.Object) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return pc
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithCompositingFilter(compositingFilter obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (pc *PathControl) WithCompositingFilter(compositingFilter obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return pc
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithContentFilters(items ...obj.Object) *PathControl {
+func (pc *PathControl) WithContentFilters(items ...obj.Object) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContentFilters:"), _arr)
+	return pc
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithShadow(shadow *Shadow) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (pc *PathControl) WithShadow(shadow *Shadow) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return pc
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithClipsToBounds(clipsToBounds bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (pc *PathControl) WithClipsToBounds(clipsToBounds bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return pc
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (pc *PathControl) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return pc
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithToolTip(toolTip string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (pc *PathControl) WithToolTip(toolTip string) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return pc
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (pc *PathControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return pc
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (pc *PathControl) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return pc
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithNextKeyView(nextKeyView ViewProvider) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (pc *PathControl) WithNextKeyView(nextKeyView ViewProvider) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return pc
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithFocusRingType(focusRingType FocusRingType) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (pc *PathControl) WithFocusRingType(focusRingType FocusRingType) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return pc
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl {
+func (pc *PathControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return pc
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (pc *PathControl) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return pc
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (pc *PathControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return pc
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *PathControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (pc *PathControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return pc
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (pc *PathControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return pc
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (pc *PathControl) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return pc
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (pc *PathControl) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return pc
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (pc *PathControl) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return pc
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (pc *PathControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return pc
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (pc *PathControl) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return pc
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (pc *PathControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return pc
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *PathControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (pc *PathControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return pc
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (pc *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return pc
 }
 
-// WithMenu returns the responder’s menu.
-func (x *PathControl) WithMenu(menu *Menu) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (pc *PathControl) WithMenu(menu *Menu) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return pc
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *PathControl) WithUserActivity(userActivity obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (pc *PathControl) WithUserActivity(userActivity obj.Object) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return pc
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (pc *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return pc
 }
 
 // SetDraggingSourceOperationMaskForLocal configures the drag operation mask.
-func (x *PathControl) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
+func (pc *PathControl) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
 }
 
 // IsEditable wraps the corresponding Objective-C method.
-func (x *PathControl) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+func (pc *PathControl) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("isEditable"))
 	return _r
-}
-
-// SetEditable wraps the corresponding Objective-C method.
-func (x *PathControl) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
 // AllowedTypes wraps the corresponding Objective-C method.
 //
 // AllowedTypes returns the collection as a Go slice.
-func (x *PathControl) AllowedTypes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedTypes"))
+func (pc *PathControl) AllowedTypes() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("allowedTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetAllowedTypes wraps the corresponding Objective-C method.
-func (x *PathControl) SetAllowedTypes(allowedTypes []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTypes:"), purego.SliceToNSArray(allowedTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
 // PlaceholderString wraps the corresponding Objective-C method.
-func (x *PathControl) PlaceholderString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
+func (pc *PathControl) PlaceholderString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPlaceholderString wraps the corresponding Objective-C method.
-func (x *PathControl) SetPlaceholderString(placeholderString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-}
-
 // PlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *PathControl) PlaceholderAttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
+func (pc *PathControl) PlaceholderAttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
-}
-
-// SetPlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *PathControl) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *PathControl) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (pc *PathControl) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// SetURL wraps the corresponding Objective-C method.
-func (x *PathControl) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-}
-
 // PathStyle wraps the corresponding Objective-C method.
-func (x *PathControl) PathStyle() PathStyle {
-	_r := objc.Send[PathStyle](objref.IDOf(x), objc.RegisterName("pathStyle"))
+func (pc *PathControl) PathStyle() PathStyle {
+	_r := objc.Send[PathStyle](objref.IDOf(pc), objc.RegisterName("pathStyle"))
 	return _r
 }
 
-// SetPathStyle wraps the corresponding Objective-C method.
-func (x *PathControl) SetPathStyle(pathStyle PathStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathStyle:"), pathStyle)
-}
-
 // ClickedPathItem wraps the corresponding Objective-C method.
-func (x *PathControl) ClickedPathItem() *PathControlItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clickedPathItem"))
+func (pc *PathControl) ClickedPathItem() *PathControlItem {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathItem"))
 	return PathControlItemFromID(_r)
 }
 
 // PathItems wraps the corresponding Objective-C method.
 //
 // PathItems returns the collection as a Go slice.
-func (x *PathControl) PathItems() []*PathControlItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathItems"))
+func (pc *PathControl) PathItems() []*PathControlItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathControlItem { return PathControlItemFromID(_id) })
 }
 
-// SetPathItems wraps the corresponding Objective-C method.
-func (x *PathControl) SetPathItems(pathItems []*PathControlItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathItems:"), purego.SliceToNSArray(pathItems, func(_v *PathControlItem) objc.ID { return objref.IDOf(_v) }))
-}
-
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *PathControl) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (pc *PathControl) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *PathControl) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
 // ClickedPathComponentCell returns the clicked cell.
-func (x *PathControl) ClickedPathComponentCell() *PathComponentCell {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clickedPathComponentCell"))
+func (pc *PathControl) ClickedPathComponentCell() *PathComponentCell {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathComponentCell"))
 	return PathComponentCellFromID(_r)
 }
 
 // PathComponentCells returns an array of the NSPathComponentCell objects currently being displayed.
 //
 // PathComponentCells returns the collection as a Go slice.
-func (x *PathControl) PathComponentCells() []*PathComponentCell {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathComponentCells"))
+func (pc *PathControl) PathComponentCells() []*PathComponentCell {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
 }
 
 // SetPathComponentCells sets the array of NSPathComponentCell objects currently being displayed.
-func (x *PathControl) SetPathComponentCells(cells []*PathComponentCell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathComponentCells:"), purego.SliceToNSArray(cells, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) }))
+func (pc *PathControl) SetPathComponentCells(cells []*PathComponentCell) {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathComponentCells:"), purego.SliceToNSArray(cells, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) }))
 }
-
-// PathControlable is the interface implemented by [PathControl], for mocking and DI.
-type PathControlable interface {
-	obj.Object
-	WithEditable(editable bool) *PathControl
-	WithAllowedTypes(items ...obj.Object) *PathControl
-	WithPlaceholderString(placeholderString string) *PathControl
-	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathControl
-	WithURL(uRL string) *PathControl
-	WithPathStyle(pathStyle PathStyle) *PathControl
-	WithPathItems(items ...*PathControlItem) *PathControl
-	WithBackgroundColor(backgroundColor *Color) *PathControl
-	WithTarget(target obj.Object) *PathControl
-	WithTag(tag int) *PathControl
-	WithIgnoresMultiClick(ignoresMultiClick bool) *PathControl
-	WithContinuous(continuous bool) *PathControl
-	WithEnabled(enabled bool) *PathControl
-	WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl
-	WithHighlighted(highlighted bool) *PathControl
-	WithControlSize(controlSize ControlSize) *PathControl
-	WithFormatter(formatter obj.Object) *PathControl
-	WithObjectValue(objectValue obj.Object) *PathControl
-	WithStringValue(stringValue string) *PathControl
-	WithAttributedStringValue(attributedStringValue obj.Object) *PathControl
-	WithIntValue(intValue int) *PathControl
-	WithIntegerValue(integerValue int) *PathControl
-	WithFloatValue(floatValue float32) *PathControl
-	WithDoubleValue(doubleValue float64) *PathControl
-	WithFont(font *Font) *PathControl
-	WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl
-	WithLineBreakMode(lineBreakMode LineBreakMode) *PathControl
-	WithAlignment(alignment TextAlignment) *PathControl
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathControl
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl
-	WithCell(cell CellProvider) *PathControl
-	WithSubviews(items ...ViewProvider) *PathControl
-	WithHidden(hidden bool) *PathControl
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PathControl
-	WithAutoresizesSubviews(autoresizesSubviews bool) *PathControl
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PathControl
-	WithFrame(frame corefoundation.CGRect) *PathControl
-	WithFrameRotation(frameRotation float64) *PathControl
-	WithFrameCenterRotation(frameCenterRotation float64) *PathControl
-	WithBoundsRotation(boundsRotation float64) *PathControl
-	WithBounds(bounds corefoundation.CGRect) *PathControl
-	WithCanDrawConcurrently(canDrawConcurrently bool) *PathControl
-	WithNeedsDisplay(needsDisplay bool) *PathControl
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PathControl
-	WithWantsRestingTouches(wantsRestingTouches bool) *PathControl
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PathControl
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PathControl
-	WithWantsLayer(wantsLayer bool) *PathControl
-	WithLayer(layer obj.Object) *PathControl
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PathControl
-	WithNeedsLayout(needsLayout bool) *PathControl
-	WithAlphaValue(alphaValue float64) *PathControl
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PathControl
-	WithBackgroundFilters(items ...obj.Object) *PathControl
-	WithCompositingFilter(compositingFilter obj.Object) *PathControl
-	WithContentFilters(items ...obj.Object) *PathControl
-	WithShadow(shadow *Shadow) *PathControl
-	WithClipsToBounds(clipsToBounds bool) *PathControl
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl
-	WithToolTip(toolTip string) *PathControl
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathControl
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PathControl
-	WithNextKeyView(nextKeyView ViewProvider) *PathControl
-	WithFocusRingType(focusRingType FocusRingType) *PathControl
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PathControl
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PathControl
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PathControl
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PathControl
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PathControl
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PathControl
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PathControl
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PathControl
-	WithNextResponder(nextResponder ResponderProvider) *PathControl
-	WithMenu(menu *Menu) *PathControl
-	WithUserActivity(userActivity obj.Object) *PathControl
-	WithTouchBar(touchBar *TouchBar) *PathControl
-	SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool)
-	IsEditable() bool
-	SetEditable(editable bool)
-	AllowedTypes() []string
-	SetAllowedTypes(allowedTypes []string)
-	PlaceholderString() string
-	SetPlaceholderString(placeholderString string)
-	PlaceholderAttributedString() obj.Object
-	SetPlaceholderAttributedString(placeholderAttributedString obj.Object)
-	URL() obj.Object
-	SetURL(uRL string)
-	PathStyle() PathStyle
-	SetPathStyle(pathStyle PathStyle)
-	ClickedPathItem() *PathControlItem
-	PathItems() []*PathControlItem
-	SetPathItems(pathItems []*PathControlItem)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	ClickedPathComponentCell() *PathComponentCell
-	PathComponentCells() []*PathComponentCell
-	SetPathComponentCells(cells []*PathComponentCell)
-}
-
-var _ PathControlable = (*PathControl)(nil)
 
 var _ ControlProvider = (*PathControl)(nil)
 

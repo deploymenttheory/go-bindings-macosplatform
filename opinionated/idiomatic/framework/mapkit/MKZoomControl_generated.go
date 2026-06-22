@@ -46,24 +46,24 @@ func zoomControlAdopt(id objc.ID) *ZoomControl {
 }
 
 // Description returns the object's -description text.
-func (x *ZoomControl) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (zc *ZoomControl) Description() string {
+	return rt.Description(objref.IDOf(zc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ZoomControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (zc *ZoomControl) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(zc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ZoomControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (zc *ZoomControl) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(zc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ZoomControl) String() string {
-	return rt.Description(objref.IDOf(x))
+func (zc *ZoomControl) String() string {
+	return rt.Description(objref.IDOf(zc))
 }
 
 // NewZoomControl creates a new ZoomControl.
@@ -72,29 +72,14 @@ func NewZoomControl() *ZoomControl {
 	return zoomControlAdopt(_id)
 }
 
-// WithMapView the map view associated with this control.
-func (x *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
-	return x
+// WithMapView sets the map view associated with this control.
+func (zc *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
+	objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	return zc
 }
 
 // MapView wraps the corresponding Objective-C method.
-func (x *ZoomControl) MapView() *MapView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
+func (zc *ZoomControl) MapView() *MapView {
+	_r := objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)
 }
-
-// SetMapView wraps the corresponding Objective-C method.
-func (x *ZoomControl) SetMapView(mapView *MapView) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
-}
-
-// ZoomControlable is the interface implemented by [ZoomControl], for mocking and DI.
-type ZoomControlable interface {
-	obj.Object
-	WithMapView(mapView *MapView) *ZoomControl
-	MapView() *MapView
-	SetMapView(mapView *MapView)
-}
-
-var _ ZoomControlable = (*ZoomControl)(nil)

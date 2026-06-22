@@ -46,24 +46,24 @@ func displayLinkAdopt(id objc.ID) *DisplayLink {
 }
 
 // Description returns the object's -description text.
-func (x *DisplayLink) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dl *DisplayLink) Description() string {
+	return rt.Description(objref.IDOf(dl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DisplayLink) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dl *DisplayLink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DisplayLink) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dl *DisplayLink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DisplayLink) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dl *DisplayLink) String() string {
+	return rt.Description(objref.IDOf(dl))
 }
 
 // NewDisplayLink creates a new DisplayLink.
@@ -72,68 +72,47 @@ func NewDisplayLink() *DisplayLink {
 	return displayLinkAdopt(_id)
 }
 
-// WithPaused a Boolean value that indicates whether the system suspends the display link’s notifications to the target.
-func (x *DisplayLink) WithPaused(paused bool) *DisplayLink {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that indicates whether the system suspends the display link’s notifications to the target.
+func (dl *DisplayLink) WithPaused(paused bool) *DisplayLink {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setPaused:"), paused)
+	return dl
 }
 
 // AddToRunLoopForMode registers the display link with a run loop.
-func (x *DisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
+func (dl *DisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes the display link from the run loop for the given mode.
-func (x *DisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
+func (dl *DisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // Invalidate removes the display link from all run loop modes.
-func (x *DisplayLink) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (dl *DisplayLink) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("invalidate"))
 }
 
 // Timestamp wraps the corresponding Objective-C method.
-func (x *DisplayLink) Timestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+func (dl *DisplayLink) Timestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("timestamp"))
 	return _r
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *DisplayLink) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (dl *DisplayLink) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("duration"))
 	return _r
 }
 
 // TargetTimestamp wraps the corresponding Objective-C method.
-func (x *DisplayLink) TargetTimestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetTimestamp"))
+func (dl *DisplayLink) TargetTimestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
 // IsPaused wraps the corresponding Objective-C method.
-func (x *DisplayLink) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+func (dl *DisplayLink) IsPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(dl), objc.RegisterName("isPaused"))
 	return _r
 }
-
-// SetPaused wraps the corresponding Objective-C method.
-func (x *DisplayLink) SetPaused(paused bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-}
-
-// DisplayLinkable is the interface implemented by [DisplayLink], for mocking and DI.
-type DisplayLinkable interface {
-	obj.Object
-	WithPaused(paused bool) *DisplayLink
-	AddToRunLoopForMode(runloop obj.Object, mode obj.Object)
-	RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object)
-	Invalidate()
-	Timestamp() float64
-	Duration() float64
-	TargetTimestamp() float64
-	IsPaused() bool
-	SetPaused(paused bool)
-}
-
-var _ DisplayLinkable = (*DisplayLink)(nil)

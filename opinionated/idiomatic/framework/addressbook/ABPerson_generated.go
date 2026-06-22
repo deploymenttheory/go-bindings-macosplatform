@@ -54,45 +54,33 @@ func NewPersonWithVCardRepresentation(vCardData obj.Object) *Person {
 }
 
 // ParentGroups returns an array of the address book groups that this person belongs to.
-func (x *Person) ParentGroups() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentGroups"))
+func (p *Person) ParentGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("parentGroups"))
 	return obj.Wrap(_r)
 }
 
 // LinkedPeople returns the array of all person records that are linked to the person this record represents.
-func (x *Person) LinkedPeople() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkedPeople"))
+func (p *Person) LinkedPeople() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("linkedPeople"))
 	return obj.Wrap(_r)
 }
 
 // VCardRepresentation returns the vCard representation of the person record as a data object in vCard format.
-func (x *Person) VCardRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vCardRepresentation"))
+func (p *Person) VCardRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("vCardRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // SetImageData sets the image for this person to the given data.
-func (x *Person) SetImageData(data obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setImageData:"), objref.IDOf(data))
+func (p *Person) SetImageData(data obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("setImageData:"), objref.IDOf(data))
 	return _r
 }
 
 // ImageData returns data that contains a picture of this person.
-func (x *Person) ImageData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageData"))
+func (p *Person) ImageData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("imageData"))
 	return obj.Wrap(_r)
 }
-
-// Personable is the interface implemented by [Person], for mocking and DI.
-type Personable interface {
-	obj.Object
-	ParentGroups() obj.Object
-	LinkedPeople() obj.Object
-	VCardRepresentation() obj.Object
-	SetImageData(data obj.Object) bool
-	ImageData() obj.Object
-}
-
-var _ Personable = (*Person)(nil)
 
 var _ RecordProvider = (*Person)(nil)

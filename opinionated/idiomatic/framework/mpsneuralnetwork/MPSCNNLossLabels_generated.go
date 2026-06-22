@@ -44,24 +44,24 @@ func cNNLossLabelsAdopt(id objc.ID) *CNNLossLabels {
 }
 
 // Description returns the object's -description text.
-func (x *CNNLossLabels) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cll *CNNLossLabels) Description() string {
+	return rt.Description(objref.IDOf(cll))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLossLabels) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cll *CNNLossLabels) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cll), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLossLabels) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cll *CNNLossLabels) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cll), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CNNLossLabels) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cll *CNNLossLabels) String() string {
+	return rt.Description(objref.IDOf(cll))
 }
 
 // NewCNNLossLabels creates a new CNNLossLabels.
@@ -70,30 +70,20 @@ func NewCNNLossLabels() *CNNLossLabels {
 	return cNNLossLabelsAdopt(_id)
 }
 
-// LossImage loss image accessor method.
-func (x *CNNLossLabels) LossImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lossImage"))
+// LossImage returns loss image accessor method.
+func (cll *CNNLossLabels) LossImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("lossImage"))
 	return obj.Wrap(_r)
 }
 
-// LabelsImage labels image accessor method.
-func (x *CNNLossLabels) LabelsImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelsImage"))
+// LabelsImage returns labels image accessor method.
+func (cll *CNNLossLabels) LabelsImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("labelsImage"))
 	return obj.Wrap(_r)
 }
 
-// WeightsImage weights image accessor method.
-func (x *CNNLossLabels) WeightsImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsImage"))
+// WeightsImage returns weights image accessor method.
+func (cll *CNNLossLabels) WeightsImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("weightsImage"))
 	return obj.Wrap(_r)
 }
-
-// CNNLossLabelsable is the interface implemented by [CNNLossLabels], for mocking and DI.
-type CNNLossLabelsable interface {
-	obj.Object
-	LossImage() obj.Object
-	LabelsImage() obj.Object
-	WeightsImage() obj.Object
-}
-
-var _ CNNLossLabelsable = (*CNNLossLabels)(nil)

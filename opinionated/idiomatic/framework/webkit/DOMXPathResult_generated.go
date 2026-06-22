@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,32 +50,32 @@ func NewDOMXPathResult() *DOMXPathResult {
 }
 
 // IterateNext wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) IterateNext() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iterateNext"))
+func (dpr *DOMXPathResult) IterateNext() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("iterateNext"))
 	return DOMNodeFromID(_r)
 }
 
 // SnapshotItem wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) SnapshotItem(index int) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotItem:"), index)
+func (dpr *DOMXPathResult) SnapshotItem(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("snapshotItem:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) ResultType() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("resultType"))
+func (dpr *DOMXPathResult) ResultType() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(dpr), objc.RegisterName("resultType"))
 	return _r
 }
 
 // NumberValue wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) NumberValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("numberValue"))
+func (dpr *DOMXPathResult) NumberValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(dpr), objc.RegisterName("numberValue"))
 	return _r
 }
 
 // StringValue wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (dpr *DOMXPathResult) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
@@ -84,44 +83,28 @@ func (x *DOMXPathResult) StringValue() string {
 }
 
 // BooleanValue wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) BooleanValue() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("booleanValue"))
+func (dpr *DOMXPathResult) BooleanValue() bool {
+	_r := objc.Send[bool](objref.IDOf(dpr), objc.RegisterName("booleanValue"))
 	return _r
 }
 
 // SingleNodeValue wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) SingleNodeValue() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleNodeValue"))
+func (dpr *DOMXPathResult) SingleNodeValue() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("singleNodeValue"))
 	return DOMNodeFromID(_r)
 }
 
 // InvalidIteratorState wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) InvalidIteratorState() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("invalidIteratorState"))
+func (dpr *DOMXPathResult) InvalidIteratorState() bool {
+	_r := objc.Send[bool](objref.IDOf(dpr), objc.RegisterName("invalidIteratorState"))
 	return _r
 }
 
 // SnapshotLength wraps the corresponding Objective-C method.
-func (x *DOMXPathResult) SnapshotLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("snapshotLength"))
+func (dpr *DOMXPathResult) SnapshotLength() int {
+	_r := objc.Send[int](objref.IDOf(dpr), objc.RegisterName("snapshotLength"))
 	return _r
 }
-
-// DOMXPathResultable is the interface implemented by [DOMXPathResult], for mocking and DI.
-type DOMXPathResultable interface {
-	obj.Object
-	IterateNext() *DOMNode
-	SnapshotItem(index int) *DOMNode
-	ResultType() uint16
-	NumberValue() float64
-	StringValue() string
-	BooleanValue() bool
-	SingleNodeValue() *DOMNode
-	InvalidIteratorState() bool
-	SnapshotLength() int
-}
-
-var _ DOMXPathResultable = (*DOMXPathResult)(nil)
 
 var _ DOMObjectProvider = (*DOMXPathResult)(nil)
 

@@ -48,216 +48,137 @@ func renderPassAttachmentDescriptorAdopt(id objc.ID) *RenderPassAttachmentDescri
 }
 
 // Description returns the object's -description text.
-func (x *RenderPassAttachmentDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpad *RenderPassAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rpad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderPassAttachmentDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpad *RenderPassAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderPassAttachmentDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpad *RenderPassAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderPassAttachmentDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpad *RenderPassAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(rpad))
 }
 
-// WithLevel the mipmap level of the texture used for rendering to the attachment.
-func (x *RenderPassAttachmentDescriptor) WithLevel(level int) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-	return x
+// WithLevel sets the mipmap level of the texture used for rendering to the attachment.
+func (rpad *RenderPassAttachmentDescriptor) WithLevel(level int) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setLevel:"), level)
+	return rpad
 }
 
-// WithSlice the slice of the texture used for rendering to the attachment.
-func (x *RenderPassAttachmentDescriptor) WithSlice(slice int) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlice:"), slice)
-	return x
+// WithSlice sets the slice of the texture used for rendering to the attachment.
+func (rpad *RenderPassAttachmentDescriptor) WithSlice(slice int) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setSlice:"), slice)
+	return rpad
 }
 
-// WithDepthPlane the depth plane of the texture used for rendering to the attachment.
-func (x *RenderPassAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthPlane:"), depthPlane)
-	return x
+// WithDepthPlane sets the depth plane of the texture used for rendering to the attachment.
+func (rpad *RenderPassAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setDepthPlane:"), depthPlane)
+	return rpad
 }
 
-// WithResolveLevel the mipmap level of the texture used for the multisample resolve action.
-func (x *RenderPassAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveLevel:"), resolveLevel)
-	return x
+// WithResolveLevel sets the mipmap level of the texture used for the multisample resolve action.
+func (rpad *RenderPassAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setResolveLevel:"), resolveLevel)
+	return rpad
 }
 
-// WithResolveSlice the slice of the texture used for the multisample resolve action.
-func (x *RenderPassAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveSlice:"), resolveSlice)
-	return x
+// WithResolveSlice sets the slice of the texture used for the multisample resolve action.
+func (rpad *RenderPassAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setResolveSlice:"), resolveSlice)
+	return rpad
 }
 
-// WithResolveDepthPlane the depth plane of the texture used for the multisample resolve action.
-func (x *RenderPassAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
-	return x
+// WithResolveDepthPlane sets the depth plane of the texture used for the multisample resolve action.
+func (rpad *RenderPassAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
+	return rpad
 }
 
-// WithLoadAction the action performed by this attachment at the start of a rendering pass for a render command encoder.
-func (x *RenderPassAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadAction:"), loadAction)
-	return x
+// WithLoadAction sets the action performed by this attachment at the start of a rendering pass for a render command encoder.
+func (rpad *RenderPassAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setLoadAction:"), loadAction)
+	return rpad
 }
 
-// WithStoreAction the action performed by this attachment at the end of a rendering pass for a render command encoder.
-func (x *RenderPassAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAction:"), storeAction)
-	return x
+// WithStoreAction sets the action performed by this attachment at the end of a rendering pass for a render command encoder.
+func (rpad *RenderPassAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setStoreAction:"), storeAction)
+	return rpad
 }
 
-// WithStoreActionOptions the options that modify the store action performed by this attachment.
-func (x *RenderPassAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
-	return x
+// WithStoreActionOptions sets the options that modify the store action performed by this attachment.
+func (rpad *RenderPassAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpad), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
+	return rpad
 }
 
-// Level the mipmap level of the texture to be used for rendering.  Default is zero.
-func (x *RenderPassAttachmentDescriptor) Level() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("level"))
+// Level returns the mipmap level of the texture to be used for rendering.  Default is zero.
+func (rpad *RenderPassAttachmentDescriptor) Level() int {
+	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("level"))
 	return _r
 }
 
-// SetLevel wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetLevel(level int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-}
-
-// Slice the slice of the texture to be used for rendering.  Default is zero.
-func (x *RenderPassAttachmentDescriptor) Slice() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("slice"))
+// Slice returns the slice of the texture to be used for rendering.  Default is zero.
+func (rpad *RenderPassAttachmentDescriptor) Slice() int {
+	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("slice"))
 	return _r
 }
 
-// SetSlice wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetSlice(slice int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlice:"), slice)
-}
-
-// DepthPlane the depth plane of the texture to be used for rendering.  Default is zero.
-func (x *RenderPassAttachmentDescriptor) DepthPlane() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("depthPlane"))
+// DepthPlane returns the depth plane of the texture to be used for rendering.  Default is zero.
+func (rpad *RenderPassAttachmentDescriptor) DepthPlane() int {
+	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("depthPlane"))
 	return _r
 }
 
-// SetDepthPlane wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetDepthPlane(depthPlane int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthPlane:"), depthPlane)
-}
-
-// ResolveLevel the mipmap level of the resolve texture to be used for multisample resolve.  Defaults to zero.
-func (x *RenderPassAttachmentDescriptor) ResolveLevel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resolveLevel"))
+// ResolveLevel returns the mipmap level of the resolve texture to be used for multisample resolve.  Defaults to zero.
+func (rpad *RenderPassAttachmentDescriptor) ResolveLevel() int {
+	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("resolveLevel"))
 	return _r
 }
 
-// SetResolveLevel wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetResolveLevel(resolveLevel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveLevel:"), resolveLevel)
-}
-
-// ResolveSlice the texture slice of the resolve texture to be used for multisample resolve.  Defaults to zero.
-func (x *RenderPassAttachmentDescriptor) ResolveSlice() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resolveSlice"))
+// ResolveSlice returns the texture slice of the resolve texture to be used for multisample resolve.  Defaults to zero.
+func (rpad *RenderPassAttachmentDescriptor) ResolveSlice() int {
+	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("resolveSlice"))
 	return _r
 }
 
-// SetResolveSlice wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetResolveSlice(resolveSlice int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveSlice:"), resolveSlice)
-}
-
-// ResolveDepthPlane the texture depth plane of the resolve texture to be used for multisample resolve.  Defaults to zero.
-func (x *RenderPassAttachmentDescriptor) ResolveDepthPlane() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resolveDepthPlane"))
+// ResolveDepthPlane returns the texture depth plane of the resolve texture to be used for multisample resolve.  Defaults to zero.
+func (rpad *RenderPassAttachmentDescriptor) ResolveDepthPlane() int {
+	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("resolveDepthPlane"))
 	return _r
 }
 
-// SetResolveDepthPlane wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetResolveDepthPlane(resolveDepthPlane int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
-}
-
-// LoadAction the action to be performed with this attachment at the beginning of a render pass.  Default is MTLLoadActionDontCare unless specified by a creation or init method.
-func (x *RenderPassAttachmentDescriptor) LoadAction() LoadAction {
-	_r := objc.Send[LoadAction](objref.IDOf(x), objc.RegisterName("loadAction"))
+// LoadAction returns the action to be performed with this attachment at the beginning of a render pass.  Default is MTLLoadActionDontCare unless specified by a creation or init method.
+func (rpad *RenderPassAttachmentDescriptor) LoadAction() LoadAction {
+	_r := objc.Send[LoadAction](objref.IDOf(rpad), objc.RegisterName("loadAction"))
 	return _r
 }
 
-// SetLoadAction wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetLoadAction(loadAction LoadAction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadAction:"), loadAction)
-}
-
-// StoreAction the action to be performed with this attachment at the end of a render pass.  Default is MTLStoreActionDontCare unless specified by a creation or init method.
-func (x *RenderPassAttachmentDescriptor) StoreAction() StoreAction {
-	_r := objc.Send[StoreAction](objref.IDOf(x), objc.RegisterName("storeAction"))
+// StoreAction returns the action to be performed with this attachment at the end of a render pass.  Default is MTLStoreActionDontCare unless specified by a creation or init method.
+func (rpad *RenderPassAttachmentDescriptor) StoreAction() StoreAction {
+	_r := objc.Send[StoreAction](objref.IDOf(rpad), objc.RegisterName("storeAction"))
 	return _r
 }
 
-// SetStoreAction wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetStoreAction(storeAction StoreAction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAction:"), storeAction)
-}
-
-// StoreActionOptions optional configuration for the store action performed with this attachment at the end of a render pass.  Default is MTLStoreActionOptionNone.
-func (x *RenderPassAttachmentDescriptor) StoreActionOptions() StoreActionOptions {
-	_r := objc.Send[StoreActionOptions](objref.IDOf(x), objc.RegisterName("storeActionOptions"))
+// StoreActionOptions returns optional configuration for the store action performed with this attachment at the end of a render pass.  Default is MTLStoreActionOptionNone.
+func (rpad *RenderPassAttachmentDescriptor) StoreActionOptions() StoreActionOptions {
+	_r := objc.Send[StoreActionOptions](objref.IDOf(rpad), objc.RegisterName("storeActionOptions"))
 	return _r
 }
-
-// SetStoreActionOptions wraps the corresponding Objective-C method.
-func (x *RenderPassAttachmentDescriptor) SetStoreActionOptions(storeActionOptions StoreActionOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
-}
-
-// RenderPassAttachmentDescriptorable is the interface implemented by [RenderPassAttachmentDescriptor], for mocking and DI.
-type RenderPassAttachmentDescriptorable interface {
-	obj.Object
-	WithLevel(level int) *RenderPassAttachmentDescriptor
-	WithSlice(slice int) *RenderPassAttachmentDescriptor
-	WithDepthPlane(depthPlane int) *RenderPassAttachmentDescriptor
-	WithResolveLevel(resolveLevel int) *RenderPassAttachmentDescriptor
-	WithResolveSlice(resolveSlice int) *RenderPassAttachmentDescriptor
-	WithResolveDepthPlane(resolveDepthPlane int) *RenderPassAttachmentDescriptor
-	WithLoadAction(loadAction LoadAction) *RenderPassAttachmentDescriptor
-	WithStoreAction(storeAction StoreAction) *RenderPassAttachmentDescriptor
-	WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassAttachmentDescriptor
-	Level() int
-	SetLevel(level int)
-	Slice() int
-	SetSlice(slice int)
-	DepthPlane() int
-	SetDepthPlane(depthPlane int)
-	ResolveLevel() int
-	SetResolveLevel(resolveLevel int)
-	ResolveSlice() int
-	SetResolveSlice(resolveSlice int)
-	ResolveDepthPlane() int
-	SetResolveDepthPlane(resolveDepthPlane int)
-	LoadAction() LoadAction
-	SetLoadAction(loadAction LoadAction)
-	StoreAction() StoreAction
-	SetStoreAction(storeAction StoreAction)
-	StoreActionOptions() StoreActionOptions
-	SetStoreActionOptions(storeActionOptions StoreActionOptions)
-}
-
-var _ RenderPassAttachmentDescriptorable = (*RenderPassAttachmentDescriptor)(nil)
 
 // isRenderPassAttachmentDescriptor marks RenderPassAttachmentDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the RenderPassAttachmentDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RenderPassAttachmentDescriptor) isRenderPassAttachmentDescriptor() {}
+func (rpad *RenderPassAttachmentDescriptor) isRenderPassAttachmentDescriptor() {}
 
 var _ RenderPassAttachmentDescriptorProvider = (*RenderPassAttachmentDescriptor)(nil)

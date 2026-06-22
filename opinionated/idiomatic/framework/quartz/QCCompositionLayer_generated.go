@@ -46,24 +46,24 @@ func qCCompositionLayerAdopt(id objc.ID) *QCCompositionLayer {
 }
 
 // Description returns the object's -description text.
-func (x *QCCompositionLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qcl *QCCompositionLayer) Description() string {
+	return rt.Description(objref.IDOf(qcl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QCCompositionLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qcl *QCCompositionLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qcl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QCCompositionLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qcl *QCCompositionLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qcl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QCCompositionLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qcl *QCCompositionLayer) String() string {
+	return rt.Description(objref.IDOf(qcl))
 }
 
 // NewQCCompositionLayerWithFile initializes and returns a composition layer using the Quartz Composer composition in the specified file.
@@ -81,15 +81,7 @@ func NewQCCompositionLayerWithComposition(composition *QCComposition) *QCComposi
 }
 
 // Composition returns the composition associated with the layer.
-func (x *QCCompositionLayer) Composition() *QCComposition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
+func (qcl *QCCompositionLayer) Composition() *QCComposition {
+	_r := objc.Send[objc.ID](objref.IDOf(qcl), objc.RegisterName("composition"))
 	return QCCompositionFromID(_r)
 }
-
-// QCCompositionLayerable is the interface implemented by [QCCompositionLayer], for mocking and DI.
-type QCCompositionLayerable interface {
-	obj.Object
-	Composition() *QCComposition
-}
-
-var _ QCCompositionLayerable = (*QCCompositionLayer)(nil)

@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewIntersectionFunctionDescriptor() *IntersectionFunctionDescriptor {
 	return intersectionFunctionDescriptorAdopt(_id)
 }
 
-// WithName the name of the function to fetch from the library.
-func (x *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the function to fetch from the library.
+func (ifd *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ifd), objc.RegisterName("setName:"), purego.NSString(name))
+	return ifd
 }
 
-// WithSpecializedName a new name for the created function object.
-func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
-	return x
+// WithSpecializedName sets a new name for the created function object.
+func (ifd *IntersectionFunctionDescriptor) WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ifd), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
+	return ifd
 }
 
-// WithConstantValues the set of constant values assigned to the function constants.
-func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
-	return x
+// WithConstantValues sets the set of constant values assigned to the function constants.
+func (ifd *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ifd), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
+	return ifd
 }
 
-// WithOptions flags specifying how Metal should create the new function object.
-func (x *IntersectionFunctionDescriptor) WithOptions(options FunctionOptions) *IntersectionFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
-	return x
+// WithOptions sets flags specifying how Metal should create the new function object.
+func (ifd *IntersectionFunctionDescriptor) WithOptions(options FunctionOptions) *IntersectionFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ifd), objc.RegisterName("setOptions:"), options)
+	return ifd
 }
-
-// IntersectionFunctionDescriptorable is the interface implemented by [IntersectionFunctionDescriptor], for mocking and DI.
-type IntersectionFunctionDescriptorable interface {
-	obj.Object
-	WithName(name string) *IntersectionFunctionDescriptor
-	WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor
-	WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor
-	WithOptions(options FunctionOptions) *IntersectionFunctionDescriptor
-}
-
-var _ IntersectionFunctionDescriptorable = (*IntersectionFunctionDescriptor)(nil)
 
 var _ FunctionDescriptorProvider = (*IntersectionFunctionDescriptor)(nil)

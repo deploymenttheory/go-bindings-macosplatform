@@ -53,77 +53,56 @@ func NewViewAnimationWithViewAnimations(viewAnimations []obj.Object) *ViewAnimat
 	return viewAnimationAdopt(_id)
 }
 
-// WithViewAnimations the dictionaries defining the objects to animate.
-func (x *ViewAnimation) WithViewAnimations(items ...obj.Object) *ViewAnimation {
+// WithViewAnimations sets the dictionaries defining the objects to animate.
+func (va *ViewAnimation) WithViewAnimations(items ...obj.Object) *ViewAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewAnimations:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setViewAnimations:"), _arr)
+	return va
 }
 
-// WithCurrentProgress the current progress of the animation.
-func (x *ViewAnimation) WithCurrentProgress(currentProgress float32) *ViewAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentProgress:"), currentProgress)
-	return x
+// WithCurrentProgress sets the current progress of the animation.
+func (va *ViewAnimation) WithCurrentProgress(currentProgress float32) *ViewAnimation {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setCurrentProgress:"), currentProgress)
+	return va
 }
 
-// WithDuration the duration of the animation, in seconds.
-func (x *ViewAnimation) WithDuration(duration float64) *ViewAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-	return x
+// WithDuration sets the duration of the animation, in seconds.
+func (va *ViewAnimation) WithDuration(duration float64) *ViewAnimation {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setDuration:"), duration)
+	return va
 }
 
-// WithAnimationBlockingMode the blocking mode of the animation.
-func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *ViewAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
-	return x
+// WithAnimationBlockingMode sets the blocking mode of the animation.
+func (va *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *ViewAnimation {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
+	return va
 }
 
-// WithFrameRate the number of frame updates per second to generate for the animation.
-func (x *ViewAnimation) WithFrameRate(frameRate float32) *ViewAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRate:"), frameRate)
-	return x
+// WithFrameRate sets the number of frame updates per second to generate for the animation.
+func (va *ViewAnimation) WithFrameRate(frameRate float32) *ViewAnimation {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setFrameRate:"), frameRate)
+	return va
 }
 
-// WithAnimationCurve the timing curve for the animation.
-func (x *ViewAnimation) WithAnimationCurve(animationCurve AnimationCurve) *ViewAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationCurve:"), animationCurve)
-	return x
+// WithAnimationCurve sets the timing curve for the animation.
+func (va *ViewAnimation) WithAnimationCurve(animationCurve AnimationCurve) *ViewAnimation {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setAnimationCurve:"), animationCurve)
+	return va
 }
 
-// WithProgressMarks an array of floating-point numbers representing current progress marks.
-func (x *ViewAnimation) WithProgressMarks(items ...obj.Object) *ViewAnimation {
+// WithProgressMarks sets an array of floating-point numbers representing current progress marks.
+func (va *ViewAnimation) WithProgressMarks(items ...obj.Object) *ViewAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressMarks:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setProgressMarks:"), _arr)
+	return va
 }
 
 // ViewAnimations wraps the corresponding Objective-C method.
 //
 // ViewAnimations returns the collection as a Go slice.
-func (x *ViewAnimation) ViewAnimations() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewAnimations"))
+func (va *ViewAnimation) ViewAnimations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("viewAnimations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetViewAnimations wraps the corresponding Objective-C method.
-func (x *ViewAnimation) SetViewAnimations(viewAnimations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewAnimations:"), purego.SliceToNSArray(viewAnimations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// ViewAnimationable is the interface implemented by [ViewAnimation], for mocking and DI.
-type ViewAnimationable interface {
-	obj.Object
-	WithViewAnimations(items ...obj.Object) *ViewAnimation
-	WithCurrentProgress(currentProgress float32) *ViewAnimation
-	WithDuration(duration float64) *ViewAnimation
-	WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *ViewAnimation
-	WithFrameRate(frameRate float32) *ViewAnimation
-	WithAnimationCurve(animationCurve AnimationCurve) *ViewAnimation
-	WithProgressMarks(items ...obj.Object) *ViewAnimation
-	ViewAnimations() []obj.Object
-	SetViewAnimations(viewAnimations []obj.Object)
-}
-
-var _ ViewAnimationable = (*ViewAnimation)(nil)
 
 var _ AnimationProvider = (*ViewAnimation)(nil)

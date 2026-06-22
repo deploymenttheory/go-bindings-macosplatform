@@ -5,13 +5,14 @@
 package scenekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // SceneSource is an idiomatic wrapper over the Objective-C class SCNSceneSource.
@@ -48,24 +49,24 @@ func sceneSourceAdopt(id objc.ID) *SceneSource {
 }
 
 // Description returns the object's -description text.
-func (x *SceneSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SceneSource) Description() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SceneSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ss *SceneSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SceneSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ss *SceneSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SceneSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SceneSource) String() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // NewSceneSourceWithURLOptions initializes a scene source for reading the scene graph from a specified file.
@@ -83,9 +84,9 @@ func NewSceneSourceWithDataOptions(data obj.Object, options obj.Object) *SceneSo
 }
 
 // SceneWithOptionsError instantiates a scene from the scene source with the specified options.
-func (x *SceneSource) SceneWithOptionsError(options obj.Object) (result *Scene, err error) {
+func (ss *SceneSource) SceneWithOptionsError(options obj.Object) (result *Scene, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sceneWithOptions:error:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("sceneWithOptions:error:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -93,39 +94,27 @@ func (x *SceneSource) SceneWithOptionsError(options obj.Object) (result *Scene, 
 }
 
 // PropertyForKey returns metadata about the scene.
-func (x *SceneSource) PropertyForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:"), purego.NSString(key))
+func (ss *SceneSource) PropertyForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("propertyForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // EntriesPassingTest loads and returns all objects in the scene source that pass the test in a given block.
-func (x *SceneSource) EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
+func (ss *SceneSource) EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("entriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Url the receiver's URL (if any).
-func (x *SceneSource) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the receiver's URL (if any).
+func (ss *SceneSource) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Data the receiver's data (if any).
-func (x *SceneSource) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the receiver's data (if any).
+func (ss *SceneSource) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// SceneSourceable is the interface implemented by [SceneSource], for mocking and DI.
-type SceneSourceable interface {
-	obj.Object
-	SceneWithOptionsError(options obj.Object) (result *Scene, err error)
-	PropertyForKey(key string) obj.Object
-	EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object
-	Url() obj.Object
-	Data() obj.Object
-}
-
-var _ SceneSourceable = (*SceneSource)(nil)

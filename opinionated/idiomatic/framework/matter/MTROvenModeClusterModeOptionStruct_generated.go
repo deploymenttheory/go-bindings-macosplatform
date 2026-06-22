@@ -44,24 +44,24 @@ func mTROvenModeClusterModeOptionStructAdopt(id objc.ID) *MTROvenModeClusterMode
 }
 
 // Description returns the object's -description text.
-func (x *MTROvenModeClusterModeOptionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (momcmos *MTROvenModeClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(momcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROvenModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (momcmos *MTROvenModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(momcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROvenModeClusterModeOptionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (momcmos *MTROvenModeClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(momcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROvenModeClusterModeOptionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (momcmos *MTROvenModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(momcmos))
 }
 
 // NewMTROvenModeClusterModeOptionStruct creates a new MTROvenModeClusterModeOptionStruct.
@@ -71,64 +71,39 @@ func NewMTROvenModeClusterModeOptionStruct() *MTROvenModeClusterModeOptionStruct
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTROvenModeClusterModeOptionStruct) WithLabel(label string) *MTROvenModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (momcmos *MTROvenModeClusterModeOptionStruct) WithLabel(label string) *MTROvenModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(momcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return momcmos
 }
 
 // WithMode sets the property and returns the receiver so calls can be chained.
-func (x *MTROvenModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTROvenModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-	return x
+func (momcmos *MTROvenModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTROvenModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(momcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	return momcmos
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterModeOptionStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (momcmos *MTROvenModeClusterModeOptionStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(momcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterModeOptionStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Mode wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterModeOptionStruct) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+func (momcmos *MTROvenModeClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(momcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterModeOptionStruct) SetMode(mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-}
-
 // ModeTags wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterModeOptionStruct) ModeTags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
+func (momcmos *MTROvenModeClusterModeOptionStruct) ModeTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(momcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
+func (momcmos *MTROvenModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(momcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }
-
-// MTROvenModeClusterModeOptionStructable is the interface implemented by [MTROvenModeClusterModeOptionStruct], for mocking and DI.
-type MTROvenModeClusterModeOptionStructable interface {
-	obj.Object
-	WithLabel(label string) *MTROvenModeClusterModeOptionStruct
-	WithMode(mode obj.Object) *MTROvenModeClusterModeOptionStruct
-	Label() string
-	SetLabel(label string)
-	Mode() obj.Object
-	SetMode(mode obj.Object)
-	ModeTags() obj.Object
-	SetModeTags(modeTags obj.Object)
-}
-
-var _ MTROvenModeClusterModeOptionStructable = (*MTROvenModeClusterModeOptionStruct)(nil)

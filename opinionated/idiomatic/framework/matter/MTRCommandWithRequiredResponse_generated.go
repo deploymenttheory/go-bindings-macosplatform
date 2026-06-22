@@ -46,24 +46,24 @@ func mTRCommandWithRequiredResponseAdopt(id objc.ID) *MTRCommandWithRequiredResp
 }
 
 // Description returns the object's -description text.
-func (x *MTRCommandWithRequiredResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcwrr *MTRCommandWithRequiredResponse) Description() string {
+	return rt.Description(objref.IDOf(mcwrr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCommandWithRequiredResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcwrr *MTRCommandWithRequiredResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcwrr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCommandWithRequiredResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcwrr *MTRCommandWithRequiredResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcwrr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCommandWithRequiredResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcwrr *MTRCommandWithRequiredResponse) String() string {
+	return rt.Description(objref.IDOf(mcwrr))
 }
 
 // NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse creates a new MTRCommandWithRequiredResponse.
@@ -73,69 +73,38 @@ func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path
 	return mTRCommandWithRequiredResponseAdopt(_id)
 }
 
-// WithPath the path of the command being invoked.
-func (x *MTRCommandWithRequiredResponse) WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path of the command being invoked.
+func (mcwrr *MTRCommandWithRequiredResponse) WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse {
+	objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return mcwrr
 }
 
-// WithCommandFields the command fields to pass for the command invoke. nil if this command does not have any fields. If not nil, this should be a data-value dictionary of MTRStructureValueType.
-func (x *MTRCommandWithRequiredResponse) WithCommandFields(commandFields obj.Object) *MTRCommandWithRequiredResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandFields:"), objref.IDOf(commandFields))
-	return x
+// WithCommandFields sets the command fields to pass for the command invoke. nil if this command does not have any fields. If not nil, this should be a data-value dictionary of MTRStructureValueType.
+func (mcwrr *MTRCommandWithRequiredResponse) WithCommandFields(commandFields obj.Object) *MTRCommandWithRequiredResponse {
+	objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("setCommandFields:"), objref.IDOf(commandFields))
+	return mcwrr
 }
 
-// WithRequiredResponse the response that represents this command succeeding.
-func (x *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse obj.Object) *MTRCommandWithRequiredResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredResponse:"), objref.IDOf(requiredResponse))
-	return x
+// WithRequiredResponse sets the response that represents this command succeeding.
+func (mcwrr *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse obj.Object) *MTRCommandWithRequiredResponse {
+	objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("setRequiredResponse:"), objref.IDOf(requiredResponse))
+	return mcwrr
 }
 
-// Path the path of the command being invoked.
-func (x *MTRCommandWithRequiredResponse) Path() *MTRCommandPath {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+// Path returns the path of the command being invoked.
+func (mcwrr *MTRCommandWithRequiredResponse) Path() *MTRCommandPath {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("path"))
 	return MTRCommandPathFromID(_r)
 }
 
-// SetPath wraps the corresponding Objective-C method.
-func (x *MTRCommandWithRequiredResponse) SetPath(path *MTRCommandPath) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-}
-
-// CommandFields the command fields to pass for the command invoke.  nil if this command does not have any fields.  If not nil, this should be a data-value dictionary of MTRStructureValueType.
-func (x *MTRCommandWithRequiredResponse) CommandFields() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandFields"))
+// CommandFields returns the command fields to pass for the command invoke.  nil if this command does not have any fields.  If not nil, this should be a data-value dictionary of MTRStructureValueType.
+func (mcwrr *MTRCommandWithRequiredResponse) CommandFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("commandFields"))
 	return obj.Wrap(_r)
 }
 
-// SetCommandFields wraps the corresponding Objective-C method.
-func (x *MTRCommandWithRequiredResponse) SetCommandFields(commandFields obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandFields:"), objref.IDOf(commandFields))
-}
-
-// RequiredResponse the response that represents this command succeeding. If this is nil, that indicates that the invoke is considered successful if it does not result in an error status response. If this is is not nil, then the invoke is considered successful if the response is a data response and for each entry in the provided requiredResponse the field whose field ID matches the key of the entry has a value that equals the value of the entry.  Values of entries are data-value dictionaries.
-func (x *MTRCommandWithRequiredResponse) RequiredResponse() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredResponse"))
+// RequiredResponse returns the response that represents this command succeeding. If this is nil, that indicates that the invoke is considered successful if it does not result in an error status response. If this is is not nil, then the invoke is considered successful if the response is a data response and for each entry in the provided requiredResponse the field whose field ID matches the key of the entry has a value that equals the value of the entry.  Values of entries are data-value dictionaries.
+func (mcwrr *MTRCommandWithRequiredResponse) RequiredResponse() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("requiredResponse"))
 	return obj.Wrap(_r)
 }
-
-// SetRequiredResponse wraps the corresponding Objective-C method.
-func (x *MTRCommandWithRequiredResponse) SetRequiredResponse(requiredResponse obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredResponse:"), objref.IDOf(requiredResponse))
-}
-
-// MTRCommandWithRequiredResponseable is the interface implemented by [MTRCommandWithRequiredResponse], for mocking and DI.
-type MTRCommandWithRequiredResponseable interface {
-	obj.Object
-	WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse
-	WithCommandFields(commandFields obj.Object) *MTRCommandWithRequiredResponse
-	WithRequiredResponse(requiredResponse obj.Object) *MTRCommandWithRequiredResponse
-	Path() *MTRCommandPath
-	SetPath(path *MTRCommandPath)
-	CommandFields() obj.Object
-	SetCommandFields(commandFields obj.Object)
-	RequiredResponse() obj.Object
-	SetRequiredResponse(requiredResponse obj.Object)
-}
-
-var _ MTRCommandWithRequiredResponseable = (*MTRCommandWithRequiredResponse)(nil)

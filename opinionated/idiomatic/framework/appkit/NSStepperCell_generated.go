@@ -52,420 +52,329 @@ func NewStepperCell() *StepperCell {
 	return stepperCellAdopt(_id)
 }
 
-// WithMinValue the minimum value for the receiver.
-func (x *StepperCell) WithMinValue(minValue float64) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
-	return x
+// WithMinValue sets the minimum value for the receiver.
+func (sc *StepperCell) WithMinValue(minValue float64) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMinValue:"), minValue)
+	return sc
 }
 
-// WithMaxValue the maximum value for the receiver.
-func (x *StepperCell) WithMaxValue(maxValue float64) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
-	return x
+// WithMaxValue sets the maximum value for the receiver.
+func (sc *StepperCell) WithMaxValue(maxValue float64) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMaxValue:"), maxValue)
+	return sc
 }
 
-// WithIncrement the amount by which the receiver will change per increment or decrement.
-func (x *StepperCell) WithIncrement(increment float64) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
-	return x
+// WithIncrement sets the amount by which the receiver will change per increment or decrement.
+func (sc *StepperCell) WithIncrement(increment float64) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIncrement:"), increment)
+	return sc
 }
 
-// WithValueWraps a Boolean value indicating whether the receiver wraps around the minimum and maximum values.
-func (x *StepperCell) WithValueWraps(valueWraps bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueWraps:"), valueWraps)
-	return x
+// WithValueWraps sets a Boolean value indicating whether the receiver wraps around the minimum and maximum values.
+func (sc *StepperCell) WithValueWraps(valueWraps bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setValueWraps:"), valueWraps)
+	return sc
 }
 
-// WithAutorepeat a Boolean value indicating how the receiver responds to mouse events.
-func (x *StepperCell) WithAutorepeat(autorepeat bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorepeat:"), autorepeat)
-	return x
+// WithAutorepeat sets a Boolean value indicating how the receiver responds to mouse events.
+func (sc *StepperCell) WithAutorepeat(autorepeat bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAutorepeat:"), autorepeat)
+	return sc
 }
 
-// WithControlView the view associated with the cell.
-func (x *StepperCell) WithControlView(controlView ViewProvider) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (sc *StepperCell) WithControlView(controlView ViewProvider) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return sc
 }
 
-// WithType the type of the cell.
-func (x *StepperCell) WithType(type_ CellType) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (sc *StepperCell) WithType(type_ CellType) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setType:"), type_)
+	return sc
 }
 
-// WithState the cell’s current state.
-func (x *StepperCell) WithState(state int) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (sc *StepperCell) WithState(state int) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setState:"), state)
+	return sc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *StepperCell) WithTarget(target obj.Object) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (sc *StepperCell) WithTarget(target obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return sc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *StepperCell) WithTag(tag int) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (sc *StepperCell) WithTag(tag int) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:"), tag)
+	return sc
 }
 
-// WithTitle the cell’s title text.
-func (x *StepperCell) WithTitle(title string) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (sc *StepperCell) WithTitle(title string) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return sc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *StepperCell) WithEnabled(enabled bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (sc *StepperCell) WithEnabled(enabled bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:"), enabled)
+	return sc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *StepperCell) WithContinuous(continuous bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (sc *StepperCell) WithContinuous(continuous bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContinuous:"), continuous)
+	return sc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *StepperCell) WithEditable(editable bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (sc *StepperCell) WithEditable(editable bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEditable:"), editable)
+	return sc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *StepperCell) WithSelectable(selectable bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (sc *StepperCell) WithSelectable(selectable bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectable:"), selectable)
+	return sc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *StepperCell) WithBordered(bordered bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (sc *StepperCell) WithBordered(bordered bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBordered:"), bordered)
+	return sc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *StepperCell) WithBezeled(bezeled bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (sc *StepperCell) WithBezeled(bezeled bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBezeled:"), bezeled)
+	return sc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *StepperCell) WithScrollable(scrollable bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (sc *StepperCell) WithScrollable(scrollable bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScrollable:"), scrollable)
+	return sc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *StepperCell) WithHighlighted(highlighted bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (sc *StepperCell) WithHighlighted(highlighted bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHighlighted:"), highlighted)
+	return sc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *StepperCell) WithAlignment(alignment TextAlignment) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (sc *StepperCell) WithAlignment(alignment TextAlignment) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:"), alignment)
+	return sc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *StepperCell) WithWraps(wraps bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (sc *StepperCell) WithWraps(wraps bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWraps:"), wraps)
+	return sc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *StepperCell) WithFont(font *Font) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (sc *StepperCell) WithFont(font *Font) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return sc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *StepperCell) WithFormatter(formatter obj.Object) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (sc *StepperCell) WithFormatter(formatter obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return sc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *StepperCell) WithObjectValue(objectValue obj.Object) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (sc *StepperCell) WithObjectValue(objectValue obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return sc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *StepperCell) WithStringValue(stringValue string) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (sc *StepperCell) WithStringValue(stringValue string) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return sc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *StepperCell) WithIntValue(intValue int) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (sc *StepperCell) WithIntValue(intValue int) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntValue:"), intValue)
+	return sc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *StepperCell) WithFloatValue(floatValue float32) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (sc *StepperCell) WithFloatValue(floatValue float32) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFloatValue:"), floatValue)
+	return sc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *StepperCell) WithDoubleValue(doubleValue float64) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (sc *StepperCell) WithDoubleValue(doubleValue float64) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return sc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *StepperCell) WithIntegerValue(integerValue int) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (sc *StepperCell) WithIntegerValue(integerValue int) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return sc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *StepperCell) WithImage(image *Image) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (sc *StepperCell) WithImage(image *Image) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return sc
 }
 
-// WithControlSize the size of the cell.
-func (x *StepperCell) WithControlSize(controlSize ControlSize) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (sc *StepperCell) WithControlSize(controlSize ControlSize) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlSize:"), controlSize)
+	return sc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *StepperCell) WithRepresentedObject(representedObject obj.Object) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (sc *StepperCell) WithRepresentedObject(representedObject obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return sc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *StepperCell) WithMenu(menu *Menu) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (sc *StepperCell) WithMenu(menu *Menu) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return sc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *StepperCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (sc *StepperCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return sc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *StepperCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (sc *StepperCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return sc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *StepperCell) WithLineBreakMode(lineBreakMode LineBreakMode) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (sc *StepperCell) WithLineBreakMode(lineBreakMode LineBreakMode) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return sc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *StepperCell) WithAllowsUndo(allowsUndo bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (sc *StepperCell) WithAllowsUndo(allowsUndo bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return sc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *StepperCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (sc *StepperCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return sc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *StepperCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (sc *StepperCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return sc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *StepperCell) WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (sc *StepperCell) WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return sc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *StepperCell) WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (sc *StepperCell) WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return sc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *StepperCell) WithShowsFirstResponder(showsFirstResponder bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (sc *StepperCell) WithShowsFirstResponder(showsFirstResponder bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return sc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *StepperCell) WithFocusRingType(focusRingType FocusRingType) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (sc *StepperCell) WithFocusRingType(focusRingType FocusRingType) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return sc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *StepperCell) WithAttributedStringValue(attributedStringValue obj.Object) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (sc *StepperCell) WithAttributedStringValue(attributedStringValue obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return sc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *StepperCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (sc *StepperCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return sc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *StepperCell) WithImportsGraphics(importsGraphics bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (sc *StepperCell) WithImportsGraphics(importsGraphics bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return sc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *StepperCell) WithAllowsMixedState(allowsMixedState bool) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (sc *StepperCell) WithAllowsMixedState(allowsMixedState bool) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return sc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *StepperCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (sc *StepperCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return sc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *StepperCell) WithControlTint(controlTint ControlTint) *StepperCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (sc *StepperCell) WithControlTint(controlTint ControlTint) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlTint:"), controlTint)
+	return sc
 }
 
 // MinValue wraps the corresponding Objective-C method.
-func (x *StepperCell) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+func (sc *StepperCell) MinValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("minValue"))
 	return _r
-}
-
-// SetMinValue wraps the corresponding Objective-C method.
-func (x *StepperCell) SetMinValue(minValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
 // MaxValue wraps the corresponding Objective-C method.
-func (x *StepperCell) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+func (sc *StepperCell) MaxValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("maxValue"))
 	return _r
-}
-
-// SetMaxValue wraps the corresponding Objective-C method.
-func (x *StepperCell) SetMaxValue(maxValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
 // Increment wraps the corresponding Objective-C method.
-func (x *StepperCell) Increment() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("increment"))
+func (sc *StepperCell) Increment() float64 {
+	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("increment"))
 	return _r
-}
-
-// SetIncrement wraps the corresponding Objective-C method.
-func (x *StepperCell) SetIncrement(increment float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
 }
 
 // ValueWraps wraps the corresponding Objective-C method.
-func (x *StepperCell) ValueWraps() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("valueWraps"))
+func (sc *StepperCell) ValueWraps() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("valueWraps"))
 	return _r
-}
-
-// SetValueWraps wraps the corresponding Objective-C method.
-func (x *StepperCell) SetValueWraps(valueWraps bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueWraps:"), valueWraps)
 }
 
 // Autorepeat wraps the corresponding Objective-C method.
-func (x *StepperCell) Autorepeat() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autorepeat"))
+func (sc *StepperCell) Autorepeat() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("autorepeat"))
 	return _r
 }
-
-// SetAutorepeat wraps the corresponding Objective-C method.
-func (x *StepperCell) SetAutorepeat(autorepeat bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorepeat:"), autorepeat)
-}
-
-// StepperCellable is the interface implemented by [StepperCell], for mocking and DI.
-type StepperCellable interface {
-	obj.Object
-	WithMinValue(minValue float64) *StepperCell
-	WithMaxValue(maxValue float64) *StepperCell
-	WithIncrement(increment float64) *StepperCell
-	WithValueWraps(valueWraps bool) *StepperCell
-	WithAutorepeat(autorepeat bool) *StepperCell
-	WithControlView(controlView ViewProvider) *StepperCell
-	WithType(type_ CellType) *StepperCell
-	WithState(state int) *StepperCell
-	WithTarget(target obj.Object) *StepperCell
-	WithTag(tag int) *StepperCell
-	WithTitle(title string) *StepperCell
-	WithEnabled(enabled bool) *StepperCell
-	WithContinuous(continuous bool) *StepperCell
-	WithEditable(editable bool) *StepperCell
-	WithSelectable(selectable bool) *StepperCell
-	WithBordered(bordered bool) *StepperCell
-	WithBezeled(bezeled bool) *StepperCell
-	WithScrollable(scrollable bool) *StepperCell
-	WithHighlighted(highlighted bool) *StepperCell
-	WithAlignment(alignment TextAlignment) *StepperCell
-	WithWraps(wraps bool) *StepperCell
-	WithFont(font *Font) *StepperCell
-	WithFormatter(formatter obj.Object) *StepperCell
-	WithObjectValue(objectValue obj.Object) *StepperCell
-	WithStringValue(stringValue string) *StepperCell
-	WithIntValue(intValue int) *StepperCell
-	WithFloatValue(floatValue float32) *StepperCell
-	WithDoubleValue(doubleValue float64) *StepperCell
-	WithIntegerValue(integerValue int) *StepperCell
-	WithImage(image *Image) *StepperCell
-	WithControlSize(controlSize ControlSize) *StepperCell
-	WithRepresentedObject(representedObject obj.Object) *StepperCell
-	WithMenu(menu *Menu) *StepperCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *StepperCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *StepperCell
-	WithAllowsUndo(allowsUndo bool) *StepperCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StepperCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell
-	WithShowsFirstResponder(showsFirstResponder bool) *StepperCell
-	WithFocusRingType(focusRingType FocusRingType) *StepperCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *StepperCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell
-	WithImportsGraphics(importsGraphics bool) *StepperCell
-	WithAllowsMixedState(allowsMixedState bool) *StepperCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *StepperCell
-	WithControlTint(controlTint ControlTint) *StepperCell
-	MinValue() float64
-	SetMinValue(minValue float64)
-	MaxValue() float64
-	SetMaxValue(maxValue float64)
-	Increment() float64
-	SetIncrement(increment float64)
-	ValueWraps() bool
-	SetValueWraps(valueWraps bool)
-	Autorepeat() bool
-	SetAutorepeat(autorepeat bool)
-}
-
-var _ StepperCellable = (*StepperCell)(nil)
 
 var _ ActionCellProvider = (*StepperCell)(nil)
 

@@ -44,24 +44,24 @@ func mTRCommissionableBrowserResultAdopt(id objc.ID) *MTRCommissionableBrowserRe
 }
 
 // Description returns the object's -description text.
-func (x *MTRCommissionableBrowserResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcbr *MTRCommissionableBrowserResult) Description() string {
+	return rt.Description(objref.IDOf(mcbr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCommissionableBrowserResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcbr *MTRCommissionableBrowserResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcbr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCommissionableBrowserResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcbr *MTRCommissionableBrowserResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcbr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCommissionableBrowserResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcbr *MTRCommissionableBrowserResult) String() string {
+	return rt.Description(objref.IDOf(mcbr))
 }
 
 // NewMTRCommissionableBrowserResult creates a new MTRCommissionableBrowserResult.
@@ -70,47 +70,35 @@ func NewMTRCommissionableBrowserResult() *MTRCommissionableBrowserResult {
 	return mTRCommissionableBrowserResultAdopt(_id)
 }
 
-// InstanceName for a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
-func (x *MTRCommissionableBrowserResult) InstanceName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceName"))
+// InstanceName returns for a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
+func (mcbr *MTRCommissionableBrowserResult) InstanceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("instanceName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// VendorID a 16-bit unsigned value identifying the device manufacturer.
-func (x *MTRCommissionableBrowserResult) VendorID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+// VendorID returns a 16-bit unsigned value identifying the device manufacturer.
+func (mcbr *MTRCommissionableBrowserResult) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// ProductID a 16-bit unsigned value identifying the product.
-func (x *MTRCommissionableBrowserResult) ProductID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+// ProductID returns a 16-bit unsigned value identifying the product.
+func (mcbr *MTRCommissionableBrowserResult) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// Discriminator a 12-bit value matching the field of the same name in MTRSetupPayload.
-func (x *MTRCommissionableBrowserResult) Discriminator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discriminator"))
+// Discriminator returns a 12-bit value matching the field of the same name in MTRSetupPayload.
+func (mcbr *MTRCommissionableBrowserResult) Discriminator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("discriminator"))
 	return obj.Wrap(_r)
 }
 
-// CommissioningMode a boolean indicating whether the device has a commissioning window open.
-func (x *MTRCommissionableBrowserResult) CommissioningMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("commissioningMode"))
+// CommissioningMode reports whether a boolean indicating whether the device has a commissioning window open.
+func (mcbr *MTRCommissionableBrowserResult) CommissioningMode() bool {
+	_r := objc.Send[bool](objref.IDOf(mcbr), objc.RegisterName("commissioningMode"))
 	return _r
 }
-
-// MTRCommissionableBrowserResultable is the interface implemented by [MTRCommissionableBrowserResult], for mocking and DI.
-type MTRCommissionableBrowserResultable interface {
-	obj.Object
-	InstanceName() string
-	VendorID() obj.Object
-	ProductID() obj.Object
-	Discriminator() obj.Object
-	CommissioningMode() bool
-}
-
-var _ MTRCommissionableBrowserResultable = (*MTRCommissionableBrowserResult)(nil)

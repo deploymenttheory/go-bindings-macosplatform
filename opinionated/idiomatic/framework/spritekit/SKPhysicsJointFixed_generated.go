@@ -7,7 +7,6 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewPhysicsJointFixed() *PhysicsJointFixed {
 	return physicsJointFixedAdopt(_id)
 }
 
-// WithBodyA the first body connected by the joint.
-func (x *PhysicsJointFixed) WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
-	return x
+// WithBodyA sets the first body connected by the joint.
+func (pjf *PhysicsJointFixed) WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed {
+	objc.Send[objc.ID](objref.IDOf(pjf), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
+	return pjf
 }
 
-// WithBodyB the second body connected by the joint.
-func (x *PhysicsJointFixed) WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
-	return x
+// WithBodyB sets the second body connected by the joint.
+func (pjf *PhysicsJointFixed) WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed {
+	objc.Send[objc.ID](objref.IDOf(pjf), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
+	return pjf
 }
-
-// PhysicsJointFixedable is the interface implemented by [PhysicsJointFixed], for mocking and DI.
-type PhysicsJointFixedable interface {
-	obj.Object
-	WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed
-	WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed
-}
-
-var _ PhysicsJointFixedable = (*PhysicsJointFixed)(nil)
 
 var _ PhysicsJointProvider = (*PhysicsJointFixed)(nil)

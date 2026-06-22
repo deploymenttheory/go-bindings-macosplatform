@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionFeatureChannelsMaxNode() *NNReductionFeatureChannelsMaxNode {
 	return nNReductionFeatureChannelsMaxNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionFeatureChannelsMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrfcmn *NNReductionFeatureChannelsMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrfcmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionFeatureChannelsMaxNode) WithLabel(label string) *NNReductionFeatureChannelsMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrfcmn *NNReductionFeatureChannelsMaxNode) WithLabel(label string) *NNReductionFeatureChannelsMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrfcmn
 }
-
-// NNReductionFeatureChannelsMaxNodeable is the interface implemented by [NNReductionFeatureChannelsMaxNode], for mocking and DI.
-type NNReductionFeatureChannelsMaxNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMaxNode
-	WithLabel(label string) *NNReductionFeatureChannelsMaxNode
-}
-
-var _ NNReductionFeatureChannelsMaxNodeable = (*NNReductionFeatureChannelsMaxNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsMaxNode)(nil)
 

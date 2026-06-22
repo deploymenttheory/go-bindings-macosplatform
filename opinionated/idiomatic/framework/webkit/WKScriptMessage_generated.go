@@ -46,24 +46,24 @@ func wKScriptMessageAdopt(id objc.ID) *WKScriptMessage {
 }
 
 // Description returns the object's -description text.
-func (x *WKScriptMessage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wsm *WKScriptMessage) Description() string {
+	return rt.Description(objref.IDOf(wsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKScriptMessage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wsm *WKScriptMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKScriptMessage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wsm *WKScriptMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKScriptMessage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wsm *WKScriptMessage) String() string {
+	return rt.Description(objref.IDOf(wsm))
 }
 
 // NewWKScriptMessage creates a new WKScriptMessage.
@@ -72,47 +72,35 @@ func NewWKScriptMessage() *WKScriptMessage {
 	return wKScriptMessageAdopt(_id)
 }
 
-// Body the body of the message. Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
-func (x *WKScriptMessage) Body() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
+// Body returns the body of the message. Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
+func (wsm *WKScriptMessage) Body() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("body"))
 	return obj.Wrap(_r)
 }
 
-// WebView the web view sending the message.
-func (x *WKScriptMessage) WebView() *WKWebView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
+// WebView returns the web view sending the message.
+func (wsm *WKScriptMessage) WebView() *WKWebView {
+	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("webView"))
 	return WKWebViewFromID(_r)
 }
 
-// FrameInfo the frame sending the message.
-func (x *WKScriptMessage) FrameInfo() *WKFrameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameInfo"))
+// FrameInfo returns the frame sending the message.
+func (wsm *WKScriptMessage) FrameInfo() *WKFrameInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("frameInfo"))
 	return WKFrameInfoFromID(_r)
 }
 
-// Name the name of the message handler to which the message is sent.
-func (x *WKScriptMessage) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of the message handler to which the message is sent.
+func (wsm *WKScriptMessage) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// World the content world from which the message was sent.
-func (x *WKScriptMessage) World() *WKContentWorld {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("world"))
+// World returns the content world from which the message was sent.
+func (wsm *WKScriptMessage) World() *WKContentWorld {
+	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("world"))
 	return WKContentWorldFromID(_r)
 }
-
-// WKScriptMessageable is the interface implemented by [WKScriptMessage], for mocking and DI.
-type WKScriptMessageable interface {
-	obj.Object
-	Body() obj.Object
-	WebView() *WKWebView
-	FrameInfo() *WKFrameInfo
-	Name() string
-	World() *WKContentWorld
-}
-
-var _ WKScriptMessageable = (*WKScriptMessage)(nil)

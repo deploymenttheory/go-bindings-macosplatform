@@ -46,24 +46,24 @@ func screenTimeConfigurationAdopt(id objc.ID) *ScreenTimeConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *ScreenTimeConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (stc *ScreenTimeConfiguration) Description() string {
+	return rt.Description(objref.IDOf(stc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScreenTimeConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (stc *ScreenTimeConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(stc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScreenTimeConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (stc *ScreenTimeConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(stc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScreenTimeConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (stc *ScreenTimeConfiguration) String() string {
+	return rt.Description(objref.IDOf(stc))
 }
 
 // NewScreenTimeConfiguration creates a new ScreenTimeConfiguration.
@@ -72,16 +72,8 @@ func NewScreenTimeConfiguration() *ScreenTimeConfiguration {
 	return screenTimeConfigurationAdopt(_id)
 }
 
-// EnforcesChildRestrictions a Boolean that indicates whether the device is currently enforcing child restrictions.
-func (x *ScreenTimeConfiguration) EnforcesChildRestrictions() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enforcesChildRestrictions"))
+// EnforcesChildRestrictions reports whether a Boolean that indicates whether the device is currently enforcing child restrictions.
+func (stc *ScreenTimeConfiguration) EnforcesChildRestrictions() bool {
+	_r := objc.Send[bool](objref.IDOf(stc), objc.RegisterName("enforcesChildRestrictions"))
 	return _r
 }
-
-// ScreenTimeConfigurationable is the interface implemented by [ScreenTimeConfiguration], for mocking and DI.
-type ScreenTimeConfigurationable interface {
-	obj.Object
-	EnforcesChildRestrictions() bool
-}
-
-var _ ScreenTimeConfigurationable = (*ScreenTimeConfiguration)(nil)

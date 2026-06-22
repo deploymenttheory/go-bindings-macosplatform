@@ -48,56 +48,41 @@ func accelerationStructureDescriptorAdopt(id objc.ID) *AccelerationStructureDesc
 }
 
 // Description returns the object's -description text.
-func (x *AccelerationStructureDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asd *AccelerationStructureDescriptor) Description() string {
+	return rt.Description(objref.IDOf(asd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationStructureDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asd *AccelerationStructureDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationStructureDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asd *AccelerationStructureDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccelerationStructureDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asd *AccelerationStructureDescriptor) String() string {
+	return rt.Description(objref.IDOf(asd))
 }
 
-// WithUsage the options that describe how you intend to use the acceleration structure.
-func (x *AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *AccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
-	return x
+// WithUsage sets the options that describe how you intend to use the acceleration structure.
+func (asd *AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *AccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asd), objc.RegisterName("setUsage:"), usage)
+	return asd
 }
 
 // Usage wraps the corresponding Objective-C method.
-func (x *AccelerationStructureDescriptor) Usage() AccelerationStructureUsage {
-	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(x), objc.RegisterName("usage"))
+func (asd *AccelerationStructureDescriptor) Usage() AccelerationStructureUsage {
+	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(asd), objc.RegisterName("usage"))
 	return _r
 }
-
-// SetUsage wraps the corresponding Objective-C method.
-func (x *AccelerationStructureDescriptor) SetUsage(usage AccelerationStructureUsage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
-}
-
-// AccelerationStructureDescriptorable is the interface implemented by [AccelerationStructureDescriptor], for mocking and DI.
-type AccelerationStructureDescriptorable interface {
-	obj.Object
-	WithUsage(usage AccelerationStructureUsage) *AccelerationStructureDescriptor
-	Usage() AccelerationStructureUsage
-	SetUsage(usage AccelerationStructureUsage)
-}
-
-var _ AccelerationStructureDescriptorable = (*AccelerationStructureDescriptor)(nil)
 
 // isAccelerationStructureDescriptor marks AccelerationStructureDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the AccelerationStructureDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AccelerationStructureDescriptor) isAccelerationStructureDescriptor() {}
+func (asd *AccelerationStructureDescriptor) isAccelerationStructureDescriptor() {}
 
 var _ AccelerationStructureDescriptorProvider = (*AccelerationStructureDescriptor)(nil)

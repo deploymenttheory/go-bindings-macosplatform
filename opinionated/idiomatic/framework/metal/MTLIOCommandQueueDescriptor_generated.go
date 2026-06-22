@@ -46,24 +46,24 @@ func iOCommandQueueDescriptorAdopt(id objc.ID) *IOCommandQueueDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *IOCommandQueueDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (icqd *IOCommandQueueDescriptor) Description() string {
+	return rt.Description(objref.IDOf(icqd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOCommandQueueDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (icqd *IOCommandQueueDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(icqd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOCommandQueueDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (icqd *IOCommandQueueDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(icqd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IOCommandQueueDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (icqd *IOCommandQueueDescriptor) String() string {
+	return rt.Description(objref.IDOf(icqd))
 }
 
 // NewIOCommandQueueDescriptor creates a new IOCommandQueueDescriptor.
@@ -72,89 +72,50 @@ func NewIOCommandQueueDescriptor() *IOCommandQueueDescriptor {
 	return iOCommandQueueDescriptorAdopt(_id)
 }
 
-// WithMaxCommandBufferCount sets the largest number of outstanding input/output command buffers a queue can have at any point in time.
-func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *IOCommandQueueDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
-	return x
+// WithMaxCommandBufferCount sets sets the largest number of outstanding input/output command buffers a queue can have at any point in time.
+func (icqd *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(icqd), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
+	return icqd
 }
 
-// WithPriority configures the priority for a new input/output command queue.
-func (x *IOCommandQueueDescriptor) WithPriority(priority IOPriority) *IOCommandQueueDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-	return x
+// WithPriority sets configures the priority for a new input/output command queue.
+func (icqd *IOCommandQueueDescriptor) WithPriority(priority IOPriority) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(icqd), objc.RegisterName("setPriority:"), priority)
+	return icqd
 }
 
-// WithType configures the queue type for a new input/output command queue.
-func (x *IOCommandQueueDescriptor) WithType(type_ IOCommandQueueType) *IOCommandQueueDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets configures the queue type for a new input/output command queue.
+func (icqd *IOCommandQueueDescriptor) WithType(type_ IOCommandQueueType) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(icqd), objc.RegisterName("setType:"), type_)
+	return icqd
 }
 
-// WithMaxCommandsInFlight sets the largest number of individual commands that an input/output command queue can run at a time.
-func (x *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight int) *IOCommandQueueDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandsInFlight:"), maxCommandsInFlight)
-	return x
+// WithMaxCommandsInFlight sets sets the largest number of individual commands that an input/output command queue can run at a time.
+func (icqd *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight int) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(icqd), objc.RegisterName("setMaxCommandsInFlight:"), maxCommandsInFlight)
+	return icqd
 }
 
-// MaxCommandBufferCount the maximum number of commandBuffers that can be in flight at a given time for the queue.
-func (x *IOCommandQueueDescriptor) MaxCommandBufferCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandBufferCount"))
+// MaxCommandBufferCount returns the maximum number of commandBuffers that can be in flight at a given time for the queue.
+func (icqd *IOCommandQueueDescriptor) MaxCommandBufferCount() int {
+	_r := objc.Send[int](objref.IDOf(icqd), objc.RegisterName("maxCommandBufferCount"))
 	return _r
 }
 
-// SetMaxCommandBufferCount wraps the corresponding Objective-C method.
-func (x *IOCommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
-}
-
-// Priority the priority of the commands executed by this queue.
-func (x *IOCommandQueueDescriptor) Priority() IOPriority {
-	_r := objc.Send[IOPriority](objref.IDOf(x), objc.RegisterName("priority"))
+// Priority returns the priority of the commands executed by this queue.
+func (icqd *IOCommandQueueDescriptor) Priority() IOPriority {
+	_r := objc.Send[IOPriority](objref.IDOf(icqd), objc.RegisterName("priority"))
 	return _r
 }
 
-// SetPriority wraps the corresponding Objective-C method.
-func (x *IOCommandQueueDescriptor) SetPriority(priority IOPriority) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-}
-
-// Type the type (serial or concurrent) of the queue.
-func (x *IOCommandQueueDescriptor) Type() IOCommandQueueType {
-	_r := objc.Send[IOCommandQueueType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type (serial or concurrent) of the queue.
+func (icqd *IOCommandQueueDescriptor) Type() IOCommandQueueType {
+	_r := objc.Send[IOCommandQueueType](objref.IDOf(icqd), objc.RegisterName("type"))
 	return _r
 }
 
-// SetType wraps the corresponding Objective-C method.
-func (x *IOCommandQueueDescriptor) SetType(type_ IOCommandQueueType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-}
-
-// MaxCommandsInFlight the maximum number of IO commands that can be in flight at a given time for the queue. A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
-func (x *IOCommandQueueDescriptor) MaxCommandsInFlight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandsInFlight"))
+// MaxCommandsInFlight returns the maximum number of IO commands that can be in flight at a given time for the queue. A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
+func (icqd *IOCommandQueueDescriptor) MaxCommandsInFlight() int {
+	_r := objc.Send[int](objref.IDOf(icqd), objc.RegisterName("maxCommandsInFlight"))
 	return _r
 }
-
-// SetMaxCommandsInFlight wraps the corresponding Objective-C method.
-func (x *IOCommandQueueDescriptor) SetMaxCommandsInFlight(maxCommandsInFlight int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandsInFlight:"), maxCommandsInFlight)
-}
-
-// IOCommandQueueDescriptorable is the interface implemented by [IOCommandQueueDescriptor], for mocking and DI.
-type IOCommandQueueDescriptorable interface {
-	obj.Object
-	WithMaxCommandBufferCount(maxCommandBufferCount int) *IOCommandQueueDescriptor
-	WithPriority(priority IOPriority) *IOCommandQueueDescriptor
-	WithType(type_ IOCommandQueueType) *IOCommandQueueDescriptor
-	WithMaxCommandsInFlight(maxCommandsInFlight int) *IOCommandQueueDescriptor
-	MaxCommandBufferCount() int
-	SetMaxCommandBufferCount(maxCommandBufferCount int)
-	Priority() IOPriority
-	SetPriority(priority IOPriority)
-	Type() IOCommandQueueType
-	SetType(type_ IOCommandQueueType)
-	MaxCommandsInFlight() int
-	SetMaxCommandsInFlight(maxCommandsInFlight int)
-}
-
-var _ IOCommandQueueDescriptorable = (*IOCommandQueueDescriptor)(nil)

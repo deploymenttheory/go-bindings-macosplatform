@@ -46,24 +46,24 @@ func particlePropertyControllerAdopt(id objc.ID) *ParticlePropertyController {
 }
 
 // Description returns the object's -description text.
-func (x *ParticlePropertyController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ppc *ParticlePropertyController) Description() string {
+	return rt.Description(objref.IDOf(ppc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ParticlePropertyController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ppc *ParticlePropertyController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ppc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ParticlePropertyController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ppc *ParticlePropertyController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ppc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ParticlePropertyController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ppc *ParticlePropertyController) String() string {
+	return rt.Description(objref.IDOf(ppc))
 }
 
 // NewParticlePropertyController creates a new ParticlePropertyController.
@@ -72,129 +72,74 @@ func NewParticlePropertyController() *ParticlePropertyController {
 	return particlePropertyControllerAdopt(_id)
 }
 
-// WithAnimation the Core Animation object defining the behavior of the property animation.
-func (x *ParticlePropertyController) WithAnimation(animation obj.Object) *ParticlePropertyController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), objref.IDOf(animation))
-	return x
+// WithAnimation sets the Core Animation object defining the behavior of the property animation.
+func (ppc *ParticlePropertyController) WithAnimation(animation obj.Object) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setAnimation:"), objref.IDOf(animation))
+	return ppc
 }
 
-// WithInputMode the mode that determines input values for the property controller’s animation.
-func (x *ParticlePropertyController) WithInputMode(inputMode ParticleInputMode) *ParticlePropertyController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMode:"), inputMode)
-	return x
+// WithInputMode sets the mode that determines input values for the property controller’s animation.
+func (ppc *ParticlePropertyController) WithInputMode(inputMode ParticleInputMode) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setInputMode:"), inputMode)
+	return ppc
 }
 
-// WithInputScale a factor for multiplying the input value of the controller’s animation.
-func (x *ParticlePropertyController) WithInputScale(inputScale float64) *ParticlePropertyController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputScale:"), inputScale)
-	return x
+// WithInputScale sets a factor for multiplying the input value of the controller’s animation.
+func (ppc *ParticlePropertyController) WithInputScale(inputScale float64) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setInputScale:"), inputScale)
+	return ppc
 }
 
-// WithInputBias an offset to add to the input value of the controller’s animation.
-func (x *ParticlePropertyController) WithInputBias(inputBias float64) *ParticlePropertyController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputBias:"), inputBias)
-	return x
+// WithInputBias sets an offset to add to the input value of the controller’s animation.
+func (ppc *ParticlePropertyController) WithInputBias(inputBias float64) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setInputBias:"), inputBias)
+	return ppc
 }
 
-// WithInputOrigin a node whose distance to each particle provides input values for the controller’s animation.
-func (x *ParticlePropertyController) WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputOrigin:"), objref.IDOf(inputOrigin))
-	return x
+// WithInputOrigin sets a node whose distance to each particle provides input values for the controller’s animation.
+func (ppc *ParticlePropertyController) WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setInputOrigin:"), objref.IDOf(inputOrigin))
+	return ppc
 }
 
-// WithInputProperty a particle property that provides input values for this property controller’s animation.
-func (x *ParticlePropertyController) WithInputProperty(inputProperty obj.Object) *ParticlePropertyController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputProperty:"), objref.IDOf(inputProperty))
-	return x
+// WithInputProperty sets a particle property that provides input values for this property controller’s animation.
+func (ppc *ParticlePropertyController) WithInputProperty(inputProperty obj.Object) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setInputProperty:"), objref.IDOf(inputProperty))
+	return ppc
 }
 
 // Animation wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) Animation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animation"))
+func (ppc *ParticlePropertyController) Animation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("animation"))
 	return obj.Wrap(_r)
-}
-
-// SetAnimation wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) SetAnimation(animation obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), objref.IDOf(animation))
 }
 
 // InputMode wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) InputMode() ParticleInputMode {
-	_r := objc.Send[ParticleInputMode](objref.IDOf(x), objc.RegisterName("inputMode"))
+func (ppc *ParticlePropertyController) InputMode() ParticleInputMode {
+	_r := objc.Send[ParticleInputMode](objref.IDOf(ppc), objc.RegisterName("inputMode"))
 	return _r
-}
-
-// SetInputMode wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) SetInputMode(inputMode ParticleInputMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMode:"), inputMode)
 }
 
 // InputScale wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) InputScale() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("inputScale"))
+func (ppc *ParticlePropertyController) InputScale() float64 {
+	_r := objc.Send[float64](objref.IDOf(ppc), objc.RegisterName("inputScale"))
 	return _r
-}
-
-// SetInputScale wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) SetInputScale(inputScale float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputScale:"), inputScale)
 }
 
 // InputBias wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) InputBias() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("inputBias"))
+func (ppc *ParticlePropertyController) InputBias() float64 {
+	_r := objc.Send[float64](objref.IDOf(ppc), objc.RegisterName("inputBias"))
 	return _r
 }
 
-// SetInputBias wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) SetInputBias(inputBias float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputBias:"), inputBias)
-}
-
 // InputOrigin wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) InputOrigin() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputOrigin"))
+func (ppc *ParticlePropertyController) InputOrigin() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("inputOrigin"))
 	return NodeFromID(_r)
 }
 
-// SetInputOrigin wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) SetInputOrigin(inputOrigin *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputOrigin:"), objref.IDOf(inputOrigin))
-}
-
 // InputProperty wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) InputProperty() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputProperty"))
+func (ppc *ParticlePropertyController) InputProperty() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("inputProperty"))
 	return obj.Wrap(_r)
 }
-
-// SetInputProperty wraps the corresponding Objective-C method.
-func (x *ParticlePropertyController) SetInputProperty(inputProperty obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputProperty:"), objref.IDOf(inputProperty))
-}
-
-// ParticlePropertyControllerable is the interface implemented by [ParticlePropertyController], for mocking and DI.
-type ParticlePropertyControllerable interface {
-	obj.Object
-	WithAnimation(animation obj.Object) *ParticlePropertyController
-	WithInputMode(inputMode ParticleInputMode) *ParticlePropertyController
-	WithInputScale(inputScale float64) *ParticlePropertyController
-	WithInputBias(inputBias float64) *ParticlePropertyController
-	WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController
-	WithInputProperty(inputProperty obj.Object) *ParticlePropertyController
-	Animation() obj.Object
-	SetAnimation(animation obj.Object)
-	InputMode() ParticleInputMode
-	SetInputMode(inputMode ParticleInputMode)
-	InputScale() float64
-	SetInputScale(inputScale float64)
-	InputBias() float64
-	SetInputBias(inputBias float64)
-	InputOrigin() *Node
-	SetInputOrigin(inputOrigin *Node)
-	InputProperty() obj.Object
-	SetInputProperty(inputProperty obj.Object)
-}
-
-var _ ParticlePropertyControllerable = (*ParticlePropertyController)(nil)

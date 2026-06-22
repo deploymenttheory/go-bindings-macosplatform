@@ -46,24 +46,24 @@ func syncedDirectoryStateAdopt(id objc.ID) *SyncedDirectoryState {
 }
 
 // Description returns the object's -description text.
-func (x *SyncedDirectoryState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sds *SyncedDirectoryState) Description() string {
+	return rt.Description(objref.IDOf(sds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncedDirectoryState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sds *SyncedDirectoryState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncedDirectoryState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sds *SyncedDirectoryState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncedDirectoryState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sds *SyncedDirectoryState) String() string {
+	return rt.Description(objref.IDOf(sds))
 }
 
 // NewSyncedDirectoryState creates a new SyncedDirectoryState.
@@ -73,31 +73,21 @@ func NewSyncedDirectoryState() *SyncedDirectoryState {
 }
 
 // State specifies the current state of the directory
-func (x *SyncedDirectoryState) State() SyncState {
-	_r := objc.Send[SyncState](objref.IDOf(x), objc.RegisterName("state"))
+func (sds *SyncedDirectoryState) State() SyncState {
+	_r := objc.Send[SyncState](objref.IDOf(sds), objc.RegisterName("state"))
 	return _r
 }
 
-// Url the URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
-func (x *SyncedDirectoryState) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
+func (sds *SyncedDirectoryState) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// ConflictedVersions the conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
+// ConflictedVersions returns the conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
 //
 // ConflictedVersions returns the collection as a Go slice.
-func (x *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conflictedVersions"))
+func (sds *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {
+	_arr := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("conflictedVersions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncedDirectoryVersion { return SyncedDirectoryVersionFromID(_id) })
 }
-
-// SyncedDirectoryStateable is the interface implemented by [SyncedDirectoryState], for mocking and DI.
-type SyncedDirectoryStateable interface {
-	obj.Object
-	State() SyncState
-	Url() obj.Object
-	ConflictedVersions() []*SyncedDirectoryVersion
-}
-
-var _ SyncedDirectoryStateable = (*SyncedDirectoryState)(nil)

@@ -46,24 +46,24 @@ func virtualConferenceRoomTypeDescriptorAdopt(id objc.ID) *VirtualConferenceRoom
 }
 
 // Description returns the object's -description text.
-func (x *VirtualConferenceRoomTypeDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcrtd *VirtualConferenceRoomTypeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vcrtd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtualConferenceRoomTypeDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcrtd *VirtualConferenceRoomTypeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcrtd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtualConferenceRoomTypeDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcrtd *VirtualConferenceRoomTypeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcrtd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtualConferenceRoomTypeDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcrtd *VirtualConferenceRoomTypeDescriptor) String() string {
+	return rt.Description(objref.IDOf(vcrtd))
 }
 
 // NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier creates an object that describes a location where a virtual conference takes place.
@@ -74,8 +74,8 @@ func NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier(title string, ide
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *VirtualConferenceRoomTypeDescriptor) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (vcrtd *VirtualConferenceRoomTypeDescriptor) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vcrtd), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,16 +83,7 @@ func (x *VirtualConferenceRoomTypeDescriptor) Title() string {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *VirtualConferenceRoomTypeDescriptor) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (vcrtd *VirtualConferenceRoomTypeDescriptor) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcrtd), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
-
-// VirtualConferenceRoomTypeDescriptorable is the interface implemented by [VirtualConferenceRoomTypeDescriptor], for mocking and DI.
-type VirtualConferenceRoomTypeDescriptorable interface {
-	obj.Object
-	Title() string
-	Identifier() obj.Object
-}
-
-var _ VirtualConferenceRoomTypeDescriptorable = (*VirtualConferenceRoomTypeDescriptor)(nil)

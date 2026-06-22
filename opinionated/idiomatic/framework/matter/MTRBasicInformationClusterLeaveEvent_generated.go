@@ -46,56 +46,41 @@ func mTRBasicInformationClusterLeaveEventAdopt(id objc.ID) *MTRBasicInformationC
 }
 
 // Description returns the object's -description text.
-func (x *MTRBasicInformationClusterLeaveEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbicle *MTRBasicInformationClusterLeaveEvent) Description() string {
+	return rt.Description(objref.IDOf(mbicle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBasicInformationClusterLeaveEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbicle *MTRBasicInformationClusterLeaveEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbicle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBasicInformationClusterLeaveEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbicle *MTRBasicInformationClusterLeaveEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbicle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBasicInformationClusterLeaveEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbicle *MTRBasicInformationClusterLeaveEvent) String() string {
+	return rt.Description(objref.IDOf(mbicle))
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicInformationClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicInformationClusterLeaveEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mbicle *MTRBasicInformationClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicInformationClusterLeaveEvent {
+	objc.Send[objc.ID](objref.IDOf(mbicle), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mbicle
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterLeaveEvent) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (mbicle *MTRBasicInformationClusterLeaveEvent) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbicle), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterLeaveEvent) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTRBasicInformationClusterLeaveEventable is the interface implemented by [MTRBasicInformationClusterLeaveEvent], for mocking and DI.
-type MTRBasicInformationClusterLeaveEventable interface {
-	obj.Object
-	WithFabricIndex(fabricIndex obj.Object) *MTRBasicInformationClusterLeaveEvent
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTRBasicInformationClusterLeaveEventable = (*MTRBasicInformationClusterLeaveEvent)(nil)
 
 // isMTRBasicInformationClusterLeaveEvent marks MTRBasicInformationClusterLeaveEvent — and, by embedding promotion, its
 // subclasses — as a member of the MTRBasicInformationClusterLeaveEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBasicInformationClusterLeaveEvent) isMTRBasicInformationClusterLeaveEvent() {}
+func (mbicle *MTRBasicInformationClusterLeaveEvent) isMTRBasicInformationClusterLeaveEvent() {}
 
 var _ MTRBasicInformationClusterLeaveEventProvider = (*MTRBasicInformationClusterLeaveEvent)(nil)

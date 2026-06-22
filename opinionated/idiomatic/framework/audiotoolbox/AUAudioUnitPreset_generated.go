@@ -46,24 +46,24 @@ func audioUnitPresetAdopt(id objc.ID) *AudioUnitPreset {
 }
 
 // Description returns the object's -description text.
-func (x *AudioUnitPreset) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aup *AudioUnitPreset) Description() string {
+	return rt.Description(objref.IDOf(aup))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitPreset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aup *AudioUnitPreset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aup), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitPreset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aup *AudioUnitPreset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aup), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioUnitPreset) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aup *AudioUnitPreset) String() string {
+	return rt.Description(objref.IDOf(aup))
 }
 
 // NewAudioUnitPreset creates a new AudioUnitPreset.
@@ -72,52 +72,29 @@ func NewAudioUnitPreset() *AudioUnitPreset {
 	return audioUnitPresetAdopt(_id)
 }
 
-// WithNumber the preset’s unique numeric identifier.
-func (x *AudioUnitPreset) WithNumber(number int) *AudioUnitPreset {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
-	return x
+// WithNumber sets the preset’s unique numeric identifier.
+func (aup *AudioUnitPreset) WithNumber(number int) *AudioUnitPreset {
+	objc.Send[objc.ID](objref.IDOf(aup), objc.RegisterName("setNumber:"), number)
+	return aup
 }
 
-// WithName the preset’s name.
-func (x *AudioUnitPreset) WithName(name string) *AudioUnitPreset {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the preset’s name.
+func (aup *AudioUnitPreset) WithName(name string) *AudioUnitPreset {
+	objc.Send[objc.ID](objref.IDOf(aup), objc.RegisterName("setName:"), purego.NSString(name))
+	return aup
 }
 
-// Number the preset's unique numeric identifier.
-func (x *AudioUnitPreset) Number() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("number"))
+// Number returns the preset's unique numeric identifier.
+func (aup *AudioUnitPreset) Number() int {
+	_r := objc.Send[int](objref.IDOf(aup), objc.RegisterName("number"))
 	return _r
 }
 
-// SetNumber wraps the corresponding Objective-C method.
-func (x *AudioUnitPreset) SetNumber(number int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
-}
-
-// Name the preset's name.
-func (x *AudioUnitPreset) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the preset's name.
+func (aup *AudioUnitPreset) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aup), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *AudioUnitPreset) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// AudioUnitPresetable is the interface implemented by [AudioUnitPreset], for mocking and DI.
-type AudioUnitPresetable interface {
-	obj.Object
-	WithNumber(number int) *AudioUnitPreset
-	WithName(name string) *AudioUnitPreset
-	Number() int
-	SetNumber(number int)
-	Name() string
-	SetName(name string)
-}
-
-var _ AudioUnitPresetable = (*AudioUnitPreset)(nil)

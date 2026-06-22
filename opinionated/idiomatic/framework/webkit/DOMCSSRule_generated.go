@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,61 +43,43 @@ func dOMCSSRuleAdopt(id objc.ID) *DOMCSSRule {
 	return x
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSRule) WithCssText(cssText string) *DOMCSSRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dr *DOMCSSRule) WithCSSText(cssText string) *DOMCSSRule {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dr
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *DOMCSSRule) Type() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("type"))
+func (dr *DOMCSSRule) Type() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(dr), objc.RegisterName("type"))
 	return _r
 }
 
-// CssText wraps the corresponding Objective-C method.
-func (x *DOMCSSRule) CssText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssText"))
+// CSSText wraps the corresponding Objective-C method.
+func (dr *DOMCSSRule) CSSText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("cssText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCssText wraps the corresponding Objective-C method.
-func (x *DOMCSSRule) SetCssText(cssText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-}
-
 // ParentStyleSheet wraps the corresponding Objective-C method.
-func (x *DOMCSSRule) ParentStyleSheet() *DOMCSSStyleSheet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentStyleSheet"))
+func (dr *DOMCSSRule) ParentStyleSheet() *DOMCSSStyleSheet {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("parentStyleSheet"))
 	return DOMCSSStyleSheetFromID(_r)
 }
 
 // ParentRule wraps the corresponding Objective-C method.
-func (x *DOMCSSRule) ParentRule() *DOMCSSRule {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentRule"))
+func (dr *DOMCSSRule) ParentRule() *DOMCSSRule {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("parentRule"))
 	return DOMCSSRuleFromID(_r)
 }
-
-// DOMCSSRuleable is the interface implemented by [DOMCSSRule], for mocking and DI.
-type DOMCSSRuleable interface {
-	obj.Object
-	WithCssText(cssText string) *DOMCSSRule
-	Type() uint16
-	CssText() string
-	SetCssText(cssText string)
-	ParentStyleSheet() *DOMCSSStyleSheet
-	ParentRule() *DOMCSSRule
-}
-
-var _ DOMCSSRuleable = (*DOMCSSRule)(nil)
 
 // isDOMCSSRule marks DOMCSSRule — and, by embedding promotion, its
 // subclasses — as a member of the DOMCSSRule hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMCSSRule) isDOMCSSRule() {}
+func (dr *DOMCSSRule) isDOMCSSRule() {}
 
 var _ DOMCSSRuleProvider = (*DOMCSSRule)(nil)
 

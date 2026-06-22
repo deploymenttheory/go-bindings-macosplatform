@@ -44,24 +44,24 @@ func mTRMessagesClusterMessageQueuedEventAdopt(id objc.ID) *MTRMessagesClusterMe
 }
 
 // Description returns the object's -description text.
-func (x *MTRMessagesClusterMessageQueuedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) Description() string {
+	return rt.Description(objref.IDOf(mmcmqe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMessagesClusterMessageQueuedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmcmqe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMessagesClusterMessageQueuedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmcmqe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMessagesClusterMessageQueuedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) String() string {
+	return rt.Description(objref.IDOf(mmcmqe))
 }
 
 // NewMTRMessagesClusterMessageQueuedEvent creates a new MTRMessagesClusterMessageQueuedEvent.
@@ -71,28 +71,13 @@ func NewMTRMessagesClusterMessageQueuedEvent() *MTRMessagesClusterMessageQueuedE
 }
 
 // WithMessageID sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterMessageQueuedEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageQueuedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
-	return x
+func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageQueuedEvent {
+	objc.Send[objc.ID](objref.IDOf(mmcmqe), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+	return mmcmqe
 }
 
 // MessageID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageQueuedEvent) MessageID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
+func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) MessageID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcmqe), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
 }
-
-// SetMessageID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageQueuedEvent) SetMessageID(messageID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
-}
-
-// MTRMessagesClusterMessageQueuedEventable is the interface implemented by [MTRMessagesClusterMessageQueuedEvent], for mocking and DI.
-type MTRMessagesClusterMessageQueuedEventable interface {
-	obj.Object
-	WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageQueuedEvent
-	MessageID() obj.Object
-	SetMessageID(messageID obj.Object)
-}
-
-var _ MTRMessagesClusterMessageQueuedEventable = (*MTRMessagesClusterMessageQueuedEvent)(nil)

@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRUnitTestingClusterTestSpecificResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestSpecificResponseParams.
@@ -48,24 +49,24 @@ func mTRUnitTestingClusterTestSpecificResponseParamsAdopt(id objc.ID) *MTRUnitTe
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mutctsrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutctsrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutctsrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) String() string {
+	return rt.Description(objref.IDOf(mutctsrp))
 }
 
 // NewMTRUnitTestingClusterTestSpecificResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterTestSpecificResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -80,56 +81,33 @@ func NewMTRUnitTestingClusterTestSpecificResponseParamsWithResponseValueError(re
 }
 
 // WithReturnValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) WithReturnValue(returnValue obj.Object) *MTRUnitTestingClusterTestSpecificResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), objref.IDOf(returnValue))
-	return x
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) WithReturnValue(returnValue obj.Object) *MTRUnitTestingClusterTestSpecificResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctsrp), objc.RegisterName("setReturnValue:"), objref.IDOf(returnValue))
+	return mutctsrp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestSpecificResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestSpecificResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctsrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mutctsrp
 }
 
 // ReturnValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) ReturnValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("returnValue"))
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) ReturnValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctsrp), objc.RegisterName("returnValue"))
 	return obj.Wrap(_r)
 }
 
-// SetReturnValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) SetReturnValue(returnValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), objref.IDOf(returnValue))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctsrp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
-
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// MTRUnitTestingClusterTestSpecificResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestSpecificResponseParams], for mocking and DI.
-type MTRUnitTestingClusterTestSpecificResponseParamsable interface {
-	obj.Object
-	WithReturnValue(returnValue obj.Object) *MTRUnitTestingClusterTestSpecificResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestSpecificResponseParams
-	ReturnValue() obj.Object
-	SetReturnValue(returnValue obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-}
-
-var _ MTRUnitTestingClusterTestSpecificResponseParamsable = (*MTRUnitTestingClusterTestSpecificResponseParams)(nil)
 
 // isMTRUnitTestingClusterTestSpecificResponseParams marks MTRUnitTestingClusterTestSpecificResponseParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterTestSpecificResponseParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterTestSpecificResponseParams) isMTRUnitTestingClusterTestSpecificResponseParams() {
+func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) isMTRUnitTestingClusterTestSpecificResponseParams() {
 }
 
 var _ MTRUnitTestingClusterTestSpecificResponseParamsProvider = (*MTRUnitTestingClusterTestSpecificResponseParams)(nil)

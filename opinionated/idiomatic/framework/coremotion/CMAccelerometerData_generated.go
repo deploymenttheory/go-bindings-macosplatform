@@ -7,7 +7,6 @@ package coremotion
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewAccelerometerData() *AccelerometerData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMAccelerometerData")), objc.RegisterName("new"))
 	return accelerometerDataAdopt(_id)
 }
-
-// AccelerometerDataable is the interface implemented by [AccelerometerData], for mocking and DI.
-type AccelerometerDataable interface {
-	obj.Object
-}
-
-var _ AccelerometerDataable = (*AccelerometerData)(nil)
 
 var _ LogItemProvider = (*AccelerometerData)(nil)

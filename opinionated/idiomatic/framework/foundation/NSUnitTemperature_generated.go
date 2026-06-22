@@ -53,18 +53,10 @@ func NewUnitTemperature() *UnitTemperature {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitTemperature) WithScriptingProperties(scriptingProperties obj.Object) *UnitTemperature {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ut *UnitTemperature) WithScriptingProperties(scriptingProperties obj.Object) *UnitTemperature {
+	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ut
 }
-
-// UnitTemperatureable is the interface implemented by [UnitTemperature], for mocking and DI.
-type UnitTemperatureable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitTemperature
-}
-
-var _ UnitTemperatureable = (*UnitTemperature)(nil)
 
 var _ DimensionProvider = (*UnitTemperature)(nil)
 

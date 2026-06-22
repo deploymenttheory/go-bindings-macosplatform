@@ -48,73 +48,61 @@ func mediaSelectionGroupAdopt(id objc.ID) *MediaSelectionGroup {
 }
 
 // Description returns the object's -description text.
-func (x *MediaSelectionGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msg *MediaSelectionGroup) Description() string {
+	return rt.Description(objref.IDOf(msg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaSelectionGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msg *MediaSelectionGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaSelectionGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msg *MediaSelectionGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaSelectionGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msg *MediaSelectionGroup) String() string {
+	return rt.Description(objref.IDOf(msg))
 }
 
 // MediaSelectionOptionWithPropertyList returns the media selection options that match the given property list.
-func (x *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist obj.Object) *MediaSelectionOption {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelectionOptionWithPropertyList:"), objref.IDOf(plist))
+func (msg *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist obj.Object) *MediaSelectionOption {
+	_r := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("mediaSelectionOptionWithPropertyList:"), objref.IDOf(plist))
 	return MediaSelectionOptionFromID(_r)
 }
 
-// Options a collection of mutually exclusive media selection options. An NSArray of AVMediaSelectionOption*.
+// Options returns a collection of mutually exclusive media selection options. An NSArray of AVMediaSelectionOption*.
 //
 // Options returns the collection as a Go slice.
-func (x *MediaSelectionGroup) Options() []*MediaSelectionOption {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+func (msg *MediaSelectionGroup) Options() []*MediaSelectionOption {
+	_arr := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("options"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
 // DefaultOption indicates the default option in the group, i.e. the option that's intended for use in the absence of a specific end-user selection or preference. Can be nil, indicating that without a specific end-user selection or preference, no option in the group is intended to be selected.
-func (x *MediaSelectionGroup) DefaultOption() *MediaSelectionOption {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultOption"))
+func (msg *MediaSelectionGroup) DefaultOption() *MediaSelectionOption {
+	_r := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("defaultOption"))
 	return MediaSelectionOptionFromID(_r)
 }
 
-// AllowsEmptySelection indicates whether it's possible to present none of the options in the group when an associated AVPlayerItem is played. If allowsEmptySelection is YES, all of the available media options in the group can be deselected by passing nil as the specified AVMediaSelectionOption to -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
-func (x *MediaSelectionGroup) AllowsEmptySelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEmptySelection"))
+// AllowsEmptySelection reports whether it's possible to present none of the options in the group when an associated AVPlayerItem is played. If allowsEmptySelection is true, all of the available media options in the group can be deselected by passing nil as the specified AVMediaSelectionOption to -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
+func (msg *MediaSelectionGroup) AllowsEmptySelection() bool {
+	_r := objc.Send[bool](objref.IDOf(msg), objc.RegisterName("allowsEmptySelection"))
 	return _r
 }
 
 // CustomMediaSelectionScheme wraps the corresponding Objective-C method.
-func (x *MediaSelectionGroup) CustomMediaSelectionScheme() *CustomMediaSelectionScheme {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customMediaSelectionScheme"))
+func (msg *MediaSelectionGroup) CustomMediaSelectionScheme() *CustomMediaSelectionScheme {
+	_r := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("customMediaSelectionScheme"))
 	return CustomMediaSelectionSchemeFromID(_r)
 }
-
-// MediaSelectionGroupable is the interface implemented by [MediaSelectionGroup], for mocking and DI.
-type MediaSelectionGroupable interface {
-	obj.Object
-	MediaSelectionOptionWithPropertyList(plist obj.Object) *MediaSelectionOption
-	Options() []*MediaSelectionOption
-	DefaultOption() *MediaSelectionOption
-	AllowsEmptySelection() bool
-	CustomMediaSelectionScheme() *CustomMediaSelectionScheme
-}
-
-var _ MediaSelectionGroupable = (*MediaSelectionGroup)(nil)
 
 // isMediaSelectionGroup marks MediaSelectionGroup — and, by embedding promotion, its
 // subclasses — as a member of the MediaSelectionGroup hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MediaSelectionGroup) isMediaSelectionGroup() {}
+func (msg *MediaSelectionGroup) isMediaSelectionGroup() {}
 
 var _ MediaSelectionGroupProvider = (*MediaSelectionGroup)(nil)

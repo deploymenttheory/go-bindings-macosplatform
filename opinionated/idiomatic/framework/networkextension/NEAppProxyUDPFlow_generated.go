@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,23 +55,23 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 	return nEAppProxyUDPFlowAdopt(_id)
 }
 
-// WithNetworkInterface the network interface, if any, used by this flow.
-func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
-	return x
+// WithNetworkInterface sets the network interface, if any, used by this flow.
+func (napuf *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow {
+	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
+	return napuf
 }
 
 // WriteDatagramsSentByEndpoints write datagrams to the flow.
 //
 // WriteDatagramsSentByEndpoints blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints []obj.Object) error {
+func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints []obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeDatagrams:sentByEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(remoteEndpoints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("writeDatagrams:sentByEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(remoteEndpoints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -79,20 +80,10 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, d
 	}
 }
 
-// LocalFlowEndpoint an `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
-func (x *NEAppProxyUDPFlow) LocalFlowEndpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localFlowEndpoint"))
+// LocalFlowEndpoint returns an `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
+func (napuf *NEAppProxyUDPFlow) LocalFlowEndpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("localFlowEndpoint"))
 	return obj.Wrap(_r)
 }
-
-// NEAppProxyUDPFlowable is the interface implemented by [NEAppProxyUDPFlow], for mocking and DI.
-type NEAppProxyUDPFlowable interface {
-	obj.Object
-	WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow
-	WriteDatagramsSentByEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints []obj.Object) error
-	LocalFlowEndpoint() obj.Object
-}
-
-var _ NEAppProxyUDPFlowable = (*NEAppProxyUDPFlow)(nil)
 
 var _ NEAppProxyFlowProvider = (*NEAppProxyUDPFlow)(nil)

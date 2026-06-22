@@ -46,24 +46,24 @@ func nibAdopt(id objc.ID) *Nib {
 }
 
 // Description returns the object's -description text.
-func (x *Nib) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Nib) Description() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Nib) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (n *Nib) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Nib) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (n *Nib) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Nib) String() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Nib) String() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // NewNibWithNibNamedBundle returns an NSNib object initialized to the nib file in the specified bundle.
@@ -88,29 +88,19 @@ func NewNibWithContentsOfURL(nibFileURL string) *Nib {
 }
 
 // InstantiateWithOwnerTopLevelObjects instantiates objects in the nib file with the specified owner.
-func (x *Nib) InstantiateWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
+func (n *Nib) InstantiateWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("instantiateWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
 	return _r
 }
 
 // InstantiateNibWithExternalNameTable unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
-func (x *Nib) InstantiateNibWithExternalNameTable(externalNameTable obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateNibWithExternalNameTable:"), objref.IDOf(externalNameTable))
+func (n *Nib) InstantiateNibWithExternalNameTable(externalNameTable obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("instantiateNibWithExternalNameTable:"), objref.IDOf(externalNameTable))
 	return _r
 }
 
 // InstantiateNibWithOwnerTopLevelObjects unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
-func (x *Nib) InstantiateNibWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateNibWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
+func (n *Nib) InstantiateNibWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("instantiateNibWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
 	return _r
 }
-
-// Nibable is the interface implemented by [Nib], for mocking and DI.
-type Nibable interface {
-	obj.Object
-	InstantiateWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool
-	InstantiateNibWithExternalNameTable(externalNameTable obj.Object) bool
-	InstantiateNibWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool
-}
-
-var _ Nibable = (*Nib)(nil)

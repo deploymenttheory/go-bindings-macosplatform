@@ -48,102 +48,75 @@ func assetReaderOutputAdopt(id objc.ID) *AssetReaderOutput {
 }
 
 // Description returns the object's -description text.
-func (x *AssetReaderOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aro *AssetReaderOutput) Description() string {
+	return rt.Description(objref.IDOf(aro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetReaderOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aro *AssetReaderOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetReaderOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aro *AssetReaderOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetReaderOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aro *AssetReaderOutput) String() string {
+	return rt.Description(objref.IDOf(aro))
 }
 
-// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
-func (x *AssetReaderOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
-	return x
+// WithAlwaysCopiesSampleData sets a Boolean value that indicates whether the output vends copied sample data.
+func (aro *AssetReaderOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderOutput {
+	objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
+	return aro
 }
 
-// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-func (x *AssetReaderOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
-	return x
+// WithSupportsRandomAccess sets a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
+func (aro *AssetReaderOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderOutput {
+	objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
+	return aro
 }
 
-// CopyNextSampleBuffer copies the next sample buffer from the output.
-func (x *AssetReaderOutput) CopyNextSampleBuffer() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyNextSampleBuffer"))
+// CopyNextSampleBuffer returns copies the next sample buffer from the output.
+func (aro *AssetReaderOutput) CopyNextSampleBuffer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("copyNextSampleBuffer"))
 	return obj.Wrap(_r)
 }
 
-// MediaType the media type of the samples that can be read from the receiver. The value of this property is one of the media type strings defined in AVMediaFormat.h.
-func (x *AssetReaderOutput) MediaType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+// MediaType returns the media type of the samples that can be read from the receiver. The value of this property is one of the media type strings defined in AVMediaFormat.h.
+func (aro *AssetReaderOutput) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
-// AlwaysCopiesSampleData indicates whether or not the data in buffers gets copied before being vended to the client. When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
-func (x *AssetReaderOutput) AlwaysCopiesSampleData() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alwaysCopiesSampleData"))
+// AlwaysCopiesSampleData reports whether the data in buffers gets copied before being vended to the client. When the value of this property is true, the AVAssetReaderOutput will always vend a buffer with copied data to the client. Data in such buffers can be freely modified by the client. When the value of this property is false, the buffers vended to the client may not be copied. Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined. Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is true. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
+func (aro *AssetReaderOutput) AlwaysCopiesSampleData() bool {
+	_r := objc.Send[bool](objref.IDOf(aro), objc.RegisterName("alwaysCopiesSampleData"))
 	return _r
-}
-
-// SetAlwaysCopiesSampleData indicates whether or not the data in buffers gets copied before being vended to the client. When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
-func (x *AssetReaderOutput) SetAlwaysCopiesSampleData(alwaysCopiesSampleData bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
 }
 
 // ResetForReadingTimeRanges restarts reading with a new set of time ranges.
-func (x *AssetReaderOutput) ResetForReadingTimeRanges(timeRanges []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetForReadingTimeRanges:"), purego.SliceToNSArray(timeRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (aro *AssetReaderOutput) ResetForReadingTimeRanges(timeRanges []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("resetForReadingTimeRanges:"), purego.SliceToNSArray(timeRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MarkConfigurationAsFinal tells the output that it’s finished reconfiguring time ranges, and allows the asset reader to advance to a completed state.
-func (x *AssetReaderOutput) MarkConfigurationAsFinal() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markConfigurationAsFinal"))
+func (aro *AssetReaderOutput) MarkConfigurationAsFinal() {
+	objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("markConfigurationAsFinal"))
 }
 
-// SupportsRandomAccess indicates whether the asset reader output supports reconfiguration of the time ranges to read. When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
-func (x *AssetReaderOutput) SupportsRandomAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsRandomAccess"))
+// SupportsRandomAccess reports whether the asset reader output supports reconfiguration of the time ranges to read. When the value of this property is true, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method. This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is false, which means that the asset reader output may not be reconfigured once reading has begun. When the value of this property is false, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
+func (aro *AssetReaderOutput) SupportsRandomAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(aro), objc.RegisterName("supportsRandomAccess"))
 	return _r
 }
-
-// SetSupportsRandomAccess indicates whether the asset reader output supports reconfiguration of the time ranges to read. When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
-func (x *AssetReaderOutput) SetSupportsRandomAccess(supportsRandomAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
-}
-
-// AssetReaderOutputable is the interface implemented by [AssetReaderOutput], for mocking and DI.
-type AssetReaderOutputable interface {
-	obj.Object
-	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderOutput
-	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderOutput
-	CopyNextSampleBuffer() obj.Object
-	MediaType() obj.Object
-	AlwaysCopiesSampleData() bool
-	SetAlwaysCopiesSampleData(alwaysCopiesSampleData bool)
-	ResetForReadingTimeRanges(timeRanges []obj.Object)
-	MarkConfigurationAsFinal()
-	SupportsRandomAccess() bool
-	SetSupportsRandomAccess(supportsRandomAccess bool)
-}
-
-var _ AssetReaderOutputable = (*AssetReaderOutput)(nil)
 
 // isAssetReaderOutput marks AssetReaderOutput — and, by embedding promotion, its
 // subclasses — as a member of the AssetReaderOutput hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AssetReaderOutput) isAssetReaderOutput() {}
+func (aro *AssetReaderOutput) isAssetReaderOutput() {}
 
 var _ AssetReaderOutputProvider = (*AssetReaderOutput)(nil)

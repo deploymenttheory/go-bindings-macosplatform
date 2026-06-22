@@ -46,24 +46,24 @@ func entityDescriptionAdopt(id objc.ID) *EntityDescription {
 }
 
 // Description returns the object's -description text.
-func (x *EntityDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ed *EntityDescription) Description() string {
+	return rt.Description(objref.IDOf(ed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EntityDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ed *EntityDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EntityDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ed *EntityDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EntityDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ed *EntityDescription) String() string {
+	return rt.Description(objref.IDOf(ed))
 }
 
 // NewEntityDescription creates a new EntityDescription.
@@ -72,339 +72,227 @@ func NewEntityDescription() *EntityDescription {
 	return entityDescriptionAdopt(_id)
 }
 
-// WithManagedObjectClassName the name of the class that represents the receiver’s entity.
-func (x *EntityDescription) WithManagedObjectClassName(managedObjectClassName string) *EntityDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectClassName:"), purego.NSString(managedObjectClassName))
-	return x
+// WithManagedObjectClassName sets the name of the class that represents the receiver’s entity.
+func (ed *EntityDescription) WithManagedObjectClassName(managedObjectClassName string) *EntityDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setManagedObjectClassName:"), purego.NSString(managedObjectClassName))
+	return ed
 }
 
-// WithName the entity name of the receiver.
-func (x *EntityDescription) WithName(name string) *EntityDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the entity name of the receiver.
+func (ed *EntityDescription) WithName(name string) *EntityDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setName:"), purego.NSString(name))
+	return ed
 }
 
-// WithAbstract a Boolean value that indicates whether the receiver represents an abstract entity.
-func (x *EntityDescription) WithAbstract(abstract bool) *EntityDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbstract:"), abstract)
-	return x
+// WithAbstract sets a Boolean value that indicates whether the receiver represents an abstract entity.
+func (ed *EntityDescription) WithAbstract(abstract bool) *EntityDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setAbstract:"), abstract)
+	return ed
 }
 
-// WithSubentities an array containing the sub-entities of the receiver.
-func (x *EntityDescription) WithSubentities(items ...*EntityDescription) *EntityDescription {
+// WithSubentities sets an array containing the sub-entities of the receiver.
+func (ed *EntityDescription) WithSubentities(items ...*EntityDescription) *EntityDescription {
 	_arr := purego.SliceToNSArray(items, func(_v *EntityDescription) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubentities:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setSubentities:"), _arr)
+	return ed
 }
 
-// WithProperties an array containing the properties of the receiver.
-func (x *EntityDescription) WithProperties(items ...PropertyDescriptionProvider) *EntityDescription {
+// WithProperties sets an array containing the properties of the receiver.
+func (ed *EntityDescription) WithProperties(items ...PropertyDescriptionProvider) *EntityDescription {
 	_arr := purego.SliceToNSArray(items, func(_v PropertyDescriptionProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setProperties:"), _arr)
+	return ed
 }
 
-// WithUserInfo the user info dictionary of the receiver.
-func (x *EntityDescription) WithUserInfo(userInfo obj.Object) *EntityDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info dictionary of the receiver.
+func (ed *EntityDescription) WithUserInfo(userInfo obj.Object) *EntityDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return ed
 }
 
-// WithVersionHashModifier the version hash modifier for the receiver.
-func (x *EntityDescription) WithVersionHashModifier(versionHashModifier string) *EntityDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
-	return x
+// WithVersionHashModifier sets the version hash modifier for the receiver.
+func (ed *EntityDescription) WithVersionHashModifier(versionHashModifier string) *EntityDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
+	return ed
 }
 
-// WithRenamingIdentifier the renaming identifier for the receiver.
-func (x *EntityDescription) WithRenamingIdentifier(renamingIdentifier string) *EntityDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
-	return x
+// WithRenamingIdentifier sets the renaming identifier for the receiver.
+func (ed *EntityDescription) WithRenamingIdentifier(renamingIdentifier string) *EntityDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
+	return ed
 }
 
-// WithIndexes an array of fetch index descriptions for the entity.
-func (x *EntityDescription) WithIndexes(items ...*FetchIndexDescription) *EntityDescription {
+// WithIndexes sets an array of fetch index descriptions for the entity.
+func (ed *EntityDescription) WithIndexes(items ...*FetchIndexDescription) *EntityDescription {
 	_arr := purego.SliceToNSArray(items, func(_v *FetchIndexDescription) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setIndexes:"), _arr)
+	return ed
 }
 
-// WithUniquenessConstraints an array of arrays that contains one or more attributes with a value that must be unique over the instances of that entity.
-func (x *EntityDescription) WithUniquenessConstraints(items ...obj.Object) *EntityDescription {
+// WithUniquenessConstraints sets an array of arrays that contains one or more attributes with a value that must be unique over the instances of that entity.
+func (ed *EntityDescription) WithUniquenessConstraints(items ...obj.Object) *EntityDescription {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniquenessConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setUniquenessConstraints:"), _arr)
+	return ed
 }
 
-// WithCompoundIndexes the compound indexes for the entity as an array of arrays.
-func (x *EntityDescription) WithCompoundIndexes(items ...obj.Object) *EntityDescription {
+// WithCompoundIndexes sets the compound indexes for the entity as an array of arrays.
+func (ed *EntityDescription) WithCompoundIndexes(items ...obj.Object) *EntityDescription {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompoundIndexes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setCompoundIndexes:"), _arr)
+	return ed
 }
 
-// WithCoreSpotlightDisplayNameExpression the expression that computes the CoreSpotlight display name for instances of the entity.
-func (x *EntityDescription) WithCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression obj.Object) *EntityDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoreSpotlightDisplayNameExpression:"), objref.IDOf(coreSpotlightDisplayNameExpression))
-	return x
+// WithCoreSpotlightDisplayNameExpression sets the expression that computes the CoreSpotlight display name for instances of the entity.
+func (ed *EntityDescription) WithCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression obj.Object) *EntityDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setCoreSpotlightDisplayNameExpression:"), objref.IDOf(coreSpotlightDisplayNameExpression))
+	return ed
 }
 
 // RelationshipsWithDestinationEntity returns an array containing the relationships of the receiver where the entity description of the relationship is a given entity.
-func (x *EntityDescription) RelationshipsWithDestinationEntity(entity *EntityDescription) []*RelationshipDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relationshipsWithDestinationEntity:"), objref.IDOf(entity))
+func (ed *EntityDescription) RelationshipsWithDestinationEntity(entity *EntityDescription) []*RelationshipDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("relationshipsWithDestinationEntity:"), objref.IDOf(entity))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *RelationshipDescription { return RelationshipDescriptionFromID(_id) })
 }
 
 // IsKindOfEntity returns a Boolean value that indicates whether the receiver is a sub-entity of another given entity.
-func (x *EntityDescription) IsKindOfEntity(entity *EntityDescription) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isKindOfEntity:"), objref.IDOf(entity))
+func (ed *EntityDescription) IsKindOfEntity(entity *EntityDescription) bool {
+	_r := objc.Send[bool](objref.IDOf(ed), objc.RegisterName("isKindOfEntity:"), objref.IDOf(entity))
 	return _r
 }
 
 // ManagedObjectModel wraps the corresponding Objective-C method.
-func (x *EntityDescription) ManagedObjectModel() *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectModel"))
+func (ed *EntityDescription) ManagedObjectModel() *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // ManagedObjectClassName wraps the corresponding Objective-C method.
-func (x *EntityDescription) ManagedObjectClassName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectClassName"))
+func (ed *EntityDescription) ManagedObjectClassName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("managedObjectClassName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetManagedObjectClassName wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetManagedObjectClassName(managedObjectClassName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectClassName:"), purego.NSString(managedObjectClassName))
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *EntityDescription) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (ed *EntityDescription) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // IsAbstract wraps the corresponding Objective-C method.
-func (x *EntityDescription) IsAbstract() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbstract"))
+func (ed *EntityDescription) IsAbstract() bool {
+	_r := objc.Send[bool](objref.IDOf(ed), objc.RegisterName("isAbstract"))
 	return _r
 }
 
-// SetAbstract wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetAbstract(abstract bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbstract:"), abstract)
-}
-
 // SubentitiesByName wraps the corresponding Objective-C method.
-func (x *EntityDescription) SubentitiesByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subentitiesByName"))
+func (ed *EntityDescription) SubentitiesByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("subentitiesByName"))
 	return obj.Wrap(_r)
 }
 
 // Subentities wraps the corresponding Objective-C method.
 //
 // Subentities returns the collection as a Go slice.
-func (x *EntityDescription) Subentities() []*EntityDescription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subentities"))
+func (ed *EntityDescription) Subentities() []*EntityDescription {
+	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("subentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
-// SetSubentities wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetSubentities(subentities []*EntityDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubentities:"), purego.SliceToNSArray(subentities, func(_v *EntityDescription) objc.ID { return objref.IDOf(_v) }))
-}
-
 // Superentity wraps the corresponding Objective-C method.
-func (x *EntityDescription) Superentity() *EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superentity"))
+func (ed *EntityDescription) Superentity() *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("superentity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // PropertiesByName wraps the corresponding Objective-C method.
-func (x *EntityDescription) PropertiesByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesByName"))
+func (ed *EntityDescription) PropertiesByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("propertiesByName"))
 	return obj.Wrap(_r)
 }
 
 // Properties wraps the corresponding Objective-C method.
 //
 // Properties returns the collection as a Go slice.
-func (x *EntityDescription) Properties() []*PropertyDescription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+func (ed *EntityDescription) Properties() []*PropertyDescription {
+	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("properties"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyDescription { return PropertyDescriptionFromID(_id) })
 }
 
-// SetProperties wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetProperties(properties []*PropertyDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), purego.SliceToNSArray(properties, func(_v *PropertyDescription) objc.ID { return objref.IDOf(_v) }))
-}
-
 // UserInfo wraps the corresponding Objective-C method.
-func (x *EntityDescription) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (ed *EntityDescription) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// SetUserInfo wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetUserInfo(userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-}
-
 // AttributesByName wraps the corresponding Objective-C method.
-func (x *EntityDescription) AttributesByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributesByName"))
+func (ed *EntityDescription) AttributesByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("attributesByName"))
 	return obj.Wrap(_r)
 }
 
 // RelationshipsByName wraps the corresponding Objective-C method.
-func (x *EntityDescription) RelationshipsByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relationshipsByName"))
+func (ed *EntityDescription) RelationshipsByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("relationshipsByName"))
 	return obj.Wrap(_r)
 }
 
 // VersionHash wraps the corresponding Objective-C method.
-func (x *EntityDescription) VersionHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionHash"))
+func (ed *EntityDescription) VersionHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("versionHash"))
 	return obj.Wrap(_r)
 }
 
 // VersionHashModifier wraps the corresponding Objective-C method.
-func (x *EntityDescription) VersionHashModifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionHashModifier"))
+func (ed *EntityDescription) VersionHashModifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("versionHashModifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetVersionHashModifier wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetVersionHashModifier(versionHashModifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
 }
 
 // RenamingIdentifier wraps the corresponding Objective-C method.
-func (x *EntityDescription) RenamingIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renamingIdentifier"))
+func (ed *EntityDescription) RenamingIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("renamingIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetRenamingIdentifier wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetRenamingIdentifier(renamingIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
 }
 
 // Indexes wraps the corresponding Objective-C method.
 //
 // Indexes returns the collection as a Go slice.
-func (x *EntityDescription) Indexes() []*FetchIndexDescription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexes"))
+func (ed *EntityDescription) Indexes() []*FetchIndexDescription {
+	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("indexes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FetchIndexDescription { return FetchIndexDescriptionFromID(_id) })
-}
-
-// SetIndexes wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetIndexes(indexes []*FetchIndexDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexes:"), purego.SliceToNSArray(indexes, func(_v *FetchIndexDescription) objc.ID { return objref.IDOf(_v) }))
 }
 
 // UniquenessConstraints wraps the corresponding Objective-C method.
 //
 // UniquenessConstraints returns the collection as a Go slice.
-func (x *EntityDescription) UniquenessConstraints() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniquenessConstraints"))
+func (ed *EntityDescription) UniquenessConstraints() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("uniquenessConstraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetUniquenessConstraints wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetUniquenessConstraints(uniquenessConstraints []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniquenessConstraints:"), purego.SliceToNSArray(uniquenessConstraints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CompoundIndexes wraps the corresponding Objective-C method.
 //
 // CompoundIndexes returns the collection as a Go slice.
-func (x *EntityDescription) CompoundIndexes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compoundIndexes"))
+func (ed *EntityDescription) CompoundIndexes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("compoundIndexes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetCompoundIndexes wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetCompoundIndexes(compoundIndexes []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompoundIndexes:"), purego.SliceToNSArray(compoundIndexes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // CoreSpotlightDisplayNameExpression wraps the corresponding Objective-C method.
-func (x *EntityDescription) CoreSpotlightDisplayNameExpression() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coreSpotlightDisplayNameExpression"))
+func (ed *EntityDescription) CoreSpotlightDisplayNameExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("coreSpotlightDisplayNameExpression"))
 	return obj.Wrap(_r)
 }
-
-// SetCoreSpotlightDisplayNameExpression wraps the corresponding Objective-C method.
-func (x *EntityDescription) SetCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoreSpotlightDisplayNameExpression:"), objref.IDOf(coreSpotlightDisplayNameExpression))
-}
-
-// EntityDescriptionable is the interface implemented by [EntityDescription], for mocking and DI.
-type EntityDescriptionable interface {
-	obj.Object
-	WithManagedObjectClassName(managedObjectClassName string) *EntityDescription
-	WithName(name string) *EntityDescription
-	WithAbstract(abstract bool) *EntityDescription
-	WithSubentities(items ...*EntityDescription) *EntityDescription
-	WithProperties(items ...PropertyDescriptionProvider) *EntityDescription
-	WithUserInfo(userInfo obj.Object) *EntityDescription
-	WithVersionHashModifier(versionHashModifier string) *EntityDescription
-	WithRenamingIdentifier(renamingIdentifier string) *EntityDescription
-	WithIndexes(items ...*FetchIndexDescription) *EntityDescription
-	WithUniquenessConstraints(items ...obj.Object) *EntityDescription
-	WithCompoundIndexes(items ...obj.Object) *EntityDescription
-	WithCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression obj.Object) *EntityDescription
-	RelationshipsWithDestinationEntity(entity *EntityDescription) []*RelationshipDescription
-	IsKindOfEntity(entity *EntityDescription) bool
-	ManagedObjectModel() *ManagedObjectModel
-	ManagedObjectClassName() string
-	SetManagedObjectClassName(managedObjectClassName string)
-	Name() string
-	SetName(name string)
-	IsAbstract() bool
-	SetAbstract(abstract bool)
-	SubentitiesByName() obj.Object
-	Subentities() []*EntityDescription
-	SetSubentities(subentities []*EntityDescription)
-	Superentity() *EntityDescription
-	PropertiesByName() obj.Object
-	Properties() []*PropertyDescription
-	SetProperties(properties []*PropertyDescription)
-	UserInfo() obj.Object
-	SetUserInfo(userInfo obj.Object)
-	AttributesByName() obj.Object
-	RelationshipsByName() obj.Object
-	VersionHash() obj.Object
-	VersionHashModifier() string
-	SetVersionHashModifier(versionHashModifier string)
-	RenamingIdentifier() string
-	SetRenamingIdentifier(renamingIdentifier string)
-	Indexes() []*FetchIndexDescription
-	SetIndexes(indexes []*FetchIndexDescription)
-	UniquenessConstraints() []obj.Object
-	SetUniquenessConstraints(uniquenessConstraints []obj.Object)
-	CompoundIndexes() []obj.Object
-	SetCompoundIndexes(compoundIndexes []obj.Object)
-	CoreSpotlightDisplayNameExpression() obj.Object
-	SetCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression obj.Object)
-}
-
-var _ EntityDescriptionable = (*EntityDescription)(nil)

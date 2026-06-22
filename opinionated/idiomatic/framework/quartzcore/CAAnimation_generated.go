@@ -48,83 +48,59 @@ func animationAdopt(id objc.ID) *Animation {
 }
 
 // Description returns the object's -description text.
-func (x *Animation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Animation) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Animation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Animation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Animation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Animation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Animation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Animation) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
-// WithTimingFunction an optional timing function defining the pacing of the animation.
-func (x *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
-	return x
+// WithTimingFunction sets an optional timing function defining the pacing of the animation.
+func (a *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return a
 }
 
-// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
-func (x *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-	return x
+// WithRemovedOnCompletion sets determines if the animation is removed from the target layer’s animations upon completion.
+func (a *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return a
 }
 
 // ShouldArchiveValueForKey specifies whether the value of the property for a given key is archived.
-func (x *Animation) ShouldArchiveValueForKey(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
+func (a *Animation) ShouldArchiveValueForKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
 	return _r
 }
 
 // TimingFunction wraps the corresponding Objective-C method.
-func (x *Animation) TimingFunction() *MediaTimingFunction {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timingFunction"))
+func (a *Animation) TimingFunction() *MediaTimingFunction {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("timingFunction"))
 	return MediaTimingFunctionFromID(_r)
 }
 
-// SetTimingFunction wraps the corresponding Objective-C method.
-func (x *Animation) SetTimingFunction(timingFunction *MediaTimingFunction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
-}
-
 // IsRemovedOnCompletion wraps the corresponding Objective-C method.
-func (x *Animation) IsRemovedOnCompletion() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemovedOnCompletion"))
+func (a *Animation) IsRemovedOnCompletion() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRemovedOnCompletion"))
 	return _r
 }
-
-// SetRemovedOnCompletion wraps the corresponding Objective-C method.
-func (x *Animation) SetRemovedOnCompletion(removedOnCompletion bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-}
-
-// Animationable is the interface implemented by [Animation], for mocking and DI.
-type Animationable interface {
-	obj.Object
-	WithTimingFunction(timingFunction *MediaTimingFunction) *Animation
-	WithRemovedOnCompletion(removedOnCompletion bool) *Animation
-	ShouldArchiveValueForKey(key string) bool
-	TimingFunction() *MediaTimingFunction
-	SetTimingFunction(timingFunction *MediaTimingFunction)
-	IsRemovedOnCompletion() bool
-	SetRemovedOnCompletion(removedOnCompletion bool)
-}
-
-var _ Animationable = (*Animation)(nil)
 
 // isAnimation marks Animation — and, by embedding promotion, its
 // subclasses — as a member of the Animation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Animation) isAnimation() {}
+func (a *Animation) isAnimation() {}
 
 var _ AnimationProvider = (*Animation)(nil)

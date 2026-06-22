@@ -44,24 +44,24 @@ func mTRDeviceAttestationInfoAdopt(id objc.ID) *MTRDeviceAttestationInfo {
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceAttestationInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdai *MTRDeviceAttestationInfo) Description() string {
+	return rt.Description(objref.IDOf(mdai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceAttestationInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdai *MTRDeviceAttestationInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceAttestationInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdai *MTRDeviceAttestationInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceAttestationInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdai *MTRDeviceAttestationInfo) String() string {
+	return rt.Description(objref.IDOf(mdai))
 }
 
 // NewMTRDeviceAttestationInfoWithDeviceAttestationChallengeNonceElementsTLVElementsSignatureDeviceAttestationCertificateProductAttestationIntermediateCertificateCertificationDeclarationFirmwareInfo creates a new MTRDeviceAttestationInfo.
@@ -71,65 +71,50 @@ func NewMTRDeviceAttestationInfoWithDeviceAttestationChallengeNonceElementsTLVEl
 	return mTRDeviceAttestationInfoAdopt(_id)
 }
 
-// Challenge the attestation challenge from the secure session.
-func (x *MTRDeviceAttestationInfo) Challenge() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("challenge"))
+// Challenge returns the attestation challenge from the secure session.
+func (mdai *MTRDeviceAttestationInfo) Challenge() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("challenge"))
 	return obj.Wrap(_r)
 }
 
-// Nonce the attestation nonce from the AttestationRequest command.
-func (x *MTRDeviceAttestationInfo) Nonce() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
+// Nonce returns the attestation nonce from the AttestationRequest command.
+func (mdai *MTRDeviceAttestationInfo) Nonce() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
-// ElementsTLV the TLV-encoded attestation_elements_message that was used to find the certificationDeclaration and firmwareInfo.
-func (x *MTRDeviceAttestationInfo) ElementsTLV() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsTLV"))
+// ElementsTLV returns the TLV-encoded attestation_elements_message that was used to find the certificationDeclaration and firmwareInfo.
+func (mdai *MTRDeviceAttestationInfo) ElementsTLV() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("elementsTLV"))
 	return obj.Wrap(_r)
 }
 
-// ElementsSignature a signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and the attestation challenge from the secure session.
-func (x *MTRDeviceAttestationInfo) ElementsSignature() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsSignature"))
+// ElementsSignature returns a signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and the attestation challenge from the secure session.
+func (mdai *MTRDeviceAttestationInfo) ElementsSignature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("elementsSignature"))
 	return obj.Wrap(_r)
 }
 
-// DeviceAttestationCertificate the device attestation certificate for the device.  This can be used to verify signatures created with the device attestation private key.
-func (x *MTRDeviceAttestationInfo) DeviceAttestationCertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAttestationCertificate"))
+// DeviceAttestationCertificate returns the device attestation certificate for the device.  This can be used to verify signatures created with the device attestation private key.
+func (mdai *MTRDeviceAttestationInfo) DeviceAttestationCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("deviceAttestationCertificate"))
 	return obj.Wrap(_r)
 }
 
-// ProductAttestationIntermediateCertificate the product attestation intermediate certificate that can be used to verify the authenticity of the device attestation certificate.
-func (x *MTRDeviceAttestationInfo) ProductAttestationIntermediateCertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productAttestationIntermediateCertificate"))
+// ProductAttestationIntermediateCertificate returns the product attestation intermediate certificate that can be used to verify the authenticity of the device attestation certificate.
+func (mdai *MTRDeviceAttestationInfo) ProductAttestationIntermediateCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("productAttestationIntermediateCertificate"))
 	return obj.Wrap(_r)
 }
 
-// CertificationDeclaration the certification declaration of the device.  This is a DER-encoded string representing a CMS-formatted certification declaration.
-func (x *MTRDeviceAttestationInfo) CertificationDeclaration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificationDeclaration"))
+// CertificationDeclaration returns the certification declaration of the device.  This is a DER-encoded string representing a CMS-formatted certification declaration.
+func (mdai *MTRDeviceAttestationInfo) CertificationDeclaration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("certificationDeclaration"))
 	return obj.Wrap(_r)
 }
 
 // FirmwareInfo wraps the corresponding Objective-C method.
-func (x *MTRDeviceAttestationInfo) FirmwareInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firmwareInfo"))
+func (mdai *MTRDeviceAttestationInfo) FirmwareInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("firmwareInfo"))
 	return obj.Wrap(_r)
 }
-
-// MTRDeviceAttestationInfoable is the interface implemented by [MTRDeviceAttestationInfo], for mocking and DI.
-type MTRDeviceAttestationInfoable interface {
-	obj.Object
-	Challenge() obj.Object
-	Nonce() obj.Object
-	ElementsTLV() obj.Object
-	ElementsSignature() obj.Object
-	DeviceAttestationCertificate() obj.Object
-	ProductAttestationIntermediateCertificate() obj.Object
-	CertificationDeclaration() obj.Object
-	FirmwareInfo() obj.Object
-}
-
-var _ MTRDeviceAttestationInfoable = (*MTRDeviceAttestationInfo)(nil)

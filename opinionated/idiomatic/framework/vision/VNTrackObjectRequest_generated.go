@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,61 +53,47 @@ func NewTrackObjectRequestWithDetectedObjectObservation(observation *DetectedObj
 	return trackObjectRequestAdopt(_id)
 }
 
-// WithInputObservation the observation object defining a region to track.
-func (x *TrackObjectRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
-	return x
+// WithInputObservation sets the observation object defining a region to track.
+func (tor *TrackObjectRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
+	return tor
 }
 
-// WithTrackingLevel a value for specifying whether to prioritize speed or location accuracy.
-func (x *TrackObjectRequest) WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingLevel:"), trackingLevel)
-	return x
+// WithTrackingLevel sets a value for specifying whether to prioritize speed or location accuracy.
+func (tor *TrackObjectRequest) WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setTrackingLevel:"), trackingLevel)
+	return tor
 }
 
-// WithLastFrame a Boolean that indicates the last frame in a tracking sequence.
-func (x *TrackObjectRequest) WithLastFrame(lastFrame bool) *TrackObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastFrame:"), lastFrame)
-	return x
+// WithLastFrame sets a Boolean that indicates the last frame in a tracking sequence.
+func (tor *TrackObjectRequest) WithLastFrame(lastFrame bool) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setLastFrame:"), lastFrame)
+	return tor
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *TrackObjectRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (tor *TrackObjectRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return tor
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *TrackObjectRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (tor *TrackObjectRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return tor
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *TrackObjectRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (tor *TrackObjectRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return tor
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *TrackObjectRequest) WithRevision(revision int) *TrackObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (tor *TrackObjectRequest) WithRevision(revision int) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setRevision:"), revision)
+	return tor
 }
-
-// TrackObjectRequestable is the interface implemented by [TrackObjectRequest], for mocking and DI.
-type TrackObjectRequestable interface {
-	obj.Object
-	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest
-	WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackObjectRequest
-	WithLastFrame(lastFrame bool) *TrackObjectRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest
-	WithRevision(revision int) *TrackObjectRequest
-}
-
-var _ TrackObjectRequestable = (*TrackObjectRequest)(nil)
 
 var _ TrackingRequestProvider = (*TrackObjectRequest)(nil)
 

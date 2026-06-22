@@ -7,7 +7,6 @@ package authenticationservices
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewAuthorizationPasswordRequest() *AuthorizationPasswordRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPasswordRequest")), objc.RegisterName("new"))
 	return authorizationPasswordRequestAdopt(_id)
 }
-
-// AuthorizationPasswordRequestable is the interface implemented by [AuthorizationPasswordRequest], for mocking and DI.
-type AuthorizationPasswordRequestable interface {
-	obj.Object
-}
-
-var _ AuthorizationPasswordRequestable = (*AuthorizationPasswordRequest)(nil)
 
 var _ AuthorizationRequestProvider = (*AuthorizationPasswordRequest)(nil)

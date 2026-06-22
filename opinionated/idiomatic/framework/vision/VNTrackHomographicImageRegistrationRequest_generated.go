@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewTrackHomographicImageRegistrationRequest() *TrackHomographicImageRegistr
 	return trackHomographicImageRegistrationRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *TrackHomographicImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackHomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (thirr *TrackHomographicImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackHomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(thirr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return thirr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *TrackHomographicImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackHomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (thirr *TrackHomographicImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackHomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(thirr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return thirr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *TrackHomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackHomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (thirr *TrackHomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackHomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(thirr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return thirr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *TrackHomographicImageRegistrationRequest) WithRevision(revision int) *TrackHomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (thirr *TrackHomographicImageRegistrationRequest) WithRevision(revision int) *TrackHomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(thirr), objc.RegisterName("setRevision:"), revision)
+	return thirr
 }
-
-// TrackHomographicImageRegistrationRequestable is the interface implemented by [TrackHomographicImageRegistrationRequest], for mocking and DI.
-type TrackHomographicImageRegistrationRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackHomographicImageRegistrationRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackHomographicImageRegistrationRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *TrackHomographicImageRegistrationRequest
-	WithRevision(revision int) *TrackHomographicImageRegistrationRequest
-}
-
-var _ TrackHomographicImageRegistrationRequestable = (*TrackHomographicImageRegistrationRequest)(nil)
 
 var _ StatefulRequestProvider = (*TrackHomographicImageRegistrationRequest)(nil)
 

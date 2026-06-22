@@ -46,416 +46,298 @@ func arrayControllerAdopt(id objc.ID) *ArrayController {
 	return x
 }
 
-// WithAutomaticallyRearrangesObjects a Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
-func (x *ArrayController) WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyRearrangesObjects:"), automaticallyRearrangesObjects)
-	return x
+// WithAutomaticallyRearrangesObjects sets a Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
+func (ac *ArrayController) WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAutomaticallyRearrangesObjects:"), automaticallyRearrangesObjects)
+	return ac
 }
 
-// WithSortDescriptors an array of sort descriptor objects, used by the receiver to arrange its content.
-func (x *ArrayController) WithSortDescriptors(items ...obj.Object) *ArrayController {
+// WithSortDescriptors sets an array of sort descriptor objects, used by the receiver to arrange its content.
+func (ac *ArrayController) WithSortDescriptors(items ...obj.Object) *ArrayController {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setSortDescriptors:"), _arr)
+	return ac
 }
 
-// WithFilterPredicate a predicate used by the receiver to filter the array controller contents
-func (x *ArrayController) WithFilterPredicate(filterPredicate obj.Object) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
-	return x
+// WithFilterPredicate sets a predicate used by the receiver to filter the array controller contents
+func (ac *ArrayController) WithFilterPredicate(filterPredicate obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
+	return ac
 }
 
-// WithClearsFilterPredicateOnInsertion a Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
-func (x *ArrayController) WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearsFilterPredicateOnInsertion:"), clearsFilterPredicateOnInsertion)
-	return x
+// WithClearsFilterPredicateOnInsertion sets a Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
+func (ac *ArrayController) WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setClearsFilterPredicateOnInsertion:"), clearsFilterPredicateOnInsertion)
+	return ac
 }
 
-// WithAvoidsEmptySelection a Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
-func (x *ArrayController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
-	return x
+// WithAvoidsEmptySelection sets a Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
+func (ac *ArrayController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
+	return ac
 }
 
-// WithPreservesSelection a Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
-func (x *ArrayController) WithPreservesSelection(preservesSelection bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesSelection:"), preservesSelection)
-	return x
+// WithPreservesSelection sets a Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
+func (ac *ArrayController) WithPreservesSelection(preservesSelection bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setPreservesSelection:"), preservesSelection)
+	return ac
 }
 
-// WithSelectsInsertedObjects a Boolean value that indicates whether the receiver automatically selects inserted objects
-func (x *ArrayController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
-	return x
+// WithSelectsInsertedObjects sets a Boolean value that indicates whether the receiver automatically selects inserted objects
+func (ac *ArrayController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
+	return ac
 }
 
-// WithAlwaysUsesMultipleValuesMarker a Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
-func (x *ArrayController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
-	return x
+// WithAlwaysUsesMultipleValuesMarker sets a Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
+func (ac *ArrayController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
+	return ac
 }
 
-// WithSelectionIndexes an index set containing the indexes of the receiver’s currently selected objects in the content array
-func (x *ArrayController) WithSelectionIndexes(selectionIndexes obj.Object) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(selectionIndexes))
-	return x
+// WithSelectionIndexes sets an index set containing the indexes of the receiver’s currently selected objects in the content array
+func (ac *ArrayController) WithSelectionIndexes(selectionIndexes obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(selectionIndexes))
+	return ac
 }
 
-// WithSelectionIndex the index of the first object in the receiver’s selection
-func (x *ArrayController) WithSelectionIndex(selectionIndex int) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndex:"), selectionIndex)
-	return x
+// WithSelectionIndex sets the index of the first object in the receiver’s selection
+func (ac *ArrayController) WithSelectionIndex(selectionIndex int) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setSelectionIndex:"), selectionIndex)
+	return ac
 }
 
-// WithContent the receiver’s content object.
-func (x *ArrayController) WithContent(content obj.Object) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
-	return x
+// WithContent sets the receiver’s content object.
+func (ac *ArrayController) WithContent(content obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setContent:"), objref.IDOf(content))
+	return ac
 }
 
-// WithAutomaticallyPreparesContent a Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
-func (x *ArrayController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreparesContent:"), automaticallyPreparesContent)
-	return x
+// WithAutomaticallyPreparesContent sets a Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
+func (ac *ArrayController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAutomaticallyPreparesContent:"), automaticallyPreparesContent)
+	return ac
 }
 
-// WithEditable a Boolean that indicates whether the receiver allows adding and removing objects.
-func (x *ArrayController) WithEditable(editable bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean that indicates whether the receiver allows adding and removing objects.
+func (ac *ArrayController) WithEditable(editable bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setEditable:"), editable)
+	return ac
 }
 
-// WithManagedObjectContext the receiver’s managed object context.
-func (x *ArrayController) WithManagedObjectContext(managedObjectContext obj.Object) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
-	return x
+// WithManagedObjectContext sets the receiver’s managed object context.
+func (ac *ArrayController) WithManagedObjectContext(managedObjectContext obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
+	return ac
 }
 
-// WithEntityName the entity name used by the receiver to create new objects.
-func (x *ArrayController) WithEntityName(entityName string) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityName:"), purego.NSString(entityName))
-	return x
+// WithEntityName sets the entity name used by the receiver to create new objects.
+func (ac *ArrayController) WithEntityName(entityName string) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setEntityName:"), purego.NSString(entityName))
+	return ac
 }
 
-// WithFetchPredicate the receiver’s fetch predicate.
-func (x *ArrayController) WithFetchPredicate(fetchPredicate obj.Object) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
-	return x
+// WithFetchPredicate sets the receiver’s fetch predicate.
+func (ac *ArrayController) WithFetchPredicate(fetchPredicate obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
+	return ac
 }
 
-// WithUsesLazyFetching a Boolean that indicates whether the receiver uses lazy fetching.
-func (x *ArrayController) WithUsesLazyFetching(usesLazyFetching bool) *ArrayController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLazyFetching:"), usesLazyFetching)
-	return x
+// WithUsesLazyFetching sets a Boolean that indicates whether the receiver uses lazy fetching.
+func (ac *ArrayController) WithUsesLazyFetching(usesLazyFetching bool) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setUsesLazyFetching:"), usesLazyFetching)
+	return ac
 }
 
 // RearrangeObjects triggers filtering of the receiver’s content.
-func (x *ArrayController) RearrangeObjects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rearrangeObjects"))
+func (ac *ArrayController) RearrangeObjects() {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("rearrangeObjects"))
 }
 
 // DidChangeArrangementCriteria invoked when any criteria for arranging objects change.
-func (x *ArrayController) DidChangeArrangementCriteria() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeArrangementCriteria"))
+func (ac *ArrayController) DidChangeArrangementCriteria() {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("didChangeArrangementCriteria"))
 }
 
 // ArrangeObjects returns a given array, appropriately sorted and filtered.
-func (x *ArrayController) ArrangeObjects(objects obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangeObjects:"), objref.IDOf(objects))
+func (ac *ArrayController) ArrangeObjects(objects obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("arrangeObjects:"), objref.IDOf(objects))
 	return obj.Wrap(_r)
 }
 
-// SetSelectionIndexes sets the receiver’s selection indexes and returns a Boolean value that indicates whether the selection changed.
-func (x *ArrayController) SetSelectionIndexes(indexes obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(indexes))
-	return _r
-}
-
-// SetSelectionIndex sets the receiver’s selection to the given index, and returns a Boolean value that indicates whether the selection was changed.
-func (x *ArrayController) SetSelectionIndex(index int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectionIndex:"), index)
-	return _r
-}
-
 // AddSelectionIndexes adds the objects at the specified indexes in the receiver’s content array to the current selection.
-func (x *ArrayController) AddSelectionIndexes(indexes obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addSelectionIndexes:"), objref.IDOf(indexes))
+func (ac *ArrayController) AddSelectionIndexes(indexes obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("addSelectionIndexes:"), objref.IDOf(indexes))
 	return _r
 }
 
 // RemoveSelectionIndexes removes the object as the specified indexes from the receiver’s current selection.
-func (x *ArrayController) RemoveSelectionIndexes(indexes obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeSelectionIndexes:"), objref.IDOf(indexes))
+func (ac *ArrayController) RemoveSelectionIndexes(indexes obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("removeSelectionIndexes:"), objref.IDOf(indexes))
 	return _r
 }
 
 // SetSelectedObjects sets the specified objects as the receiver’s current selection.
-func (x *ArrayController) SetSelectedObjects(objects obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectedObjects:"), objref.IDOf(objects))
+func (ac *ArrayController) SetSelectedObjects(objects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("setSelectedObjects:"), objref.IDOf(objects))
 	return _r
 }
 
 // AddSelectedObjects adds the specified objects from the receiver’s content array to the current selection.
-func (x *ArrayController) AddSelectedObjects(objects obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addSelectedObjects:"), objref.IDOf(objects))
+func (ac *ArrayController) AddSelectedObjects(objects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("addSelectedObjects:"), objref.IDOf(objects))
 	return _r
 }
 
 // RemoveSelectedObjects removes the specified objects from the receiver’s current selection.
-func (x *ArrayController) RemoveSelectedObjects(objects obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeSelectedObjects:"), objref.IDOf(objects))
+func (ac *ArrayController) RemoveSelectedObjects(objects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("removeSelectedObjects:"), objref.IDOf(objects))
 	return _r
 }
 
 // Insert creates a new object and inserts it into the receiver’s content array.
-func (x *ArrayController) Insert(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insert:"), objref.IDOf(sender))
+func (ac *ArrayController) Insert(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("insert:"), objref.IDOf(sender))
 }
 
 // SelectNext selects the next object, relative to the current selection, in the receiver’s arranged content.
-func (x *ArrayController) SelectNext(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectNext:"), objref.IDOf(sender))
+func (ac *ArrayController) SelectNext(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("selectNext:"), objref.IDOf(sender))
 }
 
 // SelectPrevious selects the previous object, relative to the current selection, in the receiver’s arranged content.
-func (x *ArrayController) SelectPrevious(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectPrevious:"), objref.IDOf(sender))
+func (ac *ArrayController) SelectPrevious(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("selectPrevious:"), objref.IDOf(sender))
 }
 
 // AddObjects adds objects to the receiver’s content collection.
-func (x *ArrayController) AddObjects(objects obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObjects:"), objref.IDOf(objects))
+func (ac *ArrayController) AddObjects(objects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("addObjects:"), objref.IDOf(objects))
 }
 
 // InsertObjectAtArrangedObjectIndex inserts object into the receiver’s arranged objects array at the location specified by index, and adds it to the receiver’s content collection.
-func (x *ArrayController) InsertObjectAtArrangedObjectIndex(object obj.Object, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObject:atArrangedObjectIndex:"), objref.IDOf(object), index)
+func (ac *ArrayController) InsertObjectAtArrangedObjectIndex(object obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("insertObject:atArrangedObjectIndex:"), objref.IDOf(object), index)
 }
 
 // InsertObjectsAtArrangedObjectIndexes inserts objects into the receiver’s arranged objects array at the locations specified in indexes, and adds it to the receiver’s content collection.
-func (x *ArrayController) InsertObjectsAtArrangedObjectIndexes(objects obj.Object, indexes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObjects:atArrangedObjectIndexes:"), objref.IDOf(objects), objref.IDOf(indexes))
+func (ac *ArrayController) InsertObjectsAtArrangedObjectIndexes(objects obj.Object, indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("insertObjects:atArrangedObjectIndexes:"), objref.IDOf(objects), objref.IDOf(indexes))
 }
 
 // RemoveObjectAtArrangedObjectIndex removes the object at the specified index in the receiver’s arranged objects from the receiver’s content array.
-func (x *ArrayController) RemoveObjectAtArrangedObjectIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectAtArrangedObjectIndex:"), index)
+func (ac *ArrayController) RemoveObjectAtArrangedObjectIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("removeObjectAtArrangedObjectIndex:"), index)
 }
 
 // RemoveObjectsAtArrangedObjectIndexes removes the objects at the specified indexes in the receiver’s arranged objects from the content array.
-func (x *ArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsAtArrangedObjectIndexes:"), objref.IDOf(indexes))
+func (ac *ArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("removeObjectsAtArrangedObjectIndexes:"), objref.IDOf(indexes))
 }
 
 // RemoveObjects removes objects from the receiver’s content collection.
-func (x *ArrayController) RemoveObjects(objects obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjects:"), objref.IDOf(objects))
+func (ac *ArrayController) RemoveObjects(objects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("removeObjects:"), objref.IDOf(objects))
 }
 
 // AutomaticallyRearrangesObjects wraps the corresponding Objective-C method.
-func (x *ArrayController) AutomaticallyRearrangesObjects() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyRearrangesObjects"))
+func (ac *ArrayController) AutomaticallyRearrangesObjects() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("automaticallyRearrangesObjects"))
 	return _r
-}
-
-// SetAutomaticallyRearrangesObjects wraps the corresponding Objective-C method.
-func (x *ArrayController) SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyRearrangesObjects:"), automaticallyRearrangesObjects)
 }
 
 // AutomaticRearrangementKeyPaths wraps the corresponding Objective-C method.
 //
 // AutomaticRearrangementKeyPaths returns the collection as a Go slice.
-func (x *ArrayController) AutomaticRearrangementKeyPaths() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("automaticRearrangementKeyPaths"))
+func (ac *ArrayController) AutomaticRearrangementKeyPaths() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("automaticRearrangementKeyPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // SortDescriptors wraps the corresponding Objective-C method.
 //
 // SortDescriptors returns the collection as a Go slice.
-func (x *ArrayController) SortDescriptors() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+func (ac *ArrayController) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSortDescriptors wraps the corresponding Objective-C method.
-func (x *ArrayController) SetSortDescriptors(sortDescriptors []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // FilterPredicate wraps the corresponding Objective-C method.
-func (x *ArrayController) FilterPredicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterPredicate"))
+func (ac *ArrayController) FilterPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("filterPredicate"))
 	return obj.Wrap(_r)
 }
 
-// SetFilterPredicate wraps the corresponding Objective-C method.
-func (x *ArrayController) SetFilterPredicate(filterPredicate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
-}
-
 // ClearsFilterPredicateOnInsertion wraps the corresponding Objective-C method.
-func (x *ArrayController) ClearsFilterPredicateOnInsertion() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("clearsFilterPredicateOnInsertion"))
+func (ac *ArrayController) ClearsFilterPredicateOnInsertion() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("clearsFilterPredicateOnInsertion"))
 	return _r
 }
 
-// SetClearsFilterPredicateOnInsertion wraps the corresponding Objective-C method.
-func (x *ArrayController) SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearsFilterPredicateOnInsertion:"), clearsFilterPredicateOnInsertion)
-}
-
 // ArrangedObjects wraps the corresponding Objective-C method.
-func (x *ArrayController) ArrangedObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangedObjects"))
+func (ac *ArrayController) ArrangedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("arrangedObjects"))
 	return obj.Wrap(_r)
 }
 
 // AvoidsEmptySelection wraps the corresponding Objective-C method.
-func (x *ArrayController) AvoidsEmptySelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("avoidsEmptySelection"))
+func (ac *ArrayController) AvoidsEmptySelection() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("avoidsEmptySelection"))
 	return _r
-}
-
-// SetAvoidsEmptySelection wraps the corresponding Objective-C method.
-func (x *ArrayController) SetAvoidsEmptySelection(avoidsEmptySelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
 }
 
 // PreservesSelection wraps the corresponding Objective-C method.
-func (x *ArrayController) PreservesSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesSelection"))
+func (ac *ArrayController) PreservesSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("preservesSelection"))
 	return _r
-}
-
-// SetPreservesSelection wraps the corresponding Objective-C method.
-func (x *ArrayController) SetPreservesSelection(preservesSelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesSelection:"), preservesSelection)
 }
 
 // SelectsInsertedObjects wraps the corresponding Objective-C method.
-func (x *ArrayController) SelectsInsertedObjects() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectsInsertedObjects"))
+func (ac *ArrayController) SelectsInsertedObjects() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("selectsInsertedObjects"))
 	return _r
-}
-
-// SetSelectsInsertedObjects wraps the corresponding Objective-C method.
-func (x *ArrayController) SetSelectsInsertedObjects(selectsInsertedObjects bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
 }
 
 // AlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
-func (x *ArrayController) AlwaysUsesMultipleValuesMarker() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alwaysUsesMultipleValuesMarker"))
+func (ac *ArrayController) AlwaysUsesMultipleValuesMarker() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("alwaysUsesMultipleValuesMarker"))
 	return _r
 }
 
-// SetAlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
-func (x *ArrayController) SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
-}
-
 // SelectionIndexes wraps the corresponding Objective-C method.
-func (x *ArrayController) SelectionIndexes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionIndexes"))
+func (ac *ArrayController) SelectionIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("selectionIndexes"))
 	return obj.Wrap(_r)
 }
 
 // SelectionIndex wraps the corresponding Objective-C method.
-func (x *ArrayController) SelectionIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionIndex"))
+func (ac *ArrayController) SelectionIndex() int {
+	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("selectionIndex"))
 	return _r
 }
 
 // CanInsert wraps the corresponding Objective-C method.
-func (x *ArrayController) CanInsert() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canInsert"))
+func (ac *ArrayController) CanInsert() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("canInsert"))
 	return _r
 }
 
 // CanSelectNext wraps the corresponding Objective-C method.
-func (x *ArrayController) CanSelectNext() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSelectNext"))
+func (ac *ArrayController) CanSelectNext() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("canSelectNext"))
 	return _r
 }
 
 // CanSelectPrevious wraps the corresponding Objective-C method.
-func (x *ArrayController) CanSelectPrevious() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSelectPrevious"))
+func (ac *ArrayController) CanSelectPrevious() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("canSelectPrevious"))
 	return _r
 }
-
-// ArrayControllerable is the interface implemented by [ArrayController], for mocking and DI.
-type ArrayControllerable interface {
-	obj.Object
-	WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *ArrayController
-	WithSortDescriptors(items ...obj.Object) *ArrayController
-	WithFilterPredicate(filterPredicate obj.Object) *ArrayController
-	WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *ArrayController
-	WithAvoidsEmptySelection(avoidsEmptySelection bool) *ArrayController
-	WithPreservesSelection(preservesSelection bool) *ArrayController
-	WithSelectsInsertedObjects(selectsInsertedObjects bool) *ArrayController
-	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController
-	WithSelectionIndexes(selectionIndexes obj.Object) *ArrayController
-	WithSelectionIndex(selectionIndex int) *ArrayController
-	WithContent(content obj.Object) *ArrayController
-	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController
-	WithEditable(editable bool) *ArrayController
-	WithManagedObjectContext(managedObjectContext obj.Object) *ArrayController
-	WithEntityName(entityName string) *ArrayController
-	WithFetchPredicate(fetchPredicate obj.Object) *ArrayController
-	WithUsesLazyFetching(usesLazyFetching bool) *ArrayController
-	RearrangeObjects()
-	DidChangeArrangementCriteria()
-	ArrangeObjects(objects obj.Object) obj.Object
-	SetSelectionIndexes(indexes obj.Object) bool
-	SetSelectionIndex(index int) bool
-	AddSelectionIndexes(indexes obj.Object) bool
-	RemoveSelectionIndexes(indexes obj.Object) bool
-	SetSelectedObjects(objects obj.Object) bool
-	AddSelectedObjects(objects obj.Object) bool
-	RemoveSelectedObjects(objects obj.Object) bool
-	Insert(sender obj.Object)
-	SelectNext(sender obj.Object)
-	SelectPrevious(sender obj.Object)
-	AddObjects(objects obj.Object)
-	InsertObjectAtArrangedObjectIndex(object obj.Object, index int)
-	InsertObjectsAtArrangedObjectIndexes(objects obj.Object, indexes obj.Object)
-	RemoveObjectAtArrangedObjectIndex(index int)
-	RemoveObjectsAtArrangedObjectIndexes(indexes obj.Object)
-	RemoveObjects(objects obj.Object)
-	AutomaticallyRearrangesObjects() bool
-	SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool)
-	AutomaticRearrangementKeyPaths() []string
-	SortDescriptors() []obj.Object
-	SetSortDescriptors(sortDescriptors []obj.Object)
-	FilterPredicate() obj.Object
-	SetFilterPredicate(filterPredicate obj.Object)
-	ClearsFilterPredicateOnInsertion() bool
-	SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool)
-	ArrangedObjects() obj.Object
-	AvoidsEmptySelection() bool
-	SetAvoidsEmptySelection(avoidsEmptySelection bool)
-	PreservesSelection() bool
-	SetPreservesSelection(preservesSelection bool)
-	SelectsInsertedObjects() bool
-	SetSelectsInsertedObjects(selectsInsertedObjects bool)
-	AlwaysUsesMultipleValuesMarker() bool
-	SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool)
-	SelectionIndexes() obj.Object
-	SelectionIndex() int
-	CanInsert() bool
-	CanSelectNext() bool
-	CanSelectPrevious() bool
-}
-
-var _ ArrayControllerable = (*ArrayController)(nil)
 
 // isArrayController marks ArrayController — and, by embedding promotion, its
 // subclasses — as a member of the ArrayController hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayController) isArrayController() {}
+func (ac *ArrayController) isArrayController() {}
 
 var _ ArrayControllerProvider = (*ArrayController)(nil)
 

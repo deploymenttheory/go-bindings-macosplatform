@@ -5,13 +5,14 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DiskImageStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZDiskImageStorageDeviceAttachment.
@@ -71,39 +72,28 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizatio
 	return diskImageStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// URL URL of the underlying disk image.
-func (x *DiskImageStorageDeviceAttachment) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns URL of the underlying disk image.
+func (disda *DiskImageStorageDeviceAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(disda), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// IsReadOnly whether the underlying disk image is read-only.
-func (x *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+// IsReadOnly reports whether the underlying disk image is read-only.
+func (disda *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(disda), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
-// CachingMode how disk image data is cached by the host.
-func (x *DiskImageStorageDeviceAttachment) CachingMode() DiskImageCachingMode {
-	_r := objc.Send[DiskImageCachingMode](objref.IDOf(x), objc.RegisterName("cachingMode"))
+// CachingMode returns how disk image data is cached by the host.
+func (disda *DiskImageStorageDeviceAttachment) CachingMode() DiskImageCachingMode {
+	_r := objc.Send[DiskImageCachingMode](objref.IDOf(disda), objc.RegisterName("cachingMode"))
 	return _r
 }
 
-// SynchronizationMode the mode in which the disk image synchronizes data with the underlying storage device.
-func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() DiskImageSynchronizationMode {
-	_r := objc.Send[DiskImageSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
+// SynchronizationMode returns the mode in which the disk image synchronizes data with the underlying storage device.
+func (disda *DiskImageStorageDeviceAttachment) SynchronizationMode() DiskImageSynchronizationMode {
+	_r := objc.Send[DiskImageSynchronizationMode](objref.IDOf(disda), objc.RegisterName("synchronizationMode"))
 	return _r
 }
-
-// DiskImageStorageDeviceAttachmentable is the interface implemented by [DiskImageStorageDeviceAttachment], for mocking and DI.
-type DiskImageStorageDeviceAttachmentable interface {
-	obj.Object
-	URL() obj.Object
-	IsReadOnly() bool
-	CachingMode() DiskImageCachingMode
-	SynchronizationMode() DiskImageSynchronizationMode
-}
-
-var _ DiskImageStorageDeviceAttachmentable = (*DiskImageStorageDeviceAttachment)(nil)
 
 var _ StorageDeviceAttachmentProvider = (*DiskImageStorageDeviceAttachment)(nil)

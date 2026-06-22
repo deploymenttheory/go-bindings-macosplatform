@@ -39,7 +39,7 @@ func OpenSystemSettingsLoginItems() {
 	objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("openSystemSettingsLoginItems"))
 }
 
-// MainAppService a SMAppService corresponding to the main application as a LoginItem This SMAppService can be used to configure the main app to be launched at login
+// MainAppService returns a SMAppService corresponding to the main application as a LoginItem This SMAppService can be used to configure the main app to be launched at login
 func MainAppService() *AppService {
 	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("mainAppService"))
 	return AppServiceFromID(_r)

@@ -44,24 +44,24 @@ func transformRotateYOpAdopt(id objc.ID) *TransformRotateYOp {
 }
 
 // Description returns the object's -description text.
-func (x *TransformRotateYOp) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tryo *TransformRotateYOp) Description() string {
+	return rt.Description(objref.IDOf(tryo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformRotateYOp) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tryo *TransformRotateYOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tryo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformRotateYOp) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tryo *TransformRotateYOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tryo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TransformRotateYOp) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tryo *TransformRotateYOp) String() string {
+	return rt.Description(objref.IDOf(tryo))
 }
 
 // NewTransformRotateYOp creates a new TransformRotateYOp.
@@ -71,8 +71,8 @@ func NewTransformRotateYOp() *TransformRotateYOp {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TransformRotateYOp) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (tryo *TransformRotateYOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tryo), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,16 +80,7 @@ func (x *TransformRotateYOp) Name() string {
 }
 
 // AnimatedValue wraps the corresponding Objective-C method.
-func (x *TransformRotateYOp) AnimatedValue() *AnimatedScalar {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+func (tryo *TransformRotateYOp) AnimatedValue() *AnimatedScalar {
+	_r := objc.Send[objc.ID](objref.IDOf(tryo), objc.RegisterName("animatedValue"))
 	return AnimatedScalarFromID(_r)
 }
-
-// TransformRotateYOpable is the interface implemented by [TransformRotateYOp], for mocking and DI.
-type TransformRotateYOpable interface {
-	obj.Object
-	Name() string
-	AnimatedValue() *AnimatedScalar
-}
-
-var _ TransformRotateYOpable = (*TransformRotateYOp)(nil)

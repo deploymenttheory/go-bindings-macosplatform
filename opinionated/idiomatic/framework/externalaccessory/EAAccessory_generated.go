@@ -46,24 +46,24 @@ func accessoryAdopt(id objc.ID) *Accessory {
 }
 
 // Description returns the object's -description text.
-func (x *Accessory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Accessory) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Accessory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Accessory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Accessory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Accessory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Accessory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Accessory) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAccessory creates a new Accessory.
@@ -73,32 +73,22 @@ func NewAccessory() *Accessory {
 }
 
 // IsConnected wraps the corresponding Objective-C method.
-func (x *Accessory) IsConnected() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
+func (a *Accessory) IsConnected() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isConnected"))
 	return _r
 }
 
 // ConnectionID wraps the corresponding Objective-C method.
-func (x *Accessory) ConnectionID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("connectionID"))
+func (a *Accessory) ConnectionID() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("connectionID"))
 	return _r
 }
 
 // DockType wraps the corresponding Objective-C method.
-func (x *Accessory) DockType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dockType"))
+func (a *Accessory) DockType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("dockType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Accessoryable is the interface implemented by [Accessory], for mocking and DI.
-type Accessoryable interface {
-	obj.Object
-	IsConnected() bool
-	ConnectionID() int
-	DockType() string
-}
-
-var _ Accessoryable = (*Accessory)(nil)

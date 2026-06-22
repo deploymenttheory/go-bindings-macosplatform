@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,23 +46,15 @@ func documentSampleAdopt(id objc.ID) *DocumentSample {
 }
 
 // DocumentType wraps the corresponding Objective-C method.
-func (x *DocumentSample) DocumentType() *DocumentType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentType"))
+func (ds *DocumentSample) DocumentType() *DocumentType {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("documentType"))
 	return DocumentTypeFromID(_r)
 }
-
-// DocumentSampleable is the interface implemented by [DocumentSample], for mocking and DI.
-type DocumentSampleable interface {
-	obj.Object
-	DocumentType() *DocumentType
-}
-
-var _ DocumentSampleable = (*DocumentSample)(nil)
 
 // isDocumentSample marks DocumentSample — and, by embedding promotion, its
 // subclasses — as a member of the DocumentSample hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DocumentSample) isDocumentSample() {}
+func (ds *DocumentSample) isDocumentSample() {}
 
 var _ DocumentSampleProvider = (*DocumentSample)(nil)
 

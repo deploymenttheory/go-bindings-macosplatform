@@ -46,24 +46,24 @@ func extensionStreamFormatAdopt(id objc.ID) *ExtensionStreamFormat {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionStreamFormat) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (esf *ExtensionStreamFormat) Description() string {
+	return rt.Description(objref.IDOf(esf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionStreamFormat) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (esf *ExtensionStreamFormat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(esf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionStreamFormat) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (esf *ExtensionStreamFormat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(esf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionStreamFormat) String() string {
-	return rt.Description(objref.IDOf(x))
+func (esf *ExtensionStreamFormat) String() string {
+	return rt.Description(objref.IDOf(esf))
 }
 
 // NewExtensionStreamFormat creates a new ExtensionStreamFormat.
@@ -72,25 +72,16 @@ func NewExtensionStreamFormat() *ExtensionStreamFormat {
 	return extensionStreamFormatAdopt(_id)
 }
 
-// FormatDescription the format description of the samples delivered by the stream.
-func (x *ExtensionStreamFormat) FormatDescription() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescription"))
+// FormatDescription returns the format description of the samples delivered by the stream.
+func (esf *ExtensionStreamFormat) FormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esf), objc.RegisterName("formatDescription"))
 	return obj.Wrap(_r)
 }
 
-// ValidFrameDurations the valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.
+// ValidFrameDurations returns the valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.
 //
 // ValidFrameDurations returns the collection as a Go slice.
-func (x *ExtensionStreamFormat) ValidFrameDurations() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validFrameDurations"))
+func (esf *ExtensionStreamFormat) ValidFrameDurations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(esf), objc.RegisterName("validFrameDurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ExtensionStreamFormatable is the interface implemented by [ExtensionStreamFormat], for mocking and DI.
-type ExtensionStreamFormatable interface {
-	obj.Object
-	FormatDescription() obj.Object
-	ValidFrameDurations() []obj.Object
-}
-
-var _ ExtensionStreamFormatable = (*ExtensionStreamFormat)(nil)

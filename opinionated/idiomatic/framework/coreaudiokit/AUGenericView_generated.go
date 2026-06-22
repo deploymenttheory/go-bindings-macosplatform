@@ -46,24 +46,24 @@ func aUGenericViewAdopt(id objc.ID) *AUGenericView {
 }
 
 // Description returns the object's -description text.
-func (x *AUGenericView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (agv *AUGenericView) Description() string {
+	return rt.Description(objref.IDOf(agv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AUGenericView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (agv *AUGenericView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(agv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AUGenericView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (agv *AUGenericView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(agv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AUGenericView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (agv *AUGenericView) String() string {
+	return rt.Description(objref.IDOf(agv))
 }
 
 // NewAUGenericView creates a new AUGenericView.
@@ -72,29 +72,14 @@ func NewAUGenericView() *AUGenericView {
 	return aUGenericViewAdopt(_id)
 }
 
-// WithShowsExpertParameters indicates whether or not controls for expert audio unit parameters are displayed in the generic view.
-func (x *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) *AUGenericView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
-	return x
+// WithShowsExpertParameters sets indicates whether or not controls for expert audio unit parameters are displayed in the generic view.
+func (agv *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) *AUGenericView {
+	objc.Send[objc.ID](objref.IDOf(agv), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
+	return agv
 }
 
 // ShowsExpertParameters wraps the corresponding Objective-C method.
-func (x *AUGenericView) ShowsExpertParameters() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsExpertParameters"))
+func (agv *AUGenericView) ShowsExpertParameters() bool {
+	_r := objc.Send[bool](objref.IDOf(agv), objc.RegisterName("showsExpertParameters"))
 	return _r
 }
-
-// SetShowsExpertParameters wraps the corresponding Objective-C method.
-func (x *AUGenericView) SetShowsExpertParameters(showsExpertParameters bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
-}
-
-// AUGenericViewable is the interface implemented by [AUGenericView], for mocking and DI.
-type AUGenericViewable interface {
-	obj.Object
-	WithShowsExpertParameters(showsExpertParameters bool) *AUGenericView
-	ShowsExpertParameters() bool
-	SetShowsExpertParameters(showsExpertParameters bool)
-}
-
-var _ AUGenericViewable = (*AUGenericView)(nil)

@@ -46,24 +46,24 @@ func optimizerDescriptorAdopt(id objc.ID) *OptimizerDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *OptimizerDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (od *OptimizerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(od))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OptimizerDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (od *OptimizerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(od), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OptimizerDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (od *OptimizerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(od), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OptimizerDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (od *OptimizerDescriptor) String() string {
+	return rt.Description(objref.IDOf(od))
 }
 
 // NewOptimizerDescriptor creates a new OptimizerDescriptor.
@@ -72,79 +72,62 @@ func NewOptimizerDescriptor() *OptimizerDescriptor {
 	return optimizerDescriptorAdopt(_id)
 }
 
-// LearningRate the learning rate
-func (x *OptimizerDescriptor) LearningRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("learningRate"))
+// LearningRate returns the learning rate
+func (od *OptimizerDescriptor) LearningRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("learningRate"))
 	return _r
 }
 
-// GradientRescale the rescale value applied to gradients during optimizer update
-func (x *OptimizerDescriptor) GradientRescale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientRescale"))
+// GradientRescale returns the rescale value applied to gradients during optimizer update
+func (od *OptimizerDescriptor) GradientRescale() float32 {
+	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
-// AppliesGradientClipping whether gradient clipping should be applied or not. The default is false
-func (x *OptimizerDescriptor) AppliesGradientClipping() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesGradientClipping"))
+// AppliesGradientClipping reports whether gradient clipping should be applied or not. The default is false
+func (od *OptimizerDescriptor) AppliesGradientClipping() bool {
+	_r := objc.Send[bool](objref.IDOf(od), objc.RegisterName("appliesGradientClipping"))
 	return _r
 }
 
-// GradientClipMax the maximum gradient value if gradient clipping is enabled before gradient is rescaled.
-func (x *OptimizerDescriptor) GradientClipMax() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMax"))
+// GradientClipMax returns the maximum gradient value if gradient clipping is enabled before gradient is rescaled.
+func (od *OptimizerDescriptor) GradientClipMax() float32 {
+	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
-// GradientClipMin the minimum gradient value if gradient clipping is enabled before gradient is rescaled.
-func (x *OptimizerDescriptor) GradientClipMin() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMin"))
+// GradientClipMin returns the minimum gradient value if gradient clipping is enabled before gradient is rescaled.
+func (od *OptimizerDescriptor) GradientClipMin() float32 {
+	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
-// RegularizationScale the regularization scale.
-func (x *OptimizerDescriptor) RegularizationScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("regularizationScale"))
+// RegularizationScale returns the regularization scale.
+func (od *OptimizerDescriptor) RegularizationScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("regularizationScale"))
 	return _r
 }
 
-// RegularizationType the regularization type.
-func (x *OptimizerDescriptor) RegularizationType() RegularizationType {
-	_r := objc.Send[RegularizationType](objref.IDOf(x), objc.RegisterName("regularizationType"))
+// RegularizationType returns the regularization type.
+func (od *OptimizerDescriptor) RegularizationType() RegularizationType {
+	_r := objc.Send[RegularizationType](objref.IDOf(od), objc.RegisterName("regularizationType"))
 	return _r
 }
 
-// GradientClippingType the type of clipping applied to gradient
-func (x *OptimizerDescriptor) GradientClippingType() GradientClippingType {
-	_r := objc.Send[GradientClippingType](objref.IDOf(x), objc.RegisterName("gradientClippingType"))
+// GradientClippingType returns the type of clipping applied to gradient
+func (od *OptimizerDescriptor) GradientClippingType() GradientClippingType {
+	_r := objc.Send[GradientClippingType](objref.IDOf(od), objc.RegisterName("gradientClippingType"))
 	return _r
 }
 
-// MaximumClippingNorm the maximum clipping value
-func (x *OptimizerDescriptor) MaximumClippingNorm() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumClippingNorm"))
+// MaximumClippingNorm returns the maximum clipping value
+func (od *OptimizerDescriptor) MaximumClippingNorm() float32 {
+	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("maximumClippingNorm"))
 	return _r
 }
 
-// CustomGlobalNorm used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
-func (x *OptimizerDescriptor) CustomGlobalNorm() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("customGlobalNorm"))
+// CustomGlobalNorm returns used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
+func (od *OptimizerDescriptor) CustomGlobalNorm() float32 {
+	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("customGlobalNorm"))
 	return _r
 }
-
-// OptimizerDescriptorable is the interface implemented by [OptimizerDescriptor], for mocking and DI.
-type OptimizerDescriptorable interface {
-	obj.Object
-	LearningRate() float32
-	GradientRescale() float32
-	AppliesGradientClipping() bool
-	GradientClipMax() float32
-	GradientClipMin() float32
-	RegularizationScale() float32
-	RegularizationType() RegularizationType
-	GradientClippingType() GradientClippingType
-	MaximumClippingNorm() float32
-	CustomGlobalNorm() float32
-}
-
-var _ OptimizerDescriptorable = (*OptimizerDescriptor)(nil)

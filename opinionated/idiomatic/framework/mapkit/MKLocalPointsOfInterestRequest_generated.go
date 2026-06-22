@@ -46,24 +46,24 @@ func localPointsOfInterestRequestAdopt(id objc.ID) *LocalPointsOfInterestRequest
 }
 
 // Description returns the object's -description text.
-func (x *LocalPointsOfInterestRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lpoir *LocalPointsOfInterestRequest) Description() string {
+	return rt.Description(objref.IDOf(lpoir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalPointsOfInterestRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lpoir *LocalPointsOfInterestRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lpoir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalPointsOfInterestRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lpoir *LocalPointsOfInterestRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lpoir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocalPointsOfInterestRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lpoir *LocalPointsOfInterestRequest) String() string {
+	return rt.Description(objref.IDOf(lpoir))
 }
 
 // NewLocalPointsOfInterestRequest creates a new LocalPointsOfInterestRequest.
@@ -72,29 +72,14 @@ func NewLocalPointsOfInterestRequest() *LocalPointsOfInterestRequest {
 	return localPointsOfInterestRequestAdopt(_id)
 }
 
-// WithPointOfInterestFilter a filter that lists points of interest categories to include or exclude.
-func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-	return x
+// WithPointOfInterestFilter sets a filter that lists points of interest categories to include or exclude.
+func (lpoir *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
+	objc.Send[objc.ID](objref.IDOf(lpoir), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return lpoir
 }
 
 // PointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+func (lpoir *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(lpoir), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
-
-// SetPointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *LocalPointsOfInterestRequest) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-}
-
-// LocalPointsOfInterestRequestable is the interface implemented by [LocalPointsOfInterestRequest], for mocking and DI.
-type LocalPointsOfInterestRequestable interface {
-	obj.Object
-	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest
-	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
-}
-
-var _ LocalPointsOfInterestRequestable = (*LocalPointsOfInterestRequest)(nil)

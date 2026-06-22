@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// IsAVBSupported returns a Boolean value that indicates whether the current machine hardware supports Audio Video Bridging (AVB).
+// IsAVBSupported reports whether returns a Boolean value that indicates whether the current machine hardware supports Audio Video Bridging (AVB).
 func IsAVBSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("CANetworkBrowserWindowController")), objc.RegisterName("isAVBSupported"))
 	return _r

@@ -46,24 +46,24 @@ func unitAdopt(id objc.ID) *Unit {
 }
 
 // Description returns the object's -description text.
-func (x *Unit) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (u *Unit) Description() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Unit) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (u *Unit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Unit) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (u *Unit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Unit) String() string {
-	return rt.Description(objref.IDOf(x))
+func (u *Unit) String() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // NewUnit creates a new Unit.
@@ -72,15 +72,15 @@ func NewUnit() *Unit {
 	return unitAdopt(_id)
 }
 
-// IsNull returns a Boolean value indicating whether the unit is null.
-func (x *Unit) IsNull() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNull"))
+// IsNull reports whether returns a Boolean value indicating whether the unit is null.
+func (u *Unit) IsNull() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isNull"))
 	return _r
 }
 
 // UnitString returns a unique string representation for the unit that could be used with +unitFromString:
-func (x *Unit) UnitString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitString"))
+func (u *Unit) UnitString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitString"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,38 +88,25 @@ func (x *Unit) UnitString() string {
 }
 
 // UnitMultipliedByUnit creates a complex unit by multiplying the receiving unit with another unit.
-func (x *Unit) UnitMultipliedByUnit(unit *Unit) *Unit {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitMultipliedByUnit:"), objref.IDOf(unit))
+func (u *Unit) UnitMultipliedByUnit(unit *Unit) *Unit {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitMultipliedByUnit:"), objref.IDOf(unit))
 	return UnitFromID(_r)
 }
 
 // UnitDividedByUnit creates a complex unit by dividing the receiving unit by another unit.
-func (x *Unit) UnitDividedByUnit(unit *Unit) *Unit {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitDividedByUnit:"), objref.IDOf(unit))
+func (u *Unit) UnitDividedByUnit(unit *Unit) *Unit {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitDividedByUnit:"), objref.IDOf(unit))
 	return UnitFromID(_r)
 }
 
 // UnitRaisedToPower creates a complex unit by raising the unit to the given power.
-func (x *Unit) UnitRaisedToPower(power int) *Unit {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitRaisedToPower:"), power)
+func (u *Unit) UnitRaisedToPower(power int) *Unit {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitRaisedToPower:"), power)
 	return UnitFromID(_r)
 }
 
 // ReciprocalUnit returns a complex unit representing the unit’s reciprocal.
-func (x *Unit) ReciprocalUnit() *Unit {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reciprocalUnit"))
+func (u *Unit) ReciprocalUnit() *Unit {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("reciprocalUnit"))
 	return UnitFromID(_r)
 }
-
-// Unitable is the interface implemented by [Unit], for mocking and DI.
-type Unitable interface {
-	obj.Object
-	IsNull() bool
-	UnitString() string
-	UnitMultipliedByUnit(unit *Unit) *Unit
-	UnitDividedByUnit(unit *Unit) *Unit
-	UnitRaisedToPower(power int) *Unit
-	ReciprocalUnit() *Unit
-}
-
-var _ Unitable = (*Unit)(nil)

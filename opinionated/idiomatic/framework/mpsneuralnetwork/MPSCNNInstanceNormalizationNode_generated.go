@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,38 +49,22 @@ func NewCNNInstanceNormalizationNode() *CNNInstanceNormalizationNode {
 	return cNNInstanceNormalizationNodeAdopt(_id)
 }
 
-// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNInstanceNormalizationNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNInstanceNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-	return x
+// WithTrainingStyle sets the training style of the forward node will be propagated to gradient nodes made from it
+func (cinn *CNNInstanceNormalizationNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNInstanceNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cinn), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return cinn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNInstanceNormalizationNode) WithLabel(label string) *CNNInstanceNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cinn *CNNInstanceNormalizationNode) WithLabel(label string) *CNNInstanceNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cinn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cinn
 }
 
-// TrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNInstanceNormalizationNode) TrainingStyle() NNTrainingStyle {
-	_r := objc.Send[NNTrainingStyle](objref.IDOf(x), objc.RegisterName("trainingStyle"))
+// TrainingStyle returns the training style of the forward node will be propagated to gradient nodes made from it
+func (cinn *CNNInstanceNormalizationNode) TrainingStyle() NNTrainingStyle {
+	_r := objc.Send[NNTrainingStyle](objref.IDOf(cinn), objc.RegisterName("trainingStyle"))
 	return _r
 }
-
-// SetTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNInstanceNormalizationNode) SetTrainingStyle(trainingStyle NNTrainingStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-}
-
-// CNNInstanceNormalizationNodeable is the interface implemented by [CNNInstanceNormalizationNode], for mocking and DI.
-type CNNInstanceNormalizationNodeable interface {
-	obj.Object
-	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNInstanceNormalizationNode
-	WithLabel(label string) *CNNInstanceNormalizationNode
-	TrainingStyle() NNTrainingStyle
-	SetTrainingStyle(trainingStyle NNTrainingStyle)
-}
-
-var _ CNNInstanceNormalizationNodeable = (*CNNInstanceNormalizationNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNInstanceNormalizationNode)(nil)

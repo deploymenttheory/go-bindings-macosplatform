@@ -44,24 +44,24 @@ func mTRTimeSynchronizationClusterSetTimeZoneParamsAdopt(id objc.ID) *MTRTimeSyn
 }
 
 // Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) Description() string {
+	return rt.Description(objref.IDOf(mtscstzp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtscstzp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtscstzp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) String() string {
+	return rt.Description(objref.IDOf(mtscstzp))
 }
 
 // NewMTRTimeSynchronizationClusterSetTimeZoneParams creates a new MTRTimeSynchronizationClusterSetTimeZoneParams.
@@ -70,62 +70,37 @@ func NewMTRTimeSynchronizationClusterSetTimeZoneParams() *MTRTimeSynchronization
 	return mTRTimeSynchronizationClusterSetTimeZoneParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneParams {
+	objc.Send[objc.ID](objref.IDOf(mtscstzp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtscstzp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneParams {
+	objc.Send[objc.ID](objref.IDOf(mtscstzp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtscstzp
 }
 
 // TimeZone wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) TimeZone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) TimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscstzp), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
 }
 
 // SetTimeZone wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) SetTimeZone(timeZone obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) SetTimeZone(timeZone obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mtscstzp), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscstzp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscstzp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRTimeSynchronizationClusterSetTimeZoneParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetTimeZoneParams], for mocking and DI.
-type MTRTimeSynchronizationClusterSetTimeZoneParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneParams
-	TimeZone() obj.Object
-	SetTimeZone(timeZone obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRTimeSynchronizationClusterSetTimeZoneParamsable = (*MTRTimeSynchronizationClusterSetTimeZoneParams)(nil)

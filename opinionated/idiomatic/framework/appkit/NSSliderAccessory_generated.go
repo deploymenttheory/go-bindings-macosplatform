@@ -44,24 +44,24 @@ func sliderAccessoryAdopt(id objc.ID) *SliderAccessory {
 }
 
 // Description returns the object's -description text.
-func (x *SliderAccessory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SliderAccessory) Description() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SliderAccessory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sa *SliderAccessory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SliderAccessory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sa *SliderAccessory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SliderAccessory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SliderAccessory) String() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // NewSliderAccessory creates a new SliderAccessory.
@@ -70,49 +70,26 @@ func NewSliderAccessory() *SliderAccessory {
 	return sliderAccessoryAdopt(_id)
 }
 
-// WithBehavior the effect on interaction with the accessory.
-func (x *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
-	return x
+// WithBehavior sets the effect on interaction with the accessory.
+func (sa *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
+	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
+	return sa
 }
 
-// WithEnabled determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to true.
-func (x *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to true.
+func (sa *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {
+	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setEnabled:"), enabled)
+	return sa
 }
 
-// Behavior the effect on interaction with the accessory. The default value is `automaticBehavior`.
-func (x *SliderAccessory) Behavior() *SliderAccessoryBehavior {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("behavior"))
+// Behavior returns the effect on interaction with the accessory. The default value is `automaticBehavior`.
+func (sa *SliderAccessory) Behavior() *SliderAccessoryBehavior {
+	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("behavior"))
 	return SliderAccessoryBehaviorFromID(_r)
 }
 
-// SetBehavior wraps the corresponding Objective-C method.
-func (x *SliderAccessory) SetBehavior(behavior *SliderAccessoryBehavior) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
-}
-
-// IsEnabled determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
-func (x *SliderAccessory) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
+func (sa *SliderAccessory) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *SliderAccessory) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// SliderAccessoryable is the interface implemented by [SliderAccessory], for mocking and DI.
-type SliderAccessoryable interface {
-	obj.Object
-	WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory
-	WithEnabled(enabled bool) *SliderAccessory
-	Behavior() *SliderAccessoryBehavior
-	SetBehavior(behavior *SliderAccessoryBehavior)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-}
-
-var _ SliderAccessoryable = (*SliderAccessory)(nil)

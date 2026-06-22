@@ -46,24 +46,24 @@ func decisionTreeAdopt(id objc.ID) *DecisionTree {
 }
 
 // Description returns the object's -description text.
-func (x *DecisionTree) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DecisionTree) Description() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DecisionTree) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dt *DecisionTree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DecisionTree) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dt *DecisionTree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DecisionTree) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DecisionTree) String() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
 // NewDecisionTreeWithExamplesActionsAttributes creates an automatically learned decision tree using the specified attributes, example items, and actions.
@@ -73,36 +73,20 @@ func NewDecisionTreeWithExamplesActionsAttributes(examples []obj.Object, actions
 	return decisionTreeAdopt(_id)
 }
 
-// WithRandomSource the randomizer to be used when evaluating parts of the tree that branch randomly.
-func (x *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *DecisionTree {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
-	return x
+// WithRandomSource sets the randomizer to be used when evaluating parts of the tree that branch randomly.
+func (dt *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *DecisionTree {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
+	return dt
 }
 
-// RootNode the node for the decision tree that all other nodes descend from
-func (x *DecisionTree) RootNode() *DecisionNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootNode"))
+// RootNode returns the node for the decision tree that all other nodes descend from
+func (dt *DecisionTree) RootNode() *DecisionNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("rootNode"))
 	return DecisionNodeFromID(_r)
 }
 
-// RandomSource the random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches
-func (x *DecisionTree) RandomSource() *RandomSource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomSource"))
+// RandomSource returns the random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches
+func (dt *DecisionTree) RandomSource() *RandomSource {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("randomSource"))
 	return RandomSourceFromID(_r)
 }
-
-// SetRandomSource wraps the corresponding Objective-C method.
-func (x *DecisionTree) SetRandomSource(randomSource *RandomSource) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
-}
-
-// DecisionTreeable is the interface implemented by [DecisionTree], for mocking and DI.
-type DecisionTreeable interface {
-	obj.Object
-	WithRandomSource(randomSource RandomSourceProvider) *DecisionTree
-	RootNode() *DecisionNode
-	RandomSource() *RandomSource
-	SetRandomSource(randomSource *RandomSource)
-}
-
-var _ DecisionTreeable = (*DecisionTree)(nil)

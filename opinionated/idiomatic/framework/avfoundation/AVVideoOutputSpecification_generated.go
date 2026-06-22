@@ -46,24 +46,24 @@ func videoOutputSpecificationAdopt(id objc.ID) *VideoOutputSpecification {
 }
 
 // Description returns the object's -description text.
-func (x *VideoOutputSpecification) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vos *VideoOutputSpecification) Description() string {
+	return rt.Description(objref.IDOf(vos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoOutputSpecification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vos *VideoOutputSpecification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoOutputSpecification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vos *VideoOutputSpecification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoOutputSpecification) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vos *VideoOutputSpecification) String() string {
+	return rt.Description(objref.IDOf(vos))
 }
 
 // NewVideoOutputSpecificationWithTagCollections creates an instance of AVVideoOutputSpecification initialized with the specified tag collections. This method throws an exception for the following reasons: - tagCollections is nil or has a count of 0. - tagCollections contains elements that are not of the type CMTagCollection.
@@ -73,68 +73,42 @@ func NewVideoOutputSpecificationWithTagCollections(tagCollections obj.Object) *V
 	return videoOutputSpecificationAdopt(_id)
 }
 
-// WithDefaultPixelBufferAttributes the default client requirements for CVPixelBuffers related to all tag collections not explicitly set with setOutputPixelBufferAttributes:forTagCollection:, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <CoreVideo/CVPixelBuffer.h>
-func (x *VideoOutputSpecification) WithDefaultPixelBufferAttributes(defaultPixelBufferAttributes obj.Object) *VideoOutputSpecification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultPixelBufferAttributes:"), objref.IDOf(defaultPixelBufferAttributes))
-	return x
+// WithDefaultPixelBufferAttributes sets the default client requirements for CVPixelBuffers related to all tag collections not explicitly set with setOutputPixelBufferAttributes:forTagCollection:, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <CoreVideo/CVPixelBuffer.h>
+func (vos *VideoOutputSpecification) WithDefaultPixelBufferAttributes(defaultPixelBufferAttributes obj.Object) *VideoOutputSpecification {
+	objc.Send[objc.ID](objref.IDOf(vos), objc.RegisterName("setDefaultPixelBufferAttributes:"), objref.IDOf(defaultPixelBufferAttributes))
+	return vos
 }
 
-// WithDefaultOutputSettings the default client requirements for output CVPixelBuffers related to all tag collections not explicitly set with -setOutputSettings:forTagCollection, expressed using the constants in AVVideoSettings.h. For uncompressed video output, start with kCVPixelBuffer* keys in <CoreVideo/CVPixelBuffer.h>. In addition to the keys in CVPixelBuffer.h, uncompressed video settings dictionaries may also contain the following keys: - AVVideoAllowWideColorKey NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <AVFoundation/AVVideoSettings.h> and <CoreVideo/CVPixelBuffer.h>.
-func (x *VideoOutputSpecification) WithDefaultOutputSettings(defaultOutputSettings obj.Object) *VideoOutputSpecification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultOutputSettings:"), objref.IDOf(defaultOutputSettings))
-	return x
+// WithDefaultOutputSettings sets the default client requirements for output CVPixelBuffers related to all tag collections not explicitly set with -setOutputSettings:forTagCollection, expressed using the constants in AVVideoSettings.h. For uncompressed video output, start with kCVPixelBuffer* keys in <CoreVideo/CVPixelBuffer.h>. In addition to the keys in CVPixelBuffer.h, uncompressed video settings dictionaries may also contain the following keys: - AVVideoAllowWideColorKey NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <AVFoundation/AVVideoSettings.h> and <CoreVideo/CVPixelBuffer.h>.
+func (vos *VideoOutputSpecification) WithDefaultOutputSettings(defaultOutputSettings obj.Object) *VideoOutputSpecification {
+	objc.Send[objc.ID](objref.IDOf(vos), objc.RegisterName("setDefaultOutputSettings:"), objref.IDOf(defaultOutputSettings))
+	return vos
 }
 
 // SetOutputPixelBufferAttributesForTagCollection specifies a mapping between a tag collection and a set of pixel buffer attributes. If this method is called twice on the same tag collection, the first requested pixel buffer attributes will be overridden.
-func (x *VideoOutputSpecification) SetOutputPixelBufferAttributesForTagCollection(pixelBufferAttributes obj.Object, tagCollection obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelBufferAttributes:forTagCollection:"), objref.IDOf(pixelBufferAttributes), objref.IDOf(tagCollection))
+func (vos *VideoOutputSpecification) SetOutputPixelBufferAttributesForTagCollection(pixelBufferAttributes obj.Object, tagCollection obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(vos), objc.RegisterName("setOutputPixelBufferAttributes:forTagCollection:"), objref.IDOf(pixelBufferAttributes), objref.IDOf(tagCollection))
 }
 
 // SetOutputSettingsForTagCollection specifies a mapping between a tag collection and a set of output settings. If this method is called twice on the same tag collection, the first requested output settings will be overridden.
-func (x *VideoOutputSpecification) SetOutputSettingsForTagCollection(outputSettings obj.Object, tagCollection obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputSettings:forTagCollection:"), objref.IDOf(outputSettings), objref.IDOf(tagCollection))
+func (vos *VideoOutputSpecification) SetOutputSettingsForTagCollection(outputSettings obj.Object, tagCollection obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(vos), objc.RegisterName("setOutputSettings:forTagCollection:"), objref.IDOf(outputSettings), objref.IDOf(tagCollection))
 }
 
-// PreferredTagCollections tag collections held by AVVideoOutputSpecification. Returns an array of CMTagCollections.
-func (x *VideoOutputSpecification) PreferredTagCollections() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredTagCollections"))
+// PreferredTagCollections returns tag collections held by AVVideoOutputSpecification. Returns an array of CMTagCollections.
+func (vos *VideoOutputSpecification) PreferredTagCollections() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vos), objc.RegisterName("preferredTagCollections"))
 	return obj.Wrap(_r)
 }
 
-// DefaultPixelBufferAttributes the default client requirements for CVPixelBuffers related to all tag collections not explicitly set with setOutputPixelBufferAttributes:forTagCollection:, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <CoreVideo/CVPixelBuffer.h>
-func (x *VideoOutputSpecification) DefaultPixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultPixelBufferAttributes"))
+// DefaultPixelBufferAttributes returns the default client requirements for CVPixelBuffers related to all tag collections not explicitly set with setOutputPixelBufferAttributes:forTagCollection:, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <CoreVideo/CVPixelBuffer.h>
+func (vos *VideoOutputSpecification) DefaultPixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vos), objc.RegisterName("defaultPixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// SetDefaultPixelBufferAttributes the default client requirements for CVPixelBuffers related to all tag collections not explicitly set with setOutputPixelBufferAttributes:forTagCollection:, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <CoreVideo/CVPixelBuffer.h>
-func (x *VideoOutputSpecification) SetDefaultPixelBufferAttributes(defaultPixelBufferAttributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultPixelBufferAttributes:"), objref.IDOf(defaultPixelBufferAttributes))
-}
-
-// DefaultOutputSettings the default client requirements for output CVPixelBuffers related to all tag collections not explicitly set with -setOutputSettings:forTagCollection, expressed using the constants in AVVideoSettings.h. For uncompressed video output, start with kCVPixelBuffer* keys in <CoreVideo/CVPixelBuffer.h>. In addition to the keys in CVPixelBuffer.h, uncompressed video settings dictionaries may also contain the following keys: - AVVideoAllowWideColorKey NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <AVFoundation/AVVideoSettings.h> and <CoreVideo/CVPixelBuffer.h>.
-func (x *VideoOutputSpecification) DefaultOutputSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultOutputSettings"))
+// DefaultOutputSettings returns the default client requirements for output CVPixelBuffers related to all tag collections not explicitly set with -setOutputSettings:forTagCollection, expressed using the constants in AVVideoSettings.h. For uncompressed video output, start with kCVPixelBuffer* keys in <CoreVideo/CVPixelBuffer.h>. In addition to the keys in CVPixelBuffer.h, uncompressed video settings dictionaries may also contain the following keys: - AVVideoAllowWideColorKey NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <AVFoundation/AVVideoSettings.h> and <CoreVideo/CVPixelBuffer.h>.
+func (vos *VideoOutputSpecification) DefaultOutputSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vos), objc.RegisterName("defaultOutputSettings"))
 	return obj.Wrap(_r)
 }
-
-// SetDefaultOutputSettings the default client requirements for output CVPixelBuffers related to all tag collections not explicitly set with -setOutputSettings:forTagCollection, expressed using the constants in AVVideoSettings.h. For uncompressed video output, start with kCVPixelBuffer* keys in <CoreVideo/CVPixelBuffer.h>. In addition to the keys in CVPixelBuffer.h, uncompressed video settings dictionaries may also contain the following keys: - AVVideoAllowWideColorKey NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <AVFoundation/AVVideoSettings.h> and <CoreVideo/CVPixelBuffer.h>.
-func (x *VideoOutputSpecification) SetDefaultOutputSettings(defaultOutputSettings obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultOutputSettings:"), objref.IDOf(defaultOutputSettings))
-}
-
-// VideoOutputSpecificationable is the interface implemented by [VideoOutputSpecification], for mocking and DI.
-type VideoOutputSpecificationable interface {
-	obj.Object
-	WithDefaultPixelBufferAttributes(defaultPixelBufferAttributes obj.Object) *VideoOutputSpecification
-	WithDefaultOutputSettings(defaultOutputSettings obj.Object) *VideoOutputSpecification
-	SetOutputPixelBufferAttributesForTagCollection(pixelBufferAttributes obj.Object, tagCollection obj.Object)
-	SetOutputSettingsForTagCollection(outputSettings obj.Object, tagCollection obj.Object)
-	PreferredTagCollections() obj.Object
-	DefaultPixelBufferAttributes() obj.Object
-	SetDefaultPixelBufferAttributes(defaultPixelBufferAttributes obj.Object)
-	DefaultOutputSettings() obj.Object
-	SetDefaultOutputSettings(defaultOutputSettings obj.Object)
-}
-
-var _ VideoOutputSpecificationable = (*VideoOutputSpecification)(nil)

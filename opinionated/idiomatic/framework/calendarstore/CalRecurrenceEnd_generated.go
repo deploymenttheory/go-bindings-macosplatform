@@ -44,24 +44,24 @@ func calRecurrenceEndAdopt(id objc.ID) *CalRecurrenceEnd {
 }
 
 // Description returns the object's -description text.
-func (x *CalRecurrenceEnd) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cre *CalRecurrenceEnd) Description() string {
+	return rt.Description(objref.IDOf(cre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CalRecurrenceEnd) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cre *CalRecurrenceEnd) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CalRecurrenceEnd) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cre *CalRecurrenceEnd) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CalRecurrenceEnd) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cre *CalRecurrenceEnd) String() string {
+	return rt.Description(objref.IDOf(cre))
 }
 
 // NewCalRecurrenceEnd creates a new CalRecurrenceEnd.
@@ -71,29 +71,19 @@ func NewCalRecurrenceEnd() *CalRecurrenceEnd {
 }
 
 // UsesEndDate wraps the corresponding Objective-C method.
-func (x *CalRecurrenceEnd) UsesEndDate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesEndDate"))
+func (cre *CalRecurrenceEnd) UsesEndDate() bool {
+	_r := objc.Send[bool](objref.IDOf(cre), objc.RegisterName("usesEndDate"))
 	return _r
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *CalRecurrenceEnd) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (cre *CalRecurrenceEnd) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cre), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
 // OccurrenceCount wraps the corresponding Objective-C method.
-func (x *CalRecurrenceEnd) OccurrenceCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occurrenceCount"))
+func (cre *CalRecurrenceEnd) OccurrenceCount() int {
+	_r := objc.Send[int](objref.IDOf(cre), objc.RegisterName("occurrenceCount"))
 	return _r
 }
-
-// CalRecurrenceEndable is the interface implemented by [CalRecurrenceEnd], for mocking and DI.
-type CalRecurrenceEndable interface {
-	obj.Object
-	UsesEndDate() bool
-	EndDate() obj.Object
-	OccurrenceCount() int
-}
-
-var _ CalRecurrenceEndable = (*CalRecurrenceEnd)(nil)

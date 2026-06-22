@@ -46,178 +46,117 @@ func physicallyPlausibleLightAdopt(id objc.ID) *PhysicallyPlausibleLight {
 	return x
 }
 
-// WithColor the color of the light source.
-func (x *PhysicallyPlausibleLight) WithColor(color obj.Object) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-	return x
+// WithColor sets the color of the light source.
+func (ppl *PhysicallyPlausibleLight) WithColor(color obj.Object) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return ppl
 }
 
-// WithLumens the total visible intensity of the light source, in lumens.
-func (x *PhysicallyPlausibleLight) WithLumens(lumens float32) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLumens:"), lumens)
-	return x
+// WithLumens sets the total visible intensity of the light source, in lumens.
+func (ppl *PhysicallyPlausibleLight) WithLumens(lumens float32) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setLumens:"), lumens)
+	return ppl
 }
 
-// WithInnerConeAngle the radial angle, in degrees, of the area fully illuminated by the light.
-func (x *PhysicallyPlausibleLight) WithInnerConeAngle(innerConeAngle float32) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
-	return x
+// WithInnerConeAngle sets the radial angle, in degrees, of the area fully illuminated by the light.
+func (ppl *PhysicallyPlausibleLight) WithInnerConeAngle(innerConeAngle float32) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
+	return ppl
 }
 
-// WithOuterConeAngle the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
-func (x *PhysicallyPlausibleLight) WithOuterConeAngle(outerConeAngle float32) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
-	return x
+// WithOuterConeAngle sets the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
+func (ppl *PhysicallyPlausibleLight) WithOuterConeAngle(outerConeAngle float32) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
+	return ppl
 }
 
-// WithAttenuationStartDistance the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
-func (x *PhysicallyPlausibleLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
-	return x
+// WithAttenuationStartDistance sets the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
+func (ppl *PhysicallyPlausibleLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
+	return ppl
 }
 
-// WithAttenuationEndDistance the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
-func (x *PhysicallyPlausibleLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
-	return x
+// WithAttenuationEndDistance sets the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
+func (ppl *PhysicallyPlausibleLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
+	return ppl
 }
 
-// WithLightType the type of the light.
-func (x *PhysicallyPlausibleLight) WithLightType(lightType LightType) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
-	return x
+// WithLightType sets the type of the light.
+func (ppl *PhysicallyPlausibleLight) WithLightType(lightType LightType) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setLightType:"), lightType)
+	return ppl
 }
 
-// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
-func (x *PhysicallyPlausibleLight) WithColorSpace(colorSpace string) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
-	return x
+// WithColorSpace sets the name of the Core Graphics color space to be used for interpreting the light’s color information.
+func (ppl *PhysicallyPlausibleLight) WithColorSpace(colorSpace string) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
+	return ppl
 }
 
-// WithParent the parent object that contains this object.
-func (x *PhysicallyPlausibleLight) WithParent(parent ObjectProvider) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (ppl *PhysicallyPlausibleLight) WithParent(parent ObjectProvider) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return ppl
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *PhysicallyPlausibleLight) WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (ppl *PhysicallyPlausibleLight) WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return ppl
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *PhysicallyPlausibleLight) WithHidden(hidden bool) *PhysicallyPlausibleLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (ppl *PhysicallyPlausibleLight) WithHidden(hidden bool) *PhysicallyPlausibleLight {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setHidden:"), hidden)
+	return ppl
 }
 
 // SetColorByTemperature sets the light’s color based on a black-body temperature.
-func (x *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorByTemperature:"), temperature)
+func (ppl *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) {
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColorByTemperature:"), temperature)
 }
 
 // Color wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+func (ppl *PhysicallyPlausibleLight) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// SetColor wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) SetColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-}
-
 // Lumens wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) Lumens() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lumens"))
+func (ppl *PhysicallyPlausibleLight) Lumens() float32 {
+	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("lumens"))
 	return _r
-}
-
-// SetLumens wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) SetLumens(lumens float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLumens:"), lumens)
 }
 
 // InnerConeAngle wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) InnerConeAngle() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("innerConeAngle"))
+func (ppl *PhysicallyPlausibleLight) InnerConeAngle() float32 {
+	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("innerConeAngle"))
 	return _r
-}
-
-// SetInnerConeAngle wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) SetInnerConeAngle(innerConeAngle float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
 }
 
 // OuterConeAngle wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) OuterConeAngle() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("outerConeAngle"))
+func (ppl *PhysicallyPlausibleLight) OuterConeAngle() float32 {
+	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("outerConeAngle"))
 	return _r
-}
-
-// SetOuterConeAngle wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) SetOuterConeAngle(outerConeAngle float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
 }
 
 // AttenuationStartDistance wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) AttenuationStartDistance() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("attenuationStartDistance"))
+func (ppl *PhysicallyPlausibleLight) AttenuationStartDistance() float32 {
+	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("attenuationStartDistance"))
 	return _r
-}
-
-// SetAttenuationStartDistance wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) SetAttenuationStartDistance(attenuationStartDistance float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
 }
 
 // AttenuationEndDistance wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) AttenuationEndDistance() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("attenuationEndDistance"))
+func (ppl *PhysicallyPlausibleLight) AttenuationEndDistance() float32 {
+	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("attenuationEndDistance"))
 	return _r
 }
-
-// SetAttenuationEndDistance wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleLight) SetAttenuationEndDistance(attenuationEndDistance float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
-}
-
-// PhysicallyPlausibleLightable is the interface implemented by [PhysicallyPlausibleLight], for mocking and DI.
-type PhysicallyPlausibleLightable interface {
-	obj.Object
-	WithColor(color obj.Object) *PhysicallyPlausibleLight
-	WithLumens(lumens float32) *PhysicallyPlausibleLight
-	WithInnerConeAngle(innerConeAngle float32) *PhysicallyPlausibleLight
-	WithOuterConeAngle(outerConeAngle float32) *PhysicallyPlausibleLight
-	WithAttenuationStartDistance(attenuationStartDistance float32) *PhysicallyPlausibleLight
-	WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight
-	WithLightType(lightType LightType) *PhysicallyPlausibleLight
-	WithColorSpace(colorSpace string) *PhysicallyPlausibleLight
-	WithParent(parent ObjectProvider) *PhysicallyPlausibleLight
-	WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight
-	WithHidden(hidden bool) *PhysicallyPlausibleLight
-	SetColorByTemperature(temperature float32)
-	Color() obj.Object
-	SetColor(color obj.Object)
-	Lumens() float32
-	SetLumens(lumens float32)
-	InnerConeAngle() float32
-	SetInnerConeAngle(innerConeAngle float32)
-	OuterConeAngle() float32
-	SetOuterConeAngle(outerConeAngle float32)
-	AttenuationStartDistance() float32
-	SetAttenuationStartDistance(attenuationStartDistance float32)
-	AttenuationEndDistance() float32
-	SetAttenuationEndDistance(attenuationEndDistance float32)
-}
-
-var _ PhysicallyPlausibleLightable = (*PhysicallyPlausibleLight)(nil)
 
 // isPhysicallyPlausibleLight marks PhysicallyPlausibleLight — and, by embedding promotion, its
 // subclasses — as a member of the PhysicallyPlausibleLight hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PhysicallyPlausibleLight) isPhysicallyPlausibleLight() {}
+func (ppl *PhysicallyPlausibleLight) isPhysicallyPlausibleLight() {}
 
 var _ PhysicallyPlausibleLightProvider = (*PhysicallyPlausibleLight)(nil)
 

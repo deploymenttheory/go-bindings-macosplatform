@@ -53,19 +53,11 @@ func NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState(gr
 	return nNConcatenationGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNConcatenationGradientNode) WithLabel(label string) *NNConcatenationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ncgn *NNConcatenationGradientNode) WithLabel(label string) *NNConcatenationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(ncgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ncgn
 }
-
-// NNConcatenationGradientNodeable is the interface implemented by [NNConcatenationGradientNode], for mocking and DI.
-type NNConcatenationGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNConcatenationGradientNode
-}
-
-var _ NNConcatenationGradientNodeable = (*NNConcatenationGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*NNConcatenationGradientNode)(nil)
 

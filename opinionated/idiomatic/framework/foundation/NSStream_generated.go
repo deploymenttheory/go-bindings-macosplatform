@@ -48,88 +48,73 @@ func streamAdopt(id objc.ID) *Stream {
 }
 
 // Description returns the object's -description text.
-func (x *Stream) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Stream) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Stream) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Stream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Stream) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Stream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Stream) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Stream) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Stream) WithScriptingProperties(scriptingProperties obj.Object) *Stream {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (s *Stream) WithScriptingProperties(scriptingProperties obj.Object) *Stream {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return s
 }
 
 // Open wraps the corresponding Objective-C method.
-func (x *Stream) Open() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("open"))
+func (s *Stream) Open() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("open"))
 }
 
 // Close wraps the corresponding Objective-C method.
-func (x *Stream) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (s *Stream) Close() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("close"))
 }
 
 // PropertyForKey wraps the corresponding Objective-C method.
-func (x *Stream) PropertyForKey(key *String) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:"), objref.IDOf(key))
+func (s *Stream) PropertyForKey(key *String) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("propertyForKey:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // SetPropertyForKey wraps the corresponding Objective-C method.
-func (x *Stream) SetPropertyForKey(property obj.Object, key *String) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setProperty:forKey:"), objref.IDOf(property), objref.IDOf(key))
+func (s *Stream) SetPropertyForKey(property obj.Object, key *String) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("setProperty:forKey:"), objref.IDOf(property), objref.IDOf(key))
 	return _r
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
-func (x *Stream) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
+func (s *Stream) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
-func (x *Stream) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
+func (s *Stream) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // StreamStatus wraps the corresponding Objective-C method.
-func (x *Stream) StreamStatus() StreamStatus {
-	_r := objc.Send[StreamStatus](objref.IDOf(x), objc.RegisterName("streamStatus"))
+func (s *Stream) StreamStatus() StreamStatus {
+	_r := objc.Send[StreamStatus](objref.IDOf(s), objc.RegisterName("streamStatus"))
 	return _r
 }
-
-// Streamable is the interface implemented by [Stream], for mocking and DI.
-type Streamable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Stream
-	Open()
-	Close()
-	PropertyForKey(key *String) obj.Object
-	SetPropertyForKey(property obj.Object, key *String) bool
-	ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String)
-	RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String)
-	StreamStatus() StreamStatus
-}
-
-var _ Streamable = (*Stream)(nil)
 
 // isStream marks Stream — and, by embedding promotion, its
 // subclasses — as a member of the Stream hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Stream) isStream() {}
+func (s *Stream) isStream() {}
 
 var _ StreamProvider = (*Stream)(nil)

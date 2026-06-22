@@ -46,24 +46,24 @@ func attitudeAdopt(id objc.ID) *Attitude {
 }
 
 // Description returns the object's -description text.
-func (x *Attitude) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Attitude) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Attitude) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Attitude) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Attitude) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Attitude) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Attitude) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Attitude) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAttitude creates a new Attitude.
@@ -73,35 +73,24 @@ func NewAttitude() *Attitude {
 }
 
 // MultiplyByInverseOfAttitude yields the change in attitude given a specific attitude.
-func (x *Attitude) MultiplyByInverseOfAttitude(attitude *Attitude) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiplyByInverseOfAttitude:"), objref.IDOf(attitude))
+func (a *Attitude) MultiplyByInverseOfAttitude(attitude *Attitude) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("multiplyByInverseOfAttitude:"), objref.IDOf(attitude))
 }
 
 // Roll wraps the corresponding Objective-C method.
-func (x *Attitude) Roll() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("roll"))
+func (a *Attitude) Roll() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("roll"))
 	return _r
 }
 
 // Pitch wraps the corresponding Objective-C method.
-func (x *Attitude) Pitch() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
+func (a *Attitude) Pitch() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("pitch"))
 	return _r
 }
 
 // Yaw wraps the corresponding Objective-C method.
-func (x *Attitude) Yaw() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yaw"))
+func (a *Attitude) Yaw() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("yaw"))
 	return _r
 }
-
-// Attitudeable is the interface implemented by [Attitude], for mocking and DI.
-type Attitudeable interface {
-	obj.Object
-	MultiplyByInverseOfAttitude(attitude *Attitude)
-	Roll() float64
-	Pitch() float64
-	Yaw() float64
-}
-
-var _ Attitudeable = (*Attitude)(nil)

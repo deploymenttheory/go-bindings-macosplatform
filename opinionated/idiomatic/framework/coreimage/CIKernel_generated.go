@@ -48,46 +48,38 @@ func kernelAdopt(id objc.ID) *Kernel {
 }
 
 // Description returns the object's -description text.
-func (x *Kernel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (k *Kernel) Description() string {
+	return rt.Description(objref.IDOf(k))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Kernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (k *Kernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(k), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Kernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (k *Kernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(k), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Kernel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (k *Kernel) String() string {
+	return rt.Description(objref.IDOf(k))
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Kernel) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (k *Kernel) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Kernelable is the interface implemented by [Kernel], for mocking and DI.
-type Kernelable interface {
-	obj.Object
-	Name() string
-}
-
-var _ Kernelable = (*Kernel)(nil)
-
 // isKernel marks Kernel — and, by embedding promotion, its
 // subclasses — as a member of the Kernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Kernel) isKernel() {}
+func (k *Kernel) isKernel() {}
 
 var _ KernelProvider = (*Kernel)(nil)

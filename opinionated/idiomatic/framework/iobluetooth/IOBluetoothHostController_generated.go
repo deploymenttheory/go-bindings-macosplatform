@@ -46,24 +46,24 @@ func iOBluetoothHostControllerAdopt(id objc.ID) *IOBluetoothHostController {
 }
 
 // Description returns the object's -description text.
-func (x *IOBluetoothHostController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ibhc *IOBluetoothHostController) Description() string {
+	return rt.Description(objref.IDOf(ibhc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothHostController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ibhc *IOBluetoothHostController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ibhc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothHostController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ibhc *IOBluetoothHostController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ibhc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IOBluetoothHostController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ibhc *IOBluetoothHostController) String() string {
+	return rt.Description(objref.IDOf(ibhc))
 }
 
 // NewIOBluetoothHostController creates a new IOBluetoothHostController.
@@ -73,26 +73,26 @@ func NewIOBluetoothHostController() *IOBluetoothHostController {
 }
 
 // WithDelegate sets the property and returns the receiver so calls can be chained.
-func (x *IOBluetoothHostController) WithDelegate(delegate obj.Object) *IOBluetoothHostController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+func (ibhc *IOBluetoothHostController) WithDelegate(delegate obj.Object) *IOBluetoothHostController {
+	objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return ibhc
 }
 
 // ClassOfDevice gets the current class of device value.
-func (x *IOBluetoothHostController) ClassOfDevice() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("classOfDevice"))
+func (ibhc *IOBluetoothHostController) ClassOfDevice() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibhc), objc.RegisterName("classOfDevice"))
 	return _r
 }
 
 // SetClassOfDeviceForTimeInterval sets the current class of device value, for the specified amount of time. Note that the time interval must be set and valid. The range of acceptable values is 30-120 seconds. Anything above or below will be rounded up, or down, as appropriate.
-func (x *IOBluetoothHostController) SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setClassOfDevice:forTimeInterval:"), classOfDevice, seconds)
+func (ibhc *IOBluetoothHostController) SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int {
+	_r := objc.Send[int](objref.IDOf(ibhc), objc.RegisterName("setClassOfDevice:forTimeInterval:"), classOfDevice, seconds)
 	return _r
 }
 
-// AddressAsString convience routine to get the HCI controller’s Bluetooth address as an NSString object.
-func (x *IOBluetoothHostController) AddressAsString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressAsString"))
+// AddressAsString returns convience routine to get the HCI controller’s Bluetooth address as an NSString object.
+func (ibhc *IOBluetoothHostController) AddressAsString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("addressAsString"))
 	if _r == 0 {
 		return ""
 	}
@@ -100,8 +100,8 @@ func (x *IOBluetoothHostController) AddressAsString() string {
 }
 
 // NameAsString gets the “friendly” name of HCI controller.
-func (x *IOBluetoothHostController) NameAsString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameAsString"))
+func (ibhc *IOBluetoothHostController) NameAsString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("nameAsString"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,26 +109,7 @@ func (x *IOBluetoothHostController) NameAsString() string {
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *IOBluetoothHostController) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (ibhc *IOBluetoothHostController) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
-
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *IOBluetoothHostController) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
-// IOBluetoothHostControllerable is the interface implemented by [IOBluetoothHostController], for mocking and DI.
-type IOBluetoothHostControllerable interface {
-	obj.Object
-	WithDelegate(delegate obj.Object) *IOBluetoothHostController
-	ClassOfDevice() uint32
-	SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int
-	AddressAsString() string
-	NameAsString() string
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-}
-
-var _ IOBluetoothHostControllerable = (*IOBluetoothHostController)(nil)

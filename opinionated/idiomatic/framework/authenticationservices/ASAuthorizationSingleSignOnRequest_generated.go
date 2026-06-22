@@ -52,84 +52,57 @@ func NewAuthorizationSingleSignOnRequest() *AuthorizationSingleSignOnRequest {
 	return authorizationSingleSignOnRequestAdopt(_id)
 }
 
-// WithAuthorizationOptions options that control the authorization process.
-func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...obj.Object) *AuthorizationSingleSignOnRequest {
+// WithAuthorizationOptions sets options that control the authorization process.
+func (assor *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...obj.Object) *AuthorizationSingleSignOnRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorizationOptions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("setAuthorizationOptions:"), _arr)
+	return assor
 }
 
-// WithUserInterfaceEnabled enables or disables the authorization user interface. The default values is YES. If user interface is not enabled, then the authorization will fail with
-func (x *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceEnabled:"), userInterfaceEnabled)
-	return x
+// WithUserInterfaceEnabled sets enables or disables the authorization user interface. The default values is YES. If user interface is not enabled, then the authorization will fail with
+func (assor *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("setUserInterfaceEnabled:"), userInterfaceEnabled)
+	return assor
 }
 
-// WithRequestedScopes the contact information to be requested from the user during authentication.
-func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...obj.Object) *AuthorizationSingleSignOnRequest {
+// WithRequestedScopes sets the contact information to be requested from the user during authentication.
+func (assor *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...obj.Object) *AuthorizationSingleSignOnRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedScopes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("setRequestedScopes:"), _arr)
+	return assor
 }
 
-// WithState data that’s returned to you unmodified in the corresponding credential after a successful authentication.
-func (x *AuthorizationSingleSignOnRequest) WithState(state string) *AuthorizationSingleSignOnRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), purego.NSString(state))
-	return x
+// WithState sets data that’s returned to you unmodified in the corresponding credential after a successful authentication.
+func (assor *AuthorizationSingleSignOnRequest) WithState(state string) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("setState:"), purego.NSString(state))
+	return assor
 }
 
-// WithNonce a string value to pass to the identity provider.
-func (x *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *AuthorizationSingleSignOnRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), purego.NSString(nonce))
-	return x
+// WithNonce sets a string value to pass to the identity provider.
+func (assor *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("setNonce:"), purego.NSString(nonce))
+	return assor
 }
 
-// WithRequestedOperation the OpenID authentication operation you want this request to perform.
-func (x *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationSingleSignOnRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
-	return x
+// WithRequestedOperation sets the OpenID authentication operation you want this request to perform.
+func (assor *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
+	return assor
 }
 
-// AuthorizationOptions parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
+// AuthorizationOptions returns parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
 //
 // AuthorizationOptions returns the collection as a Go slice.
-func (x *AuthorizationSingleSignOnRequest) AuthorizationOptions() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationOptions"))
+func (assor *AuthorizationSingleSignOnRequest) AuthorizationOptions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("authorizationOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetAuthorizationOptions wraps the corresponding Objective-C method.
-func (x *AuthorizationSingleSignOnRequest) SetAuthorizationOptions(authorizationOptions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorizationOptions:"), purego.SliceToNSArray(authorizationOptions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// IsUserInterfaceEnabled enables or disables the authorization user interface. The default values is YES. If user interface is not enabled, then the authorization will fail with
-func (x *AuthorizationSingleSignOnRequest) IsUserInterfaceEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserInterfaceEnabled"))
+// IsUserInterfaceEnabled reports whether enables or disables the authorization user interface. The default values is true. If user interface is not enabled, then the authorization will fail with
+func (assor *AuthorizationSingleSignOnRequest) IsUserInterfaceEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(assor), objc.RegisterName("isUserInterfaceEnabled"))
 	return _r
 }
-
-// SetUserInterfaceEnabled wraps the corresponding Objective-C method.
-func (x *AuthorizationSingleSignOnRequest) SetUserInterfaceEnabled(userInterfaceEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceEnabled:"), userInterfaceEnabled)
-}
-
-// AuthorizationSingleSignOnRequestable is the interface implemented by [AuthorizationSingleSignOnRequest], for mocking and DI.
-type AuthorizationSingleSignOnRequestable interface {
-	obj.Object
-	WithAuthorizationOptions(items ...obj.Object) *AuthorizationSingleSignOnRequest
-	WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest
-	WithRequestedScopes(items ...obj.Object) *AuthorizationSingleSignOnRequest
-	WithState(state string) *AuthorizationSingleSignOnRequest
-	WithNonce(nonce string) *AuthorizationSingleSignOnRequest
-	WithRequestedOperation(requestedOperation obj.Object) *AuthorizationSingleSignOnRequest
-	AuthorizationOptions() []obj.Object
-	SetAuthorizationOptions(authorizationOptions []obj.Object)
-	IsUserInterfaceEnabled() bool
-	SetUserInterfaceEnabled(userInterfaceEnabled bool)
-}
-
-var _ AuthorizationSingleSignOnRequestable = (*AuthorizationSingleSignOnRequest)(nil)
 
 var _ AuthorizationOpenIDRequestProvider = (*AuthorizationSingleSignOnRequest)(nil)
 

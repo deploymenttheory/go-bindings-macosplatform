@@ -44,24 +44,24 @@ func transformScaleOpAdopt(id objc.ID) *TransformScaleOp {
 }
 
 // Description returns the object's -description text.
-func (x *TransformScaleOp) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tso *TransformScaleOp) Description() string {
+	return rt.Description(objref.IDOf(tso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformScaleOp) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tso *TransformScaleOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformScaleOp) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tso *TransformScaleOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TransformScaleOp) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tso *TransformScaleOp) String() string {
+	return rt.Description(objref.IDOf(tso))
 }
 
 // NewTransformScaleOp creates a new TransformScaleOp.
@@ -71,8 +71,8 @@ func NewTransformScaleOp() *TransformScaleOp {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TransformScaleOp) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (tso *TransformScaleOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tso), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,16 +80,7 @@ func (x *TransformScaleOp) Name() string {
 }
 
 // AnimatedValue wraps the corresponding Objective-C method.
-func (x *TransformScaleOp) AnimatedValue() *AnimatedVector3 {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+func (tso *TransformScaleOp) AnimatedValue() *AnimatedVector3 {
+	_r := objc.Send[objc.ID](objref.IDOf(tso), objc.RegisterName("animatedValue"))
 	return AnimatedVector3FromID(_r)
 }
-
-// TransformScaleOpable is the interface implemented by [TransformScaleOp], for mocking and DI.
-type TransformScaleOpable interface {
-	obj.Object
-	Name() string
-	AnimatedValue() *AnimatedVector3
-}
-
-var _ TransformScaleOpable = (*TransformScaleOp)(nil)

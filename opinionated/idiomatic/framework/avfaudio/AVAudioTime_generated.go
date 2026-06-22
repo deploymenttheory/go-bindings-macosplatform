@@ -46,24 +46,24 @@ func audioTimeAdopt(id objc.ID) *AudioTime {
 }
 
 // Description returns the object's -description text.
-func (x *AudioTime) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (at *AudioTime) Description() string {
+	return rt.Description(objref.IDOf(at))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioTime) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (at *AudioTime) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(at), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioTime) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (at *AudioTime) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(at), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioTime) String() string {
-	return rt.Description(objref.IDOf(x))
+func (at *AudioTime) String() string {
+	return rt.Description(objref.IDOf(at))
 }
 
 // NewAudioTimeWithHostTime creates an audio time object with the specified host time.
@@ -88,50 +88,37 @@ func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64,
 }
 
 // ExtrapolateTimeFromAnchor creates an audio time object by converting between host time and sample time.
-func (x *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *AudioTime) *AudioTime {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extrapolateTimeFromAnchor:"), objref.IDOf(anchorTime))
+func (at *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *AudioTime) *AudioTime {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("extrapolateTimeFromAnchor:"), objref.IDOf(anchorTime))
 	return AudioTimeFromID(_r)
 }
 
-// IsHostTimeValid whether the hostTime property is valid.
-func (x *AudioTime) IsHostTimeValid() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHostTimeValid"))
+// IsHostTimeValid reports whether the hostTime property is valid.
+func (at *AudioTime) IsHostTimeValid() bool {
+	_r := objc.Send[bool](objref.IDOf(at), objc.RegisterName("isHostTimeValid"))
 	return _r
 }
 
-// HostTime the host time.
-func (x *AudioTime) HostTime() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("hostTime"))
+// HostTime returns the host time.
+func (at *AudioTime) HostTime() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(at), objc.RegisterName("hostTime"))
 	return _r
 }
 
-// IsSampleTimeValid whether the sampleTime and sampleRate properties are valid.
-func (x *AudioTime) IsSampleTimeValid() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSampleTimeValid"))
+// IsSampleTimeValid reports whether the sampleTime and sampleRate properties are valid.
+func (at *AudioTime) IsSampleTimeValid() bool {
+	_r := objc.Send[bool](objref.IDOf(at), objc.RegisterName("isSampleTimeValid"))
 	return _r
 }
 
-// SampleTime the time as a number of audio samples, as tracked by the current audio device.
-func (x *AudioTime) SampleTime() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("sampleTime"))
+// SampleTime returns the time as a number of audio samples, as tracked by the current audio device.
+func (at *AudioTime) SampleTime() int64 {
+	_r := objc.Send[int64](objref.IDOf(at), objc.RegisterName("sampleTime"))
 	return _r
 }
 
-// SampleRate the sample rate at which sampleTime is being expressed.
-func (x *AudioTime) SampleRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sampleRate"))
+// SampleRate returns the sample rate at which sampleTime is being expressed.
+func (at *AudioTime) SampleRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(at), objc.RegisterName("sampleRate"))
 	return _r
 }
-
-// AudioTimeable is the interface implemented by [AudioTime], for mocking and DI.
-type AudioTimeable interface {
-	obj.Object
-	ExtrapolateTimeFromAnchor(anchorTime *AudioTime) *AudioTime
-	IsHostTimeValid() bool
-	HostTime() uint64
-	IsSampleTimeValid() bool
-	SampleTime() int64
-	SampleRate() float64
-}
-
-var _ AudioTimeable = (*AudioTime)(nil)

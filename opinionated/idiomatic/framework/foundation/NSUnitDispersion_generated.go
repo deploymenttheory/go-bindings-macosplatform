@@ -53,18 +53,10 @@ func NewUnitDispersion() *UnitDispersion {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitDispersion) WithScriptingProperties(scriptingProperties obj.Object) *UnitDispersion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ud *UnitDispersion) WithScriptingProperties(scriptingProperties obj.Object) *UnitDispersion {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ud
 }
-
-// UnitDispersionable is the interface implemented by [UnitDispersion], for mocking and DI.
-type UnitDispersionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitDispersion
-}
-
-var _ UnitDispersionable = (*UnitDispersion)(nil)
 
 var _ DimensionProvider = (*UnitDispersion)(nil)
 

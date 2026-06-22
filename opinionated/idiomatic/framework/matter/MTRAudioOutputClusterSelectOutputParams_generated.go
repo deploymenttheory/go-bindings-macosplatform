@@ -44,24 +44,24 @@ func mTRAudioOutputClusterSelectOutputParamsAdopt(id objc.ID) *MTRAudioOutputClu
 }
 
 // Description returns the object's -description text.
-func (x *MTRAudioOutputClusterSelectOutputParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) Description() string {
+	return rt.Description(objref.IDOf(maocsop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAudioOutputClusterSelectOutputParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maocsop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAudioOutputClusterSelectOutputParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maocsop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAudioOutputClusterSelectOutputParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) String() string {
+	return rt.Description(objref.IDOf(maocsop))
 }
 
 // NewMTRAudioOutputClusterSelectOutputParams creates a new MTRAudioOutputClusterSelectOutputParams.
@@ -71,68 +71,37 @@ func NewMTRAudioOutputClusterSelectOutputParams() *MTRAudioOutputClusterSelectOu
 }
 
 // WithIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAudioOutputClusterSelectOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterSelectOutputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
-	return x
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterSelectOutputParams {
+	objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("setIndex:"), objref.IDOf(index))
+	return maocsop
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAudioOutputClusterSelectOutputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterSelectOutputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterSelectOutputParams {
+	objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return maocsop
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAudioOutputClusterSelectOutputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterSelectOutputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterSelectOutputParams {
+	objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return maocsop
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterSelectOutputParams) Index() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("index"))
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) Index() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
-// SetIndex wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterSelectOutputParams) SetIndex(index obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAudioOutputClusterSelectOutputParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterSelectOutputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAudioOutputClusterSelectOutputParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maocsop *MTRAudioOutputClusterSelectOutputParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRAudioOutputClusterSelectOutputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRAudioOutputClusterSelectOutputParamsable is the interface implemented by [MTRAudioOutputClusterSelectOutputParams], for mocking and DI.
-type MTRAudioOutputClusterSelectOutputParamsable interface {
-	obj.Object
-	WithIndex(index obj.Object) *MTRAudioOutputClusterSelectOutputParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterSelectOutputParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterSelectOutputParams
-	Index() obj.Object
-	SetIndex(index obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRAudioOutputClusterSelectOutputParamsable = (*MTRAudioOutputClusterSelectOutputParams)(nil)

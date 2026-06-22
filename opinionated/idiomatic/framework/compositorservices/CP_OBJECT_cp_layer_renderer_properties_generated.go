@@ -46,24 +46,24 @@ func _cp_layer_renderer_propertiesAdopt(id objc.ID) *_cp_layer_renderer_properti
 }
 
 // Description returns the object's -description text.
-func (x *_cp_layer_renderer_properties) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (clrp *_cp_layer_renderer_properties) Description() string {
+	return rt.Description(objref.IDOf(clrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *_cp_layer_renderer_properties) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (clrp *_cp_layer_renderer_properties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(clrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *_cp_layer_renderer_properties) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (clrp *_cp_layer_renderer_properties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(clrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *_cp_layer_renderer_properties) String() string {
-	return rt.Description(objref.IDOf(x))
+func (clrp *_cp_layer_renderer_properties) String() string {
+	return rt.Description(objref.IDOf(clrp))
 }
 
 // New_cp_layer_renderer_properties creates a new _cp_layer_renderer_properties.
@@ -71,10 +71,3 @@ func New_cp_layer_renderer_properties() *_cp_layer_renderer_properties {
 	_id := objc.Send[objc.ID](objc.ID(_class("CP_OBJECT_cp_layer_renderer_properties")), objc.RegisterName("new"))
 	return _cp_layer_renderer_propertiesAdopt(_id)
 }
-
-// _cp_layer_renderer_propertiesable is the interface implemented by [_cp_layer_renderer_properties], for mocking and DI.
-type _cp_layer_renderer_propertiesable interface {
-	obj.Object
-}
-
-var _ _cp_layer_renderer_propertiesable = (*_cp_layer_renderer_properties)(nil)

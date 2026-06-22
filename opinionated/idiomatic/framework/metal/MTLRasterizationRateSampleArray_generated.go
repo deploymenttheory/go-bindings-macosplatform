@@ -46,24 +46,24 @@ func rasterizationRateSampleArrayAdopt(id objc.ID) *RasterizationRateSampleArray
 }
 
 // Description returns the object's -description text.
-func (x *RasterizationRateSampleArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rrsa *RasterizationRateSampleArray) Description() string {
+	return rt.Description(objref.IDOf(rrsa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RasterizationRateSampleArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rrsa *RasterizationRateSampleArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rrsa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RasterizationRateSampleArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rrsa *RasterizationRateSampleArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rrsa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RasterizationRateSampleArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rrsa *RasterizationRateSampleArray) String() string {
+	return rt.Description(objref.IDOf(rrsa))
 }
 
 // NewRasterizationRateSampleArray creates a new RasterizationRateSampleArray.
@@ -73,21 +73,12 @@ func NewRasterizationRateSampleArray() *RasterizationRateSampleArray {
 }
 
 // ObjectAtIndexedSubscript retrieves the sample value at the specified index.
-func (x *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+func (rrsa *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rrsa), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return obj.Wrap(_r)
 }
 
 // SetObjectAtIndexedSubscript stores a sample value at the specified index.
-func (x *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value obj.Object, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(value), index)
+func (rrsa *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(rrsa), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(value), index)
 }
-
-// RasterizationRateSampleArrayable is the interface implemented by [RasterizationRateSampleArray], for mocking and DI.
-type RasterizationRateSampleArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(index int) obj.Object
-	SetObjectAtIndexedSubscript(value obj.Object, index int)
-}
-
-var _ RasterizationRateSampleArrayable = (*RasterizationRateSampleArray)(nil)

@@ -54,129 +54,105 @@ func NewPhotometricLightWithIESProfile(uRL string) *PhotometricLight {
 	return photometricLightAdopt(_id)
 }
 
-// WithColor the color of the light source.
-func (x *PhotometricLight) WithColor(color obj.Object) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-	return x
+// WithColor sets the color of the light source.
+func (pl *PhotometricLight) WithColor(color obj.Object) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return pl
 }
 
-// WithLumens the total visible intensity of the light source, in lumens.
-func (x *PhotometricLight) WithLumens(lumens float32) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLumens:"), lumens)
-	return x
+// WithLumens sets the total visible intensity of the light source, in lumens.
+func (pl *PhotometricLight) WithLumens(lumens float32) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setLumens:"), lumens)
+	return pl
 }
 
-// WithInnerConeAngle the radial angle, in degrees, of the area fully illuminated by the light.
-func (x *PhotometricLight) WithInnerConeAngle(innerConeAngle float32) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
-	return x
+// WithInnerConeAngle sets the radial angle, in degrees, of the area fully illuminated by the light.
+func (pl *PhotometricLight) WithInnerConeAngle(innerConeAngle float32) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
+	return pl
 }
 
-// WithOuterConeAngle the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
-func (x *PhotometricLight) WithOuterConeAngle(outerConeAngle float32) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
-	return x
+// WithOuterConeAngle sets the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
+func (pl *PhotometricLight) WithOuterConeAngle(outerConeAngle float32) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
+	return pl
 }
 
-// WithAttenuationStartDistance the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
-func (x *PhotometricLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
-	return x
+// WithAttenuationStartDistance sets the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
+func (pl *PhotometricLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
+	return pl
 }
 
-// WithAttenuationEndDistance the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
-func (x *PhotometricLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
-	return x
+// WithAttenuationEndDistance sets the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
+func (pl *PhotometricLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
+	return pl
 }
 
-// WithLightType the type of the light.
-func (x *PhotometricLight) WithLightType(lightType LightType) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
-	return x
+// WithLightType sets the type of the light.
+func (pl *PhotometricLight) WithLightType(lightType LightType) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setLightType:"), lightType)
+	return pl
 }
 
-// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
-func (x *PhotometricLight) WithColorSpace(colorSpace string) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
-	return x
+// WithColorSpace sets the name of the Core Graphics color space to be used for interpreting the light’s color information.
+func (pl *PhotometricLight) WithColorSpace(colorSpace string) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
+	return pl
 }
 
-// WithParent the parent object that contains this object.
-func (x *PhotometricLight) WithParent(parent ObjectProvider) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (pl *PhotometricLight) WithParent(parent ObjectProvider) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return pl
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *PhotometricLight) WithInstance(instance ObjectProvider) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (pl *PhotometricLight) WithInstance(instance ObjectProvider) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return pl
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *PhotometricLight) WithHidden(hidden bool) *PhotometricLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (pl *PhotometricLight) WithHidden(hidden bool) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setHidden:"), hidden)
+	return pl
 }
 
 // GenerateSphericalHarmonicsFromLight generates spherical harmonics information based on the light’s photometry data.
-func (x *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateSphericalHarmonicsFromLight:"), sphericalHarmonicsLevel)
+func (pl *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel int) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("generateSphericalHarmonicsFromLight:"), sphericalHarmonicsLevel)
 }
 
 // GenerateCubemapFromLight generates a cube map texture from the light’s photometry data.
-func (x *PhotometricLight) GenerateCubemapFromLight(textureSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateCubemapFromLight:"), textureSize)
+func (pl *PhotometricLight) GenerateCubemapFromLight(textureSize int) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("generateCubemapFromLight:"), textureSize)
 }
 
 // GenerateTexture generate an IES compliant MDLTexture 1D when the number of horizontal angles is one and the innerConeAngle is < 180 2D when the previous statement fails and innerConeAngle < 89 3D in all other cases the parameter textureSize is the size in pixels of the texture image. For a size of N, 1D generates an Nx1 image, 2D generates an NxN image, 3D generates an Nx(N*6) image (i.e. cubemap).
-func (x *PhotometricLight) GenerateTexture(textureSize int) *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateTexture:"), textureSize)
+func (pl *PhotometricLight) GenerateTexture(textureSize int) *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("generateTexture:"), textureSize)
 	return TextureFromID(_r)
 }
 
 // LightCubeMap wraps the corresponding Objective-C method.
-func (x *PhotometricLight) LightCubeMap() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lightCubeMap"))
+func (pl *PhotometricLight) LightCubeMap() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("lightCubeMap"))
 	return TextureFromID(_r)
 }
 
 // SphericalHarmonicsLevel wraps the corresponding Objective-C method.
-func (x *PhotometricLight) SphericalHarmonicsLevel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsLevel"))
+func (pl *PhotometricLight) SphericalHarmonicsLevel() int {
+	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("sphericalHarmonicsLevel"))
 	return _r
 }
 
 // SphericalHarmonicsCoefficients wraps the corresponding Objective-C method.
-func (x *PhotometricLight) SphericalHarmonicsCoefficients() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsCoefficients"))
+func (pl *PhotometricLight) SphericalHarmonicsCoefficients() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("sphericalHarmonicsCoefficients"))
 	return obj.Wrap(_r)
 }
-
-// PhotometricLightable is the interface implemented by [PhotometricLight], for mocking and DI.
-type PhotometricLightable interface {
-	obj.Object
-	WithColor(color obj.Object) *PhotometricLight
-	WithLumens(lumens float32) *PhotometricLight
-	WithInnerConeAngle(innerConeAngle float32) *PhotometricLight
-	WithOuterConeAngle(outerConeAngle float32) *PhotometricLight
-	WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight
-	WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight
-	WithLightType(lightType LightType) *PhotometricLight
-	WithColorSpace(colorSpace string) *PhotometricLight
-	WithParent(parent ObjectProvider) *PhotometricLight
-	WithInstance(instance ObjectProvider) *PhotometricLight
-	WithHidden(hidden bool) *PhotometricLight
-	GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel int)
-	GenerateCubemapFromLight(textureSize int)
-	GenerateTexture(textureSize int) *Texture
-	LightCubeMap() *Texture
-	SphericalHarmonicsLevel() int
-	SphericalHarmonicsCoefficients() obj.Object
-}
-
-var _ PhotometricLightable = (*PhotometricLight)(nil)
 
 var _ PhysicallyPlausibleLightProvider = (*PhotometricLight)(nil)
 

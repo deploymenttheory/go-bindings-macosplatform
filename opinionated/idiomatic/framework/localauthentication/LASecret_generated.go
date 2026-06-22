@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func secretAdopt(id objc.ID) *Secret {
 }
 
 // Description returns the object's -description text.
-func (x *Secret) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Secret) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Secret) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Secret) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Secret) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Secret) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Secret) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Secret) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSecret creates a new Secret.
@@ -77,7 +78,7 @@ func NewSecret() *Secret {
 // LoadDataWithCompletion retrieves data stored in a secret.
 //
 // LoadDataWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Secret) LoadDataWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (s *Secret) LoadDataWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func (x *Secret) LoadDataWithCompletion(ctx context.Context) (result obj.Object,
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadDataWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("loadDataWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -98,11 +99,3 @@ func (x *Secret) LoadDataWithCompletion(ctx context.Context) (result obj.Object,
 		return _zero, ctx.Err()
 	}
 }
-
-// Secretable is the interface implemented by [Secret], for mocking and DI.
-type Secretable interface {
-	obj.Object
-	LoadDataWithCompletion(ctx context.Context) (obj.Object, error)
-}
-
-var _ Secretable = (*Secret)(nil)

@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,59 +52,35 @@ func NewMIDIPolyPressureEventWithChannelKeyPressure(channel int, key int, pressu
 	return mIDIPolyPressureEventAdopt(_id)
 }
 
-// WithKey the MIDI key number.
-func (x *MIDIPolyPressureEvent) WithKey(key int) *MIDIPolyPressureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
-	return x
+// WithKey sets the MIDI key number.
+func (mppe *MIDIPolyPressureEvent) WithKey(key int) *MIDIPolyPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(mppe), objc.RegisterName("setKey:"), key)
+	return mppe
 }
 
-// WithPressure the poly pressure value for the requested key.
-func (x *MIDIPolyPressureEvent) WithPressure(pressure int) *MIDIPolyPressureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
-	return x
+// WithPressure sets the poly pressure value for the requested key.
+func (mppe *MIDIPolyPressureEvent) WithPressure(pressure int) *MIDIPolyPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(mppe), objc.RegisterName("setPressure:"), pressure)
+	return mppe
 }
 
-// WithChannel the MIDI channel.
-func (x *MIDIPolyPressureEvent) WithChannel(channel int) *MIDIPolyPressureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+// WithChannel sets the MIDI channel.
+func (mppe *MIDIPolyPressureEvent) WithChannel(channel int) *MIDIPolyPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(mppe), objc.RegisterName("setChannel:"), channel)
+	return mppe
 }
 
 // Key wraps the corresponding Objective-C method.
-func (x *MIDIPolyPressureEvent) Key() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("key"))
+func (mppe *MIDIPolyPressureEvent) Key() int {
+	_r := objc.Send[int](objref.IDOf(mppe), objc.RegisterName("key"))
 	return _r
-}
-
-// SetKey wraps the corresponding Objective-C method.
-func (x *MIDIPolyPressureEvent) SetKey(key int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
 }
 
 // Pressure wraps the corresponding Objective-C method.
-func (x *MIDIPolyPressureEvent) Pressure() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pressure"))
+func (mppe *MIDIPolyPressureEvent) Pressure() int {
+	_r := objc.Send[int](objref.IDOf(mppe), objc.RegisterName("pressure"))
 	return _r
 }
-
-// SetPressure wraps the corresponding Objective-C method.
-func (x *MIDIPolyPressureEvent) SetPressure(pressure int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
-}
-
-// MIDIPolyPressureEventable is the interface implemented by [MIDIPolyPressureEvent], for mocking and DI.
-type MIDIPolyPressureEventable interface {
-	obj.Object
-	WithKey(key int) *MIDIPolyPressureEvent
-	WithPressure(pressure int) *MIDIPolyPressureEvent
-	WithChannel(channel int) *MIDIPolyPressureEvent
-	Key() int
-	SetKey(key int)
-	Pressure() int
-	SetPressure(pressure int)
-}
-
-var _ MIDIPolyPressureEventable = (*MIDIPolyPressureEvent)(nil)
 
 var _ MIDIChannelEventProvider = (*MIDIPolyPressureEvent)(nil)
 

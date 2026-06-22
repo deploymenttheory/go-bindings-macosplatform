@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewSoftmaxLayer() *SoftmaxLayer {
 	return softmaxLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *SoftmaxLayer) WithLabel(label string) *SoftmaxLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (sl *SoftmaxLayer) WithLabel(label string) *SoftmaxLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return sl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (sl *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return sl
 }
 
-// Operation the softmax operation.  Supported values are softmax and log softmax.
-func (x *SoftmaxLayer) Operation() SoftmaxOperation {
-	_r := objc.Send[SoftmaxOperation](objref.IDOf(x), objc.RegisterName("operation"))
+// Operation returns the softmax operation.  Supported values are softmax and log softmax.
+func (sl *SoftmaxLayer) Operation() SoftmaxOperation {
+	_r := objc.Send[SoftmaxOperation](objref.IDOf(sl), objc.RegisterName("operation"))
 	return _r
 }
 
-// Dimension the  dimension over which softmax operation should be performed
-func (x *SoftmaxLayer) Dimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+// Dimension returns the  dimension over which softmax operation should be performed
+func (sl *SoftmaxLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("dimension"))
 	return _r
 }
-
-// SoftmaxLayerable is the interface implemented by [SoftmaxLayer], for mocking and DI.
-type SoftmaxLayerable interface {
-	obj.Object
-	WithLabel(label string) *SoftmaxLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer
-	Operation() SoftmaxOperation
-	Dimension() int
-}
-
-var _ SoftmaxLayerable = (*SoftmaxLayer)(nil)
 
 var _ LayerProvider = (*SoftmaxLayer)(nil)

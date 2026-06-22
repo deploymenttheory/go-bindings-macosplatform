@@ -52,74 +52,58 @@ func NewDeleteCommand() *DeleteCommand {
 	return deleteCommandAdopt(_id)
 }
 
-// WithDirectParameter sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
-func (x *DeleteCommand) WithDirectParameter(directParameter obj.Object) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
-	return x
+// WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+func (dc *DeleteCommand) WithDirectParameter(directParameter obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
+	return dc
 }
 
-// WithReceiversSpecifier sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
-func (x *DeleteCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
-	return x
+// WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+func (dc *DeleteCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
+	return dc
 }
 
-// WithArguments sets the arguments of the command to args.
-func (x *DeleteCommand) WithArguments(arguments obj.Object) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
-	return x
+// WithArguments sets sets the arguments of the command to args.
+func (dc *DeleteCommand) WithArguments(arguments obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+	return dc
 }
 
-// WithScriptErrorNumber sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
-func (x *DeleteCommand) WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
-	return x
+// WithScriptErrorNumber sets sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+func (dc *DeleteCommand) WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
+	return dc
 }
 
-// WithScriptErrorOffendingObjectDescriptor sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *DeleteCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
-	return x
+// WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (dc *DeleteCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
+	return dc
 }
 
-// WithScriptErrorExpectedTypeDescriptor sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *DeleteCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
-	return x
+// WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (dc *DeleteCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
+	return dc
 }
 
-// WithScriptErrorString sets a script error string that is associated with execution of the command.
-func (x *DeleteCommand) WithScriptErrorString(scriptErrorString StringProvider) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
-	return x
+// WithScriptErrorString sets sets a script error string that is associated with execution of the command.
+func (dc *DeleteCommand) WithScriptErrorString(scriptErrorString StringProvider) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
+	return dc
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DeleteCommand) WithScriptingProperties(scriptingProperties obj.Object) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (dc *DeleteCommand) WithScriptingProperties(scriptingProperties obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return dc
 }
 
 // KeySpecifier wraps the corresponding Objective-C method.
-func (x *DeleteCommand) KeySpecifier() *ScriptObjectSpecifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySpecifier"))
+func (dc *DeleteCommand) KeySpecifier() *ScriptObjectSpecifier {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
-
-// DeleteCommandable is the interface implemented by [DeleteCommand], for mocking and DI.
-type DeleteCommandable interface {
-	obj.Object
-	WithDirectParameter(directParameter obj.Object) *DeleteCommand
-	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand
-	WithArguments(arguments obj.Object) *DeleteCommand
-	WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand
-	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand
-	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand
-	WithScriptErrorString(scriptErrorString StringProvider) *DeleteCommand
-	WithScriptingProperties(scriptingProperties obj.Object) *DeleteCommand
-	KeySpecifier() *ScriptObjectSpecifier
-}
-
-var _ DeleteCommandable = (*DeleteCommand)(nil)
 
 var _ ScriptCommandProvider = (*DeleteCommand)(nil)

@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewPhysicsBallSocketJoint() *PhysicsBallSocketJoint {
 }
 
 // BodyA wraps the corresponding Objective-C method.
-func (x *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+func (pbsj *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pbsj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyB wraps the corresponding Objective-C method.
-func (x *PhysicsBallSocketJoint) BodyB() *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+func (pbsj *PhysicsBallSocketJoint) BodyB() *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pbsj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
-
-// PhysicsBallSocketJointable is the interface implemented by [PhysicsBallSocketJoint], for mocking and DI.
-type PhysicsBallSocketJointable interface {
-	obj.Object
-	BodyA() *PhysicsBody
-	BodyB() *PhysicsBody
-}
-
-var _ PhysicsBallSocketJointable = (*PhysicsBallSocketJoint)(nil)
 
 var _ PhysicsBehaviorProvider = (*PhysicsBallSocketJoint)(nil)

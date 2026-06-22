@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,20 +51,12 @@ func NewMathExpressionIdentifierWithContent(content string) *MathExpressionIdent
 }
 
 // Content wraps the corresponding Objective-C method.
-func (x *MathExpressionIdentifier) Content() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+func (mei *MathExpressionIdentifier) Content() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MathExpressionIdentifierable is the interface implemented by [MathExpressionIdentifier], for mocking and DI.
-type MathExpressionIdentifierable interface {
-	obj.Object
-	Content() string
-}
-
-var _ MathExpressionIdentifierable = (*MathExpressionIdentifier)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionIdentifier)(nil)

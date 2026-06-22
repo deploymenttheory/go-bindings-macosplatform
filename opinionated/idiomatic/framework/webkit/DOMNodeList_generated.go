@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +50,16 @@ func NewDOMNodeList() *DOMNodeList {
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMNodeList) Item(index int) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dnl *DOMNodeList) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnl), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMNodeList) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dnl *DOMNodeList) Length() int {
+	_r := objc.Send[int](objref.IDOf(dnl), objc.RegisterName("length"))
 	return _r
 }
-
-// DOMNodeListable is the interface implemented by [DOMNodeList], for mocking and DI.
-type DOMNodeListable interface {
-	obj.Object
-	Item(index int) *DOMNode
-	Length() int
-}
-
-var _ DOMNodeListable = (*DOMNodeList)(nil)
 
 var _ DOMObjectProvider = (*DOMNodeList)(nil)
 

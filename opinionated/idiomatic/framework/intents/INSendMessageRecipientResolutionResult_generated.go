@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,13 +51,6 @@ func NewSendMessageRecipientResolutionResultWithPersonResolutionResult(personRes
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonResolutionResult:"), objref.IDOf(personResolutionResult))
 	return sendMessageRecipientResolutionResultAdopt(_id)
 }
-
-// SendMessageRecipientResolutionResultable is the interface implemented by [SendMessageRecipientResolutionResult], for mocking and DI.
-type SendMessageRecipientResolutionResultable interface {
-	obj.Object
-}
-
-var _ SendMessageRecipientResolutionResultable = (*SendMessageRecipientResolutionResult)(nil)
 
 var _ PersonResolutionResultProvider = (*SendMessageRecipientResolutionResult)(nil)
 

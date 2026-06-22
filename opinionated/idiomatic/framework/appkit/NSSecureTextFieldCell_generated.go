@@ -52,390 +52,324 @@ func NewSecureTextFieldCell() *SecureTextFieldCell {
 	return secureTextFieldCellAdopt(_id)
 }
 
-// WithEchosBullets a Boolean that indicates whether the receiver echoes a bullet character rather than each character typed.
-func (x *SecureTextFieldCell) WithEchosBullets(echosBullets bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEchosBullets:"), echosBullets)
-	return x
+// WithEchosBullets sets a Boolean that indicates whether the receiver echoes a bullet character rather than each character typed.
+func (stfc *SecureTextFieldCell) WithEchosBullets(echosBullets bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setEchosBullets:"), echosBullets)
+	return stfc
 }
 
-// WithBackgroundColor the color of the cell’s background.
-func (x *SecureTextFieldCell) WithBackgroundColor(backgroundColor *Color) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the cell’s background.
+func (stfc *SecureTextFieldCell) WithBackgroundColor(backgroundColor *Color) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return stfc
 }
 
-// WithDrawsBackground a Boolean value that indicates whether the cell draws its background color.
-func (x *SecureTextFieldCell) WithDrawsBackground(drawsBackground bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean value that indicates whether the cell draws its background color.
+func (stfc *SecureTextFieldCell) WithDrawsBackground(drawsBackground bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return stfc
 }
 
-// WithTextColor the color to use to draw the cell’s text.
-func (x *SecureTextFieldCell) WithTextColor(textColor *Color) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-	return x
+// WithTextColor sets the color to use to draw the cell’s text.
+func (stfc *SecureTextFieldCell) WithTextColor(textColor *Color) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	return stfc
 }
 
-// WithBezelStyle the bezel style to use when drawing the text field.
-func (x *SecureTextFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
-	return x
+// WithBezelStyle sets the bezel style to use when drawing the text field.
+func (stfc *SecureTextFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	return stfc
 }
 
-// WithPlaceholderString the placeholder text for the cell, specified as a plain text string.
-func (x *SecureTextFieldCell) WithPlaceholderString(placeholderString string) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-	return x
+// WithPlaceholderString sets the placeholder text for the cell, specified as a plain text string.
+func (stfc *SecureTextFieldCell) WithPlaceholderString(placeholderString string) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	return stfc
 }
 
-// WithPlaceholderAttributedString the placeholder text for the cell, specified as an attributed string.
-func (x *SecureTextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-	return x
+// WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
+func (stfc *SecureTextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	return stfc
 }
 
-// WithAllowedInputSourceLocales an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
-func (x *SecureTextFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *SecureTextFieldCell {
+// WithAllowedInputSourceLocales sets an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+func (stfc *SecureTextFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *SecureTextFieldCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	return stfc
 }
 
-// WithControlView the view associated with the cell.
-func (x *SecureTextFieldCell) WithControlView(controlView ViewProvider) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (stfc *SecureTextFieldCell) WithControlView(controlView ViewProvider) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return stfc
 }
 
-// WithType the type of the cell.
-func (x *SecureTextFieldCell) WithType(type_ CellType) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (stfc *SecureTextFieldCell) WithType(type_ CellType) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setType:"), type_)
+	return stfc
 }
 
-// WithState the cell’s current state.
-func (x *SecureTextFieldCell) WithState(state int) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (stfc *SecureTextFieldCell) WithState(state int) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setState:"), state)
+	return stfc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *SecureTextFieldCell) WithTarget(target obj.Object) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (stfc *SecureTextFieldCell) WithTarget(target obj.Object) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return stfc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *SecureTextFieldCell) WithTag(tag int) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (stfc *SecureTextFieldCell) WithTag(tag int) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setTag:"), tag)
+	return stfc
 }
 
-// WithTitle the cell’s title text.
-func (x *SecureTextFieldCell) WithTitle(title string) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (stfc *SecureTextFieldCell) WithTitle(title string) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return stfc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *SecureTextFieldCell) WithEnabled(enabled bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (stfc *SecureTextFieldCell) WithEnabled(enabled bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setEnabled:"), enabled)
+	return stfc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *SecureTextFieldCell) WithContinuous(continuous bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (stfc *SecureTextFieldCell) WithContinuous(continuous bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setContinuous:"), continuous)
+	return stfc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *SecureTextFieldCell) WithEditable(editable bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (stfc *SecureTextFieldCell) WithEditable(editable bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setEditable:"), editable)
+	return stfc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *SecureTextFieldCell) WithSelectable(selectable bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (stfc *SecureTextFieldCell) WithSelectable(selectable bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setSelectable:"), selectable)
+	return stfc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *SecureTextFieldCell) WithBordered(bordered bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (stfc *SecureTextFieldCell) WithBordered(bordered bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setBordered:"), bordered)
+	return stfc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *SecureTextFieldCell) WithBezeled(bezeled bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (stfc *SecureTextFieldCell) WithBezeled(bezeled bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setBezeled:"), bezeled)
+	return stfc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *SecureTextFieldCell) WithScrollable(scrollable bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (stfc *SecureTextFieldCell) WithScrollable(scrollable bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setScrollable:"), scrollable)
+	return stfc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *SecureTextFieldCell) WithHighlighted(highlighted bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (stfc *SecureTextFieldCell) WithHighlighted(highlighted bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setHighlighted:"), highlighted)
+	return stfc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *SecureTextFieldCell) WithAlignment(alignment TextAlignment) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (stfc *SecureTextFieldCell) WithAlignment(alignment TextAlignment) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setAlignment:"), alignment)
+	return stfc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *SecureTextFieldCell) WithWraps(wraps bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (stfc *SecureTextFieldCell) WithWraps(wraps bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setWraps:"), wraps)
+	return stfc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *SecureTextFieldCell) WithFont(font *Font) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (stfc *SecureTextFieldCell) WithFont(font *Font) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return stfc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *SecureTextFieldCell) WithFormatter(formatter obj.Object) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (stfc *SecureTextFieldCell) WithFormatter(formatter obj.Object) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return stfc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *SecureTextFieldCell) WithObjectValue(objectValue obj.Object) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (stfc *SecureTextFieldCell) WithObjectValue(objectValue obj.Object) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return stfc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *SecureTextFieldCell) WithStringValue(stringValue string) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (stfc *SecureTextFieldCell) WithStringValue(stringValue string) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return stfc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *SecureTextFieldCell) WithIntValue(intValue int) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (stfc *SecureTextFieldCell) WithIntValue(intValue int) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setIntValue:"), intValue)
+	return stfc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *SecureTextFieldCell) WithFloatValue(floatValue float32) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (stfc *SecureTextFieldCell) WithFloatValue(floatValue float32) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setFloatValue:"), floatValue)
+	return stfc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *SecureTextFieldCell) WithDoubleValue(doubleValue float64) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (stfc *SecureTextFieldCell) WithDoubleValue(doubleValue float64) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return stfc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *SecureTextFieldCell) WithIntegerValue(integerValue int) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (stfc *SecureTextFieldCell) WithIntegerValue(integerValue int) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return stfc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *SecureTextFieldCell) WithImage(image *Image) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (stfc *SecureTextFieldCell) WithImage(image *Image) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return stfc
 }
 
-// WithControlSize the size of the cell.
-func (x *SecureTextFieldCell) WithControlSize(controlSize ControlSize) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (stfc *SecureTextFieldCell) WithControlSize(controlSize ControlSize) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setControlSize:"), controlSize)
+	return stfc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *SecureTextFieldCell) WithRepresentedObject(representedObject obj.Object) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (stfc *SecureTextFieldCell) WithRepresentedObject(representedObject obj.Object) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return stfc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *SecureTextFieldCell) WithMenu(menu *Menu) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (stfc *SecureTextFieldCell) WithMenu(menu *Menu) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return stfc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *SecureTextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (stfc *SecureTextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return stfc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *SecureTextFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (stfc *SecureTextFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return stfc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *SecureTextFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (stfc *SecureTextFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return stfc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *SecureTextFieldCell) WithAllowsUndo(allowsUndo bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (stfc *SecureTextFieldCell) WithAllowsUndo(allowsUndo bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return stfc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *SecureTextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (stfc *SecureTextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return stfc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *SecureTextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (stfc *SecureTextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return stfc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *SecureTextFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (stfc *SecureTextFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return stfc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *SecureTextFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (stfc *SecureTextFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return stfc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *SecureTextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (stfc *SecureTextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return stfc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *SecureTextFieldCell) WithFocusRingType(focusRingType FocusRingType) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (stfc *SecureTextFieldCell) WithFocusRingType(focusRingType FocusRingType) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return stfc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *SecureTextFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (stfc *SecureTextFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return stfc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *SecureTextFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (stfc *SecureTextFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return stfc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *SecureTextFieldCell) WithImportsGraphics(importsGraphics bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (stfc *SecureTextFieldCell) WithImportsGraphics(importsGraphics bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return stfc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *SecureTextFieldCell) WithAllowsMixedState(allowsMixedState bool) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (stfc *SecureTextFieldCell) WithAllowsMixedState(allowsMixedState bool) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return stfc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *SecureTextFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (stfc *SecureTextFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return stfc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *SecureTextFieldCell) WithControlTint(controlTint ControlTint) *SecureTextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (stfc *SecureTextFieldCell) WithControlTint(controlTint ControlTint) *SecureTextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setControlTint:"), controlTint)
+	return stfc
 }
 
 // EchosBullets wraps the corresponding Objective-C method.
-func (x *SecureTextFieldCell) EchosBullets() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("echosBullets"))
+func (stfc *SecureTextFieldCell) EchosBullets() bool {
+	_r := objc.Send[bool](objref.IDOf(stfc), objc.RegisterName("echosBullets"))
 	return _r
 }
-
-// SetEchosBullets wraps the corresponding Objective-C method.
-func (x *SecureTextFieldCell) SetEchosBullets(echosBullets bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEchosBullets:"), echosBullets)
-}
-
-// SecureTextFieldCellable is the interface implemented by [SecureTextFieldCell], for mocking and DI.
-type SecureTextFieldCellable interface {
-	obj.Object
-	WithEchosBullets(echosBullets bool) *SecureTextFieldCell
-	WithBackgroundColor(backgroundColor *Color) *SecureTextFieldCell
-	WithDrawsBackground(drawsBackground bool) *SecureTextFieldCell
-	WithTextColor(textColor *Color) *SecureTextFieldCell
-	WithBezelStyle(bezelStyle TextFieldBezelStyle) *SecureTextFieldCell
-	WithPlaceholderString(placeholderString string) *SecureTextFieldCell
-	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SecureTextFieldCell
-	WithAllowedInputSourceLocales(items ...obj.Object) *SecureTextFieldCell
-	WithControlView(controlView ViewProvider) *SecureTextFieldCell
-	WithType(type_ CellType) *SecureTextFieldCell
-	WithState(state int) *SecureTextFieldCell
-	WithTarget(target obj.Object) *SecureTextFieldCell
-	WithTag(tag int) *SecureTextFieldCell
-	WithTitle(title string) *SecureTextFieldCell
-	WithEnabled(enabled bool) *SecureTextFieldCell
-	WithContinuous(continuous bool) *SecureTextFieldCell
-	WithEditable(editable bool) *SecureTextFieldCell
-	WithSelectable(selectable bool) *SecureTextFieldCell
-	WithBordered(bordered bool) *SecureTextFieldCell
-	WithBezeled(bezeled bool) *SecureTextFieldCell
-	WithScrollable(scrollable bool) *SecureTextFieldCell
-	WithHighlighted(highlighted bool) *SecureTextFieldCell
-	WithAlignment(alignment TextAlignment) *SecureTextFieldCell
-	WithWraps(wraps bool) *SecureTextFieldCell
-	WithFont(font *Font) *SecureTextFieldCell
-	WithFormatter(formatter obj.Object) *SecureTextFieldCell
-	WithObjectValue(objectValue obj.Object) *SecureTextFieldCell
-	WithStringValue(stringValue string) *SecureTextFieldCell
-	WithIntValue(intValue int) *SecureTextFieldCell
-	WithFloatValue(floatValue float32) *SecureTextFieldCell
-	WithDoubleValue(doubleValue float64) *SecureTextFieldCell
-	WithIntegerValue(integerValue int) *SecureTextFieldCell
-	WithImage(image *Image) *SecureTextFieldCell
-	WithControlSize(controlSize ControlSize) *SecureTextFieldCell
-	WithRepresentedObject(representedObject obj.Object) *SecureTextFieldCell
-	WithMenu(menu *Menu) *SecureTextFieldCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SecureTextFieldCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *SecureTextFieldCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *SecureTextFieldCell
-	WithAllowsUndo(allowsUndo bool) *SecureTextFieldCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SecureTextFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SecureTextFieldCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextFieldCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextFieldCell
-	WithShowsFirstResponder(showsFirstResponder bool) *SecureTextFieldCell
-	WithFocusRingType(focusRingType FocusRingType) *SecureTextFieldCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *SecureTextFieldCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SecureTextFieldCell
-	WithImportsGraphics(importsGraphics bool) *SecureTextFieldCell
-	WithAllowsMixedState(allowsMixedState bool) *SecureTextFieldCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *SecureTextFieldCell
-	WithControlTint(controlTint ControlTint) *SecureTextFieldCell
-	EchosBullets() bool
-	SetEchosBullets(echosBullets bool)
-}
-
-var _ SecureTextFieldCellable = (*SecureTextFieldCell)(nil)
 
 var _ TextFieldCellProvider = (*SecureTextFieldCell)(nil)
 

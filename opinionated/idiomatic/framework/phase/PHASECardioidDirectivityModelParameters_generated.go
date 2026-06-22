@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,19 +55,11 @@ func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameter
 // SubbandParameters wraps the corresponding Objective-C method.
 //
 // SubbandParameters returns the collection as a Go slice.
-func (x *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDirectivityModelSubbandParameters {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subbandParameters"))
+func (cdmp *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDirectivityModelSubbandParameters {
+	_arr := objc.Send[objc.ID](objref.IDOf(cdmp), objc.RegisterName("subbandParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CardioidDirectivityModelSubbandParameters {
 		return CardioidDirectivityModelSubbandParametersFromID(_id)
 	})
 }
-
-// CardioidDirectivityModelParametersable is the interface implemented by [CardioidDirectivityModelParameters], for mocking and DI.
-type CardioidDirectivityModelParametersable interface {
-	obj.Object
-	SubbandParameters() []*CardioidDirectivityModelSubbandParameters
-}
-
-var _ CardioidDirectivityModelParametersable = (*CardioidDirectivityModelParameters)(nil)
 
 var _ DirectivityModelParametersProvider = (*CardioidDirectivityModelParameters)(nil)

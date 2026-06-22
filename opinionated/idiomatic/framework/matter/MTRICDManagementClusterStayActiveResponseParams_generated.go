@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRICDManagementClusterStayActiveResponseParams is an idiomatic wrapper over the Objective-C class MTRICDManagementClusterStayActiveResponseParams.
@@ -46,24 +47,24 @@ func mTRICDManagementClusterStayActiveResponseParamsAdopt(id objc.ID) *MTRICDMan
 }
 
 // Description returns the object's -description text.
-func (x *MTRICDManagementClusterStayActiveResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mmcsarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRICDManagementClusterStayActiveResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmcsarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRICDManagementClusterStayActiveResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmcsarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRICDManagementClusterStayActiveResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) String() string {
+	return rt.Description(objref.IDOf(mmcsarp))
 }
 
 // NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,28 +79,13 @@ func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(re
 }
 
 // WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
-	return x
+func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
+	return mmcsarp
 }
 
 // PromisedActiveDuration wraps the corresponding Objective-C method.
-func (x *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("promisedActiveDuration"))
+func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("promisedActiveDuration"))
 	return obj.Wrap(_r)
 }
-
-// SetPromisedActiveDuration wraps the corresponding Objective-C method.
-func (x *MTRICDManagementClusterStayActiveResponseParams) SetPromisedActiveDuration(promisedActiveDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
-}
-
-// MTRICDManagementClusterStayActiveResponseParamsable is the interface implemented by [MTRICDManagementClusterStayActiveResponseParams], for mocking and DI.
-type MTRICDManagementClusterStayActiveResponseParamsable interface {
-	obj.Object
-	WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams
-	PromisedActiveDuration() obj.Object
-	SetPromisedActiveDuration(promisedActiveDuration obj.Object)
-}
-
-var _ MTRICDManagementClusterStayActiveResponseParamsable = (*MTRICDManagementClusterStayActiveResponseParams)(nil)

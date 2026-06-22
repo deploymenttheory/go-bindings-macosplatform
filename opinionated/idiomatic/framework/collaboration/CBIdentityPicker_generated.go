@@ -46,24 +46,24 @@ func identityPickerAdopt(id objc.ID) *IdentityPicker {
 }
 
 // Description returns the object's -description text.
-func (x *IdentityPicker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ip *IdentityPicker) Description() string {
+	return rt.Description(objref.IDOf(ip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IdentityPicker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ip *IdentityPicker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IdentityPicker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ip *IdentityPicker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IdentityPicker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ip *IdentityPicker) String() string {
+	return rt.Description(objref.IDOf(ip))
 }
 
 // NewIdentityPicker creates a new IdentityPicker.
@@ -72,74 +72,48 @@ func NewIdentityPicker() *IdentityPicker {
 	return identityPickerAdopt(_id)
 }
 
-// WithTitle the title of the identity picker.
-func (x *IdentityPicker) WithTitle(title string) *IdentityPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the identity picker.
+func (ip *IdentityPicker) WithTitle(title string) *IdentityPicker {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ip
 }
 
-// WithAllowsMultipleSelection a Boolean value indicating whether the user is allowed to select multiple identities.
-func (x *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
-	return x
+// WithAllowsMultipleSelection sets a Boolean value indicating whether the user is allowed to select multiple identities.
+func (ip *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
+	return ip
 }
 
-// RunModal runs the receiver as an application-modal dialog.
-func (x *IdentityPicker) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+// RunModal returns runs the receiver as an application-modal dialog.
+func (ip *IdentityPicker) RunModal() int {
+	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("runModal"))
 	return _r
 }
 
 // RunModalForWindowCompletionHandler runs the identity picker modally as a sheet attached to a specified window.
-func (x *IdentityPicker) RunModalForWindowCompletionHandler(window obj.Object, completionHandler func(int)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runModalForWindow:completionHandler:"), objref.IDOf(window), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
+func (ip *IdentityPicker) RunModalForWindowCompletionHandler(window obj.Object, completionHandler func(int)) {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("runModalForWindow:completionHandler:"), objref.IDOf(window), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 }
 
-// Title the title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
-func (x *IdentityPicker) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns the title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
+func (ip *IdentityPicker) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *IdentityPicker) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// AllowsMultipleSelection a Boolean value indicating whether the user is allowed to select multiple identities. The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> if the user can select multiple records; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>. The default value is <doc://com.apple.documentation/documentation/objectivec/no>.
-func (x *IdentityPicker) AllowsMultipleSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
+// AllowsMultipleSelection reports whether the user is allowed to select multiple identities. The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> if the user can select multiple records; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>. The default value is <doc://com.apple.documentation/documentation/objectivec/no>.
+func (ip *IdentityPicker) AllowsMultipleSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(ip), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
 
-// SetAllowsMultipleSelection wraps the corresponding Objective-C method.
-func (x *IdentityPicker) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
-}
-
-// Identities the array of identities (represented by `CBIdentity` objects) selected using the identity picker.
+// Identities returns the array of identities (represented by `CBIdentity` objects) selected using the identity picker.
 //
 // Identities returns the collection as a Go slice.
-func (x *IdentityPicker) Identities() []*Identity {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identities"))
+func (ip *IdentityPicker) Identities() []*Identity {
+	_arr := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("identities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Identity { return IdentityFromID(_id) })
 }
-
-// IdentityPickerable is the interface implemented by [IdentityPicker], for mocking and DI.
-type IdentityPickerable interface {
-	obj.Object
-	WithTitle(title string) *IdentityPicker
-	WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker
-	RunModal() int
-	RunModalForWindowCompletionHandler(window obj.Object, completionHandler func(int))
-	Title() string
-	SetTitle(title string)
-	AllowsMultipleSelection() bool
-	SetAllowsMultipleSelection(allowsMultipleSelection bool)
-	Identities() []*Identity
-}
-
-var _ IdentityPickerable = (*IdentityPicker)(nil)

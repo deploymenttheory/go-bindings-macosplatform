@@ -7,7 +7,6 @@ package imagecapturecore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewScannerFeatureBoolean() *ScannerFeatureBoolean {
 	return scannerFeatureBooleanAdopt(_id)
 }
 
-// WithValue ￼The value of this feature.
-func (x *ScannerFeatureBoolean) WithValue(value bool) *ScannerFeatureBoolean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets ￼The value of this feature.
+func (sfb *ScannerFeatureBoolean) WithValue(value bool) *ScannerFeatureBoolean {
+	objc.Send[objc.ID](objref.IDOf(sfb), objc.RegisterName("setValue:"), value)
+	return sfb
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *ScannerFeatureBoolean) Value() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("value"))
+func (sfb *ScannerFeatureBoolean) Value() bool {
+	_r := objc.Send[bool](objref.IDOf(sfb), objc.RegisterName("value"))
 	return _r
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *ScannerFeatureBoolean) SetValue(value bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// ScannerFeatureBooleanable is the interface implemented by [ScannerFeatureBoolean], for mocking and DI.
-type ScannerFeatureBooleanable interface {
-	obj.Object
-	WithValue(value bool) *ScannerFeatureBoolean
-	Value() bool
-	SetValue(value bool)
-}
-
-var _ ScannerFeatureBooleanable = (*ScannerFeatureBoolean)(nil)
 
 var _ ScannerFeatureProvider = (*ScannerFeatureBoolean)(nil)

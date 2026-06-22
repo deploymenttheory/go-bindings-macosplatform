@@ -46,24 +46,24 @@ func nNImageNodeAdopt(id objc.ID) *NNImageNode {
 }
 
 // Description returns the object's -description text.
-func (x *NNImageNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nin *NNImageNode) Description() string {
+	return rt.Description(objref.IDOf(nin))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNImageNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nin *NNImageNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nin), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNImageNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nin *NNImageNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nin), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNImageNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nin *NNImageNode) String() string {
+	return rt.Description(objref.IDOf(nin))
 }
 
 // NewNNImageNodeWithHandle creates a new NNImageNode.
@@ -73,69 +73,38 @@ func NewNNImageNodeWithHandle(handle obj.Object) *NNImageNode {
 	return nNImageNodeAdopt(_id)
 }
 
-// WithExportFromGraph tag a image node for view later Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *NNImageNode) WithExportFromGraph(exportFromGraph bool) *NNImageNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-	return x
+// WithExportFromGraph sets tag a image node for view later Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+func (nin *NNImageNode) WithExportFromGraph(exportFromGraph bool) *NNImageNode {
+	objc.Send[objc.ID](objref.IDOf(nin), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
+	return nin
 }
 
-// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU It is not needed on iOS/tvOS devices, where it does nothing.
-func (x *NNImageNode) WithSynchronizeResource(synchronizeResource bool) *NNImageNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-	return x
+// WithSynchronizeResource sets set to true to cause the resource to be synchronized with the CPU It is not needed on iOS/tvOS devices, where it does nothing.
+func (nin *NNImageNode) WithSynchronizeResource(synchronizeResource bool) *NNImageNode {
+	objc.Send[objc.ID](objref.IDOf(nin), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
+	return nin
 }
 
-// WithStopGradient stop training graph automatic creation at this node. An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
-func (x *NNImageNode) WithStopGradient(stopGradient bool) *NNImageNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStopGradient:"), stopGradient)
-	return x
+// WithStopGradient sets stop training graph automatic creation at this node. An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
+func (nin *NNImageNode) WithStopGradient(stopGradient bool) *NNImageNode {
+	objc.Send[objc.ID](objref.IDOf(nin), objc.RegisterName("setStopGradient:"), stopGradient)
+	return nin
 }
 
-// ExportFromGraph tag a image node for view later Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *NNImageNode) ExportFromGraph() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("exportFromGraph"))
+// ExportFromGraph reports whether tag a image node for view later Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits. When exportFromGraph = true, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly. This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: false
+func (nin *NNImageNode) ExportFromGraph() bool {
+	_r := objc.Send[bool](objref.IDOf(nin), objc.RegisterName("exportFromGraph"))
 	return _r
 }
 
-// SetExportFromGraph wraps the corresponding Objective-C method.
-func (x *NNImageNode) SetExportFromGraph(exportFromGraph bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-}
-
-// SynchronizeResource set to true to cause the resource to be synchronized with the CPU It is not needed on iOS/tvOS devices, where it does nothing.
-func (x *NNImageNode) SynchronizeResource() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeResource"))
+// SynchronizeResource reports whether set to true to cause the resource to be synchronized with the CPU It is not needed on iOS/tvOS devices, where it does nothing.
+func (nin *NNImageNode) SynchronizeResource() bool {
+	_r := objc.Send[bool](objref.IDOf(nin), objc.RegisterName("synchronizeResource"))
 	return _r
 }
 
-// SetSynchronizeResource wraps the corresponding Objective-C method.
-func (x *NNImageNode) SetSynchronizeResource(synchronizeResource bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-}
-
-// StopGradient stop training graph automatic creation at this node. An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
-func (x *NNImageNode) StopGradient() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopGradient"))
+// StopGradient reports whether stop training graph automatic creation at this node. An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = true. This will prevent gradient propagation beyond this MPSNNImageNode. Default: false
+func (nin *NNImageNode) StopGradient() bool {
+	_r := objc.Send[bool](objref.IDOf(nin), objc.RegisterName("stopGradient"))
 	return _r
 }
-
-// SetStopGradient wraps the corresponding Objective-C method.
-func (x *NNImageNode) SetStopGradient(stopGradient bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStopGradient:"), stopGradient)
-}
-
-// NNImageNodeable is the interface implemented by [NNImageNode], for mocking and DI.
-type NNImageNodeable interface {
-	obj.Object
-	WithExportFromGraph(exportFromGraph bool) *NNImageNode
-	WithSynchronizeResource(synchronizeResource bool) *NNImageNode
-	WithStopGradient(stopGradient bool) *NNImageNode
-	ExportFromGraph() bool
-	SetExportFromGraph(exportFromGraph bool)
-	SynchronizeResource() bool
-	SetSynchronizeResource(synchronizeResource bool)
-	StopGradient() bool
-	SetStopGradient(stopGradient bool)
-}
-
-var _ NNImageNodeable = (*NNImageNode)(nil)

@@ -44,24 +44,24 @@ func mTRBooleanStateConfigurationClusterAlarmsStateChangedEventAdopt(id objc.ID)
 }
 
 // Description returns the object's -description text.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(mbsccasce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbsccasce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbsccasce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) String() string {
+	return rt.Description(objref.IDOf(mbsccasce))
 }
 
 // NewMTRBooleanStateConfigurationClusterAlarmsStateChangedEvent creates a new MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent.
@@ -71,48 +71,25 @@ func NewMTRBooleanStateConfigurationClusterAlarmsStateChangedEvent() *MTRBoolean
 }
 
 // WithAlarmsActive sets the property and returns the receiver so calls can be chained.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsActive(alarmsActive obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsActive:"), objref.IDOf(alarmsActive))
-	return x
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsActive(alarmsActive obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("setAlarmsActive:"), objref.IDOf(alarmsActive))
+	return mbsccasce
 }
 
 // WithAlarmsSuppressed sets the property and returns the receiver so calls can be chained.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsSuppressed(alarmsSuppressed obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsSuppressed:"), objref.IDOf(alarmsSuppressed))
-	return x
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsSuppressed(alarmsSuppressed obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("setAlarmsSuppressed:"), objref.IDOf(alarmsSuppressed))
+	return mbsccasce
 }
 
 // AlarmsActive wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsActive() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmsActive"))
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsActive() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("alarmsActive"))
 	return obj.Wrap(_r)
-}
-
-// SetAlarmsActive wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) SetAlarmsActive(alarmsActive obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsActive:"), objref.IDOf(alarmsActive))
 }
 
 // AlarmsSuppressed wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsSuppressed() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmsSuppressed"))
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsSuppressed() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("alarmsSuppressed"))
 	return obj.Wrap(_r)
 }
-
-// SetAlarmsSuppressed wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) SetAlarmsSuppressed(alarmsSuppressed obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsSuppressed:"), objref.IDOf(alarmsSuppressed))
-}
-
-// MTRBooleanStateConfigurationClusterAlarmsStateChangedEventable is the interface implemented by [MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent], for mocking and DI.
-type MTRBooleanStateConfigurationClusterAlarmsStateChangedEventable interface {
-	obj.Object
-	WithAlarmsActive(alarmsActive obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent
-	WithAlarmsSuppressed(alarmsSuppressed obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent
-	AlarmsActive() obj.Object
-	SetAlarmsActive(alarmsActive obj.Object)
-	AlarmsSuppressed() obj.Object
-	SetAlarmsSuppressed(alarmsSuppressed obj.Object)
-}
-
-var _ MTRBooleanStateConfigurationClusterAlarmsStateChangedEventable = (*MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent)(nil)

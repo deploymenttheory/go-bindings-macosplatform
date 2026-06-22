@@ -52,46 +52,34 @@ func NewMatchCalendarEvent() *MatchCalendarEvent {
 	return matchCalendarEventAdopt(_id)
 }
 
-// IsAllDay a Boolean value that indicates whether the event is an all-day event.
-func (x *MatchCalendarEvent) IsAllDay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllDay"))
+// IsAllDay reports whether the event is an all-day event.
+func (mce *MatchCalendarEvent) IsAllDay() bool {
+	_r := objc.Send[bool](objref.IDOf(mce), objc.RegisterName("isAllDay"))
 	return _r
 }
 
-// StartDate a date that represents the start of the event.
-func (x *MatchCalendarEvent) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+// StartDate returns a date that represents the start of the event.
+func (mce *MatchCalendarEvent) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// StartTimeZone the time zone for the event’s start date.
-func (x *MatchCalendarEvent) StartTimeZone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTimeZone"))
+// StartTimeZone returns the time zone for the event’s start date.
+func (mce *MatchCalendarEvent) StartTimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("startTimeZone"))
 	return obj.Wrap(_r)
 }
 
-// EndDate a date that represents the end of the event.
-func (x *MatchCalendarEvent) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+// EndDate returns a date that represents the end of the event.
+func (mce *MatchCalendarEvent) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// EndTimeZone the time zone for the event’s end date.
-func (x *MatchCalendarEvent) EndTimeZone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimeZone"))
+// EndTimeZone returns the time zone for the event’s end date.
+func (mce *MatchCalendarEvent) EndTimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("endTimeZone"))
 	return obj.Wrap(_r)
 }
-
-// MatchCalendarEventable is the interface implemented by [MatchCalendarEvent], for mocking and DI.
-type MatchCalendarEventable interface {
-	obj.Object
-	IsAllDay() bool
-	StartDate() obj.Object
-	StartTimeZone() obj.Object
-	EndDate() obj.Object
-	EndTimeZone() obj.Object
-}
-
-var _ MatchCalendarEventable = (*MatchCalendarEvent)(nil)
 
 var _ MatchProvider = (*MatchCalendarEvent)(nil)

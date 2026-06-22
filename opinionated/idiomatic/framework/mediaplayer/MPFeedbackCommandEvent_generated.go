@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewFeedbackCommandEvent() *FeedbackCommandEvent {
 }
 
 // IsNegative wraps the corresponding Objective-C method.
-func (x *FeedbackCommandEvent) IsNegative() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNegative"))
+func (fce *FeedbackCommandEvent) IsNegative() bool {
+	_r := objc.Send[bool](objref.IDOf(fce), objc.RegisterName("isNegative"))
 	return _r
 }
-
-// FeedbackCommandEventable is the interface implemented by [FeedbackCommandEvent], for mocking and DI.
-type FeedbackCommandEventable interface {
-	obj.Object
-	IsNegative() bool
-}
-
-var _ FeedbackCommandEventable = (*FeedbackCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*FeedbackCommandEvent)(nil)

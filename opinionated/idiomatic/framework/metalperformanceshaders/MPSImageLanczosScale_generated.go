@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageLanczosScale() *ImageLanczosScale {
 	return imageLanczosScaleAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageLanczosScale) WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ils *ImageLanczosScale) WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale {
+	objc.Send[objc.ID](objref.IDOf(ils), objc.RegisterName("setOffset:"), offset)
+	return ils
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageLanczosScale) WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ils *ImageLanczosScale) WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale {
+	objc.Send[objc.ID](objref.IDOf(ils), objc.RegisterName("setClipRect:"), clipRect)
+	return ils
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageLanczosScale) WithLabel(label string) *ImageLanczosScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ils *ImageLanczosScale) WithLabel(label string) *ImageLanczosScale {
+	objc.Send[objc.ID](objref.IDOf(ils), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ils
 }
-
-// ImageLanczosScaleable is the interface implemented by [ImageLanczosScale], for mocking and DI.
-type ImageLanczosScaleable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale
-	WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale
-	WithLabel(label string) *ImageLanczosScale
-}
-
-var _ ImageLanczosScaleable = (*ImageLanczosScale)(nil)
 
 var _ ImageScaleProvider = (*ImageLanczosScale)(nil)
 

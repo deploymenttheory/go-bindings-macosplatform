@@ -60,87 +60,64 @@ func NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqu
 	return uniqueIDSpecifierAdopt(_id)
 }
 
-// WithUniqueID returns the ID encapsulated by the receiver.
-func (x *UniqueIDSpecifier) WithUniqueID(uniqueID obj.Object) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueID:"), objref.IDOf(uniqueID))
-	return x
+// WithUniqueID sets returns the ID encapsulated by the receiver.
+func (uis *UniqueIDSpecifier) WithUniqueID(uniqueID obj.Object) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setUniqueID:"), objref.IDOf(uniqueID))
+	return uis
 }
 
-// WithChildSpecifier sets the receiver’s child reference.
-func (x *UniqueIDSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
-	return x
+// WithChildSpecifier sets sets the receiver’s child reference.
+func (uis *UniqueIDSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
+	return uis
 }
 
-// WithContainerSpecifier sets the container specifier of the receiver.
-func (x *UniqueIDSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
-	return x
+// WithContainerSpecifier sets sets the container specifier of the receiver.
+func (uis *UniqueIDSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
+	return uis
 }
 
-// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-func (x *UniqueIDSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
-	return x
+// WithContainerIsObjectBeingTested sets sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+func (uis *UniqueIDSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
+	return uis
 }
 
-// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-func (x *UniqueIDSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
-	return x
+// WithContainerIsRangeContainerObject sets sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+func (uis *UniqueIDSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
+	return uis
 }
 
-// WithKey sets the key of the receiver.
-func (x *UniqueIDSpecifier) WithKey(key StringProvider) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
-	return x
+// WithKey sets sets the key of the receiver.
+func (uis *UniqueIDSpecifier) WithKey(key StringProvider) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setKey:"), objref.IDOf(key))
+	return uis
 }
 
-// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
-func (x *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
-	return x
+// WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
+func (uis *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
+	return uis
 }
 
-// WithEvaluationErrorNumber sets the value of the evaluation error.
-func (x *UniqueIDSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
-	return x
+// WithEvaluationErrorNumber sets sets the value of the evaluation error.
+func (uis *UniqueIDSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
+	return uis
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UniqueIDSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uis *UniqueIDSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uis
 }
 
 // UniqueID wraps the corresponding Objective-C method.
-func (x *UniqueIDSpecifier) UniqueID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueID"))
+func (uis *UniqueIDSpecifier) UniqueID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("uniqueID"))
 	return obj.Wrap(_r)
 }
-
-// SetUniqueID wraps the corresponding Objective-C method.
-func (x *UniqueIDSpecifier) SetUniqueID(uniqueID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueID:"), objref.IDOf(uniqueID))
-}
-
-// UniqueIDSpecifierable is the interface implemented by [UniqueIDSpecifier], for mocking and DI.
-type UniqueIDSpecifierable interface {
-	obj.Object
-	WithUniqueID(uniqueID obj.Object) *UniqueIDSpecifier
-	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier
-	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier
-	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier
-	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier
-	WithKey(key StringProvider) *UniqueIDSpecifier
-	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier
-	WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier
-	WithScriptingProperties(scriptingProperties obj.Object) *UniqueIDSpecifier
-	UniqueID() obj.Object
-	SetUniqueID(uniqueID obj.Object)
-}
-
-var _ UniqueIDSpecifierable = (*UniqueIDSpecifier)(nil)
 
 var _ ScriptObjectSpecifierProvider = (*UniqueIDSpecifier)(nil)

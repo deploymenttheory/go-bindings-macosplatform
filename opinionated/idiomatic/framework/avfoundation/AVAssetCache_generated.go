@@ -46,24 +46,24 @@ func assetCacheAdopt(id objc.ID) *AssetCache {
 }
 
 // Description returns the object's -description text.
-func (x *AssetCache) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AssetCache) Description() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetCache) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ac *AssetCache) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetCache) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ac *AssetCache) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetCache) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AssetCache) String() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // NewAssetCache creates a new AssetCache.
@@ -73,36 +73,25 @@ func NewAssetCache() *AssetCache {
 }
 
 // MediaSelectionOptionsInMediaSelectionGroup returns an array of locally cached media selection options that are available for offline use.
-func (x *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []*MediaSelectionOption {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelectionOptionsInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+func (ac *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []*MediaSelectionOption {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("mediaSelectionOptionsInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
-// IsPlayableOffline returns YES if a complete rendition of an AVAsset is available to be played without a network connection. An answer of YES does not indicate that any given media selection is available for offline playback. To determine if a specific media selection is available offline, see mediaSelectionOptionsInMediaSelectionGroup:.
-func (x *AssetCache) IsPlayableOffline() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlayableOffline"))
+// IsPlayableOffline reports whether a complete rendition of an AVAsset is available to be played without a network connection. An answer of true does not indicate that any given media selection is available for offline playback. To determine if a specific media selection is available offline, see mediaSelectionOptionsInMediaSelectionGroup:.
+func (ac *AssetCache) IsPlayableOffline() bool {
+	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("isPlayableOffline"))
 	return _r
 }
 
 // MediaPresentationSettingsForMediaSelectionGroup for each AVMediaPresentationSelector defined by the AVCustomMediaSelectionScheme of an AVMediaSelectionGroup, returns the AVMediaPresentationSettings that can be satisfied for offline operations, e.g. playback.
-func (x *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationSettingsForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+func (ac *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("mediaPresentationSettingsForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return obj.Wrap(_r)
 }
 
 // MediaPresentationLanguagesForMediaSelectionGroup returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup’s AVCustomMediaSelectionScheme.
-func (x *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationLanguagesForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+func (ac *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("mediaPresentationLanguagesForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// AssetCacheable is the interface implemented by [AssetCache], for mocking and DI.
-type AssetCacheable interface {
-	obj.Object
-	MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []*MediaSelectionOption
-	IsPlayableOffline() bool
-	MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object
-	MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []string
-}
-
-var _ AssetCacheable = (*AssetCache)(nil)

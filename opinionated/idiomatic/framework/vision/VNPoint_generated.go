@@ -49,24 +49,24 @@ func pointAdopt(id objc.ID) *Point {
 }
 
 // Description returns the object's -description text.
-func (x *Point) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Point) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Point) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Point) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Point) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Point) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Point) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Point) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPointWithXY creates a point object with the specified coordinates.
@@ -84,43 +84,32 @@ func NewPointWithLocation(location corefoundation.CGPoint) *Point {
 }
 
 // DistanceToPoint returns the distance to another point.
-func (x *Point) DistanceToPoint(point *Point) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("distanceToPoint:"), objref.IDOf(point))
+func (p *Point) DistanceToPoint(point *Point) float64 {
+	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("distanceToPoint:"), objref.IDOf(point))
 	return _r
 }
 
 // Location returns the X and Y coordinates of the point, as CGPoint type, with respect to the origin of the coordinate system the point is defined in.
-func (x *Point) Location() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("location"))
+func (p *Point) Location() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(p), objc.RegisterName("location"))
 	return _r
 }
 
 // X returns the X coordinate of the point with respect to the origin of the coordinate system the point is defined in.
-func (x *Point) X() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
+func (p *Point) X() float64 {
+	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("x"))
 	return _r
 }
 
 // Y returns the Y coordinate of the point with respect to the origin of the coordinate system the point is defined in.
-func (x *Point) Y() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
+func (p *Point) Y() float64 {
+	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("y"))
 	return _r
 }
-
-// Pointable is the interface implemented by [Point], for mocking and DI.
-type Pointable interface {
-	obj.Object
-	DistanceToPoint(point *Point) float64
-	Location() corefoundation.CGPoint
-	X() float64
-	Y() float64
-}
-
-var _ Pointable = (*Point)(nil)
 
 // isPoint marks Point — and, by embedding promotion, its
 // subclasses — as a member of the Point hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Point) isPoint() {}
+func (p *Point) isPoint() {}
 
 var _ PointProvider = (*Point)(nil)

@@ -60,67 +60,37 @@ func NewLinuxBootLoaderWithKernelURL(kernelURL string) *LinuxBootLoader {
 	return linuxBootLoaderAdopt(_id)
 }
 
-// WithKernelURL the URL of the Linux kernel file.
-func (x *LinuxBootLoader) WithKernelURL(kernelURL string) *LinuxBootLoader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelURL:"), rt.FileURL(kernelURL))
-	return x
+// WithKernelURL sets the URL of the Linux kernel file.
+func (lbl *LinuxBootLoader) WithKernelURL(kernelURL string) *LinuxBootLoader {
+	objc.Send[objc.ID](objref.IDOf(lbl), objc.RegisterName("setKernelURL:"), rt.FileURL(kernelURL))
+	return lbl
 }
 
-// WithCommandLine the command-line parameters to pass to the Linux kernel at boot time.
-func (x *LinuxBootLoader) WithCommandLine(commandLine string) *LinuxBootLoader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandLine:"), purego.NSString(commandLine))
-	return x
+// WithCommandLine sets the command-line parameters to pass to the Linux kernel at boot time.
+func (lbl *LinuxBootLoader) WithCommandLine(commandLine string) *LinuxBootLoader {
+	objc.Send[objc.ID](objref.IDOf(lbl), objc.RegisterName("setCommandLine:"), purego.NSString(commandLine))
+	return lbl
 }
 
-// WithInitialRamdiskURL the location of an optional RAM disk, which the boot loader maps into memory before it boots the Linux kernel.
-func (x *LinuxBootLoader) WithInitialRamdiskURL(initialRamdiskURL string) *LinuxBootLoader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialRamdiskURL:"), rt.FileURL(initialRamdiskURL))
-	return x
+// WithInitialRamdiskURL sets the location of an optional RAM disk, which the boot loader maps into memory before it boots the Linux kernel.
+func (lbl *LinuxBootLoader) WithInitialRamdiskURL(initialRamdiskURL string) *LinuxBootLoader {
+	objc.Send[objc.ID](objref.IDOf(lbl), objc.RegisterName("setInitialRamdiskURL:"), rt.FileURL(initialRamdiskURL))
+	return lbl
 }
 
-// KernelURL URL of the Linux kernel.
-func (x *LinuxBootLoader) KernelURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("kernelURL"))
+// KernelURL returns URL of the Linux kernel.
+func (lbl *LinuxBootLoader) KernelURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lbl), objc.RegisterName("kernelURL"))
 	return obj.Wrap(_r)
 }
 
-// SetKernelURL wraps the corresponding Objective-C method.
-func (x *LinuxBootLoader) SetKernelURL(kernelURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelURL:"), rt.FileURL(kernelURL))
-}
-
 // CommandLine define the command-line parameters passed to the kernel on boot.
-func (x *LinuxBootLoader) CommandLine() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandLine"))
+func (lbl *LinuxBootLoader) CommandLine() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lbl), objc.RegisterName("commandLine"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetCommandLine wraps the corresponding Objective-C method.
-func (x *LinuxBootLoader) SetCommandLine(commandLine string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandLine:"), purego.NSString(commandLine))
-}
-
-// SetInitialRamdiskURL wraps the corresponding Objective-C method.
-func (x *LinuxBootLoader) SetInitialRamdiskURL(initialRamdiskURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialRamdiskURL:"), rt.FileURL(initialRamdiskURL))
-}
-
-// LinuxBootLoaderable is the interface implemented by [LinuxBootLoader], for mocking and DI.
-type LinuxBootLoaderable interface {
-	obj.Object
-	WithKernelURL(kernelURL string) *LinuxBootLoader
-	WithCommandLine(commandLine string) *LinuxBootLoader
-	WithInitialRamdiskURL(initialRamdiskURL string) *LinuxBootLoader
-	KernelURL() obj.Object
-	SetKernelURL(kernelURL string)
-	CommandLine() string
-	SetCommandLine(commandLine string)
-	SetInitialRamdiskURL(initialRamdiskURL string)
-}
-
-var _ LinuxBootLoaderable = (*LinuxBootLoader)(nil)
 
 var _ BootLoaderProvider = (*LinuxBootLoader)(nil)

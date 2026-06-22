@@ -46,24 +46,24 @@ func messageSecurityInformationAdopt(id objc.ID) *MessageSecurityInformation {
 }
 
 // Description returns the object's -description text.
-func (x *MessageSecurityInformation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msi *MessageSecurityInformation) Description() string {
+	return rt.Description(objref.IDOf(msi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MessageSecurityInformation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msi *MessageSecurityInformation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MessageSecurityInformation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msi *MessageSecurityInformation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MessageSecurityInformation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msi *MessageSecurityInformation) String() string {
+	return rt.Description(objref.IDOf(msi))
 }
 
 // NewMessageSecurityInformation creates a new MessageSecurityInformation.
@@ -72,42 +72,31 @@ func NewMessageSecurityInformation() *MessageSecurityInformation {
 	return messageSecurityInformationAdopt(_id)
 }
 
-// Signers the signers of the message
+// Signers returns the signers of the message
 //
 // Signers returns the collection as a Go slice.
-func (x *MessageSecurityInformation) Signers() []*MessageSigner {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signers"))
+func (msi *MessageSecurityInformation) Signers() []*MessageSigner {
+	_arr := objc.Send[objc.ID](objref.IDOf(msi), objc.RegisterName("signers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MessageSigner { return MessageSignerFromID(_id) })
 }
 
-// IsEncrypted whether or not the message was encrypted.
-func (x *MessageSecurityInformation) IsEncrypted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+// IsEncrypted reports whether the message was encrypted.
+func (msi *MessageSecurityInformation) IsEncrypted() bool {
+	_r := objc.Send[bool](objref.IDOf(msi), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
-// ShouldBlockRemoteContent whether or not Mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
-func (x *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBlockRemoteContent"))
+// ShouldBlockRemoteContent reports whether mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
+func (msi *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
+	_r := objc.Send[bool](objref.IDOf(msi), objc.RegisterName("shouldBlockRemoteContent"))
 	return _r
 }
 
-// LocalizedRemoteContentBlockingReason a localized string containing the reason for blocking remote content.
-func (x *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedRemoteContentBlockingReason"))
+// LocalizedRemoteContentBlockingReason returns a localized string containing the reason for blocking remote content.
+func (msi *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() string {
+	_r := objc.Send[objc.ID](objref.IDOf(msi), objc.RegisterName("localizedRemoteContentBlockingReason"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MessageSecurityInformationable is the interface implemented by [MessageSecurityInformation], for mocking and DI.
-type MessageSecurityInformationable interface {
-	obj.Object
-	Signers() []*MessageSigner
-	IsEncrypted() bool
-	ShouldBlockRemoteContent() bool
-	LocalizedRemoteContentBlockingReason() string
-}
-
-var _ MessageSecurityInformationable = (*MessageSecurityInformation)(nil)

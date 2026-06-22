@@ -48,36 +48,29 @@ func platformConfigurationAdopt(id objc.ID) *PlatformConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *PlatformConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PlatformConfiguration) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlatformConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PlatformConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlatformConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PlatformConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlatformConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PlatformConfiguration) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
-
-// PlatformConfigurationable is the interface implemented by [PlatformConfiguration], for mocking and DI.
-type PlatformConfigurationable interface {
-	obj.Object
-}
-
-var _ PlatformConfigurationable = (*PlatformConfiguration)(nil)
 
 // isPlatformConfiguration marks PlatformConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the PlatformConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PlatformConfiguration) isPlatformConfiguration() {}
+func (pc *PlatformConfiguration) isPlatformConfiguration() {}
 
 var _ PlatformConfigurationProvider = (*PlatformConfiguration)(nil)

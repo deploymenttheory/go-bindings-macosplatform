@@ -46,24 +46,24 @@ func imageConstraintAdopt(id objc.ID) *ImageConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *ImageConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ic *ImageConstraint) Description() string {
+	return rt.Description(objref.IDOf(ic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ic *ImageConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ic *ImageConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ic *ImageConstraint) String() string {
+	return rt.Description(objref.IDOf(ic))
 }
 
 // NewImageConstraint creates a new ImageConstraint.
@@ -72,37 +72,26 @@ func NewImageConstraint() *ImageConstraint {
 	return imageConstraintAdopt(_id)
 }
 
-// PixelsHigh the required or default height of the image
-func (x *ImageConstraint) PixelsHigh() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
+// PixelsHigh returns the required or default height of the image
+func (ic *ImageConstraint) PixelsHigh() int {
+	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
-// PixelsWide the required or default width of the image
-func (x *ImageConstraint) PixelsWide() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsWide"))
+// PixelsWide returns the required or default width of the image
+func (ic *ImageConstraint) PixelsWide() int {
+	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
-// PixelFormatType the accepted kCVPixelFormatType for the image.
-func (x *ImageConstraint) PixelFormatType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
+// PixelFormatType returns the accepted kCVPixelFormatType for the image.
+func (ic *ImageConstraint) PixelFormatType() int {
+	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("pixelFormatType"))
 	return _r
 }
 
-// SizeConstraint detailed image size constraint
-func (x *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeConstraint"))
+// SizeConstraint returns detailed image size constraint
+func (ic *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("sizeConstraint"))
 	return ImageSizeConstraintFromID(_r)
 }
-
-// ImageConstraintable is the interface implemented by [ImageConstraint], for mocking and DI.
-type ImageConstraintable interface {
-	obj.Object
-	PixelsHigh() int
-	PixelsWide() int
-	PixelFormatType() int
-	SizeConstraint() *ImageSizeConstraint
-}
-
-var _ ImageConstraintable = (*ImageConstraint)(nil)

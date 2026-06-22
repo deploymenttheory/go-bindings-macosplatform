@@ -44,24 +44,24 @@ func mTRDataTypeAtomicAttributeStatusStructAdopt(id objc.ID) *MTRDataTypeAtomicA
 }
 
 // Description returns the object's -description text.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) Description() string {
+	return rt.Description(objref.IDOf(mdtaass))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdtaass), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdtaass), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) String() string {
+	return rt.Description(objref.IDOf(mdtaass))
 }
 
 // NewMTRDataTypeAtomicAttributeStatusStruct creates a new MTRDataTypeAtomicAttributeStatusStruct.
@@ -71,48 +71,25 @@ func NewMTRDataTypeAtomicAttributeStatusStruct() *MTRDataTypeAtomicAttributeStat
 }
 
 // WithAttributeID sets the property and returns the receiver so calls can be chained.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) WithAttributeID(attributeID obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeID:"), objref.IDOf(attributeID))
-	return x
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) WithAttributeID(attributeID obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
+	objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("setAttributeID:"), objref.IDOf(attributeID))
+	return mdtaass
 }
 
 // WithStatusCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) WithStatusCode(statusCode obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
-	return x
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) WithStatusCode(statusCode obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
+	objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
+	return mdtaass
 }
 
 // AttributeID wraps the corresponding Objective-C method.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeID"))
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("attributeID"))
 	return obj.Wrap(_r)
-}
-
-// SetAttributeID wraps the corresponding Objective-C method.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) SetAttributeID(attributeID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeID:"), objref.IDOf(attributeID))
 }
 
 // StatusCode wraps the corresponding Objective-C method.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusCode"))
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("statusCode"))
 	return obj.Wrap(_r)
 }
-
-// SetStatusCode wraps the corresponding Objective-C method.
-func (x *MTRDataTypeAtomicAttributeStatusStruct) SetStatusCode(statusCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
-}
-
-// MTRDataTypeAtomicAttributeStatusStructable is the interface implemented by [MTRDataTypeAtomicAttributeStatusStruct], for mocking and DI.
-type MTRDataTypeAtomicAttributeStatusStructable interface {
-	obj.Object
-	WithAttributeID(attributeID obj.Object) *MTRDataTypeAtomicAttributeStatusStruct
-	WithStatusCode(statusCode obj.Object) *MTRDataTypeAtomicAttributeStatusStruct
-	AttributeID() obj.Object
-	SetAttributeID(attributeID obj.Object)
-	StatusCode() obj.Object
-	SetStatusCode(statusCode obj.Object)
-}
-
-var _ MTRDataTypeAtomicAttributeStatusStructable = (*MTRDataTypeAtomicAttributeStatusStruct)(nil)

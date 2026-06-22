@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewArrayStridedSliceGradient() *ArrayStridedSliceGradient {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayStridedSliceGradient")), objc.RegisterName("new"))
 	return arrayStridedSliceGradientAdopt(_id)
 }
-
-// ArrayStridedSliceGradientable is the interface implemented by [ArrayStridedSliceGradient], for mocking and DI.
-type ArrayStridedSliceGradientable interface {
-	obj.Object
-}
-
-var _ ArrayStridedSliceGradientable = (*ArrayStridedSliceGradient)(nil)
 
 var _ ArrayUnaryGradientKernelProvider = (*ArrayStridedSliceGradient)(nil)
 

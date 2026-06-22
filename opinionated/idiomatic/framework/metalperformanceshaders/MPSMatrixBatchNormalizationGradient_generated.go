@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,135 +52,95 @@ func NewMatrixBatchNormalizationGradient() *MatrixBatchNormalizationGradient {
 	return matrixBatchNormalizationGradientAdopt(_id)
 }
 
-// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.
-func (x *MatrixBatchNormalizationGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-	return x
+// WithSourceNumberOfFeatureVectors sets the number of input vectors which make up the input array.
+func (mbng *MatrixBatchNormalizationGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return mbng
 }
 
-// WithSourceInputFeatureChannels the number of feature channels in the input vectors.
-func (x *MatrixBatchNormalizationGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-	return x
+// WithSourceInputFeatureChannels sets the number of feature channels in the input vectors.
+func (mbng *MatrixBatchNormalizationGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return mbng
 }
 
-// WithEpsilon a small term added to the variance when normalizing the input.
-func (x *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-	return x
+// WithEpsilon sets a small term added to the variance when normalizing the input.
+func (mbng *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setEpsilon:"), epsilon)
+	return mbng
 }
 
-// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixBatchNormalizationGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
-	return x
+// WithPrimarySourceMatrixOrigin sets the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mbng *MatrixBatchNormalizationGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return mbng
 }
 
-// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixBatchNormalizationGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
-	return x
+// WithSecondarySourceMatrixOrigin sets the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mbng *MatrixBatchNormalizationGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return mbng
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixBatchNormalizationGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mbng *MatrixBatchNormalizationGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return mbng
 }
 
-// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-func (x *MatrixBatchNormalizationGradient) WithBatchStart(batchStart int) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (mbng *MatrixBatchNormalizationGradient) WithBatchStart(batchStart int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setBatchStart:"), batchStart)
+	return mbng
 }
 
-// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-func (x *MatrixBatchNormalizationGradient) WithBatchSize(batchSize int) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (mbng *MatrixBatchNormalizationGradient) WithBatchSize(batchSize int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setBatchSize:"), batchSize)
+	return mbng
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixBatchNormalizationGradient) WithLabel(label string) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (mbng *MatrixBatchNormalizationGradient) WithLabel(label string) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mbng
 }
 
-// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+// NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbng *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+// NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbng *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+// NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbng *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.
-func (x *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+// SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.
+func (mbng *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
-// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalizationGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-}
-
-// SourceInputFeatureChannels the number of feature channels in the input vectors.
-func (x *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+// SourceInputFeatureChannels returns the number of feature channels in the input vectors.
+func (mbng *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
-// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalizationGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-}
-
-// Epsilon a small term added to the variance when normalizing the input.
-func (x *MatrixBatchNormalizationGradient) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns a small term added to the variance when normalizing the input.
+func (mbng *MatrixBatchNormalizationGradient) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("epsilon"))
 	return _r
 }
-
-// SetEpsilon wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalizationGradient) SetEpsilon(epsilon float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-}
-
-// MatrixBatchNormalizationGradientable is the interface implemented by [MatrixBatchNormalizationGradient], for mocking and DI.
-type MatrixBatchNormalizationGradientable interface {
-	obj.Object
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient
-	WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient
-	WithBatchStart(batchStart int) *MatrixBatchNormalizationGradient
-	WithBatchSize(batchSize int) *MatrixBatchNormalizationGradient
-	WithLabel(label string) *MatrixBatchNormalizationGradient
-	NeuronParameterA() float32
-	NeuronParameterB() float32
-	NeuronParameterC() float32
-	SourceNumberOfFeatureVectors() int
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
-	SourceInputFeatureChannels() int
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
-	Epsilon() float32
-	SetEpsilon(epsilon float32)
-}
-
-var _ MatrixBatchNormalizationGradientable = (*MatrixBatchNormalizationGradient)(nil)
 
 var _ MatrixBinaryKernelProvider = (*MatrixBatchNormalizationGradient)(nil)
 

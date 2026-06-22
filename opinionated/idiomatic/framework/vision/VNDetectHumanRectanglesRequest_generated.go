@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,60 +52,41 @@ func NewDetectHumanRectanglesRequest() *DetectHumanRectanglesRequest {
 	return detectHumanRectanglesRequestAdopt(_id)
 }
 
-// WithUpperBodyOnly a Boolean value that indicates whether the request requires detecting a full body or upper body only to produce a result.
-func (x *DetectHumanRectanglesRequest) WithUpperBodyOnly(upperBodyOnly bool) *DetectHumanRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBodyOnly:"), upperBodyOnly)
-	return x
+// WithUpperBodyOnly sets a Boolean value that indicates whether the request requires detecting a full body or upper body only to produce a result.
+func (dhrr *DetectHumanRectanglesRequest) WithUpperBodyOnly(upperBodyOnly bool) *DetectHumanRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dhrr), objc.RegisterName("setUpperBodyOnly:"), upperBodyOnly)
+	return dhrr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectHumanRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dhrr *DetectHumanRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dhrr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dhrr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectHumanRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dhrr *DetectHumanRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dhrr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dhrr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectHumanRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dhrr *DetectHumanRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dhrr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dhrr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectHumanRectanglesRequest) WithRevision(revision int) *DetectHumanRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dhrr *DetectHumanRectanglesRequest) WithRevision(revision int) *DetectHumanRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dhrr), objc.RegisterName("setRevision:"), revision)
+	return dhrr
 }
 
-// UpperBodyOnly boolean property to specify whether the human upper body or full body needs to be detected. The default is YES, meaning the request is setup to detect upper body only
-func (x *DetectHumanRectanglesRequest) UpperBodyOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("upperBodyOnly"))
+// UpperBodyOnly reports whether boolean property to specify whether the human upper body or full body needs to be detected. The default is true, meaning the request is setup to detect upper body only
+func (dhrr *DetectHumanRectanglesRequest) UpperBodyOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(dhrr), objc.RegisterName("upperBodyOnly"))
 	return _r
 }
-
-// SetUpperBodyOnly wraps the corresponding Objective-C method.
-func (x *DetectHumanRectanglesRequest) SetUpperBodyOnly(upperBodyOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBodyOnly:"), upperBodyOnly)
-}
-
-// DetectHumanRectanglesRequestable is the interface implemented by [DetectHumanRectanglesRequest], for mocking and DI.
-type DetectHumanRectanglesRequestable interface {
-	obj.Object
-	WithUpperBodyOnly(upperBodyOnly bool) *DetectHumanRectanglesRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanRectanglesRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanRectanglesRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanRectanglesRequest
-	WithRevision(revision int) *DetectHumanRectanglesRequest
-	UpperBodyOnly() bool
-	SetUpperBodyOnly(upperBodyOnly bool)
-}
-
-var _ DetectHumanRectanglesRequestable = (*DetectHumanRectanglesRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectHumanRectanglesRequest)(nil)
 

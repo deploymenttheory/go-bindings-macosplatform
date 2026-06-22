@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,84 +59,52 @@ func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSha
 	return japanIndividualNumberCardMetadataAdopt(_id)
 }
 
-// WithAuthenticationPassword a string that specifies the authentication password when provisioning the pass.
-func (x *JapanIndividualNumberCardMetadata) WithAuthenticationPassword(authenticationPassword string) *JapanIndividualNumberCardMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationPassword:"), purego.NSString(authenticationPassword))
-	return x
+// WithAuthenticationPassword sets a string that specifies the authentication password when provisioning the pass.
+func (jincm *JapanIndividualNumberCardMetadata) WithAuthenticationPassword(authenticationPassword string) *JapanIndividualNumberCardMetadata {
+	objc.Send[objc.ID](objref.IDOf(jincm), objc.RegisterName("setAuthenticationPassword:"), purego.NSString(authenticationPassword))
+	return jincm
 }
 
-// WithSigningPassword a string that sets the signing password when you provision the pass.
-func (x *JapanIndividualNumberCardMetadata) WithSigningPassword(signingPassword string) *JapanIndividualNumberCardMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSigningPassword:"), purego.NSString(signingPassword))
-	return x
+// WithSigningPassword sets a string that sets the signing password when you provision the pass.
+func (jincm *JapanIndividualNumberCardMetadata) WithSigningPassword(signingPassword string) *JapanIndividualNumberCardMetadata {
+	objc.Send[objc.ID](objref.IDOf(jincm), objc.RegisterName("setSigningPassword:"), purego.NSString(signingPassword))
+	return jincm
 }
 
-// WithPreview an object that contains information representing the pass for provisioning.
-func (x *JapanIndividualNumberCardMetadata) WithPreview(preview AddPassMetadataPreviewProvider) *JapanIndividualNumberCardMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreview:"), objref.IDOf(preview))
-	return x
+// WithPreview sets an object that contains information representing the pass for provisioning.
+func (jincm *JapanIndividualNumberCardMetadata) WithPreview(preview AddPassMetadataPreviewProvider) *JapanIndividualNumberCardMetadata {
+	objc.Send[objc.ID](objref.IDOf(jincm), objc.RegisterName("setPreview:"), objref.IDOf(preview))
+	return jincm
 }
 
-// WithServerEnvironmentIdentifier an identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
-func (x *JapanIndividualNumberCardMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *JapanIndividualNumberCardMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
-	return x
+// WithServerEnvironmentIdentifier sets an identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
+func (jincm *JapanIndividualNumberCardMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *JapanIndividualNumberCardMetadata {
+	objc.Send[objc.ID](objref.IDOf(jincm), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
+	return jincm
 }
 
-// AuthenticationPassword raw authentication password used to protect authentication functionality. If configured in the pass, this functionality allows users to present their identity credentials to external parties.
-func (x *JapanIndividualNumberCardMetadata) AuthenticationPassword() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationPassword"))
+// AuthenticationPassword returns raw authentication password used to protect authentication functionality. If configured in the pass, this functionality allows users to present their identity credentials to external parties.
+func (jincm *JapanIndividualNumberCardMetadata) AuthenticationPassword() string {
+	_r := objc.Send[objc.ID](objref.IDOf(jincm), objc.RegisterName("authenticationPassword"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetAuthenticationPassword wraps the corresponding Objective-C method.
-func (x *JapanIndividualNumberCardMetadata) SetAuthenticationPassword(authenticationPassword string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationPassword:"), purego.NSString(authenticationPassword))
-}
-
-// SigningPassword raw signing password used to protect signing functionality. If configured in the pass, this functionality allows users to digitally sign with external parties or print officially signed documents.
-func (x *JapanIndividualNumberCardMetadata) SigningPassword() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signingPassword"))
+// SigningPassword returns raw signing password used to protect signing functionality. If configured in the pass, this functionality allows users to digitally sign with external parties or print officially signed documents.
+func (jincm *JapanIndividualNumberCardMetadata) SigningPassword() string {
+	_r := objc.Send[objc.ID](objref.IDOf(jincm), objc.RegisterName("signingPassword"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSigningPassword wraps the corresponding Objective-C method.
-func (x *JapanIndividualNumberCardMetadata) SetSigningPassword(signingPassword string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSigningPassword:"), purego.NSString(signingPassword))
-}
-
-// Preview preview: A preview object containing the necessary information to represent the pass during provisioning.
-func (x *JapanIndividualNumberCardMetadata) Preview() *AddPassMetadataPreview {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preview"))
+// Preview returns preview: A preview object containing the necessary information to represent the pass during provisioning.
+func (jincm *JapanIndividualNumberCardMetadata) Preview() *AddPassMetadataPreview {
+	_r := objc.Send[objc.ID](objref.IDOf(jincm), objc.RegisterName("preview"))
 	return AddPassMetadataPreviewFromID(_r)
 }
-
-// SetPreview wraps the corresponding Objective-C method.
-func (x *JapanIndividualNumberCardMetadata) SetPreview(preview *AddPassMetadataPreview) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreview:"), objref.IDOf(preview))
-}
-
-// JapanIndividualNumberCardMetadataable is the interface implemented by [JapanIndividualNumberCardMetadata], for mocking and DI.
-type JapanIndividualNumberCardMetadataable interface {
-	obj.Object
-	WithAuthenticationPassword(authenticationPassword string) *JapanIndividualNumberCardMetadata
-	WithSigningPassword(signingPassword string) *JapanIndividualNumberCardMetadata
-	WithPreview(preview AddPassMetadataPreviewProvider) *JapanIndividualNumberCardMetadata
-	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *JapanIndividualNumberCardMetadata
-	AuthenticationPassword() string
-	SetAuthenticationPassword(authenticationPassword string)
-	SigningPassword() string
-	SetSigningPassword(signingPassword string)
-	Preview() *AddPassMetadataPreview
-	SetPreview(preview *AddPassMetadataPreview)
-}
-
-var _ JapanIndividualNumberCardMetadataable = (*JapanIndividualNumberCardMetadata)(nil)
 
 var _ IdentityDocumentMetadataProvider = (*JapanIndividualNumberCardMetadata)(nil)

@@ -48,36 +48,29 @@ func musicEventAdopt(id objc.ID) *MusicEvent {
 }
 
 // Description returns the object's -description text.
-func (x *MusicEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (me *MusicEvent) Description() string {
+	return rt.Description(objref.IDOf(me))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MusicEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (me *MusicEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(me), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MusicEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (me *MusicEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(me), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MusicEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (me *MusicEvent) String() string {
+	return rt.Description(objref.IDOf(me))
 }
-
-// MusicEventable is the interface implemented by [MusicEvent], for mocking and DI.
-type MusicEventable interface {
-	obj.Object
-}
-
-var _ MusicEventable = (*MusicEvent)(nil)
 
 // isMusicEvent marks MusicEvent — and, by embedding promotion, its
 // subclasses — as a member of the MusicEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MusicEvent) isMusicEvent() {}
+func (me *MusicEvent) isMusicEvent() {}
 
 var _ MusicEventProvider = (*MusicEvent)(nil)

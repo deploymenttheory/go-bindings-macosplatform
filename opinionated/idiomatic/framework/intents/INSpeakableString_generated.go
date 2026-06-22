@@ -46,24 +46,24 @@ func speakableStringAdopt(id objc.ID) *SpeakableString {
 }
 
 // Description returns the object's -description text.
-func (x *SpeakableString) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpeakableString) Description() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeakableString) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ss *SpeakableString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeakableString) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ss *SpeakableString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeakableString) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpeakableString) String() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint initializes the string with a phrase from your app’s vocabulary.
@@ -72,10 +72,3 @@ func NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint(voc
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVocabularyIdentifier:spokenPhrase:pronunciationHint:"), purego.NSString(vocabularyIdentifier), purego.NSString(spokenPhrase), purego.NSString(pronunciationHint))
 	return speakableStringAdopt(_id)
 }
-
-// SpeakableStringable is the interface implemented by [SpeakableString], for mocking and DI.
-type SpeakableStringable interface {
-	obj.Object
-}
-
-var _ SpeakableStringable = (*SpeakableString)(nil)

@@ -46,24 +46,24 @@ func paymentInformationEventExtensionAdopt(id objc.ID) *PaymentInformationEventE
 }
 
 // Description returns the object's -description text.
-func (x *PaymentInformationEventExtension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (piee *PaymentInformationEventExtension) Description() string {
+	return rt.Description(objref.IDOf(piee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentInformationEventExtension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (piee *PaymentInformationEventExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(piee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentInformationEventExtension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (piee *PaymentInformationEventExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(piee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentInformationEventExtension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (piee *PaymentInformationEventExtension) String() string {
+	return rt.Description(objref.IDOf(piee))
 }
 
 // NewPaymentInformationEventExtension creates a new PaymentInformationEventExtension.
@@ -71,10 +71,3 @@ func NewPaymentInformationEventExtension() *PaymentInformationEventExtension {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentInformationEventExtension")), objc.RegisterName("new"))
 	return paymentInformationEventExtensionAdopt(_id)
 }
-
-// PaymentInformationEventExtensionable is the interface implemented by [PaymentInformationEventExtension], for mocking and DI.
-type PaymentInformationEventExtensionable interface {
-	obj.Object
-}
-
-var _ PaymentInformationEventExtensionable = (*PaymentInformationEventExtension)(nil)

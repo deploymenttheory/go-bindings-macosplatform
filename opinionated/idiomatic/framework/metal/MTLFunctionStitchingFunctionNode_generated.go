@@ -46,24 +46,24 @@ func functionStitchingFunctionNodeAdopt(id objc.ID) *FunctionStitchingFunctionNo
 }
 
 // Description returns the object's -description text.
-func (x *FunctionStitchingFunctionNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fsfn *FunctionStitchingFunctionNode) Description() string {
+	return rt.Description(objref.IDOf(fsfn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FunctionStitchingFunctionNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fsfn *FunctionStitchingFunctionNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fsfn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FunctionStitchingFunctionNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fsfn *FunctionStitchingFunctionNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fsfn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FunctionStitchingFunctionNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fsfn *FunctionStitchingFunctionNode) String() string {
+	return rt.Description(objref.IDOf(fsfn))
 }
 
 // NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies creates a new function node.
@@ -73,68 +73,43 @@ func NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies(name s
 	return functionStitchingFunctionNodeAdopt(_id)
 }
 
-// WithName the name of the function to call.
-func (x *FunctionStitchingFunctionNode) WithName(name string) *FunctionStitchingFunctionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the function to call.
+func (fsfn *FunctionStitchingFunctionNode) WithName(name string) *FunctionStitchingFunctionNode {
+	objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("setName:"), purego.NSString(name))
+	return fsfn
 }
 
-// WithControlDependencies the list of nodes that need to execute before executing the node.
-func (x *FunctionStitchingFunctionNode) WithControlDependencies(items ...*FunctionStitchingFunctionNode) *FunctionStitchingFunctionNode {
+// WithControlDependencies sets the list of nodes that need to execute before executing the node.
+func (fsfn *FunctionStitchingFunctionNode) WithControlDependencies(items ...*FunctionStitchingFunctionNode) *FunctionStitchingFunctionNode {
 	_arr := purego.SliceToNSArray(items, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlDependencies:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("setControlDependencies:"), _arr)
+	return fsfn
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *FunctionStitchingFunctionNode) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (fsfn *FunctionStitchingFunctionNode) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *FunctionStitchingFunctionNode) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // Arguments wraps the corresponding Objective-C method.
-func (x *FunctionStitchingFunctionNode) Arguments() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+func (fsfn *FunctionStitchingFunctionNode) Arguments() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetArguments wraps the corresponding Objective-C method.
-func (x *FunctionStitchingFunctionNode) SetArguments(arguments []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), purego.SliceToNSArray(arguments, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (fsfn *FunctionStitchingFunctionNode) SetArguments(arguments []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("setArguments:"), purego.SliceToNSArray(arguments, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ControlDependencies wraps the corresponding Objective-C method.
 //
 // ControlDependencies returns the collection as a Go slice.
-func (x *FunctionStitchingFunctionNode) ControlDependencies() []*FunctionStitchingFunctionNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlDependencies"))
+func (fsfn *FunctionStitchingFunctionNode) ControlDependencies() []*FunctionStitchingFunctionNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("controlDependencies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingFunctionNode { return FunctionStitchingFunctionNodeFromID(_id) })
 }
-
-// SetControlDependencies wraps the corresponding Objective-C method.
-func (x *FunctionStitchingFunctionNode) SetControlDependencies(controlDependencies []*FunctionStitchingFunctionNode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlDependencies:"), purego.SliceToNSArray(controlDependencies, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) }))
-}
-
-// FunctionStitchingFunctionNodeable is the interface implemented by [FunctionStitchingFunctionNode], for mocking and DI.
-type FunctionStitchingFunctionNodeable interface {
-	obj.Object
-	WithName(name string) *FunctionStitchingFunctionNode
-	WithControlDependencies(items ...*FunctionStitchingFunctionNode) *FunctionStitchingFunctionNode
-	Name() string
-	SetName(name string)
-	Arguments() []obj.Object
-	SetArguments(arguments []obj.Object)
-	ControlDependencies() []*FunctionStitchingFunctionNode
-	SetControlDependencies(controlDependencies []*FunctionStitchingFunctionNode)
-}
-
-var _ FunctionStitchingFunctionNodeable = (*FunctionStitchingFunctionNode)(nil)

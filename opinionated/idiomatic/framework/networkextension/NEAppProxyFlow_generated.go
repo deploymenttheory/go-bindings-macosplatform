@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,43 +51,43 @@ func nEAppProxyFlowAdopt(id objc.ID) *NEAppProxyFlow {
 }
 
 // Description returns the object's -description text.
-func (x *NEAppProxyFlow) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (napf *NEAppProxyFlow) Description() string {
+	return rt.Description(objref.IDOf(napf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEAppProxyFlow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (napf *NEAppProxyFlow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(napf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEAppProxyFlow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (napf *NEAppProxyFlow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(napf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEAppProxyFlow) String() string {
-	return rt.Description(objref.IDOf(x))
+func (napf *NEAppProxyFlow) String() string {
+	return rt.Description(objref.IDOf(napf))
 }
 
-// WithNetworkInterface the network interface, if any, used by this flow.
-func (x *NEAppProxyFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyFlow {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
-	return x
+// WithNetworkInterface sets the network interface, if any, used by this flow.
+func (napf *NEAppProxyFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyFlow {
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
+	return napf
 }
 
 // OpenWithLocalFlowEndpoint this function is used by an NEProvider implementation to indicate that it is ready to handle flow data.
 //
 // OpenWithLocalFlowEndpoint blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint obj.Object) error {
+func (napf *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openWithLocalFlowEndpoint:completionHandler:"), objref.IDOf(localEndpoint), _block)
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("openWithLocalFlowEndpoint:completionHandler:"), objref.IDOf(localEndpoint), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -98,14 +99,14 @@ func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEnd
 // OpenWithLocalEndpoint opens the flow, indicating to the system that the caller is ready to start receiving and sending data.
 //
 // OpenWithLocalEndpoint blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *NWHostEndpoint) error {
+func (napf *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *NWHostEndpoint) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openWithLocalEndpoint:completionHandler:"), objref.IDOf(localEndpoint), _block)
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("openWithLocalEndpoint:completionHandler:"), objref.IDOf(localEndpoint), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -115,61 +116,40 @@ func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoin
 }
 
 // SetMetadata sets the flow’s metadata for use by proxy providers.
-func (x *NEAppProxyFlow) SetMetadata(parameters obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(parameters))
+func (napf *NEAppProxyFlow) SetMetadata(parameters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("setMetadata:"), objref.IDOf(parameters))
 }
 
-// MetaData an NEFlowMetaData object containing meta data for the flow.
-func (x *NEAppProxyFlow) MetaData() *NEFlowMetaData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
+// MetaData returns an NEFlowMetaData object containing meta data for the flow.
+func (napf *NEAppProxyFlow) MetaData() *NEFlowMetaData {
+	_r := objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("metaData"))
 	return NEFlowMetaDataFromID(_r)
 }
 
-// NetworkInterface an nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
-func (x *NEAppProxyFlow) NetworkInterface() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkInterface"))
+// NetworkInterface returns an nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+func (napf *NEAppProxyFlow) NetworkInterface() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("networkInterface"))
 	return obj.Wrap(_r)
 }
 
-// SetNetworkInterface wraps the corresponding Objective-C method.
-func (x *NEAppProxyFlow) SetNetworkInterface(networkInterface obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
-}
-
-// RemoteHostname if the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
-func (x *NEAppProxyFlow) RemoteHostname() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteHostname"))
+// RemoteHostname returns if the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
+func (napf *NEAppProxyFlow) RemoteHostname() string {
+	_r := objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("remoteHostname"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsBound YES if the flow was bound by the application to a specific interface (contained in the networkInterface property), NO otherwise.
-func (x *NEAppProxyFlow) IsBound() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBound"))
+// IsBound reports whether the flow was bound by the application to a specific interface (contained in the networkInterface property).
+func (napf *NEAppProxyFlow) IsBound() bool {
+	_r := objc.Send[bool](objref.IDOf(napf), objc.RegisterName("isBound"))
 	return _r
 }
-
-// NEAppProxyFlowable is the interface implemented by [NEAppProxyFlow], for mocking and DI.
-type NEAppProxyFlowable interface {
-	obj.Object
-	WithNetworkInterface(networkInterface obj.Object) *NEAppProxyFlow
-	OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint obj.Object) error
-	OpenWithLocalEndpoint(ctx context.Context, localEndpoint *NWHostEndpoint) error
-	SetMetadata(parameters obj.Object)
-	MetaData() *NEFlowMetaData
-	NetworkInterface() obj.Object
-	SetNetworkInterface(networkInterface obj.Object)
-	RemoteHostname() string
-	IsBound() bool
-}
-
-var _ NEAppProxyFlowable = (*NEAppProxyFlow)(nil)
 
 // isNEAppProxyFlow marks NEAppProxyFlow — and, by embedding promotion, its
 // subclasses — as a member of the NEAppProxyFlow hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NEAppProxyFlow) isNEAppProxyFlow() {}
+func (napf *NEAppProxyFlow) isNEAppProxyFlow() {}
 
 var _ NEAppProxyFlowProvider = (*NEAppProxyFlow)(nil)

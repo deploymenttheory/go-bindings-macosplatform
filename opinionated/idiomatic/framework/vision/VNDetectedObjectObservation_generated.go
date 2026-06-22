@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,31 +46,22 @@ func detectedObjectObservationAdopt(id objc.ID) *DetectedObjectObservation {
 	return x
 }
 
-// BoundingBox the bounding box of the detected object. The coordinates are normalized to the dimensions of the processed image, with the origin at the image's lower-left corner.
-func (x *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingBox"))
+// BoundingBox returns the bounding box of the detected object. The coordinates are normalized to the dimensions of the processed image, with the origin at the image's lower-left corner.
+func (doo *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(doo), objc.RegisterName("boundingBox"))
 	return _r
 }
 
-// GlobalSegmentationMask the resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
-func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalSegmentationMask"))
+// GlobalSegmentationMask returns the resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
+func (doo *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
+	_r := objc.Send[objc.ID](objref.IDOf(doo), objc.RegisterName("globalSegmentationMask"))
 	return PixelBufferObservationFromID(_r)
 }
-
-// DetectedObjectObservationable is the interface implemented by [DetectedObjectObservation], for mocking and DI.
-type DetectedObjectObservationable interface {
-	obj.Object
-	BoundingBox() corefoundation.CGRect
-	GlobalSegmentationMask() *PixelBufferObservation
-}
-
-var _ DetectedObjectObservationable = (*DetectedObjectObservation)(nil)
 
 // isDetectedObjectObservation marks DetectedObjectObservation — and, by embedding promotion, its
 // subclasses — as a member of the DetectedObjectObservation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DetectedObjectObservation) isDetectedObjectObservation() {}
+func (doo *DetectedObjectObservation) isDetectedObjectObservation() {}
 
 var _ DetectedObjectObservationProvider = (*DetectedObjectObservation)(nil)
 

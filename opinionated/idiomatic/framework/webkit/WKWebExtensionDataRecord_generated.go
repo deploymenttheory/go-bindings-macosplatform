@@ -44,24 +44,24 @@ func wKWebExtensionDataRecordAdopt(id objc.ID) *WKWebExtensionDataRecord {
 }
 
 // Description returns the object's -description text.
-func (x *WKWebExtensionDataRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wwedr *WKWebExtensionDataRecord) Description() string {
+	return rt.Description(objref.IDOf(wwedr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKWebExtensionDataRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wwedr *WKWebExtensionDataRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wwedr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKWebExtensionDataRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wwedr *WKWebExtensionDataRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wwedr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKWebExtensionDataRecord) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wwedr *WKWebExtensionDataRecord) String() string {
+	return rt.Description(objref.IDOf(wwedr))
 }
 
 // NewWKWebExtensionDataRecord creates a new WKWebExtensionDataRecord.
@@ -71,56 +71,43 @@ func NewWKWebExtensionDataRecord() *WKWebExtensionDataRecord {
 }
 
 // SizeInBytesOfTypes retrieves the size in bytes of the specific data types in this data record.
-func (x *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sizeInBytesOfTypes:"), objref.IDOf(dataTypes))
+func (wwedr *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("sizeInBytesOfTypes:"), objref.IDOf(dataTypes))
 	return _r
 }
 
-// DisplayName the display name for the web extension to which this data record belongs.
-func (x *WKWebExtensionDataRecord) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns the display name for the web extension to which this data record belongs.
+func (wwedr *WKWebExtensionDataRecord) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UniqueIdentifier unique identifier for the web extension context to which this data record belongs.
-func (x *WKWebExtensionDataRecord) UniqueIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+// UniqueIdentifier returns unique identifier for the web extension context to which this data record belongs.
+func (wwedr *WKWebExtensionDataRecord) UniqueIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("uniqueIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ContainedDataTypes the set of data types contained in this data record.
-func (x *WKWebExtensionDataRecord) ContainedDataTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containedDataTypes"))
+// ContainedDataTypes returns the set of data types contained in this data record.
+func (wwedr *WKWebExtensionDataRecord) ContainedDataTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("containedDataTypes"))
 	return obj.Wrap(_r)
 }
 
-// Errors an array of errors that may have occurred when either calculating or deleting storage.
-func (x *WKWebExtensionDataRecord) Errors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errors"))
+// Errors returns an array of errors that may have occurred when either calculating or deleting storage.
+func (wwedr *WKWebExtensionDataRecord) Errors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// TotalSizeInBytes the total size in bytes of all data types contained in this data record.
-func (x *WKWebExtensionDataRecord) TotalSizeInBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalSizeInBytes"))
+// TotalSizeInBytes returns the total size in bytes of all data types contained in this data record.
+func (wwedr *WKWebExtensionDataRecord) TotalSizeInBytes() int {
+	_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("totalSizeInBytes"))
 	return _r
 }
-
-// WKWebExtensionDataRecordable is the interface implemented by [WKWebExtensionDataRecord], for mocking and DI.
-type WKWebExtensionDataRecordable interface {
-	obj.Object
-	SizeInBytesOfTypes(dataTypes obj.Object) int
-	DisplayName() string
-	UniqueIdentifier() string
-	ContainedDataTypes() obj.Object
-	Errors() []obj.Object
-	TotalSizeInBytes() int
-}
-
-var _ WKWebExtensionDataRecordable = (*WKWebExtensionDataRecord)(nil)

@@ -46,24 +46,24 @@ func nEFilterSettingsAdopt(id objc.ID) *NEFilterSettings {
 }
 
 // Description returns the object's -description text.
-func (x *NEFilterSettings) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfs *NEFilterSettings) Description() string {
+	return rt.Description(objref.IDOf(nfs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterSettings) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfs *NEFilterSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterSettings) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfs *NEFilterSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFilterSettings) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfs *NEFilterSettings) String() string {
+	return rt.Description(objref.IDOf(nfs))
 }
 
 // NewNEFilterSettingsWithRulesDefaultAction creates a new settings instance from an array of rules and a default action.
@@ -73,25 +73,16 @@ func NewNEFilterSettingsWithRulesDefaultAction(rules []*NEFilterRule, defaultAct
 	return nEFilterSettingsAdopt(_id)
 }
 
-// Rules an NSArray containing an ordered list of NEFilterRuleObjects. After the NEFilterSettings are applied to the system, each network flow is matched against these rules in order, and the NEFilterAction of the first rule that matches is taken: NEFilterActionAllow: Allow the flow of data to proceed on its journey through the networking stack without consulting this provider. NEFilterActionDrop: Drop the flow without consulting this provider. NEFilterActionFilterData: Call this provider's handleNewFlow: method with the flow.
+// Rules returns an NSArray containing an ordered list of NEFilterRuleObjects. After the NEFilterSettings are applied to the system, each network flow is matched against these rules in order, and the NEFilterAction of the first rule that matches is taken: NEFilterActionAllow: Allow the flow of data to proceed on its journey through the networking stack without consulting this provider. NEFilterActionDrop: Drop the flow without consulting this provider. NEFilterActionFilterData: Call this provider's handleNewFlow: method with the flow.
 //
 // Rules returns the collection as a Go slice.
-func (x *NEFilterSettings) Rules() []*NEFilterRule {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
+func (nfs *NEFilterSettings) Rules() []*NEFilterRule {
+	_arr := objc.Send[objc.ID](objref.IDOf(nfs), objc.RegisterName("rules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEFilterRule { return NEFilterRuleFromID(_id) })
 }
 
-// DefaultAction an NEFilterAction containing the default action to take for flows of network data that do not match any of the specified rules.
-func (x *NEFilterSettings) DefaultAction() NEFilterAction {
-	_r := objc.Send[NEFilterAction](objref.IDOf(x), objc.RegisterName("defaultAction"))
+// DefaultAction returns an NEFilterAction containing the default action to take for flows of network data that do not match any of the specified rules.
+func (nfs *NEFilterSettings) DefaultAction() NEFilterAction {
+	_r := objc.Send[NEFilterAction](objref.IDOf(nfs), objc.RegisterName("defaultAction"))
 	return _r
 }
-
-// NEFilterSettingsable is the interface implemented by [NEFilterSettings], for mocking and DI.
-type NEFilterSettingsable interface {
-	obj.Object
-	Rules() []*NEFilterRule
-	DefaultAction() NEFilterAction
-}
-
-var _ NEFilterSettingsable = (*NEFilterSettings)(nil)

@@ -5,13 +5,14 @@
 package extensionkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostViewController is an idiomatic wrapper over the Objective-C class EXHostViewController.
@@ -48,24 +49,24 @@ func hostViewControllerAdopt(id objc.ID) *HostViewController {
 }
 
 // Description returns the object's -description text.
-func (x *HostViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hvc *HostViewController) Description() string {
+	return rt.Description(objref.IDOf(hvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hvc *HostViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hvc *HostViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HostViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hvc *HostViewController) String() string {
+	return rt.Description(objref.IDOf(hvc))
 }
 
 // NewHostViewController creates a new HostViewController.
@@ -74,40 +75,24 @@ func NewHostViewController() *HostViewController {
 	return hostViewControllerAdopt(_id)
 }
 
-// WithPlaceholderView the view to display when the view controller has no app extension content to display.
-func (x *HostViewController) WithPlaceholderView(placeholderView obj.Object) *HostViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
-	return x
+// WithPlaceholderView sets the view to display when the view controller has no app extension content to display.
+func (hvc *HostViewController) WithPlaceholderView(placeholderView obj.Object) *HostViewController {
+	objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
+	return hvc
 }
 
 // MakeXPCConnectionWithError initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
-func (x *HostViewController) MakeXPCConnectionWithError() (result obj.Object, err error) {
+func (hvc *HostViewController) MakeXPCConnectionWithError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeXPCConnectionWithError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("makeXPCConnectionWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// PlaceholderView the view to display when the view controller has no app extension content to display.
-func (x *HostViewController) PlaceholderView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderView"))
+// PlaceholderView returns the view to display when the view controller has no app extension content to display.
+func (hvc *HostViewController) PlaceholderView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("placeholderView"))
 	return obj.Wrap(_r)
 }
-
-// SetPlaceholderView wraps the corresponding Objective-C method.
-func (x *HostViewController) SetPlaceholderView(placeholderView obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
-}
-
-// HostViewControllerable is the interface implemented by [HostViewController], for mocking and DI.
-type HostViewControllerable interface {
-	obj.Object
-	WithPlaceholderView(placeholderView obj.Object) *HostViewController
-	MakeXPCConnectionWithError() (result obj.Object, err error)
-	PlaceholderView() obj.Object
-	SetPlaceholderView(placeholderView obj.Object)
-}
-
-var _ HostViewControllerable = (*HostViewController)(nil)

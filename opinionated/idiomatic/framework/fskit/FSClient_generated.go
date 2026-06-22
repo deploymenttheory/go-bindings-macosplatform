@@ -6,6 +6,7 @@ package fskit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func clientAdopt(id objc.ID) *Client {
 }
 
 // Description returns the object's -description text.
-func (x *Client) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Client) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Client) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Client) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Client) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Client) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Client) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Client) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewClient creates a new Client.
@@ -77,7 +78,7 @@ func NewClient() *Client {
 // FetchInstalledExtensions asynchronously retrieves an list of installed file system modules.
 //
 // FetchInstalledExtensions blocks until the operation completes or ctx is cancelled.
-func (x *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Object, err error) {
+func (c *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func (x *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Objec
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchInstalledExtensionsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchInstalledExtensionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -98,11 +99,3 @@ func (x *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Objec
 		return _zero, ctx.Err()
 	}
 }
-
-// Clientable is the interface implemented by [Client], for mocking and DI.
-type Clientable interface {
-	obj.Object
-	FetchInstalledExtensions(ctx context.Context) (obj.Object, error)
-}
-
-var _ Clientable = (*Client)(nil)

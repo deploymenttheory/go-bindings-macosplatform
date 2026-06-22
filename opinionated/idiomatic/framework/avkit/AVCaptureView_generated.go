@@ -46,24 +46,24 @@ func captureViewAdopt(id objc.ID) *CaptureView {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cv *CaptureView) Description() string {
+	return rt.Description(objref.IDOf(cv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cv *CaptureView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cv *CaptureView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cv *CaptureView) String() string {
+	return rt.Description(objref.IDOf(cv))
 }
 
 // NewCaptureView creates a new CaptureView.
@@ -72,69 +72,43 @@ func NewCaptureView() *CaptureView {
 	return captureViewAdopt(_id)
 }
 
-// WithControlsStyle the style of the capture controls presented by the view.
-func (x *CaptureView) WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
-	return x
+// WithControlsStyle sets the style of the capture controls presented by the view.
+func (cv *CaptureView) WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setControlsStyle:"), controlsStyle)
+	return cv
 }
 
-// WithVideoGravity a string value that defines how the capture view displays video within its bounds.
-func (x *CaptureView) WithVideoGravity(videoGravity obj.Object) *CaptureView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-	return x
+// WithVideoGravity sets a string value that defines how the capture view displays video within its bounds.
+func (cv *CaptureView) WithVideoGravity(videoGravity obj.Object) *CaptureView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
+	return cv
 }
 
 // SetSessionShowVideoPreviewShowAudioPreview sets the view’s capture session.
-func (x *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:showVideoPreview:showAudioPreview:"), objref.IDOf(session), showVideoPreview, showAudioPreview)
+func (cv *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSession:showVideoPreview:showAudioPreview:"), objref.IDOf(session), showVideoPreview, showAudioPreview)
 }
 
-// Session a capture session represented by this view. Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
-func (x *CaptureView) Session() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+// Session returns a capture session represented by this view. Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
+func (cv *CaptureView) Session() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("session"))
 	return obj.Wrap(_r)
 }
 
-// FileOutput a capture file output used to record media data. The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
-func (x *CaptureView) FileOutput() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileOutput"))
+// FileOutput returns a capture file output used to record media data. The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
+func (cv *CaptureView) FileOutput() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("fileOutput"))
 	return obj.Wrap(_r)
 }
 
-// ControlsStyle the style of the capture controls pane associated with the view.
-func (x *CaptureView) ControlsStyle() CaptureViewControlsStyle {
-	_r := objc.Send[CaptureViewControlsStyle](objref.IDOf(x), objc.RegisterName("controlsStyle"))
+// ControlsStyle returns the style of the capture controls pane associated with the view.
+func (cv *CaptureView) ControlsStyle() CaptureViewControlsStyle {
+	_r := objc.Send[CaptureViewControlsStyle](objref.IDOf(cv), objc.RegisterName("controlsStyle"))
 	return _r
 }
 
-// SetControlsStyle wraps the corresponding Objective-C method.
-func (x *CaptureView) SetControlsStyle(controlsStyle CaptureViewControlsStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
-}
-
-// VideoGravity a string defining how the video is displayed within the views bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
-func (x *CaptureView) VideoGravity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoGravity"))
+// VideoGravity returns a string defining how the video is displayed within the views bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
+func (cv *CaptureView) VideoGravity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("videoGravity"))
 	return obj.Wrap(_r)
 }
-
-// SetVideoGravity wraps the corresponding Objective-C method.
-func (x *CaptureView) SetVideoGravity(videoGravity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-}
-
-// CaptureViewable is the interface implemented by [CaptureView], for mocking and DI.
-type CaptureViewable interface {
-	obj.Object
-	WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView
-	WithVideoGravity(videoGravity obj.Object) *CaptureView
-	SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool)
-	Session() obj.Object
-	FileOutput() obj.Object
-	ControlsStyle() CaptureViewControlsStyle
-	SetControlsStyle(controlsStyle CaptureViewControlsStyle)
-	VideoGravity() obj.Object
-	SetVideoGravity(videoGravity obj.Object)
-}
-
-var _ CaptureViewable = (*CaptureView)(nil)

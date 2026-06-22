@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,158 +51,99 @@ func NewMTL4TileRenderPipelineDescriptor() *MTL4TileRenderPipelineDescriptor {
 	return mTL4TileRenderPipelineDescriptorAdopt(_id)
 }
 
-// WithTileFunctionDescriptor configures the tile function that the render pipeline executes for each tile in the tile shader stage.
-func (x *MTL4TileRenderPipelineDescriptor) WithTileFunctionDescriptor(tileFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileFunctionDescriptor:"), objref.IDOf(tileFunctionDescriptor))
-	return x
+// WithTileFunctionDescriptor sets configures the tile function that the render pipeline executes for each tile in the tile shader stage.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithTileFunctionDescriptor(tileFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setTileFunctionDescriptor:"), objref.IDOf(tileFunctionDescriptor))
+	return mtrpd
 }
 
-// WithRasterSampleCount configures the number of samples per pixel used for multisampling.
-func (x *MTL4TileRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount int) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
-	return x
+// WithRasterSampleCount sets configures the number of samples per pixel used for multisampling.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount int) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
+	return mtrpd
 }
 
-// WithThreadgroupSizeMatchesTileSize indicating whether the size of the threadgroup matches the size of a tile in the render pipeline.
-func (x *MTL4TileRenderPipelineDescriptor) WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadgroupSizeMatchesTileSize:"), threadgroupSizeMatchesTileSize)
-	return x
+// WithThreadgroupSizeMatchesTileSize sets indicating whether the size of the threadgroup matches the size of a tile in the render pipeline.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setThreadgroupSizeMatchesTileSize:"), threadgroupSizeMatchesTileSize)
+	return mtrpd
 }
 
-// WithMaxTotalThreadsPerThreadgroup sets the maximum number of threads that the GPU can execute simultaneously within a single threadgroup in the tile render pipeline.
-func (x *MTL4TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
-	return x
+// WithMaxTotalThreadsPerThreadgroup sets sets the maximum number of threads that the GPU can execute simultaneously within a single threadgroup in the tile render pipeline.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
+	return mtrpd
 }
 
-// WithStaticLinkingDescriptor configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
-func (x *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
-	return x
+// WithStaticLinkingDescriptor sets configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
+	return mtrpd
 }
 
-// WithSupportBinaryLinking indicates whether the pipeline supports linking binary functions.
-func (x *MTL4TileRenderPipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportBinaryLinking:"), supportBinaryLinking)
-	return x
+// WithSupportBinaryLinking sets indicates whether the pipeline supports linking binary functions.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setSupportBinaryLinking:"), supportBinaryLinking)
+	return mtrpd
 }
 
-// WithLabel assigns an optional string that uniquely identifies a pipeline descriptor.
-func (x *MTL4TileRenderPipelineDescriptor) WithLabel(label string) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional string that uniquely identifies a pipeline descriptor.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithLabel(label string) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mtrpd
 }
 
-// WithOptions provides compile-time options when you build the pipeline.
-func (x *MTL4TileRenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
-	return x
+// WithOptions sets provides compile-time options when you build the pipeline.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
+	return mtrpd
 }
 
 // Reset resets the descriptor to the default state.
-func (x *MTL4TileRenderPipelineDescriptor) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (mtrpd *MTL4TileRenderPipelineDescriptor) Reset() {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("reset"))
 }
 
-// TileFunctionDescriptor configures the tile function that the render pipeline executes for each tile in the tile shader stage.
-func (x *MTL4TileRenderPipelineDescriptor) TileFunctionDescriptor() *MTL4FunctionDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileFunctionDescriptor"))
+// TileFunctionDescriptor returns configures the tile function that the render pipeline executes for each tile in the tile shader stage.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) TileFunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("tileFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
-// SetTileFunctionDescriptor wraps the corresponding Objective-C method.
-func (x *MTL4TileRenderPipelineDescriptor) SetTileFunctionDescriptor(tileFunctionDescriptor *MTL4FunctionDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileFunctionDescriptor:"), objref.IDOf(tileFunctionDescriptor))
-}
-
-// RasterSampleCount configures the number of samples per pixel used for multisampling.
-func (x *MTL4TileRenderPipelineDescriptor) RasterSampleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rasterSampleCount"))
+// RasterSampleCount returns configures the number of samples per pixel used for multisampling.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) RasterSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(mtrpd), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
-// SetRasterSampleCount wraps the corresponding Objective-C method.
-func (x *MTL4TileRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
-}
-
-// ColorAttachments access an array of descriptors that configure the properties of each color attachment in the tile render pipeline.
-func (x *MTL4TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorAttachments"))
+// ColorAttachments returns access an array of descriptors that configure the properties of each color attachment in the tile render pipeline.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("colorAttachments"))
 	return TileRenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
-// ThreadgroupSizeMatchesTileSize indicating whether the size of the threadgroup matches the size of a tile in the render pipeline.
-func (x *MTL4TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("threadgroupSizeMatchesTileSize"))
+// ThreadgroupSizeMatchesTileSize reports whether the size of the threadgroup matches the size of a tile in the render pipeline.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
+	_r := objc.Send[bool](objref.IDOf(mtrpd), objc.RegisterName("threadgroupSizeMatchesTileSize"))
 	return _r
-}
-
-// SetThreadgroupSizeMatchesTileSize wraps the corresponding Objective-C method.
-func (x *MTL4TileRenderPipelineDescriptor) SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadgroupSizeMatchesTileSize:"), threadgroupSizeMatchesTileSize)
 }
 
 // MaxTotalThreadsPerThreadgroup sets the maximum number of threads that the GPU can execute simultaneously within a single threadgroup in the tile render pipeline.
-func (x *MTL4TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
+func (mtrpd *MTL4TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
+	_r := objc.Send[int](objref.IDOf(mtrpd), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
 	return _r
 }
 
-// SetMaxTotalThreadsPerThreadgroup wraps the corresponding Objective-C method.
-func (x *MTL4TileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
-}
-
-// StaticLinkingDescriptor configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
-func (x *MTL4TileRenderPipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("staticLinkingDescriptor"))
+// StaticLinkingDescriptor returns configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("staticLinkingDescriptor"))
 	return MTL4StaticLinkingDescriptorFromID(_r)
 }
 
-// SetStaticLinkingDescriptor wraps the corresponding Objective-C method.
-func (x *MTL4TileRenderPipelineDescriptor) SetStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
-}
-
-// SupportBinaryLinking indicates whether the pipeline supports linking binary functions.
-func (x *MTL4TileRenderPipelineDescriptor) SupportBinaryLinking() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportBinaryLinking"))
+// SupportBinaryLinking reports whether the pipeline supports linking binary functions.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) SupportBinaryLinking() bool {
+	_r := objc.Send[bool](objref.IDOf(mtrpd), objc.RegisterName("supportBinaryLinking"))
 	return _r
 }
-
-// SetSupportBinaryLinking wraps the corresponding Objective-C method.
-func (x *MTL4TileRenderPipelineDescriptor) SetSupportBinaryLinking(supportBinaryLinking bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportBinaryLinking:"), supportBinaryLinking)
-}
-
-// MTL4TileRenderPipelineDescriptorable is the interface implemented by [MTL4TileRenderPipelineDescriptor], for mocking and DI.
-type MTL4TileRenderPipelineDescriptorable interface {
-	obj.Object
-	WithTileFunctionDescriptor(tileFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4TileRenderPipelineDescriptor
-	WithRasterSampleCount(rasterSampleCount int) *MTL4TileRenderPipelineDescriptor
-	WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *MTL4TileRenderPipelineDescriptor
-	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *MTL4TileRenderPipelineDescriptor
-	WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor
-	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor
-	WithLabel(label string) *MTL4TileRenderPipelineDescriptor
-	WithOptions(options *MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor
-	Reset()
-	TileFunctionDescriptor() *MTL4FunctionDescriptor
-	SetTileFunctionDescriptor(tileFunctionDescriptor *MTL4FunctionDescriptor)
-	RasterSampleCount() int
-	SetRasterSampleCount(rasterSampleCount int)
-	ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray
-	ThreadgroupSizeMatchesTileSize() bool
-	SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool)
-	MaxTotalThreadsPerThreadgroup() int
-	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int)
-	StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor
-	SetStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor)
-	SupportBinaryLinking() bool
-	SetSupportBinaryLinking(supportBinaryLinking bool)
-}
-
-var _ MTL4TileRenderPipelineDescriptorable = (*MTL4TileRenderPipelineDescriptor)(nil)
 
 var _ MTL4PipelineDescriptorProvider = (*MTL4TileRenderPipelineDescriptor)(nil)

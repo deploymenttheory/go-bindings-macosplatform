@@ -54,17 +54,9 @@ func NewMusicUserEventWithData(data obj.Object) *MusicUserEvent {
 }
 
 // SizeInBytes wraps the corresponding Objective-C method.
-func (x *MusicUserEvent) SizeInBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sizeInBytes"))
+func (mue *MusicUserEvent) SizeInBytes() int {
+	_r := objc.Send[int](objref.IDOf(mue), objc.RegisterName("sizeInBytes"))
 	return _r
 }
-
-// MusicUserEventable is the interface implemented by [MusicUserEvent], for mocking and DI.
-type MusicUserEventable interface {
-	obj.Object
-	SizeInBytes() int
-}
-
-var _ MusicUserEventable = (*MusicUserEvent)(nil)
 
 var _ MusicEventProvider = (*MusicUserEvent)(nil)

@@ -48,86 +48,73 @@ func videoCompositionInstructionAdopt(id objc.ID) *VideoCompositionInstruction {
 }
 
 // Description returns the object's -description text.
-func (x *VideoCompositionInstruction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vci *VideoCompositionInstruction) Description() string {
+	return rt.Description(objref.IDOf(vci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoCompositionInstruction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vci *VideoCompositionInstruction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoCompositionInstruction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vci *VideoCompositionInstruction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoCompositionInstruction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vci *VideoCompositionInstruction) String() string {
+	return rt.Description(objref.IDOf(vci))
 }
 
 // BackgroundColor indicates the background color of the composition. Solid BGRA colors only are supported; patterns and other color refs that are not supported will be ignored. - If the background color is not specified the video compositor will use a default backgroundColor of opaque black. - If the rendered pixel buffer does not have alpha, the alpha value of the backgroundColor will be ignored.
-func (x *VideoCompositionInstruction) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (vci *VideoCompositionInstruction) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
 // LayerInstructions provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed. Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc. If this key is nil, the output will be a fill of the background color.
 //
 // LayerInstructions returns the collection as a Go slice.
-func (x *VideoCompositionInstruction) LayerInstructions() []*VideoCompositionLayerInstruction {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerInstructions"))
+func (vci *VideoCompositionInstruction) LayerInstructions() []*VideoCompositionLayerInstruction {
+	_arr := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("layerInstructions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VideoCompositionLayerInstruction {
 		return VideoCompositionLayerInstructionFromID(_id)
 	})
 }
 
-// EnablePostProcessing if NO, indicates that post-processing should be skipped for the duration of this instruction.  YES by default. See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].
-func (x *VideoCompositionInstruction) EnablePostProcessing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enablePostProcessing"))
+// EnablePostProcessing reports whether if false, indicates that post-processing should be skipped for the duration of this instruction. true by default. See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].
+func (vci *VideoCompositionInstruction) EnablePostProcessing() bool {
+	_r := objc.Send[bool](objref.IDOf(vci), objc.RegisterName("enablePostProcessing"))
 	return _r
 }
 
-// RequiredSourceTrackIDs list of video track IDs required to compose frames for this instruction. The value of this property is computed from the layer instructions.
+// RequiredSourceTrackIDs returns list of video track IDs required to compose frames for this instruction. The value of this property is computed from the layer instructions.
 //
 // RequiredSourceTrackIDs returns the collection as a Go slice.
-func (x *VideoCompositionInstruction) RequiredSourceTrackIDs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredSourceTrackIDs"))
+func (vci *VideoCompositionInstruction) RequiredSourceTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("requiredSourceTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PassthroughTrackID if the video composition result is one of the source frames for the duration of the instruction, this property returns the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source frame will be used instead. The value of this property is computed from the layer instructions
-func (x *VideoCompositionInstruction) PassthroughTrackID() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("passthroughTrackID"))
+// PassthroughTrackID returns if the video composition result is one of the source frames for the duration of the instruction, this property returns the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source frame will be used instead. The value of this property is computed from the layer instructions
+func (vci *VideoCompositionInstruction) PassthroughTrackID() int32 {
+	_r := objc.Send[int32](objref.IDOf(vci), objc.RegisterName("passthroughTrackID"))
 	return _r
 }
 
-// RequiredSourceSampleDataTrackIDs list of track IDs for which sample data should be presented to the compositor for this instruction.
+// RequiredSourceSampleDataTrackIDs returns list of track IDs for which sample data should be presented to the compositor for this instruction.
 //
 // RequiredSourceSampleDataTrackIDs returns the collection as a Go slice.
-func (x *VideoCompositionInstruction) RequiredSourceSampleDataTrackIDs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredSourceSampleDataTrackIDs"))
+func (vci *VideoCompositionInstruction) RequiredSourceSampleDataTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("requiredSourceSampleDataTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// VideoCompositionInstructionable is the interface implemented by [VideoCompositionInstruction], for mocking and DI.
-type VideoCompositionInstructionable interface {
-	obj.Object
-	BackgroundColor() obj.Object
-	LayerInstructions() []*VideoCompositionLayerInstruction
-	EnablePostProcessing() bool
-	RequiredSourceTrackIDs() []obj.Object
-	PassthroughTrackID() int32
-	RequiredSourceSampleDataTrackIDs() []obj.Object
-}
-
-var _ VideoCompositionInstructionable = (*VideoCompositionInstruction)(nil)
 
 // isVideoCompositionInstruction marks VideoCompositionInstruction — and, by embedding promotion, its
 // subclasses — as a member of the VideoCompositionInstruction hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *VideoCompositionInstruction) isVideoCompositionInstruction() {}
+func (vci *VideoCompositionInstruction) isVideoCompositionInstruction() {}
 
 var _ VideoCompositionInstructionProvider = (*VideoCompositionInstruction)(nil)

@@ -46,24 +46,24 @@ func tensorExtentsAdopt(id objc.ID) *TensorExtents {
 }
 
 // Description returns the object's -description text.
-func (x *TensorExtents) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (te *TensorExtents) Description() string {
+	return rt.Description(objref.IDOf(te))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TensorExtents) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (te *TensorExtents) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(te), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TensorExtents) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (te *TensorExtents) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(te), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TensorExtents) String() string {
-	return rt.Description(objref.IDOf(x))
+func (te *TensorExtents) String() string {
+	return rt.Description(objref.IDOf(te))
 }
 
 // NewTensorExtents creates a new TensorExtents.
@@ -73,22 +73,13 @@ func NewTensorExtents() *TensorExtents {
 }
 
 // ExtentAtDimensionIndex returns the extent at an index.
-func (x *TensorExtents) ExtentAtDimensionIndex(dimensionIndex int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extentAtDimensionIndex:"), dimensionIndex)
+func (te *TensorExtents) ExtentAtDimensionIndex(dimensionIndex int) int {
+	_r := objc.Send[int](objref.IDOf(te), objc.RegisterName("extentAtDimensionIndex:"), dimensionIndex)
 	return _r
 }
 
-// Rank obtains the rank of the tensor. The rank represents the number of dimensions.
-func (x *TensorExtents) Rank() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+// Rank returns obtains the rank of the tensor. The rank represents the number of dimensions.
+func (te *TensorExtents) Rank() int {
+	_r := objc.Send[int](objref.IDOf(te), objc.RegisterName("rank"))
 	return _r
 }
-
-// TensorExtentsable is the interface implemented by [TensorExtents], for mocking and DI.
-type TensorExtentsable interface {
-	obj.Object
-	ExtentAtDimensionIndex(dimensionIndex int) int
-	Rank() int
-}
-
-var _ TensorExtentsable = (*TensorExtents)(nil)

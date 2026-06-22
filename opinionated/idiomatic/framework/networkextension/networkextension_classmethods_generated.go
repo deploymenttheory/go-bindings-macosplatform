@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -43,7 +44,7 @@ func SharedManager() *NEDNSProxyManager {
 	return NEDNSProxyManagerFromID(_r)
 }
 
-// NEDNSSettingsManagerSharedManager access the single instance of a DNS settings manager.
+// NEDNSSettingsManagerSharedManager returns access the single instance of a DNS settings manager.
 func NEDNSSettingsManagerSharedManager() *NEDNSSettingsManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEDNSSettingsManager")), objc.RegisterName("sharedManager"))
 	return NEDNSSettingsManagerFromID(_r)
@@ -73,7 +74,7 @@ func PauseVerdict() *NEFilterDataVerdict {
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// NEFilterManagerSharedManager access the single instance of NEFilterManager.
+// NEFilterManagerSharedManager returns access the single instance of NEFilterManager.
 func NEFilterManagerSharedManager() *NEFilterManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterManager")), objc.RegisterName("sharedManager"))
 	return NEFilterManagerFromID(_r)
@@ -108,7 +109,7 @@ func StartSystemExtensionMode() {
 	objc.Send[objc.ID](objc.ID(_class("NEProvider")), objc.RegisterName("startSystemExtensionMode"))
 }
 
-// NERelayManagerSharedManager access the single instance of a network relay manager.
+// NERelayManagerSharedManager returns access the single instance of a network relay manager.
 func NERelayManagerSharedManager() *NERelayManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NERelayManager")), objc.RegisterName("sharedManager"))
 	return NERelayManagerFromID(_r)
@@ -195,7 +196,7 @@ func ForPerAppVPN() *NETunnelProviderManager {
 	return NETunnelProviderManagerFromID(_r)
 }
 
-// NEVPNManagerSharedManager access the single instance of NEVPNManager.
+// NEVPNManagerSharedManager returns access the single instance of NEVPNManager.
 func NEVPNManagerSharedManager() *NEVPNManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEVPNManager")), objc.RegisterName("sharedManager"))
 	return NEVPNManagerFromID(_r)

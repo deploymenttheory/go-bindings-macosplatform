@@ -44,24 +44,24 @@ func filterBrowserViewAdopt(id objc.ID) *FilterBrowserView {
 }
 
 // Description returns the object's -description text.
-func (x *FilterBrowserView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fbv *FilterBrowserView) Description() string {
+	return rt.Description(objref.IDOf(fbv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FilterBrowserView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fbv *FilterBrowserView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fbv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FilterBrowserView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fbv *FilterBrowserView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fbv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FilterBrowserView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fbv *FilterBrowserView) String() string {
+	return rt.Description(objref.IDOf(fbv))
 }
 
 // NewFilterBrowserView creates a new FilterBrowserView.
@@ -71,24 +71,15 @@ func NewFilterBrowserView() *FilterBrowserView {
 }
 
 // SetPreviewState use this method to show and hide the Preview Use this method to show and hide the Preview from the program.
-func (x *FilterBrowserView) SetPreviewState(inState bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviewState:"), inState)
+func (fbv *FilterBrowserView) SetPreviewState(inState bool) {
+	objc.Send[objc.ID](objref.IDOf(fbv), objc.RegisterName("setPreviewState:"), inState)
 }
 
 // FilterName returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
-func (x *FilterBrowserView) FilterName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
+func (fbv *FilterBrowserView) FilterName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fbv), objc.RegisterName("filterName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// FilterBrowserViewable is the interface implemented by [FilterBrowserView], for mocking and DI.
-type FilterBrowserViewable interface {
-	obj.Object
-	SetPreviewState(inState bool)
-	FilterName() string
-}
-
-var _ FilterBrowserViewable = (*FilterBrowserView)(nil)

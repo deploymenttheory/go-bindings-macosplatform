@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,39 +65,28 @@ func NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source *NN
 	return cNNDropoutNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNDropoutNode) WithLabel(label string) *CNNDropoutNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cdn *CNNDropoutNode) WithLabel(label string) *CNNDropoutNode {
+	objc.Send[objc.ID](objref.IDOf(cdn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cdn
 }
 
 // KeepProbability wraps the corresponding Objective-C method.
-func (x *CNNDropoutNode) KeepProbability() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
+func (cdn *CNNDropoutNode) KeepProbability() float32 {
+	_r := objc.Send[float32](objref.IDOf(cdn), objc.RegisterName("keepProbability"))
 	return _r
 }
 
 // Seed wraps the corresponding Objective-C method.
-func (x *CNNDropoutNode) Seed() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+func (cdn *CNNDropoutNode) Seed() int {
+	_r := objc.Send[int](objref.IDOf(cdn), objc.RegisterName("seed"))
 	return _r
 }
 
 // MaskStrideInPixels wraps the corresponding Objective-C method.
-func (x *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
-	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("maskStrideInPixels"))
+func (cdn *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(cdn), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }
-
-// CNNDropoutNodeable is the interface implemented by [CNNDropoutNode], for mocking and DI.
-type CNNDropoutNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNDropoutNode
-	KeepProbability() float32
-	Seed() int
-	MaskStrideInPixels() metal.MTLSize
-}
-
-var _ CNNDropoutNodeable = (*CNNDropoutNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNDropoutNode)(nil)

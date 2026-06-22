@@ -46,24 +46,24 @@ func mutableFileDataBufferAdopt(id objc.ID) *MutableFileDataBuffer {
 }
 
 // Description returns the object's -description text.
-func (x *MutableFileDataBuffer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mfdb *MutableFileDataBuffer) Description() string {
+	return rt.Description(objref.IDOf(mfdb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableFileDataBuffer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mfdb *MutableFileDataBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mfdb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableFileDataBuffer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mfdb *MutableFileDataBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mfdb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MutableFileDataBuffer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mfdb *MutableFileDataBuffer) String() string {
+	return rt.Description(objref.IDOf(mfdb))
 }
 
 // NewMutableFileDataBuffer creates a new MutableFileDataBuffer.
@@ -72,16 +72,8 @@ func NewMutableFileDataBuffer() *MutableFileDataBuffer {
 	return mutableFileDataBufferAdopt(_id)
 }
 
-// Length the data length of the buffer.
-func (x *MutableFileDataBuffer) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+// Length returns the data length of the buffer.
+func (mfdb *MutableFileDataBuffer) Length() int {
+	_r := objc.Send[int](objref.IDOf(mfdb), objc.RegisterName("length"))
 	return _r
 }
-
-// MutableFileDataBufferable is the interface implemented by [MutableFileDataBuffer], for mocking and DI.
-type MutableFileDataBufferable interface {
-	obj.Object
-	Length() int
-}
-
-var _ MutableFileDataBufferable = (*MutableFileDataBuffer)(nil)

@@ -53,39 +53,28 @@ func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCo
 	return dataMatrixCodeDescriptorAdopt(_id)
 }
 
-// ErrorCorrectedPayload the error-corrected payload containing the data encoded in the Data Matrix code symbol. DataMatrix symbols are specified bn ISO/IEC 16022:2006(E). ECC 200-type symbols will always have an even number of rows and columns. For ECC 200-type symbols, the phases of encoding data into a symbol are described in section 5.1 -- Encode procedure overview. The error corrected payload comprises the de-interleaved bits of the message described at the end of Step 1: Data encodation.
-func (x *DataMatrixCodeDescriptor) ErrorCorrectedPayload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+// ErrorCorrectedPayload returns the error-corrected payload containing the data encoded in the Data Matrix code symbol. DataMatrix symbols are specified bn ISO/IEC 16022:2006(E). ECC 200-type symbols will always have an even number of rows and columns. For ECC 200-type symbols, the phases of encoding data into a symbol are described in section 5.1 -- Encode procedure overview. The error corrected payload comprises the de-interleaved bits of the message described at the end of Step 1: Data encodation.
+func (dmcd *DataMatrixCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dmcd), objc.RegisterName("errorCorrectedPayload"))
 	return obj.Wrap(_r)
 }
 
-// RowCount the number of rows in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
-func (x *DataMatrixCodeDescriptor) RowCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowCount"))
+// RowCount returns the number of rows in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
+func (dmcd *DataMatrixCodeDescriptor) RowCount() int {
+	_r := objc.Send[int](objref.IDOf(dmcd), objc.RegisterName("rowCount"))
 	return _r
 }
 
-// ColumnCount the number of columns in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
-func (x *DataMatrixCodeDescriptor) ColumnCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnCount"))
+// ColumnCount returns the number of columns in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
+func (dmcd *DataMatrixCodeDescriptor) ColumnCount() int {
+	_r := objc.Send[int](objref.IDOf(dmcd), objc.RegisterName("columnCount"))
 	return _r
 }
 
-// EccVersion the error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in “CIDataMatrixCodeECCVersion“. Any symbol with an even number of rows and columns will be ECC 200.
-func (x *DataMatrixCodeDescriptor) EccVersion() DataMatrixCodeECCVersion {
-	_r := objc.Send[DataMatrixCodeECCVersion](objref.IDOf(x), objc.RegisterName("eccVersion"))
+// EccVersion returns the error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in “CIDataMatrixCodeECCVersion“. Any symbol with an even number of rows and columns will be ECC 200.
+func (dmcd *DataMatrixCodeDescriptor) EccVersion() DataMatrixCodeECCVersion {
+	_r := objc.Send[DataMatrixCodeECCVersion](objref.IDOf(dmcd), objc.RegisterName("eccVersion"))
 	return _r
 }
-
-// DataMatrixCodeDescriptorable is the interface implemented by [DataMatrixCodeDescriptor], for mocking and DI.
-type DataMatrixCodeDescriptorable interface {
-	obj.Object
-	ErrorCorrectedPayload() obj.Object
-	RowCount() int
-	ColumnCount() int
-	EccVersion() DataMatrixCodeECCVersion
-}
-
-var _ DataMatrixCodeDescriptorable = (*DataMatrixCodeDescriptor)(nil)
 
 var _ BarcodeDescriptorProvider = (*DataMatrixCodeDescriptor)(nil)

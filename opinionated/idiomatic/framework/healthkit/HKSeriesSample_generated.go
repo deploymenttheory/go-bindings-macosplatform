@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,23 +46,15 @@ func seriesSampleAdopt(id objc.ID) *SeriesSample {
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *SeriesSample) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (ss *SeriesSample) Count() int {
+	_r := objc.Send[int](objref.IDOf(ss), objc.RegisterName("count"))
 	return _r
 }
-
-// SeriesSampleable is the interface implemented by [SeriesSample], for mocking and DI.
-type SeriesSampleable interface {
-	obj.Object
-	Count() int
-}
-
-var _ SeriesSampleable = (*SeriesSample)(nil)
 
 // isSeriesSample marks SeriesSample — and, by embedding promotion, its
 // subclasses — as a member of the SeriesSample hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SeriesSample) isSeriesSample() {}
+func (ss *SeriesSample) isSeriesSample() {}
 
 var _ SeriesSampleProvider = (*SeriesSample)(nil)
 

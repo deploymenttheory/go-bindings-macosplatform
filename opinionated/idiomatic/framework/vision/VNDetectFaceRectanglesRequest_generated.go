@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewDetectFaceRectanglesRequest() *DetectFaceRectanglesRequest {
 	return detectFaceRectanglesRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectFaceRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dfrr *DetectFaceRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dfrr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dfrr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectFaceRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dfrr *DetectFaceRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dfrr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dfrr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectFaceRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dfrr *DetectFaceRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dfrr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dfrr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectFaceRectanglesRequest) WithRevision(revision int) *DetectFaceRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dfrr *DetectFaceRectanglesRequest) WithRevision(revision int) *DetectFaceRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(dfrr), objc.RegisterName("setRevision:"), revision)
+	return dfrr
 }
-
-// DetectFaceRectanglesRequestable is the interface implemented by [DetectFaceRectanglesRequest], for mocking and DI.
-type DetectFaceRectanglesRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest
-	WithRevision(revision int) *DetectFaceRectanglesRequest
-}
-
-var _ DetectFaceRectanglesRequestable = (*DetectFaceRectanglesRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectFaceRectanglesRequest)(nil)
 

@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,111 +59,64 @@ func NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiN
 	return extendedNoteOnEventAdopt(_id)
 }
 
-// WithMidiNote the MIDI note number.
-func (x *ExtendedNoteOnEvent) WithMidiNote(midiNote float32) *ExtendedNoteOnEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMidiNote:"), midiNote)
-	return x
+// WithMidiNote sets the MIDI note number.
+func (enoe *ExtendedNoteOnEvent) WithMidiNote(midiNote float32) *ExtendedNoteOnEvent {
+	objc.Send[objc.ID](objref.IDOf(enoe), objc.RegisterName("setMidiNote:"), midiNote)
+	return enoe
 }
 
-// WithVelocity the MDI velocity.
-func (x *ExtendedNoteOnEvent) WithVelocity(velocity float32) *ExtendedNoteOnEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
-	return x
+// WithVelocity sets the MDI velocity.
+func (enoe *ExtendedNoteOnEvent) WithVelocity(velocity float32) *ExtendedNoteOnEvent {
+	objc.Send[objc.ID](objref.IDOf(enoe), objc.RegisterName("setVelocity:"), velocity)
+	return enoe
 }
 
-// WithInstrumentID the instrument identifier.
-func (x *ExtendedNoteOnEvent) WithInstrumentID(instrumentID int) *ExtendedNoteOnEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstrumentID:"), instrumentID)
-	return x
+// WithInstrumentID sets the instrument identifier.
+func (enoe *ExtendedNoteOnEvent) WithInstrumentID(instrumentID int) *ExtendedNoteOnEvent {
+	objc.Send[objc.ID](objref.IDOf(enoe), objc.RegisterName("setInstrumentID:"), instrumentID)
+	return enoe
 }
 
-// WithGroupID the audio unit channel that handles the event.
-func (x *ExtendedNoteOnEvent) WithGroupID(groupID int) *ExtendedNoteOnEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), groupID)
-	return x
+// WithGroupID sets the audio unit channel that handles the event.
+func (enoe *ExtendedNoteOnEvent) WithGroupID(groupID int) *ExtendedNoteOnEvent {
+	objc.Send[objc.ID](objref.IDOf(enoe), objc.RegisterName("setGroupID:"), groupID)
+	return enoe
 }
 
-// WithDuration the duration of the event, in beats.
-func (x *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-	return x
+// WithDuration sets the duration of the event, in beats.
+func (enoe *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnEvent {
+	objc.Send[objc.ID](objref.IDOf(enoe), objc.RegisterName("setDuration:"), duration)
+	return enoe
 }
 
 // MidiNote wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) MidiNote() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("midiNote"))
+func (enoe *ExtendedNoteOnEvent) MidiNote() float32 {
+	_r := objc.Send[float32](objref.IDOf(enoe), objc.RegisterName("midiNote"))
 	return _r
-}
-
-// SetMidiNote wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) SetMidiNote(midiNote float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMidiNote:"), midiNote)
 }
 
 // Velocity wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) Velocity() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("velocity"))
+func (enoe *ExtendedNoteOnEvent) Velocity() float32 {
+	_r := objc.Send[float32](objref.IDOf(enoe), objc.RegisterName("velocity"))
 	return _r
-}
-
-// SetVelocity wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) SetVelocity(velocity float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 }
 
 // InstrumentID wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) InstrumentID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instrumentID"))
+func (enoe *ExtendedNoteOnEvent) InstrumentID() int {
+	_r := objc.Send[int](objref.IDOf(enoe), objc.RegisterName("instrumentID"))
 	return _r
-}
-
-// SetInstrumentID wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) SetInstrumentID(instrumentID int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstrumentID:"), instrumentID)
 }
 
 // GroupID wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) GroupID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupID"))
+func (enoe *ExtendedNoteOnEvent) GroupID() int {
+	_r := objc.Send[int](objref.IDOf(enoe), objc.RegisterName("groupID"))
 	return _r
-}
-
-// SetGroupID wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) SetGroupID(groupID int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), groupID)
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (enoe *ExtendedNoteOnEvent) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(enoe), objc.RegisterName("duration"))
 	return _r
 }
-
-// SetDuration wraps the corresponding Objective-C method.
-func (x *ExtendedNoteOnEvent) SetDuration(duration float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-}
-
-// ExtendedNoteOnEventable is the interface implemented by [ExtendedNoteOnEvent], for mocking and DI.
-type ExtendedNoteOnEventable interface {
-	obj.Object
-	WithMidiNote(midiNote float32) *ExtendedNoteOnEvent
-	WithVelocity(velocity float32) *ExtendedNoteOnEvent
-	WithInstrumentID(instrumentID int) *ExtendedNoteOnEvent
-	WithGroupID(groupID int) *ExtendedNoteOnEvent
-	WithDuration(duration float64) *ExtendedNoteOnEvent
-	MidiNote() float32
-	SetMidiNote(midiNote float32)
-	Velocity() float32
-	SetVelocity(velocity float32)
-	InstrumentID() int
-	SetInstrumentID(instrumentID int)
-	GroupID() int
-	SetGroupID(groupID int)
-	Duration() float64
-	SetDuration(duration float64)
-}
-
-var _ ExtendedNoteOnEventable = (*ExtendedNoteOnEvent)(nil)
 
 var _ MusicEventProvider = (*ExtendedNoteOnEvent)(nil)

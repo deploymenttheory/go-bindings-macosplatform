@@ -51,45 +51,33 @@ func NewMTRTestClusterClusterTestEmitTestEventRequestParams() *MTRTestClusterClu
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mtccteterp
 }
 
 // WithArg2 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
-	return x
+func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
+	return mtccteterp
 }
 
 // WithArg3 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
-	return x
+func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
+	return mtccteterp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtccteterp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtccteterp
 }
-
-// MTRTestClusterClusterTestEmitTestEventRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestEventRequestParams], for mocking and DI.
-type MTRTestClusterClusterTestEmitTestEventRequestParamsable interface {
-	obj.Object
-	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams
-	WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams
-	WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams
-}
-
-var _ MTRTestClusterClusterTestEmitTestEventRequestParamsable = (*MTRTestClusterClusterTestEmitTestEventRequestParams)(nil)
 
 var _ MTRUnitTestingClusterTestEmitTestEventRequestParamsProvider = (*MTRTestClusterClusterTestEmitTestEventRequestParams)(nil)

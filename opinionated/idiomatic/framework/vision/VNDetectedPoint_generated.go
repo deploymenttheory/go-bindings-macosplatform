@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,23 +46,15 @@ func detectedPointAdopt(id objc.ID) *DetectedPoint {
 }
 
 // Confidence wraps the corresponding Objective-C method.
-func (x *DetectedPoint) Confidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+func (dp *DetectedPoint) Confidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(dp), objc.RegisterName("confidence"))
 	return _r
 }
-
-// DetectedPointable is the interface implemented by [DetectedPoint], for mocking and DI.
-type DetectedPointable interface {
-	obj.Object
-	Confidence() float32
-}
-
-var _ DetectedPointable = (*DetectedPoint)(nil)
 
 // isDetectedPoint marks DetectedPoint — and, by embedding promotion, its
 // subclasses — as a member of the DetectedPoint hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DetectedPoint) isDetectedPoint() {}
+func (dp *DetectedPoint) isDetectedPoint() {}
 
 var _ DetectedPointProvider = (*DetectedPoint)(nil)
 

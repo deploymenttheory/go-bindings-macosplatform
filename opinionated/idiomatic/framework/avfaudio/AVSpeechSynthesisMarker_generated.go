@@ -47,24 +47,24 @@ func speechSynthesisMarkerAdopt(id objc.ID) *SpeechSynthesisMarker {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechSynthesisMarker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ssm *SpeechSynthesisMarker) Description() string {
+	return rt.Description(objref.IDOf(ssm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechSynthesisMarker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ssm *SpeechSynthesisMarker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ssm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechSynthesisMarker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ssm *SpeechSynthesisMarker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ssm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechSynthesisMarker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ssm *SpeechSynthesisMarker) String() string {
+	return rt.Description(objref.IDOf(ssm))
 }
 
 // NewSpeechSynthesisMarkerWithMarkerTypeForTextRangeAtByteSampleOffset creates a marker with a type and location of the request’s text.
@@ -109,115 +109,68 @@ func NewSpeechSynthesisMarkerWithBookmarkNameAtByteSampleOffset(mark string, byt
 	return speechSynthesisMarkerAdopt(_id)
 }
 
-// WithMark the type that describes the text.
-func (x *SpeechSynthesisMarker) WithMark(mark SpeechSynthesisMarkerMark) *SpeechSynthesisMarker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMark:"), mark)
-	return x
+// WithMark sets the type that describes the text.
+func (ssm *SpeechSynthesisMarker) WithMark(mark SpeechSynthesisMarkerMark) *SpeechSynthesisMarker {
+	objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("setMark:"), mark)
+	return ssm
 }
 
-// WithByteSampleOffset the byte offset into the audio buffer.
-func (x *SpeechSynthesisMarker) WithByteSampleOffset(byteSampleOffset int) *SpeechSynthesisMarker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteSampleOffset:"), byteSampleOffset)
-	return x
+// WithByteSampleOffset sets the byte offset into the audio buffer.
+func (ssm *SpeechSynthesisMarker) WithByteSampleOffset(byteSampleOffset int) *SpeechSynthesisMarker {
+	objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("setByteSampleOffset:"), byteSampleOffset)
+	return ssm
 }
 
-// WithTextRange the location and length of the request’s text.
-func (x *SpeechSynthesisMarker) WithTextRange(textRange foundation.NSRange) *SpeechSynthesisMarker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextRange:"), textRange)
-	return x
+// WithTextRange sets the location and length of the request’s text.
+func (ssm *SpeechSynthesisMarker) WithTextRange(textRange foundation.NSRange) *SpeechSynthesisMarker {
+	objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("setTextRange:"), textRange)
+	return ssm
 }
 
-// WithBookmarkName a string that represents the name of a bookmark.
-func (x *SpeechSynthesisMarker) WithBookmarkName(bookmarkName string) *SpeechSynthesisMarker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBookmarkName:"), purego.NSString(bookmarkName))
-	return x
+// WithBookmarkName sets a string that represents the name of a bookmark.
+func (ssm *SpeechSynthesisMarker) WithBookmarkName(bookmarkName string) *SpeechSynthesisMarker {
+	objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("setBookmarkName:"), purego.NSString(bookmarkName))
+	return ssm
 }
 
-// WithPhoneme a string that represents a distinct sound.
-func (x *SpeechSynthesisMarker) WithPhoneme(phoneme string) *SpeechSynthesisMarker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneme:"), purego.NSString(phoneme))
-	return x
+// WithPhoneme sets a string that represents a distinct sound.
+func (ssm *SpeechSynthesisMarker) WithPhoneme(phoneme string) *SpeechSynthesisMarker {
+	objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("setPhoneme:"), purego.NSString(phoneme))
+	return ssm
 }
 
 // Mark wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) Mark() SpeechSynthesisMarkerMark {
-	_r := objc.Send[SpeechSynthesisMarkerMark](objref.IDOf(x), objc.RegisterName("mark"))
+func (ssm *SpeechSynthesisMarker) Mark() SpeechSynthesisMarkerMark {
+	_r := objc.Send[SpeechSynthesisMarkerMark](objref.IDOf(ssm), objc.RegisterName("mark"))
 	return _r
 }
 
-// SetMark wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) SetMark(mark SpeechSynthesisMarkerMark) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMark:"), mark)
-}
-
-// ByteSampleOffset byte offset into the associated audio buffer
-func (x *SpeechSynthesisMarker) ByteSampleOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("byteSampleOffset"))
+// ByteSampleOffset returns byte offset into the associated audio buffer
+func (ssm *SpeechSynthesisMarker) ByteSampleOffset() int {
+	_r := objc.Send[int](objref.IDOf(ssm), objc.RegisterName("byteSampleOffset"))
 	return _r
 }
 
-// SetByteSampleOffset wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) SetByteSampleOffset(byteSampleOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteSampleOffset:"), byteSampleOffset)
-}
-
-// TextRange the location and length of the pertaining speech request's SSML text. This marker applies to the range of characters represented by the NSString.
-func (x *SpeechSynthesisMarker) TextRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("textRange"))
+// TextRange returns the location and length of the pertaining speech request's SSML text. This marker applies to the range of characters represented by the NSString.
+func (ssm *SpeechSynthesisMarker) TextRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(ssm), objc.RegisterName("textRange"))
 	return _r
-}
-
-// SetTextRange wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) SetTextRange(textRange foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextRange:"), textRange)
 }
 
 // BookmarkName wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) BookmarkName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bookmarkName"))
+func (ssm *SpeechSynthesisMarker) BookmarkName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("bookmarkName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetBookmarkName wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) SetBookmarkName(bookmarkName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBookmarkName:"), purego.NSString(bookmarkName))
 }
 
 // Phoneme wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) Phoneme() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneme"))
+func (ssm *SpeechSynthesisMarker) Phoneme() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("phoneme"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetPhoneme wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisMarker) SetPhoneme(phoneme string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneme:"), purego.NSString(phoneme))
-}
-
-// SpeechSynthesisMarkerable is the interface implemented by [SpeechSynthesisMarker], for mocking and DI.
-type SpeechSynthesisMarkerable interface {
-	obj.Object
-	WithMark(mark SpeechSynthesisMarkerMark) *SpeechSynthesisMarker
-	WithByteSampleOffset(byteSampleOffset int) *SpeechSynthesisMarker
-	WithTextRange(textRange foundation.NSRange) *SpeechSynthesisMarker
-	WithBookmarkName(bookmarkName string) *SpeechSynthesisMarker
-	WithPhoneme(phoneme string) *SpeechSynthesisMarker
-	Mark() SpeechSynthesisMarkerMark
-	SetMark(mark SpeechSynthesisMarkerMark)
-	ByteSampleOffset() int
-	SetByteSampleOffset(byteSampleOffset int)
-	TextRange() foundation.NSRange
-	SetTextRange(textRange foundation.NSRange)
-	BookmarkName() string
-	SetBookmarkName(bookmarkName string)
-	Phoneme() string
-	SetPhoneme(phoneme string)
-}
-
-var _ SpeechSynthesisMarkerable = (*SpeechSynthesisMarker)(nil)

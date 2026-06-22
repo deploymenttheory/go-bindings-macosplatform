@@ -46,24 +46,24 @@ func predictionOptionsAdopt(id objc.ID) *PredictionOptions {
 }
 
 // Description returns the object's -description text.
-func (x *PredictionOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (po *PredictionOptions) Description() string {
+	return rt.Description(objref.IDOf(po))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PredictionOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (po *PredictionOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(po), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PredictionOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (po *PredictionOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(po), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PredictionOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (po *PredictionOptions) String() string {
+	return rt.Description(objref.IDOf(po))
 }
 
 // NewPredictionOptions creates a new PredictionOptions.
@@ -72,49 +72,26 @@ func NewPredictionOptions() *PredictionOptions {
 	return predictionOptionsAdopt(_id)
 }
 
-// WithUsesCPUOnly a Boolean value that indicates whether a prediction is computed using only the CPU.
-func (x *PredictionOptions) WithUsesCPUOnly(usesCPUOnly bool) *PredictionOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean value that indicates whether a prediction is computed using only the CPU.
+func (po *PredictionOptions) WithUsesCPUOnly(usesCPUOnly bool) *PredictionOptions {
+	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return po
 }
 
-// WithOutputBackings a dictionary of feature names and client-allocated buffers.
-func (x *PredictionOptions) WithOutputBackings(outputBackings obj.Object) *PredictionOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
-	return x
+// WithOutputBackings sets a dictionary of feature names and client-allocated buffers.
+func (po *PredictionOptions) WithOutputBackings(outputBackings obj.Object) *PredictionOptions {
+	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
+	return po
 }
 
-// UsesCPUOnly set to YES to force computation to be on the CPU only
-func (x *PredictionOptions) UsesCPUOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesCPUOnly"))
+// UsesCPUOnly reports whether set to true to force computation to be on the CPU only
+func (po *PredictionOptions) UsesCPUOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("usesCPUOnly"))
 	return _r
 }
 
-// SetUsesCPUOnly wraps the corresponding Objective-C method.
-func (x *PredictionOptions) SetUsesCPUOnly(usesCPUOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-}
-
-// OutputBackings propose the model to use the specified backing objects for the output feature values. Use the property to get the inference result directly into the client allocated buffer when possible for efficient memory management. The property is a dictionary of the feature name and the output backing object. The framework may not use the specified backing object and instead allocates one by itself if the outputBacking dictionary doesn't contain the entry for the feature name, the model doesn't support the user allocated buffers, or in the batch prediction mode. To check if the backing object was used, compare the output prediction and the backing object by object identity. \code CVPixelBufferRef outputBacking = ...; [options setOutputBackings:
-func (x *PredictionOptions) OutputBackings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputBackings"))
+// OutputBackings returns propose the model to use the specified backing objects for the output feature values. Use the property to get the inference result directly into the client allocated buffer when possible for efficient memory management. The property is a dictionary of the feature name and the output backing object. The framework may not use the specified backing object and instead allocates one by itself if the outputBacking dictionary doesn't contain the entry for the feature name, the model doesn't support the user allocated buffers, or in the batch prediction mode. To check if the backing object was used, compare the output prediction and the backing object by object identity. \code CVPixelBufferRef outputBacking = ...; [options setOutputBackings:
+func (po *PredictionOptions) OutputBackings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("outputBackings"))
 	return obj.Wrap(_r)
 }
-
-// SetOutputBackings wraps the corresponding Objective-C method.
-func (x *PredictionOptions) SetOutputBackings(outputBackings obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
-}
-
-// PredictionOptionsable is the interface implemented by [PredictionOptions], for mocking and DI.
-type PredictionOptionsable interface {
-	obj.Object
-	WithUsesCPUOnly(usesCPUOnly bool) *PredictionOptions
-	WithOutputBackings(outputBackings obj.Object) *PredictionOptions
-	UsesCPUOnly() bool
-	SetUsesCPUOnly(usesCPUOnly bool)
-	OutputBackings() obj.Object
-	SetOutputBackings(outputBackings obj.Object)
-}
-
-var _ PredictionOptionsable = (*PredictionOptions)(nil)

@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,39 +49,28 @@ func NewNNOptimizerRMSProp() *NNOptimizerRMSProp {
 	return nNOptimizerRMSPropAdopt(_id)
 }
 
-// WithLearningRate the learningRate at which we update values The default value is 1e-3
-func (x *NNOptimizerRMSProp) WithLearningRate(learningRate float32) *NNOptimizerRMSProp {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learningRate at which we update values The default value is 1e-3
+func (norp *NNOptimizerRMSProp) WithLearningRate(learningRate float32) *NNOptimizerRMSProp {
+	objc.Send[objc.ID](objref.IDOf(norp), objc.RegisterName("setLearningRate:"), learningRate)
+	return norp
 }
 
-// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
-func (x *NNOptimizerRMSProp) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
-	return x
+// WithApplyGradientClipping sets a bool which decides if gradient will be clipped The default value is NO
+func (norp *NNOptimizerRMSProp) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp {
+	objc.Send[objc.ID](objref.IDOf(norp), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
+	return norp
 }
 
-// Decay the decay at which we update sumOfSquares Default value is 0.9
-func (x *NNOptimizerRMSProp) Decay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("decay"))
+// Decay returns the decay at which we update sumOfSquares Default value is 0.9
+func (norp *NNOptimizerRMSProp) Decay() float64 {
+	_r := objc.Send[float64](objref.IDOf(norp), objc.RegisterName("decay"))
 	return _r
 }
 
-// Epsilon the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
-func (x *NNOptimizerRMSProp) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
+func (norp *NNOptimizerRMSProp) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(norp), objc.RegisterName("epsilon"))
 	return _r
 }
-
-// NNOptimizerRMSPropable is the interface implemented by [NNOptimizerRMSProp], for mocking and DI.
-type NNOptimizerRMSPropable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *NNOptimizerRMSProp
-	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp
-	Decay() float64
-	Epsilon() float32
-}
-
-var _ NNOptimizerRMSPropable = (*NNOptimizerRMSProp)(nil)
 
 var _ NNOptimizerProvider = (*NNOptimizerRMSProp)(nil)

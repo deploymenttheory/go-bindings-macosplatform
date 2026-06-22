@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewSymbolWiggleEffect() *SymbolWiggleEffect {
 }
 
 // EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
-func (x *SymbolWiggleEffect) EffectWithByLayer() *SymbolWiggleEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+func (swe *SymbolWiggleEffect) EffectWithByLayer() *SymbolWiggleEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(swe), objc.RegisterName("effectWithByLayer"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
-func (x *SymbolWiggleEffect) EffectWithWholeSymbol() *SymbolWiggleEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+func (swe *SymbolWiggleEffect) EffectWithWholeSymbol() *SymbolWiggleEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(swe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolWiggleEffectFromID(_r)
 }
-
-// SymbolWiggleEffectable is the interface implemented by [SymbolWiggleEffect], for mocking and DI.
-type SymbolWiggleEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolWiggleEffect
-	EffectWithWholeSymbol() *SymbolWiggleEffect
-}
-
-var _ SymbolWiggleEffectable = (*SymbolWiggleEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolWiggleEffect)(nil)

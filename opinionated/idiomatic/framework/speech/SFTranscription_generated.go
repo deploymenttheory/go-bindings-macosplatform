@@ -46,24 +46,24 @@ func transcriptionAdopt(id objc.ID) *Transcription {
 }
 
 // Description returns the object's -description text.
-func (x *Transcription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transcription) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Transcription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Transcription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Transcription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Transcription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Transcription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transcription) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTranscription creates a new Transcription.
@@ -72,42 +72,31 @@ func NewTranscription() *Transcription {
 	return transcriptionAdopt(_id)
 }
 
-// FormattedString the entire transcription of utterances, formatted into a single, user-displayable string.
-func (x *Transcription) FormattedString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedString"))
+// FormattedString returns the entire transcription of utterances, formatted into a single, user-displayable string.
+func (t *Transcription) FormattedString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("formattedString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Segments an array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer. The order of the segments in the array matches the order in which the corresponding utterances occur in the spoken content.
+// Segments returns an array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer. The order of the segments in the array matches the order in which the corresponding utterances occur in the spoken content.
 //
 // Segments returns the collection as a Go slice.
-func (x *Transcription) Segments() []*TranscriptionSegment {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("segments"))
+func (t *Transcription) Segments() []*TranscriptionSegment {
+	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("segments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TranscriptionSegment { return TranscriptionSegmentFromID(_id) })
 }
 
-// SpeakingRate the number of words spoken per minute.
-func (x *Transcription) SpeakingRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speakingRate"))
+// SpeakingRate returns the number of words spoken per minute.
+func (t *Transcription) SpeakingRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("speakingRate"))
 	return _r
 }
 
-// AveragePauseDuration the average pause duration between words, measured in seconds.
-func (x *Transcription) AveragePauseDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averagePauseDuration"))
+// AveragePauseDuration returns the average pause duration between words, measured in seconds.
+func (t *Transcription) AveragePauseDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("averagePauseDuration"))
 	return _r
 }
-
-// Transcriptionable is the interface implemented by [Transcription], for mocking and DI.
-type Transcriptionable interface {
-	obj.Object
-	FormattedString() string
-	Segments() []*TranscriptionSegment
-	SpeakingRate() float64
-	AveragePauseDuration() float64
-}
-
-var _ Transcriptionable = (*Transcription)(nil)

@@ -7,7 +7,6 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,38 +51,22 @@ func NewNEFilterNewFlowVerdict() *NEFilterNewFlowVerdict {
 	return nEFilterNewFlowVerdictAdopt(_id)
 }
 
-// WithStatisticsReportFrequency the frequency at which the data provider receives reports.
-func (x *NEFilterNewFlowVerdict) WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterNewFlowVerdict {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatisticsReportFrequency:"), statisticsReportFrequency)
-	return x
+// WithStatisticsReportFrequency sets the frequency at which the data provider receives reports.
+func (nfnfv *NEFilterNewFlowVerdict) WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterNewFlowVerdict {
+	objc.Send[objc.ID](objref.IDOf(nfnfv), objc.RegisterName("setStatisticsReportFrequency:"), statisticsReportFrequency)
+	return nfnfv
 }
 
-// WithShouldReport a Boolean value that indicates whether to send a report to the control provider when processing this verdict.
-func (x *NEFilterNewFlowVerdict) WithShouldReport(shouldReport bool) *NEFilterNewFlowVerdict {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReport:"), shouldReport)
-	return x
+// WithShouldReport sets a Boolean value that indicates whether to send a report to the control provider when processing this verdict.
+func (nfnfv *NEFilterNewFlowVerdict) WithShouldReport(shouldReport bool) *NEFilterNewFlowVerdict {
+	objc.Send[objc.ID](objref.IDOf(nfnfv), objc.RegisterName("setShouldReport:"), shouldReport)
+	return nfnfv
 }
 
-// StatisticsReportFrequency the frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics. The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
-func (x *NEFilterNewFlowVerdict) StatisticsReportFrequency() NEFilterReportFrequency {
-	_r := objc.Send[NEFilterReportFrequency](objref.IDOf(x), objc.RegisterName("statisticsReportFrequency"))
+// StatisticsReportFrequency returns the frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics. The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
+func (nfnfv *NEFilterNewFlowVerdict) StatisticsReportFrequency() NEFilterReportFrequency {
+	_r := objc.Send[NEFilterReportFrequency](objref.IDOf(nfnfv), objc.RegisterName("statisticsReportFrequency"))
 	return _r
 }
-
-// SetStatisticsReportFrequency wraps the corresponding Objective-C method.
-func (x *NEFilterNewFlowVerdict) SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatisticsReportFrequency:"), statisticsReportFrequency)
-}
-
-// NEFilterNewFlowVerdictable is the interface implemented by [NEFilterNewFlowVerdict], for mocking and DI.
-type NEFilterNewFlowVerdictable interface {
-	obj.Object
-	WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterNewFlowVerdict
-	WithShouldReport(shouldReport bool) *NEFilterNewFlowVerdict
-	StatisticsReportFrequency() NEFilterReportFrequency
-	SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency)
-}
-
-var _ NEFilterNewFlowVerdictable = (*NEFilterNewFlowVerdict)(nil)
 
 var _ NEFilterVerdictProvider = (*NEFilterNewFlowVerdict)(nil)

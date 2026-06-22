@@ -53,47 +53,34 @@ func NewMutableCharacterSet() *MutableCharacterSet {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableCharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableCharacterSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mcs *MutableCharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableCharacterSet {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mcs
 }
 
 // AddCharactersInString adds to the receiver the characters in a given string.
-func (x *MutableCharacterSet) AddCharactersInString(aString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addCharactersInString:"), purego.NSString(aString))
+func (mcs *MutableCharacterSet) AddCharactersInString(aString string) {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("addCharactersInString:"), purego.NSString(aString))
 }
 
 // RemoveCharactersInString removes from the receiver the characters in a given string.
-func (x *MutableCharacterSet) RemoveCharactersInString(aString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCharactersInString:"), purego.NSString(aString))
+func (mcs *MutableCharacterSet) RemoveCharactersInString(aString string) {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("removeCharactersInString:"), purego.NSString(aString))
 }
 
 // FormUnionWithCharacterSet modifies the receiver so it contains all characters that exist in either the receiver or another set.
-func (x *MutableCharacterSet) FormUnionWithCharacterSet(otherSet *CharacterSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formUnionWithCharacterSet:"), objref.IDOf(otherSet))
+func (mcs *MutableCharacterSet) FormUnionWithCharacterSet(otherSet *CharacterSet) {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("formUnionWithCharacterSet:"), objref.IDOf(otherSet))
 }
 
 // FormIntersectionWithCharacterSet modifies the receiver so it contains only characters that exist in both the receiver and another set.
-func (x *MutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *CharacterSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formIntersectionWithCharacterSet:"), objref.IDOf(otherSet))
+func (mcs *MutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *CharacterSet) {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("formIntersectionWithCharacterSet:"), objref.IDOf(otherSet))
 }
 
 // Invert replaces all the characters in the receiver with all the characters it didn’t previously contain.
-func (x *MutableCharacterSet) Invert() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invert"))
+func (mcs *MutableCharacterSet) Invert() {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("invert"))
 }
-
-// MutableCharacterSetable is the interface implemented by [MutableCharacterSet], for mocking and DI.
-type MutableCharacterSetable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableCharacterSet
-	AddCharactersInString(aString string)
-	RemoveCharactersInString(aString string)
-	FormUnionWithCharacterSet(otherSet *CharacterSet)
-	FormIntersectionWithCharacterSet(otherSet *CharacterSet)
-	Invert()
-}
-
-var _ MutableCharacterSetable = (*MutableCharacterSet)(nil)
 
 var _ CharacterSetProvider = (*MutableCharacterSet)(nil)

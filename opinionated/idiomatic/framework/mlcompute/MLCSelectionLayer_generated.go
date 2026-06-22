@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewSelectionLayer() *SelectionLayer {
 	return selectionLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *SelectionLayer) WithLabel(label string) *SelectionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (sl *SelectionLayer) WithLabel(label string) *SelectionLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return sl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *SelectionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SelectionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (sl *SelectionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SelectionLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return sl
 }
-
-// SelectionLayerable is the interface implemented by [SelectionLayer], for mocking and DI.
-type SelectionLayerable interface {
-	obj.Object
-	WithLabel(label string) *SelectionLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SelectionLayer
-}
-
-var _ SelectionLayerable = (*SelectionLayer)(nil)
 
 var _ LayerProvider = (*SelectionLayer)(nil)

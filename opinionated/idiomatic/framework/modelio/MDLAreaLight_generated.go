@@ -52,129 +52,95 @@ func NewAreaLight() *AreaLight {
 	return areaLightAdopt(_id)
 }
 
-// WithAreaRadius the radius, in units of local coordinate space, of the area from which light emanates.
-func (x *AreaLight) WithAreaRadius(areaRadius float32) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaRadius:"), areaRadius)
-	return x
+// WithAreaRadius sets the radius, in units of local coordinate space, of the area from which light emanates.
+func (al *AreaLight) WithAreaRadius(areaRadius float32) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setAreaRadius:"), areaRadius)
+	return al
 }
 
-// WithAspect the aspect ratio of the light’s shape.
-func (x *AreaLight) WithAspect(aspect float32) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspect:"), aspect)
-	return x
+// WithAspect sets the aspect ratio of the light’s shape.
+func (al *AreaLight) WithAspect(aspect float32) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setAspect:"), aspect)
+	return al
 }
 
-// WithColor the color of the light source.
-func (x *AreaLight) WithColor(color obj.Object) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-	return x
+// WithColor sets the color of the light source.
+func (al *AreaLight) WithColor(color obj.Object) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return al
 }
 
-// WithLumens the total visible intensity of the light source, in lumens.
-func (x *AreaLight) WithLumens(lumens float32) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLumens:"), lumens)
-	return x
+// WithLumens sets the total visible intensity of the light source, in lumens.
+func (al *AreaLight) WithLumens(lumens float32) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setLumens:"), lumens)
+	return al
 }
 
-// WithInnerConeAngle the radial angle, in degrees, of the area fully illuminated by the light.
-func (x *AreaLight) WithInnerConeAngle(innerConeAngle float32) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
-	return x
+// WithInnerConeAngle sets the radial angle, in degrees, of the area fully illuminated by the light.
+func (al *AreaLight) WithInnerConeAngle(innerConeAngle float32) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
+	return al
 }
 
-// WithOuterConeAngle the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
-func (x *AreaLight) WithOuterConeAngle(outerConeAngle float32) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
-	return x
+// WithOuterConeAngle sets the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
+func (al *AreaLight) WithOuterConeAngle(outerConeAngle float32) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
+	return al
 }
 
-// WithAttenuationStartDistance the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
-func (x *AreaLight) WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
-	return x
+// WithAttenuationStartDistance sets the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
+func (al *AreaLight) WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
+	return al
 }
 
-// WithAttenuationEndDistance the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
-func (x *AreaLight) WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
-	return x
+// WithAttenuationEndDistance sets the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
+func (al *AreaLight) WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
+	return al
 }
 
-// WithLightType the type of the light.
-func (x *AreaLight) WithLightType(lightType LightType) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
-	return x
+// WithLightType sets the type of the light.
+func (al *AreaLight) WithLightType(lightType LightType) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setLightType:"), lightType)
+	return al
 }
 
-// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
-func (x *AreaLight) WithColorSpace(colorSpace string) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
-	return x
+// WithColorSpace sets the name of the Core Graphics color space to be used for interpreting the light’s color information.
+func (al *AreaLight) WithColorSpace(colorSpace string) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
+	return al
 }
 
-// WithParent the parent object that contains this object.
-func (x *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (al *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return al
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (al *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return al
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *AreaLight) WithHidden(hidden bool) *AreaLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (al *AreaLight) WithHidden(hidden bool) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setHidden:"), hidden)
+	return al
 }
 
 // AreaRadius wraps the corresponding Objective-C method.
-func (x *AreaLight) AreaRadius() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("areaRadius"))
+func (al *AreaLight) AreaRadius() float32 {
+	_r := objc.Send[float32](objref.IDOf(al), objc.RegisterName("areaRadius"))
 	return _r
-}
-
-// SetAreaRadius wraps the corresponding Objective-C method.
-func (x *AreaLight) SetAreaRadius(areaRadius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaRadius:"), areaRadius)
 }
 
 // Aspect wraps the corresponding Objective-C method.
-func (x *AreaLight) Aspect() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("aspect"))
+func (al *AreaLight) Aspect() float32 {
+	_r := objc.Send[float32](objref.IDOf(al), objc.RegisterName("aspect"))
 	return _r
 }
-
-// SetAspect wraps the corresponding Objective-C method.
-func (x *AreaLight) SetAspect(aspect float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspect:"), aspect)
-}
-
-// AreaLightable is the interface implemented by [AreaLight], for mocking and DI.
-type AreaLightable interface {
-	obj.Object
-	WithAreaRadius(areaRadius float32) *AreaLight
-	WithAspect(aspect float32) *AreaLight
-	WithColor(color obj.Object) *AreaLight
-	WithLumens(lumens float32) *AreaLight
-	WithInnerConeAngle(innerConeAngle float32) *AreaLight
-	WithOuterConeAngle(outerConeAngle float32) *AreaLight
-	WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight
-	WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight
-	WithLightType(lightType LightType) *AreaLight
-	WithColorSpace(colorSpace string) *AreaLight
-	WithParent(parent ObjectProvider) *AreaLight
-	WithInstance(instance ObjectProvider) *AreaLight
-	WithHidden(hidden bool) *AreaLight
-	AreaRadius() float32
-	SetAreaRadius(areaRadius float32)
-	Aspect() float32
-	SetAspect(aspect float32)
-}
-
-var _ AreaLightable = (*AreaLight)(nil)
 
 var _ PhysicallyPlausibleLightProvider = (*AreaLight)(nil)
 

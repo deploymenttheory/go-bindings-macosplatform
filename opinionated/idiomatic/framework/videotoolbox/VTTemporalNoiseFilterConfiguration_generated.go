@@ -46,24 +46,24 @@ func temporalNoiseFilterConfigurationAdopt(id objc.ID) *TemporalNoiseFilterConfi
 }
 
 // Description returns the object's -description text.
-func (x *TemporalNoiseFilterConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tnfc *TemporalNoiseFilterConfiguration) Description() string {
+	return rt.Description(objref.IDOf(tnfc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TemporalNoiseFilterConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tnfc *TemporalNoiseFilterConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tnfc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TemporalNoiseFilterConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tnfc *TemporalNoiseFilterConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tnfc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TemporalNoiseFilterConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tnfc *TemporalNoiseFilterConfiguration) String() string {
+	return rt.Description(objref.IDOf(tnfc))
 }
 
 // NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat creates a new temporal noise-processor configuration.
@@ -73,60 +73,46 @@ func NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelForm
 	return temporalNoiseFilterConfigurationAdopt(_id)
 }
 
-// FrameWidth width of source frame in pixels.
-func (x *TemporalNoiseFilterConfiguration) FrameWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
+// FrameWidth returns width of source frame in pixels.
+func (tnfc *TemporalNoiseFilterConfiguration) FrameWidth() int {
+	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("frameWidth"))
 	return _r
 }
 
-// FrameHeight height of source frame in pixels.
-func (x *TemporalNoiseFilterConfiguration) FrameHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
+// FrameHeight returns height of source frame in pixels.
+func (tnfc *TemporalNoiseFilterConfiguration) FrameHeight() int {
+	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("frameHeight"))
 	return _r
 }
 
-// FrameSupportedPixelFormats supported pixel formats for source frames for current configuration.
+// FrameSupportedPixelFormats returns supported pixel formats for source frames for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
-func (x *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameSupportedPixelFormats"))
+func (tnfc *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(tnfc), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (x *TemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+// SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (tnfc *TemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tnfc), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (x *TemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
+// DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (tnfc *TemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tnfc), objc.RegisterName("destinationPixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// NextFrameCount maximum number of future reference frames that the processor can use to process a source frame.
-func (x *TemporalNoiseFilterConfiguration) NextFrameCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextFrameCount"))
+// NextFrameCount returns maximum number of future reference frames that the processor can use to process a source frame.
+func (tnfc *TemporalNoiseFilterConfiguration) NextFrameCount() int {
+	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("nextFrameCount"))
 	return _r
 }
 
-// PreviousFrameCount maximum number of past reference frames that the processor can use to process a source frame.
-func (x *TemporalNoiseFilterConfiguration) PreviousFrameCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("previousFrameCount"))
+// PreviousFrameCount returns maximum number of past reference frames that the processor can use to process a source frame.
+func (tnfc *TemporalNoiseFilterConfiguration) PreviousFrameCount() int {
+	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("previousFrameCount"))
 	return _r
 }
-
-// TemporalNoiseFilterConfigurationable is the interface implemented by [TemporalNoiseFilterConfiguration], for mocking and DI.
-type TemporalNoiseFilterConfigurationable interface {
-	obj.Object
-	FrameWidth() int
-	FrameHeight() int
-	FrameSupportedPixelFormats() []obj.Object
-	SourcePixelBufferAttributes() obj.Object
-	DestinationPixelBufferAttributes() obj.Object
-	NextFrameCount() int
-	PreviousFrameCount() int
-}
-
-var _ TemporalNoiseFilterConfigurationable = (*TemporalNoiseFilterConfiguration)(nil)

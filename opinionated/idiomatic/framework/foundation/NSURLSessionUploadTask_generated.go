@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,51 +55,51 @@ func NewURLSessionUploadTask() *URLSessionUploadTask {
 }
 
 // WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionUploadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
-	return x
+func (usut *URLSessionUploadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
+	return usut
 }
 
 // WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionUploadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
-	return x
+func (usut *URLSessionUploadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
+	return usut
 }
 
 // WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionUploadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
-	return x
+func (usut *URLSessionUploadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
+	return usut
 }
 
 // WithTaskDescription sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionUploadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
-	return x
+func (usut *URLSessionUploadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
+	return usut
 }
 
 // WithPriority sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionUploadTask) WithPriority(priority float32) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-	return x
+func (usut *URLSessionUploadTask) WithPriority(priority float32) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setPriority:"), priority)
+	return usut
 }
 
 // WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionUploadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
-	return x
+func (usut *URLSessionUploadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
+	return usut
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionUploadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (usut *URLSessionUploadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return usut
 }
 
 // CancelByProducingResumeData cancels an upload and calls the completion handler with resume data for later use. resumeData will be nil if the server does not support the latest resumable uploads Internet-Draft from the HTTP Working Group, found at https://datatracker.ietf.org/doc/draft-ietf-httpbis-resumable-upload/ - Parameter completionHandler: The completion handler to call when the upload has been successfully canceled.
 //
 // CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {
+func (usut *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {
 	type _result struct {
 		val *Data
 		err error
@@ -109,7 +110,7 @@ func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) 
 		_o.val = DataFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelByProducingResumeData:"), _block)
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("cancelByProducingResumeData:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -118,21 +119,6 @@ func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) 
 		return _zero, ctx.Err()
 	}
 }
-
-// URLSessionUploadTaskable is the interface implemented by [URLSessionUploadTask], for mocking and DI.
-type URLSessionUploadTaskable interface {
-	obj.Object
-	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask
-	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionUploadTask
-	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionUploadTask
-	WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask
-	WithPriority(priority float32) *URLSessionUploadTask
-	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionUploadTask
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionUploadTask
-	CancelByProducingResumeData(ctx context.Context) (*Data, error)
-}
-
-var _ URLSessionUploadTaskable = (*URLSessionUploadTask)(nil)
 
 var _ URLSessionDataTaskProvider = (*URLSessionUploadTask)(nil)
 

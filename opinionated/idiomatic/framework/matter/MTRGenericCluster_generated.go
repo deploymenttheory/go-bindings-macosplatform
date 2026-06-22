@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,23 +44,15 @@ func mTRGenericClusterAdopt(id objc.ID) *MTRGenericCluster {
 }
 
 // Device wraps the corresponding Objective-C method.
-func (x *MTRGenericCluster) Device() *MTRDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+func (mgc *MTRGenericCluster) Device() *MTRDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(mgc), objc.RegisterName("device"))
 	return MTRDeviceFromID(_r)
 }
-
-// MTRGenericClusterable is the interface implemented by [MTRGenericCluster], for mocking and DI.
-type MTRGenericClusterable interface {
-	obj.Object
-	Device() *MTRDevice
-}
-
-var _ MTRGenericClusterable = (*MTRGenericCluster)(nil)
 
 // isMTRGenericCluster marks MTRGenericCluster — and, by embedding promotion, its
 // subclasses — as a member of the MTRGenericCluster hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRGenericCluster) isMTRGenericCluster() {}
+func (mgc *MTRGenericCluster) isMTRGenericCluster() {}
 
 var _ MTRGenericClusterProvider = (*MTRGenericCluster)(nil)
 

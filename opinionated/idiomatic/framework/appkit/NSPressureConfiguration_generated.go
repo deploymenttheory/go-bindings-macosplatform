@@ -46,24 +46,24 @@ func pressureConfigurationAdopt(id objc.ID) *PressureConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *PressureConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PressureConfiguration) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PressureConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PressureConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PressureConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PressureConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PressureConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PressureConfiguration) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewPressureConfigurationWithPressureBehavior initializes a pressure configuration object with a specified pressure behavior.
@@ -74,21 +74,12 @@ func NewPressureConfigurationWithPressureBehavior(pressureBehavior PressureBehav
 }
 
 // Set changes the pressure configuration of the trackpad to the initialized pressure configuration.
-func (x *PressureConfiguration) Set() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+func (pc *PressureConfiguration) Set() {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("set"))
 }
 
 // PressureBehavior wraps the corresponding Objective-C method.
-func (x *PressureConfiguration) PressureBehavior() PressureBehavior {
-	_r := objc.Send[PressureBehavior](objref.IDOf(x), objc.RegisterName("pressureBehavior"))
+func (pc *PressureConfiguration) PressureBehavior() PressureBehavior {
+	_r := objc.Send[PressureBehavior](objref.IDOf(pc), objc.RegisterName("pressureBehavior"))
 	return _r
 }
-
-// PressureConfigurationable is the interface implemented by [PressureConfiguration], for mocking and DI.
-type PressureConfigurationable interface {
-	obj.Object
-	Set()
-	PressureBehavior() PressureBehavior
-}
-
-var _ PressureConfigurationable = (*PressureConfiguration)(nil)

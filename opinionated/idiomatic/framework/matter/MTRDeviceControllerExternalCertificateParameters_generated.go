@@ -50,63 +50,49 @@ func NewMTRDeviceControllerExternalCertificateParameters() *MTRDeviceControllerE
 	return mTRDeviceControllerExternalCertificateParametersAdopt(_id)
 }
 
-// WithProductAttestationAuthorityCertificates the Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters {
+// WithProductAttestationAuthorityCertificates sets the Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
+	return mdcecp
 }
 
-// WithCertificationDeclarationCertificates the Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters {
+// WithCertificationDeclarationCertificates sets the Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
+	return mdcecp
 }
 
-// WithShouldAdvertiseOperational whether the controller should advertise its operational identity.  Defaults to NO.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAdvertiseOperational:"), shouldAdvertiseOperational)
-	return x
+// WithShouldAdvertiseOperational sets whether the controller should advertise its operational identity.  Defaults to NO.
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters {
+	objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("setShouldAdvertiseOperational:"), shouldAdvertiseOperational)
+	return mdcecp
 }
 
-// WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) *MTRDeviceControllerExternalCertificateParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConcurrentSubscriptionEstablishmentsAllowedOnThread:"), concurrentSubscriptionEstablishmentsAllowedOnThread)
-	return x
+// WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) *MTRDeviceControllerExternalCertificateParameters {
+	objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("setConcurrentSubscriptionEstablishmentsAllowedOnThread:"), concurrentSubscriptionEstablishmentsAllowedOnThread)
+	return mdcecp
 }
 
-// WithStorageBehaviorConfiguration sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
-func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageBehaviorConfiguration:"), objref.IDOf(storageBehaviorConfiguration))
-	return x
+// WithStorageBehaviorConfiguration sets sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
+	objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("setStorageBehaviorConfiguration:"), objref.IDOf(storageBehaviorConfiguration))
+	return mdcecp
 }
 
-// WithStartSuspended whether the controller should start out suspended.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
-	return x
+// WithStartSuspended sets whether the controller should start out suspended.
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters {
+	objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("setStartSuspended:"), startSuspended)
+	return mdcecp
 }
 
 // RootCertificate wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerExternalCertificateParameters) RootCertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificate"))
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) RootCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("rootCertificate"))
 	return obj.Wrap(_r)
 }
-
-// MTRDeviceControllerExternalCertificateParametersable is the interface implemented by [MTRDeviceControllerExternalCertificateParameters], for mocking and DI.
-type MTRDeviceControllerExternalCertificateParametersable interface {
-	obj.Object
-	WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters
-	WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters
-	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters
-	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) *MTRDeviceControllerExternalCertificateParameters
-	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters
-	WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters
-	RootCertificate() obj.Object
-}
-
-var _ MTRDeviceControllerExternalCertificateParametersable = (*MTRDeviceControllerExternalCertificateParameters)(nil)
 
 var _ MTRDeviceControllerParametersProvider = (*MTRDeviceControllerExternalCertificateParameters)(nil)
 

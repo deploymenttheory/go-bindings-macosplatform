@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewFragmentedMovie() *FragmentedMovie {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVFragmentedMovie")), objc.RegisterName("new"))
 	return fragmentedMovieAdopt(_id)
 }
-
-// FragmentedMovieable is the interface implemented by [FragmentedMovie], for mocking and DI.
-type FragmentedMovieable interface {
-	obj.Object
-}
-
-var _ FragmentedMovieable = (*FragmentedMovie)(nil)
 
 var _ MovieProvider = (*FragmentedMovie)(nil)
 

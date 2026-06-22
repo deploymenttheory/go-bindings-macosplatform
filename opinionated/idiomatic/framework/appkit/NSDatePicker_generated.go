@@ -54,840 +54,633 @@ func NewDatePicker() *DatePicker {
 	return datePickerAdopt(_id)
 }
 
-// WithDatePickerStyle the date picker’s style.
-func (x *DatePicker) WithDatePickerStyle(datePickerStyle DatePickerStyle) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerStyle:"), datePickerStyle)
-	return x
+// WithDatePickerStyle sets the date picker’s style.
+func (dp *DatePicker) WithDatePickerStyle(datePickerStyle DatePickerStyle) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerStyle:"), datePickerStyle)
+	return dp
 }
 
-// WithBezeled a Boolean value that indicates whether the date picker draws a bezeled border.
-func (x *DatePicker) WithBezeled(bezeled bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value that indicates whether the date picker draws a bezeled border.
+func (dp *DatePicker) WithBezeled(bezeled bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBezeled:"), bezeled)
+	return dp
 }
 
-// WithBordered a Boolean value that indicates whether the date picker has a plain border.
-func (x *DatePicker) WithBordered(bordered bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value that indicates whether the date picker has a plain border.
+func (dp *DatePicker) WithBordered(bordered bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBordered:"), bordered)
+	return dp
 }
 
-// WithDrawsBackground a Boolean value that indicates whether the date picker draws the background.
-func (x *DatePicker) WithDrawsBackground(drawsBackground bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean value that indicates whether the date picker draws the background.
+func (dp *DatePicker) WithDrawsBackground(drawsBackground bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return dp
 }
 
-// WithBackgroundColor the date picker’s background color.
-func (x *DatePicker) WithBackgroundColor(backgroundColor *Color) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the date picker’s background color.
+func (dp *DatePicker) WithBackgroundColor(backgroundColor *Color) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return dp
 }
 
-// WithTextColor the date picker’s text color.
-func (x *DatePicker) WithTextColor(textColor *Color) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-	return x
+// WithTextColor sets the date picker’s text color.
+func (dp *DatePicker) WithTextColor(textColor *Color) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	return dp
 }
 
-// WithDatePickerMode the date picker’s mode.
-func (x *DatePicker) WithDatePickerMode(datePickerMode DatePickerMode) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerMode:"), datePickerMode)
-	return x
+// WithDatePickerMode sets the date picker’s mode.
+func (dp *DatePicker) WithDatePickerMode(datePickerMode DatePickerMode) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerMode:"), datePickerMode)
+	return dp
 }
 
-// WithDatePickerElements a bitmask that indicates which visual elements of the date picker are currently shown, and which won’t be usable because they are hidden.
-func (x *DatePicker) WithDatePickerElements(datePickerElements DatePickerElementFlags) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerElements:"), datePickerElements)
-	return x
+// WithDatePickerElements sets a bitmask that indicates which visual elements of the date picker are currently shown, and which won’t be usable because they are hidden.
+func (dp *DatePicker) WithDatePickerElements(datePickerElements DatePickerElementFlags) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerElements:"), datePickerElements)
+	return dp
 }
 
-// WithCalendar the calendar used by the date picker.
-func (x *DatePicker) WithCalendar(calendar obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
-	return x
+// WithCalendar sets the calendar used by the date picker.
+func (dp *DatePicker) WithCalendar(calendar obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+	return dp
 }
 
-// WithLocale the date picker’s locale.
-func (x *DatePicker) WithLocale(locale obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+// WithLocale sets the date picker’s locale.
+func (dp *DatePicker) WithLocale(locale obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return dp
 }
 
-// WithTimeZone the time zone for the date picker.
-func (x *DatePicker) WithTimeZone(timeZone obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
-	return x
+// WithTimeZone sets the time zone for the date picker.
+func (dp *DatePicker) WithTimeZone(timeZone obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+	return dp
 }
 
-// WithDateValue the date selected by the date picker.
-func (x *DatePicker) WithDateValue(dateValue obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
-	return x
+// WithDateValue sets the date selected by the date picker.
+func (dp *DatePicker) WithDateValue(dateValue obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
+	return dp
 }
 
-// WithTimeInterval the time interval selected by the date picker.
-func (x *DatePicker) WithTimeInterval(timeInterval float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeInterval:"), timeInterval)
-	return x
+// WithTimeInterval sets the time interval selected by the date picker.
+func (dp *DatePicker) WithTimeInterval(timeInterval float64) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTimeInterval:"), timeInterval)
+	return dp
 }
 
-// WithMinDate the date picker’s minimum date value.
-func (x *DatePicker) WithMinDate(minDate obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
-	return x
+// WithMinDate sets the date picker’s minimum date value.
+func (dp *DatePicker) WithMinDate(minDate obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
+	return dp
 }
 
-// WithMaxDate the date picker’s maximum date value.
-func (x *DatePicker) WithMaxDate(maxDate obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
-	return x
+// WithMaxDate sets the date picker’s maximum date value.
+func (dp *DatePicker) WithMaxDate(maxDate obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
+	return dp
 }
 
-// WithPresentsCalendarOverlay a Boolean value that indicates whether to present a graphical calendar overlay when editing a calendar element within a text-field style date picker.
-func (x *DatePicker) WithPresentsCalendarOverlay(presentsCalendarOverlay bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsCalendarOverlay:"), presentsCalendarOverlay)
-	return x
+// WithPresentsCalendarOverlay sets a Boolean value that indicates whether to present a graphical calendar overlay when editing a calendar element within a text-field style date picker.
+func (dp *DatePicker) WithPresentsCalendarOverlay(presentsCalendarOverlay bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPresentsCalendarOverlay:"), presentsCalendarOverlay)
+	return dp
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *DatePicker) WithTarget(target obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (dp *DatePicker) WithTarget(target obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return dp
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *DatePicker) WithTag(tag int) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (dp *DatePicker) WithTag(tag int) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTag:"), tag)
+	return dp
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *DatePicker) WithIgnoresMultiClick(ignoresMultiClick bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (dp *DatePicker) WithIgnoresMultiClick(ignoresMultiClick bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return dp
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *DatePicker) WithContinuous(continuous bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (dp *DatePicker) WithContinuous(continuous bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setContinuous:"), continuous)
+	return dp
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *DatePicker) WithEnabled(enabled bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (dp *DatePicker) WithEnabled(enabled bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setEnabled:"), enabled)
+	return dp
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *DatePicker) WithRefusesFirstResponder(refusesFirstResponder bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (dp *DatePicker) WithRefusesFirstResponder(refusesFirstResponder bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return dp
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *DatePicker) WithHighlighted(highlighted bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (dp *DatePicker) WithHighlighted(highlighted bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHighlighted:"), highlighted)
+	return dp
 }
 
-// WithControlSize the size of the control.
-func (x *DatePicker) WithControlSize(controlSize ControlSize) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (dp *DatePicker) WithControlSize(controlSize ControlSize) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setControlSize:"), controlSize)
+	return dp
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *DatePicker) WithFormatter(formatter obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (dp *DatePicker) WithFormatter(formatter obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return dp
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *DatePicker) WithObjectValue(objectValue obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (dp *DatePicker) WithObjectValue(objectValue obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return dp
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *DatePicker) WithStringValue(stringValue string) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (dp *DatePicker) WithStringValue(stringValue string) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return dp
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *DatePicker) WithAttributedStringValue(attributedStringValue obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (dp *DatePicker) WithAttributedStringValue(attributedStringValue obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return dp
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *DatePicker) WithIntValue(intValue int) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (dp *DatePicker) WithIntValue(intValue int) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIntValue:"), intValue)
+	return dp
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *DatePicker) WithIntegerValue(integerValue int) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (dp *DatePicker) WithIntegerValue(integerValue int) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIntegerValue:"), integerValue)
+	return dp
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *DatePicker) WithFloatValue(floatValue float32) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (dp *DatePicker) WithFloatValue(floatValue float32) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFloatValue:"), floatValue)
+	return dp
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *DatePicker) WithDoubleValue(doubleValue float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (dp *DatePicker) WithDoubleValue(doubleValue float64) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return dp
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *DatePicker) WithFont(font *Font) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (dp *DatePicker) WithFont(font *Font) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return dp
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *DatePicker) WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (dp *DatePicker) WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return dp
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *DatePicker) WithLineBreakMode(lineBreakMode LineBreakMode) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (dp *DatePicker) WithLineBreakMode(lineBreakMode LineBreakMode) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return dp
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *DatePicker) WithAlignment(alignment TextAlignment) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (dp *DatePicker) WithAlignment(alignment TextAlignment) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAlignment:"), alignment)
+	return dp
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *DatePicker) WithBaseWritingDirection(baseWritingDirection WritingDirection) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (dp *DatePicker) WithBaseWritingDirection(baseWritingDirection WritingDirection) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return dp
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *DatePicker) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (dp *DatePicker) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return dp
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithCell(cell CellProvider) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (dp *DatePicker) WithCell(cell CellProvider) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return dp
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithSubviews(items ...ViewProvider) *DatePicker {
+func (dp *DatePicker) WithSubviews(items ...ViewProvider) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setSubviews:"), _arr)
+	return dp
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithHidden(hidden bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (dp *DatePicker) WithHidden(hidden bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHidden:"), hidden)
+	return dp
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (dp *DatePicker) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return dp
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithAutoresizesSubviews(autoresizesSubviews bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (dp *DatePicker) WithAutoresizesSubviews(autoresizesSubviews bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return dp
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (dp *DatePicker) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return dp
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *DatePicker) WithFrame(frame corefoundation.CGRect) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (dp *DatePicker) WithFrame(frame corefoundation.CGRect) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrame:"), frame)
+	return dp
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithFrameRotation(frameRotation float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (dp *DatePicker) WithFrameRotation(frameRotation float64) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return dp
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithFrameCenterRotation(frameCenterRotation float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (dp *DatePicker) WithFrameCenterRotation(frameCenterRotation float64) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return dp
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithBoundsRotation(boundsRotation float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (dp *DatePicker) WithBoundsRotation(boundsRotation float64) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return dp
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *DatePicker) WithBounds(bounds corefoundation.CGRect) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (dp *DatePicker) WithBounds(bounds corefoundation.CGRect) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBounds:"), bounds)
+	return dp
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithCanDrawConcurrently(canDrawConcurrently bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (dp *DatePicker) WithCanDrawConcurrently(canDrawConcurrently bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return dp
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *DatePicker) WithNeedsDisplay(needsDisplay bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (dp *DatePicker) WithNeedsDisplay(needsDisplay bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return dp
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithAcceptsTouchEvents(acceptsTouchEvents bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (dp *DatePicker) WithAcceptsTouchEvents(acceptsTouchEvents bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return dp
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithWantsRestingTouches(wantsRestingTouches bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (dp *DatePicker) WithWantsRestingTouches(wantsRestingTouches bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return dp
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (dp *DatePicker) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return dp
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (dp *DatePicker) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return dp
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithWantsLayer(wantsLayer bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (dp *DatePicker) WithWantsLayer(wantsLayer bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return dp
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithLayer(layer obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (dp *DatePicker) WithLayer(layer obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return dp
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (dp *DatePicker) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return dp
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithNeedsLayout(needsLayout bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (dp *DatePicker) WithNeedsLayout(needsLayout bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return dp
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithAlphaValue(alphaValue float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (dp *DatePicker) WithAlphaValue(alphaValue float64) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return dp
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (dp *DatePicker) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return dp
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithBackgroundFilters(items ...obj.Object) *DatePicker {
+func (dp *DatePicker) WithBackgroundFilters(items ...obj.Object) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return dp
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithCompositingFilter(compositingFilter obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (dp *DatePicker) WithCompositingFilter(compositingFilter obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return dp
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithContentFilters(items ...obj.Object) *DatePicker {
+func (dp *DatePicker) WithContentFilters(items ...obj.Object) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setContentFilters:"), _arr)
+	return dp
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithShadow(shadow *Shadow) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (dp *DatePicker) WithShadow(shadow *Shadow) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return dp
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithClipsToBounds(clipsToBounds bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (dp *DatePicker) WithClipsToBounds(clipsToBounds bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return dp
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (dp *DatePicker) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return dp
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithToolTip(toolTip string) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (dp *DatePicker) WithToolTip(toolTip string) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return dp
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (dp *DatePicker) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return dp
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (dp *DatePicker) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return dp
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithNextKeyView(nextKeyView ViewProvider) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (dp *DatePicker) WithNextKeyView(nextKeyView ViewProvider) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return dp
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithFocusRingType(focusRingType FocusRingType) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (dp *DatePicker) WithFocusRingType(focusRingType FocusRingType) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return dp
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithGestureRecognizers(items ...GestureRecognizerProvider) *DatePicker {
+func (dp *DatePicker) WithGestureRecognizers(items ...GestureRecognizerProvider) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return dp
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (dp *DatePicker) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return dp
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (dp *DatePicker) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return dp
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *DatePicker) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (dp *DatePicker) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return dp
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (dp *DatePicker) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return dp
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (dp *DatePicker) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return dp
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (dp *DatePicker) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return dp
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (dp *DatePicker) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return dp
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (dp *DatePicker) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return dp
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (dp *DatePicker) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return dp
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (dp *DatePicker) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return dp
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *DatePicker) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (dp *DatePicker) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return dp
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *DatePicker) WithNextResponder(nextResponder ResponderProvider) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (dp *DatePicker) WithNextResponder(nextResponder ResponderProvider) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return dp
 }
 
-// WithMenu returns the responder’s menu.
-func (x *DatePicker) WithMenu(menu *Menu) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (dp *DatePicker) WithMenu(menu *Menu) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return dp
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *DatePicker) WithUserActivity(userActivity obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (dp *DatePicker) WithUserActivity(userActivity obj.Object) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return dp
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *DatePicker) WithTouchBar(touchBar *TouchBar) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (dp *DatePicker) WithTouchBar(touchBar *TouchBar) *DatePicker {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return dp
 }
 
 // DatePickerStyle wraps the corresponding Objective-C method.
-func (x *DatePicker) DatePickerStyle() DatePickerStyle {
-	_r := objc.Send[DatePickerStyle](objref.IDOf(x), objc.RegisterName("datePickerStyle"))
+func (dp *DatePicker) DatePickerStyle() DatePickerStyle {
+	_r := objc.Send[DatePickerStyle](objref.IDOf(dp), objc.RegisterName("datePickerStyle"))
 	return _r
-}
-
-// SetDatePickerStyle wraps the corresponding Objective-C method.
-func (x *DatePicker) SetDatePickerStyle(datePickerStyle DatePickerStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerStyle:"), datePickerStyle)
 }
 
 // IsBezeled wraps the corresponding Objective-C method.
-func (x *DatePicker) IsBezeled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBezeled"))
+func (dp *DatePicker) IsBezeled() bool {
+	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("isBezeled"))
 	return _r
-}
-
-// SetBezeled wraps the corresponding Objective-C method.
-func (x *DatePicker) SetBezeled(bezeled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 }
 
 // IsBordered wraps the corresponding Objective-C method.
-func (x *DatePicker) IsBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBordered"))
+func (dp *DatePicker) IsBordered() bool {
+	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("isBordered"))
 	return _r
-}
-
-// SetBordered wraps the corresponding Objective-C method.
-func (x *DatePicker) SetBordered(bordered bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
-func (x *DatePicker) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+func (dp *DatePicker) DrawsBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("drawsBackground"))
 	return _r
-}
-
-// SetDrawsBackground wraps the corresponding Objective-C method.
-func (x *DatePicker) SetDrawsBackground(drawsBackground bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *DatePicker) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (dp *DatePicker) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
-}
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *DatePicker) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
 // TextColor wraps the corresponding Objective-C method.
-func (x *DatePicker) TextColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textColor"))
+func (dp *DatePicker) TextColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// SetTextColor wraps the corresponding Objective-C method.
-func (x *DatePicker) SetTextColor(textColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-}
-
 // DatePickerMode wraps the corresponding Objective-C method.
-func (x *DatePicker) DatePickerMode() DatePickerMode {
-	_r := objc.Send[DatePickerMode](objref.IDOf(x), objc.RegisterName("datePickerMode"))
+func (dp *DatePicker) DatePickerMode() DatePickerMode {
+	_r := objc.Send[DatePickerMode](objref.IDOf(dp), objc.RegisterName("datePickerMode"))
 	return _r
-}
-
-// SetDatePickerMode wraps the corresponding Objective-C method.
-func (x *DatePicker) SetDatePickerMode(datePickerMode DatePickerMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerMode:"), datePickerMode)
 }
 
 // DatePickerElements wraps the corresponding Objective-C method.
-func (x *DatePicker) DatePickerElements() DatePickerElementFlags {
-	_r := objc.Send[DatePickerElementFlags](objref.IDOf(x), objc.RegisterName("datePickerElements"))
+func (dp *DatePicker) DatePickerElements() DatePickerElementFlags {
+	_r := objc.Send[DatePickerElementFlags](objref.IDOf(dp), objc.RegisterName("datePickerElements"))
 	return _r
-}
-
-// SetDatePickerElements wraps the corresponding Objective-C method.
-func (x *DatePicker) SetDatePickerElements(datePickerElements DatePickerElementFlags) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerElements:"), datePickerElements)
 }
 
 // Calendar wraps the corresponding Objective-C method.
-func (x *DatePicker) Calendar() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
+func (dp *DatePicker) Calendar() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("calendar"))
 	return obj.Wrap(_r)
-}
-
-// SetCalendar wraps the corresponding Objective-C method.
-func (x *DatePicker) SetCalendar(calendar obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
 // Locale wraps the corresponding Objective-C method.
-func (x *DatePicker) Locale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+func (dp *DatePicker) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
-}
-
-// SetLocale wraps the corresponding Objective-C method.
-func (x *DatePicker) SetLocale(locale obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
 // TimeZone wraps the corresponding Objective-C method.
-func (x *DatePicker) TimeZone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+func (dp *DatePicker) TimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
-}
-
-// SetTimeZone wraps the corresponding Objective-C method.
-func (x *DatePicker) SetTimeZone(timeZone obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
 // DateValue wraps the corresponding Objective-C method.
-func (x *DatePicker) DateValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateValue"))
+func (dp *DatePicker) DateValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("dateValue"))
 	return obj.Wrap(_r)
-}
-
-// SetDateValue wraps the corresponding Objective-C method.
-func (x *DatePicker) SetDateValue(dateValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
 }
 
 // TimeInterval wraps the corresponding Objective-C method.
-func (x *DatePicker) TimeInterval() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
+func (dp *DatePicker) TimeInterval() float64 {
+	_r := objc.Send[float64](objref.IDOf(dp), objc.RegisterName("timeInterval"))
 	return _r
-}
-
-// SetTimeInterval wraps the corresponding Objective-C method.
-func (x *DatePicker) SetTimeInterval(timeInterval float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeInterval:"), timeInterval)
 }
 
 // MinDate wraps the corresponding Objective-C method.
-func (x *DatePicker) MinDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minDate"))
+func (dp *DatePicker) MinDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("minDate"))
 	return obj.Wrap(_r)
-}
-
-// SetMinDate wraps the corresponding Objective-C method.
-func (x *DatePicker) SetMinDate(minDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
 }
 
 // MaxDate wraps the corresponding Objective-C method.
-func (x *DatePicker) MaxDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxDate"))
+func (dp *DatePicker) MaxDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("maxDate"))
 	return obj.Wrap(_r)
 }
 
-// SetMaxDate wraps the corresponding Objective-C method.
-func (x *DatePicker) SetMaxDate(maxDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
-}
-
 // PresentsCalendarOverlay wraps the corresponding Objective-C method.
-func (x *DatePicker) PresentsCalendarOverlay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentsCalendarOverlay"))
+func (dp *DatePicker) PresentsCalendarOverlay() bool {
+	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("presentsCalendarOverlay"))
 	return _r
 }
-
-// SetPresentsCalendarOverlay wraps the corresponding Objective-C method.
-func (x *DatePicker) SetPresentsCalendarOverlay(presentsCalendarOverlay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsCalendarOverlay:"), presentsCalendarOverlay)
-}
-
-// DatePickerable is the interface implemented by [DatePicker], for mocking and DI.
-type DatePickerable interface {
-	obj.Object
-	WithDatePickerStyle(datePickerStyle DatePickerStyle) *DatePicker
-	WithBezeled(bezeled bool) *DatePicker
-	WithBordered(bordered bool) *DatePicker
-	WithDrawsBackground(drawsBackground bool) *DatePicker
-	WithBackgroundColor(backgroundColor *Color) *DatePicker
-	WithTextColor(textColor *Color) *DatePicker
-	WithDatePickerMode(datePickerMode DatePickerMode) *DatePicker
-	WithDatePickerElements(datePickerElements DatePickerElementFlags) *DatePicker
-	WithCalendar(calendar obj.Object) *DatePicker
-	WithLocale(locale obj.Object) *DatePicker
-	WithTimeZone(timeZone obj.Object) *DatePicker
-	WithDateValue(dateValue obj.Object) *DatePicker
-	WithTimeInterval(timeInterval float64) *DatePicker
-	WithMinDate(minDate obj.Object) *DatePicker
-	WithMaxDate(maxDate obj.Object) *DatePicker
-	WithPresentsCalendarOverlay(presentsCalendarOverlay bool) *DatePicker
-	WithTarget(target obj.Object) *DatePicker
-	WithTag(tag int) *DatePicker
-	WithIgnoresMultiClick(ignoresMultiClick bool) *DatePicker
-	WithContinuous(continuous bool) *DatePicker
-	WithEnabled(enabled bool) *DatePicker
-	WithRefusesFirstResponder(refusesFirstResponder bool) *DatePicker
-	WithHighlighted(highlighted bool) *DatePicker
-	WithControlSize(controlSize ControlSize) *DatePicker
-	WithFormatter(formatter obj.Object) *DatePicker
-	WithObjectValue(objectValue obj.Object) *DatePicker
-	WithStringValue(stringValue string) *DatePicker
-	WithAttributedStringValue(attributedStringValue obj.Object) *DatePicker
-	WithIntValue(intValue int) *DatePicker
-	WithIntegerValue(integerValue int) *DatePicker
-	WithFloatValue(floatValue float32) *DatePicker
-	WithDoubleValue(doubleValue float64) *DatePicker
-	WithFont(font *Font) *DatePicker
-	WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker
-	WithLineBreakMode(lineBreakMode LineBreakMode) *DatePicker
-	WithAlignment(alignment TextAlignment) *DatePicker
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *DatePicker
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *DatePicker
-	WithCell(cell CellProvider) *DatePicker
-	WithSubviews(items ...ViewProvider) *DatePicker
-	WithHidden(hidden bool) *DatePicker
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *DatePicker
-	WithAutoresizesSubviews(autoresizesSubviews bool) *DatePicker
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *DatePicker
-	WithFrame(frame corefoundation.CGRect) *DatePicker
-	WithFrameRotation(frameRotation float64) *DatePicker
-	WithFrameCenterRotation(frameCenterRotation float64) *DatePicker
-	WithBoundsRotation(boundsRotation float64) *DatePicker
-	WithBounds(bounds corefoundation.CGRect) *DatePicker
-	WithCanDrawConcurrently(canDrawConcurrently bool) *DatePicker
-	WithNeedsDisplay(needsDisplay bool) *DatePicker
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *DatePicker
-	WithWantsRestingTouches(wantsRestingTouches bool) *DatePicker
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *DatePicker
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *DatePicker
-	WithWantsLayer(wantsLayer bool) *DatePicker
-	WithLayer(layer obj.Object) *DatePicker
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *DatePicker
-	WithNeedsLayout(needsLayout bool) *DatePicker
-	WithAlphaValue(alphaValue float64) *DatePicker
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *DatePicker
-	WithBackgroundFilters(items ...obj.Object) *DatePicker
-	WithCompositingFilter(compositingFilter obj.Object) *DatePicker
-	WithContentFilters(items ...obj.Object) *DatePicker
-	WithShadow(shadow *Shadow) *DatePicker
-	WithClipsToBounds(clipsToBounds bool) *DatePicker
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *DatePicker
-	WithToolTip(toolTip string) *DatePicker
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *DatePicker
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *DatePicker
-	WithNextKeyView(nextKeyView ViewProvider) *DatePicker
-	WithFocusRingType(focusRingType FocusRingType) *DatePicker
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *DatePicker
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *DatePicker
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *DatePicker
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *DatePicker
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *DatePicker
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *DatePicker
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *DatePicker
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *DatePicker
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *DatePicker
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *DatePicker
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *DatePicker
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *DatePicker
-	WithNextResponder(nextResponder ResponderProvider) *DatePicker
-	WithMenu(menu *Menu) *DatePicker
-	WithUserActivity(userActivity obj.Object) *DatePicker
-	WithTouchBar(touchBar *TouchBar) *DatePicker
-	DatePickerStyle() DatePickerStyle
-	SetDatePickerStyle(datePickerStyle DatePickerStyle)
-	IsBezeled() bool
-	SetBezeled(bezeled bool)
-	IsBordered() bool
-	SetBordered(bordered bool)
-	DrawsBackground() bool
-	SetDrawsBackground(drawsBackground bool)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	TextColor() *Color
-	SetTextColor(textColor *Color)
-	DatePickerMode() DatePickerMode
-	SetDatePickerMode(datePickerMode DatePickerMode)
-	DatePickerElements() DatePickerElementFlags
-	SetDatePickerElements(datePickerElements DatePickerElementFlags)
-	Calendar() obj.Object
-	SetCalendar(calendar obj.Object)
-	Locale() obj.Object
-	SetLocale(locale obj.Object)
-	TimeZone() obj.Object
-	SetTimeZone(timeZone obj.Object)
-	DateValue() obj.Object
-	SetDateValue(dateValue obj.Object)
-	TimeInterval() float64
-	SetTimeInterval(timeInterval float64)
-	MinDate() obj.Object
-	SetMinDate(minDate obj.Object)
-	MaxDate() obj.Object
-	SetMaxDate(maxDate obj.Object)
-	PresentsCalendarOverlay() bool
-	SetPresentsCalendarOverlay(presentsCalendarOverlay bool)
-}
-
-var _ DatePickerable = (*DatePicker)(nil)
 
 var _ ControlProvider = (*DatePicker)(nil)
 

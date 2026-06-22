@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func achievementDescriptionAdopt(id objc.ID) *AchievementDescription {
 }
 
 // Description returns the object's -description text.
-func (x *AchievementDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *AchievementDescription) Description() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AchievementDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ad *AchievementDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AchievementDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ad *AchievementDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AchievementDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *AchievementDescription) String() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // NewAchievementDescription creates a new AchievementDescription.
@@ -75,99 +76,99 @@ func NewAchievementDescription() *AchievementDescription {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *AchievementDescription) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (ad *AchievementDescription) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// GroupIdentifier the group identifier for the achievement, if one exists.
-func (x *AchievementDescription) GroupIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+// GroupIdentifier returns the group identifier for the achievement, if one exists.
+func (ad *AchievementDescription) GroupIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Title the title of the achievement.
-func (x *AchievementDescription) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns the title of the achievement.
+func (ad *AchievementDescription) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AchievedDescription the description for an unachieved achievement.
-func (x *AchievementDescription) AchievedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("achievedDescription"))
+// AchievedDescription returns the description for an unachieved achievement.
+func (ad *AchievementDescription) AchievedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("achievedDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UnachievedDescription the description for an achieved achievement.
-func (x *AchievementDescription) UnachievedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unachievedDescription"))
+// UnachievedDescription returns the description for an achieved achievement.
+func (ad *AchievementDescription) UnachievedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("unachievedDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MaximumPoints maximum points available for completing this achievement.
-func (x *AchievementDescription) MaximumPoints() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumPoints"))
+// MaximumPoints returns maximum points available for completing this achievement.
+func (ad *AchievementDescription) MaximumPoints() int {
+	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("maximumPoints"))
 	return _r
 }
 
-// IsHidden whether or not the achievement should be listed or displayed if not yet unhidden by the game.
-func (x *AchievementDescription) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+// IsHidden reports whether the achievement should be listed or displayed if not yet unhidden by the game.
+func (ad *AchievementDescription) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// IsReplayable whether or not the achievement will be reported by the game when the user earns it again. This allows the achievement to be used for challenges when the recipient has previously earned it.
-func (x *AchievementDescription) IsReplayable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReplayable"))
+// IsReplayable reports whether the achievement will be reported by the game when the user earns it again. This allows the achievement to be used for challenges when the recipient has previously earned it.
+func (ad *AchievementDescription) IsReplayable() bool {
+	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("isReplayable"))
 	return _r
 }
 
-// RarityPercent if present, the rarity of the achievement expressed as a percentage of players that earned it. Null if not enough data is available to compute it.
-func (x *AchievementDescription) RarityPercent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rarityPercent"))
+// RarityPercent returns if present, the rarity of the achievement expressed as a percentage of players that earned it. Null if not enough data is available to compute it.
+func (ad *AchievementDescription) RarityPercent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("rarityPercent"))
 	return obj.Wrap(_r)
 }
 
-// ReleaseState the release state of the achievement in App Store Connect.
-func (x *AchievementDescription) ReleaseState() ReleaseState {
-	_r := objc.Send[ReleaseState](objref.IDOf(x), objc.RegisterName("releaseState"))
+// ReleaseState returns the release state of the achievement in App Store Connect.
+func (ad *AchievementDescription) ReleaseState() ReleaseState {
+	_r := objc.Send[ReleaseState](objref.IDOf(ad), objc.RegisterName("releaseState"))
 	return _r
 }
 
-// ActivityIdentifier the identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.
-func (x *AchievementDescription) ActivityIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityIdentifier"))
+// ActivityIdentifier returns the identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.
+func (ad *AchievementDescription) ActivityIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("activityIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ActivityProperties the properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.
-func (x *AchievementDescription) ActivityProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityProperties"))
+// ActivityProperties returns the properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.
+func (ad *AchievementDescription) ActivityProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("activityProperties"))
 	return obj.Wrap(_r)
 }
 
 // LoadImage loads the image to display when the player completes the achievement.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
-func (x *AchievementDescription) LoadImage(ctx context.Context) (result obj.Object, err error) {
+func (ad *AchievementDescription) LoadImage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -179,7 +180,7 @@ func (x *AchievementDescription) LoadImage(ctx context.Context) (result obj.Obje
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,23 +189,3 @@ func (x *AchievementDescription) LoadImage(ctx context.Context) (result obj.Obje
 		return _zero, ctx.Err()
 	}
 }
-
-// AchievementDescriptionable is the interface implemented by [AchievementDescription], for mocking and DI.
-type AchievementDescriptionable interface {
-	obj.Object
-	Identifier() string
-	GroupIdentifier() string
-	Title() string
-	AchievedDescription() string
-	UnachievedDescription() string
-	MaximumPoints() int
-	IsHidden() bool
-	IsReplayable() bool
-	RarityPercent() obj.Object
-	ReleaseState() ReleaseState
-	ActivityIdentifier() string
-	ActivityProperties() obj.Object
-	LoadImage(ctx context.Context) (obj.Object, error)
-}
-
-var _ AchievementDescriptionable = (*AchievementDescription)(nil)

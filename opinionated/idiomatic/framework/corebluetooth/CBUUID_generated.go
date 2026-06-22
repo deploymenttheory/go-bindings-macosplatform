@@ -46,24 +46,24 @@ func uUIDAdopt(id objc.ID) *UUID {
 }
 
 // Description returns the object's -description text.
-func (x *UUID) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (u *UUID) Description() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UUID) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (u *UUID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UUID) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (u *UUID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UUID) String() string {
-	return rt.Description(objref.IDOf(x))
+func (u *UUID) String() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // NewUUID creates a new UUID.
@@ -72,26 +72,17 @@ func NewUUID() *UUID {
 	return uUIDAdopt(_id)
 }
 
-// Data the UUID as NSData.
-func (x *UUID) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the UUID as NSData.
+func (u *UUID) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// UUIDString the UUID as NSString.
-func (x *UUID) UUIDString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
+// UUIDString returns the UUID as NSString.
+func (u *UUID) UUIDString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("UUIDString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// UUIDable is the interface implemented by [UUID], for mocking and DI.
-type UUIDable interface {
-	obj.Object
-	Data() obj.Object
-	UUIDString() string
-}
-
-var _ UUIDable = (*UUID)(nil)

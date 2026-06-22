@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,38 +51,22 @@ func NewNNPadNode() *NNPadNode {
 	return nNPadNodeAdopt(_id)
 }
 
-// WithFillValue determines the constant value to apply when using
-func (x *NNPadNode) WithFillValue(fillValue float32) *NNPadNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
-	return x
+// WithFillValue sets determines the constant value to apply when using
+func (npn *NNPadNode) WithFillValue(fillValue float32) *NNPadNode {
+	objc.Send[objc.ID](objref.IDOf(npn), objc.RegisterName("setFillValue:"), fillValue)
+	return npn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNPadNode) WithLabel(label string) *NNPadNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (npn *NNPadNode) WithLabel(label string) *NNPadNode {
+	objc.Send[objc.ID](objref.IDOf(npn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return npn
 }
 
 // FillValue determines the constant value to apply when using
-func (x *NNPadNode) FillValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fillValue"))
+func (npn *NNPadNode) FillValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(npn), objc.RegisterName("fillValue"))
 	return _r
 }
-
-// SetFillValue wraps the corresponding Objective-C method.
-func (x *NNPadNode) SetFillValue(fillValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
-}
-
-// NNPadNodeable is the interface implemented by [NNPadNode], for mocking and DI.
-type NNPadNodeable interface {
-	obj.Object
-	WithFillValue(fillValue float32) *NNPadNode
-	WithLabel(label string) *NNPadNode
-	FillValue() float32
-	SetFillValue(fillValue float32)
-}
-
-var _ NNPadNodeable = (*NNPadNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNPadNode)(nil)

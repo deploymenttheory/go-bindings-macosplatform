@@ -46,24 +46,24 @@ func webAuthenticationSessionCallbackAdopt(id objc.ID) *WebAuthenticationSession
 }
 
 // Description returns the object's -description text.
-func (x *WebAuthenticationSessionCallback) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wasc *WebAuthenticationSessionCallback) Description() string {
+	return rt.Description(objref.IDOf(wasc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebAuthenticationSessionCallback) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wasc *WebAuthenticationSessionCallback) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wasc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebAuthenticationSessionCallback) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wasc *WebAuthenticationSessionCallback) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wasc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebAuthenticationSessionCallback) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wasc *WebAuthenticationSessionCallback) String() string {
+	return rt.Description(objref.IDOf(wasc))
 }
 
 // NewWebAuthenticationSessionCallback creates a new WebAuthenticationSessionCallback.
@@ -73,15 +73,7 @@ func NewWebAuthenticationSessionCallback() *WebAuthenticationSessionCallback {
 }
 
 // MatchesURL check whether a given main-frame navigation URL matches the callback expected by the client app. Handles all URL-based callback strategies, including custom schemes and HTTPS navigations. This is mainly meant for web browsers adopting the ASWebAuthenticationWebBrowser API, but may also be useful for other apps for debugging purposes.
-func (x *WebAuthenticationSessionCallback) MatchesURL(url string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesURL:"), rt.FileURL(url))
+func (wasc *WebAuthenticationSessionCallback) MatchesURL(url string) bool {
+	_r := objc.Send[bool](objref.IDOf(wasc), objc.RegisterName("matchesURL:"), rt.FileURL(url))
 	return _r
 }
-
-// WebAuthenticationSessionCallbackable is the interface implemented by [WebAuthenticationSessionCallback], for mocking and DI.
-type WebAuthenticationSessionCallbackable interface {
-	obj.Object
-	MatchesURL(url string) bool
-}
-
-var _ WebAuthenticationSessionCallbackable = (*WebAuthenticationSessionCallback)(nil)

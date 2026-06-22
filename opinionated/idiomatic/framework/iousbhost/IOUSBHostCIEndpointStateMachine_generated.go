@@ -5,13 +5,14 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostCIEndpointStateMachine is an idiomatic wrapper over the Objective-C class IOUSBHostCIEndpointStateMachine.
@@ -48,24 +49,24 @@ func hostCIEndpointStateMachineAdopt(id objc.ID) *HostCIEndpointStateMachine {
 }
 
 // Description returns the object's -description text.
-func (x *HostCIEndpointStateMachine) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hcesm *HostCIEndpointStateMachine) Description() string {
+	return rt.Description(objref.IDOf(hcesm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostCIEndpointStateMachine) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hcesm *HostCIEndpointStateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hcesm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostCIEndpointStateMachine) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hcesm *HostCIEndpointStateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hcesm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HostCIEndpointStateMachine) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hcesm *HostCIEndpointStateMachine) String() string {
+	return rt.Description(objref.IDOf(hcesm))
 }
 
 // NewHostCIEndpointStateMachine creates a new HostCIEndpointStateMachine.
@@ -75,9 +76,9 @@ func NewHostCIEndpointStateMachine() *HostCIEndpointStateMachine {
 }
 
 // ProcessDoorbell advance the state machine and process an IOUSBHostCIDoorbell message The IOUSBHostCIDoorbell is inspected to determine if it is handled by this state machine and is appropriate for the current state.  If successful, the client should check for an IOUSBHostCIEndpointStateActive endpointState and a currentTransferMessage with IOUSBHostCIMessageControlValid set to determine if more IOUSBHostCIMessages should be processed.
-func (x *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error {
+func (hcesm *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("processDoorbell:error:"), doorbell, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hcesm), objc.RegisterName("processDoorbell:error:"), doorbell, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,37 +86,25 @@ func (x *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error {
 }
 
 // EndpointState wraps the corresponding Objective-C method.
-func (x *HostCIEndpointStateMachine) EndpointState() HostCIEndpointState {
-	_r := objc.Send[HostCIEndpointState](objref.IDOf(x), objc.RegisterName("endpointState"))
+func (hcesm *HostCIEndpointStateMachine) EndpointState() HostCIEndpointState {
+	_r := objc.Send[HostCIEndpointState](objref.IDOf(hcesm), objc.RegisterName("endpointState"))
 	return _r
 }
 
 // DeviceAddress wraps the corresponding Objective-C method.
-func (x *HostCIEndpointStateMachine) DeviceAddress() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
+func (hcesm *HostCIEndpointStateMachine) DeviceAddress() int {
+	_r := objc.Send[int](objref.IDOf(hcesm), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
 // EndpointAddress wraps the corresponding Objective-C method.
-func (x *HostCIEndpointStateMachine) EndpointAddress() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endpointAddress"))
+func (hcesm *HostCIEndpointStateMachine) EndpointAddress() int {
+	_r := objc.Send[int](objref.IDOf(hcesm), objc.RegisterName("endpointAddress"))
 	return _r
 }
 
 // ControllerInterface wraps the corresponding Objective-C method.
-func (x *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
+func (hcesm *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(hcesm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
 }
-
-// HostCIEndpointStateMachineable is the interface implemented by [HostCIEndpointStateMachine], for mocking and DI.
-type HostCIEndpointStateMachineable interface {
-	obj.Object
-	ProcessDoorbell(doorbell uint32) error
-	EndpointState() HostCIEndpointState
-	DeviceAddress() int
-	EndpointAddress() int
-	ControllerInterface() *HostControllerInterface
-}
-
-var _ HostCIEndpointStateMachineable = (*HostCIEndpointStateMachine)(nil)

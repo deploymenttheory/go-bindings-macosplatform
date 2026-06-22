@@ -44,24 +44,24 @@ func itemBadgeAdopt(id objc.ID) *ItemBadge {
 }
 
 // Description returns the object's -description text.
-func (x *ItemBadge) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ib *ItemBadge) Description() string {
+	return rt.Description(objref.IDOf(ib))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ItemBadge) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ib *ItemBadge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ib), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ItemBadge) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ib *ItemBadge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ib), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ItemBadge) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ib *ItemBadge) String() string {
+	return rt.Description(objref.IDOf(ib))
 }
 
 // NewItemBadge creates a new ItemBadge.
@@ -71,18 +71,10 @@ func NewItemBadge() *ItemBadge {
 }
 
 // Text wraps the corresponding Objective-C method.
-func (x *ItemBadge) Text() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+func (ib *ItemBadge) Text() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ib), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ItemBadgeable is the interface implemented by [ItemBadge], for mocking and DI.
-type ItemBadgeable interface {
-	obj.Object
-	Text() string
-}
-
-var _ ItemBadgeable = (*ItemBadge)(nil)

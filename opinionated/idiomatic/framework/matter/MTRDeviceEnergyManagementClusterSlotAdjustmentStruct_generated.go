@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt(id objc.ID) *MTRD
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Description() string {
+	return rt.Description(objref.IDOf(mdemcsas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemcsas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemcsas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) String() string {
+	return rt.Description(objref.IDOf(mdemcsas))
 }
 
 // NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct creates a new MTRDeviceEnergyManagementClusterSlotAdjustmentStruct.
@@ -71,68 +71,37 @@ func NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct() *MTRDeviceEnergyM
 }
 
 // WithSlotIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
-	return x
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
+	return mdemcsas
 }
 
 // WithNominalPower sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
-	return x
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
+	return mdemcsas
 }
 
 // WithDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-	return x
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setDuration:"), objref.IDOf(duration))
+	return mdemcsas
 }
 
 // SlotIndex wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotIndex"))
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("slotIndex"))
 	return obj.Wrap(_r)
-}
-
-// SetSlotIndex wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetSlotIndex(slotIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
 }
 
 // NominalPower wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalPower"))
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("nominalPower"))
 	return obj.Wrap(_r)
-}
-
-// SetNominalPower wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetNominalPower(nominalPower obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
-
-// SetDuration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetDuration(duration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-}
-
-// MTRDeviceEnergyManagementClusterSlotAdjustmentStructable is the interface implemented by [MTRDeviceEnergyManagementClusterSlotAdjustmentStruct], for mocking and DI.
-type MTRDeviceEnergyManagementClusterSlotAdjustmentStructable interface {
-	obj.Object
-	WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
-	WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
-	WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
-	SlotIndex() obj.Object
-	SetSlotIndex(slotIndex obj.Object)
-	NominalPower() obj.Object
-	SetNominalPower(nominalPower obj.Object)
-	Duration() obj.Object
-	SetDuration(duration obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementClusterSlotAdjustmentStructable = (*MTRDeviceEnergyManagementClusterSlotAdjustmentStruct)(nil)

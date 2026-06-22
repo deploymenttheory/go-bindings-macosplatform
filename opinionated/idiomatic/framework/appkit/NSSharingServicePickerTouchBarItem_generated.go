@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,81 +51,49 @@ func NewSharingServicePickerTouchBarItem() *SharingServicePickerTouchBarItem {
 	return sharingServicePickerTouchBarItemAdopt(_id)
 }
 
-// WithEnabled a Boolean value that specifies whether the sharing service picker item is enabled.
-func (x *SharingServicePickerTouchBarItem) WithEnabled(enabled bool) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that specifies whether the sharing service picker item is enabled.
+func (ssptbi *SharingServicePickerTouchBarItem) WithEnabled(enabled bool) *SharingServicePickerTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setEnabled:"), enabled)
+	return ssptbi
 }
 
-// WithButtonTitle the text displayed in the sharing service picker item button.
-func (x *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
-	return x
+// WithButtonTitle sets the text displayed in the sharing service picker item button.
+func (ssptbi *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
+	return ssptbi
 }
 
-// WithButtonImage the image displayed in the sharing service picker item button.
-func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
-	return x
+// WithButtonImage sets the image displayed in the sharing service picker item button.
+func (ssptbi *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
+	return ssptbi
 }
 
-// WithVisibilityPriority determines which items are shown in a bar when space is limited.
-func (x *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-	return x
+// WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
+func (ssptbi *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return ssptbi
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *SharingServicePickerTouchBarItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (ssptbi *SharingServicePickerTouchBarItem) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ssptbi), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *SharingServicePickerTouchBarItem) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
 // ButtonTitle wraps the corresponding Objective-C method.
-func (x *SharingServicePickerTouchBarItem) ButtonTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonTitle"))
+func (ssptbi *SharingServicePickerTouchBarItem) ButtonTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetButtonTitle wraps the corresponding Objective-C method.
-func (x *SharingServicePickerTouchBarItem) SetButtonTitle(buttonTitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
-}
-
 // ButtonImage wraps the corresponding Objective-C method.
-func (x *SharingServicePickerTouchBarItem) ButtonImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonImage"))
+func (ssptbi *SharingServicePickerTouchBarItem) ButtonImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonImage"))
 	return ImageFromID(_r)
 }
-
-// SetButtonImage wraps the corresponding Objective-C method.
-func (x *SharingServicePickerTouchBarItem) SetButtonImage(buttonImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
-}
-
-// SharingServicePickerTouchBarItemable is the interface implemented by [SharingServicePickerTouchBarItem], for mocking and DI.
-type SharingServicePickerTouchBarItemable interface {
-	obj.Object
-	WithEnabled(enabled bool) *SharingServicePickerTouchBarItem
-	WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem
-	WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem
-	WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	ButtonTitle() string
-	SetButtonTitle(buttonTitle string)
-	ButtonImage() *Image
-	SetButtonImage(buttonImage *Image)
-}
-
-var _ SharingServicePickerTouchBarItemable = (*SharingServicePickerTouchBarItem)(nil)
 
 var _ TouchBarItemProvider = (*SharingServicePickerTouchBarItem)(nil)

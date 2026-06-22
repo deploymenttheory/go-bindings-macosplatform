@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,52 +45,40 @@ func cNNPoolingGradientNodeAdopt(id objc.ID) *CNNPoolingGradientNode {
 	return x
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingGradientNode) WithLabel(label string) *CNNPoolingGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cpgn *CNNPoolingGradientNode) WithLabel(label string) *CNNPoolingGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cpgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cpgn
 }
 
 // KernelWidth wraps the corresponding Objective-C method.
-func (x *CNNPoolingGradientNode) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+func (cpgn *CNNPoolingGradientNode) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight wraps the corresponding Objective-C method.
-func (x *CNNPoolingGradientNode) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+func (cpgn *CNNPoolingGradientNode) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // StrideInPixelsX wraps the corresponding Objective-C method.
-func (x *CNNPoolingGradientNode) StrideInPixelsX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsX"))
+func (cpgn *CNNPoolingGradientNode) StrideInPixelsX() int {
+	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("strideInPixelsX"))
 	return _r
 }
 
 // StrideInPixelsY wraps the corresponding Objective-C method.
-func (x *CNNPoolingGradientNode) StrideInPixelsY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsY"))
+func (cpgn *CNNPoolingGradientNode) StrideInPixelsY() int {
+	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("strideInPixelsY"))
 	return _r
 }
-
-// CNNPoolingGradientNodeable is the interface implemented by [CNNPoolingGradientNode], for mocking and DI.
-type CNNPoolingGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingGradientNode
-	KernelWidth() int
-	KernelHeight() int
-	StrideInPixelsX() int
-	StrideInPixelsY() int
-}
-
-var _ CNNPoolingGradientNodeable = (*CNNPoolingGradientNode)(nil)
 
 // isCNNPoolingGradientNode marks CNNPoolingGradientNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNPoolingGradientNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNPoolingGradientNode) isCNNPoolingGradientNode() {}
+func (cpgn *CNNPoolingGradientNode) isCNNPoolingGradientNode() {}
 
 var _ CNNPoolingGradientNodeProvider = (*CNNPoolingGradientNode)(nil)
 

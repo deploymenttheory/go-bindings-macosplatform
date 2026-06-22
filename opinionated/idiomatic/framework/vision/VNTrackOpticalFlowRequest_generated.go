@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,100 +52,65 @@ func NewTrackOpticalFlowRequest() *TrackOpticalFlowRequest {
 	return trackOpticalFlowRequestAdopt(_id)
 }
 
-// WithComputationAccuracy the level of accuracy to compute the optical flow.
-func (x *TrackOpticalFlowRequest) WithComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
-	return x
+// WithComputationAccuracy sets the level of accuracy to compute the optical flow.
+func (tofr *TrackOpticalFlowRequest) WithComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(tofr), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
+	return tofr
 }
 
-// WithOutputPixelFormat the pixel format type of the output value.
-func (x *TrackOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat int) *TrackOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
-	return x
+// WithOutputPixelFormat sets the pixel format type of the output value.
+func (tofr *TrackOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat int) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(tofr), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
+	return tofr
 }
 
-// WithKeepNetworkOutput a Boolean value that indicates the raw pixel buffer continues to emit from the network.
-func (x *TrackOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
-	return x
+// WithKeepNetworkOutput sets a Boolean value that indicates the raw pixel buffer continues to emit from the network.
+func (tofr *TrackOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(tofr), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
+	return tofr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *TrackOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (tofr *TrackOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(tofr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return tofr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *TrackOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (tofr *TrackOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(tofr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return tofr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *TrackOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (tofr *TrackOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(tofr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return tofr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *TrackOpticalFlowRequest) WithRevision(revision int) *TrackOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (tofr *TrackOpticalFlowRequest) WithRevision(revision int) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(tofr), objc.RegisterName("setRevision:"), revision)
+	return tofr
 }
 
-// ComputationAccuracy the level of accuracy used to compute the optical flow. Default is VNTrackOpticalFlowRequestComputationAccuracyMedium. The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
-func (x *TrackOpticalFlowRequest) ComputationAccuracy() TrackOpticalFlowRequestComputationAccuracy {
-	_r := objc.Send[TrackOpticalFlowRequestComputationAccuracy](objref.IDOf(x), objc.RegisterName("computationAccuracy"))
+// ComputationAccuracy returns the level of accuracy used to compute the optical flow. Default is VNTrackOpticalFlowRequestComputationAccuracyMedium. The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
+func (tofr *TrackOpticalFlowRequest) ComputationAccuracy() TrackOpticalFlowRequestComputationAccuracy {
+	_r := objc.Send[TrackOpticalFlowRequestComputationAccuracy](objref.IDOf(tofr), objc.RegisterName("computationAccuracy"))
 	return _r
 }
 
-// SetComputationAccuracy wraps the corresponding Objective-C method.
-func (x *TrackOpticalFlowRequest) SetComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
-}
-
-// OutputPixelFormat pixel format type of the output buffer. Valid values are `kCVPixelFormatType_TwoComponent32Float` and `kCVPixelFormatType_TwoComponent16Half`.  Default is `kCVPixelFormatType_TwoComponent32Float`.
-func (x *TrackOpticalFlowRequest) OutputPixelFormat() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputPixelFormat"))
+// OutputPixelFormat returns pixel format type of the output buffer. Valid values are `kCVPixelFormatType_TwoComponent32Float` and `kCVPixelFormatType_TwoComponent16Half`.  Default is `kCVPixelFormatType_TwoComponent32Float`.
+func (tofr *TrackOpticalFlowRequest) OutputPixelFormat() int {
+	_r := objc.Send[int](objref.IDOf(tofr), objc.RegisterName("outputPixelFormat"))
 	return _r
 }
 
-// SetOutputPixelFormat wraps the corresponding Objective-C method.
-func (x *TrackOpticalFlowRequest) SetOutputPixelFormat(outputPixelFormat int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
-}
-
-// KeepNetworkOutput setting this to `YES` will keep the raw pixel buffer coming from the the ML network. The default is `NO`. When set to `YES`, the outputPixelFormat is ignored.
-func (x *TrackOpticalFlowRequest) KeepNetworkOutput() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("keepNetworkOutput"))
+// KeepNetworkOutput reports whether setting this to `YES` will keep the raw pixel buffer coming from the the ML network. The default is `NO`. When set to `YES`, the outputPixelFormat is ignored.
+func (tofr *TrackOpticalFlowRequest) KeepNetworkOutput() bool {
+	_r := objc.Send[bool](objref.IDOf(tofr), objc.RegisterName("keepNetworkOutput"))
 	return _r
 }
-
-// SetKeepNetworkOutput wraps the corresponding Objective-C method.
-func (x *TrackOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
-}
-
-// TrackOpticalFlowRequestable is the interface implemented by [TrackOpticalFlowRequest], for mocking and DI.
-type TrackOpticalFlowRequestable interface {
-	obj.Object
-	WithComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest
-	WithOutputPixelFormat(outputPixelFormat int) *TrackOpticalFlowRequest
-	WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest
-	WithRevision(revision int) *TrackOpticalFlowRequest
-	ComputationAccuracy() TrackOpticalFlowRequestComputationAccuracy
-	SetComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy)
-	OutputPixelFormat() int
-	SetOutputPixelFormat(outputPixelFormat int)
-	KeepNetworkOutput() bool
-	SetKeepNetworkOutput(keepNetworkOutput bool)
-}
-
-var _ TrackOpticalFlowRequestable = (*TrackOpticalFlowRequest)(nil)
 
 var _ StatefulRequestProvider = (*TrackOpticalFlowRequest)(nil)
 

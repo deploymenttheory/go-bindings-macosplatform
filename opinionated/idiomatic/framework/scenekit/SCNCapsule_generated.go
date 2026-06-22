@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,176 +51,120 @@ func NewCapsule() *Capsule {
 	return capsuleAdopt(_id)
 }
 
-// WithCapRadius the radius both of the capsule’s circular center cross section and of its hemispherical ends. Animatable.
-func (x *Capsule) WithCapRadius(capRadius float64) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapRadius:"), capRadius)
-	return x
+// WithCapRadius sets the radius both of the capsule’s circular center cross section and of its hemispherical ends. Animatable.
+func (c *Capsule) WithCapRadius(capRadius float64) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCapRadius:"), capRadius)
+	return c
 }
 
-// WithHeight the extent of the capsule along its y-axis. Animatable.
-func (x *Capsule) WithHeight(height float64) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
-	return x
+// WithHeight sets the extent of the capsule along its y-axis. Animatable.
+func (c *Capsule) WithHeight(height float64) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHeight:"), height)
+	return c
 }
 
-// WithRadialSegmentCount the number of subdivisions around the lateral circumference of the capsule. Animatable.
-func (x *Capsule) WithRadialSegmentCount(radialSegmentCount int) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
-	return x
+// WithRadialSegmentCount sets the number of subdivisions around the lateral circumference of the capsule. Animatable.
+func (c *Capsule) WithRadialSegmentCount(radialSegmentCount int) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
+	return c
 }
 
-// WithHeightSegmentCount the number of subdivisions in the sides of the capsule along its y-axis. Animatable.
-func (x *Capsule) WithHeightSegmentCount(heightSegmentCount int) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
-	return x
+// WithHeightSegmentCount sets the number of subdivisions in the sides of the capsule along its y-axis. Animatable.
+func (c *Capsule) WithHeightSegmentCount(heightSegmentCount int) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
+	return c
 }
 
-// WithCapSegmentCount the number of subdivisions in the height of each hemispherical end of the capsule. Animatable.
-func (x *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapSegmentCount:"), capSegmentCount)
-	return x
+// WithCapSegmentCount sets the number of subdivisions in the height of each hemispherical end of the capsule. Animatable.
+func (c *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCapSegmentCount:"), capSegmentCount)
+	return c
 }
 
-// WithName a name associated with the geometry object.
-func (x *Capsule) WithName(name string) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a name associated with the geometry object.
+func (c *Capsule) WithName(name string) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), purego.NSString(name))
+	return c
 }
 
-// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-func (x *Capsule) WithMaterials(items ...*Material) *Capsule {
+// WithMaterials sets an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (c *Capsule) WithMaterials(items ...*Material) *Capsule {
 	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setMaterials:"), _arr)
+	return c
 }
 
-// WithFirstMaterial the first material attached to the geometry.
-func (x *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
-	return x
+// WithFirstMaterial sets the first material attached to the geometry.
+func (c *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
+	return c
 }
 
-// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-func (x *Capsule) WithLevelsOfDetail(items ...*LevelOfDetail) *Capsule {
+// WithLevelsOfDetail sets an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (c *Capsule) WithLevelsOfDetail(items ...*LevelOfDetail) *Capsule {
 	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLevelsOfDetail:"), _arr)
+	return c
 }
 
 // WithTessellator sets the property and returns the receiver so calls can be chained.
-func (x *Capsule) WithTessellator(tessellator *GeometryTessellator) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
-	return x
+func (c *Capsule) WithTessellator(tessellator *GeometryTessellator) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
+	return c
 }
 
-// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-func (x *Capsule) WithSubdivisionLevel(subdivisionLevel int) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
-	return x
+// WithSubdivisionLevel sets the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (c *Capsule) WithSubdivisionLevel(subdivisionLevel int) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
+	return c
 }
 
-// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-func (x *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
-	return x
+// WithWantsAdaptiveSubdivision sets specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+func (c *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
+	return c
 }
 
-// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
-	return x
+// WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
+func (c *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
+	return c
 }
 
-// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-func (x *Capsule) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
-	return x
+// WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
+func (c *Capsule) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
+	return c
 }
 
-// CapRadius the cap radius of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
-func (x *Capsule) CapRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("capRadius"))
+// CapRadius returns the cap radius of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+func (c *Capsule) CapRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("capRadius"))
 	return _r
 }
 
-// SetCapRadius wraps the corresponding Objective-C method.
-func (x *Capsule) SetCapRadius(capRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapRadius:"), capRadius)
-}
-
-// Height the height of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 2.
-func (x *Capsule) Height() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+// Height returns the height of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 2.
+func (c *Capsule) Height() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("height"))
 	return _r
 }
 
-// SetHeight wraps the corresponding Objective-C method.
-func (x *Capsule) SetHeight(height float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
-}
-
-// RadialSegmentCount the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
-func (x *Capsule) RadialSegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radialSegmentCount"))
+// RadialSegmentCount returns the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
+func (c *Capsule) RadialSegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("radialSegmentCount"))
 	return _r
 }
 
-// SetRadialSegmentCount wraps the corresponding Objective-C method.
-func (x *Capsule) SetRadialSegmentCount(radialSegmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
-}
-
-// HeightSegmentCount the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
-func (x *Capsule) HeightSegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+// HeightSegmentCount returns the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
+func (c *Capsule) HeightSegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("heightSegmentCount"))
 	return _r
 }
 
-// SetHeightSegmentCount wraps the corresponding Objective-C method.
-func (x *Capsule) SetHeightSegmentCount(heightSegmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
-}
-
-// CapSegmentCount the number of subdivisions in the cap. Animatable. If the value is less than 2, the behavior is undefined. The default value is 24.
-func (x *Capsule) CapSegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capSegmentCount"))
+// CapSegmentCount returns the number of subdivisions in the cap. Animatable. If the value is less than 2, the behavior is undefined. The default value is 24.
+func (c *Capsule) CapSegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("capSegmentCount"))
 	return _r
 }
-
-// SetCapSegmentCount wraps the corresponding Objective-C method.
-func (x *Capsule) SetCapSegmentCount(capSegmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapSegmentCount:"), capSegmentCount)
-}
-
-// Capsuleable is the interface implemented by [Capsule], for mocking and DI.
-type Capsuleable interface {
-	obj.Object
-	WithCapRadius(capRadius float64) *Capsule
-	WithHeight(height float64) *Capsule
-	WithRadialSegmentCount(radialSegmentCount int) *Capsule
-	WithHeightSegmentCount(heightSegmentCount int) *Capsule
-	WithCapSegmentCount(capSegmentCount int) *Capsule
-	WithName(name string) *Capsule
-	WithMaterials(items ...*Material) *Capsule
-	WithFirstMaterial(firstMaterial *Material) *Capsule
-	WithLevelsOfDetail(items ...*LevelOfDetail) *Capsule
-	WithTessellator(tessellator *GeometryTessellator) *Capsule
-	WithSubdivisionLevel(subdivisionLevel int) *Capsule
-	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule
-	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule
-	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule
-	CapRadius() float64
-	SetCapRadius(capRadius float64)
-	Height() float64
-	SetHeight(height float64)
-	RadialSegmentCount() int
-	SetRadialSegmentCount(radialSegmentCount int)
-	HeightSegmentCount() int
-	SetHeightSegmentCount(heightSegmentCount int)
-	CapSegmentCount() int
-	SetCapSegmentCount(capSegmentCount int)
-}
-
-var _ Capsuleable = (*Capsule)(nil)
 
 var _ GeometryProvider = (*Capsule)(nil)

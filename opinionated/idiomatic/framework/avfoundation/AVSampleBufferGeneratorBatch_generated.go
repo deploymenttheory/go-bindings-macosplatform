@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func sampleBufferGeneratorBatchAdopt(id objc.ID) *SampleBufferGeneratorBatch {
 }
 
 // Description returns the object's -description text.
-func (x *SampleBufferGeneratorBatch) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sbgb *SampleBufferGeneratorBatch) Description() string {
+	return rt.Description(objref.IDOf(sbgb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleBufferGeneratorBatch) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sbgb *SampleBufferGeneratorBatch) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sbgb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleBufferGeneratorBatch) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sbgb *SampleBufferGeneratorBatch) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sbgb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SampleBufferGeneratorBatch) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sbgb *SampleBufferGeneratorBatch) String() string {
+	return rt.Description(objref.IDOf(sbgb))
 }
 
 // NewSampleBufferGeneratorBatch creates a new SampleBufferGeneratorBatch.
@@ -77,14 +78,14 @@ func NewSampleBufferGeneratorBatch() *SampleBufferGeneratorBatch {
 // MakeDataReady loads sample data asynchronously for all sample buffers within a batch.
 //
 // MakeDataReady blocks until the operation completes or ctx is cancelled.
-func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
+func (sbgb *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeDataReadyWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sbgb), objc.RegisterName("makeDataReadyWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -94,15 +95,6 @@ func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 }
 
 // Cancel cancels any I/O for this batch.
-func (x *SampleBufferGeneratorBatch) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (sbgb *SampleBufferGeneratorBatch) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(sbgb), objc.RegisterName("cancel"))
 }
-
-// SampleBufferGeneratorBatchable is the interface implemented by [SampleBufferGeneratorBatch], for mocking and DI.
-type SampleBufferGeneratorBatchable interface {
-	obj.Object
-	MakeDataReady(ctx context.Context) error
-	Cancel()
-}
-
-var _ SampleBufferGeneratorBatchable = (*SampleBufferGeneratorBatch)(nil)

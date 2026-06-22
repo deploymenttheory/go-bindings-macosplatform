@@ -46,24 +46,24 @@ func dateIntervalAdopt(id objc.ID) *DateInterval {
 }
 
 // Description returns the object's -description text.
-func (x *DateInterval) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (di *DateInterval) Description() string {
+	return rt.Description(objref.IDOf(di))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DateInterval) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (di *DateInterval) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(di), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DateInterval) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (di *DateInterval) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(di), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DateInterval) String() string {
-	return rt.Description(objref.IDOf(x))
+func (di *DateInterval) String() string {
+	return rt.Description(objref.IDOf(di))
 }
 
 // NewDateInterval creates a new DateInterval.
@@ -94,71 +94,55 @@ func NewDateIntervalWithStartDateEndDate(startDate *Date, endDate *Date) *DateIn
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DateInterval) WithScriptingProperties(scriptingProperties obj.Object) *DateInterval {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (di *DateInterval) WithScriptingProperties(scriptingProperties obj.Object) *DateInterval {
+	objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return di
 }
 
 // Compare compares the receiver with the specified date interval.
-func (x *DateInterval) Compare(dateInterval *DateInterval) ComparisonResult {
-	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:"), objref.IDOf(dateInterval))
+func (di *DateInterval) Compare(dateInterval *DateInterval) ComparisonResult {
+	_r := objc.Send[ComparisonResult](objref.IDOf(di), objc.RegisterName("compare:"), objref.IDOf(dateInterval))
 	return _r
 }
 
 // IsEqualToDateInterval indicates whether the receiver is equal to the specified date interval.
-func (x *DateInterval) IsEqualToDateInterval(dateInterval *DateInterval) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToDateInterval:"), objref.IDOf(dateInterval))
+func (di *DateInterval) IsEqualToDateInterval(dateInterval *DateInterval) bool {
+	_r := objc.Send[bool](objref.IDOf(di), objc.RegisterName("isEqualToDateInterval:"), objref.IDOf(dateInterval))
 	return _r
 }
 
 // IntersectsDateInterval indicates whether the receiver intersects with the specified date interval.
-func (x *DateInterval) IntersectsDateInterval(dateInterval *DateInterval) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsDateInterval:"), objref.IDOf(dateInterval))
+func (di *DateInterval) IntersectsDateInterval(dateInterval *DateInterval) bool {
+	_r := objc.Send[bool](objref.IDOf(di), objc.RegisterName("intersectsDateInterval:"), objref.IDOf(dateInterval))
 	return _r
 }
 
 // IntersectionWithDateInterval returns the intersection between the receiver and the specified date interval.
-func (x *DateInterval) IntersectionWithDateInterval(dateInterval *DateInterval) *DateInterval {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectionWithDateInterval:"), objref.IDOf(dateInterval))
+func (di *DateInterval) IntersectionWithDateInterval(dateInterval *DateInterval) *DateInterval {
+	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("intersectionWithDateInterval:"), objref.IDOf(dateInterval))
 	return DateIntervalFromID(_r)
 }
 
 // ContainsDate indicates whether the receiver contains the specified date.
-func (x *DateInterval) ContainsDate(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsDate:"), objref.IDOf(date))
+func (di *DateInterval) ContainsDate(date *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(di), objc.RegisterName("containsDate:"), objref.IDOf(date))
 	return _r
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *DateInterval) StartDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (di *DateInterval) StartDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("startDate"))
 	return DateFromID(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *DateInterval) EndDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (di *DateInterval) EndDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("endDate"))
 	return DateFromID(_r)
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *DateInterval) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (di *DateInterval) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(di), objc.RegisterName("duration"))
 	return _r
 }
-
-// DateIntervalable is the interface implemented by [DateInterval], for mocking and DI.
-type DateIntervalable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *DateInterval
-	Compare(dateInterval *DateInterval) ComparisonResult
-	IsEqualToDateInterval(dateInterval *DateInterval) bool
-	IntersectsDateInterval(dateInterval *DateInterval) bool
-	IntersectionWithDateInterval(dateInterval *DateInterval) *DateInterval
-	ContainsDate(date *Date) bool
-	StartDate() *Date
-	EndDate() *Date
-	Duration() float64
-}
-
-var _ DateIntervalable = (*DateInterval)(nil)

@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewWorkoutRoute() *WorkoutRoute {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRoute")), objc.RegisterName("new"))
 	return workoutRouteAdopt(_id)
 }
-
-// WorkoutRouteable is the interface implemented by [WorkoutRoute], for mocking and DI.
-type WorkoutRouteable interface {
-	obj.Object
-}
-
-var _ WorkoutRouteable = (*WorkoutRoute)(nil)
 
 var _ SeriesSampleProvider = (*WorkoutRoute)(nil)
 

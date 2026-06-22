@@ -46,24 +46,24 @@ func syncEngineSendChangesScopeAdopt(id objc.ID) *SyncEngineSendChangesScope {
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineSendChangesScope) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sescs *SyncEngineSendChangesScope) Description() string {
+	return rt.Description(objref.IDOf(sescs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineSendChangesScope) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sescs *SyncEngineSendChangesScope) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sescs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineSendChangesScope) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sescs *SyncEngineSendChangesScope) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sescs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineSendChangesScope) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sescs *SyncEngineSendChangesScope) String() string {
+	return rt.Description(objref.IDOf(sescs))
 }
 
 // NewSyncEngineSendChangesScopeWithZoneIDs creates a scope that contains only the given zone IDs. If zoneIDs is nil, then this scope contains all zones.
@@ -88,43 +88,31 @@ func NewSyncEngineSendChangesScopeWithRecordIDs(recordIDs obj.Object) *SyncEngin
 }
 
 // ContainsRecordID returns true if this scope includes the given record ID.
-func (x *SyncEngineSendChangesScope) ContainsRecordID(recordID *RecordID) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsRecordID:"), objref.IDOf(recordID))
+func (sescs *SyncEngineSendChangesScope) ContainsRecordID(recordID *RecordID) bool {
+	_r := objc.Send[bool](objref.IDOf(sescs), objc.RegisterName("containsRecordID:"), objref.IDOf(recordID))
 	return _r
 }
 
 // ContainsPendingRecordZoneChange returns true if this scope includes the given pending change.
-func (x *SyncEngineSendChangesScope) ContainsPendingRecordZoneChange(pendingRecordZoneChange *SyncEnginePendingRecordZoneChange) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPendingRecordZoneChange:"), objref.IDOf(pendingRecordZoneChange))
+func (sescs *SyncEngineSendChangesScope) ContainsPendingRecordZoneChange(pendingRecordZoneChange *SyncEnginePendingRecordZoneChange) bool {
+	_r := objc.Send[bool](objref.IDOf(sescs), objc.RegisterName("containsPendingRecordZoneChange:"), objref.IDOf(pendingRecordZoneChange))
 	return _r
 }
 
-// ZoneIDs the scope of zone IDs in which to send changes. If you only want to send changes for a particular set of zones, you can initialize your scope with those zone IDs. When creating the next batch of changes to send to the server, consult this, and only send changes within these zones. If this and “recordIDs“ are `nil`, then you should send all changes.
-func (x *SyncEngineSendChangesScope) ZoneIDs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneIDs"))
+// ZoneIDs returns the scope of zone IDs in which to send changes. If you only want to send changes for a particular set of zones, you can initialize your scope with those zone IDs. When creating the next batch of changes to send to the server, consult this, and only send changes within these zones. If this and “recordIDs“ are `nil`, then you should send all changes.
+func (sescs *SyncEngineSendChangesScope) ZoneIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sescs), objc.RegisterName("zoneIDs"))
 	return obj.Wrap(_r)
 }
 
-// ExcludedZoneIDs a specific set of zone IDs to exclude from this scope. If you know that you don't want to send changes for a particular set of zones, you can set those zones here. - Note: a scope with a non-nil “zoneIDs“ always has an empty `excludedZoneIDs`.
-func (x *SyncEngineSendChangesScope) ExcludedZoneIDs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedZoneIDs"))
+// ExcludedZoneIDs returns a specific set of zone IDs to exclude from this scope. If you know that you don't want to send changes for a particular set of zones, you can set those zones here. - Note: a scope with a non-nil “zoneIDs“ always has an empty `excludedZoneIDs`.
+func (sescs *SyncEngineSendChangesScope) ExcludedZoneIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sescs), objc.RegisterName("excludedZoneIDs"))
 	return obj.Wrap(_r)
 }
 
-// RecordIDs the scope of record IDs in which to send changes. If you only want to send changes for a particular set of records, you can initialize your scope with those records IDs. When creating the next batch of changes to send to the server, consult this property, and only send changes for these record IDs. If this and “zoneIDs“ are `nil`, then you should send all changes.
-func (x *SyncEngineSendChangesScope) RecordIDs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIDs"))
+// RecordIDs returns the scope of record IDs in which to send changes. If you only want to send changes for a particular set of records, you can initialize your scope with those records IDs. When creating the next batch of changes to send to the server, consult this property, and only send changes for these record IDs. If this and “zoneIDs“ are `nil`, then you should send all changes.
+func (sescs *SyncEngineSendChangesScope) RecordIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sescs), objc.RegisterName("recordIDs"))
 	return obj.Wrap(_r)
 }
-
-// SyncEngineSendChangesScopeable is the interface implemented by [SyncEngineSendChangesScope], for mocking and DI.
-type SyncEngineSendChangesScopeable interface {
-	obj.Object
-	ContainsRecordID(recordID *RecordID) bool
-	ContainsPendingRecordZoneChange(pendingRecordZoneChange *SyncEnginePendingRecordZoneChange) bool
-	ZoneIDs() obj.Object
-	ExcludedZoneIDs() obj.Object
-	RecordIDs() obj.Object
-}
-
-var _ SyncEngineSendChangesScopeable = (*SyncEngineSendChangesScope)(nil)

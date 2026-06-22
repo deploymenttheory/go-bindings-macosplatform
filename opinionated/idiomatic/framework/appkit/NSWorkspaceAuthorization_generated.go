@@ -46,24 +46,24 @@ func workspaceAuthorizationAdopt(id objc.ID) *WorkspaceAuthorization {
 }
 
 // Description returns the object's -description text.
-func (x *WorkspaceAuthorization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wa *WorkspaceAuthorization) Description() string {
+	return rt.Description(objref.IDOf(wa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkspaceAuthorization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wa *WorkspaceAuthorization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkspaceAuthorization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wa *WorkspaceAuthorization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkspaceAuthorization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wa *WorkspaceAuthorization) String() string {
+	return rt.Description(objref.IDOf(wa))
 }
 
 // NewWorkspaceAuthorization creates a new WorkspaceAuthorization.
@@ -71,10 +71,3 @@ func NewWorkspaceAuthorization() *WorkspaceAuthorization {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSWorkspaceAuthorization")), objc.RegisterName("new"))
 	return workspaceAuthorizationAdopt(_id)
 }
-
-// WorkspaceAuthorizationable is the interface implemented by [WorkspaceAuthorization], for mocking and DI.
-type WorkspaceAuthorizationable interface {
-	obj.Object
-}
-
-var _ WorkspaceAuthorizationable = (*WorkspaceAuthorization)(nil)

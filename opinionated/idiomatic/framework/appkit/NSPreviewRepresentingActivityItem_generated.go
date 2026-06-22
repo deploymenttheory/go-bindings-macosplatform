@@ -46,24 +46,24 @@ func previewRepresentingActivityItemAdopt(id objc.ID) *PreviewRepresentingActivi
 }
 
 // Description returns the object's -description text.
-func (x *PreviewRepresentingActivityItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (prai *PreviewRepresentingActivityItem) Description() string {
+	return rt.Description(objref.IDOf(prai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PreviewRepresentingActivityItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (prai *PreviewRepresentingActivityItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(prai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PreviewRepresentingActivityItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (prai *PreviewRepresentingActivityItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(prai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PreviewRepresentingActivityItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (prai *PreviewRepresentingActivityItem) String() string {
+	return rt.Description(objref.IDOf(prai))
 }
 
 // NewPreviewRepresentingActivityItemWithItemTitleImageIcon creates a metadata object with the title, image, and icon for a shareable item.
@@ -79,10 +79,3 @@ func NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider(it
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:imageProvider:iconProvider:"), objref.IDOf(item), purego.NSString(title), objref.IDOf(imageProvider), objref.IDOf(iconProvider))
 	return previewRepresentingActivityItemAdopt(_id)
 }
-
-// PreviewRepresentingActivityItemable is the interface implemented by [PreviewRepresentingActivityItem], for mocking and DI.
-type PreviewRepresentingActivityItemable interface {
-	obj.Object
-}
-
-var _ PreviewRepresentingActivityItemable = (*PreviewRepresentingActivityItem)(nil)

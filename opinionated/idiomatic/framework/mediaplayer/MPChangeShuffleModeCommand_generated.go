@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,38 +51,22 @@ func NewChangeShuffleModeCommand() *ChangeShuffleModeCommand {
 	return changeShuffleModeCommandAdopt(_id)
 }
 
-// WithCurrentShuffleType the current shuffle mode for a media item.
-func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType ShuffleType) *ChangeShuffleModeCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentShuffleType:"), currentShuffleType)
-	return x
+// WithCurrentShuffleType sets the current shuffle mode for a media item.
+func (csmc *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType ShuffleType) *ChangeShuffleModeCommand {
+	objc.Send[objc.ID](objref.IDOf(csmc), objc.RegisterName("setCurrentShuffleType:"), currentShuffleType)
+	return csmc
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (csmc *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeCommand {
+	objc.Send[objc.ID](objref.IDOf(csmc), objc.RegisterName("setEnabled:"), enabled)
+	return csmc
 }
 
 // CurrentShuffleType wraps the corresponding Objective-C method.
-func (x *ChangeShuffleModeCommand) CurrentShuffleType() ShuffleType {
-	_r := objc.Send[ShuffleType](objref.IDOf(x), objc.RegisterName("currentShuffleType"))
+func (csmc *ChangeShuffleModeCommand) CurrentShuffleType() ShuffleType {
+	_r := objc.Send[ShuffleType](objref.IDOf(csmc), objc.RegisterName("currentShuffleType"))
 	return _r
 }
-
-// SetCurrentShuffleType wraps the corresponding Objective-C method.
-func (x *ChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType ShuffleType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentShuffleType:"), currentShuffleType)
-}
-
-// ChangeShuffleModeCommandable is the interface implemented by [ChangeShuffleModeCommand], for mocking and DI.
-type ChangeShuffleModeCommandable interface {
-	obj.Object
-	WithCurrentShuffleType(currentShuffleType ShuffleType) *ChangeShuffleModeCommand
-	WithEnabled(enabled bool) *ChangeShuffleModeCommand
-	CurrentShuffleType() ShuffleType
-	SetCurrentShuffleType(currentShuffleType ShuffleType)
-}
-
-var _ ChangeShuffleModeCommandable = (*ChangeShuffleModeCommand)(nil)
 
 var _ RemoteCommandProvider = (*ChangeShuffleModeCommand)(nil)

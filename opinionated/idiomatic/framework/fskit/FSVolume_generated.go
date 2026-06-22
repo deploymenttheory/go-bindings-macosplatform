@@ -46,24 +46,24 @@ func volumeAdopt(id objc.ID) *Volume {
 }
 
 // Description returns the object's -description text.
-func (x *Volume) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Volume) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Volume) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *Volume) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Volume) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *Volume) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Volume) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Volume) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewVolumeWithVolumeIDVolumeName creates a volume with the given identifier and name.
@@ -73,36 +73,20 @@ func NewVolumeWithVolumeIDVolumeName(volumeID *VolumeIdentifier, volumeName *Fil
 	return volumeAdopt(_id)
 }
 
-// WithName the name of the volume.
-func (x *Volume) WithName(name *FileName) *Volume {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+// WithName sets the name of the volume.
+func (v_ *Volume) WithName(name *FileName) *Volume {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setName:"), objref.IDOf(name))
+	return v_
 }
 
-// VolumeID an identifier that uniquely identifies the volume.
-func (x *Volume) VolumeID() *VolumeIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volumeID"))
+// VolumeID returns an identifier that uniquely identifies the volume.
+func (v_ *Volume) VolumeID() *VolumeIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("volumeID"))
 	return VolumeIdentifierFromID(_r)
 }
 
-// Name the name of the volume.
-func (x *Volume) Name() *FileName {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of the volume.
+func (v_ *Volume) Name() *FileName {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("name"))
 	return FileNameFromID(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *Volume) SetName(name *FileName) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-}
-
-// Volumeable is the interface implemented by [Volume], for mocking and DI.
-type Volumeable interface {
-	obj.Object
-	WithName(name *FileName) *Volume
-	VolumeID() *VolumeIdentifier
-	Name() *FileName
-	SetName(name *FileName)
-}
-
-var _ Volumeable = (*Volume)(nil)

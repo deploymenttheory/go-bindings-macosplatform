@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageTranspose() *ImageTranspose {
 	return imageTransposeAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageTranspose) WithOffset(offset mpscore.MPSOffset) *ImageTranspose {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (it *ImageTranspose) WithOffset(offset mpscore.MPSOffset) *ImageTranspose {
+	objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("setOffset:"), offset)
+	return it
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageTranspose) WithClipRect(clipRect metal.MTLRegion) *ImageTranspose {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (it *ImageTranspose) WithClipRect(clipRect metal.MTLRegion) *ImageTranspose {
+	objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("setClipRect:"), clipRect)
+	return it
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageTranspose) WithLabel(label string) *ImageTranspose {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (it *ImageTranspose) WithLabel(label string) *ImageTranspose {
+	objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return it
 }
-
-// ImageTransposeable is the interface implemented by [ImageTranspose], for mocking and DI.
-type ImageTransposeable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageTranspose
-	WithClipRect(clipRect metal.MTLRegion) *ImageTranspose
-	WithLabel(label string) *ImageTranspose
-}
-
-var _ ImageTransposeable = (*ImageTranspose)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageTranspose)(nil)
 

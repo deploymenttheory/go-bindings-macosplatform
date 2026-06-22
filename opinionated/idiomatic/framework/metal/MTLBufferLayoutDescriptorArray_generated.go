@@ -46,24 +46,24 @@ func bufferLayoutDescriptorArrayAdopt(id objc.ID) *BufferLayoutDescriptorArray {
 }
 
 // Description returns the object's -description text.
-func (x *BufferLayoutDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (blda *BufferLayoutDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(blda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BufferLayoutDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (blda *BufferLayoutDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(blda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BufferLayoutDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (blda *BufferLayoutDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(blda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BufferLayoutDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (blda *BufferLayoutDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(blda))
 }
 
 // NewBufferLayoutDescriptorArray creates a new BufferLayoutDescriptorArray.
@@ -73,21 +73,12 @@ func NewBufferLayoutDescriptorArray() *BufferLayoutDescriptorArray {
 }
 
 // ObjectAtIndexedSubscript returns the state of the specified buffer layout.
-func (x *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *BufferLayoutDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+func (blda *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *BufferLayoutDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(blda), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return BufferLayoutDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the state of the specified buffer layout.
-func (x *BufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *BufferLayoutDescriptor, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
+func (blda *BufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *BufferLayoutDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(blda), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
 }
-
-// BufferLayoutDescriptorArrayable is the interface implemented by [BufferLayoutDescriptorArray], for mocking and DI.
-type BufferLayoutDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(index int) *BufferLayoutDescriptor
-	SetObjectAtIndexedSubscript(bufferDesc *BufferLayoutDescriptor, index int)
-}
-
-var _ BufferLayoutDescriptorArrayable = (*BufferLayoutDescriptorArray)(nil)

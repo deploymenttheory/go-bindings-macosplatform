@@ -48,56 +48,41 @@ func captureControlAdopt(id objc.ID) *CaptureControl {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureControl) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *CaptureControl) Description() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cc *CaptureControl) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cc *CaptureControl) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureControl) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *CaptureControl) String() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
-// WithEnabled a Boolean value that indicates whether this control supports user interaction.
-func (x *CaptureControl) WithEnabled(enabled bool) *CaptureControl {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether this control supports user interaction.
+func (cc *CaptureControl) WithEnabled(enabled bool) *CaptureControl {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setEnabled:"), enabled)
+	return cc
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *CaptureControl) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (cc *CaptureControl) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *CaptureControl) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// CaptureControlable is the interface implemented by [CaptureControl], for mocking and DI.
-type CaptureControlable interface {
-	obj.Object
-	WithEnabled(enabled bool) *CaptureControl
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-}
-
-var _ CaptureControlable = (*CaptureControl)(nil)
 
 // isCaptureControl marks CaptureControl — and, by embedding promotion, its
 // subclasses — as a member of the CaptureControl hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CaptureControl) isCaptureControl() {}
+func (cc *CaptureControl) isCaptureControl() {}
 
 var _ CaptureControlProvider = (*CaptureControl)(nil)

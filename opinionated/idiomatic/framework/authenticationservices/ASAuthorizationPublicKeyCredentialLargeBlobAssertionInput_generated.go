@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialLargeBlobAssertionInputAdopt(id objc.ID) *A
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Description() string {
+	return rt.Description(objref.IDOf(apkclbai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkclbai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkclbai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) String() string {
+	return rt.Description(objref.IDOf(apkclbai))
 }
 
 // NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation creates a new AuthorizationPublicKeyCredentialLargeBlobAssertionInput.
@@ -74,35 +74,19 @@ func NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation(ope
 }
 
 // WithDataToWrite sets the property and returns the receiver so calls can be chained.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrite(dataToWrite obj.Object) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataToWrite:"), objref.IDOf(dataToWrite))
-	return x
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrite(dataToWrite obj.Object) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	objc.Send[objc.ID](objref.IDOf(apkclbai), objc.RegisterName("setDataToWrite:"), objref.IDOf(dataToWrite))
+	return apkclbai
 }
 
 // Operation wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() AuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
-	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobAssertionOperation](objref.IDOf(x), objc.RegisterName("operation"))
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() AuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
+	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobAssertionOperation](objref.IDOf(apkclbai), objc.RegisterName("operation"))
 	return _r
 }
 
 // DataToWrite wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataToWrite"))
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkclbai), objc.RegisterName("dataToWrite"))
 	return obj.Wrap(_r)
 }
-
-// SetDataToWrite wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) SetDataToWrite(dataToWrite obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataToWrite:"), objref.IDOf(dataToWrite))
-}
-
-// AuthorizationPublicKeyCredentialLargeBlobAssertionInputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobAssertionInput], for mocking and DI.
-type AuthorizationPublicKeyCredentialLargeBlobAssertionInputable interface {
-	obj.Object
-	WithDataToWrite(dataToWrite obj.Object) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
-	Operation() AuthorizationPublicKeyCredentialLargeBlobAssertionOperation
-	DataToWrite() obj.Object
-	SetDataToWrite(dataToWrite obj.Object)
-}
-
-var _ AuthorizationPublicKeyCredentialLargeBlobAssertionInputable = (*AuthorizationPublicKeyCredentialLargeBlobAssertionInput)(nil)

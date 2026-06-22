@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,26 +49,17 @@ func NewDOMCSSFontFaceRule() *DOMCSSFontFaceRule {
 	return dOMCSSFontFaceRuleAdopt(_id)
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSFontFaceRule) WithCssText(cssText string) *DOMCSSFontFaceRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dffr *DOMCSSFontFaceRule) WithCSSText(cssText string) *DOMCSSFontFaceRule {
+	objc.Send[objc.ID](objref.IDOf(dffr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dffr
 }
 
 // Style wraps the corresponding Objective-C method.
-func (x *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
+func (dffr *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(dffr), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
-
-// DOMCSSFontFaceRuleable is the interface implemented by [DOMCSSFontFaceRule], for mocking and DI.
-type DOMCSSFontFaceRuleable interface {
-	obj.Object
-	WithCssText(cssText string) *DOMCSSFontFaceRule
-	Style() *DOMCSSStyleDeclaration
-}
-
-var _ DOMCSSFontFaceRuleable = (*DOMCSSFontFaceRule)(nil)
 
 var _ DOMCSSRuleProvider = (*DOMCSSFontFaceRule)(nil)
 

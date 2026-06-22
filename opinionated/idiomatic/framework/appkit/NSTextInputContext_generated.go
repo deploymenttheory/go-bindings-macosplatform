@@ -46,24 +46,24 @@ func textInputContextAdopt(id objc.ID) *TextInputContext {
 }
 
 // Description returns the object's -description text.
-func (x *TextInputContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tic *TextInputContext) Description() string {
+	return rt.Description(objref.IDOf(tic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextInputContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tic *TextInputContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextInputContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tic *TextInputContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextInputContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tic *TextInputContext) String() string {
+	return rt.Description(objref.IDOf(tic))
 }
 
 // NewTextInputContext creates a new TextInputContext.
@@ -72,136 +72,95 @@ func NewTextInputContext() *TextInputContext {
 	return textInputContextAdopt(_id)
 }
 
-// WithAcceptsGlyphInfo a Boolean value that indicates whether the client handles NSGlyphInfoAttributeName or not.
-func (x *TextInputContext) WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextInputContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsGlyphInfo:"), acceptsGlyphInfo)
-	return x
+// WithAcceptsGlyphInfo sets a Boolean value that indicates whether the client handles NSGlyphInfoAttributeName or not.
+func (tic *TextInputContext) WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextInputContext {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("setAcceptsGlyphInfo:"), acceptsGlyphInfo)
+	return tic
 }
 
-// WithAllowedInputSourceLocales the set of keyboard input source locales allowed when this input context is active.
-func (x *TextInputContext) WithAllowedInputSourceLocales(items ...obj.Object) *TextInputContext {
+// WithAllowedInputSourceLocales sets the set of keyboard input source locales allowed when this input context is active.
+func (tic *TextInputContext) WithAllowedInputSourceLocales(items ...obj.Object) *TextInputContext {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	return tic
 }
 
-// WithSelectedKeyboardInputSource the identifier string for the selected keyboard text input source.
-func (x *TextInputContext) WithSelectedKeyboardInputSource(selectedKeyboardInputSource obj.Object) *TextInputContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedKeyboardInputSource:"), objref.IDOf(selectedKeyboardInputSource))
-	return x
+// WithSelectedKeyboardInputSource sets the identifier string for the selected keyboard text input source.
+func (tic *TextInputContext) WithSelectedKeyboardInputSource(selectedKeyboardInputSource obj.Object) *TextInputContext {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("setSelectedKeyboardInputSource:"), objref.IDOf(selectedKeyboardInputSource))
+	return tic
 }
 
 // Activate activates the receiver.
-func (x *TextInputContext) Activate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
+func (tic *TextInputContext) Activate() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("activate"))
 }
 
 // Deactivate deactivates the receiver.
-func (x *TextInputContext) Deactivate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
+func (tic *TextInputContext) Deactivate() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("deactivate"))
 }
 
 // HandleEvent tells the Cocoa text input system to handle mouse or key events.
-func (x *TextInputContext) HandleEvent(event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleEvent:"), objref.IDOf(event))
+func (tic *TextInputContext) HandleEvent(event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(tic), objc.RegisterName("handleEvent:"), objref.IDOf(event))
 	return _r
 }
 
 // DiscardMarkedText tells the Cocoa text input system to discard the current conversion session.
-func (x *TextInputContext) DiscardMarkedText() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardMarkedText"))
+func (tic *TextInputContext) DiscardMarkedText() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("discardMarkedText"))
 }
 
 // InvalidateCharacterCoordinates notifies the Cocoa text input system that the position information previously queried via methods like firstRectForCharacterRange:actualRange: needs to be updated.
-func (x *TextInputContext) InvalidateCharacterCoordinates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateCharacterCoordinates"))
+func (tic *TextInputContext) InvalidateCharacterCoordinates() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("invalidateCharacterCoordinates"))
 }
 
 // TextInputClientWillStartScrollingOrZooming wraps the corresponding Objective-C method.
-func (x *TextInputContext) TextInputClientWillStartScrollingOrZooming() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputClientWillStartScrollingOrZooming"))
+func (tic *TextInputContext) TextInputClientWillStartScrollingOrZooming() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientWillStartScrollingOrZooming"))
 }
 
 // TextInputClientDidEndScrollingOrZooming wraps the corresponding Objective-C method.
-func (x *TextInputContext) TextInputClientDidEndScrollingOrZooming() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputClientDidEndScrollingOrZooming"))
+func (tic *TextInputContext) TextInputClientDidEndScrollingOrZooming() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientDidEndScrollingOrZooming"))
 }
 
 // TextInputClientDidUpdateSelection wraps the corresponding Objective-C method.
-func (x *TextInputContext) TextInputClientDidUpdateSelection() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputClientDidUpdateSelection"))
+func (tic *TextInputContext) TextInputClientDidUpdateSelection() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientDidUpdateSelection"))
 }
 
 // TextInputClientDidScroll wraps the corresponding Objective-C method.
-func (x *TextInputContext) TextInputClientDidScroll() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputClientDidScroll"))
+func (tic *TextInputContext) TextInputClientDidScroll() {
+	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientDidScroll"))
 }
 
 // AcceptsGlyphInfo wraps the corresponding Objective-C method.
-func (x *TextInputContext) AcceptsGlyphInfo() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsGlyphInfo"))
+func (tic *TextInputContext) AcceptsGlyphInfo() bool {
+	_r := objc.Send[bool](objref.IDOf(tic), objc.RegisterName("acceptsGlyphInfo"))
 	return _r
-}
-
-// SetAcceptsGlyphInfo wraps the corresponding Objective-C method.
-func (x *TextInputContext) SetAcceptsGlyphInfo(acceptsGlyphInfo bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsGlyphInfo:"), acceptsGlyphInfo)
 }
 
 // AllowedInputSourceLocales wraps the corresponding Objective-C method.
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
-func (x *TextInputContext) AllowedInputSourceLocales() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedInputSourceLocales"))
+func (tic *TextInputContext) AllowedInputSourceLocales() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("allowedInputSourceLocales"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
-}
-
-// SetAllowedInputSourceLocales wraps the corresponding Objective-C method.
-func (x *TextInputContext) SetAllowedInputSourceLocales(allowedInputSourceLocales []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), purego.SliceToNSArray(allowedInputSourceLocales, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // KeyboardInputSources wraps the corresponding Objective-C method.
 //
 // KeyboardInputSources returns the collection as a Go slice.
-func (x *TextInputContext) KeyboardInputSources() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyboardInputSources"))
+func (tic *TextInputContext) KeyboardInputSources() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("keyboardInputSources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SelectedKeyboardInputSource wraps the corresponding Objective-C method.
-func (x *TextInputContext) SelectedKeyboardInputSource() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedKeyboardInputSource"))
+func (tic *TextInputContext) SelectedKeyboardInputSource() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("selectedKeyboardInputSource"))
 	return obj.Wrap(_r)
 }
-
-// SetSelectedKeyboardInputSource wraps the corresponding Objective-C method.
-func (x *TextInputContext) SetSelectedKeyboardInputSource(selectedKeyboardInputSource obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedKeyboardInputSource:"), objref.IDOf(selectedKeyboardInputSource))
-}
-
-// TextInputContextable is the interface implemented by [TextInputContext], for mocking and DI.
-type TextInputContextable interface {
-	obj.Object
-	WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextInputContext
-	WithAllowedInputSourceLocales(items ...obj.Object) *TextInputContext
-	WithSelectedKeyboardInputSource(selectedKeyboardInputSource obj.Object) *TextInputContext
-	Activate()
-	Deactivate()
-	HandleEvent(event *Event) bool
-	DiscardMarkedText()
-	InvalidateCharacterCoordinates()
-	TextInputClientWillStartScrollingOrZooming()
-	TextInputClientDidEndScrollingOrZooming()
-	TextInputClientDidUpdateSelection()
-	TextInputClientDidScroll()
-	AcceptsGlyphInfo() bool
-	SetAcceptsGlyphInfo(acceptsGlyphInfo bool)
-	AllowedInputSourceLocales() []string
-	SetAllowedInputSourceLocales(allowedInputSourceLocales []string)
-	KeyboardInputSources() []obj.Object
-	SelectedKeyboardInputSource() obj.Object
-	SetSelectedKeyboardInputSource(selectedKeyboardInputSource obj.Object)
-}
-
-var _ TextInputContextable = (*TextInputContext)(nil)

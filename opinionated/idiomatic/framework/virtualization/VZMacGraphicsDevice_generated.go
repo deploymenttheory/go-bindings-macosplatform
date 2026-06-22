@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMacGraphicsDevice() *MacGraphicsDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDevice")), objc.RegisterName("new"))
 	return macGraphicsDeviceAdopt(_id)
 }
-
-// MacGraphicsDeviceable is the interface implemented by [MacGraphicsDevice], for mocking and DI.
-type MacGraphicsDeviceable interface {
-	obj.Object
-}
-
-var _ MacGraphicsDeviceable = (*MacGraphicsDevice)(nil)
 
 var _ GraphicsDeviceProvider = (*MacGraphicsDevice)(nil)

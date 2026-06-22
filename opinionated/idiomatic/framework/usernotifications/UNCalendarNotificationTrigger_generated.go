@@ -52,25 +52,16 @@ func NewCalendarNotificationTrigger() *CalendarNotificationTrigger {
 	return calendarNotificationTriggerAdopt(_id)
 }
 
-// NextTriggerDate the next date at which the trigger conditions are met.
-func (x *CalendarNotificationTrigger) NextTriggerDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTriggerDate"))
+// NextTriggerDate returns the next date at which the trigger conditions are met.
+func (cnt *CalendarNotificationTrigger) NextTriggerDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cnt), objc.RegisterName("nextTriggerDate"))
 	return obj.Wrap(_r)
 }
 
 // DateComponents wraps the corresponding Objective-C method.
-func (x *CalendarNotificationTrigger) DateComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateComponents"))
+func (cnt *CalendarNotificationTrigger) DateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cnt), objc.RegisterName("dateComponents"))
 	return obj.Wrap(_r)
 }
-
-// CalendarNotificationTriggerable is the interface implemented by [CalendarNotificationTrigger], for mocking and DI.
-type CalendarNotificationTriggerable interface {
-	obj.Object
-	NextTriggerDate() obj.Object
-	DateComponents() obj.Object
-}
-
-var _ CalendarNotificationTriggerable = (*CalendarNotificationTrigger)(nil)
 
 var _ NotificationTriggerProvider = (*CalendarNotificationTrigger)(nil)

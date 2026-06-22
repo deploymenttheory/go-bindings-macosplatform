@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewSoundEventNodeAsset() *SoundEventNodeAsset {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASESoundEventNodeAsset")), objc.RegisterName("new"))
 	return soundEventNodeAssetAdopt(_id)
 }
-
-// SoundEventNodeAssetable is the interface implemented by [SoundEventNodeAsset], for mocking and DI.
-type SoundEventNodeAssetable interface {
-	obj.Object
-}
-
-var _ SoundEventNodeAssetable = (*SoundEventNodeAsset)(nil)
 
 var _ AssetProvider = (*SoundEventNodeAsset)(nil)

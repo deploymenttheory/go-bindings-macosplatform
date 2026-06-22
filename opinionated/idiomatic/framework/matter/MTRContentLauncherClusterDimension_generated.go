@@ -51,31 +51,21 @@ func NewMTRContentLauncherClusterDimension() *MTRContentLauncherClusterDimension
 }
 
 // WithWidth sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterDimension) WithWidth(width obj.Object) *MTRContentLauncherClusterDimension {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
-	return x
+func (mclcd *MTRContentLauncherClusterDimension) WithWidth(width obj.Object) *MTRContentLauncherClusterDimension {
+	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setWidth:"), objref.IDOf(width))
+	return mclcd
 }
 
 // WithHeight sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterDimension) WithHeight(height obj.Object) *MTRContentLauncherClusterDimension {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
-	return x
+func (mclcd *MTRContentLauncherClusterDimension) WithHeight(height obj.Object) *MTRContentLauncherClusterDimension {
+	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setHeight:"), objref.IDOf(height))
+	return mclcd
 }
 
 // WithMetric sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterDimension) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimension {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
-	return x
+func (mclcd *MTRContentLauncherClusterDimension) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimension {
+	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setMetric:"), objref.IDOf(metric))
+	return mclcd
 }
-
-// MTRContentLauncherClusterDimensionable is the interface implemented by [MTRContentLauncherClusterDimension], for mocking and DI.
-type MTRContentLauncherClusterDimensionable interface {
-	obj.Object
-	WithWidth(width obj.Object) *MTRContentLauncherClusterDimension
-	WithHeight(height obj.Object) *MTRContentLauncherClusterDimension
-	WithMetric(metric obj.Object) *MTRContentLauncherClusterDimension
-}
-
-var _ MTRContentLauncherClusterDimensionable = (*MTRContentLauncherClusterDimension)(nil)
 
 var _ MTRContentLauncherClusterDimensionStructProvider = (*MTRContentLauncherClusterDimension)(nil)

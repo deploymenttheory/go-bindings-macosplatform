@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,160 +50,127 @@ func NewDOMHTMLLegendElement() *DOMHTMLLegendElement {
 }
 
 // WithAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithAlign(align string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-	return x
+func (dle *DOMHTMLLegendElement) WithAlign(align string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setAlign:"), purego.NSString(align))
+	return dle
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithTitle(title string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dle *DOMHTMLLegendElement) WithTitle(title string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dle
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithLang(lang string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dle *DOMHTMLLegendElement) WithLang(lang string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dle
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithDir(dir string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dle *DOMHTMLLegendElement) WithDir(dir string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dle
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithTabIndex(tabIndex int) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dle *DOMHTMLLegendElement) WithTabIndex(tabIndex int) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dle
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithAccessKey(accessKey string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dle *DOMHTMLLegendElement) WithAccessKey(accessKey string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dle
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithInnerText(innerText string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dle *DOMHTMLLegendElement) WithInnerText(innerText string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dle
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithOuterText(outerText string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dle *DOMHTMLLegendElement) WithOuterText(outerText string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dle
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithContentEditable(contentEditable string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dle *DOMHTMLLegendElement) WithContentEditable(contentEditable string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dle
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithIdName(idName string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dle *DOMHTMLLegendElement) WithIDName(idName string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dle
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithScrollLeft(scrollLeft int) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dle *DOMHTMLLegendElement) WithScrollLeft(scrollLeft int) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dle
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithScrollTop(scrollTop int) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dle *DOMHTMLLegendElement) WithScrollTop(scrollTop int) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dle
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithInnerHTML(innerHTML string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dle *DOMHTMLLegendElement) WithInnerHTML(innerHTML string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dle
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithOuterHTML(outerHTML string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dle *DOMHTMLLegendElement) WithOuterHTML(outerHTML string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dle
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithClassName(className string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dle *DOMHTMLLegendElement) WithClassName(className string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dle
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithNodeValue(nodeValue string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dle *DOMHTMLLegendElement) WithNodeValue(nodeValue string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dle
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithPrefix(prefix string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dle *DOMHTMLLegendElement) WithPrefix(prefix string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dle
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLLegendElement) WithTextContent(textContent string) *DOMHTMLLegendElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dle *DOMHTMLLegendElement) WithTextContent(textContent string) *DOMHTMLLegendElement {
+	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dle
 }
 
 // Form wraps the corresponding Objective-C method.
-func (x *DOMHTMLLegendElement) Form() *DOMHTMLFormElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("form"))
+func (dle *DOMHTMLLegendElement) Form() *DOMHTMLFormElement {
+	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Align wraps the corresponding Objective-C method.
-func (x *DOMHTMLLegendElement) Align() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+func (dle *DOMHTMLLegendElement) Align() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLLegendElement) SetAlign(align string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-}
-
-// DOMHTMLLegendElementable is the interface implemented by [DOMHTMLLegendElement], for mocking and DI.
-type DOMHTMLLegendElementable interface {
-	obj.Object
-	WithAlign(align string) *DOMHTMLLegendElement
-	WithTitle(title string) *DOMHTMLLegendElement
-	WithLang(lang string) *DOMHTMLLegendElement
-	WithDir(dir string) *DOMHTMLLegendElement
-	WithTabIndex(tabIndex int) *DOMHTMLLegendElement
-	WithAccessKey(accessKey string) *DOMHTMLLegendElement
-	WithInnerText(innerText string) *DOMHTMLLegendElement
-	WithOuterText(outerText string) *DOMHTMLLegendElement
-	WithContentEditable(contentEditable string) *DOMHTMLLegendElement
-	WithIdName(idName string) *DOMHTMLLegendElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLLegendElement
-	WithScrollTop(scrollTop int) *DOMHTMLLegendElement
-	WithInnerHTML(innerHTML string) *DOMHTMLLegendElement
-	WithOuterHTML(outerHTML string) *DOMHTMLLegendElement
-	WithClassName(className string) *DOMHTMLLegendElement
-	WithNodeValue(nodeValue string) *DOMHTMLLegendElement
-	WithPrefix(prefix string) *DOMHTMLLegendElement
-	WithTextContent(textContent string) *DOMHTMLLegendElement
-	Form() *DOMHTMLFormElement
-	Align() string
-	SetAlign(align string)
-}
-
-var _ DOMHTMLLegendElementable = (*DOMHTMLLegendElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLLegendElement)(nil)
 

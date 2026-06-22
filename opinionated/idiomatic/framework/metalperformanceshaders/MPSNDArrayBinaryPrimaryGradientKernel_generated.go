@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,24 +43,16 @@ func nDArrayBinaryPrimaryGradientKernelAdopt(id objc.ID) *NDArrayBinaryPrimaryGr
 	return x
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayBinaryPrimaryGradientKernel) WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nabpgk *NDArrayBinaryPrimaryGradientKernel) WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel {
+	objc.Send[objc.ID](objref.IDOf(nabpgk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nabpgk
 }
-
-// NDArrayBinaryPrimaryGradientKernelable is the interface implemented by [NDArrayBinaryPrimaryGradientKernel], for mocking and DI.
-type NDArrayBinaryPrimaryGradientKernelable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel
-}
-
-var _ NDArrayBinaryPrimaryGradientKernelable = (*NDArrayBinaryPrimaryGradientKernel)(nil)
 
 // isNDArrayBinaryPrimaryGradientKernel marks NDArrayBinaryPrimaryGradientKernel — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayBinaryPrimaryGradientKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayBinaryPrimaryGradientKernel) isNDArrayBinaryPrimaryGradientKernel() {}
+func (nabpgk *NDArrayBinaryPrimaryGradientKernel) isNDArrayBinaryPrimaryGradientKernel() {}
 
 var _ NDArrayBinaryPrimaryGradientKernelProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)
 

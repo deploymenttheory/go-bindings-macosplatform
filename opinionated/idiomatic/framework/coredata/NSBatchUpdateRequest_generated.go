@@ -60,40 +60,40 @@ func NewBatchUpdateRequestWithEntity(entity *EntityDescription) *BatchUpdateRequ
 	return batchUpdateRequestAdopt(_id)
 }
 
-// WithPredicate a predicate that identifies the objects to update.
-func (x *BatchUpdateRequest) WithPredicate(predicate obj.Object) *BatchUpdateRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
-	return x
+// WithPredicate sets a predicate that identifies the objects to update.
+func (bur *BatchUpdateRequest) WithPredicate(predicate obj.Object) *BatchUpdateRequest {
+	objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
+	return bur
 }
 
-// WithIncludesSubentities a Boolean value that indicates whether to update subentities.
-func (x *BatchUpdateRequest) WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
-	return x
+// WithIncludesSubentities sets a Boolean value that indicates whether to update subentities.
+func (bur *BatchUpdateRequest) WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest {
+	objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
+	return bur
 }
 
-// WithResultType the type of result that Core Data returns from the request.
-func (x *BatchUpdateRequest) WithResultType(resultType BatchUpdateRequestResultType) *BatchUpdateRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-	return x
+// WithResultType sets the type of result that Core Data returns from the request.
+func (bur *BatchUpdateRequest) WithResultType(resultType BatchUpdateRequestResultType) *BatchUpdateRequest {
+	objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("setResultType:"), resultType)
+	return bur
 }
 
-// WithPropertiesToUpdate a dictionary of property description pairs that describe the updates.
-func (x *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate obj.Object) *BatchUpdateRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToUpdate:"), objref.IDOf(propertiesToUpdate))
-	return x
+// WithPropertiesToUpdate sets a dictionary of property description pairs that describe the updates.
+func (bur *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate obj.Object) *BatchUpdateRequest {
+	objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("setPropertiesToUpdate:"), objref.IDOf(propertiesToUpdate))
+	return bur
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (bur *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("setAffectedStores:"), _arr)
+	return bur
 }
 
 // EntityName wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) EntityName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityName"))
+func (bur *BatchUpdateRequest) EntityName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("entityName"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,75 +101,33 @@ func (x *BatchUpdateRequest) EntityName() string {
 }
 
 // Entity wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) Entity() *EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+func (bur *BatchUpdateRequest) Entity() *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // Predicate wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+func (bur *BatchUpdateRequest) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
-}
-
-// SetPredicate wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) SetPredicate(predicate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
 // IncludesSubentities wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) IncludesSubentities() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesSubentities"))
+func (bur *BatchUpdateRequest) IncludesSubentities() bool {
+	_r := objc.Send[bool](objref.IDOf(bur), objc.RegisterName("includesSubentities"))
 	return _r
-}
-
-// SetIncludesSubentities wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) SetIncludesSubentities(includesSubentities bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) ResultType() BatchUpdateRequestResultType {
-	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (bur *BatchUpdateRequest) ResultType() BatchUpdateRequestResultType {
+	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(bur), objc.RegisterName("resultType"))
 	return _r
 }
 
-// SetResultType wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) SetResultType(resultType BatchUpdateRequestResultType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-}
-
 // PropertiesToUpdate wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) PropertiesToUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesToUpdate"))
+func (bur *BatchUpdateRequest) PropertiesToUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("propertiesToUpdate"))
 	return obj.Wrap(_r)
 }
-
-// SetPropertiesToUpdate wraps the corresponding Objective-C method.
-func (x *BatchUpdateRequest) SetPropertiesToUpdate(propertiesToUpdate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToUpdate:"), objref.IDOf(propertiesToUpdate))
-}
-
-// BatchUpdateRequestable is the interface implemented by [BatchUpdateRequest], for mocking and DI.
-type BatchUpdateRequestable interface {
-	obj.Object
-	WithPredicate(predicate obj.Object) *BatchUpdateRequest
-	WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest
-	WithResultType(resultType BatchUpdateRequestResultType) *BatchUpdateRequest
-	WithPropertiesToUpdate(propertiesToUpdate obj.Object) *BatchUpdateRequest
-	WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest
-	EntityName() string
-	Entity() *EntityDescription
-	Predicate() obj.Object
-	SetPredicate(predicate obj.Object)
-	IncludesSubentities() bool
-	SetIncludesSubentities(includesSubentities bool)
-	ResultType() BatchUpdateRequestResultType
-	SetResultType(resultType BatchUpdateRequestResultType)
-	PropertiesToUpdate() obj.Object
-	SetPropertiesToUpdate(propertiesToUpdate obj.Object)
-}
-
-var _ BatchUpdateRequestable = (*BatchUpdateRequest)(nil)
 
 var _ PersistentStoreRequestProvider = (*BatchUpdateRequest)(nil)

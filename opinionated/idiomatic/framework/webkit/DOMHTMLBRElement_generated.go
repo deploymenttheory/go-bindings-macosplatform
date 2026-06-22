@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,153 +50,121 @@ func NewDOMHTMLBRElement() *DOMHTMLBRElement {
 }
 
 // WithClear sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithClear(clear string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClear:"), purego.NSString(clear))
-	return x
+func (de *DOMHTMLBRElement) WithClear(clear string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setClear:"), purego.NSString(clear))
+	return de
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithTitle(title string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (de *DOMHTMLBRElement) WithTitle(title string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return de
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithLang(lang string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (de *DOMHTMLBRElement) WithLang(lang string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return de
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithDir(dir string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (de *DOMHTMLBRElement) WithDir(dir string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return de
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithTabIndex(tabIndex int) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (de *DOMHTMLBRElement) WithTabIndex(tabIndex int) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTabIndex:"), tabIndex)
+	return de
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithAccessKey(accessKey string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (de *DOMHTMLBRElement) WithAccessKey(accessKey string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return de
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithInnerText(innerText string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (de *DOMHTMLBRElement) WithInnerText(innerText string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return de
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithOuterText(outerText string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (de *DOMHTMLBRElement) WithOuterText(outerText string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return de
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithContentEditable(contentEditable string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (de *DOMHTMLBRElement) WithContentEditable(contentEditable string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return de
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithIdName(idName string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (de *DOMHTMLBRElement) WithIDName(idName string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return de
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithScrollLeft(scrollLeft int) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (de *DOMHTMLBRElement) WithScrollLeft(scrollLeft int) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return de
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithScrollTop(scrollTop int) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (de *DOMHTMLBRElement) WithScrollTop(scrollTop int) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollTop:"), scrollTop)
+	return de
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithInnerHTML(innerHTML string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (de *DOMHTMLBRElement) WithInnerHTML(innerHTML string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return de
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithOuterHTML(outerHTML string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (de *DOMHTMLBRElement) WithOuterHTML(outerHTML string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return de
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithClassName(className string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (de *DOMHTMLBRElement) WithClassName(className string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return de
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithNodeValue(nodeValue string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (de *DOMHTMLBRElement) WithNodeValue(nodeValue string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return de
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithPrefix(prefix string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (de *DOMHTMLBRElement) WithPrefix(prefix string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return de
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBRElement) WithTextContent(textContent string) *DOMHTMLBRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (de *DOMHTMLBRElement) WithTextContent(textContent string) *DOMHTMLBRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return de
 }
 
 // Clear wraps the corresponding Objective-C method.
-func (x *DOMHTMLBRElement) Clear() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
+func (de *DOMHTMLBRElement) Clear() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("clear"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetClear wraps the corresponding Objective-C method.
-func (x *DOMHTMLBRElement) SetClear(clear string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClear:"), purego.NSString(clear))
-}
-
-// DOMHTMLBRElementable is the interface implemented by [DOMHTMLBRElement], for mocking and DI.
-type DOMHTMLBRElementable interface {
-	obj.Object
-	WithClear(clear string) *DOMHTMLBRElement
-	WithTitle(title string) *DOMHTMLBRElement
-	WithLang(lang string) *DOMHTMLBRElement
-	WithDir(dir string) *DOMHTMLBRElement
-	WithTabIndex(tabIndex int) *DOMHTMLBRElement
-	WithAccessKey(accessKey string) *DOMHTMLBRElement
-	WithInnerText(innerText string) *DOMHTMLBRElement
-	WithOuterText(outerText string) *DOMHTMLBRElement
-	WithContentEditable(contentEditable string) *DOMHTMLBRElement
-	WithIdName(idName string) *DOMHTMLBRElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLBRElement
-	WithScrollTop(scrollTop int) *DOMHTMLBRElement
-	WithInnerHTML(innerHTML string) *DOMHTMLBRElement
-	WithOuterHTML(outerHTML string) *DOMHTMLBRElement
-	WithClassName(className string) *DOMHTMLBRElement
-	WithNodeValue(nodeValue string) *DOMHTMLBRElement
-	WithPrefix(prefix string) *DOMHTMLBRElement
-	WithTextContent(textContent string) *DOMHTMLBRElement
-	Clear() string
-	SetClear(clear string)
-}
-
-var _ DOMHTMLBRElementable = (*DOMHTMLBRElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLBRElement)(nil)
 

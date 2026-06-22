@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // KeyedUnarchiver is an idiomatic wrapper over the Objective-C class NSKeyedUnarchiver.
@@ -72,50 +73,27 @@ func NewKeyedUnarchiverForReadingWithData(data *Data) *KeyedUnarchiver {
 	return keyedUnarchiverAdopt(_id)
 }
 
-// WithRequiresSecureCoding indicates whether the receiver requires all unarchived classes to conform to NSSecureCoding.
-func (x *KeyedUnarchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
-	return x
+// WithRequiresSecureCoding sets indicates whether the receiver requires all unarchived classes to conform to NSSecureCoding.
+func (ku *KeyedUnarchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver {
+	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
+	return ku
 }
 
-// WithDecodingFailurePolicy the action to take when this unarchiver fails to decode an entry.
-func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy) *KeyedUnarchiver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecodingFailurePolicy:"), decodingFailurePolicy)
-	return x
+// WithDecodingFailurePolicy sets the action to take when this unarchiver fails to decode an entry.
+func (ku *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy) *KeyedUnarchiver {
+	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setDecodingFailurePolicy:"), decodingFailurePolicy)
+	return ku
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *KeyedUnarchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ku *KeyedUnarchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver {
+	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ku
 }
 
 // FinishDecoding tells the receiver that you are finished decoding objects.
-func (x *KeyedUnarchiver) FinishDecoding() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishDecoding"))
+func (ku *KeyedUnarchiver) FinishDecoding() {
+	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("finishDecoding"))
 }
-
-// SetRequiresSecureCoding wraps the corresponding Objective-C method.
-func (x *KeyedUnarchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
-}
-
-// SetDecodingFailurePolicy wraps the corresponding Objective-C method.
-func (x *KeyedUnarchiver) SetDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecodingFailurePolicy:"), decodingFailurePolicy)
-}
-
-// KeyedUnarchiverable is the interface implemented by [KeyedUnarchiver], for mocking and DI.
-type KeyedUnarchiverable interface {
-	obj.Object
-	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver
-	WithDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy) *KeyedUnarchiver
-	WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver
-	FinishDecoding()
-	SetRequiresSecureCoding(requiresSecureCoding bool)
-	SetDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy)
-}
-
-var _ KeyedUnarchiverable = (*KeyedUnarchiver)(nil)
 
 var _ CoderProvider = (*KeyedUnarchiver)(nil)

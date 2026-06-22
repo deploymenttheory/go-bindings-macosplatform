@@ -51,31 +51,21 @@ func NewMTRTestClusterClusterTestStructArrayArgumentResponseParams() *MTRTestClu
 }
 
 // WithArg5 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithArg5(arg5 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
-	return x
+func (mtcctsaarp *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithArg5(arg5 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctsaarp), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
+	return mtcctsaarp
 }
 
 // WithArg6 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithArg6(arg6 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
-	return x
+func (mtcctsaarp *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithArg6(arg6 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctsaarp), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
+	return mtcctsaarp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcctsaarp *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctsaarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtcctsaarp
 }
-
-// MTRTestClusterClusterTestStructArrayArgumentResponseParamsable is the interface implemented by [MTRTestClusterClusterTestStructArrayArgumentResponseParams], for mocking and DI.
-type MTRTestClusterClusterTestStructArrayArgumentResponseParamsable interface {
-	obj.Object
-	WithArg5(arg5 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams
-	WithArg6(arg6 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestStructArrayArgumentResponseParams
-}
-
-var _ MTRTestClusterClusterTestStructArrayArgumentResponseParamsable = (*MTRTestClusterClusterTestStructArrayArgumentResponseParams)(nil)
 
 var _ MTRUnitTestingClusterTestStructArrayArgumentResponseParamsProvider = (*MTRTestClusterClusterTestStructArrayArgumentResponseParams)(nil)

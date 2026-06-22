@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Description() string {
+	return rt.Description(objref.IDOf(mdemcpacs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemcpacs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemcpacs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) String() string {
+	return rt.Description(objref.IDOf(mdemcpacs))
 }
 
 // NewMTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct creates a new MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct.
@@ -71,41 +71,24 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct() *MTRDevice
 }
 
 // WithCause sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
-	return x
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("setCause:"), objref.IDOf(cause))
+	return mdemcpacs
 }
 
 // PowerAdjustCapability wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) PowerAdjustCapability() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("powerAdjustCapability"))
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) PowerAdjustCapability() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("powerAdjustCapability"))
 	return obj.Wrap(_r)
 }
 
 // SetPowerAdjustCapability wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetPowerAdjustCapability(powerAdjustCapability obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPowerAdjustCapability:"), objref.IDOf(powerAdjustCapability))
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetPowerAdjustCapability(powerAdjustCapability obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("setPowerAdjustCapability:"), objref.IDOf(powerAdjustCapability))
 }
 
 // Cause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
-
-// SetCause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetCause(cause obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
-}
-
-// MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct], for mocking and DI.
-type MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable interface {
-	obj.Object
-	WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
-	PowerAdjustCapability() obj.Object
-	SetPowerAdjustCapability(powerAdjustCapability obj.Object)
-	Cause() obj.Object
-	SetCause(cause obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable = (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct)(nil)

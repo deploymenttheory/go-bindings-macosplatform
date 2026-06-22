@@ -46,24 +46,24 @@ func collaborationOptionAdopt(id objc.ID) *CollaborationOption {
 }
 
 // Description returns the object's -description text.
-func (x *CollaborationOption) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (co *CollaborationOption) Description() string {
+	return rt.Description(objref.IDOf(co))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollaborationOption) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (co *CollaborationOption) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(co), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollaborationOption) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (co *CollaborationOption) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(co), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollaborationOption) String() string {
-	return rt.Description(objref.IDOf(x))
+func (co *CollaborationOption) String() string {
+	return rt.Description(objref.IDOf(co))
 }
 
 // NewCollaborationOptionWithTitleIdentifier creates and initializes a collaboration option object.
@@ -73,108 +73,68 @@ func NewCollaborationOptionWithTitleIdentifier(title string, identifier string) 
 	return collaborationOptionAdopt(_id)
 }
 
-// WithTitle a localized string the system displays as a title to represent the permissions option.
-func (x *CollaborationOption) WithTitle(title string) *CollaborationOption {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets a localized string the system displays as a title to represent the permissions option.
+func (co *CollaborationOption) WithTitle(title string) *CollaborationOption {
+	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return co
 }
 
-// WithSubtitle a localized string the system displays to represent the permissions option in the collaboration view.
-func (x *CollaborationOption) WithSubtitle(subtitle string) *CollaborationOption {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets a localized string the system displays to represent the permissions option in the collaboration view.
+func (co *CollaborationOption) WithSubtitle(subtitle string) *CollaborationOption {
+	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return co
 }
 
-// WithSelected a Boolean value that represents the selected state of an option.
-func (x *CollaborationOption) WithSelected(selected bool) *CollaborationOption {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
-	return x
+// WithSelected sets a Boolean value that represents the selected state of an option.
+func (co *CollaborationOption) WithSelected(selected bool) *CollaborationOption {
+	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setSelected:"), selected)
+	return co
 }
 
-// WithRequiredOptionsIdentifiers an array of option identifiers that the app must select before the system makes the option interactive.
-func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...obj.Object) *CollaborationOption {
+// WithRequiredOptionsIdentifiers sets an array of option identifiers that the app must select before the system makes the option interactive.
+func (co *CollaborationOption) WithRequiredOptionsIdentifiers(items ...obj.Object) *CollaborationOption {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredOptionsIdentifiers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setRequiredOptionsIdentifiers:"), _arr)
+	return co
 }
 
-// Title a localized title string to be used when displaying the option
-func (x *CollaborationOption) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns a localized title string to be used when displaying the option
+func (co *CollaborationOption) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *CollaborationOption) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// Identifier unique identifier
-func (x *CollaborationOption) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns unique identifier
+func (co *CollaborationOption) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Subtitle a localized subtitle string to be used when displaying the option
-func (x *CollaborationOption) Subtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+// Subtitle returns a localized subtitle string to be used when displaying the option
+func (co *CollaborationOption) Subtitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSubtitle wraps the corresponding Objective-C method.
-func (x *CollaborationOption) SetSubtitle(subtitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-}
-
-// IsSelected a flag that indicates whether the option is selected. This property should only be set directly when the option represents an individual switch. Defaults to NO
-func (x *CollaborationOption) IsSelected() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
+// IsSelected reports whether a flag that indicates whether the option is selected. This property should only be set directly when the option represents an individual switch. Defaults to false
+func (co *CollaborationOption) IsSelected() bool {
+	_r := objc.Send[bool](objref.IDOf(co), objc.RegisterName("isSelected"))
 	return _r
 }
 
-// SetSelected wraps the corresponding Objective-C method.
-func (x *CollaborationOption) SetSelected(selected bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
-}
-
-// RequiredOptionsIdentifiers an array of option identifiers that must already be selected in order to be interacted with
+// RequiredOptionsIdentifiers returns an array of option identifiers that must already be selected in order to be interacted with
 //
 // RequiredOptionsIdentifiers returns the collection as a Go slice.
-func (x *CollaborationOption) RequiredOptionsIdentifiers() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredOptionsIdentifiers"))
+func (co *CollaborationOption) RequiredOptionsIdentifiers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("requiredOptionsIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SetRequiredOptionsIdentifiers wraps the corresponding Objective-C method.
-func (x *CollaborationOption) SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredOptionsIdentifiers:"), purego.SliceToNSArray(requiredOptionsIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// CollaborationOptionable is the interface implemented by [CollaborationOption], for mocking and DI.
-type CollaborationOptionable interface {
-	obj.Object
-	WithTitle(title string) *CollaborationOption
-	WithSubtitle(subtitle string) *CollaborationOption
-	WithSelected(selected bool) *CollaborationOption
-	WithRequiredOptionsIdentifiers(items ...obj.Object) *CollaborationOption
-	Title() string
-	SetTitle(title string)
-	Identifier() string
-	Subtitle() string
-	SetSubtitle(subtitle string)
-	IsSelected() bool
-	SetSelected(selected bool)
-	RequiredOptionsIdentifiers() []string
-	SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers []string)
-}
-
-var _ CollaborationOptionable = (*CollaborationOption)(nil)

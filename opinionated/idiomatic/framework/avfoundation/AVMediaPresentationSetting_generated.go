@@ -46,24 +46,24 @@ func mediaPresentationSettingAdopt(id objc.ID) *MediaPresentationSetting {
 }
 
 // Description returns the object's -description text.
-func (x *MediaPresentationSetting) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mps *MediaPresentationSetting) Description() string {
+	return rt.Description(objref.IDOf(mps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaPresentationSetting) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mps *MediaPresentationSetting) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaPresentationSetting) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mps *MediaPresentationSetting) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaPresentationSetting) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mps *MediaPresentationSetting) String() string {
+	return rt.Description(objref.IDOf(mps))
 }
 
 // NewMediaPresentationSetting creates a new MediaPresentationSetting.
@@ -73,8 +73,8 @@ func NewMediaPresentationSetting() *MediaPresentationSetting {
 }
 
 // DisplayNameForLocaleIdentifier returns the display name for the selectable setting that best matches the specified locale identifier.
-func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
+func (mps *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
 	if _r == 0 {
 		return ""
 	}
@@ -82,16 +82,7 @@ func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifi
 }
 
 // MediaCharacteristic provides the media characteristic that corresponds to the selectable setting.
-func (x *MediaPresentationSetting) MediaCharacteristic() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaCharacteristic"))
+func (mps *MediaPresentationSetting) MediaCharacteristic() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("mediaCharacteristic"))
 	return obj.Wrap(_r)
 }
-
-// MediaPresentationSettingable is the interface implemented by [MediaPresentationSetting], for mocking and DI.
-type MediaPresentationSettingable interface {
-	obj.Object
-	DisplayNameForLocaleIdentifier(localeIdentifier string) string
-	MediaCharacteristic() obj.Object
-}
-
-var _ MediaPresentationSettingable = (*MediaPresentationSetting)(nil)

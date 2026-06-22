@@ -46,24 +46,24 @@ func propertyListSerializationAdopt(id objc.ID) *PropertyListSerialization {
 }
 
 // Description returns the object's -description text.
-func (x *PropertyListSerialization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pls *PropertyListSerialization) Description() string {
+	return rt.Description(objref.IDOf(pls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PropertyListSerialization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pls *PropertyListSerialization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PropertyListSerialization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pls *PropertyListSerialization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PropertyListSerialization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pls *PropertyListSerialization) String() string {
+	return rt.Description(objref.IDOf(pls))
 }
 
 // NewPropertyListSerialization creates a new PropertyListSerialization.
@@ -73,15 +73,7 @@ func NewPropertyListSerialization() *PropertyListSerialization {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PropertyListSerialization) WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (pls *PropertyListSerialization) WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization {
+	objc.Send[objc.ID](objref.IDOf(pls), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return pls
 }
-
-// PropertyListSerializationable is the interface implemented by [PropertyListSerialization], for mocking and DI.
-type PropertyListSerializationable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization
-}
-
-var _ PropertyListSerializationable = (*PropertyListSerialization)(nil)

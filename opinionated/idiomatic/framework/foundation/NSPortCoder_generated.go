@@ -54,57 +54,43 @@ func NewPortCoderWithReceivePortSendPortComponents(rcvPort *Port, sndPort *Port,
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PortCoder) WithScriptingProperties(scriptingProperties obj.Object) *PortCoder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (pc *PortCoder) WithScriptingProperties(scriptingProperties obj.Object) *PortCoder {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return pc
 }
 
-// IsBycopy returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
-func (x *PortCoder) IsBycopy() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBycopy"))
+// IsBycopy reports whether returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
+func (pc *PortCoder) IsBycopy() bool {
+	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("isBycopy"))
 	return _r
 }
 
-// IsByref returns a Boolean value that indicates whether the receiver is encoding an object by reference.
-func (x *PortCoder) IsByref() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isByref"))
+// IsByref reports whether returns a Boolean value that indicates whether the receiver is encoding an object by reference.
+func (pc *PortCoder) IsByref() bool {
+	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("isByref"))
 	return _r
 }
 
 // EncodePortObject encodes a given port so it can be properly reconstituted in the receiving process or thread.
-func (x *PortCoder) EncodePortObject(aport *Port) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodePortObject:"), objref.IDOf(aport))
+func (pc *PortCoder) EncodePortObject(aport *Port) {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("encodePortObject:"), objref.IDOf(aport))
 }
 
-// DecodePortObject decodes and returns an NSPort object that was previously encoded with any of the general encode...Object: messages.
-func (x *PortCoder) DecodePortObject() *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodePortObject"))
+// DecodePortObject returns decodes and returns an NSPort object that was previously encoded with any of the general encode...Object: messages.
+func (pc *PortCoder) DecodePortObject() *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("decodePortObject"))
 	return PortFromID(_r)
 }
 
 // Connection returns the NSConnection object that uses the receiver.
-func (x *PortCoder) Connection() *Connection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
+func (pc *PortCoder) Connection() *Connection {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("connection"))
 	return ConnectionFromID(_r)
 }
 
 // Dispatch processes and acts upon the distributed object message with which the receiver was initialized.
-func (x *PortCoder) Dispatch() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatch"))
+func (pc *PortCoder) Dispatch() {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("dispatch"))
 }
-
-// PortCoderable is the interface implemented by [PortCoder], for mocking and DI.
-type PortCoderable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *PortCoder
-	IsBycopy() bool
-	IsByref() bool
-	EncodePortObject(aport *Port)
-	DecodePortObject() *Port
-	Connection() *Connection
-	Dispatch()
-}
-
-var _ PortCoderable = (*PortCoder)(nil)
 
 var _ CoderProvider = (*PortCoder)(nil)

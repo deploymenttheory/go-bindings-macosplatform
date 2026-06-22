@@ -6,10 +6,10 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,104 +61,94 @@ func NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete(rec
 	return modifyRecordZonesOperationAdopt(_id)
 }
 
-// WithRecordZonesToSave the record zones to save to the database.
-func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*RecordZone) *ModifyRecordZonesOperation {
+// WithRecordZonesToSave sets the record zones to save to the database.
+func (mrzo *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*RecordZone) *ModifyRecordZonesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZone) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZonesToSave:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setRecordZonesToSave:"), _arr)
+	return mrzo
 }
 
-// WithRecordZoneIDsToDelete the IDs of the record zones to delete permanently from the database.
-func (x *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*RecordZoneID) *ModifyRecordZonesOperation {
+// WithRecordZoneIDsToDelete sets the IDs of the record zones to delete permanently from the database.
+func (mrzo *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*RecordZoneID) *ModifyRecordZonesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDsToDelete:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setRecordZoneIDsToDelete:"), _arr)
+	return mrzo
 }
 
-// WithDatabase the database that the operation uses.
-func (x *ModifyRecordZonesOperation) WithDatabase(database *Database) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (mrzo *ModifyRecordZonesOperation) WithDatabase(database *Database) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return mrzo
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *ModifyRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (mrzo *ModifyRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return mrzo
 }
 
-// WithGroup the operation’s group.
-func (x *ModifyRecordZonesOperation) WithGroup(group *OperationGroup) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (mrzo *ModifyRecordZonesOperation) WithGroup(group *OperationGroup) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return mrzo
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *ModifyRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (mrzo *ModifyRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return mrzo
 }
 
-// WithContainer the operation's container.
-func (x *ModifyRecordZonesOperation) WithContainer(container *Container) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (mrzo *ModifyRecordZonesOperation) WithContainer(container *Container) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return mrzo
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *ModifyRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (mrzo *ModifyRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return mrzo
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *ModifyRecordZonesOperation) WithLongLived(longLived bool) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (mrzo *ModifyRecordZonesOperation) WithLongLived(longLived bool) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setLongLived:"), longLived)
+	return mrzo
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (mrzo *ModifyRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return mrzo
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (mrzo *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return mrzo
 }
 
-// RecordZonesToSave the record zones to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// RecordZonesToSave returns the record zones to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
 //
 // RecordZonesToSave returns the collection as a Go slice.
-func (x *ModifyRecordZonesOperation) RecordZonesToSave() []*RecordZone {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZonesToSave"))
+func (mrzo *ModifyRecordZonesOperation) RecordZonesToSave() []*RecordZone {
+	_arr := objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("recordZonesToSave"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
 
-// SetRecordZonesToSave wraps the corresponding Objective-C method.
-func (x *ModifyRecordZonesOperation) SetRecordZonesToSave(recordZonesToSave []*RecordZone) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZonesToSave:"), purego.SliceToNSArray(recordZonesToSave, func(_v *RecordZone) objc.ID { return objref.IDOf(_v) }))
-}
-
-// RecordZoneIDsToDelete the IDs of the record zones to delete permanently from the database. The initial value of the property is the array of zone IDs that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// RecordZoneIDsToDelete returns the IDs of the record zones to delete permanently from the database. The initial value of the property is the array of zone IDs that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
 //
 // RecordZoneIDsToDelete returns the collection as a Go slice.
-func (x *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneIDsToDelete"))
+func (mrzo *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID {
+	_arr := objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("recordZoneIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
-}
-
-// SetRecordZoneIDsToDelete wraps the corresponding Objective-C method.
-func (x *ModifyRecordZonesOperation) SetRecordZoneIDsToDelete(recordZoneIDsToDelete []*RecordZoneID) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDsToDelete:"), purego.SliceToNSArray(recordZoneIDsToDelete, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetPerRecordZoneDeleteBlock wraps the corresponding Objective-C method.
 //
 // SetPerRecordZoneDeleteBlock blocks until the operation completes or ctx is cancelled.
-func (x *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Context) (result *RecordZoneID, err error) {
+func (mrzo *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Context) (result *RecordZoneID, err error) {
 	type _result struct {
 		val *RecordZoneID
 		err error
@@ -170,7 +160,7 @@ func (x *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Con
 		_o.val = RecordZoneIDFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordZoneDeleteBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setPerRecordZoneDeleteBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -179,29 +169,6 @@ func (x *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Con
 		return _zero, ctx.Err()
 	}
 }
-
-// ModifyRecordZonesOperationable is the interface implemented by [ModifyRecordZonesOperation], for mocking and DI.
-type ModifyRecordZonesOperationable interface {
-	obj.Object
-	WithRecordZonesToSave(items ...*RecordZone) *ModifyRecordZonesOperation
-	WithRecordZoneIDsToDelete(items ...*RecordZoneID) *ModifyRecordZonesOperation
-	WithDatabase(database *Database) *ModifyRecordZonesOperation
-	WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation
-	WithGroup(group *OperationGroup) *ModifyRecordZonesOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation
-	WithContainer(container *Container) *ModifyRecordZonesOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation
-	WithLongLived(longLived bool) *ModifyRecordZonesOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation
-	RecordZonesToSave() []*RecordZone
-	SetRecordZonesToSave(recordZonesToSave []*RecordZone)
-	RecordZoneIDsToDelete() []*RecordZoneID
-	SetRecordZoneIDsToDelete(recordZoneIDsToDelete []*RecordZoneID)
-	SetPerRecordZoneDeleteBlock(ctx context.Context) (*RecordZoneID, error)
-}
-
-var _ ModifyRecordZonesOperationable = (*ModifyRecordZonesOperation)(nil)
 
 var _ DatabaseOperationProvider = (*ModifyRecordZonesOperation)(nil)
 

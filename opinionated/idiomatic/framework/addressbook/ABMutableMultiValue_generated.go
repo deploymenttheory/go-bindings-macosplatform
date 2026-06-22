@@ -53,8 +53,8 @@ func NewMutableMultiValue() *MutableMultiValue {
 }
 
 // AddValueWithLabel adds a value and its label to a multivalue list.
-func (x *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addValue:withLabel:"), objref.IDOf(value), purego.NSString(label))
+func (mmv *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmv), objc.RegisterName("addValue:withLabel:"), objref.IDOf(value), purego.NSString(label))
 	if _r == 0 {
 		return ""
 	}
@@ -62,8 +62,8 @@ func (x *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) st
 }
 
 // InsertValueWithLabelAtIndex inserts a value and its label at the given index in a multivalue list.
-func (x *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, label string, index int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertValue:withLabel:atIndex:"), objref.IDOf(value), purego.NSString(label), index)
+func (mmv *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, label string, index int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmv), objc.RegisterName("insertValue:withLabel:atIndex:"), objref.IDOf(value), purego.NSString(label), index)
 	if _r == 0 {
 		return ""
 	}
@@ -71,40 +71,27 @@ func (x *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, label 
 }
 
 // RemoveValueAndLabelAtIndex removes the value and label at the given index.
-func (x *MutableMultiValue) RemoveValueAndLabelAtIndex(index int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValueAndLabelAtIndex:"), index)
+func (mmv *MutableMultiValue) RemoveValueAndLabelAtIndex(index int) bool {
+	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("removeValueAndLabelAtIndex:"), index)
 	return _r
 }
 
 // ReplaceValueAtIndexWithValue replaces the value at the given index.
-func (x *MutableMultiValue) ReplaceValueAtIndexWithValue(index int, value obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replaceValueAtIndex:withValue:"), index, objref.IDOf(value))
+func (mmv *MutableMultiValue) ReplaceValueAtIndexWithValue(index int, value obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("replaceValueAtIndex:withValue:"), index, objref.IDOf(value))
 	return _r
 }
 
 // ReplaceLabelAtIndexWithLabel replaces the label at the given index.
-func (x *MutableMultiValue) ReplaceLabelAtIndexWithLabel(index int, label string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replaceLabelAtIndex:withLabel:"), index, purego.NSString(label))
+func (mmv *MutableMultiValue) ReplaceLabelAtIndexWithLabel(index int, label string) bool {
+	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("replaceLabelAtIndex:withLabel:"), index, purego.NSString(label))
 	return _r
 }
 
 // SetPrimaryIdentifier sets the primary value to be the value for the given identifier.
-func (x *MutableMultiValue) SetPrimaryIdentifier(identifier string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPrimaryIdentifier:"), purego.NSString(identifier))
+func (mmv *MutableMultiValue) SetPrimaryIdentifier(identifier string) bool {
+	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("setPrimaryIdentifier:"), purego.NSString(identifier))
 	return _r
 }
-
-// MutableMultiValueable is the interface implemented by [MutableMultiValue], for mocking and DI.
-type MutableMultiValueable interface {
-	obj.Object
-	AddValueWithLabel(value obj.Object, label string) string
-	InsertValueWithLabelAtIndex(value obj.Object, label string, index int) string
-	RemoveValueAndLabelAtIndex(index int) bool
-	ReplaceValueAtIndexWithValue(index int, value obj.Object) bool
-	ReplaceLabelAtIndexWithLabel(index int, label string) bool
-	SetPrimaryIdentifier(identifier string) bool
-}
-
-var _ MutableMultiValueable = (*MutableMultiValue)(nil)
 
 var _ MultiValueProvider = (*MutableMultiValue)(nil)

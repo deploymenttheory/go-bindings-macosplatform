@@ -46,24 +46,24 @@ func textAttachmentViewProviderAdopt(id objc.ID) *TextAttachmentViewProvider {
 }
 
 // Description returns the object's -description text.
-func (x *TextAttachmentViewProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tavp *TextAttachmentViewProvider) Description() string {
+	return rt.Description(objref.IDOf(tavp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextAttachmentViewProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tavp *TextAttachmentViewProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tavp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextAttachmentViewProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tavp *TextAttachmentViewProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tavp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextAttachmentViewProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tavp *TextAttachmentViewProvider) String() string {
+	return rt.Description(objref.IDOf(tavp))
 }
 
 // NewTextAttachmentViewProvider creates a new TextAttachmentViewProvider.
@@ -72,69 +72,43 @@ func NewTextAttachmentViewProvider() *TextAttachmentViewProvider {
 	return textAttachmentViewProviderAdopt(_id)
 }
 
-// WithView the text attachment’s view.
-func (x *TextAttachmentViewProvider) WithView(view ViewProvider) *TextAttachmentViewProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets the text attachment’s view.
+func (tavp *TextAttachmentViewProvider) WithView(view ViewProvider) *TextAttachmentViewProvider {
+	objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("setView:"), objref.IDOf(view))
+	return tavp
 }
 
-// WithTracksTextAttachmentViewBounds a Boolean value that determines the text attachment’s bounds policy.
-func (x *TextAttachmentViewProvider) WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTracksTextAttachmentViewBounds:"), tracksTextAttachmentViewBounds)
-	return x
+// WithTracksTextAttachmentViewBounds sets a Boolean value that determines the text attachment’s bounds policy.
+func (tavp *TextAttachmentViewProvider) WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider {
+	objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("setTracksTextAttachmentViewBounds:"), tracksTextAttachmentViewBounds)
+	return tavp
 }
 
 // LoadView draws the custom view hierarchy that text attachment view subclasses implement.
-func (x *TextAttachmentViewProvider) LoadView() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadView"))
+func (tavp *TextAttachmentViewProvider) LoadView() {
+	objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("loadView"))
 }
 
 // TextAttachment wraps the corresponding Objective-C method.
-func (x *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttachment"))
+func (tavp *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
+	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textAttachment"))
 	return TextAttachmentFromID(_r)
 }
 
 // TextLayoutManager wraps the corresponding Objective-C method.
-func (x *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
+func (tavp *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
+	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // View wraps the corresponding Objective-C method.
-func (x *TextAttachmentViewProvider) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (tavp *TextAttachmentViewProvider) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// SetView wraps the corresponding Objective-C method.
-func (x *TextAttachmentViewProvider) SetView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-}
-
 // TracksTextAttachmentViewBounds wraps the corresponding Objective-C method.
-func (x *TextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tracksTextAttachmentViewBounds"))
+func (tavp *TextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
+	_r := objc.Send[bool](objref.IDOf(tavp), objc.RegisterName("tracksTextAttachmentViewBounds"))
 	return _r
 }
-
-// SetTracksTextAttachmentViewBounds wraps the corresponding Objective-C method.
-func (x *TextAttachmentViewProvider) SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTracksTextAttachmentViewBounds:"), tracksTextAttachmentViewBounds)
-}
-
-// TextAttachmentViewProviderable is the interface implemented by [TextAttachmentViewProvider], for mocking and DI.
-type TextAttachmentViewProviderable interface {
-	obj.Object
-	WithView(view ViewProvider) *TextAttachmentViewProvider
-	WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider
-	LoadView()
-	TextAttachment() *TextAttachment
-	TextLayoutManager() *TextLayoutManager
-	View() *View
-	SetView(view *View)
-	TracksTextAttachmentViewBounds() bool
-	SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool)
-}
-
-var _ TextAttachmentViewProviderable = (*TextAttachmentViewProvider)(nil)

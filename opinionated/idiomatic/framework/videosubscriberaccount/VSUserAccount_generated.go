@@ -46,24 +46,24 @@ func vSUserAccountAdopt(id objc.ID) *VSUserAccount {
 }
 
 // Description returns the object's -description text.
-func (x *VSUserAccount) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vua *VSUserAccount) Description() string {
+	return rt.Description(objref.IDOf(vua))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSUserAccount) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vua *VSUserAccount) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vua), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSUserAccount) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vua *VSUserAccount) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vua), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSUserAccount) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vua *VSUserAccount) String() string {
+	return rt.Description(objref.IDOf(vua))
 }
 
 // NewVSUserAccountWithAccountTypeUpdateURL creates a new VSUserAccount.
@@ -74,257 +74,160 @@ func NewVSUserAccountWithAccountTypeUpdateURL(accountType VSUserAccountType, url
 }
 
 // WithUpdateURL sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithUpdateURL(updateURL string) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateURL:"), rt.FileURL(updateURL))
-	return x
+func (vua *VSUserAccount) WithUpdateURL(updateURL string) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setUpdateURL:"), rt.FileURL(updateURL))
+	return vua
 }
 
 // WithRequiresSystemTrust sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithRequiresSystemTrust(requiresSystemTrust bool) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSystemTrust:"), requiresSystemTrust)
-	return x
+func (vua *VSUserAccount) WithRequiresSystemTrust(requiresSystemTrust bool) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setRequiresSystemTrust:"), requiresSystemTrust)
+	return vua
 }
 
 // WithAccountProviderIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithAccountProviderIdentifier(accountProviderIdentifier string) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountProviderIdentifier:"), purego.NSString(accountProviderIdentifier))
-	return x
+func (vua *VSUserAccount) WithAccountProviderIdentifier(accountProviderIdentifier string) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAccountProviderIdentifier:"), purego.NSString(accountProviderIdentifier))
+	return vua
 }
 
 // WithIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithIdentifier(identifier string) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-	return x
+func (vua *VSUserAccount) WithIdentifier(identifier string) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
+	return vua
 }
 
 // WithAccountType sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithAccountType(accountType VSUserAccountType) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountType:"), accountType)
-	return x
+func (vua *VSUserAccount) WithAccountType(accountType VSUserAccountType) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAccountType:"), accountType)
+	return vua
 }
 
 // WithSignedOut sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithSignedOut(signedOut bool) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignedOut:"), signedOut)
-	return x
+func (vua *VSUserAccount) WithSignedOut(signedOut bool) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setSignedOut:"), signedOut)
+	return vua
 }
 
 // WithSubscriptionBillingCycleEndDate sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithSubscriptionBillingCycleEndDate(subscriptionBillingCycleEndDate obj.Object) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionBillingCycleEndDate:"), objref.IDOf(subscriptionBillingCycleEndDate))
-	return x
+func (vua *VSUserAccount) WithSubscriptionBillingCycleEndDate(subscriptionBillingCycleEndDate obj.Object) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setSubscriptionBillingCycleEndDate:"), objref.IDOf(subscriptionBillingCycleEndDate))
+	return vua
 }
 
 // WithTierIdentifiers sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithTierIdentifiers(items ...obj.Object) *VSUserAccount {
+func (vua *VSUserAccount) WithTierIdentifiers(items ...obj.Object) *VSUserAccount {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTierIdentifiers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setTierIdentifiers:"), _arr)
+	return vua
 }
 
 // WithBillingIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithBillingIdentifier(billingIdentifier string) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingIdentifier:"), purego.NSString(billingIdentifier))
-	return x
+func (vua *VSUserAccount) WithBillingIdentifier(billingIdentifier string) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setBillingIdentifier:"), purego.NSString(billingIdentifier))
+	return vua
 }
 
 // WithAuthenticationData sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithAuthenticationData(authenticationData string) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationData:"), purego.NSString(authenticationData))
-	return x
+func (vua *VSUserAccount) WithAuthenticationData(authenticationData string) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAuthenticationData:"), purego.NSString(authenticationData))
+	return vua
 }
 
 // WithAppleSubscription sets the property and returns the receiver so calls can be chained.
-func (x *VSUserAccount) WithAppleSubscription(appleSubscription *VSAppleSubscription) *VSUserAccount {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleSubscription:"), objref.IDOf(appleSubscription))
-	return x
+func (vua *VSUserAccount) WithAppleSubscription(appleSubscription *VSAppleSubscription) *VSUserAccount {
+	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAppleSubscription:"), objref.IDOf(appleSubscription))
+	return vua
 }
 
 // UpdateURL wraps the corresponding Objective-C method.
-func (x *VSUserAccount) UpdateURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateURL"))
+func (vua *VSUserAccount) UpdateURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("updateURL"))
 	return obj.Wrap(_r)
-}
-
-// SetUpdateURL wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetUpdateURL(updateURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateURL:"), rt.FileURL(updateURL))
 }
 
 // RequiresSystemTrust wraps the corresponding Objective-C method.
-func (x *VSUserAccount) RequiresSystemTrust() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresSystemTrust"))
+func (vua *VSUserAccount) RequiresSystemTrust() bool {
+	_r := objc.Send[bool](objref.IDOf(vua), objc.RegisterName("requiresSystemTrust"))
 	return _r
-}
-
-// SetRequiresSystemTrust wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetRequiresSystemTrust(requiresSystemTrust bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSystemTrust:"), requiresSystemTrust)
 }
 
 // AccountProviderIdentifier wraps the corresponding Objective-C method.
-func (x *VSUserAccount) AccountProviderIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountProviderIdentifier"))
+func (vua *VSUserAccount) AccountProviderIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("accountProviderIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAccountProviderIdentifier wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetAccountProviderIdentifier(accountProviderIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountProviderIdentifier:"), purego.NSString(accountProviderIdentifier))
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *VSUserAccount) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (vua *VSUserAccount) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetIdentifier wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetIdentifier(identifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-}
-
 // AccountType wraps the corresponding Objective-C method.
-func (x *VSUserAccount) AccountType() VSUserAccountType {
-	_r := objc.Send[VSUserAccountType](objref.IDOf(x), objc.RegisterName("accountType"))
+func (vua *VSUserAccount) AccountType() VSUserAccountType {
+	_r := objc.Send[VSUserAccountType](objref.IDOf(vua), objc.RegisterName("accountType"))
 	return _r
-}
-
-// SetAccountType wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetAccountType(accountType VSUserAccountType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountType:"), accountType)
 }
 
 // IsSignedOut wraps the corresponding Objective-C method.
-func (x *VSUserAccount) IsSignedOut() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSignedOut"))
+func (vua *VSUserAccount) IsSignedOut() bool {
+	_r := objc.Send[bool](objref.IDOf(vua), objc.RegisterName("isSignedOut"))
 	return _r
 }
 
-// SetSignedOut wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetSignedOut(signedOut bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignedOut:"), signedOut)
-}
-
 // SubscriptionBillingCycleEndDate wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SubscriptionBillingCycleEndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionBillingCycleEndDate"))
+func (vua *VSUserAccount) SubscriptionBillingCycleEndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("subscriptionBillingCycleEndDate"))
 	return obj.Wrap(_r)
-}
-
-// SetSubscriptionBillingCycleEndDate wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetSubscriptionBillingCycleEndDate(subscriptionBillingCycleEndDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionBillingCycleEndDate:"), objref.IDOf(subscriptionBillingCycleEndDate))
 }
 
 // TierIdentifiers wraps the corresponding Objective-C method.
 //
 // TierIdentifiers returns the collection as a Go slice.
-func (x *VSUserAccount) TierIdentifiers() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tierIdentifiers"))
+func (vua *VSUserAccount) TierIdentifiers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("tierIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetTierIdentifiers wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetTierIdentifiers(tierIdentifiers []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTierIdentifiers:"), purego.SliceToNSArray(tierIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
 // BillingIdentifier wraps the corresponding Objective-C method.
-func (x *VSUserAccount) BillingIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingIdentifier"))
+func (vua *VSUserAccount) BillingIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("billingIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetBillingIdentifier wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetBillingIdentifier(billingIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingIdentifier:"), purego.NSString(billingIdentifier))
 }
 
 // AuthenticationData wraps the corresponding Objective-C method.
-func (x *VSUserAccount) AuthenticationData() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationData"))
+func (vua *VSUserAccount) AuthenticationData() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("authenticationData"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetAuthenticationData wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetAuthenticationData(authenticationData string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationData:"), purego.NSString(authenticationData))
-}
-
 // IsFromCurrentDevice wraps the corresponding Objective-C method.
-func (x *VSUserAccount) IsFromCurrentDevice() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFromCurrentDevice"))
+func (vua *VSUserAccount) IsFromCurrentDevice() bool {
+	_r := objc.Send[bool](objref.IDOf(vua), objc.RegisterName("isFromCurrentDevice"))
 	return _r
 }
 
 // DeviceCategory wraps the corresponding Objective-C method.
-func (x *VSUserAccount) DeviceCategory() VSOriginatingDeviceCategory {
-	_r := objc.Send[VSOriginatingDeviceCategory](objref.IDOf(x), objc.RegisterName("deviceCategory"))
+func (vua *VSUserAccount) DeviceCategory() VSOriginatingDeviceCategory {
+	_r := objc.Send[VSOriginatingDeviceCategory](objref.IDOf(vua), objc.RegisterName("deviceCategory"))
 	return _r
 }
 
 // AppleSubscription wraps the corresponding Objective-C method.
-func (x *VSUserAccount) AppleSubscription() *VSAppleSubscription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleSubscription"))
+func (vua *VSUserAccount) AppleSubscription() *VSAppleSubscription {
+	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("appleSubscription"))
 	return VSAppleSubscriptionFromID(_r)
 }
-
-// SetAppleSubscription wraps the corresponding Objective-C method.
-func (x *VSUserAccount) SetAppleSubscription(appleSubscription *VSAppleSubscription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleSubscription:"), objref.IDOf(appleSubscription))
-}
-
-// VSUserAccountable is the interface implemented by [VSUserAccount], for mocking and DI.
-type VSUserAccountable interface {
-	obj.Object
-	WithUpdateURL(updateURL string) *VSUserAccount
-	WithRequiresSystemTrust(requiresSystemTrust bool) *VSUserAccount
-	WithAccountProviderIdentifier(accountProviderIdentifier string) *VSUserAccount
-	WithIdentifier(identifier string) *VSUserAccount
-	WithAccountType(accountType VSUserAccountType) *VSUserAccount
-	WithSignedOut(signedOut bool) *VSUserAccount
-	WithSubscriptionBillingCycleEndDate(subscriptionBillingCycleEndDate obj.Object) *VSUserAccount
-	WithTierIdentifiers(items ...obj.Object) *VSUserAccount
-	WithBillingIdentifier(billingIdentifier string) *VSUserAccount
-	WithAuthenticationData(authenticationData string) *VSUserAccount
-	WithAppleSubscription(appleSubscription *VSAppleSubscription) *VSUserAccount
-	UpdateURL() obj.Object
-	SetUpdateURL(updateURL string)
-	RequiresSystemTrust() bool
-	SetRequiresSystemTrust(requiresSystemTrust bool)
-	AccountProviderIdentifier() string
-	SetAccountProviderIdentifier(accountProviderIdentifier string)
-	Identifier() string
-	SetIdentifier(identifier string)
-	AccountType() VSUserAccountType
-	SetAccountType(accountType VSUserAccountType)
-	IsSignedOut() bool
-	SetSignedOut(signedOut bool)
-	SubscriptionBillingCycleEndDate() obj.Object
-	SetSubscriptionBillingCycleEndDate(subscriptionBillingCycleEndDate obj.Object)
-	TierIdentifiers() []string
-	SetTierIdentifiers(tierIdentifiers []string)
-	BillingIdentifier() string
-	SetBillingIdentifier(billingIdentifier string)
-	AuthenticationData() string
-	SetAuthenticationData(authenticationData string)
-	IsFromCurrentDevice() bool
-	DeviceCategory() VSOriginatingDeviceCategory
-	AppleSubscription() *VSAppleSubscription
-	SetAppleSubscription(appleSubscription *VSAppleSubscription)
-}
-
-var _ VSUserAccountable = (*VSUserAccount)(nil)

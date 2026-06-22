@@ -46,24 +46,24 @@ func credentialServiceIdentifierAdopt(id objc.ID) *CredentialServiceIdentifier {
 }
 
 // Description returns the object's -description text.
-func (x *CredentialServiceIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (csi *CredentialServiceIdentifier) Description() string {
+	return rt.Description(objref.IDOf(csi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CredentialServiceIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (csi *CredentialServiceIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(csi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CredentialServiceIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (csi *CredentialServiceIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(csi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CredentialServiceIdentifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (csi *CredentialServiceIdentifier) String() string {
+	return rt.Description(objref.IDOf(csi))
 }
 
 // NewCredentialServiceIdentifierWithIdentifierType initializes a credential service identifier instance.
@@ -80,9 +80,9 @@ func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier stri
 	return credentialServiceIdentifierAdopt(_id)
 }
 
-// DisplayName a user visible name for the identifier. For `app` types it will contain the localized name of the app. For `URL` types it will contain the host name of the URL if it contains a valid host. For `URL` type identifiers that do not contain a valid host and for `domain` type identifiers, this will be equal to `identifier`. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.
-func (x *CredentialServiceIdentifier) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns a user visible name for the identifier. For `app` types it will contain the localized name of the app. For `URL` types it will contain the host name of the URL if it contains a valid host. For `URL` type identifiers that do not contain a valid host and for `domain` type identifiers, this will be equal to `identifier`. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.
+func (csi *CredentialServiceIdentifier) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(csi), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,8 +90,8 @@ func (x *CredentialServiceIdentifier) DisplayName() string {
 }
 
 // Identifier get the identifier.
-func (x *CredentialServiceIdentifier) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (csi *CredentialServiceIdentifier) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(csi), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -99,17 +99,7 @@ func (x *CredentialServiceIdentifier) Identifier() string {
 }
 
 // Type get the service identifier type.
-func (x *CredentialServiceIdentifier) Type() CredentialServiceIdentifierType {
-	_r := objc.Send[CredentialServiceIdentifierType](objref.IDOf(x), objc.RegisterName("type"))
+func (csi *CredentialServiceIdentifier) Type() CredentialServiceIdentifierType {
+	_r := objc.Send[CredentialServiceIdentifierType](objref.IDOf(csi), objc.RegisterName("type"))
 	return _r
 }
-
-// CredentialServiceIdentifierable is the interface implemented by [CredentialServiceIdentifier], for mocking and DI.
-type CredentialServiceIdentifierable interface {
-	obj.Object
-	DisplayName() string
-	Identifier() string
-	Type() CredentialServiceIdentifierType
-}
-
-var _ CredentialServiceIdentifierable = (*CredentialServiceIdentifier)(nil)

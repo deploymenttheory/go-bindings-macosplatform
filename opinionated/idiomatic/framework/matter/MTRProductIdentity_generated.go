@@ -44,24 +44,24 @@ func mTRProductIdentityAdopt(id objc.ID) *MTRProductIdentity {
 }
 
 // Description returns the object's -description text.
-func (x *MTRProductIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpi *MTRProductIdentity) Description() string {
+	return rt.Description(objref.IDOf(mpi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRProductIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpi *MTRProductIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRProductIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpi *MTRProductIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRProductIdentity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpi *MTRProductIdentity) String() string {
+	return rt.Description(objref.IDOf(mpi))
 }
 
 // NewMTRProductIdentityWithVendorIDProductID creates a new MTRProductIdentity.
@@ -72,22 +72,13 @@ func NewMTRProductIdentityWithVendorIDProductID(vendorID obj.Object, productID o
 }
 
 // VendorID wraps the corresponding Objective-C method.
-func (x *MTRProductIdentity) VendorID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+func (mpi *MTRProductIdentity) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mpi), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
 // ProductID wraps the corresponding Objective-C method.
-func (x *MTRProductIdentity) ProductID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+func (mpi *MTRProductIdentity) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mpi), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
-
-// MTRProductIdentityable is the interface implemented by [MTRProductIdentity], for mocking and DI.
-type MTRProductIdentityable interface {
-	obj.Object
-	VendorID() obj.Object
-	ProductID() obj.Object
-}
-
-var _ MTRProductIdentityable = (*MTRProductIdentity)(nil)

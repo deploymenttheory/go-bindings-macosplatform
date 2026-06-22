@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,21 +50,21 @@ func NewEditMessageIntentWithMessageIdentifierEditedContent(messageIdentifier st
 	return editMessageIntentAdopt(_id)
 }
 
-// WithSuggestedInvocationPhrase the intent’s display name.
-func (x *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
-	return x
+// WithSuggestedInvocationPhrase sets the intent’s display name.
+func (emi *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent {
+	objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return emi
 }
 
 // WithDonationMetadata sets the property and returns the receiver so calls can be chained.
-func (x *EditMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
-	return x
+func (emi *EditMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent {
+	objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return emi
 }
 
 // MessageIdentifier wraps the corresponding Objective-C method.
-func (x *EditMessageIntent) MessageIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageIdentifier"))
+func (emi *EditMessageIntent) MessageIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("messageIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -73,23 +72,12 @@ func (x *EditMessageIntent) MessageIdentifier() string {
 }
 
 // EditedContent wraps the corresponding Objective-C method.
-func (x *EditMessageIntent) EditedContent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editedContent"))
+func (emi *EditMessageIntent) EditedContent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("editedContent"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// EditMessageIntentable is the interface implemented by [EditMessageIntent], for mocking and DI.
-type EditMessageIntentable interface {
-	obj.Object
-	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent
-	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent
-	MessageIdentifier() string
-	EditedContent() string
-}
-
-var _ EditMessageIntentable = (*EditMessageIntent)(nil)
 
 var _ IntentProvider = (*EditMessageIntent)(nil)

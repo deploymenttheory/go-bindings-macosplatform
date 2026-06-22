@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,51 +51,28 @@ func NewGraphExecutionDescriptor() *GraphExecutionDescriptor {
 	return graphExecutionDescriptorAdopt(_id)
 }
 
-// WithWaitUntilCompleted the flag that blocks the execution call until the entire execution is complete.
-func (x *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
-	return x
+// WithWaitUntilCompleted sets the flag that blocks the execution call until the entire execution is complete.
+func (ged *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ged), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
+	return ged
 }
 
-// WithCompilationDescriptor the compilation descriptor for the graph.
-func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
-	return x
+// WithCompilationDescriptor sets the compilation descriptor for the graph.
+func (ged *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ged), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
+	return ged
 }
 
-// WaitUntilCompleted the flag that blocks the execution call until the entire execution is complete. Defaults to NO.
-func (x *GraphExecutionDescriptor) WaitUntilCompleted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilCompleted"))
+// WaitUntilCompleted reports whether the flag that blocks the execution call until the entire execution is complete. Defaults to false.
+func (ged *GraphExecutionDescriptor) WaitUntilCompleted() bool {
+	_r := objc.Send[bool](objref.IDOf(ged), objc.RegisterName("waitUntilCompleted"))
 	return _r
 }
 
-// SetWaitUntilCompleted wraps the corresponding Objective-C method.
-func (x *GraphExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
-}
-
-// CompilationDescriptor the compilation descriptor for the graph. Default value is nil.
-func (x *GraphExecutionDescriptor) CompilationDescriptor() *GraphCompilationDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compilationDescriptor"))
+// CompilationDescriptor returns the compilation descriptor for the graph. Default value is nil.
+func (ged *GraphExecutionDescriptor) CompilationDescriptor() *GraphCompilationDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(ged), objc.RegisterName("compilationDescriptor"))
 	return GraphCompilationDescriptorFromID(_r)
 }
-
-// SetCompilationDescriptor the compilation descriptor for the graph. Default value is nil.
-func (x *GraphExecutionDescriptor) SetCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
-}
-
-// GraphExecutionDescriptorable is the interface implemented by [GraphExecutionDescriptor], for mocking and DI.
-type GraphExecutionDescriptorable interface {
-	obj.Object
-	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor
-	WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor
-	WaitUntilCompleted() bool
-	SetWaitUntilCompleted(waitUntilCompleted bool)
-	CompilationDescriptor() *GraphCompilationDescriptor
-	SetCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor)
-}
-
-var _ GraphExecutionDescriptorable = (*GraphExecutionDescriptor)(nil)
 
 var _ GraphObjectProvider = (*GraphExecutionDescriptor)(nil)

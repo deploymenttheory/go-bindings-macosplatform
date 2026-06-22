@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewXHCIController() *XHCIController {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZXHCIController")), objc.RegisterName("new"))
 	return xHCIControllerAdopt(_id)
 }
-
-// XHCIControllerable is the interface implemented by [XHCIController], for mocking and DI.
-type XHCIControllerable interface {
-	obj.Object
-}
-
-var _ XHCIControllerable = (*XHCIController)(nil)
 
 var _ USBControllerProvider = (*XHCIController)(nil)

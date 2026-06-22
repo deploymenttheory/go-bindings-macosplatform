@@ -46,24 +46,24 @@ func diagnosticPayloadAdopt(id objc.ID) *DiagnosticPayload {
 }
 
 // Description returns the object's -description text.
-func (x *DiagnosticPayload) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dp *DiagnosticPayload) Description() string {
+	return rt.Description(objref.IDOf(dp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiagnosticPayload) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dp *DiagnosticPayload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiagnosticPayload) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dp *DiagnosticPayload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DiagnosticPayload) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dp *DiagnosticPayload) String() string {
+	return rt.Description(objref.IDOf(dp))
 }
 
 // NewDiagnosticPayload creates a new DiagnosticPayload.
@@ -73,72 +73,57 @@ func NewDiagnosticPayload() *DiagnosticPayload {
 }
 
 // JSONRepresentation returns the contents of the payload in JSON format.
-func (x *DiagnosticPayload) JSONRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+func (dp *DiagnosticPayload) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // DictionaryRepresentation returns the results of the payload as a dictionary.
-func (x *DiagnosticPayload) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+func (dp *DiagnosticPayload) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// CpuExceptionDiagnostics an array containing CPU exception diagnostics for this application.
+// CPUExceptionDiagnostics returns an array containing CPU exception diagnostics for this application.
 //
-// CpuExceptionDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*CPUExceptionDiagnostic {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cpuExceptionDiagnostics"))
+// CPUExceptionDiagnostics returns the collection as a Go slice.
+func (dp *DiagnosticPayload) CPUExceptionDiagnostics() []*CPUExceptionDiagnostic {
+	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("cpuExceptionDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CPUExceptionDiagnostic { return CPUExceptionDiagnosticFromID(_id) })
 }
 
-// DiskWriteExceptionDiagnostics an array containing disk write exception diagnostics for this application.
+// DiskWriteExceptionDiagnostics returns an array containing disk write exception diagnostics for this application.
 //
 // DiskWriteExceptionDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diskWriteExceptionDiagnostics"))
+func (dp *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic {
+	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("diskWriteExceptionDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DiskWriteExceptionDiagnostic { return DiskWriteExceptionDiagnosticFromID(_id) })
 }
 
-// HangDiagnostics an array containing hang diagnostics for this application.
+// HangDiagnostics returns an array containing hang diagnostics for this application.
 //
 // HangDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hangDiagnostics"))
+func (dp *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
+	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("hangDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HangDiagnostic { return HangDiagnosticFromID(_id) })
 }
 
-// CrashDiagnostics an array containing crash diagnostics for this application.
+// CrashDiagnostics returns an array containing crash diagnostics for this application.
 //
 // CrashDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("crashDiagnostics"))
+func (dp *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
+	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("crashDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CrashDiagnostic { return CrashDiagnosticFromID(_id) })
 }
 
-// TimeStampBegin an NSDate object that indicates the start time for which the payload was generated.
-func (x *DiagnosticPayload) TimeStampBegin() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampBegin"))
+// TimeStampBegin returns an NSDate object that indicates the start time for which the payload was generated.
+func (dp *DiagnosticPayload) TimeStampBegin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("timeStampBegin"))
 	return obj.Wrap(_r)
 }
 
-// TimeStampEnd an NSDate object that indicates the end time for which the payload was generated.
-func (x *DiagnosticPayload) TimeStampEnd() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampEnd"))
+// TimeStampEnd returns an NSDate object that indicates the end time for which the payload was generated.
+func (dp *DiagnosticPayload) TimeStampEnd() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("timeStampEnd"))
 	return obj.Wrap(_r)
 }
-
-// DiagnosticPayloadable is the interface implemented by [DiagnosticPayload], for mocking and DI.
-type DiagnosticPayloadable interface {
-	obj.Object
-	JSONRepresentation() obj.Object
-	DictionaryRepresentation() obj.Object
-	CpuExceptionDiagnostics() []*CPUExceptionDiagnostic
-	DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic
-	HangDiagnostics() []*HangDiagnostic
-	CrashDiagnostics() []*CrashDiagnostic
-	TimeStampBegin() obj.Object
-	TimeStampEnd() obj.Object
-}
-
-var _ DiagnosticPayloadable = (*DiagnosticPayload)(nil)

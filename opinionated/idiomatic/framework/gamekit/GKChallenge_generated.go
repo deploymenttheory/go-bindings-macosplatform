@@ -48,107 +48,91 @@ func challengeAdopt(id objc.ID) *Challenge {
 }
 
 // Description returns the object's -description text.
-func (x *Challenge) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Challenge) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Challenge) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Challenge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Challenge) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Challenge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Challenge) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Challenge) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // Decline declines a challenge that another player issues to the local player.
-func (x *Challenge) Decline() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decline"))
+func (c *Challenge) Decline() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decline"))
 }
 
-// IssuingPlayer the GKPlayer who issued the challenge
-func (x *Challenge) IssuingPlayer() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuingPlayer"))
+// IssuingPlayer returns the GKPlayer who issued the challenge
+func (c *Challenge) IssuingPlayer() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("issuingPlayer"))
 	return PlayerFromID(_r)
 }
 
-// ReceivingPlayer the GKPlayer who has received the challenge
-func (x *Challenge) ReceivingPlayer() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivingPlayer"))
+// ReceivingPlayer returns the GKPlayer who has received the challenge
+func (c *Challenge) ReceivingPlayer() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("receivingPlayer"))
 	return PlayerFromID(_r)
 }
 
-// State current state of the challenge
-func (x *Challenge) State() ChallengeState {
-	_r := objc.Send[ChallengeState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns current state of the challenge
+func (c *Challenge) State() ChallengeState {
+	_r := objc.Send[ChallengeState](objref.IDOf(c), objc.RegisterName("state"))
 	return _r
 }
 
-// IssueDate date the challenge was issued
-func (x *Challenge) IssueDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issueDate"))
+// IssueDate returns date the challenge was issued
+func (c *Challenge) IssueDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("issueDate"))
 	return obj.Wrap(_r)
 }
 
-// CompletionDate date the challenge was completed or aborted
-func (x *Challenge) CompletionDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDate"))
+// CompletionDate returns date the challenge was completed or aborted
+func (c *Challenge) CompletionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("completionDate"))
 	return obj.Wrap(_r)
 }
 
-// Message the message sent to receivers of this challenge
-func (x *Challenge) Message() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
+// Message returns the message sent to receivers of this challenge
+func (c *Challenge) Message() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IssuingPlayerID * This property is obsolete. **
-func (x *Challenge) IssuingPlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuingPlayerID"))
+// IssuingPlayerID returns * This property is obsolete. **
+func (c *Challenge) IssuingPlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("issuingPlayerID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ReceivingPlayerID * This property is obsolete. **
-func (x *Challenge) ReceivingPlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivingPlayerID"))
+// ReceivingPlayerID returns * This property is obsolete. **
+func (c *Challenge) ReceivingPlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("receivingPlayerID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Challengeable is the interface implemented by [Challenge], for mocking and DI.
-type Challengeable interface {
-	obj.Object
-	Decline()
-	IssuingPlayer() *Player
-	ReceivingPlayer() *Player
-	State() ChallengeState
-	IssueDate() obj.Object
-	CompletionDate() obj.Object
-	Message() string
-	IssuingPlayerID() string
-	ReceivingPlayerID() string
-}
-
-var _ Challengeable = (*Challenge)(nil)
 
 // isChallenge marks Challenge — and, by embedding promotion, its
 // subclasses — as a member of the Challenge hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Challenge) isChallenge() {}
+func (c *Challenge) isChallenge() {}
 
 var _ ChallengeProvider = (*Challenge)(nil)

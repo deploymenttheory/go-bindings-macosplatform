@@ -44,24 +44,24 @@ func mTRMessagesClusterPresentMessagesRequestParamsAdopt(id objc.ID) *MTRMessage
 }
 
 // Description returns the object's -description text.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Description() string {
+	return rt.Description(objref.IDOf(mmcpmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmcpmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmcpmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) String() string {
+	return rt.Description(objref.IDOf(mmcpmrp))
 }
 
 // NewMTRMessagesClusterPresentMessagesRequestParams creates a new MTRMessagesClusterPresentMessagesRequestParams.
@@ -71,184 +71,111 @@ func NewMTRMessagesClusterPresentMessagesRequestParams() *MTRMessagesClusterPres
 }
 
 // WithMessageID sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithMessageID(messageID obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
-	return x
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageID(messageID obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+	return mmcpmrp
 }
 
 // WithPriority sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithPriority(priority obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
-	return x
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithPriority(priority obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setPriority:"), objref.IDOf(priority))
+	return mmcpmrp
 }
 
 // WithMessageControl sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithMessageControl(messageControl obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
-	return x
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageControl(messageControl obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
+	return mmcpmrp
 }
 
 // WithStartTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithStartTime(startTime obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
-	return x
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithStartTime(startTime obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
+	return mmcpmrp
 }
 
 // WithDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithDuration(duration obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-	return x
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithDuration(duration obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
+	return mmcpmrp
 }
 
 // WithMessageText sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithMessageText(messageText string) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
-	return x
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageText(messageText string) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
+	return mmcpmrp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mmcpmrp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mmcpmrp
 }
 
 // MessageID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) MessageID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
-}
-
-// SetMessageID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetMessageID(messageID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }
 
 // Priority wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) Priority() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priority"))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Priority() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("priority"))
 	return obj.Wrap(_r)
-}
-
-// SetPriority wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetPriority(priority obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 }
 
 // MessageControl wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) MessageControl() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageControl"))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageControl() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageControl"))
 	return obj.Wrap(_r)
-}
-
-// SetMessageControl wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetMessageControl(messageControl obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 }
 
 // StartTime wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) StartTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
-}
-
-// SetStartTime wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetStartTime(startTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) Duration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// SetDuration wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetDuration(duration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-}
-
 // MessageText wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) MessageText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageText"))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetMessageText wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetMessageText(messageText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
-}
-
 // Responses wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) Responses() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responses"))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Responses() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("responses"))
 	return obj.Wrap(_r)
 }
 
 // SetResponses wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetResponses(responses obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponses:"), objref.IDOf(responses))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) SetResponses(responses obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setResponses:"), objref.IDOf(responses))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterPresentMessagesRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRMessagesClusterPresentMessagesRequestParamsable is the interface implemented by [MTRMessagesClusterPresentMessagesRequestParams], for mocking and DI.
-type MTRMessagesClusterPresentMessagesRequestParamsable interface {
-	obj.Object
-	WithMessageID(messageID obj.Object) *MTRMessagesClusterPresentMessagesRequestParams
-	WithPriority(priority obj.Object) *MTRMessagesClusterPresentMessagesRequestParams
-	WithMessageControl(messageControl obj.Object) *MTRMessagesClusterPresentMessagesRequestParams
-	WithStartTime(startTime obj.Object) *MTRMessagesClusterPresentMessagesRequestParams
-	WithDuration(duration obj.Object) *MTRMessagesClusterPresentMessagesRequestParams
-	WithMessageText(messageText string) *MTRMessagesClusterPresentMessagesRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMessagesClusterPresentMessagesRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMessagesClusterPresentMessagesRequestParams
-	MessageID() obj.Object
-	SetMessageID(messageID obj.Object)
-	Priority() obj.Object
-	SetPriority(priority obj.Object)
-	MessageControl() obj.Object
-	SetMessageControl(messageControl obj.Object)
-	StartTime() obj.Object
-	SetStartTime(startTime obj.Object)
-	Duration() obj.Object
-	SetDuration(duration obj.Object)
-	MessageText() string
-	SetMessageText(messageText string)
-	Responses() obj.Object
-	SetResponses(responses obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRMessagesClusterPresentMessagesRequestParamsable = (*MTRMessagesClusterPresentMessagesRequestParams)(nil)

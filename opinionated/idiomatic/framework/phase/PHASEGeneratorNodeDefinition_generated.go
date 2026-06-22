@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,124 +45,81 @@ func generatorNodeDefinitionAdopt(id objc.ID) *GeneratorNodeDefinition {
 	return x
 }
 
-// WithRate a playback speed for the node’s audio.
-func (x *GeneratorNodeDefinition) WithRate(rate float64) *GeneratorNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets a playback speed for the node’s audio.
+func (gnd *GeneratorNodeDefinition) WithRate(rate float64) *GeneratorNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setRate:"), rate)
+	return gnd
 }
 
-// WithGroup a group this node conforms to for gain and rate control.
-func (x *GeneratorNodeDefinition) WithGroup(group *Group) *GeneratorNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets a group this node conforms to for gain and rate control.
+func (gnd *GeneratorNodeDefinition) WithGroup(group *Group) *GeneratorNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return gnd
 }
 
-// WithGainMetaParameterDefinition a meta parameter that dynamically changes the audio’s loudness.
-func (x *GeneratorNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
-	return x
+// WithGainMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s loudness.
+func (gnd *GeneratorNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
+	return gnd
 }
 
-// WithRateMetaParameterDefinition a meta parameter that dynamically changes the audio’s rate.
-func (x *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
-	return x
+// WithRateMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s rate.
+func (gnd *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
+	return gnd
 }
 
 // SetCalibrationModeLevel selects a loudness correction strategy and reference level.
-func (x *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode CalibrationMode, level float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalibrationMode:level:"), calibrationMode, level)
+func (gnd *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode CalibrationMode, level float64) {
+	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setCalibrationMode:level:"), calibrationMode, level)
 }
 
-// CalibrationMode the generator's calibration mode. The default value is PHASECalibrationModeNone.
-func (x *GeneratorNodeDefinition) CalibrationMode() CalibrationMode {
-	_r := objc.Send[CalibrationMode](objref.IDOf(x), objc.RegisterName("calibrationMode"))
+// CalibrationMode returns the generator's calibration mode. The default value is PHASECalibrationModeNone.
+func (gnd *GeneratorNodeDefinition) CalibrationMode() CalibrationMode {
+	_r := objc.Send[CalibrationMode](objref.IDOf(gnd), objc.RegisterName("calibrationMode"))
 	return _r
 }
 
-// Level the generator's level. The default value is 1.
-func (x *GeneratorNodeDefinition) Level() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("level"))
+// Level returns the generator's level. The default value is 1.
+func (gnd *GeneratorNodeDefinition) Level() float64 {
+	_r := objc.Send[float64](objref.IDOf(gnd), objc.RegisterName("level"))
 	return _r
 }
 
-// Rate linear rate scalar.
-func (x *GeneratorNodeDefinition) Rate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns linear rate scalar.
+func (gnd *GeneratorNodeDefinition) Rate() float64 {
+	_r := objc.Send[float64](objref.IDOf(gnd), objc.RegisterName("rate"))
 	return _r
 }
 
-// SetRate wraps the corresponding Objective-C method.
-func (x *GeneratorNodeDefinition) SetRate(rate float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-}
-
-// Group the PHASEGroup object this generator should be associated with for gain and rate control.
-func (x *GeneratorNodeDefinition) Group() *Group {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+// Group returns the PHASEGroup object this generator should be associated with for gain and rate control.
+func (gnd *GeneratorNodeDefinition) Group() *Group {
+	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }
 
-// SetGroup wraps the corresponding Objective-C method.
-func (x *GeneratorNodeDefinition) SetGroup(group *Group) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-}
-
-// GainMetaParameterDefinition optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
-func (x *GeneratorNodeDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameterDefinition"))
+// GainMetaParameterDefinition returns optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+func (gnd *GeneratorNodeDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("gainMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
-// SetGainMetaParameterDefinition wraps the corresponding Objective-C method.
-func (x *GeneratorNodeDefinition) SetGainMetaParameterDefinition(gainMetaParameterDefinition *NumberMetaParameterDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
-}
-
-// RateMetaParameterDefinition optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
-func (x *GeneratorNodeDefinition) RateMetaParameterDefinition() *NumberMetaParameterDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rateMetaParameterDefinition"))
+// RateMetaParameterDefinition returns optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+func (gnd *GeneratorNodeDefinition) RateMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("rateMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
-// SetRateMetaParameterDefinition wraps the corresponding Objective-C method.
-func (x *GeneratorNodeDefinition) SetRateMetaParameterDefinition(rateMetaParameterDefinition *NumberMetaParameterDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
-}
-
-// MixerDefinition the readonly property that returns the PHASEMixerDefinition this generator was created with and assigned to.
-func (x *GeneratorNodeDefinition) MixerDefinition() *MixerDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mixerDefinition"))
+// MixerDefinition returns the readonly property that returns the PHASEMixerDefinition this generator was created with and assigned to.
+func (gnd *GeneratorNodeDefinition) MixerDefinition() *MixerDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("mixerDefinition"))
 	return MixerDefinitionFromID(_r)
 }
-
-// GeneratorNodeDefinitionable is the interface implemented by [GeneratorNodeDefinition], for mocking and DI.
-type GeneratorNodeDefinitionable interface {
-	obj.Object
-	WithRate(rate float64) *GeneratorNodeDefinition
-	WithGroup(group *Group) *GeneratorNodeDefinition
-	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
-	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
-	SetCalibrationModeLevel(calibrationMode CalibrationMode, level float64)
-	CalibrationMode() CalibrationMode
-	Level() float64
-	Rate() float64
-	SetRate(rate float64)
-	Group() *Group
-	SetGroup(group *Group)
-	GainMetaParameterDefinition() *NumberMetaParameterDefinition
-	SetGainMetaParameterDefinition(gainMetaParameterDefinition *NumberMetaParameterDefinition)
-	RateMetaParameterDefinition() *NumberMetaParameterDefinition
-	SetRateMetaParameterDefinition(rateMetaParameterDefinition *NumberMetaParameterDefinition)
-	MixerDefinition() *MixerDefinition
-}
-
-var _ GeneratorNodeDefinitionable = (*GeneratorNodeDefinition)(nil)
 
 // isGeneratorNodeDefinition marks GeneratorNodeDefinition — and, by embedding promotion, its
 // subclasses — as a member of the GeneratorNodeDefinition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GeneratorNodeDefinition) isGeneratorNodeDefinition() {}
+func (gnd *GeneratorNodeDefinition) isGeneratorNodeDefinition() {}
 
 var _ GeneratorNodeDefinitionProvider = (*GeneratorNodeDefinition)(nil)
 

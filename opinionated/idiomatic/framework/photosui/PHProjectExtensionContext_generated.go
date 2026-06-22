@@ -46,24 +46,24 @@ func projectExtensionContextAdopt(id objc.ID) *ProjectExtensionContext {
 }
 
 // Description returns the object's -description text.
-func (x *ProjectExtensionContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pec *ProjectExtensionContext) Description() string {
+	return rt.Description(objref.IDOf(pec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectExtensionContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pec *ProjectExtensionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectExtensionContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pec *ProjectExtensionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProjectExtensionContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pec *ProjectExtensionContext) String() string {
+	return rt.Description(objref.IDOf(pec))
 }
 
 // NewProjectExtensionContext creates a new ProjectExtensionContext.
@@ -73,35 +73,24 @@ func NewProjectExtensionContext() *ProjectExtensionContext {
 }
 
 // ShowEditorForAsset invokes the built-in photo editor for the given asset.
-func (x *ProjectExtensionContext) ShowEditorForAsset(asset obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showEditorForAsset:"), objref.IDOf(asset))
+func (pec *ProjectExtensionContext) ShowEditorForAsset(asset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("showEditorForAsset:"), objref.IDOf(asset))
 }
 
 // UpdatedProjectInfoFromProjectInfoCompletion creates an updated PHProjectInfo instance from existing project information and current assets.
-func (x *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedProjectInfoFromProjectInfo:completion:"), objref.IDOf(existingProjectInfo), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
+func (pec *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("updatedProjectInfoFromProjectInfo:completion:"), objref.IDOf(existingProjectInfo), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }
 
 // PhotoLibrary wraps the corresponding Objective-C method.
-func (x *ProjectExtensionContext) PhotoLibrary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("photoLibrary"))
+func (pec *ProjectExtensionContext) PhotoLibrary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("photoLibrary"))
 	return obj.Wrap(_r)
 }
 
 // Project wraps the corresponding Objective-C method.
-func (x *ProjectExtensionContext) Project() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("project"))
+func (pec *ProjectExtensionContext) Project() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("project"))
 	return obj.Wrap(_r)
 }
-
-// ProjectExtensionContextable is the interface implemented by [ProjectExtensionContext], for mocking and DI.
-type ProjectExtensionContextable interface {
-	obj.Object
-	ShowEditorForAsset(asset obj.Object)
-	UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) obj.Object
-	PhotoLibrary() obj.Object
-	Project() obj.Object
-}
-
-var _ ProjectExtensionContextable = (*ProjectExtensionContext)(nil)

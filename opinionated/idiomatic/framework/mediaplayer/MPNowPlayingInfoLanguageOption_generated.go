@@ -46,24 +46,24 @@ func nowPlayingInfoLanguageOptionAdopt(id objc.ID) *NowPlayingInfoLanguageOption
 }
 
 // Description returns the object's -description text.
-func (x *NowPlayingInfoLanguageOption) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (npilo *NowPlayingInfoLanguageOption) Description() string {
+	return rt.Description(objref.IDOf(npilo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NowPlayingInfoLanguageOption) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (npilo *NowPlayingInfoLanguageOption) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(npilo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NowPlayingInfoLanguageOption) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (npilo *NowPlayingInfoLanguageOption) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(npilo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NowPlayingInfoLanguageOption) String() string {
-	return rt.Description(objref.IDOf(x))
+func (npilo *NowPlayingInfoLanguageOption) String() string {
+	return rt.Description(objref.IDOf(npilo))
 }
 
 // NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier creates a single language option.
@@ -73,69 +73,55 @@ func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNam
 	return nowPlayingInfoLanguageOptionAdopt(_id)
 }
 
-// IsAutomaticLegibleLanguageOption returns a Boolean value that determines whether to use the best legible language option based on the system preferences.
-func (x *NowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticLegibleLanguageOption"))
+// IsAutomaticLegibleLanguageOption reports whether returns a Boolean value that determines whether to use the best legible language option based on the system preferences.
+func (npilo *NowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
+	_r := objc.Send[bool](objref.IDOf(npilo), objc.RegisterName("isAutomaticLegibleLanguageOption"))
 	return _r
 }
 
-// IsAutomaticAudibleLanguageOption returns a Boolean value that determines whether to use the best audible language option based on the system preferences.
-func (x *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticAudibleLanguageOption"))
+// IsAutomaticAudibleLanguageOption reports whether returns a Boolean value that determines whether to use the best audible language option based on the system preferences.
+func (npilo *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
+	_r := objc.Send[bool](objref.IDOf(npilo), objc.RegisterName("isAutomaticAudibleLanguageOption"))
 	return _r
 }
 
-// LanguageOptionType the type of language option.
-func (x *NowPlayingInfoLanguageOption) LanguageOptionType() NowPlayingInfoLanguageOptionType {
-	_r := objc.Send[NowPlayingInfoLanguageOptionType](objref.IDOf(x), objc.RegisterName("languageOptionType"))
+// LanguageOptionType returns the type of language option.
+func (npilo *NowPlayingInfoLanguageOption) LanguageOptionType() NowPlayingInfoLanguageOptionType {
+	_r := objc.Send[NowPlayingInfoLanguageOptionType](objref.IDOf(npilo), objc.RegisterName("languageOptionType"))
 	return _r
 }
 
-// LanguageTag the IETF BCP 47 language tag. A nil languageTag reprsents that this option should be disabled. A languageTag with the value of MPLangaugeOptionAutoLangaugeTag represents that the best langauge based on the system preferences should be used.
-func (x *NowPlayingInfoLanguageOption) LanguageTag() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageTag"))
+// LanguageTag returns the IETF BCP 47 language tag. A nil languageTag reprsents that this option should be disabled. A languageTag with the value of MPLangaugeOptionAutoLangaugeTag represents that the best langauge based on the system preferences should be used.
+func (npilo *NowPlayingInfoLanguageOption) LanguageTag() string {
+	_r := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("languageTag"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LanguageOptionCharacteristics characteristics describing the content of the language options. See the LanguageOptionCharacteristics for the most commonly used values.
+// LanguageOptionCharacteristics returns characteristics describing the content of the language options. See the LanguageOptionCharacteristics for the most commonly used values.
 //
 // LanguageOptionCharacteristics returns the collection as a Go slice.
-func (x *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageOptionCharacteristics"))
+func (npilo *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("languageOptionCharacteristics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DisplayName a user presentable display name for this option.
-func (x *NowPlayingInfoLanguageOption) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns a user presentable display name for this option.
+func (npilo *NowPlayingInfoLanguageOption) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Identifier a unique identifier representing this option.
-func (x *NowPlayingInfoLanguageOption) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a unique identifier representing this option.
+func (npilo *NowPlayingInfoLanguageOption) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// NowPlayingInfoLanguageOptionable is the interface implemented by [NowPlayingInfoLanguageOption], for mocking and DI.
-type NowPlayingInfoLanguageOptionable interface {
-	obj.Object
-	IsAutomaticLegibleLanguageOption() bool
-	IsAutomaticAudibleLanguageOption() bool
-	LanguageOptionType() NowPlayingInfoLanguageOptionType
-	LanguageTag() string
-	LanguageOptionCharacteristics() []string
-	DisplayName() string
-	Identifier() string
-}
-
-var _ NowPlayingInfoLanguageOptionable = (*NowPlayingInfoLanguageOption)(nil)

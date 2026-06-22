@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewTrackTranslationalImageRegistrationRequest() *TrackTranslationalImageReg
 	return trackTranslationalImageRegistrationRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *TrackTranslationalImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackTranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (ttirr *TrackTranslationalImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackTranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(ttirr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return ttirr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *TrackTranslationalImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackTranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (ttirr *TrackTranslationalImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackTranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(ttirr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return ttirr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *TrackTranslationalImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackTranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (ttirr *TrackTranslationalImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackTranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(ttirr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return ttirr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *TrackTranslationalImageRegistrationRequest) WithRevision(revision int) *TrackTranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (ttirr *TrackTranslationalImageRegistrationRequest) WithRevision(revision int) *TrackTranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(ttirr), objc.RegisterName("setRevision:"), revision)
+	return ttirr
 }
-
-// TrackTranslationalImageRegistrationRequestable is the interface implemented by [TrackTranslationalImageRegistrationRequest], for mocking and DI.
-type TrackTranslationalImageRegistrationRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackTranslationalImageRegistrationRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackTranslationalImageRegistrationRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *TrackTranslationalImageRegistrationRequest
-	WithRevision(revision int) *TrackTranslationalImageRegistrationRequest
-}
-
-var _ TrackTranslationalImageRegistrationRequestable = (*TrackTranslationalImageRegistrationRequest)(nil)
 
 var _ StatefulRequestProvider = (*TrackTranslationalImageRegistrationRequest)(nil)
 

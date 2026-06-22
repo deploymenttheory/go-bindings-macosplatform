@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewMatMulLayer() *MatMulLayer {
 	return matMulLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *MatMulLayer) WithLabel(label string) *MatMulLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (mml *MatMulLayer) WithLabel(label string) *MatMulLayer {
+	objc.Send[objc.ID](objref.IDOf(mml), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mml
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *MatMulLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MatMulLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (mml *MatMulLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MatMulLayer {
+	objc.Send[objc.ID](objref.IDOf(mml), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return mml
 }
 
-// Descriptor the matrix multiplication descriptor
-func (x *MatMulLayer) Descriptor() *MatMulDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the matrix multiplication descriptor
+func (mml *MatMulLayer) Descriptor() *MatMulDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mml), objc.RegisterName("descriptor"))
 	return MatMulDescriptorFromID(_r)
 }
-
-// MatMulLayerable is the interface implemented by [MatMulLayer], for mocking and DI.
-type MatMulLayerable interface {
-	obj.Object
-	WithLabel(label string) *MatMulLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *MatMulLayer
-	Descriptor() *MatMulDescriptor
-}
-
-var _ MatMulLayerable = (*MatMulLayer)(nil)
 
 var _ LayerProvider = (*MatMulLayer)(nil)

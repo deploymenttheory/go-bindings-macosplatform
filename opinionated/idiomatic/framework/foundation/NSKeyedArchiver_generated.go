@@ -66,64 +66,39 @@ func NewKeyedArchiverForWritingWithMutableData(data *MutableData) *KeyedArchiver
 	return keyedArchiverAdopt(_id)
 }
 
-// WithOutputFormat the format in which the receiver encodes its data.
-func (x *KeyedArchiver) WithOutputFormat(outputFormat PropertyListFormat) *KeyedArchiver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFormat:"), outputFormat)
-	return x
+// WithOutputFormat sets the format in which the receiver encodes its data.
+func (ka *KeyedArchiver) WithOutputFormat(outputFormat PropertyListFormat) *KeyedArchiver {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setOutputFormat:"), outputFormat)
+	return ka
 }
 
-// WithRequiresSecureCoding indicates whether the archiver requires all archived classes to resist object substitution attacks.
-func (x *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
-	return x
+// WithRequiresSecureCoding sets indicates whether the archiver requires all archived classes to resist object substitution attacks.
+func (ka *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
+	return ka
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *KeyedArchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedArchiver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ka *KeyedArchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedArchiver {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ka
 }
 
 // FinishEncoding instructs the receiver to construct the final data stream.
-func (x *KeyedArchiver) FinishEncoding() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishEncoding"))
+func (ka *KeyedArchiver) FinishEncoding() {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("finishEncoding"))
 }
 
 // OutputFormat wraps the corresponding Objective-C method.
-func (x *KeyedArchiver) OutputFormat() PropertyListFormat {
-	_r := objc.Send[PropertyListFormat](objref.IDOf(x), objc.RegisterName("outputFormat"))
+func (ka *KeyedArchiver) OutputFormat() PropertyListFormat {
+	_r := objc.Send[PropertyListFormat](objref.IDOf(ka), objc.RegisterName("outputFormat"))
 	return _r
 }
 
-// SetOutputFormat wraps the corresponding Objective-C method.
-func (x *KeyedArchiver) SetOutputFormat(outputFormat PropertyListFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFormat:"), outputFormat)
-}
-
-// EncodedData if encoding has not yet finished, then invoking this property will call finishEncoding and return the data. If you initialized the keyed archiver with a specific mutable data instance, then it will be returned from this property after finishEncoding is called.
-func (x *KeyedArchiver) EncodedData() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodedData"))
+// EncodedData returns if encoding has not yet finished, then invoking this property will call finishEncoding and return the data. If you initialized the keyed archiver with a specific mutable data instance, then it will be returned from this property after finishEncoding is called.
+func (ka *KeyedArchiver) EncodedData() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("encodedData"))
 	return DataFromID(_r)
 }
-
-// SetRequiresSecureCoding wraps the corresponding Objective-C method.
-func (x *KeyedArchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
-}
-
-// KeyedArchiverable is the interface implemented by [KeyedArchiver], for mocking and DI.
-type KeyedArchiverable interface {
-	obj.Object
-	WithOutputFormat(outputFormat PropertyListFormat) *KeyedArchiver
-	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver
-	WithScriptingProperties(scriptingProperties obj.Object) *KeyedArchiver
-	FinishEncoding()
-	OutputFormat() PropertyListFormat
-	SetOutputFormat(outputFormat PropertyListFormat)
-	EncodedData() *Data
-	SetRequiresSecureCoding(requiresSecureCoding bool)
-}
-
-var _ KeyedArchiverable = (*KeyedArchiver)(nil)
 
 var _ CoderProvider = (*KeyedArchiver)(nil)

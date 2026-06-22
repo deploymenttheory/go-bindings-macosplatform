@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewArrayIdentity() *ArrayIdentity {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayIdentity")), objc.RegisterName("new"))
 	return arrayIdentityAdopt(_id)
 }
-
-// ArrayIdentityable is the interface implemented by [ArrayIdentity], for mocking and DI.
-type ArrayIdentityable interface {
-	obj.Object
-}
-
-var _ ArrayIdentityable = (*ArrayIdentity)(nil)
 
 var _ ArrayUnaryKernelProvider = (*ArrayIdentity)(nil)
 

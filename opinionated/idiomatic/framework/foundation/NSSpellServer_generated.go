@@ -46,24 +46,24 @@ func spellServerAdopt(id objc.ID) *SpellServer {
 }
 
 // Description returns the object's -description text.
-func (x *SpellServer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpellServer) Description() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpellServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ss *SpellServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpellServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ss *SpellServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpellServer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpellServer) String() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // NewSpellServer creates a new SpellServer.
@@ -73,35 +73,24 @@ func NewSpellServer() *SpellServer {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *SpellServer) WithScriptingProperties(scriptingProperties obj.Object) *SpellServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ss *SpellServer) WithScriptingProperties(scriptingProperties obj.Object) *SpellServer {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ss
 }
 
 // RegisterLanguageByVendor notifies the receiver of a language your spelling checker can check.
-func (x *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerLanguage:byVendor:"), purego.NSString(language), purego.NSString(vendor))
+func (ss *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("registerLanguage:byVendor:"), purego.NSString(language), purego.NSString(vendor))
 	return _r
 }
 
 // IsWordInUserDictionariesCaseSensitive indicates whether a given word is in the user’s list of learned words or the document’s list of words to ignore.
-func (x *SpellServer) IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWordInUserDictionaries:caseSensitive:"), purego.NSString(word), flag)
+func (ss *SpellServer) IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isWordInUserDictionaries:caseSensitive:"), purego.NSString(word), flag)
 	return _r
 }
 
 // Run causes the receiver to start listening for spell-checking requests.
-func (x *SpellServer) Run() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run"))
+func (ss *SpellServer) Run() {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("run"))
 }
-
-// SpellServerable is the interface implemented by [SpellServer], for mocking and DI.
-type SpellServerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *SpellServer
-	RegisterLanguageByVendor(language string, vendor string) bool
-	IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool
-	Run()
-}
-
-var _ SpellServerable = (*SpellServer)(nil)

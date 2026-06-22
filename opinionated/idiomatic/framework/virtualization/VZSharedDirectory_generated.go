@@ -46,24 +46,24 @@ func sharedDirectoryAdopt(id objc.ID) *SharedDirectory {
 }
 
 // Description returns the object's -description text.
-func (x *SharedDirectory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SharedDirectory) Description() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SharedDirectory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sd *SharedDirectory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SharedDirectory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sd *SharedDirectory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SharedDirectory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SharedDirectory) String() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // NewSharedDirectoryWithURLReadOnly initialize with a host directory.
@@ -73,23 +73,14 @@ func NewSharedDirectoryWithURLReadOnly(url string, readOnly bool) *SharedDirecto
 	return sharedDirectoryAdopt(_id)
 }
 
-// URL file URL to a directory on the host to expose to the guest. The URL must point to an existing directory path in the host file system.
-func (x *SharedDirectory) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns file URL to a directory on the host to expose to the guest. The URL must point to an existing directory path in the host file system.
+func (sd *SharedDirectory) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// IsReadOnly whether or not the directory will be exposed as read-only to the guest.
-func (x *SharedDirectory) IsReadOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+// IsReadOnly reports whether the directory will be exposed as read-only to the guest.
+func (sd *SharedDirectory) IsReadOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("isReadOnly"))
 	return _r
 }
-
-// SharedDirectoryable is the interface implemented by [SharedDirectory], for mocking and DI.
-type SharedDirectoryable interface {
-	obj.Object
-	URL() obj.Object
-	IsReadOnly() bool
-}
-
-var _ SharedDirectoryable = (*SharedDirectory)(nil)

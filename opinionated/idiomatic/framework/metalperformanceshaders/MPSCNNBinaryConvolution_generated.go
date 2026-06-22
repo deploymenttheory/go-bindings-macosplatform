@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,73 +47,58 @@ func cNNBinaryConvolutionAdopt(id objc.ID) *CNNBinaryConvolution {
 	return x
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *CNNBinaryConvolution) WithOffset(offset mpscore.MPSOffset) *CNNBinaryConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (cbc *CNNBinaryConvolution) WithOffset(offset mpscore.MPSOffset) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setOffset:"), offset)
+	return cbc
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *CNNBinaryConvolution) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (cbc *CNNBinaryConvolution) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setClipRect:"), clipRect)
+	return cbc
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *CNNBinaryConvolution) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (cbc *CNNBinaryConvolution) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cbc
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNBinaryConvolution) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBinaryConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cbc *CNNBinaryConvolution) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cbc
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNBinaryConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBinaryConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cbc *CNNBinaryConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cbc
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNBinaryConvolution) WithLabel(label string) *CNNBinaryConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cbc *CNNBinaryConvolution) WithLabel(label string) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbc
 }
 
 // InputFeatureChannels wraps the corresponding Objective-C method.
-func (x *CNNBinaryConvolution) InputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+func (cbc *CNNBinaryConvolution) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// OutputFeatureChannels the number of feature channels per pixel in the output image.
-func (x *CNNBinaryConvolution) OutputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+// OutputFeatureChannels returns the number of feature channels per pixel in the output image.
+func (cbc *CNNBinaryConvolution) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
-
-// CNNBinaryConvolutionable is the interface implemented by [CNNBinaryConvolution], for mocking and DI.
-type CNNBinaryConvolutionable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *CNNBinaryConvolution
-	WithClipRect(clipRect metal.MTLRegion) *CNNBinaryConvolution
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryConvolution
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBinaryConvolution
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBinaryConvolution
-	WithLabel(label string) *CNNBinaryConvolution
-	InputFeatureChannels() int
-	OutputFeatureChannels() int
-}
-
-var _ CNNBinaryConvolutionable = (*CNNBinaryConvolution)(nil)
 
 // isCNNBinaryConvolution marks CNNBinaryConvolution — and, by embedding promotion, its
 // subclasses — as a member of the CNNBinaryConvolution hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNBinaryConvolution) isCNNBinaryConvolution() {}
+func (cbc *CNNBinaryConvolution) isCNNBinaryConvolution() {}
 
 var _ CNNBinaryConvolutionProvider = (*CNNBinaryConvolution)(nil)
 

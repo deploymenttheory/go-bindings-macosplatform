@@ -46,24 +46,24 @@ func diffableDataSourceSnapshotAdopt(id objc.ID) *DiffableDataSourceSnapshot {
 }
 
 // Description returns the object's -description text.
-func (x *DiffableDataSourceSnapshot) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ddss *DiffableDataSourceSnapshot) Description() string {
+	return rt.Description(objref.IDOf(ddss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiffableDataSourceSnapshot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ddss *DiffableDataSourceSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ddss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiffableDataSourceSnapshot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ddss *DiffableDataSourceSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ddss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DiffableDataSourceSnapshot) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ddss *DiffableDataSourceSnapshot) String() string {
+	return rt.Description(objref.IDOf(ddss))
 }
 
 // NewDiffableDataSourceSnapshot creates a new DiffableDataSourceSnapshot.
@@ -73,167 +73,135 @@ func NewDiffableDataSourceSnapshot() *DiffableDataSourceSnapshot {
 }
 
 // NumberOfItemsInSection wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) NumberOfItemsInSection(sectionIdentifier obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfItemsInSection:"), objref.IDOf(sectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) NumberOfItemsInSection(sectionIdentifier obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ddss), objc.RegisterName("numberOfItemsInSection:"), objref.IDOf(sectionIdentifier))
 	return _r
 }
 
 // ItemIdentifiersInSectionWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) ItemIdentifiersInSectionWithIdentifier(sectionIdentifier obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifiersInSectionWithIdentifier:"), objref.IDOf(sectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) ItemIdentifiersInSectionWithIdentifier(sectionIdentifier obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("itemIdentifiersInSectionWithIdentifier:"), objref.IDOf(sectionIdentifier))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SectionIdentifierForSectionContainingItemIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) SectionIdentifierForSectionContainingItemIdentifier(itemIdentifier obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionIdentifierForSectionContainingItemIdentifier:"), objref.IDOf(itemIdentifier))
+func (ddss *DiffableDataSourceSnapshot) SectionIdentifierForSectionContainingItemIdentifier(itemIdentifier obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("sectionIdentifierForSectionContainingItemIdentifier:"), objref.IDOf(itemIdentifier))
 	return obj.Wrap(_r)
 }
 
 // IndexOfItemIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) IndexOfItemIdentifier(itemIdentifier obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemIdentifier:"), objref.IDOf(itemIdentifier))
+func (ddss *DiffableDataSourceSnapshot) IndexOfItemIdentifier(itemIdentifier obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ddss), objc.RegisterName("indexOfItemIdentifier:"), objref.IDOf(itemIdentifier))
 	return _r
 }
 
 // IndexOfSectionIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) IndexOfSectionIdentifier(sectionIdentifier obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfSectionIdentifier:"), objref.IDOf(sectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) IndexOfSectionIdentifier(sectionIdentifier obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ddss), objc.RegisterName("indexOfSectionIdentifier:"), objref.IDOf(sectionIdentifier))
 	return _r
 }
 
 // AppendItemsWithIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) AppendItemsWithIdentifiers(identifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendItemsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ddss *DiffableDataSourceSnapshot) AppendItemsWithIdentifiers(identifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("appendItemsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AppendItemsWithIdentifiersIntoSectionWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) AppendItemsWithIdentifiersIntoSectionWithIdentifier(identifiers []obj.Object, sectionIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendItemsWithIdentifiers:intoSectionWithIdentifier:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) AppendItemsWithIdentifiersIntoSectionWithIdentifier(identifiers []obj.Object, sectionIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("appendItemsWithIdentifiers:intoSectionWithIdentifier:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sectionIdentifier))
 }
 
 // InsertItemsWithIdentifiersBeforeItemWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) InsertItemsWithIdentifiersBeforeItemWithIdentifier(identifiers []obj.Object, itemIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItemsWithIdentifiers:beforeItemWithIdentifier:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(itemIdentifier))
+func (ddss *DiffableDataSourceSnapshot) InsertItemsWithIdentifiersBeforeItemWithIdentifier(identifiers []obj.Object, itemIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("insertItemsWithIdentifiers:beforeItemWithIdentifier:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(itemIdentifier))
 }
 
 // InsertItemsWithIdentifiersAfterItemWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) InsertItemsWithIdentifiersAfterItemWithIdentifier(identifiers []obj.Object, itemIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItemsWithIdentifiers:afterItemWithIdentifier:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(itemIdentifier))
+func (ddss *DiffableDataSourceSnapshot) InsertItemsWithIdentifiersAfterItemWithIdentifier(identifiers []obj.Object, itemIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("insertItemsWithIdentifiers:afterItemWithIdentifier:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(itemIdentifier))
 }
 
 // DeleteItemsWithIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) DeleteItemsWithIdentifiers(identifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteItemsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ddss *DiffableDataSourceSnapshot) DeleteItemsWithIdentifiers(identifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("deleteItemsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // DeleteAllItems wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) DeleteAllItems() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteAllItems"))
+func (ddss *DiffableDataSourceSnapshot) DeleteAllItems() {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("deleteAllItems"))
 }
 
 // MoveItemWithIdentifierBeforeItemWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) MoveItemWithIdentifierBeforeItemWithIdentifier(fromIdentifier obj.Object, toIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveItemWithIdentifier:beforeItemWithIdentifier:"), objref.IDOf(fromIdentifier), objref.IDOf(toIdentifier))
+func (ddss *DiffableDataSourceSnapshot) MoveItemWithIdentifierBeforeItemWithIdentifier(fromIdentifier obj.Object, toIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("moveItemWithIdentifier:beforeItemWithIdentifier:"), objref.IDOf(fromIdentifier), objref.IDOf(toIdentifier))
 }
 
 // MoveItemWithIdentifierAfterItemWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) MoveItemWithIdentifierAfterItemWithIdentifier(fromIdentifier obj.Object, toIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveItemWithIdentifier:afterItemWithIdentifier:"), objref.IDOf(fromIdentifier), objref.IDOf(toIdentifier))
+func (ddss *DiffableDataSourceSnapshot) MoveItemWithIdentifierAfterItemWithIdentifier(fromIdentifier obj.Object, toIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("moveItemWithIdentifier:afterItemWithIdentifier:"), objref.IDOf(fromIdentifier), objref.IDOf(toIdentifier))
 }
 
 // ReloadItemsWithIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) ReloadItemsWithIdentifiers(identifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadItemsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ddss *DiffableDataSourceSnapshot) ReloadItemsWithIdentifiers(identifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("reloadItemsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AppendSectionsWithIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) AppendSectionsWithIdentifiers(sectionIdentifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendSectionsWithIdentifiers:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ddss *DiffableDataSourceSnapshot) AppendSectionsWithIdentifiers(sectionIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("appendSectionsWithIdentifiers:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // InsertSectionsWithIdentifiersBeforeSectionWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) InsertSectionsWithIdentifiersBeforeSectionWithIdentifier(sectionIdentifiers []obj.Object, toSectionIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertSectionsWithIdentifiers:beforeSectionWithIdentifier:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(toSectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) InsertSectionsWithIdentifiersBeforeSectionWithIdentifier(sectionIdentifiers []obj.Object, toSectionIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("insertSectionsWithIdentifiers:beforeSectionWithIdentifier:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(toSectionIdentifier))
 }
 
 // InsertSectionsWithIdentifiersAfterSectionWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) InsertSectionsWithIdentifiersAfterSectionWithIdentifier(sectionIdentifiers []obj.Object, toSectionIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertSectionsWithIdentifiers:afterSectionWithIdentifier:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(toSectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) InsertSectionsWithIdentifiersAfterSectionWithIdentifier(sectionIdentifiers []obj.Object, toSectionIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("insertSectionsWithIdentifiers:afterSectionWithIdentifier:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(toSectionIdentifier))
 }
 
 // DeleteSectionsWithIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) DeleteSectionsWithIdentifiers(sectionIdentifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteSectionsWithIdentifiers:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ddss *DiffableDataSourceSnapshot) DeleteSectionsWithIdentifiers(sectionIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("deleteSectionsWithIdentifiers:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MoveSectionWithIdentifierBeforeSectionWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) MoveSectionWithIdentifierBeforeSectionWithIdentifier(fromSectionIdentifier obj.Object, toSectionIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveSectionWithIdentifier:beforeSectionWithIdentifier:"), objref.IDOf(fromSectionIdentifier), objref.IDOf(toSectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) MoveSectionWithIdentifierBeforeSectionWithIdentifier(fromSectionIdentifier obj.Object, toSectionIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("moveSectionWithIdentifier:beforeSectionWithIdentifier:"), objref.IDOf(fromSectionIdentifier), objref.IDOf(toSectionIdentifier))
 }
 
 // MoveSectionWithIdentifierAfterSectionWithIdentifier wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) MoveSectionWithIdentifierAfterSectionWithIdentifier(fromSectionIdentifier obj.Object, toSectionIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveSectionWithIdentifier:afterSectionWithIdentifier:"), objref.IDOf(fromSectionIdentifier), objref.IDOf(toSectionIdentifier))
+func (ddss *DiffableDataSourceSnapshot) MoveSectionWithIdentifierAfterSectionWithIdentifier(fromSectionIdentifier obj.Object, toSectionIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("moveSectionWithIdentifier:afterSectionWithIdentifier:"), objref.IDOf(fromSectionIdentifier), objref.IDOf(toSectionIdentifier))
 }
 
 // ReloadSectionsWithIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) ReloadSectionsWithIdentifiers(sectionIdentifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSectionsWithIdentifiers:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ddss *DiffableDataSourceSnapshot) ReloadSectionsWithIdentifiers(sectionIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("reloadSectionsWithIdentifiers:"), purego.SliceToNSArray(sectionIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // NumberOfItems wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) NumberOfItems() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfItems"))
+func (ddss *DiffableDataSourceSnapshot) NumberOfItems() int {
+	_r := objc.Send[int](objref.IDOf(ddss), objc.RegisterName("numberOfItems"))
 	return _r
 }
 
 // NumberOfSections wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) NumberOfSections() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfSections"))
+func (ddss *DiffableDataSourceSnapshot) NumberOfSections() int {
+	_r := objc.Send[int](objref.IDOf(ddss), objc.RegisterName("numberOfSections"))
 	return _r
 }
 
 // SectionIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) SectionIdentifiers() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionIdentifiers"))
+func (ddss *DiffableDataSourceSnapshot) SectionIdentifiers() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("sectionIdentifiers"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ItemIdentifiers wraps the corresponding Objective-C method.
-func (x *DiffableDataSourceSnapshot) ItemIdentifiers() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifiers"))
+func (ddss *DiffableDataSourceSnapshot) ItemIdentifiers() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ddss), objc.RegisterName("itemIdentifiers"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// DiffableDataSourceSnapshotable is the interface implemented by [DiffableDataSourceSnapshot], for mocking and DI.
-type DiffableDataSourceSnapshotable interface {
-	obj.Object
-	NumberOfItemsInSection(sectionIdentifier obj.Object) int
-	ItemIdentifiersInSectionWithIdentifier(sectionIdentifier obj.Object) []obj.Object
-	SectionIdentifierForSectionContainingItemIdentifier(itemIdentifier obj.Object) obj.Object
-	IndexOfItemIdentifier(itemIdentifier obj.Object) int
-	IndexOfSectionIdentifier(sectionIdentifier obj.Object) int
-	AppendItemsWithIdentifiers(identifiers []obj.Object)
-	AppendItemsWithIdentifiersIntoSectionWithIdentifier(identifiers []obj.Object, sectionIdentifier obj.Object)
-	InsertItemsWithIdentifiersBeforeItemWithIdentifier(identifiers []obj.Object, itemIdentifier obj.Object)
-	InsertItemsWithIdentifiersAfterItemWithIdentifier(identifiers []obj.Object, itemIdentifier obj.Object)
-	DeleteItemsWithIdentifiers(identifiers []obj.Object)
-	DeleteAllItems()
-	MoveItemWithIdentifierBeforeItemWithIdentifier(fromIdentifier obj.Object, toIdentifier obj.Object)
-	MoveItemWithIdentifierAfterItemWithIdentifier(fromIdentifier obj.Object, toIdentifier obj.Object)
-	ReloadItemsWithIdentifiers(identifiers []obj.Object)
-	AppendSectionsWithIdentifiers(sectionIdentifiers []obj.Object)
-	InsertSectionsWithIdentifiersBeforeSectionWithIdentifier(sectionIdentifiers []obj.Object, toSectionIdentifier obj.Object)
-	InsertSectionsWithIdentifiersAfterSectionWithIdentifier(sectionIdentifiers []obj.Object, toSectionIdentifier obj.Object)
-	DeleteSectionsWithIdentifiers(sectionIdentifiers []obj.Object)
-	MoveSectionWithIdentifierBeforeSectionWithIdentifier(fromSectionIdentifier obj.Object, toSectionIdentifier obj.Object)
-	MoveSectionWithIdentifierAfterSectionWithIdentifier(fromSectionIdentifier obj.Object, toSectionIdentifier obj.Object)
-	ReloadSectionsWithIdentifiers(sectionIdentifiers []obj.Object)
-	NumberOfItems() int
-	NumberOfSections() int
-	SectionIdentifiers() []obj.Object
-	ItemIdentifiers() []obj.Object
-}
-
-var _ DiffableDataSourceSnapshotable = (*DiffableDataSourceSnapshot)(nil)

@@ -5,13 +5,14 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostCIControllerStateMachine is an idiomatic wrapper over the Objective-C class IOUSBHostCIControllerStateMachine.
@@ -48,24 +49,24 @@ func hostCIControllerStateMachineAdopt(id objc.ID) *HostCIControllerStateMachine
 }
 
 // Description returns the object's -description text.
-func (x *HostCIControllerStateMachine) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hccsm *HostCIControllerStateMachine) Description() string {
+	return rt.Description(objref.IDOf(hccsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostCIControllerStateMachine) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hccsm *HostCIControllerStateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hccsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostCIControllerStateMachine) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hccsm *HostCIControllerStateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hccsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HostCIControllerStateMachine) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hccsm *HostCIControllerStateMachine) String() string {
+	return rt.Description(objref.IDOf(hccsm))
 }
 
 // NewHostCIControllerStateMachineWithInterfaceError initializes an IOUSBHostCIControllerStateMachine object The IOUSBHostCIControllerStateMachine defaults to the IOUSBHostCIControllerStateOff state.
@@ -80,9 +81,9 @@ func NewHostCIControllerStateMachineWithInterfaceError(interface_ *HostControlle
 }
 
 // EnqueueUpdatedFrameTimestamp enqueue frame and timestamp messages for delivery to the kernel driver If the controller interface is in the IOUSBHostCIControllerStateActive state, messages with the type IOUSBHostCIMessageTypeFrameNumberUpdate and IOUSBHostCIMessageTypeFrameTimestampUpdate will be generated using the provided inputs, and enqueued for delivery to the kernel driver. The frame and timestamp information provided effectively measure the duration of the controller's 1ms frame in terms of system time.  A 1% frame duration variation is permitted.  A larger frame duration variation will result in a IOUSBHostCIExceptionTypeFrameUpdateError.
-func (x *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame uint64, timestamp uint64) error {
+func (hccsm *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame uint64, timestamp uint64) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("enqueueUpdatedFrame:timestamp:error:"), frame, timestamp, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hccsm), objc.RegisterName("enqueueUpdatedFrame:timestamp:error:"), frame, timestamp, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -90,23 +91,13 @@ func (x *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame uint64
 }
 
 // ControllerState wraps the corresponding Objective-C method.
-func (x *HostCIControllerStateMachine) ControllerState() HostCIControllerState {
-	_r := objc.Send[HostCIControllerState](objref.IDOf(x), objc.RegisterName("controllerState"))
+func (hccsm *HostCIControllerStateMachine) ControllerState() HostCIControllerState {
+	_r := objc.Send[HostCIControllerState](objref.IDOf(hccsm), objc.RegisterName("controllerState"))
 	return _r
 }
 
 // ControllerInterface wraps the corresponding Objective-C method.
-func (x *HostCIControllerStateMachine) ControllerInterface() *HostControllerInterface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
+func (hccsm *HostCIControllerStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(hccsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
 }
-
-// HostCIControllerStateMachineable is the interface implemented by [HostCIControllerStateMachine], for mocking and DI.
-type HostCIControllerStateMachineable interface {
-	obj.Object
-	EnqueueUpdatedFrameTimestamp(frame uint64, timestamp uint64) error
-	ControllerState() HostCIControllerState
-	ControllerInterface() *HostControllerInterface
-}
-
-var _ HostCIControllerStateMachineable = (*HostCIControllerStateMachine)(nil)

@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,64 +43,40 @@ func nDArrayMatrixMultiplicationAdopt(id objc.ID) *NDArrayMatrixMultiplication {
 	return x
 }
 
-// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *NDArrayMatrixMultiplication) WithAlpha(alpha float64) *NDArrayMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (namm *NDArrayMatrixMultiplication) WithAlpha(alpha float64) *NDArrayMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(namm), objc.RegisterName("setAlpha:"), alpha)
+	return namm
 }
 
-// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *NDArrayMatrixMultiplication) WithBeta(beta float64) *NDArrayMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (namm *NDArrayMatrixMultiplication) WithBeta(beta float64) *NDArrayMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(namm), objc.RegisterName("setBeta:"), beta)
+	return namm
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayMatrixMultiplication) WithLabel(label string) *NDArrayMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (namm *NDArrayMatrixMultiplication) WithLabel(label string) *NDArrayMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(namm), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return namm
 }
 
-// Alpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *NDArrayMatrixMultiplication) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (namm *NDArrayMatrixMultiplication) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(namm), objc.RegisterName("alpha"))
 	return _r
 }
 
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *NDArrayMatrixMultiplication) SetAlpha(alpha float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// Beta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *NDArrayMatrixMultiplication) Beta() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (namm *NDArrayMatrixMultiplication) Beta() float64 {
+	_r := objc.Send[float64](objref.IDOf(namm), objc.RegisterName("beta"))
 	return _r
 }
-
-// SetBeta wraps the corresponding Objective-C method.
-func (x *NDArrayMatrixMultiplication) SetBeta(beta float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-}
-
-// NDArrayMatrixMultiplicationable is the interface implemented by [NDArrayMatrixMultiplication], for mocking and DI.
-type NDArrayMatrixMultiplicationable interface {
-	obj.Object
-	WithAlpha(alpha float64) *NDArrayMatrixMultiplication
-	WithBeta(beta float64) *NDArrayMatrixMultiplication
-	WithLabel(label string) *NDArrayMatrixMultiplication
-	Alpha() float64
-	SetAlpha(alpha float64)
-	Beta() float64
-	SetBeta(beta float64)
-}
-
-var _ NDArrayMatrixMultiplicationable = (*NDArrayMatrixMultiplication)(nil)
 
 // isNDArrayMatrixMultiplication marks NDArrayMatrixMultiplication — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayMatrixMultiplication hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayMatrixMultiplication) isNDArrayMatrixMultiplication() {}
+func (namm *NDArrayMatrixMultiplication) isNDArrayMatrixMultiplication() {}
 
 var _ NDArrayMatrixMultiplicationProvider = (*NDArrayMatrixMultiplication)(nil)
 

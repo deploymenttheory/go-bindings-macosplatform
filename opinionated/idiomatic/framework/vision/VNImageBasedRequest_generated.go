@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,58 +46,40 @@ func imageBasedRequestAdopt(id objc.ID) *ImageBasedRequest {
 	return x
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *ImageBasedRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageBasedRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (ibr *ImageBasedRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageBasedRequest {
+	objc.Send[objc.ID](objref.IDOf(ibr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return ibr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *ImageBasedRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageBasedRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (ibr *ImageBasedRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageBasedRequest {
+	objc.Send[objc.ID](objref.IDOf(ibr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return ibr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *ImageBasedRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageBasedRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (ibr *ImageBasedRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageBasedRequest {
+	objc.Send[objc.ID](objref.IDOf(ibr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return ibr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *ImageBasedRequest) WithRevision(revision int) *ImageBasedRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (ibr *ImageBasedRequest) WithRevision(revision int) *ImageBasedRequest {
+	objc.Send[objc.ID](objref.IDOf(ibr), objc.RegisterName("setRevision:"), revision)
+	return ibr
 }
 
 // RegionOfInterest wraps the corresponding Objective-C method.
-func (x *ImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("regionOfInterest"))
+func (ibr *ImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ibr), objc.RegisterName("regionOfInterest"))
 	return _r
 }
-
-// SetRegionOfInterest wraps the corresponding Objective-C method.
-func (x *ImageBasedRequest) SetRegionOfInterest(regionOfInterest corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-}
-
-// ImageBasedRequestable is the interface implemented by [ImageBasedRequest], for mocking and DI.
-type ImageBasedRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageBasedRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageBasedRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *ImageBasedRequest
-	WithRevision(revision int) *ImageBasedRequest
-	RegionOfInterest() corefoundation.CGRect
-	SetRegionOfInterest(regionOfInterest corefoundation.CGRect)
-}
-
-var _ ImageBasedRequestable = (*ImageBasedRequest)(nil)
 
 // isImageBasedRequest marks ImageBasedRequest — and, by embedding promotion, its
 // subclasses — as a member of the ImageBasedRequest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageBasedRequest) isImageBasedRequest() {}
+func (ibr *ImageBasedRequest) isImageBasedRequest() {}
 
 var _ ImageBasedRequestProvider = (*ImageBasedRequest)(nil)
 

@@ -44,24 +44,24 @@ func mTRThermostatClusterScheduleTypeStructAdopt(id objc.ID) *MTRThermostatClust
 }
 
 // Description returns the object's -description text.
-func (x *MTRThermostatClusterScheduleTypeStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) Description() string {
+	return rt.Description(objref.IDOf(mtcsts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterScheduleTypeStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtcsts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterScheduleTypeStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtcsts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThermostatClusterScheduleTypeStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) String() string {
+	return rt.Description(objref.IDOf(mtcsts))
 }
 
 // NewMTRThermostatClusterScheduleTypeStruct creates a new MTRThermostatClusterScheduleTypeStruct.
@@ -71,68 +71,37 @@ func NewMTRThermostatClusterScheduleTypeStruct() *MTRThermostatClusterScheduleTy
 }
 
 // WithSystemMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleTypeStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleTypeStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
-	return x
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleTypeStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
+	return mtcsts
 }
 
 // WithNumberOfSchedules sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleTypeStruct) WithNumberOfSchedules(numberOfSchedules obj.Object) *MTRThermostatClusterScheduleTypeStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfSchedules:"), objref.IDOf(numberOfSchedules))
-	return x
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithNumberOfSchedules(numberOfSchedules obj.Object) *MTRThermostatClusterScheduleTypeStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setNumberOfSchedules:"), objref.IDOf(numberOfSchedules))
+	return mtcsts
 }
 
 // WithScheduleTypeFeatures sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleTypeStruct) WithScheduleTypeFeatures(scheduleTypeFeatures obj.Object) *MTRThermostatClusterScheduleTypeStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduleTypeFeatures:"), objref.IDOf(scheduleTypeFeatures))
-	return x
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithScheduleTypeFeatures(scheduleTypeFeatures obj.Object) *MTRThermostatClusterScheduleTypeStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setScheduleTypeFeatures:"), objref.IDOf(scheduleTypeFeatures))
+	return mtcsts
 }
 
 // SystemMode wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleTypeStruct) SystemMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemMode"))
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) SystemMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("systemMode"))
 	return obj.Wrap(_r)
-}
-
-// SetSystemMode wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleTypeStruct) SetSystemMode(systemMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
 }
 
 // NumberOfSchedules wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleTypeStruct) NumberOfSchedules() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfSchedules"))
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) NumberOfSchedules() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("numberOfSchedules"))
 	return obj.Wrap(_r)
-}
-
-// SetNumberOfSchedules wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleTypeStruct) SetNumberOfSchedules(numberOfSchedules obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfSchedules:"), objref.IDOf(numberOfSchedules))
 }
 
 // ScheduleTypeFeatures wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleTypeStruct) ScheduleTypeFeatures() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleTypeFeatures"))
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) ScheduleTypeFeatures() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("scheduleTypeFeatures"))
 	return obj.Wrap(_r)
 }
-
-// SetScheduleTypeFeatures wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleTypeStruct) SetScheduleTypeFeatures(scheduleTypeFeatures obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduleTypeFeatures:"), objref.IDOf(scheduleTypeFeatures))
-}
-
-// MTRThermostatClusterScheduleTypeStructable is the interface implemented by [MTRThermostatClusterScheduleTypeStruct], for mocking and DI.
-type MTRThermostatClusterScheduleTypeStructable interface {
-	obj.Object
-	WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleTypeStruct
-	WithNumberOfSchedules(numberOfSchedules obj.Object) *MTRThermostatClusterScheduleTypeStruct
-	WithScheduleTypeFeatures(scheduleTypeFeatures obj.Object) *MTRThermostatClusterScheduleTypeStruct
-	SystemMode() obj.Object
-	SetSystemMode(systemMode obj.Object)
-	NumberOfSchedules() obj.Object
-	SetNumberOfSchedules(numberOfSchedules obj.Object)
-	ScheduleTypeFeatures() obj.Object
-	SetScheduleTypeFeatures(scheduleTypeFeatures obj.Object)
-}
-
-var _ MTRThermostatClusterScheduleTypeStructable = (*MTRThermostatClusterScheduleTypeStruct)(nil)

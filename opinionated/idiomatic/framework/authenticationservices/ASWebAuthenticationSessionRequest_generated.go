@@ -46,24 +46,24 @@ func webAuthenticationSessionRequestAdopt(id objc.ID) *WebAuthenticationSessionR
 }
 
 // Description returns the object's -description text.
-func (x *WebAuthenticationSessionRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wasr *WebAuthenticationSessionRequest) Description() string {
+	return rt.Description(objref.IDOf(wasr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebAuthenticationSessionRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wasr *WebAuthenticationSessionRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wasr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebAuthenticationSessionRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wasr *WebAuthenticationSessionRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wasr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebAuthenticationSessionRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wasr *WebAuthenticationSessionRequest) String() string {
+	return rt.Description(objref.IDOf(wasr))
 }
 
 // NewWebAuthenticationSessionRequest creates a new WebAuthenticationSessionRequest.
@@ -73,25 +73,25 @@ func NewWebAuthenticationSessionRequest() *WebAuthenticationSessionRequest {
 }
 
 // CompleteWithCallbackURL indicates that the browser successfully completed the authentication attempt.
-func (x *WebAuthenticationSessionRequest) CompleteWithCallbackURL(url string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithCallbackURL:"), rt.FileURL(url))
+func (wasr *WebAuthenticationSessionRequest) CompleteWithCallbackURL(url string) {
+	objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("completeWithCallbackURL:"), rt.FileURL(url))
 }
 
 // UUID wraps the corresponding Objective-C method.
-func (x *WebAuthenticationSessionRequest) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+func (wasr *WebAuthenticationSessionRequest) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *WebAuthenticationSessionRequest) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (wasr *WebAuthenticationSessionRequest) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
 // CallbackURLScheme wraps the corresponding Objective-C method.
-func (x *WebAuthenticationSessionRequest) CallbackURLScheme() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callbackURLScheme"))
+func (wasr *WebAuthenticationSessionRequest) CallbackURLScheme() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("callbackURLScheme"))
 	if _r == 0 {
 		return ""
 	}
@@ -99,33 +99,19 @@ func (x *WebAuthenticationSessionRequest) CallbackURLScheme() string {
 }
 
 // ShouldUseEphemeralSession wraps the corresponding Objective-C method.
-func (x *WebAuthenticationSessionRequest) ShouldUseEphemeralSession() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldUseEphemeralSession"))
+func (wasr *WebAuthenticationSessionRequest) ShouldUseEphemeralSession() bool {
+	_r := objc.Send[bool](objref.IDOf(wasr), objc.RegisterName("shouldUseEphemeralSession"))
 	return _r
 }
 
-// AdditionalHeaderFields additional headers to be sent when loading the initial URL. These should _only_ apply to the initial page, and should not overwrite any headers normally sent by the browser. Add `AdditionalHeaderFieldsAreSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
-func (x *WebAuthenticationSessionRequest) AdditionalHeaderFields() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalHeaderFields"))
+// AdditionalHeaderFields returns additional headers to be sent when loading the initial URL. These should _only_ apply to the initial page, and should not overwrite any headers normally sent by the browser. Add `AdditionalHeaderFieldsAreSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
+func (wasr *WebAuthenticationSessionRequest) AdditionalHeaderFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("additionalHeaderFields"))
 	return obj.Wrap(_r)
 }
 
-// Callback the callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
-func (x *WebAuthenticationSessionRequest) Callback() *WebAuthenticationSessionCallback {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callback"))
+// Callback returns the callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
+func (wasr *WebAuthenticationSessionRequest) Callback() *WebAuthenticationSessionCallback {
+	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("callback"))
 	return WebAuthenticationSessionCallbackFromID(_r)
 }
-
-// WebAuthenticationSessionRequestable is the interface implemented by [WebAuthenticationSessionRequest], for mocking and DI.
-type WebAuthenticationSessionRequestable interface {
-	obj.Object
-	CompleteWithCallbackURL(url string)
-	UUID() obj.Object
-	URL() obj.Object
-	CallbackURLScheme() string
-	ShouldUseEphemeralSession() bool
-	AdditionalHeaderFields() obj.Object
-	Callback() *WebAuthenticationSessionCallback
-}
-
-var _ WebAuthenticationSessionRequestable = (*WebAuthenticationSessionRequest)(nil)

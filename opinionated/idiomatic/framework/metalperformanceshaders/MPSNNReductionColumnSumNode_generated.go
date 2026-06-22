@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionColumnSumNode() *NNReductionColumnSumNode {
 	return nNReductionColumnSumNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionColumnSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnSumNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrcsn *NNReductionColumnSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnSumNode {
+	objc.Send[objc.ID](objref.IDOf(nrcsn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrcsn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionColumnSumNode) WithLabel(label string) *NNReductionColumnSumNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrcsn *NNReductionColumnSumNode) WithLabel(label string) *NNReductionColumnSumNode {
+	objc.Send[objc.ID](objref.IDOf(nrcsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrcsn
 }
-
-// NNReductionColumnSumNodeable is the interface implemented by [NNReductionColumnSumNode], for mocking and DI.
-type NNReductionColumnSumNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnSumNode
-	WithLabel(label string) *NNReductionColumnSumNode
-}
-
-var _ NNReductionColumnSumNodeable = (*NNReductionColumnSumNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionColumnSumNode)(nil)
 

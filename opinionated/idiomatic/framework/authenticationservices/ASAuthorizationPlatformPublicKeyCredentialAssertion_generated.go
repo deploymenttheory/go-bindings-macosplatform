@@ -46,24 +46,24 @@ func authorizationPlatformPublicKeyCredentialAssertionAdopt(id objc.ID) *Authori
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Description() string {
+	return rt.Description(objref.IDOf(appkca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(appkca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(appkca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) String() string {
+	return rt.Description(objref.IDOf(appkca))
 }
 
 // NewAuthorizationPlatformPublicKeyCredentialAssertion creates a new AuthorizationPlatformPublicKeyCredentialAssertion.
@@ -73,29 +73,19 @@ func NewAuthorizationPlatformPublicKeyCredentialAssertion() *AuthorizationPlatfo
 }
 
 // Attachment wraps the corresponding Objective-C method.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() AuthorizationPublicKeyCredentialAttachment {
-	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(x), objc.RegisterName("attachment"))
+func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() AuthorizationPublicKeyCredentialAttachment {
+	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(appkca), objc.RegisterName("attachment"))
 	return _r
 }
 
 // LargeBlob wraps the corresponding Objective-C method.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
+func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(appkca), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)
 }
 
 // Prf wraps the corresponding Objective-C method.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(appkca), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)
 }
-
-// AuthorizationPlatformPublicKeyCredentialAssertionable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialAssertion], for mocking and DI.
-type AuthorizationPlatformPublicKeyCredentialAssertionable interface {
-	obj.Object
-	Attachment() AuthorizationPublicKeyCredentialAttachment
-	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput
-	Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput
-}
-
-var _ AuthorizationPlatformPublicKeyCredentialAssertionable = (*AuthorizationPlatformPublicKeyCredentialAssertion)(nil)

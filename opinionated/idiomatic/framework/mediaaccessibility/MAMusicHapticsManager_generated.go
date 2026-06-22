@@ -46,24 +46,24 @@ func musicHapticsManagerAdopt(id objc.ID) *MusicHapticsManager {
 }
 
 // Description returns the object's -description text.
-func (x *MusicHapticsManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mhm *MusicHapticsManager) Description() string {
+	return rt.Description(objref.IDOf(mhm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MusicHapticsManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mhm *MusicHapticsManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mhm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MusicHapticsManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mhm *MusicHapticsManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mhm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MusicHapticsManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mhm *MusicHapticsManager) String() string {
+	return rt.Description(objref.IDOf(mhm))
 }
 
 // NewMusicHapticsManager creates a new MusicHapticsManager.
@@ -73,21 +73,12 @@ func NewMusicHapticsManager() *MusicHapticsManager {
 }
 
 // CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
-func (x *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkHapticTrackAvailabilityForMediaMatchingCode:completionHandler:"), purego.NSString(internationalStandardRecordingCode), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (mhm *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(mhm), objc.RegisterName("checkHapticTrackAvailabilityForMediaMatchingCode:completionHandler:"), purego.NSString(internationalStandardRecordingCode), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// IsActive whether the user setting to indicate Music Haptics are currently active.
-func (x *MusicHapticsManager) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+// IsActive reports whether the user setting to indicate Music Haptics are currently active.
+func (mhm *MusicHapticsManager) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(mhm), objc.RegisterName("isActive"))
 	return _r
 }
-
-// MusicHapticsManagerable is the interface implemented by [MusicHapticsManager], for mocking and DI.
-type MusicHapticsManagerable interface {
-	obj.Object
-	CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool))
-	IsActive() bool
-}
-
-var _ MusicHapticsManagerable = (*MusicHapticsManager)(nil)

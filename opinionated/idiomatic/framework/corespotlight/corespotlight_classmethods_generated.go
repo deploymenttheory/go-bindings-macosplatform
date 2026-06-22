@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// IsIndexingAvailable returns a Boolean value that indicates whether indexing is available on the current device.
+// IsIndexingAvailable reports whether returns a Boolean value that indicates whether indexing is available on the current device.
 func IsIndexingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("isIndexingAvailable"))
 	return _r

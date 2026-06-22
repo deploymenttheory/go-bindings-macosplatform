@@ -48,36 +48,29 @@ func toolAdopt(id objc.ID) *Tool {
 }
 
 // Description returns the object's -description text.
-func (x *Tool) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Tool) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Tool) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Tool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Tool) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Tool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Tool) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Tool) String() string {
+	return rt.Description(objref.IDOf(t))
 }
-
-// Toolable is the interface implemented by [Tool], for mocking and DI.
-type Toolable interface {
-	obj.Object
-}
-
-var _ Toolable = (*Tool)(nil)
 
 // isTool marks Tool — and, by embedding promotion, its
 // subclasses — as a member of the Tool hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Tool) isTool() {}
+func (t *Tool) isTool() {}
 
 var _ ToolProvider = (*Tool)(nil)

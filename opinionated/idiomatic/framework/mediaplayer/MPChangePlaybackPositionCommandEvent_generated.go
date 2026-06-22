@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewChangePlaybackPositionCommandEvent() *ChangePlaybackPositionCommandEvent
 }
 
 // PositionTime wraps the corresponding Objective-C method.
-func (x *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("positionTime"))
+func (cppce *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(cppce), objc.RegisterName("positionTime"))
 	return _r
 }
-
-// ChangePlaybackPositionCommandEventable is the interface implemented by [ChangePlaybackPositionCommandEvent], for mocking and DI.
-type ChangePlaybackPositionCommandEventable interface {
-	obj.Object
-	PositionTime() float64
-}
-
-var _ ChangePlaybackPositionCommandEventable = (*ChangePlaybackPositionCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*ChangePlaybackPositionCommandEvent)(nil)

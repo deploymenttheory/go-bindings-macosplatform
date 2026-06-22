@@ -5,11 +5,11 @@
 package mediaextension
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RAWProcessingListParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingListParameter.
@@ -79,65 +79,46 @@ func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralV
 	return rAWProcessingListParameterAdopt(_id)
 }
 
-// WithCurrentValue get or set the current value for this parameter. The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingListParameter) WithCurrentValue(currentValue int) *RAWProcessingListParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-	return x
+// WithCurrentValue sets get or set the current value for this parameter. The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+func (rplp *RAWProcessingListParameter) WithCurrentValue(currentValue int) *RAWProcessingListParameter {
+	objc.Send[objc.ID](objref.IDOf(rplp), objc.RegisterName("setCurrentValue:"), currentValue)
+	return rplp
 }
 
-// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
-func (x *RAWProcessingListParameter) WithEnabled(enabled bool) *RAWProcessingListParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the extension enables the parameter.
+func (rplp *RAWProcessingListParameter) WithEnabled(enabled bool) *RAWProcessingListParameter {
+	objc.Send[objc.ID](objref.IDOf(rplp), objc.RegisterName("setEnabled:"), enabled)
+	return rplp
 }
 
 // HasNeutralValue return value indicates whether the MERAWProcessingListParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
-func (x *RAWProcessingListParameter) HasNeutralValue() (ok bool, outNeutralValue int64) {
+func (rplp *RAWProcessingListParameter) HasNeutralValue() (ok bool, outNeutralValue int64) {
 	var _out0 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rplp), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // HasCameraValue return value indicates whether the MERAWProcessingListParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
-func (x *RAWProcessingListParameter) HasCameraValue() (ok bool, outCameraValue int64) {
+func (rplp *RAWProcessingListParameter) HasCameraValue() (ok bool, outCameraValue int64) {
 	var _out0 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rplp), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
-// ListElements the ordered array of MERAWProcessingListElementParameter which make up this list.
+// ListElements returns the ordered array of MERAWProcessingListElementParameter which make up this list.
 //
 // ListElements returns the collection as a Go slice.
-func (x *RAWProcessingListParameter) ListElements() []*RAWProcessingListElementParameter {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listElements"))
+func (rplp *RAWProcessingListParameter) ListElements() []*RAWProcessingListElementParameter {
+	_arr := objc.Send[objc.ID](objref.IDOf(rplp), objc.RegisterName("listElements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RAWProcessingListElementParameter {
 		return RAWProcessingListElementParameterFromID(_id)
 	})
 }
 
 // CurrentValue get or set the current value for this parameter. The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingListParameter) CurrentValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentValue"))
+func (rplp *RAWProcessingListParameter) CurrentValue() int {
+	_r := objc.Send[int](objref.IDOf(rplp), objc.RegisterName("currentValue"))
 	return _r
 }
-
-// SetCurrentValue wraps the corresponding Objective-C method.
-func (x *RAWProcessingListParameter) SetCurrentValue(currentValue int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-}
-
-// RAWProcessingListParameterable is the interface implemented by [RAWProcessingListParameter], for mocking and DI.
-type RAWProcessingListParameterable interface {
-	obj.Object
-	WithCurrentValue(currentValue int) *RAWProcessingListParameter
-	WithEnabled(enabled bool) *RAWProcessingListParameter
-	HasNeutralValue() (ok bool, outNeutralValue int64)
-	HasCameraValue() (ok bool, outCameraValue int64)
-	ListElements() []*RAWProcessingListElementParameter
-	CurrentValue() int
-	SetCurrentValue(currentValue int)
-}
-
-var _ RAWProcessingListParameterable = (*RAWProcessingListParameter)(nil)
 
 var _ RAWProcessingParameterProvider = (*RAWProcessingListParameter)(nil)

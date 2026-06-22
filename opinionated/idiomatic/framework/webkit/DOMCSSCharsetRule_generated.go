@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,29 +49,20 @@ func NewDOMCSSCharsetRule() *DOMCSSCharsetRule {
 	return dOMCSSCharsetRuleAdopt(_id)
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSCharsetRule) WithCssText(cssText string) *DOMCSSCharsetRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dcr *DOMCSSCharsetRule) WithCSSText(cssText string) *DOMCSSCharsetRule {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dcr
 }
 
 // Encoding wraps the corresponding Objective-C method.
-func (x *DOMCSSCharsetRule) Encoding() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encoding"))
+func (dcr *DOMCSSCharsetRule) Encoding() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("encoding"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DOMCSSCharsetRuleable is the interface implemented by [DOMCSSCharsetRule], for mocking and DI.
-type DOMCSSCharsetRuleable interface {
-	obj.Object
-	WithCssText(cssText string) *DOMCSSCharsetRule
-	Encoding() string
-}
-
-var _ DOMCSSCharsetRuleable = (*DOMCSSCharsetRule)(nil)
 
 var _ DOMCSSRuleProvider = (*DOMCSSCharsetRule)(nil)
 

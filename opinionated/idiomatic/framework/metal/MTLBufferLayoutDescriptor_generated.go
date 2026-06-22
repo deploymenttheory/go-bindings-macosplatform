@@ -46,24 +46,24 @@ func bufferLayoutDescriptorAdopt(id objc.ID) *BufferLayoutDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *BufferLayoutDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bld *BufferLayoutDescriptor) Description() string {
+	return rt.Description(objref.IDOf(bld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BufferLayoutDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bld *BufferLayoutDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BufferLayoutDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bld *BufferLayoutDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BufferLayoutDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bld *BufferLayoutDescriptor) String() string {
+	return rt.Description(objref.IDOf(bld))
 }
 
 // NewBufferLayoutDescriptor creates a new BufferLayoutDescriptor.
@@ -72,69 +72,38 @@ func NewBufferLayoutDescriptor() *BufferLayoutDescriptor {
 	return bufferLayoutDescriptorAdopt(_id)
 }
 
-// WithStride the number of bytes from one buffer entry to the next.
-func (x *BufferLayoutDescriptor) WithStride(stride int) *BufferLayoutDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
-	return x
+// WithStride sets the number of bytes from one buffer entry to the next.
+func (bld *BufferLayoutDescriptor) WithStride(stride int) *BufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(bld), objc.RegisterName("setStride:"), stride)
+	return bld
 }
 
-// WithStepFunction determines how and when compute functions fetch data.
-func (x *BufferLayoutDescriptor) WithStepFunction(stepFunction StepFunction) *BufferLayoutDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
-	return x
+// WithStepFunction sets determines how and when compute functions fetch data.
+func (bld *BufferLayoutDescriptor) WithStepFunction(stepFunction StepFunction) *BufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(bld), objc.RegisterName("setStepFunction:"), stepFunction)
+	return bld
 }
 
-// WithStepRate how frequently the step function should load data.
-func (x *BufferLayoutDescriptor) WithStepRate(stepRate int) *BufferLayoutDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
-	return x
+// WithStepRate sets how frequently the step function should load data.
+func (bld *BufferLayoutDescriptor) WithStepRate(stepRate int) *BufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(bld), objc.RegisterName("setStepRate:"), stepRate)
+	return bld
 }
 
 // Stride wraps the corresponding Objective-C method.
-func (x *BufferLayoutDescriptor) Stride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+func (bld *BufferLayoutDescriptor) Stride() int {
+	_r := objc.Send[int](objref.IDOf(bld), objc.RegisterName("stride"))
 	return _r
-}
-
-// SetStride wraps the corresponding Objective-C method.
-func (x *BufferLayoutDescriptor) SetStride(stride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }
 
 // StepFunction wraps the corresponding Objective-C method.
-func (x *BufferLayoutDescriptor) StepFunction() StepFunction {
-	_r := objc.Send[StepFunction](objref.IDOf(x), objc.RegisterName("stepFunction"))
+func (bld *BufferLayoutDescriptor) StepFunction() StepFunction {
+	_r := objc.Send[StepFunction](objref.IDOf(bld), objc.RegisterName("stepFunction"))
 	return _r
-}
-
-// SetStepFunction wraps the corresponding Objective-C method.
-func (x *BufferLayoutDescriptor) SetStepFunction(stepFunction StepFunction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 }
 
 // StepRate wraps the corresponding Objective-C method.
-func (x *BufferLayoutDescriptor) StepRate() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stepRate"))
+func (bld *BufferLayoutDescriptor) StepRate() int {
+	_r := objc.Send[int](objref.IDOf(bld), objc.RegisterName("stepRate"))
 	return _r
 }
-
-// SetStepRate wraps the corresponding Objective-C method.
-func (x *BufferLayoutDescriptor) SetStepRate(stepRate int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
-}
-
-// BufferLayoutDescriptorable is the interface implemented by [BufferLayoutDescriptor], for mocking and DI.
-type BufferLayoutDescriptorable interface {
-	obj.Object
-	WithStride(stride int) *BufferLayoutDescriptor
-	WithStepFunction(stepFunction StepFunction) *BufferLayoutDescriptor
-	WithStepRate(stepRate int) *BufferLayoutDescriptor
-	Stride() int
-	SetStride(stride int)
-	StepFunction() StepFunction
-	SetStepFunction(stepFunction StepFunction)
-	StepRate() int
-	SetStepRate(stepRate int)
-}
-
-var _ BufferLayoutDescriptorable = (*BufferLayoutDescriptor)(nil)

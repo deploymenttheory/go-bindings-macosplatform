@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,135 +44,111 @@ func dOMMouseEventAdopt(id objc.ID) *DOMMouseEvent {
 }
 
 // WithReturnValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMMouseEvent) WithReturnValue(returnValue bool) *DOMMouseEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
-	return x
+func (dme *DOMMouseEvent) WithReturnValue(returnValue bool) *DOMMouseEvent {
+	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setReturnValue:"), returnValue)
+	return dme
 }
 
 // WithCancelBubble sets the property and returns the receiver so calls can be chained.
-func (x *DOMMouseEvent) WithCancelBubble(cancelBubble bool) *DOMMouseEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
-	return x
+func (dme *DOMMouseEvent) WithCancelBubble(cancelBubble bool) *DOMMouseEvent {
+	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return dme
 }
 
 // ScreenX wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) ScreenX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("screenX"))
+func (dme *DOMMouseEvent) ScreenX() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("screenX"))
 	return _r
 }
 
 // ScreenY wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) ScreenY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("screenY"))
+func (dme *DOMMouseEvent) ScreenY() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("screenY"))
 	return _r
 }
 
 // ClientX wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) ClientX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clientX"))
+func (dme *DOMMouseEvent) ClientX() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("clientX"))
 	return _r
 }
 
 // ClientY wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) ClientY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clientY"))
+func (dme *DOMMouseEvent) ClientY() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("clientY"))
 	return _r
 }
 
 // CtrlKey wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) CtrlKey() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ctrlKey"))
+func (dme *DOMMouseEvent) CtrlKey() bool {
+	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("ctrlKey"))
 	return _r
 }
 
 // ShiftKey wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) ShiftKey() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shiftKey"))
+func (dme *DOMMouseEvent) ShiftKey() bool {
+	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("shiftKey"))
 	return _r
 }
 
 // AltKey wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) AltKey() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("altKey"))
+func (dme *DOMMouseEvent) AltKey() bool {
+	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("altKey"))
 	return _r
 }
 
 // MetaKey wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) MetaKey() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("metaKey"))
+func (dme *DOMMouseEvent) MetaKey() bool {
+	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("metaKey"))
 	return _r
 }
 
 // Button wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) Button() int16 {
-	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("button"))
+func (dme *DOMMouseEvent) Button() int16 {
+	_r := objc.Send[int16](objref.IDOf(dme), objc.RegisterName("button"))
 	return _r
 }
 
 // OffsetX wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) OffsetX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offsetX"))
+func (dme *DOMMouseEvent) OffsetX() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("offsetX"))
 	return _r
 }
 
 // OffsetY wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) OffsetY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offsetY"))
+func (dme *DOMMouseEvent) OffsetY() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("offsetY"))
 	return _r
 }
 
 // X wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) X() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("x"))
+func (dme *DOMMouseEvent) X() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("x"))
 	return _r
 }
 
 // Y wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) Y() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("y"))
+func (dme *DOMMouseEvent) Y() int {
+	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("y"))
 	return _r
 }
 
 // FromElement wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) FromElement() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromElement"))
+func (dme *DOMMouseEvent) FromElement() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("fromElement"))
 	return DOMNodeFromID(_r)
 }
 
 // ToElement wraps the corresponding Objective-C method.
-func (x *DOMMouseEvent) ToElement() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toElement"))
+func (dme *DOMMouseEvent) ToElement() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("toElement"))
 	return DOMNodeFromID(_r)
 }
-
-// DOMMouseEventable is the interface implemented by [DOMMouseEvent], for mocking and DI.
-type DOMMouseEventable interface {
-	obj.Object
-	WithReturnValue(returnValue bool) *DOMMouseEvent
-	WithCancelBubble(cancelBubble bool) *DOMMouseEvent
-	ScreenX() int
-	ScreenY() int
-	ClientX() int
-	ClientY() int
-	CtrlKey() bool
-	ShiftKey() bool
-	AltKey() bool
-	MetaKey() bool
-	Button() int16
-	OffsetX() int
-	OffsetY() int
-	X() int
-	Y() int
-	FromElement() *DOMNode
-	ToElement() *DOMNode
-}
-
-var _ DOMMouseEventable = (*DOMMouseEvent)(nil)
 
 // isDOMMouseEvent marks DOMMouseEvent — and, by embedding promotion, its
 // subclasses — as a member of the DOMMouseEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMMouseEvent) isDOMMouseEvent() {}
+func (dme *DOMMouseEvent) isDOMMouseEvent() {}
 
 var _ DOMMouseEventProvider = (*DOMMouseEvent)(nil)
 

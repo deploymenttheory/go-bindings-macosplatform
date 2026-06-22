@@ -5,7 +5,6 @@
 package cloudkit
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,297 +59,127 @@ func NewFetchDatabaseChangesOperationWithPreviousServerChangeToken(previousServe
 	return fetchDatabaseChangesOperationAdopt(_id)
 }
 
-// WithPreviousServerChangeToken the server change token.
-func (x *FetchDatabaseChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
-	return x
+// WithPreviousServerChangeToken sets the server change token.
+func (fdco *FetchDatabaseChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
+	return fdco
 }
 
-// WithResultsLimit the maximum number of results that the operation fetches.
-func (x *FetchDatabaseChangesOperation) WithResultsLimit(resultsLimit int) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
-	return x
+// WithResultsLimit sets the maximum number of results that the operation fetches.
+func (fdco *FetchDatabaseChangesOperation) WithResultsLimit(resultsLimit int) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setResultsLimit:"), resultsLimit)
+	return fdco
 }
 
-// WithFetchAllChanges a Boolean value that indicates whether to send repeated requests to the server.
-func (x *FetchDatabaseChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
-	return x
+// WithFetchAllChanges sets a Boolean value that indicates whether to send repeated requests to the server.
+func (fdco *FetchDatabaseChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
+	return fdco
 }
 
-// WithRecordZoneWithIDChangedBlock the closure to execute with a single record zone change.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDChangedBlock(obj.Wrap(_b0)) }))
-	return x
+// WithRecordZoneWithIDChangedBlock sets the closure to execute with a single record zone change.
+func (fdco *FetchDatabaseChangesOperation) WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setRecordZoneWithIDChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDChangedBlock(obj.Wrap(_b0)) }))
+	return fdco
 }
 
-// WithRecordZoneWithIDWasDeletedBlock the closure to execute when a record zone no longer exists.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDWasDeletedBlock(obj.Wrap(_b0)) }))
-	return x
+// WithRecordZoneWithIDWasDeletedBlock sets the closure to execute when a record zone no longer exists.
+func (fdco *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setRecordZoneWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDWasDeletedBlock(obj.Wrap(_b0)) }))
+	return fdco
 }
 
-// WithRecordZoneWithIDWasPurgedBlock the closure to execute when CloudKit purges a record zone.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasPurgedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDWasPurgedBlock(obj.Wrap(_b0)) }))
-	return x
+// WithRecordZoneWithIDWasPurgedBlock sets the closure to execute when CloudKit purges a record zone.
+func (fdco *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setRecordZoneWithIDWasPurgedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDWasPurgedBlock(obj.Wrap(_b0)) }))
+	return fdco
 }
 
-// WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock the closure to execute when a user-invoked account reset deletes a record zone.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(obj.Object)) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) {
+// WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock sets the closure to execute when a user-invoked account reset deletes a record zone.
+func (fdco *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) {
 		recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(obj.Wrap(_b0))
 	}))
-	return x
+	return fdco
 }
 
-// WithChangeTokenUpdatedBlock the closure to execute when the change token updates.
-func (x *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeTokenUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { changeTokenUpdatedBlock(obj.Wrap(_b0)) }))
-	return x
+// WithChangeTokenUpdatedBlock sets the closure to execute when the change token updates.
+func (fdco *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setChangeTokenUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { changeTokenUpdatedBlock(obj.Wrap(_b0)) }))
+	return fdco
 }
 
-// WithDatabase the database that the operation uses.
-func (x *FetchDatabaseChangesOperation) WithDatabase(database *Database) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (fdco *FetchDatabaseChangesOperation) WithDatabase(database *Database) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return fdco
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *FetchDatabaseChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (fdco *FetchDatabaseChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return fdco
 }
 
-// WithGroup the operation’s group.
-func (x *FetchDatabaseChangesOperation) WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (fdco *FetchDatabaseChangesOperation) WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return fdco
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *FetchDatabaseChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (fdco *FetchDatabaseChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return fdco
 }
 
-// WithContainer the operation's container.
-func (x *FetchDatabaseChangesOperation) WithContainer(container *Container) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (fdco *FetchDatabaseChangesOperation) WithContainer(container *Container) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return fdco
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *FetchDatabaseChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (fdco *FetchDatabaseChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return fdco
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *FetchDatabaseChangesOperation) WithLongLived(longLived bool) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (fdco *FetchDatabaseChangesOperation) WithLongLived(longLived bool) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setLongLived:"), longLived)
+	return fdco
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (fdco *FetchDatabaseChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return fdco
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (fdco *FetchDatabaseChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return fdco
 }
 
-// PreviousServerChangeToken the server change token. Assign the token you receive from the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
-func (x *FetchDatabaseChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousServerChangeToken"))
+// PreviousServerChangeToken returns the server change token. Assign the token you receive from the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
+func (fdco *FetchDatabaseChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
+	_r := objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("previousServerChangeToken"))
 	return ServerChangeTokenFromID(_r)
 }
 
-// SetPreviousServerChangeToken wraps the corresponding Objective-C method.
-func (x *FetchDatabaseChangesOperation) SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
-}
-
-// ResultsLimit the maximum number of results that the operation fetches. Use this property to limit the number of changes this operation returns. When the operation reaches the limit, it updates the change token and returns it to indicate that more results are available.
-func (x *FetchDatabaseChangesOperation) ResultsLimit() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultsLimit"))
+// ResultsLimit returns the maximum number of results that the operation fetches. Use this property to limit the number of changes this operation returns. When the operation reaches the limit, it updates the change token and returns it to indicate that more results are available.
+func (fdco *FetchDatabaseChangesOperation) ResultsLimit() int {
+	_r := objc.Send[int](objref.IDOf(fdco), objc.RegisterName("resultsLimit"))
 	return _r
 }
 
-// SetResultsLimit wraps the corresponding Objective-C method.
-func (x *FetchDatabaseChangesOperation) SetResultsLimit(resultsLimit int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
-}
-
-// FetchAllChanges a Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
-func (x *FetchDatabaseChangesOperation) FetchAllChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fetchAllChanges"))
+// FetchAllChanges reports whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
+func (fdco *FetchDatabaseChangesOperation) FetchAllChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(fdco), objc.RegisterName("fetchAllChanges"))
 	return _r
 }
-
-// SetFetchAllChanges wraps the corresponding Objective-C method.
-func (x *FetchDatabaseChangesOperation) SetFetchAllChanges(fetchAllChanges bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
-}
-
-// SetRecordZoneWithIDChangedBlock wraps the corresponding Objective-C method.
-//
-// SetRecordZoneWithIDChangedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDChangedBlock(ctx context.Context) (result *RecordZoneID, err error) {
-	type _result struct {
-		val *RecordZoneID
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = RecordZoneIDFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDChangedBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *RecordZoneID
-		return _zero, ctx.Err()
-	}
-}
-
-// SetRecordZoneWithIDWasDeletedBlock wraps the corresponding Objective-C method.
-//
-// SetRecordZoneWithIDWasDeletedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedBlock(ctx context.Context) (result *RecordZoneID, err error) {
-	type _result struct {
-		val *RecordZoneID
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = RecordZoneIDFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *RecordZoneID
-		return _zero, ctx.Err()
-	}
-}
-
-// SetRecordZoneWithIDWasPurgedBlock wraps the corresponding Objective-C method.
-//
-// SetRecordZoneWithIDWasPurgedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasPurgedBlock(ctx context.Context) (result *RecordZoneID, err error) {
-	type _result struct {
-		val *RecordZoneID
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = RecordZoneIDFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasPurgedBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *RecordZoneID
-		return _zero, ctx.Err()
-	}
-}
-
-// SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock wraps the corresponding Objective-C method.
-//
-// SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(ctx context.Context) (result *RecordZoneID, err error) {
-	type _result struct {
-		val *RecordZoneID
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = RecordZoneIDFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *RecordZoneID
-		return _zero, ctx.Err()
-	}
-}
-
-// SetChangeTokenUpdatedBlock wraps the corresponding Objective-C method.
-//
-// SetChangeTokenUpdatedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetChangeTokenUpdatedBlock(ctx context.Context) (result *ServerChangeToken, err error) {
-	type _result struct {
-		val *ServerChangeToken
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = ServerChangeTokenFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeTokenUpdatedBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *ServerChangeToken
-		return _zero, ctx.Err()
-	}
-}
-
-// FetchDatabaseChangesOperationable is the interface implemented by [FetchDatabaseChangesOperation], for mocking and DI.
-type FetchDatabaseChangesOperationable interface {
-	obj.Object
-	WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation
-	WithResultsLimit(resultsLimit int) *FetchDatabaseChangesOperation
-	WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(obj.Object)) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(obj.Object)) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(obj.Object)) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(obj.Object)) *FetchDatabaseChangesOperation
-	WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(obj.Object)) *FetchDatabaseChangesOperation
-	WithDatabase(database *Database) *FetchDatabaseChangesOperation
-	WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation
-	WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation
-	WithContainer(container *Container) *FetchDatabaseChangesOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchDatabaseChangesOperation
-	WithLongLived(longLived bool) *FetchDatabaseChangesOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation
-	PreviousServerChangeToken() *ServerChangeToken
-	SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken)
-	ResultsLimit() int
-	SetResultsLimit(resultsLimit int)
-	FetchAllChanges() bool
-	SetFetchAllChanges(fetchAllChanges bool)
-	SetRecordZoneWithIDChangedBlock(ctx context.Context) (*RecordZoneID, error)
-	SetRecordZoneWithIDWasDeletedBlock(ctx context.Context) (*RecordZoneID, error)
-	SetRecordZoneWithIDWasPurgedBlock(ctx context.Context) (*RecordZoneID, error)
-	SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(ctx context.Context) (*RecordZoneID, error)
-	SetChangeTokenUpdatedBlock(ctx context.Context) (*ServerChangeToken, error)
-}
-
-var _ FetchDatabaseChangesOperationable = (*FetchDatabaseChangesOperation)(nil)
 
 var _ DatabaseOperationProvider = (*FetchDatabaseChangesOperation)(nil)
 

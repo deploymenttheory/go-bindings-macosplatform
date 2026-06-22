@@ -46,24 +46,24 @@ func accountAdopt(id objc.ID) *Account {
 }
 
 // Description returns the object's -description text.
-func (x *Account) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Account) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Account) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Account) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Account) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Account) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Account) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Account) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAccountWithAccountType initializes a new account of the specified type.
@@ -73,33 +73,33 @@ func NewAccountWithAccountType(type_ *AccountType) *Account {
 	return accountAdopt(_id)
 }
 
-// WithAccountType the type of service account.
-func (x *Account) WithAccountType(accountType *AccountType) *Account {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountType:"), objref.IDOf(accountType))
-	return x
+// WithAccountType sets the type of service account.
+func (a *Account) WithAccountType(accountType *AccountType) *Account {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAccountType:"), objref.IDOf(accountType))
+	return a
 }
 
-// WithAccountDescription a human-readable description of the account.
-func (x *Account) WithAccountDescription(accountDescription string) *Account {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountDescription:"), purego.NSString(accountDescription))
-	return x
+// WithAccountDescription sets a human-readable description of the account.
+func (a *Account) WithAccountDescription(accountDescription string) *Account {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAccountDescription:"), purego.NSString(accountDescription))
+	return a
 }
 
-// WithUsername the username for this account.
-func (x *Account) WithUsername(username string) *Account {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
-	return x
+// WithUsername sets the username for this account.
+func (a *Account) WithUsername(username string) *Account {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setUsername:"), purego.NSString(username))
+	return a
 }
 
-// WithCredential the credential used to authenticate the user of this account.
-func (x *Account) WithCredential(credential *AccountCredential) *Account {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
-	return x
+// WithCredential sets the credential used to authenticate the user of this account.
+func (a *Account) WithCredential(credential *AccountCredential) *Account {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setCredential:"), objref.IDOf(credential))
+	return a
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *Account) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (a *Account) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -107,71 +107,31 @@ func (x *Account) Identifier() string {
 }
 
 // AccountType wraps the corresponding Objective-C method.
-func (x *Account) AccountType() *AccountType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountType"))
+func (a *Account) AccountType() *AccountType {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accountType"))
 	return AccountTypeFromID(_r)
 }
 
-// SetAccountType wraps the corresponding Objective-C method.
-func (x *Account) SetAccountType(accountType *AccountType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountType:"), objref.IDOf(accountType))
-}
-
 // AccountDescription wraps the corresponding Objective-C method.
-func (x *Account) AccountDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountDescription"))
+func (a *Account) AccountDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accountDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAccountDescription wraps the corresponding Objective-C method.
-func (x *Account) SetAccountDescription(accountDescription string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountDescription:"), purego.NSString(accountDescription))
 }
 
 // Username wraps the corresponding Objective-C method.
-func (x *Account) Username() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
+func (a *Account) Username() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetUsername wraps the corresponding Objective-C method.
-func (x *Account) SetUsername(username string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
-}
-
 // Credential wraps the corresponding Objective-C method.
-func (x *Account) Credential() *AccountCredential {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credential"))
+func (a *Account) Credential() *AccountCredential {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("credential"))
 	return AccountCredentialFromID(_r)
 }
-
-// SetCredential wraps the corresponding Objective-C method.
-func (x *Account) SetCredential(credential *AccountCredential) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
-}
-
-// Accountable is the interface implemented by [Account], for mocking and DI.
-type Accountable interface {
-	obj.Object
-	WithAccountType(accountType *AccountType) *Account
-	WithAccountDescription(accountDescription string) *Account
-	WithUsername(username string) *Account
-	WithCredential(credential *AccountCredential) *Account
-	Identifier() string
-	AccountType() *AccountType
-	SetAccountType(accountType *AccountType)
-	AccountDescription() string
-	SetAccountDescription(accountDescription string)
-	Username() string
-	SetUsername(username string)
-	Credential() *AccountCredential
-	SetCredential(credential *AccountCredential)
-}
-
-var _ Accountable = (*Account)(nil)

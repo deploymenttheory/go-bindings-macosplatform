@@ -46,24 +46,24 @@ func attributeDescriptorAdopt(id objc.ID) *AttributeDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *AttributeDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *AttributeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AttributeDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ad *AttributeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AttributeDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ad *AttributeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AttributeDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *AttributeDescriptor) String() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // NewAttributeDescriptor creates a new AttributeDescriptor.
@@ -72,69 +72,38 @@ func NewAttributeDescriptor() *AttributeDescriptor {
 	return attributeDescriptorAdopt(_id)
 }
 
-// WithFormat the format of the attribute’s data.
-func (x *AttributeDescriptor) WithFormat(format AttributeFormat) *AttributeDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
-	return x
+// WithFormat sets the format of the attribute’s data.
+func (ad *AttributeDescriptor) WithFormat(format AttributeFormat) *AttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setFormat:"), format)
+	return ad
 }
 
-// WithOffset the offset, in bytes, from the start of the buffer that contains the attribute data to the start of the data itself.
-func (x *AttributeDescriptor) WithOffset(offset int) *AttributeDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the offset, in bytes, from the start of the buffer that contains the attribute data to the start of the data itself.
+func (ad *AttributeDescriptor) WithOffset(offset int) *AttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setOffset:"), offset)
+	return ad
 }
 
-// WithBufferIndex the index in the buffer argument table for the buffer that contains the data for this attribute.
-func (x *AttributeDescriptor) WithBufferIndex(bufferIndex int) *AttributeDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
-	return x
+// WithBufferIndex sets the index in the buffer argument table for the buffer that contains the data for this attribute.
+func (ad *AttributeDescriptor) WithBufferIndex(bufferIndex int) *AttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setBufferIndex:"), bufferIndex)
+	return ad
 }
 
 // Format wraps the corresponding Objective-C method.
-func (x *AttributeDescriptor) Format() AttributeFormat {
-	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("format"))
+func (ad *AttributeDescriptor) Format() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(ad), objc.RegisterName("format"))
 	return _r
-}
-
-// SetFormat wraps the corresponding Objective-C method.
-func (x *AttributeDescriptor) SetFormat(format AttributeFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
 // Offset wraps the corresponding Objective-C method.
-func (x *AttributeDescriptor) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+func (ad *AttributeDescriptor) Offset() int {
+	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("offset"))
 	return _r
-}
-
-// SetOffset wraps the corresponding Objective-C method.
-func (x *AttributeDescriptor) SetOffset(offset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
 // BufferIndex wraps the corresponding Objective-C method.
-func (x *AttributeDescriptor) BufferIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferIndex"))
+func (ad *AttributeDescriptor) BufferIndex() int {
+	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("bufferIndex"))
 	return _r
 }
-
-// SetBufferIndex wraps the corresponding Objective-C method.
-func (x *AttributeDescriptor) SetBufferIndex(bufferIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
-}
-
-// AttributeDescriptorable is the interface implemented by [AttributeDescriptor], for mocking and DI.
-type AttributeDescriptorable interface {
-	obj.Object
-	WithFormat(format AttributeFormat) *AttributeDescriptor
-	WithOffset(offset int) *AttributeDescriptor
-	WithBufferIndex(bufferIndex int) *AttributeDescriptor
-	Format() AttributeFormat
-	SetFormat(format AttributeFormat)
-	Offset() int
-	SetOffset(offset int)
-	BufferIndex() int
-	SetBufferIndex(bufferIndex int)
-}
-
-var _ AttributeDescriptorable = (*AttributeDescriptor)(nil)

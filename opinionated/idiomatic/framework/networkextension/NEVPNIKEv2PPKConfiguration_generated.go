@@ -46,24 +46,24 @@ func nEVPNIKEv2PPKConfigurationAdopt(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *NEVPNIKEv2PPKConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nepc *NEVPNIKEv2PPKConfiguration) Description() string {
+	return rt.Description(objref.IDOf(nepc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEVPNIKEv2PPKConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nepc *NEVPNIKEv2PPKConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nepc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEVPNIKEv2PPKConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nepc *NEVPNIKEv2PPKConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nepc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEVPNIKEv2PPKConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nepc *NEVPNIKEv2PPKConfiguration) String() string {
+	return rt.Description(objref.IDOf(nepc))
 }
 
 // NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference initializes a quantum-secure pre-shared key (PPK) configuration.
@@ -73,46 +73,29 @@ func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier str
 	return nEVPNIKEv2PPKConfigurationAdopt(_id)
 }
 
-// WithIsMandatory a Boolean value that indicates whether it’s mandatory for the VPN server to use this PPK.
-func (x *NEVPNIKEv2PPKConfiguration) WithIsMandatory(isMandatory bool) *NEVPNIKEv2PPKConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMandatory:"), isMandatory)
-	return x
+// WithIsMandatory sets a Boolean value that indicates whether it’s mandatory for the VPN server to use this PPK.
+func (nepc *NEVPNIKEv2PPKConfiguration) WithIsMandatory(isMandatory bool) *NEVPNIKEv2PPKConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nepc), objc.RegisterName("setIsMandatory:"), isMandatory)
+	return nepc
 }
 
-// Identifier the identifer for the PPK.
-func (x *NEVPNIKEv2PPKConfiguration) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifer for the PPK.
+func (nepc *NEVPNIKEv2PPKConfiguration) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nepc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// KeychainReference a persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
-func (x *NEVPNIKEv2PPKConfiguration) KeychainReference() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychainReference"))
+// KeychainReference returns a persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+func (nepc *NEVPNIKEv2PPKConfiguration) KeychainReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nepc), objc.RegisterName("keychainReference"))
 	return obj.Wrap(_r)
 }
 
-// IsMandatory boolean indicating whether use of the PPK is mandatory or not. Default is YES.
-func (x *NEVPNIKEv2PPKConfiguration) IsMandatory() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMandatory"))
+// IsMandatory reports whether boolean indicating whether use of the PPK is mandatory or not. Default is true.
+func (nepc *NEVPNIKEv2PPKConfiguration) IsMandatory() bool {
+	_r := objc.Send[bool](objref.IDOf(nepc), objc.RegisterName("isMandatory"))
 	return _r
 }
-
-// SetIsMandatory wraps the corresponding Objective-C method.
-func (x *NEVPNIKEv2PPKConfiguration) SetIsMandatory(isMandatory bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMandatory:"), isMandatory)
-}
-
-// NEVPNIKEv2PPKConfigurationable is the interface implemented by [NEVPNIKEv2PPKConfiguration], for mocking and DI.
-type NEVPNIKEv2PPKConfigurationable interface {
-	obj.Object
-	WithIsMandatory(isMandatory bool) *NEVPNIKEv2PPKConfiguration
-	Identifier() string
-	KeychainReference() obj.Object
-	IsMandatory() bool
-	SetIsMandatory(isMandatory bool)
-}
-
-var _ NEVPNIKEv2PPKConfigurationable = (*NEVPNIKEv2PPKConfiguration)(nil)

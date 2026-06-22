@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,340 +51,214 @@ func NewAccelerationStructureCurveGeometryDescriptor() *AccelerationStructureCur
 	return accelerationStructureCurveGeometryDescriptorAdopt(_id)
 }
 
-// WithControlPointBufferOffset the offset, in bytes, to the control point data in the buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointBufferOffset(controlPointBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointBufferOffset:"), controlPointBufferOffset)
-	return x
+// WithControlPointBufferOffset sets the offset, in bytes, to the control point data in the buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithControlPointBufferOffset(controlPointBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setControlPointBufferOffset:"), controlPointBufferOffset)
+	return ascgd
 }
 
-// WithControlPointCount the number of control points in the control point buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointCount(controlPointCount int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointCount:"), controlPointCount)
-	return x
+// WithControlPointCount sets the number of control points in the control point buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithControlPointCount(controlPointCount int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setControlPointCount:"), controlPointCount)
+	return ascgd
 }
 
-// WithControlPointStride the stride, in bytes, between control points in the buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointStride(controlPointStride int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointStride:"), controlPointStride)
-	return x
+// WithControlPointStride sets the stride, in bytes, between control points in the buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithControlPointStride(controlPointStride int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setControlPointStride:"), controlPointStride)
+	return ascgd
 }
 
-// WithControlPointFormat the format of the control points in the buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat AttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointFormat:"), controlPointFormat)
-	return x
+// WithControlPointFormat sets the format of the control points in the buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat AttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setControlPointFormat:"), controlPointFormat)
+	return ascgd
 }
 
-// WithRadiusBufferOffset the offset, in bytes, to the radius data in the buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusBufferOffset(radiusBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusBufferOffset:"), radiusBufferOffset)
-	return x
+// WithRadiusBufferOffset sets the offset, in bytes, to the radius data in the buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithRadiusBufferOffset(radiusBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setRadiusBufferOffset:"), radiusBufferOffset)
+	return ascgd
 }
 
-// WithRadiusFormat the format of each radius in the radius buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat AttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusFormat:"), radiusFormat)
-	return x
+// WithRadiusFormat sets the format of each radius in the radius buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat AttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setRadiusFormat:"), radiusFormat)
+	return ascgd
 }
 
-// WithRadiusStride the stride, in bytes, between the radius elements in the radius buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusStride(radiusStride int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusStride:"), radiusStride)
-	return x
+// WithRadiusStride sets the stride, in bytes, between the radius elements in the radius buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithRadiusStride(radiusStride int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setRadiusStride:"), radiusStride)
+	return ascgd
 }
 
-// WithIndexBufferOffset the offset, in bytes, to the index data in the buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexBufferOffset(indexBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
-	return x
+// WithIndexBufferOffset sets the offset, in bytes, to the index data in the buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithIndexBufferOffset(indexBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
+	return ascgd
 }
 
-// WithIndexType the size of each index in the index buffer.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType IndexType) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-	return x
+// WithIndexType sets the size of each index in the index buffer.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType IndexType) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setIndexType:"), indexType)
+	return ascgd
 }
 
-// WithSegmentCount the number of curve segments in each curve of the geometry.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithSegmentCount(segmentCount int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
-	return x
+// WithSegmentCount sets the number of curve segments in each curve of the geometry.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithSegmentCount(segmentCount int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setSegmentCount:"), segmentCount)
+	return ascgd
 }
 
-// WithSegmentControlPointCount the number of control points in each curve segment.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPointCount(segmentControlPointCount int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentControlPointCount:"), segmentControlPointCount)
-	return x
+// WithSegmentControlPointCount sets the number of control points in each curve segment.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPointCount(segmentControlPointCount int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setSegmentControlPointCount:"), segmentControlPointCount)
+	return ascgd
 }
 
-// WithCurveType a curve type for curves in the geometry.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType CurveType) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
-	return x
+// WithCurveType sets a curve type for curves in the geometry.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType CurveType) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setCurveType:"), curveType)
+	return ascgd
 }
 
-// WithCurveBasis the basis function for the curve geometry.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis CurveBasis) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveBasis:"), curveBasis)
-	return x
+// WithCurveBasis sets the basis function for the curve geometry.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis CurveBasis) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setCurveBasis:"), curveBasis)
+	return ascgd
 }
 
-// WithCurveEndCaps an end-cap type for the curves in the geometry.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps CurveEndCaps) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveEndCaps:"), curveEndCaps)
-	return x
+// WithCurveEndCaps sets an end-cap type for the curves in the geometry.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps CurveEndCaps) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setCurveEndCaps:"), curveEndCaps)
+	return ascgd
 }
 
-// WithIntersectionFunctionTableOffset an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-	return x
+// WithIntersectionFunctionTableOffset sets an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return ascgd
 }
 
-// WithOpaque a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setOpaque:"), opaque)
+	return ascgd
 }
 
-// WithAllowDuplicateIntersectionFunctionInvocation a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-	return x
+// WithAllowDuplicateIntersectionFunctionInvocation sets a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
+	return ascgd
 }
 
-// WithLabel a label for the geometry structure, suitable for debugging.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithLabel(label string) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a label for the geometry structure, suitable for debugging.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithLabel(label string) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ascgd
 }
 
-// WithPrimitiveDataBufferOffset primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
-	return x
+// WithPrimitiveDataBufferOffset sets primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
+	return ascgd
 }
 
-// WithPrimitiveDataStride stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-	return x
+// WithPrimitiveDataStride sets stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
+	return ascgd
 }
 
-// WithPrimitiveDataElementSize size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-	return x
+// WithPrimitiveDataElementSize sets size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ascgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
+	return ascgd
 }
 
-// ControlPointBufferOffset control point buffer offset. Must be a multiple of the control point format's element size and must be aligned to the platform's buffer offset alignment.
-func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("controlPointBufferOffset"))
+// ControlPointBufferOffset returns control point buffer offset. Must be a multiple of the control point format's element size and must be aligned to the platform's buffer offset alignment.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) ControlPointBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("controlPointBufferOffset"))
 	return _r
 }
 
-// SetControlPointBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointBufferOffset(controlPointBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointBufferOffset:"), controlPointBufferOffset)
-}
-
-// ControlPointCount number of control points in the control point buffer
-func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("controlPointCount"))
+// ControlPointCount returns number of control points in the control point buffer
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) ControlPointCount() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("controlPointCount"))
 	return _r
 }
 
-// SetControlPointCount wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointCount(controlPointCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointCount:"), controlPointCount)
-}
-
-// ControlPointStride stride, in bytes, between control points in the control point buffer. Must be a multiple of the control point format's element size and must be at least the control point format's size. Defaults to 0 bytes, indicating that the control points are tightly packed.
-func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("controlPointStride"))
+// ControlPointStride returns stride, in bytes, between control points in the control point buffer. Must be a multiple of the control point format's element size and must be at least the control point format's size. Defaults to 0 bytes, indicating that the control points are tightly packed.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) ControlPointStride() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("controlPointStride"))
 	return _r
 }
 
-// SetControlPointStride wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointStride(controlPointStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointStride:"), controlPointStride)
-}
-
-// ControlPointFormat format of the control points in the control point buffer. Defaults to MTLAttributeFormatFloat3 (packed).
-func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() AttributeFormat {
-	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("controlPointFormat"))
+// ControlPointFormat returns format of the control points in the control point buffer. Defaults to MTLAttributeFormatFloat3 (packed).
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(ascgd), objc.RegisterName("controlPointFormat"))
 	return _r
 }
 
-// SetControlPointFormat wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointFormat(controlPointFormat AttributeFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointFormat:"), controlPointFormat)
-}
-
-// RadiusBufferOffset radius buffer offset. Must be a multiple of the radius format size and must be aligned to the platform's buffer offset alignment.
-func (x *AccelerationStructureCurveGeometryDescriptor) RadiusBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radiusBufferOffset"))
+// RadiusBufferOffset returns radius buffer offset. Must be a multiple of the radius format size and must be aligned to the platform's buffer offset alignment.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) RadiusBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("radiusBufferOffset"))
 	return _r
 }
 
-// SetRadiusBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusBufferOffset(radiusBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusBufferOffset:"), radiusBufferOffset)
-}
-
-// RadiusFormat format of the radii in the radius buffer. Defaults to MTLAttributeFormatFloat.
-func (x *AccelerationStructureCurveGeometryDescriptor) RadiusFormat() AttributeFormat {
-	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("radiusFormat"))
+// RadiusFormat returns format of the radii in the radius buffer. Defaults to MTLAttributeFormatFloat.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) RadiusFormat() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(ascgd), objc.RegisterName("radiusFormat"))
 	return _r
 }
 
-// SetRadiusFormat wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusFormat(radiusFormat AttributeFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusFormat:"), radiusFormat)
-}
-
-// RadiusStride stride, in bytes, between radii in the radius buffer. Must be a multiple of the radius format size. Defaults to 0 bytes, indicating that the radii are tightly packed.
-func (x *AccelerationStructureCurveGeometryDescriptor) RadiusStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radiusStride"))
+// RadiusStride returns stride, in bytes, between radii in the radius buffer. Must be a multiple of the radius format size. Defaults to 0 bytes, indicating that the radii are tightly packed.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) RadiusStride() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("radiusStride"))
 	return _r
 }
 
-// SetRadiusStride wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusStride(radiusStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusStride:"), radiusStride)
-}
-
-// IndexBufferOffset index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
-func (x *AccelerationStructureCurveGeometryDescriptor) IndexBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferOffset"))
+// IndexBufferOffset returns index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) IndexBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("indexBufferOffset"))
 	return _r
 }
 
-// SetIndexBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexBufferOffset(indexBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
-}
-
-// IndexType index type
-func (x *AccelerationStructureCurveGeometryDescriptor) IndexType() IndexType {
-	_r := objc.Send[IndexType](objref.IDOf(x), objc.RegisterName("indexType"))
+// IndexType returns index type
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) IndexType() IndexType {
+	_r := objc.Send[IndexType](objref.IDOf(ascgd), objc.RegisterName("indexType"))
 	return _r
 }
 
-// SetIndexType wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexType(indexType IndexType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-}
-
-// SegmentCount number of curve segments
-func (x *AccelerationStructureCurveGeometryDescriptor) SegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("segmentCount"))
+// SegmentCount returns number of curve segments
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) SegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("segmentCount"))
 	return _r
 }
 
-// SetSegmentCount wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetSegmentCount(segmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
-}
-
-// SegmentControlPointCount number of control points per curve segment. Must be 2, 3, or 4.
-func (x *AccelerationStructureCurveGeometryDescriptor) SegmentControlPointCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("segmentControlPointCount"))
+// SegmentControlPointCount returns number of control points per curve segment. Must be 2, 3, or 4.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) SegmentControlPointCount() int {
+	_r := objc.Send[int](objref.IDOf(ascgd), objc.RegisterName("segmentControlPointCount"))
 	return _r
 }
 
-// SetSegmentControlPointCount wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetSegmentControlPointCount(segmentControlPointCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentControlPointCount:"), segmentControlPointCount)
-}
-
-// CurveType curve type. Defaults to MTLCurveTypeRound.
-func (x *AccelerationStructureCurveGeometryDescriptor) CurveType() CurveType {
-	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("curveType"))
+// CurveType returns curve type. Defaults to MTLCurveTypeRound.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) CurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(ascgd), objc.RegisterName("curveType"))
 	return _r
 }
 
-// SetCurveType wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveType(curveType CurveType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
-}
-
-// CurveBasis curve basis. Defaults to MTLCurveBasisBSpline.
-func (x *AccelerationStructureCurveGeometryDescriptor) CurveBasis() CurveBasis {
-	_r := objc.Send[CurveBasis](objref.IDOf(x), objc.RegisterName("curveBasis"))
+// CurveBasis returns curve basis. Defaults to MTLCurveBasisBSpline.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) CurveBasis() CurveBasis {
+	_r := objc.Send[CurveBasis](objref.IDOf(ascgd), objc.RegisterName("curveBasis"))
 	return _r
 }
 
-// SetCurveBasis wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveBasis(curveBasis CurveBasis) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveBasis:"), curveBasis)
-}
-
-// CurveEndCaps type of curve end caps. Defaults to MTLCurveEndCapsNone.
-func (x *AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() CurveEndCaps {
-	_r := objc.Send[CurveEndCaps](objref.IDOf(x), objc.RegisterName("curveEndCaps"))
+// CurveEndCaps returns type of curve end caps. Defaults to MTLCurveEndCapsNone.
+func (ascgd *AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() CurveEndCaps {
+	_r := objc.Send[CurveEndCaps](objref.IDOf(ascgd), objc.RegisterName("curveEndCaps"))
 	return _r
 }
-
-// SetCurveEndCaps wraps the corresponding Objective-C method.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveEndCaps(curveEndCaps CurveEndCaps) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveEndCaps:"), curveEndCaps)
-}
-
-// AccelerationStructureCurveGeometryDescriptorable is the interface implemented by [AccelerationStructureCurveGeometryDescriptor], for mocking and DI.
-type AccelerationStructureCurveGeometryDescriptorable interface {
-	obj.Object
-	WithControlPointBufferOffset(controlPointBufferOffset int) *AccelerationStructureCurveGeometryDescriptor
-	WithControlPointCount(controlPointCount int) *AccelerationStructureCurveGeometryDescriptor
-	WithControlPointStride(controlPointStride int) *AccelerationStructureCurveGeometryDescriptor
-	WithControlPointFormat(controlPointFormat AttributeFormat) *AccelerationStructureCurveGeometryDescriptor
-	WithRadiusBufferOffset(radiusBufferOffset int) *AccelerationStructureCurveGeometryDescriptor
-	WithRadiusFormat(radiusFormat AttributeFormat) *AccelerationStructureCurveGeometryDescriptor
-	WithRadiusStride(radiusStride int) *AccelerationStructureCurveGeometryDescriptor
-	WithIndexBufferOffset(indexBufferOffset int) *AccelerationStructureCurveGeometryDescriptor
-	WithIndexType(indexType IndexType) *AccelerationStructureCurveGeometryDescriptor
-	WithSegmentCount(segmentCount int) *AccelerationStructureCurveGeometryDescriptor
-	WithSegmentControlPointCount(segmentControlPointCount int) *AccelerationStructureCurveGeometryDescriptor
-	WithCurveType(curveType CurveType) *AccelerationStructureCurveGeometryDescriptor
-	WithCurveBasis(curveBasis CurveBasis) *AccelerationStructureCurveGeometryDescriptor
-	WithCurveEndCaps(curveEndCaps CurveEndCaps) *AccelerationStructureCurveGeometryDescriptor
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureCurveGeometryDescriptor
-	WithOpaque(opaque bool) *AccelerationStructureCurveGeometryDescriptor
-	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureCurveGeometryDescriptor
-	WithLabel(label string) *AccelerationStructureCurveGeometryDescriptor
-	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureCurveGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureCurveGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureCurveGeometryDescriptor
-	ControlPointBufferOffset() int
-	SetControlPointBufferOffset(controlPointBufferOffset int)
-	ControlPointCount() int
-	SetControlPointCount(controlPointCount int)
-	ControlPointStride() int
-	SetControlPointStride(controlPointStride int)
-	ControlPointFormat() AttributeFormat
-	SetControlPointFormat(controlPointFormat AttributeFormat)
-	RadiusBufferOffset() int
-	SetRadiusBufferOffset(radiusBufferOffset int)
-	RadiusFormat() AttributeFormat
-	SetRadiusFormat(radiusFormat AttributeFormat)
-	RadiusStride() int
-	SetRadiusStride(radiusStride int)
-	IndexBufferOffset() int
-	SetIndexBufferOffset(indexBufferOffset int)
-	IndexType() IndexType
-	SetIndexType(indexType IndexType)
-	SegmentCount() int
-	SetSegmentCount(segmentCount int)
-	SegmentControlPointCount() int
-	SetSegmentControlPointCount(segmentControlPointCount int)
-	CurveType() CurveType
-	SetCurveType(curveType CurveType)
-	CurveBasis() CurveBasis
-	SetCurveBasis(curveBasis CurveBasis)
-	CurveEndCaps() CurveEndCaps
-	SetCurveEndCaps(curveEndCaps CurveEndCaps)
-}
-
-var _ AccelerationStructureCurveGeometryDescriptorable = (*AccelerationStructureCurveGeometryDescriptor)(nil)
 
 var _ AccelerationStructureGeometryDescriptorProvider = (*AccelerationStructureCurveGeometryDescriptor)(nil)

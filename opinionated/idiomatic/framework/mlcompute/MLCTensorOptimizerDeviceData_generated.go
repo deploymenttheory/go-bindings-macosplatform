@@ -46,24 +46,24 @@ func tensorOptimizerDeviceDataAdopt(id objc.ID) *TensorOptimizerDeviceData {
 }
 
 // Description returns the object's -description text.
-func (x *TensorOptimizerDeviceData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (todd *TensorOptimizerDeviceData) Description() string {
+	return rt.Description(objref.IDOf(todd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TensorOptimizerDeviceData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (todd *TensorOptimizerDeviceData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(todd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TensorOptimizerDeviceData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (todd *TensorOptimizerDeviceData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(todd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TensorOptimizerDeviceData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (todd *TensorOptimizerDeviceData) String() string {
+	return rt.Description(objref.IDOf(todd))
 }
 
 // NewTensorOptimizerDeviceData creates a new TensorOptimizerDeviceData.
@@ -71,10 +71,3 @@ func NewTensorOptimizerDeviceData() *TensorOptimizerDeviceData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorOptimizerDeviceData")), objc.RegisterName("new"))
 	return tensorOptimizerDeviceDataAdopt(_id)
 }
-
-// TensorOptimizerDeviceDataable is the interface implemented by [TensorOptimizerDeviceData], for mocking and DI.
-type TensorOptimizerDeviceDataable interface {
-	obj.Object
-}
-
-var _ TensorOptimizerDeviceDataable = (*TensorOptimizerDeviceData)(nil)

@@ -48,261 +48,177 @@ func propertyDescriptionAdopt(id objc.ID) *PropertyDescription {
 }
 
 // Description returns the object's -description text.
-func (x *PropertyDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PropertyDescription) Description() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PropertyDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pd *PropertyDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PropertyDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pd *PropertyDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PropertyDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PropertyDescription) String() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
-// WithName the name of the receiver.
-func (x *PropertyDescription) WithName(name string) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (pd *PropertyDescription) WithName(name string) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setName:"), purego.NSString(name))
+	return pd
 }
 
-// WithOptional a Boolean value that indicates whether the receiver is optional.
-func (x *PropertyDescription) WithOptional(optional bool) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
-	return x
+// WithOptional sets a Boolean value that indicates whether the receiver is optional.
+func (pd *PropertyDescription) WithOptional(optional bool) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setOptional:"), optional)
+	return pd
 }
 
-// WithTransient a Boolean value that indicates whether the receiver is transient.
-func (x *PropertyDescription) WithTransient(transient bool) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
-	return x
+// WithTransient sets a Boolean value that indicates whether the receiver is transient.
+func (pd *PropertyDescription) WithTransient(transient bool) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setTransient:"), transient)
+	return pd
 }
 
-// WithUserInfo the user info dictionary of the receiver.
-func (x *PropertyDescription) WithUserInfo(userInfo obj.Object) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info dictionary of the receiver.
+func (pd *PropertyDescription) WithUserInfo(userInfo obj.Object) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return pd
 }
 
-// WithIndexed a Boolean value that indicates whether the receiver should be indexed for searching.
-func (x *PropertyDescription) WithIndexed(indexed bool) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
-	return x
+// WithIndexed sets a Boolean value that indicates whether the receiver should be indexed for searching.
+func (pd *PropertyDescription) WithIndexed(indexed bool) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setIndexed:"), indexed)
+	return pd
 }
 
-// WithVersionHashModifier the version hash modifier for the receiver.
-func (x *PropertyDescription) WithVersionHashModifier(versionHashModifier string) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
-	return x
+// WithVersionHashModifier sets the version hash modifier for the receiver.
+func (pd *PropertyDescription) WithVersionHashModifier(versionHashModifier string) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
+	return pd
 }
 
-// WithIndexedBySpotlight a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
-func (x *PropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
-	return x
+// WithIndexedBySpotlight sets a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+func (pd *PropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
+	return pd
 }
 
-// WithStoredInExternalRecord a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
-func (x *PropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
-	return x
+// WithStoredInExternalRecord sets a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+func (pd *PropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
+	return pd
 }
 
-// WithRenamingIdentifier the renaming identifier for the receiver.
-func (x *PropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *PropertyDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
-	return x
+// WithRenamingIdentifier sets the renaming identifier for the receiver.
+func (pd *PropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *PropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
+	return pd
 }
 
 // SetValidationPredicatesWithValidationWarnings sets the validation predicates and warnings of the receiver.
-func (x *PropertyDescription) SetValidationPredicatesWithValidationWarnings(validationPredicates []obj.Object, validationWarnings []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidationPredicates:withValidationWarnings:"), purego.SliceToNSArray(validationPredicates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(validationWarnings, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (pd *PropertyDescription) SetValidationPredicatesWithValidationWarnings(validationPredicates []obj.Object, validationWarnings []string) {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setValidationPredicates:withValidationWarnings:"), purego.SliceToNSArray(validationPredicates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(validationWarnings, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // Entity wraps the corresponding Objective-C method.
-func (x *PropertyDescription) Entity() *EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+func (pd *PropertyDescription) Entity() *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *PropertyDescription) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (pd *PropertyDescription) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // IsOptional wraps the corresponding Objective-C method.
-func (x *PropertyDescription) IsOptional() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOptional"))
+func (pd *PropertyDescription) IsOptional() bool {
+	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isOptional"))
 	return _r
-}
-
-// SetOptional wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetOptional(optional bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
 }
 
 // IsTransient wraps the corresponding Objective-C method.
-func (x *PropertyDescription) IsTransient() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransient"))
+func (pd *PropertyDescription) IsTransient() bool {
+	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isTransient"))
 	return _r
-}
-
-// SetTransient wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetTransient(transient bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
 }
 
 // ValidationPredicates wraps the corresponding Objective-C method.
 //
 // ValidationPredicates returns the collection as a Go slice.
-func (x *PropertyDescription) ValidationPredicates() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validationPredicates"))
+func (pd *PropertyDescription) ValidationPredicates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("validationPredicates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ValidationWarnings wraps the corresponding Objective-C method.
-func (x *PropertyDescription) ValidationWarnings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validationWarnings"))
+func (pd *PropertyDescription) ValidationWarnings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("validationWarnings"))
 	return obj.Wrap(_r)
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *PropertyDescription) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (pd *PropertyDescription) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// SetUserInfo wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetUserInfo(userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-}
-
 // IsIndexed wraps the corresponding Objective-C method.
-func (x *PropertyDescription) IsIndexed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIndexed"))
+func (pd *PropertyDescription) IsIndexed() bool {
+	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isIndexed"))
 	return _r
 }
 
-// SetIndexed wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetIndexed(indexed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
-}
-
 // VersionHash wraps the corresponding Objective-C method.
-func (x *PropertyDescription) VersionHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionHash"))
+func (pd *PropertyDescription) VersionHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("versionHash"))
 	return obj.Wrap(_r)
 }
 
 // VersionHashModifier wraps the corresponding Objective-C method.
-func (x *PropertyDescription) VersionHashModifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionHashModifier"))
+func (pd *PropertyDescription) VersionHashModifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("versionHashModifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetVersionHashModifier wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetVersionHashModifier(versionHashModifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
 }
 
 // IsIndexedBySpotlight wraps the corresponding Objective-C method.
-func (x *PropertyDescription) IsIndexedBySpotlight() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIndexedBySpotlight"))
+func (pd *PropertyDescription) IsIndexedBySpotlight() bool {
+	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isIndexedBySpotlight"))
 	return _r
-}
-
-// SetIndexedBySpotlight wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetIndexedBySpotlight(indexedBySpotlight bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
 }
 
 // IsStoredInExternalRecord wraps the corresponding Objective-C method.
-func (x *PropertyDescription) IsStoredInExternalRecord() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStoredInExternalRecord"))
+func (pd *PropertyDescription) IsStoredInExternalRecord() bool {
+	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isStoredInExternalRecord"))
 	return _r
 }
 
-// SetStoredInExternalRecord wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetStoredInExternalRecord(storedInExternalRecord bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
-}
-
 // RenamingIdentifier wraps the corresponding Objective-C method.
-func (x *PropertyDescription) RenamingIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renamingIdentifier"))
+func (pd *PropertyDescription) RenamingIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("renamingIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetRenamingIdentifier wraps the corresponding Objective-C method.
-func (x *PropertyDescription) SetRenamingIdentifier(renamingIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
-}
-
-// PropertyDescriptionable is the interface implemented by [PropertyDescription], for mocking and DI.
-type PropertyDescriptionable interface {
-	obj.Object
-	WithName(name string) *PropertyDescription
-	WithOptional(optional bool) *PropertyDescription
-	WithTransient(transient bool) *PropertyDescription
-	WithUserInfo(userInfo obj.Object) *PropertyDescription
-	WithIndexed(indexed bool) *PropertyDescription
-	WithVersionHashModifier(versionHashModifier string) *PropertyDescription
-	WithIndexedBySpotlight(indexedBySpotlight bool) *PropertyDescription
-	WithStoredInExternalRecord(storedInExternalRecord bool) *PropertyDescription
-	WithRenamingIdentifier(renamingIdentifier string) *PropertyDescription
-	SetValidationPredicatesWithValidationWarnings(validationPredicates []obj.Object, validationWarnings []string)
-	Entity() *EntityDescription
-	Name() string
-	SetName(name string)
-	IsOptional() bool
-	SetOptional(optional bool)
-	IsTransient() bool
-	SetTransient(transient bool)
-	ValidationPredicates() []obj.Object
-	ValidationWarnings() obj.Object
-	UserInfo() obj.Object
-	SetUserInfo(userInfo obj.Object)
-	IsIndexed() bool
-	SetIndexed(indexed bool)
-	VersionHash() obj.Object
-	VersionHashModifier() string
-	SetVersionHashModifier(versionHashModifier string)
-	IsIndexedBySpotlight() bool
-	SetIndexedBySpotlight(indexedBySpotlight bool)
-	IsStoredInExternalRecord() bool
-	SetStoredInExternalRecord(storedInExternalRecord bool)
-	RenamingIdentifier() string
-	SetRenamingIdentifier(renamingIdentifier string)
-}
-
-var _ PropertyDescriptionable = (*PropertyDescription)(nil)
 
 // isPropertyDescription marks PropertyDescription — and, by embedding promotion, its
 // subclasses — as a member of the PropertyDescription hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PropertyDescription) isPropertyDescription() {}
+func (pd *PropertyDescription) isPropertyDescription() {}
 
 var _ PropertyDescriptionProvider = (*PropertyDescription)(nil)

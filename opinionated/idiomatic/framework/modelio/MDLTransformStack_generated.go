@@ -44,24 +44,24 @@ func transformStackAdopt(id objc.ID) *TransformStack {
 }
 
 // Description returns the object's -description text.
-func (x *TransformStack) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TransformStack) Description() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformStack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ts *TransformStack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformStack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ts *TransformStack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TransformStack) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TransformStack) String() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTransformStack creates a new TransformStack.
@@ -71,94 +71,75 @@ func NewTransformStack() *TransformStack {
 }
 
 // AddTranslateOpInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddTranslateOpInverse(animatedValueName string, inverse bool) *TransformTranslateOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTranslateOp:inverse:"), purego.NSString(animatedValueName), inverse)
+func (ts *TransformStack) AddTranslateOpInverse(animatedValueName string, inverse bool) *TransformTranslateOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addTranslateOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformTranslateOpFromID(_r)
 }
 
 // AddRotateXOpInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddRotateXOpInverse(animatedValueName string, inverse bool) *TransformRotateXOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRotateXOp:inverse:"), purego.NSString(animatedValueName), inverse)
+func (ts *TransformStack) AddRotateXOpInverse(animatedValueName string, inverse bool) *TransformRotateXOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateXOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformRotateXOpFromID(_r)
 }
 
 // AddRotateYOpInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddRotateYOpInverse(animatedValueName string, inverse bool) *TransformRotateYOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRotateYOp:inverse:"), purego.NSString(animatedValueName), inverse)
+func (ts *TransformStack) AddRotateYOpInverse(animatedValueName string, inverse bool) *TransformRotateYOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateYOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformRotateYOpFromID(_r)
 }
 
 // AddRotateZOpInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddRotateZOpInverse(animatedValueName string, inverse bool) *TransformRotateZOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRotateZOp:inverse:"), purego.NSString(animatedValueName), inverse)
+func (ts *TransformStack) AddRotateZOpInverse(animatedValueName string, inverse bool) *TransformRotateZOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateZOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformRotateZOpFromID(_r)
 }
 
 // AddRotateOpOrderInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddRotateOpOrderInverse(animatedValueName string, order TransformOpRotationOrder, inverse bool) *TransformRotateOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRotateOp:order:inverse:"), purego.NSString(animatedValueName), order, inverse)
+func (ts *TransformStack) AddRotateOpOrderInverse(animatedValueName string, order TransformOpRotationOrder, inverse bool) *TransformRotateOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateOp:order:inverse:"), purego.NSString(animatedValueName), order, inverse)
 	return TransformRotateOpFromID(_r)
 }
 
 // AddScaleOpInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddScaleOpInverse(animatedValueName string, inverse bool) *TransformScaleOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addScaleOp:inverse:"), purego.NSString(animatedValueName), inverse)
+func (ts *TransformStack) AddScaleOpInverse(animatedValueName string, inverse bool) *TransformScaleOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addScaleOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformScaleOpFromID(_r)
 }
 
 // AddMatrixOpInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddMatrixOpInverse(animatedValueName string, inverse bool) *TransformMatrixOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMatrixOp:inverse:"), purego.NSString(animatedValueName), inverse)
+func (ts *TransformStack) AddMatrixOpInverse(animatedValueName string, inverse bool) *TransformMatrixOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addMatrixOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformMatrixOpFromID(_r)
 }
 
 // AddOrientOpInverse wraps the corresponding Objective-C method.
-func (x *TransformStack) AddOrientOpInverse(animatedValueName string, inverse bool) *TransformOrientOp {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrientOp:inverse:"), purego.NSString(animatedValueName), inverse)
+func (ts *TransformStack) AddOrientOpInverse(animatedValueName string, inverse bool) *TransformOrientOp {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addOrientOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformOrientOpFromID(_r)
 }
 
 // AnimatedValueWithName wraps the corresponding Objective-C method.
-func (x *TransformStack) AnimatedValueWithName(name string) *AnimatedValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValueWithName:"), purego.NSString(name))
+func (ts *TransformStack) AnimatedValueWithName(name string) *AnimatedValue {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("animatedValueWithName:"), purego.NSString(name))
 	return AnimatedValueFromID(_r)
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *TransformStack) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (ts *TransformStack) Count() int {
+	_r := objc.Send[int](objref.IDOf(ts), objc.RegisterName("count"))
 	return _r
 }
 
 // KeyTimes wraps the corresponding Objective-C method.
 //
 // KeyTimes returns the collection as a Go slice.
-func (x *TransformStack) KeyTimes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyTimes"))
+func (ts *TransformStack) KeyTimes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("keyTimes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TransformOps wraps the corresponding Objective-C method.
-func (x *TransformStack) TransformOps() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformOps"))
+func (ts *TransformStack) TransformOps() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("transformOps"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// TransformStackable is the interface implemented by [TransformStack], for mocking and DI.
-type TransformStackable interface {
-	obj.Object
-	AddTranslateOpInverse(animatedValueName string, inverse bool) *TransformTranslateOp
-	AddRotateXOpInverse(animatedValueName string, inverse bool) *TransformRotateXOp
-	AddRotateYOpInverse(animatedValueName string, inverse bool) *TransformRotateYOp
-	AddRotateZOpInverse(animatedValueName string, inverse bool) *TransformRotateZOp
-	AddRotateOpOrderInverse(animatedValueName string, order TransformOpRotationOrder, inverse bool) *TransformRotateOp
-	AddScaleOpInverse(animatedValueName string, inverse bool) *TransformScaleOp
-	AddMatrixOpInverse(animatedValueName string, inverse bool) *TransformMatrixOp
-	AddOrientOpInverse(animatedValueName string, inverse bool) *TransformOrientOp
-	AnimatedValueWithName(name string) *AnimatedValue
-	Count() int
-	KeyTimes() []obj.Object
-	TransformOps() []obj.Object
-}
-
-var _ TransformStackable = (*TransformStack)(nil)

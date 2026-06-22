@@ -46,24 +46,24 @@ func iKFilterBrowserPanelAdopt(id objc.ID) *IKFilterBrowserPanel {
 }
 
 // Description returns the object's -description text.
-func (x *IKFilterBrowserPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ifbp *IKFilterBrowserPanel) Description() string {
+	return rt.Description(objref.IDOf(ifbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IKFilterBrowserPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ifbp *IKFilterBrowserPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ifbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IKFilterBrowserPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ifbp *IKFilterBrowserPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ifbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IKFilterBrowserPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ifbp *IKFilterBrowserPanel) String() string {
+	return rt.Description(objref.IDOf(ifbp))
 }
 
 // NewIKFilterBrowserPanel creates a new IKFilterBrowserPanel.
@@ -73,18 +73,10 @@ func NewIKFilterBrowserPanel() *IKFilterBrowserPanel {
 }
 
 // FilterName returns the name of the filter that is currently selected in the filter browser.
-func (x *IKFilterBrowserPanel) FilterName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
+func (ifbp *IKFilterBrowserPanel) FilterName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ifbp), objc.RegisterName("filterName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// IKFilterBrowserPanelable is the interface implemented by [IKFilterBrowserPanel], for mocking and DI.
-type IKFilterBrowserPanelable interface {
-	obj.Object
-	FilterName() string
-}
-
-var _ IKFilterBrowserPanelable = (*IKFilterBrowserPanel)(nil)

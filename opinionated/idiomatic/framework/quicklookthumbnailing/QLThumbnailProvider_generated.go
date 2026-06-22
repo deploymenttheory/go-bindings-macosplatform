@@ -6,6 +6,7 @@ package quicklookthumbnailing
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func thumbnailProviderAdopt(id objc.ID) *ThumbnailProvider {
 }
 
 // Description returns the object's -description text.
-func (x *ThumbnailProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tp *ThumbnailProvider) Description() string {
+	return rt.Description(objref.IDOf(tp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ThumbnailProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tp *ThumbnailProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ThumbnailProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tp *ThumbnailProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ThumbnailProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tp *ThumbnailProvider) String() string {
+	return rt.Description(objref.IDOf(tp))
 }
 
 // NewThumbnailProvider creates a new ThumbnailProvider.
@@ -77,7 +78,7 @@ func NewThumbnailProvider() *ThumbnailProvider {
 // ProvideThumbnailForFileRequest creates a thumbnail of a custom file type for a specific request.
 //
 // ProvideThumbnailForFileRequest blocks until the operation completes or ctx is cancelled.
-func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (result *ThumbnailReply, err error) {
+func (tp *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (result *ThumbnailReply, err error) {
 	type _result struct {
 		val *ThumbnailReply
 		err error
@@ -89,7 +90,7 @@ func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, 
 		_o.val = ThumbnailReplyFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provideThumbnailForFileRequest:completionHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("provideThumbnailForFileRequest:completionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -98,11 +99,3 @@ func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, 
 		return _zero, ctx.Err()
 	}
 }
-
-// ThumbnailProviderable is the interface implemented by [ThumbnailProvider], for mocking and DI.
-type ThumbnailProviderable interface {
-	obj.Object
-	ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (*ThumbnailReply, error)
-}
-
-var _ ThumbnailProviderable = (*ThumbnailProvider)(nil)

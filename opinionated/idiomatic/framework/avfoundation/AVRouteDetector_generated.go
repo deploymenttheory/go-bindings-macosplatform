@@ -46,24 +46,24 @@ func routeDetectorAdopt(id objc.ID) *RouteDetector {
 }
 
 // Description returns the object's -description text.
-func (x *RouteDetector) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rd *RouteDetector) Description() string {
+	return rt.Description(objref.IDOf(rd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RouteDetector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rd *RouteDetector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RouteDetector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rd *RouteDetector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RouteDetector) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rd *RouteDetector) String() string {
+	return rt.Description(objref.IDOf(rd))
 }
 
 // NewRouteDetector creates a new RouteDetector.
@@ -72,36 +72,20 @@ func NewRouteDetector() *RouteDetector {
 	return routeDetectorAdopt(_id)
 }
 
-// WithRouteDetectionEnabled a Boolean value that indicates whether route detection is in an enabled state.
-func (x *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouteDetectionEnabled:"), routeDetectionEnabled)
-	return x
+// WithRouteDetectionEnabled sets a Boolean value that indicates whether route detection is in an enabled state.
+func (rd *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setRouteDetectionEnabled:"), routeDetectionEnabled)
+	return rd
 }
 
-// IsRouteDetectionEnabled whether or not route detection is enabled. The default value is NO. Route detection significantly increases power consumption and must be turned off when it's no longer needed.
-func (x *RouteDetector) IsRouteDetectionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRouteDetectionEnabled"))
+// IsRouteDetectionEnabled reports whether route detection is enabled. The default value is false. Route detection significantly increases power consumption and must be turned off when it's no longer needed.
+func (rd *RouteDetector) IsRouteDetectionEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isRouteDetectionEnabled"))
 	return _r
 }
 
-// SetRouteDetectionEnabled wraps the corresponding Objective-C method.
-func (x *RouteDetector) SetRouteDetectionEnabled(routeDetectionEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouteDetectionEnabled:"), routeDetectionEnabled)
-}
-
-// MultipleRoutesDetected this property is YES if, in addition to the local playback route, at least one more playback route has been detected. If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
-func (x *RouteDetector) MultipleRoutesDetected() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("multipleRoutesDetected"))
+// MultipleRoutesDetected reports whether this property is true if, in addition to the local playback route, at least one more playback route has been detected. If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
+func (rd *RouteDetector) MultipleRoutesDetected() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("multipleRoutesDetected"))
 	return _r
 }
-
-// RouteDetectorable is the interface implemented by [RouteDetector], for mocking and DI.
-type RouteDetectorable interface {
-	obj.Object
-	WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector
-	IsRouteDetectionEnabled() bool
-	SetRouteDetectionEnabled(routeDetectionEnabled bool)
-	MultipleRoutesDetected() bool
-}
-
-var _ RouteDetectorable = (*RouteDetector)(nil)

@@ -46,24 +46,24 @@ func multiArrayShapeConstraintAdopt(id objc.ID) *MultiArrayShapeConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *MultiArrayShapeConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (masc *MultiArrayShapeConstraint) Description() string {
+	return rt.Description(objref.IDOf(masc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiArrayShapeConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (masc *MultiArrayShapeConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(masc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiArrayShapeConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (masc *MultiArrayShapeConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(masc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MultiArrayShapeConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (masc *MultiArrayShapeConstraint) String() string {
+	return rt.Description(objref.IDOf(masc))
 }
 
 // NewMultiArrayShapeConstraint creates a new MultiArrayShapeConstraint.
@@ -73,33 +73,23 @@ func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *MultiArrayShapeConstraint) Type() MultiArrayShapeConstraintType {
-	_r := objc.Send[MultiArrayShapeConstraintType](objref.IDOf(x), objc.RegisterName("type"))
+func (masc *MultiArrayShapeConstraint) Type() MultiArrayShapeConstraintType {
+	_r := objc.Send[MultiArrayShapeConstraintType](objref.IDOf(masc), objc.RegisterName("type"))
 	return _r
 }
 
 // SizeRangeForDimension wraps the corresponding Objective-C method.
 //
 // SizeRangeForDimension returns the collection as a Go slice.
-func (x *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeRangeForDimension"))
+func (masc *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(masc), objc.RegisterName("sizeRangeForDimension"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // EnumeratedShapes wraps the corresponding Objective-C method.
 //
 // EnumeratedShapes returns the collection as a Go slice.
-func (x *MultiArrayShapeConstraint) EnumeratedShapes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedShapes"))
+func (masc *MultiArrayShapeConstraint) EnumeratedShapes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(masc), objc.RegisterName("enumeratedShapes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// MultiArrayShapeConstraintable is the interface implemented by [MultiArrayShapeConstraint], for mocking and DI.
-type MultiArrayShapeConstraintable interface {
-	obj.Object
-	Type() MultiArrayShapeConstraintType
-	SizeRangeForDimension() []obj.Object
-	EnumeratedShapes() []obj.Object
-}
-
-var _ MultiArrayShapeConstraintable = (*MultiArrayShapeConstraint)(nil)

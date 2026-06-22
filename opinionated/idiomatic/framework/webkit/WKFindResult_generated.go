@@ -46,24 +46,24 @@ func wKFindResultAdopt(id objc.ID) *WKFindResult {
 }
 
 // Description returns the object's -description text.
-func (x *WKFindResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wfr *WKFindResult) Description() string {
+	return rt.Description(objref.IDOf(wfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKFindResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wfr *WKFindResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKFindResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wfr *WKFindResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKFindResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wfr *WKFindResult) String() string {
+	return rt.Description(objref.IDOf(wfr))
 }
 
 // NewWKFindResult creates a new WKFindResult.
@@ -73,15 +73,7 @@ func NewWKFindResult() *WKFindResult {
 }
 
 // MatchFound wraps the corresponding Objective-C method.
-func (x *WKFindResult) MatchFound() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchFound"))
+func (wfr *WKFindResult) MatchFound() bool {
+	_r := objc.Send[bool](objref.IDOf(wfr), objc.RegisterName("matchFound"))
 	return _r
 }
-
-// WKFindResultable is the interface implemented by [WKFindResult], for mocking and DI.
-type WKFindResultable interface {
-	obj.Object
-	MatchFound() bool
-}
-
-var _ WKFindResultable = (*WKFindResult)(nil)

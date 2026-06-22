@@ -46,24 +46,24 @@ func wKWebsiteDataRecordAdopt(id objc.ID) *WKWebsiteDataRecord {
 }
 
 // Description returns the object's -description text.
-func (x *WKWebsiteDataRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wwdr *WKWebsiteDataRecord) Description() string {
+	return rt.Description(objref.IDOf(wwdr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKWebsiteDataRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wwdr *WKWebsiteDataRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wwdr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKWebsiteDataRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wwdr *WKWebsiteDataRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wwdr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKWebsiteDataRecord) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wwdr *WKWebsiteDataRecord) String() string {
+	return rt.Description(objref.IDOf(wwdr))
 }
 
 // NewWKWebsiteDataRecord creates a new WKWebsiteDataRecord.
@@ -72,26 +72,17 @@ func NewWKWebsiteDataRecord() *WKWebsiteDataRecord {
 	return wKWebsiteDataRecordAdopt(_id)
 }
 
-// DisplayName the display name for the data record. This is usually the domain name.
-func (x *WKWebsiteDataRecord) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns the display name for the data record. This is usually the domain name.
+func (wwdr *WKWebsiteDataRecord) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwdr), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DataTypes the various types of website data that exist for this data record.
-func (x *WKWebsiteDataRecord) DataTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataTypes"))
+// DataTypes returns the various types of website data that exist for this data record.
+func (wwdr *WKWebsiteDataRecord) DataTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwdr), objc.RegisterName("dataTypes"))
 	return obj.Wrap(_r)
 }
-
-// WKWebsiteDataRecordable is the interface implemented by [WKWebsiteDataRecord], for mocking and DI.
-type WKWebsiteDataRecordable interface {
-	obj.Object
-	DisplayName() string
-	DataTypes() obj.Object
-}
-
-var _ WKWebsiteDataRecordable = (*WKWebsiteDataRecord)(nil)

@@ -68,37 +68,27 @@ func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid obj.Object, major uint16,
 }
 
 // UUID wraps the corresponding Objective-C method.
-func (x *BeaconIdentityCondition) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+func (bic *BeaconIdentityCondition) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
 // Major wraps the corresponding Objective-C method.
-func (x *BeaconIdentityCondition) Major() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
+func (bic *BeaconIdentityCondition) Major() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
 // Minor wraps the corresponding Objective-C method.
-func (x *BeaconIdentityCondition) Minor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
+func (bic *BeaconIdentityCondition) Minor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("minor"))
 	return obj.Wrap(_r)
 }
-
-// BeaconIdentityConditionable is the interface implemented by [BeaconIdentityCondition], for mocking and DI.
-type BeaconIdentityConditionable interface {
-	obj.Object
-	UUID() obj.Object
-	Major() obj.Object
-	Minor() obj.Object
-}
-
-var _ BeaconIdentityConditionable = (*BeaconIdentityCondition)(nil)
 
 // isBeaconIdentityCondition marks BeaconIdentityCondition — and, by embedding promotion, its
 // subclasses — as a member of the BeaconIdentityCondition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BeaconIdentityCondition) isBeaconIdentityCondition() {}
+func (bic *BeaconIdentityCondition) isBeaconIdentityCondition() {}
 
 var _ BeaconIdentityConditionProvider = (*BeaconIdentityCondition)(nil)
 

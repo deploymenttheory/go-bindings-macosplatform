@@ -46,24 +46,24 @@ func argumentAdopt(id objc.ID) *Argument {
 }
 
 // Description returns the object's -description text.
-func (x *Argument) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Argument) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Argument) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Argument) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Argument) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Argument) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Argument) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Argument) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewArgument creates a new Argument.
@@ -73,8 +73,8 @@ func NewArgument() *Argument {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Argument) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (a *Argument) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,114 +82,91 @@ func (x *Argument) Name() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Argument) Type() ArgumentType {
-	_r := objc.Send[ArgumentType](objref.IDOf(x), objc.RegisterName("type"))
+func (a *Argument) Type() ArgumentType {
+	_r := objc.Send[ArgumentType](objref.IDOf(a), objc.RegisterName("type"))
 	return _r
 }
 
 // Access wraps the corresponding Objective-C method.
-func (x *Argument) Access() BindingAccess {
-	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+func (a *Argument) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(a), objc.RegisterName("access"))
 	return _r
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *Argument) Index() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+func (a *Argument) Index() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("index"))
 	return _r
 }
 
 // IsActive wraps the corresponding Objective-C method.
-func (x *Argument) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+func (a *Argument) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActive"))
 	return _r
 }
 
 // BufferAlignment wraps the corresponding Objective-C method.
-func (x *Argument) BufferAlignment() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferAlignment"))
+func (a *Argument) BufferAlignment() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("bufferAlignment"))
 	return _r
 }
 
 // BufferDataSize wraps the corresponding Objective-C method.
-func (x *Argument) BufferDataSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferDataSize"))
+func (a *Argument) BufferDataSize() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("bufferDataSize"))
 	return _r
 }
 
 // BufferDataType wraps the corresponding Objective-C method.
-func (x *Argument) BufferDataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("bufferDataType"))
+func (a *Argument) BufferDataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(a), objc.RegisterName("bufferDataType"))
 	return _r
 }
 
 // BufferStructType wraps the corresponding Objective-C method.
-func (x *Argument) BufferStructType() *StructType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bufferStructType"))
+func (a *Argument) BufferStructType() *StructType {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bufferStructType"))
 	return StructTypeFromID(_r)
 }
 
 // BufferPointerType wraps the corresponding Objective-C method.
-func (x *Argument) BufferPointerType() *PointerType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bufferPointerType"))
+func (a *Argument) BufferPointerType() *PointerType {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bufferPointerType"))
 	return PointerTypeFromID(_r)
 }
 
 // ThreadgroupMemoryAlignment wraps the corresponding Objective-C method.
-func (x *Argument) ThreadgroupMemoryAlignment() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("threadgroupMemoryAlignment"))
+func (a *Argument) ThreadgroupMemoryAlignment() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("threadgroupMemoryAlignment"))
 	return _r
 }
 
 // ThreadgroupMemoryDataSize wraps the corresponding Objective-C method.
-func (x *Argument) ThreadgroupMemoryDataSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("threadgroupMemoryDataSize"))
+func (a *Argument) ThreadgroupMemoryDataSize() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("threadgroupMemoryDataSize"))
 	return _r
 }
 
 // TextureType wraps the corresponding Objective-C method.
-func (x *Argument) TextureType() TextureType {
-	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
+func (a *Argument) TextureType() TextureType {
+	_r := objc.Send[TextureType](objref.IDOf(a), objc.RegisterName("textureType"))
 	return _r
 }
 
 // TextureDataType wraps the corresponding Objective-C method.
-func (x *Argument) TextureDataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("textureDataType"))
+func (a *Argument) TextureDataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(a), objc.RegisterName("textureDataType"))
 	return _r
 }
 
 // IsDepthTexture wraps the corresponding Objective-C method.
-func (x *Argument) IsDepthTexture() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDepthTexture"))
+func (a *Argument) IsDepthTexture() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isDepthTexture"))
 	return _r
 }
 
 // ArrayLength wraps the corresponding Objective-C method.
-func (x *Argument) ArrayLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("arrayLength"))
+func (a *Argument) ArrayLength() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("arrayLength"))
 	return _r
 }
-
-// Argumentable is the interface implemented by [Argument], for mocking and DI.
-type Argumentable interface {
-	obj.Object
-	Name() string
-	Type() ArgumentType
-	Access() BindingAccess
-	Index() int
-	IsActive() bool
-	BufferAlignment() int
-	BufferDataSize() int
-	BufferDataType() DataType
-	BufferStructType() *StructType
-	BufferPointerType() *PointerType
-	ThreadgroupMemoryAlignment() int
-	ThreadgroupMemoryDataSize() int
-	TextureType() TextureType
-	TextureDataType() DataType
-	IsDepthTexture() bool
-	ArrayLength() int
-}
-
-var _ Argumentable = (*Argument)(nil)

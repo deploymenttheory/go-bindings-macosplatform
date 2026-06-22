@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,95 +52,76 @@ func NewNNSubtractionNode() *NNSubtractionNode {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithPrimaryScale(primaryScale float32) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (nsn *NNSubtractionNode) WithPrimaryScale(primaryScale float32) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return nsn
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithSecondaryScale(secondaryScale float32) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (nsn *NNSubtractionNode) WithSecondaryScale(secondaryScale float32) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return nsn
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithBias(bias float32) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (nsn *NNSubtractionNode) WithBias(bias float32) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setBias:"), bias)
+	return nsn
 }
 
 // WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+func (nsn *NNSubtractionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return nsn
 }
 
 // WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+func (nsn *NNSubtractionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return nsn
 }
 
 // WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
-	return x
+func (nsn *NNSubtractionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
+	return nsn
 }
 
 // WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+func (nsn *NNSubtractionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return nsn
 }
 
 // WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+func (nsn *NNSubtractionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return nsn
 }
 
 // WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+func (nsn *NNSubtractionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return nsn
 }
 
 // WithMinimumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithMinimumValue(minimumValue float32) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+func (nsn *NNSubtractionNode) WithMinimumValue(minimumValue float32) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return nsn
 }
 
 // WithMaximumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNSubtractionNode) WithMaximumValue(maximumValue float32) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+func (nsn *NNSubtractionNode) WithMaximumValue(maximumValue float32) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return nsn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNSubtractionNode) WithLabel(label string) *NNSubtractionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nsn *NNSubtractionNode) WithLabel(label string) *NNSubtractionNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nsn
 }
-
-// NNSubtractionNodeable is the interface implemented by [NNSubtractionNode], for mocking and DI.
-type NNSubtractionNodeable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *NNSubtractionNode
-	WithSecondaryScale(secondaryScale float32) *NNSubtractionNode
-	WithBias(bias float32) *NNSubtractionNode
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNSubtractionNode
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNSubtractionNode
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNSubtractionNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNSubtractionNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNSubtractionNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNSubtractionNode
-	WithMinimumValue(minimumValue float32) *NNSubtractionNode
-	WithMaximumValue(maximumValue float32) *NNSubtractionNode
-	WithLabel(label string) *NNSubtractionNode
-}
-
-var _ NNSubtractionNodeable = (*NNSubtractionNode)(nil)
 
 var _ NNBinaryArithmeticNodeProvider = (*NNSubtractionNode)(nil)
 

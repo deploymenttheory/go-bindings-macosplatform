@@ -46,24 +46,24 @@ func playerItemTrackAdopt(id objc.ID) *PlayerItemTrack {
 }
 
 // Description returns the object's -description text.
-func (x *PlayerItemTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pit *PlayerItemTrack) Description() string {
+	return rt.Description(objref.IDOf(pit))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pit *PlayerItemTrack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pit), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pit *PlayerItemTrack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pit), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerItemTrack) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pit *PlayerItemTrack) String() string {
+	return rt.Description(objref.IDOf(pit))
 }
 
 // NewPlayerItemTrack creates a new PlayerItemTrack.
@@ -72,66 +72,41 @@ func NewPlayerItemTrack() *PlayerItemTrack {
 	return playerItemTrackAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether the player item presents the track’s media during playback.
-func (x *PlayerItemTrack) WithEnabled(enabled bool) *PlayerItemTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the player item presents the track’s media during playback.
+func (pit *PlayerItemTrack) WithEnabled(enabled bool) *PlayerItemTrack {
+	objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("setEnabled:"), enabled)
+	return pit
 }
 
-// WithVideoFieldMode a mode that specifies the handling of video frames that contain multiple fields.
-func (x *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFieldMode:"), purego.NSString(videoFieldMode))
-	return x
+// WithVideoFieldMode sets a mode that specifies the handling of video frames that contain multiple fields.
+func (pit *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack {
+	objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("setVideoFieldMode:"), purego.NSString(videoFieldMode))
+	return pit
 }
 
 // AssetTrack indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
-func (x *PlayerItemTrack) AssetTrack() *AssetTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetTrack"))
+func (pit *PlayerItemTrack) AssetTrack() *AssetTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("assetTrack"))
 	return AssetTrackFromID(_r)
 }
 
-// IsEnabled indicates whether the track is enabled for presentation during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *PlayerItemTrack) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether the track is enabled for presentation during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+func (pit *PlayerItemTrack) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(pit), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *PlayerItemTrack) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// CurrentVideoFrameRate if the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *PlayerItemTrack) CurrentVideoFrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentVideoFrameRate"))
+// CurrentVideoFrameRate returns if the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+func (pit *PlayerItemTrack) CurrentVideoFrameRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(pit), objc.RegisterName("currentVideoFrameRate"))
 	return _r
 }
 
-// VideoFieldMode if the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *PlayerItemTrack) VideoFieldMode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFieldMode"))
+// VideoFieldMode returns if the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+func (pit *PlayerItemTrack) VideoFieldMode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("videoFieldMode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetVideoFieldMode if the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *PlayerItemTrack) SetVideoFieldMode(videoFieldMode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFieldMode:"), purego.NSString(videoFieldMode))
-}
-
-// PlayerItemTrackable is the interface implemented by [PlayerItemTrack], for mocking and DI.
-type PlayerItemTrackable interface {
-	obj.Object
-	WithEnabled(enabled bool) *PlayerItemTrack
-	WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack
-	AssetTrack() *AssetTrack
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	CurrentVideoFrameRate() float32
-	VideoFieldMode() string
-	SetVideoFieldMode(videoFieldMode string)
-}
-
-var _ PlayerItemTrackable = (*PlayerItemTrack)(nil)

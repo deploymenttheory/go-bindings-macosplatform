@@ -10,13 +10,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// DeviceSelector method call to instantiate a new IOBluetoothDeviceSelectorController object.
+// DeviceSelector returns method call to instantiate a new IOBluetoothDeviceSelectorController object.
 func DeviceSelector() *BluetoothDeviceSelectorController {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDeviceSelectorController")), objc.RegisterName("deviceSelector"))
 	return BluetoothDeviceSelectorControllerFromID(_r)
 }
 
-// PairingController method call to instantiate a new IOBluetoothPairingController object.
+// PairingController returns method call to instantiate a new IOBluetoothPairingController object.
 func PairingController() *BluetoothPairingController {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPairingController")), objc.RegisterName("pairingController"))
 	return BluetoothPairingControllerFromID(_r)

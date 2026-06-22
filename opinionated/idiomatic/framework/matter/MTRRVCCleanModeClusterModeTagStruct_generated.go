@@ -44,24 +44,24 @@ func mTRRVCCleanModeClusterModeTagStructAdopt(id objc.ID) *MTRRVCCleanModeCluste
 }
 
 // Description returns the object's -description text.
-func (x *MTRRVCCleanModeClusterModeTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(mcmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRVCCleanModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRVCCleanModeClusterModeTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRVCCleanModeClusterModeTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(mcmcmts))
 }
 
 // NewMTRRVCCleanModeClusterModeTagStruct creates a new MTRRVCCleanModeClusterModeTagStruct.
@@ -71,48 +71,25 @@ func NewMTRRVCCleanModeClusterModeTagStruct() *MTRRVCCleanModeClusterModeTagStru
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCCleanModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mcmcmts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCCleanModeClusterModeTagStruct) WithValue(value obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) WithValue(value obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mcmcmts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTRRVCCleanModeClusterModeTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTRRVCCleanModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRRVCCleanModeClusterModeTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRRVCCleanModeClusterModeTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTRRVCCleanModeClusterModeTagStructable is the interface implemented by [MTRRVCCleanModeClusterModeTagStruct], for mocking and DI.
-type MTRRVCCleanModeClusterModeTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRRVCCleanModeClusterModeTagStruct
-	WithValue(value obj.Object) *MTRRVCCleanModeClusterModeTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTRRVCCleanModeClusterModeTagStructable = (*MTRRVCCleanModeClusterModeTagStruct)(nil)

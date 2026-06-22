@@ -53,18 +53,10 @@ func NewUnitDuration() *UnitDuration {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitDuration) WithScriptingProperties(scriptingProperties obj.Object) *UnitDuration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ud *UnitDuration) WithScriptingProperties(scriptingProperties obj.Object) *UnitDuration {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ud
 }
-
-// UnitDurationable is the interface implemented by [UnitDuration], for mocking and DI.
-type UnitDurationable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitDuration
-}
-
-var _ UnitDurationable = (*UnitDuration)(nil)
 
 var _ DimensionProvider = (*UnitDuration)(nil)
 

@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,46 +51,34 @@ func NewEmbeddingLayer() *EmbeddingLayer {
 	return embeddingLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *EmbeddingLayer) WithLabel(label string) *EmbeddingLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (el *EmbeddingLayer) WithLabel(label string) *EmbeddingLayer {
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return el
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (el *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer {
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return el
 }
 
 // Descriptor wraps the corresponding Objective-C method.
-func (x *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+func (el *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("descriptor"))
 	return EmbeddingDescriptorFromID(_r)
 }
 
-// Weights the array of word embeddings
-func (x *EmbeddingLayer) Weights() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+// Weights returns the array of word embeddings
+func (el *EmbeddingLayer) Weights() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
-// WeightsParameter the weights tensor parameter used for optimizer update
-func (x *EmbeddingLayer) WeightsParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
+// WeightsParameter returns the weights tensor parameter used for optimizer update
+func (el *EmbeddingLayer) WeightsParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
 }
-
-// EmbeddingLayerable is the interface implemented by [EmbeddingLayer], for mocking and DI.
-type EmbeddingLayerable interface {
-	obj.Object
-	WithLabel(label string) *EmbeddingLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer
-	Descriptor() *EmbeddingDescriptor
-	Weights() *Tensor
-	WeightsParameter() *TensorParameter
-}
-
-var _ EmbeddingLayerable = (*EmbeddingLayer)(nil)
 
 var _ LayerProvider = (*EmbeddingLayer)(nil)

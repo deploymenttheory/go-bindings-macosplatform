@@ -46,24 +46,24 @@ func exceptionHandlerAdopt(id objc.ID) *ExceptionHandler {
 }
 
 // Description returns the object's -description text.
-func (x *ExceptionHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (eh *ExceptionHandler) Description() string {
+	return rt.Description(objref.IDOf(eh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExceptionHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (eh *ExceptionHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(eh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExceptionHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (eh *ExceptionHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(eh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExceptionHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (eh *ExceptionHandler) String() string {
+	return rt.Description(objref.IDOf(eh))
 }
 
 // NewExceptionHandler creates a new ExceptionHandler.
@@ -73,47 +73,34 @@ func NewExceptionHandler() *ExceptionHandler {
 }
 
 // SetExceptionHandlingMask sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.
-func (x *ExceptionHandler) SetExceptionHandlingMask(aMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHandlingMask:"), aMask)
+func (eh *ExceptionHandler) SetExceptionHandlingMask(aMask int) {
+	objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("setExceptionHandlingMask:"), aMask)
 }
 
 // ExceptionHandlingMask returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.
-func (x *ExceptionHandler) ExceptionHandlingMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("exceptionHandlingMask"))
+func (eh *ExceptionHandler) ExceptionHandlingMask() int {
+	_r := objc.Send[int](objref.IDOf(eh), objc.RegisterName("exceptionHandlingMask"))
 	return _r
 }
 
 // SetExceptionHangingMask sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.
-func (x *ExceptionHandler) SetExceptionHangingMask(aMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHangingMask:"), aMask)
+func (eh *ExceptionHandler) SetExceptionHangingMask(aMask int) {
+	objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("setExceptionHangingMask:"), aMask)
 }
 
 // ExceptionHangingMask returns a bit mask representing the types of exceptions that will halt execution for debugging.
-func (x *ExceptionHandler) ExceptionHangingMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("exceptionHangingMask"))
+func (eh *ExceptionHandler) ExceptionHangingMask() int {
+	_r := objc.Send[int](objref.IDOf(eh), objc.RegisterName("exceptionHangingMask"))
 	return _r
 }
 
 // SetDelegate sets the delegate of the NSExceptionHandler object.
-func (x *ExceptionHandler) SetDelegate(anObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(anObject))
+func (eh *ExceptionHandler) SetDelegate(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("setDelegate:"), objref.IDOf(anObject))
 }
 
 // Delegate returns the delegate of the NSExceptionHandler object.
-func (x *ExceptionHandler) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (eh *ExceptionHandler) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
-
-// ExceptionHandlerable is the interface implemented by [ExceptionHandler], for mocking and DI.
-type ExceptionHandlerable interface {
-	obj.Object
-	SetExceptionHandlingMask(aMask int)
-	ExceptionHandlingMask() int
-	SetExceptionHangingMask(aMask int)
-	ExceptionHangingMask() int
-	SetDelegate(anObject obj.Object)
-	Delegate() obj.Object
-}
-
-var _ ExceptionHandlerable = (*ExceptionHandler)(nil)

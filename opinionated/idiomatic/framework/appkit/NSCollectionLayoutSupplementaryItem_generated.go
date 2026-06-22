@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,32 +45,27 @@ func collectionLayoutSupplementaryItemAdopt(id objc.ID) *CollectionLayoutSupplem
 	return x
 }
 
-// WithZIndex the vertical stacking order of the supplementary item in relation to other items in the section.
-func (x *CollectionLayoutSupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutSupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
-	return x
+// WithZIndex sets the vertical stacking order of the supplementary item in relation to other items in the section.
+func (clsi *CollectionLayoutSupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutSupplementaryItem {
+	objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("setZIndex:"), zIndex)
+	return clsi
 }
 
-// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
-func (x *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutSupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
-	return x
+// WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
+func (clsi *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutSupplementaryItem {
+	objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	return clsi
 }
 
 // ZIndex wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSupplementaryItem) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
+func (clsi *CollectionLayoutSupplementaryItem) ZIndex() int {
+	_r := objc.Send[int](objref.IDOf(clsi), objc.RegisterName("zIndex"))
 	return _r
 }
 
-// SetZIndex wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSupplementaryItem) SetZIndex(zIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
-}
-
 // ElementKind wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSupplementaryItem) ElementKind() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementKind"))
+func (clsi *CollectionLayoutSupplementaryItem) ElementKind() string {
+	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("elementKind"))
 	if _r == 0 {
 		return ""
 	}
@@ -79,35 +73,21 @@ func (x *CollectionLayoutSupplementaryItem) ElementKind() string {
 }
 
 // ContainerAnchor wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayoutAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerAnchor"))
+func (clsi *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayoutAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("containerAnchor"))
 	return CollectionLayoutAnchorFromID(_r)
 }
 
 // ItemAnchor wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAnchor"))
+func (clsi *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("itemAnchor"))
 	return CollectionLayoutAnchorFromID(_r)
 }
-
-// CollectionLayoutSupplementaryItemable is the interface implemented by [CollectionLayoutSupplementaryItem], for mocking and DI.
-type CollectionLayoutSupplementaryItemable interface {
-	obj.Object
-	WithZIndex(zIndex int) *CollectionLayoutSupplementaryItem
-	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutSupplementaryItem
-	ZIndex() int
-	SetZIndex(zIndex int)
-	ElementKind() string
-	ContainerAnchor() *CollectionLayoutAnchor
-	ItemAnchor() *CollectionLayoutAnchor
-}
-
-var _ CollectionLayoutSupplementaryItemable = (*CollectionLayoutSupplementaryItem)(nil)
 
 // isCollectionLayoutSupplementaryItem marks CollectionLayoutSupplementaryItem — and, by embedding promotion, its
 // subclasses — as a member of the CollectionLayoutSupplementaryItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CollectionLayoutSupplementaryItem) isCollectionLayoutSupplementaryItem() {}
+func (clsi *CollectionLayoutSupplementaryItem) isCollectionLayoutSupplementaryItem() {}
 
 var _ CollectionLayoutSupplementaryItemProvider = (*CollectionLayoutSupplementaryItem)(nil)
 

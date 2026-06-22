@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,24 +60,15 @@ func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParamete
 }
 
 // AddSubtreeSwitchValue adds a child node with the given switch value.
-func (x *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *SoundEventNodeDefinition, switchValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:switchValue:"), objref.IDOf(subtree), purego.NSString(switchValue))
+func (snd *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *SoundEventNodeDefinition, switchValue string) {
+	objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("addSubtree:switchValue:"), objref.IDOf(subtree), purego.NSString(switchValue))
 }
 
 // SwitchMetaParameterDefinition wraps the corresponding Objective-C method.
-func (x *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("switchMetaParameterDefinition"))
+func (snd *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("switchMetaParameterDefinition"))
 	return StringMetaParameterDefinitionFromID(_r)
 }
-
-// SwitchNodeDefinitionable is the interface implemented by [SwitchNodeDefinition], for mocking and DI.
-type SwitchNodeDefinitionable interface {
-	obj.Object
-	AddSubtreeSwitchValue(subtree *SoundEventNodeDefinition, switchValue string)
-	SwitchMetaParameterDefinition() *StringMetaParameterDefinition
-}
-
-var _ SwitchNodeDefinitionable = (*SwitchNodeDefinition)(nil)
 
 var _ SoundEventNodeDefinitionProvider = (*SwitchNodeDefinition)(nil)
 

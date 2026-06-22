@@ -5,7 +5,6 @@
 package modelio
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +46,24 @@ func materialPropertyNodeAdopt(id objc.ID) *MaterialPropertyNode {
 }
 
 // Description returns the object's -description text.
-func (x *MaterialPropertyNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpn *MaterialPropertyNode) Description() string {
+	return rt.Description(objref.IDOf(mpn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MaterialPropertyNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpn *MaterialPropertyNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MaterialPropertyNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpn *MaterialPropertyNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MaterialPropertyNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpn *MaterialPropertyNode) String() string {
+	return rt.Description(objref.IDOf(mpn))
 }
 
 // NewMaterialPropertyNodeWithInputsOutputsEvaluationFunction creates a new MaterialPropertyNode.
@@ -75,65 +74,30 @@ func NewMaterialPropertyNodeWithInputsOutputsEvaluationFunction(inputs []*Materi
 }
 
 // WithEvaluationFunction sets the property and returns the receiver so calls can be chained.
-func (x *MaterialPropertyNode) WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationFunction:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { evaluationFunction(obj.Wrap(_b0)) }))
-	return x
-}
-
-// SetEvaluationFunction wraps the corresponding Objective-C method.
-//
-// SetEvaluationFunction blocks until the operation completes or ctx is cancelled.
-func (x *MaterialPropertyNode) SetEvaluationFunction(ctx context.Context) (result *MaterialPropertyNode, err error) {
-	type _result struct {
-		val *MaterialPropertyNode
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = MaterialPropertyNodeFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationFunction:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *MaterialPropertyNode
-		return _zero, ctx.Err()
-	}
+func (mpn *MaterialPropertyNode) WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyNode {
+	objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("setEvaluationFunction:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { evaluationFunction(obj.Wrap(_b0)) }))
+	return mpn
 }
 
 // Inputs wraps the corresponding Objective-C method.
 //
 // Inputs returns the collection as a Go slice.
-func (x *MaterialPropertyNode) Inputs() []*MaterialProperty {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+func (mpn *MaterialPropertyNode) Inputs() []*MaterialProperty {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }
 
 // Outputs wraps the corresponding Objective-C method.
 //
 // Outputs returns the collection as a Go slice.
-func (x *MaterialPropertyNode) Outputs() []*MaterialProperty {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputs"))
+func (mpn *MaterialPropertyNode) Outputs() []*MaterialProperty {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("outputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }
-
-// MaterialPropertyNodeable is the interface implemented by [MaterialPropertyNode], for mocking and DI.
-type MaterialPropertyNodeable interface {
-	obj.Object
-	WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyNode
-	SetEvaluationFunction(ctx context.Context) (*MaterialPropertyNode, error)
-	Inputs() []*MaterialProperty
-	Outputs() []*MaterialProperty
-}
-
-var _ MaterialPropertyNodeable = (*MaterialPropertyNode)(nil)
 
 // isMaterialPropertyNode marks MaterialPropertyNode — and, by embedding promotion, its
 // subclasses — as a member of the MaterialPropertyNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MaterialPropertyNode) isMaterialPropertyNode() {}
+func (mpn *MaterialPropertyNode) isMaterialPropertyNode() {}
 
 var _ MaterialPropertyNodeProvider = (*MaterialPropertyNode)(nil)

@@ -44,24 +44,24 @@ func mTRTimeSynchronizationClusterTimeZoneStatusEventAdopt(id objc.ID) *MTRTimeS
 }
 
 // Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Description() string {
+	return rt.Description(objref.IDOf(mtsctzse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtsctzse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtsctzse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) String() string {
+	return rt.Description(objref.IDOf(mtsctzse))
 }
 
 // NewMTRTimeSynchronizationClusterTimeZoneStatusEvent creates a new MTRTimeSynchronizationClusterTimeZoneStatusEvent.
@@ -71,51 +71,28 @@ func NewMTRTimeSynchronizationClusterTimeZoneStatusEvent() *MTRTimeSynchronizati
 }
 
 // WithOffset sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
-	return x
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("setOffset:"), objref.IDOf(offset))
+	return mtsctzse
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("setName:"), purego.NSString(name))
+	return mtsctzse
 }
 
 // Offset wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offset"))
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("offset"))
 	return obj.Wrap(_r)
 }
 
-// SetOffset wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetOffset(offset obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// MTRTimeSynchronizationClusterTimeZoneStatusEventable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneStatusEvent], for mocking and DI.
-type MTRTimeSynchronizationClusterTimeZoneStatusEventable interface {
-	obj.Object
-	WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStatusEvent
-	WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStatusEvent
-	Offset() obj.Object
-	SetOffset(offset obj.Object)
-	Name() string
-	SetName(name string)
-}
-
-var _ MTRTimeSynchronizationClusterTimeZoneStatusEventable = (*MTRTimeSynchronizationClusterTimeZoneStatusEvent)(nil)

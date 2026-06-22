@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func nEFilterManagerAdopt(id objc.ID) *NEFilterManager {
 }
 
 // Description returns the object's -description text.
-func (x *NEFilterManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfm *NEFilterManager) Description() string {
+	return rt.Description(objref.IDOf(nfm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfm *NEFilterManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfm *NEFilterManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFilterManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfm *NEFilterManager) String() string {
+	return rt.Description(objref.IDOf(nfm))
 }
 
 // NewNEFilterManager creates a new NEFilterManager.
@@ -74,47 +75,47 @@ func NewNEFilterManager() *NEFilterManager {
 	return nEFilterManagerAdopt(_id)
 }
 
-// WithLocalizedDescription a string containing a description of the filter configuration.
-func (x *NEFilterManager) WithLocalizedDescription(localizedDescription string) *NEFilterManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
-	return x
+// WithLocalizedDescription sets a string containing a description of the filter configuration.
+func (nfm *NEFilterManager) WithLocalizedDescription(localizedDescription string) *NEFilterManager {
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
+	return nfm
 }
 
-// WithProviderConfiguration a NEFilterProviderConfiguration object containing the filter configuration settings.
-func (x *NEFilterManager) WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
-	return x
+// WithProviderConfiguration sets a NEFilterProviderConfiguration object containing the filter configuration settings.
+func (nfm *NEFilterManager) WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager {
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
+	return nfm
 }
 
-// WithEnabled a Boolean used to toggle the enabled state of the filter.
-func (x *NEFilterManager) WithEnabled(enabled bool) *NEFilterManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean used to toggle the enabled state of the filter.
+func (nfm *NEFilterManager) WithEnabled(enabled bool) *NEFilterManager {
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("setEnabled:"), enabled)
+	return nfm
 }
 
-// WithGrade the grade of the filter, which determines when it acts relative to other filters.
-func (x *NEFilterManager) WithGrade(grade NEFilterManagerGrade) *NEFilterManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrade:"), grade)
-	return x
+// WithGrade sets the grade of the filter, which determines when it acts relative to other filters.
+func (nfm *NEFilterManager) WithGrade(grade NEFilterManagerGrade) *NEFilterManager {
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("setGrade:"), grade)
+	return nfm
 }
 
-// WithDisableEncryptedDNSSettings causes the content filter to disable any other installed encrypted DNS settings, including iCloud Private Relay system-wide DNS encryption. This should only be used if the content filter expects to intercept cleartext UDP DNS packets.
-func (x *NEFilterManager) WithDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) *NEFilterManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableEncryptedDNSSettings:"), disableEncryptedDNSSettings)
-	return x
+// WithDisableEncryptedDNSSettings sets causes the content filter to disable any other installed encrypted DNS settings, including iCloud Private Relay system-wide DNS encryption. This should only be used if the content filter expects to intercept cleartext UDP DNS packets.
+func (nfm *NEFilterManager) WithDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) *NEFilterManager {
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("setDisableEncryptedDNSSettings:"), disableEncryptedDNSSettings)
+	return nfm
 }
 
 // LoadFromPreferences load the filter configuration from the Network Extension preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
+func (nfm *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFromPreferencesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("loadFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -126,14 +127,14 @@ func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 // RemoveFromPreferences remove the filter configuration from the Network Extension preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
+func (nfm *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromPreferencesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("removeFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -145,14 +146,14 @@ func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 // SaveToPreferences save the filter configuration in the Network Extension preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterManager) SaveToPreferences(ctx context.Context) error {
+func (nfm *NEFilterManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveToPreferencesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("saveToPreferencesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -161,85 +162,35 @@ func (x *NEFilterManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
-// LocalizedDescription a string containing a description of the filter.
-func (x *NEFilterManager) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+// LocalizedDescription returns a string containing a description of the filter.
+func (nfm *NEFilterManager) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLocalizedDescription wraps the corresponding Objective-C method.
-func (x *NEFilterManager) SetLocalizedDescription(localizedDescription string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
-}
-
-// ProviderConfiguration an NEFilterProviderConfiguration object containing the provider-specific portion of the filter configuration.
-func (x *NEFilterManager) ProviderConfiguration() *NEFilterProviderConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerConfiguration"))
+// ProviderConfiguration returns an NEFilterProviderConfiguration object containing the provider-specific portion of the filter configuration.
+func (nfm *NEFilterManager) ProviderConfiguration() *NEFilterProviderConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("providerConfiguration"))
 	return NEFilterProviderConfigurationFromID(_r)
 }
 
-// SetProviderConfiguration wraps the corresponding Objective-C method.
-func (x *NEFilterManager) SetProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
-}
-
-// IsEnabled toggles the enabled status of the filter. On iOS, setting this property will disable filter configurations of other apps, and this property will be set to NO when other filter configurations are enabled. On macOS, up to 4 filter configurations of the same grade can be enabled simultaneously.
-func (x *NEFilterManager) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether toggles the enabled status of the filter. On iOS, setting this property will disable filter configurations of other apps, and this property will be set to false when other filter configurations are enabled. On macOS, up to 4 filter configurations of the same grade can be enabled simultaneously.
+func (nfm *NEFilterManager) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(nfm), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *NEFilterManager) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// Grade the grade of the filter. The default grade is NEFilterManagerGradeFirewall.
-func (x *NEFilterManager) Grade() NEFilterManagerGrade {
-	_r := objc.Send[NEFilterManagerGrade](objref.IDOf(x), objc.RegisterName("grade"))
+// Grade returns the grade of the filter. The default grade is NEFilterManagerGradeFirewall.
+func (nfm *NEFilterManager) Grade() NEFilterManagerGrade {
+	_r := objc.Send[NEFilterManagerGrade](objref.IDOf(nfm), objc.RegisterName("grade"))
 	return _r
 }
 
-// SetGrade wraps the corresponding Objective-C method.
-func (x *NEFilterManager) SetGrade(grade NEFilterManagerGrade) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrade:"), grade)
-}
-
-// DisableEncryptedDNSSettings causes the content filter to disable any other installed encrypted DNS settings, including iCloud Private Relay system-wide DNS encryption. This should only be used if the content filter expects to intercept cleartext UDP DNS packets.
-func (x *NEFilterManager) DisableEncryptedDNSSettings() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableEncryptedDNSSettings"))
+// DisableEncryptedDNSSettings reports whether causes the content filter to disable any other installed encrypted DNS settings, including iCloud Private Relay system-wide DNS encryption. This should only be used if the content filter expects to intercept cleartext UDP DNS packets.
+func (nfm *NEFilterManager) DisableEncryptedDNSSettings() bool {
+	_r := objc.Send[bool](objref.IDOf(nfm), objc.RegisterName("disableEncryptedDNSSettings"))
 	return _r
 }
-
-// SetDisableEncryptedDNSSettings wraps the corresponding Objective-C method.
-func (x *NEFilterManager) SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableEncryptedDNSSettings:"), disableEncryptedDNSSettings)
-}
-
-// NEFilterManagerable is the interface implemented by [NEFilterManager], for mocking and DI.
-type NEFilterManagerable interface {
-	obj.Object
-	WithLocalizedDescription(localizedDescription string) *NEFilterManager
-	WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager
-	WithEnabled(enabled bool) *NEFilterManager
-	WithGrade(grade NEFilterManagerGrade) *NEFilterManager
-	WithDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) *NEFilterManager
-	LoadFromPreferences(ctx context.Context) error
-	RemoveFromPreferences(ctx context.Context) error
-	SaveToPreferences(ctx context.Context) error
-	LocalizedDescription() string
-	SetLocalizedDescription(localizedDescription string)
-	ProviderConfiguration() *NEFilterProviderConfiguration
-	SetProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	Grade() NEFilterManagerGrade
-	SetGrade(grade NEFilterManagerGrade)
-	DisableEncryptedDNSSettings() bool
-	SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool)
-}
-
-var _ NEFilterManagerable = (*NEFilterManager)(nil)

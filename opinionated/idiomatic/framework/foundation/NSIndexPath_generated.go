@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // IndexPath is an idiomatic wrapper over the Objective-C class NSIndexPath.
@@ -47,24 +48,24 @@ func indexPathAdopt(id objc.ID) *IndexPath {
 }
 
 // Description returns the object's -description text.
-func (x *IndexPath) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ip *IndexPath) Description() string {
+	return rt.Description(objref.IDOf(ip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IndexPath) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ip *IndexPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IndexPath) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ip *IndexPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IndexPath) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ip *IndexPath) String() string {
+	return rt.Description(objref.IDOf(ip))
 }
 
 // NewIndexPathWithIndex initializes an index path with a single node.
@@ -75,58 +76,44 @@ func NewIndexPathWithIndex(index int) *IndexPath {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *IndexPath) WithScriptingProperties(scriptingProperties obj.Object) *IndexPath {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ip *IndexPath) WithScriptingProperties(scriptingProperties obj.Object) *IndexPath {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ip
 }
 
 // IndexPathByAddingIndex returns an index path containing the nodes in the receiving index path plus another given index.
-func (x *IndexPath) IndexPathByAddingIndex(index int) *IndexPath {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathByAddingIndex:"), index)
+func (ip *IndexPath) IndexPathByAddingIndex(index int) *IndexPath {
+	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("indexPathByAddingIndex:"), index)
 	return IndexPathFromID(_r)
 }
 
 // IndexPathByRemovingLastIndex returns an index path with the nodes in the receiving index path, excluding the last one.
-func (x *IndexPath) IndexPathByRemovingLastIndex() *IndexPath {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathByRemovingLastIndex"))
+func (ip *IndexPath) IndexPathByRemovingLastIndex() *IndexPath {
+	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("indexPathByRemovingLastIndex"))
 	return IndexPathFromID(_r)
 }
 
 // IndexAtPosition provides the value at a particular node in the index path.
-func (x *IndexPath) IndexAtPosition(position int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexAtPosition:"), position)
+func (ip *IndexPath) IndexAtPosition(position int) int {
+	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("indexAtPosition:"), position)
 	return _r
 }
 
 // Compare indicates the depth-first traversal order of the receiving index path and another index path.
-func (x *IndexPath) Compare(otherObject *IndexPath) ComparisonResult {
-	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:"), objref.IDOf(otherObject))
+func (ip *IndexPath) Compare(otherObject *IndexPath) ComparisonResult {
+	_r := objc.Send[ComparisonResult](objref.IDOf(ip), objc.RegisterName("compare:"), objref.IDOf(otherObject))
 	return _r
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *IndexPath) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (ip *IndexPath) Length() int {
+	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("length"))
 	return _r
 }
 
 // GetIndexes copies the objects contained in the index path into indexes.
-func (x *IndexPath) GetIndexes() (indexes int) {
+func (ip *IndexPath) GetIndexes() (indexes int) {
 	var _out0 int
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getIndexes:"), unsafe.Pointer(&_out0))
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("getIndexes:"), unsafe.Pointer(&_out0))
 	return _out0
 }
-
-// IndexPathable is the interface implemented by [IndexPath], for mocking and DI.
-type IndexPathable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *IndexPath
-	IndexPathByAddingIndex(index int) *IndexPath
-	IndexPathByRemovingLastIndex() *IndexPath
-	IndexAtPosition(position int) int
-	Compare(otherObject *IndexPath) ComparisonResult
-	Length() int
-	GetIndexes() (indexes int)
-}
-
-var _ IndexPathable = (*IndexPath)(nil)

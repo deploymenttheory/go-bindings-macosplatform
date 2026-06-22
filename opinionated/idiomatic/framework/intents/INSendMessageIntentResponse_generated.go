@@ -53,38 +53,27 @@ func NewSendMessageIntentResponseWithCodeUserActivity(code SendMessageIntentResp
 	return sendMessageIntentResponseAdopt(_id)
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *SendMessageIntentResponse) WithUserActivity(userActivity obj.Object) *SendMessageIntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (smir *SendMessageIntentResponse) WithUserActivity(userActivity obj.Object) *SendMessageIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(smir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return smir
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *SendMessageIntentResponse) Code() SendMessageIntentResponseCode {
-	_r := objc.Send[SendMessageIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+func (smir *SendMessageIntentResponse) Code() SendMessageIntentResponseCode {
+	_r := objc.Send[SendMessageIntentResponseCode](objref.IDOf(smir), objc.RegisterName("code"))
 	return _r
 }
 
 // SentMessages wraps the corresponding Objective-C method.
-func (x *SendMessageIntentResponse) SentMessages() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sentMessages"))
+func (smir *SendMessageIntentResponse) SentMessages() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(smir), objc.RegisterName("sentMessages"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetSentMessages wraps the corresponding Objective-C method.
-func (x *SendMessageIntentResponse) SetSentMessages(sentMessages []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSentMessages:"), purego.SliceToNSArray(sentMessages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (smir *SendMessageIntentResponse) SetSentMessages(sentMessages []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(smir), objc.RegisterName("setSentMessages:"), purego.SliceToNSArray(sentMessages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// SendMessageIntentResponseable is the interface implemented by [SendMessageIntentResponse], for mocking and DI.
-type SendMessageIntentResponseable interface {
-	obj.Object
-	WithUserActivity(userActivity obj.Object) *SendMessageIntentResponse
-	Code() SendMessageIntentResponseCode
-	SentMessages() []obj.Object
-	SetSentMessages(sentMessages []obj.Object)
-}
-
-var _ SendMessageIntentResponseable = (*SendMessageIntentResponse)(nil)
 
 var _ IntentResponseProvider = (*SendMessageIntentResponse)(nil)

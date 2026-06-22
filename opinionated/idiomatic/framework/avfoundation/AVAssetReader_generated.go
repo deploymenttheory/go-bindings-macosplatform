@@ -5,13 +5,14 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AssetReader is an idiomatic wrapper over the Objective-C class AVAssetReader.
@@ -48,24 +49,24 @@ func assetReaderAdopt(id objc.ID) *AssetReader {
 }
 
 // Description returns the object's -description text.
-func (x *AssetReader) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AssetReader) Description() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetReader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ar *AssetReader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetReader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ar *AssetReader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetReader) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AssetReader) String() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // NewAssetReaderWithAssetError creates an object to read media data from an asset.
@@ -80,57 +81,43 @@ func NewAssetReaderWithAssetError(asset *Asset) (result *AssetReader, err error)
 }
 
 // CanAddOutput determines whether you can add the output to the asset reader.
-func (x *AssetReader) CanAddOutput(output *AssetReaderOutput) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddOutput:"), objref.IDOf(output))
+func (ar *AssetReader) CanAddOutput(output *AssetReaderOutput) bool {
+	_r := objc.Send[bool](objref.IDOf(ar), objc.RegisterName("canAddOutput:"), objref.IDOf(output))
 	return _r
 }
 
 // AddOutput adds an output to the reader.
-func (x *AssetReader) AddOutput(output *AssetReaderOutput) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutput:"), objref.IDOf(output))
+func (ar *AssetReader) AddOutput(output *AssetReaderOutput) {
+	objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("addOutput:"), objref.IDOf(output))
 }
 
-// StartReading prepares the asset reader to start reading sample buffers from the asset.
-func (x *AssetReader) StartReading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startReading"))
+// StartReading reports whether prepares the asset reader to start reading sample buffers from the asset.
+func (ar *AssetReader) StartReading() bool {
+	_r := objc.Send[bool](objref.IDOf(ar), objc.RegisterName("startReading"))
 	return _r
 }
 
 // CancelReading cancels any background work and stops the reader’s outputs from reading more samples.
-func (x *AssetReader) CancelReading() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelReading"))
+func (ar *AssetReader) CancelReading() {
+	objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cancelReading"))
 }
 
-// Asset the asset from which the receiver's outputs read sample buffers. The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
-func (x *AssetReader) Asset() *Asset {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+// Asset returns the asset from which the receiver's outputs read sample buffers. The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
+func (ar *AssetReader) Asset() *Asset {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
-// Status the status of reading sample buffers from the receiver's asset. The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
-func (x *AssetReader) Status() AssetReaderStatus {
-	_r := objc.Send[AssetReaderStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the status of reading sample buffers from the receiver's asset. The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
+func (ar *AssetReader) Status() AssetReaderStatus {
+	_r := objc.Send[AssetReaderStatus](objref.IDOf(ar), objc.RegisterName("status"))
 	return _r
 }
 
-// Outputs the outputs from which clients of receiver can read media data. The value of this property is an NSArray containing concrete instances of AVAssetReaderOutput. Outputs can be added to the receiver using the addOutput: method.
+// Outputs returns the outputs from which clients of receiver can read media data. The value of this property is an NSArray containing concrete instances of AVAssetReaderOutput. Outputs can be added to the receiver using the addOutput: method.
 //
 // Outputs returns the collection as a Go slice.
-func (x *AssetReader) Outputs() []*AssetReaderOutput {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputs"))
+func (ar *AssetReader) Outputs() []*AssetReaderOutput {
+	_arr := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("outputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetReaderOutput { return AssetReaderOutputFromID(_id) })
 }
-
-// AssetReaderable is the interface implemented by [AssetReader], for mocking and DI.
-type AssetReaderable interface {
-	obj.Object
-	CanAddOutput(output *AssetReaderOutput) bool
-	AddOutput(output *AssetReaderOutput)
-	StartReading() bool
-	CancelReading()
-	Asset() *Asset
-	Status() AssetReaderStatus
-	Outputs() []*AssetReaderOutput
-}
-
-var _ AssetReaderable = (*AssetReader)(nil)

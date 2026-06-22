@@ -44,24 +44,24 @@ func mTRPowerSourceClusterWiredFaultChangeTypeAdopt(id objc.ID) *MTRPowerSourceC
 }
 
 // Description returns the object's -description text.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) Description() string {
+	return rt.Description(objref.IDOf(mpscwfct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpscwfct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpscwfct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) String() string {
+	return rt.Description(objref.IDOf(mpscwfct))
 }
 
 // NewMTRPowerSourceClusterWiredFaultChangeType creates a new MTRPowerSourceClusterWiredFaultChangeType.
@@ -71,34 +71,23 @@ func NewMTRPowerSourceClusterWiredFaultChangeType() *MTRPowerSourceClusterWiredF
 }
 
 // Current wraps the corresponding Objective-C method.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) Current() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mpscwfct), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) SetCurrent(current obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mpscwfct), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous wraps the corresponding Objective-C method.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) Previous() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mpscwfct), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) SetPrevious(previous obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
+func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mpscwfct), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
-
-// MTRPowerSourceClusterWiredFaultChangeTypeable is the interface implemented by [MTRPowerSourceClusterWiredFaultChangeType], for mocking and DI.
-type MTRPowerSourceClusterWiredFaultChangeTypeable interface {
-	obj.Object
-	Current() obj.Object
-	SetCurrent(current obj.Object)
-	Previous() obj.Object
-	SetPrevious(previous obj.Object)
-}
-
-var _ MTRPowerSourceClusterWiredFaultChangeTypeable = (*MTRPowerSourceClusterWiredFaultChangeType)(nil)

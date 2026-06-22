@@ -46,24 +46,24 @@ func customAttributeKeyAdopt(id objc.ID) *CustomAttributeKey {
 }
 
 // Description returns the object's -description text.
-func (x *CustomAttributeKey) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cak *CustomAttributeKey) Description() string {
+	return rt.Description(objref.IDOf(cak))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CustomAttributeKey) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cak *CustomAttributeKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cak), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CustomAttributeKey) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cak *CustomAttributeKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cak), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CustomAttributeKey) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cak *CustomAttributeKey) String() string {
+	return rt.Description(objref.IDOf(cak))
 }
 
 // NewCustomAttributeKeyWithKeyName returns a new custom attribute key with the specified name.
@@ -81,8 +81,8 @@ func NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiVal
 }
 
 // KeyName wraps the corresponding Objective-C method.
-func (x *CustomAttributeKey) KeyName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyName"))
+func (cak *CustomAttributeKey) KeyName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cak), objc.RegisterName("keyName"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,37 +90,25 @@ func (x *CustomAttributeKey) KeyName() string {
 }
 
 // IsSearchable wraps the corresponding Objective-C method.
-func (x *CustomAttributeKey) IsSearchable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearchable"))
+func (cak *CustomAttributeKey) IsSearchable() bool {
+	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isSearchable"))
 	return _r
 }
 
 // IsSearchableByDefault wraps the corresponding Objective-C method.
-func (x *CustomAttributeKey) IsSearchableByDefault() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearchableByDefault"))
+func (cak *CustomAttributeKey) IsSearchableByDefault() bool {
+	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isSearchableByDefault"))
 	return _r
 }
 
 // IsUnique wraps the corresponding Objective-C method.
-func (x *CustomAttributeKey) IsUnique() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnique"))
+func (cak *CustomAttributeKey) IsUnique() bool {
+	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isUnique"))
 	return _r
 }
 
 // IsMultiValued wraps the corresponding Objective-C method.
-func (x *CustomAttributeKey) IsMultiValued() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultiValued"))
+func (cak *CustomAttributeKey) IsMultiValued() bool {
+	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isMultiValued"))
 	return _r
 }
-
-// CustomAttributeKeyable is the interface implemented by [CustomAttributeKey], for mocking and DI.
-type CustomAttributeKeyable interface {
-	obj.Object
-	KeyName() string
-	IsSearchable() bool
-	IsSearchableByDefault() bool
-	IsUnique() bool
-	IsMultiValued() bool
-}
-
-var _ CustomAttributeKeyable = (*CustomAttributeKey)(nil)

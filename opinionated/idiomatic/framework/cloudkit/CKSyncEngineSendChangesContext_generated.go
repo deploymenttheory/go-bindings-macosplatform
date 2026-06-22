@@ -46,24 +46,24 @@ func syncEngineSendChangesContextAdopt(id objc.ID) *SyncEngineSendChangesContext
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineSendChangesContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sescc *SyncEngineSendChangesContext) Description() string {
+	return rt.Description(objref.IDOf(sescc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineSendChangesContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sescc *SyncEngineSendChangesContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sescc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineSendChangesContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sescc *SyncEngineSendChangesContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sescc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineSendChangesContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sescc *SyncEngineSendChangesContext) String() string {
+	return rt.Description(objref.IDOf(sescc))
 }
 
 // NewSyncEngineSendChangesContext creates a new SyncEngineSendChangesContext.
@@ -72,23 +72,14 @@ func NewSyncEngineSendChangesContext() *SyncEngineSendChangesContext {
 	return syncEngineSendChangesContextAdopt(_id)
 }
 
-// Reason the reason for the send operation.
-func (x *SyncEngineSendChangesContext) Reason() SyncEngineSyncReason {
-	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(x), objc.RegisterName("reason"))
+// Reason returns the reason for the send operation.
+func (sescc *SyncEngineSendChangesContext) Reason() SyncEngineSyncReason {
+	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(sescc), objc.RegisterName("reason"))
 	return _r
 }
 
-// Options the additional options for the send operation.
-func (x *SyncEngineSendChangesContext) Options() *SyncEngineSendChangesOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+// Options returns the additional options for the send operation.
+func (sescc *SyncEngineSendChangesContext) Options() *SyncEngineSendChangesOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(sescc), objc.RegisterName("options"))
 	return SyncEngineSendChangesOptionsFromID(_r)
 }
-
-// SyncEngineSendChangesContextable is the interface implemented by [SyncEngineSendChangesContext], for mocking and DI.
-type SyncEngineSendChangesContextable interface {
-	obj.Object
-	Reason() SyncEngineSyncReason
-	Options() *SyncEngineSendChangesOptions
-}
-
-var _ SyncEngineSendChangesContextable = (*SyncEngineSendChangesContext)(nil)

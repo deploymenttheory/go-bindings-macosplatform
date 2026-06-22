@@ -52,37 +52,16 @@ func NewMutableAssetDownloadStorageManagementPolicy() *MutableAssetDownloadStora
 	return mutableAssetDownloadStorageManagementPolicyAdopt(_id)
 }
 
-// WithPriority the eviction priority for a downloaded asset.
-func (x *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority obj.Object) *MutableAssetDownloadStorageManagementPolicy {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
-	return x
+// WithPriority sets the eviction priority for a downloaded asset.
+func (madsmp *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority obj.Object) *MutableAssetDownloadStorageManagementPolicy {
+	objc.Send[objc.ID](objref.IDOf(madsmp), objc.RegisterName("setPriority:"), objref.IDOf(priority))
+	return madsmp
 }
 
-// WithExpirationDate the expiration date for an asset.
-func (x *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate obj.Object) *MutableAssetDownloadStorageManagementPolicy {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-	return x
+// WithExpirationDate sets the expiration date for an asset.
+func (madsmp *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate obj.Object) *MutableAssetDownloadStorageManagementPolicy {
+	objc.Send[objc.ID](objref.IDOf(madsmp), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
+	return madsmp
 }
-
-// SetPriority wraps the corresponding Objective-C method.
-func (x *MutableAssetDownloadStorageManagementPolicy) SetPriority(priority obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
-}
-
-// SetExpirationDate wraps the corresponding Objective-C method.
-func (x *MutableAssetDownloadStorageManagementPolicy) SetExpirationDate(expirationDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-}
-
-// MutableAssetDownloadStorageManagementPolicyable is the interface implemented by [MutableAssetDownloadStorageManagementPolicy], for mocking and DI.
-type MutableAssetDownloadStorageManagementPolicyable interface {
-	obj.Object
-	WithPriority(priority obj.Object) *MutableAssetDownloadStorageManagementPolicy
-	WithExpirationDate(expirationDate obj.Object) *MutableAssetDownloadStorageManagementPolicy
-	SetPriority(priority obj.Object)
-	SetExpirationDate(expirationDate obj.Object)
-}
-
-var _ MutableAssetDownloadStorageManagementPolicyable = (*MutableAssetDownloadStorageManagementPolicy)(nil)
 
 var _ AssetDownloadStorageManagementPolicyProvider = (*MutableAssetDownloadStorageManagementPolicy)(nil)

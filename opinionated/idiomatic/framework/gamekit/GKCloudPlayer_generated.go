@@ -7,7 +7,6 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewCloudPlayer() *CloudPlayer {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKCloudPlayer")), objc.RegisterName("new"))
 	return cloudPlayerAdopt(_id)
 }
-
-// CloudPlayerable is the interface implemented by [CloudPlayer], for mocking and DI.
-type CloudPlayerable interface {
-	obj.Object
-}
-
-var _ CloudPlayerable = (*CloudPlayer)(nil)
 
 var _ BasePlayerProvider = (*CloudPlayer)(nil)

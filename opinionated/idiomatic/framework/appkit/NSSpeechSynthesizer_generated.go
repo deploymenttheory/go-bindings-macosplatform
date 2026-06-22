@@ -5,13 +5,14 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // SpeechSynthesizer is an idiomatic wrapper over the Objective-C class NSSpeechSynthesizer.
@@ -48,24 +49,24 @@ func speechSynthesizerAdopt(id objc.ID) *SpeechSynthesizer {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechSynthesizer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpeechSynthesizer) Description() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechSynthesizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ss *SpeechSynthesizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechSynthesizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ss *SpeechSynthesizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechSynthesizer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpeechSynthesizer) String() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // NewSpeechSynthesizerWithVoice initializes the receiver with a voice.
@@ -75,76 +76,76 @@ func NewSpeechSynthesizerWithVoice(voice obj.Object) *SpeechSynthesizer {
 	return speechSynthesizerAdopt(_id)
 }
 
-// WithRate the synthesizer’s speaking rate (words per minute).
-func (x *SpeechSynthesizer) WithRate(rate float32) *SpeechSynthesizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the synthesizer’s speaking rate (words per minute).
+func (ss *SpeechSynthesizer) WithRate(rate float32) *SpeechSynthesizer {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setRate:"), rate)
+	return ss
 }
 
-// WithVolume the synthesizer’s speaking volume.
-func (x *SpeechSynthesizer) WithVolume(volume float32) *SpeechSynthesizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the synthesizer’s speaking volume.
+func (ss *SpeechSynthesizer) WithVolume(volume float32) *SpeechSynthesizer {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setVolume:"), volume)
+	return ss
 }
 
-// WithUsesFeedbackWindow indicates whether the receiver uses the speech feedback window.
-func (x *SpeechSynthesizer) WithUsesFeedbackWindow(usesFeedbackWindow bool) *SpeechSynthesizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFeedbackWindow:"), usesFeedbackWindow)
-	return x
+// WithUsesFeedbackWindow sets indicates whether the receiver uses the speech feedback window.
+func (ss *SpeechSynthesizer) WithUsesFeedbackWindow(usesFeedbackWindow bool) *SpeechSynthesizer {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setUsesFeedbackWindow:"), usesFeedbackWindow)
+	return ss
 }
 
 // StartSpeakingString begins speaking synthesized text through the system’s default sound output device.
-func (x *SpeechSynthesizer) StartSpeakingString(string_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startSpeakingString:"), purego.NSString(string_))
+func (ss *SpeechSynthesizer) StartSpeakingString(string_ string) bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("startSpeakingString:"), purego.NSString(string_))
 	return _r
 }
 
 // StartSpeakingStringToURL begins synthesizing text into a sound (AIFF) file.
-func (x *SpeechSynthesizer) StartSpeakingStringToURL(string_ string, url string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startSpeakingString:toURL:"), purego.NSString(string_), rt.FileURL(url))
+func (ss *SpeechSynthesizer) StartSpeakingStringToURL(string_ string, url string) bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("startSpeakingString:toURL:"), purego.NSString(string_), rt.FileURL(url))
 	return _r
 }
 
 // StopSpeaking stops synthesis in progress.
-func (x *SpeechSynthesizer) StopSpeaking() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSpeaking"))
+func (ss *SpeechSynthesizer) StopSpeaking() {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("stopSpeaking"))
 }
 
 // StopSpeakingAtBoundary stops synthesis in progress at a given boundary.
-func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
+func (ss *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
 }
 
 // PauseSpeakingAtBoundary pauses synthesis in progress at a given boundary.
-func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
+func (ss *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
 }
 
 // ContinueSpeaking resumes synthesis.
-func (x *SpeechSynthesizer) ContinueSpeaking() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("continueSpeaking"))
+func (ss *SpeechSynthesizer) ContinueSpeaking() {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("continueSpeaking"))
 }
 
 // Voice returns the identifier of the receiver’s current voice.
-func (x *SpeechSynthesizer) Voice() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voice"))
+func (ss *SpeechSynthesizer) Voice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("voice"))
 	return obj.Wrap(_r)
 }
 
 // SetVoice sets the receiver’s current voice.
-func (x *SpeechSynthesizer) SetVoice(voice obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setVoice:"), objref.IDOf(voice))
+func (ss *SpeechSynthesizer) SetVoice(voice obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("setVoice:"), objref.IDOf(voice))
 	return _r
 }
 
 // AddSpeechDictionary registers the given speech dictionary with the receiver.
-func (x *SpeechSynthesizer) AddSpeechDictionary(speechDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSpeechDictionary:"), objref.IDOf(speechDictionary))
+func (ss *SpeechSynthesizer) AddSpeechDictionary(speechDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("addSpeechDictionary:"), objref.IDOf(speechDictionary))
 }
 
 // PhonemesFromText provides the phoneme symbols generated by the given text.
-func (x *SpeechSynthesizer) PhonemesFromText(text string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phonemesFromText:"), purego.NSString(text))
+func (ss *SpeechSynthesizer) PhonemesFromText(text string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("phonemesFromText:"), purego.NSString(text))
 	if _r == 0 {
 		return ""
 	}
@@ -152,9 +153,9 @@ func (x *SpeechSynthesizer) PhonemesFromText(text string) string {
 }
 
 // ObjectForPropertyError provides the value of a receiver’s property.
-func (x *SpeechSynthesizer) ObjectForPropertyError(property obj.Object) (result obj.Object, err error) {
+func (ss *SpeechSynthesizer) ObjectForPropertyError(property obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForProperty:error:"), objref.IDOf(property), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("objectForProperty:error:"), objref.IDOf(property), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -162,9 +163,9 @@ func (x *SpeechSynthesizer) ObjectForPropertyError(property obj.Object) (result 
 }
 
 // SetObjectForProperty specifies the value of a receiver’s property.
-func (x *SpeechSynthesizer) SetObjectForProperty(object obj.Object, property obj.Object) error {
+func (ss *SpeechSynthesizer) SetObjectForProperty(object obj.Object, property obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setObject:forProperty:error:"), objref.IDOf(object), objref.IDOf(property), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ss), objc.RegisterName("setObject:forProperty:error:"), objref.IDOf(object), objref.IDOf(property), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -172,69 +173,25 @@ func (x *SpeechSynthesizer) SetObjectForProperty(object obj.Object, property obj
 }
 
 // IsSpeaking wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) IsSpeaking() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpeaking"))
+func (ss *SpeechSynthesizer) IsSpeaking() bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isSpeaking"))
 	return _r
 }
 
 // Rate wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+func (ss *SpeechSynthesizer) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(ss), objc.RegisterName("rate"))
 	return _r
-}
-
-// SetRate wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) SetRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
 // Volume wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+func (ss *SpeechSynthesizer) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(ss), objc.RegisterName("volume"))
 	return _r
-}
-
-// SetVolume wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
 // UsesFeedbackWindow wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) UsesFeedbackWindow() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesFeedbackWindow"))
+func (ss *SpeechSynthesizer) UsesFeedbackWindow() bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("usesFeedbackWindow"))
 	return _r
 }
-
-// SetUsesFeedbackWindow wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) SetUsesFeedbackWindow(usesFeedbackWindow bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFeedbackWindow:"), usesFeedbackWindow)
-}
-
-// SpeechSynthesizerable is the interface implemented by [SpeechSynthesizer], for mocking and DI.
-type SpeechSynthesizerable interface {
-	obj.Object
-	WithRate(rate float32) *SpeechSynthesizer
-	WithVolume(volume float32) *SpeechSynthesizer
-	WithUsesFeedbackWindow(usesFeedbackWindow bool) *SpeechSynthesizer
-	StartSpeakingString(string_ string) bool
-	StartSpeakingStringToURL(string_ string, url string) bool
-	StopSpeaking()
-	StopSpeakingAtBoundary(boundary SpeechBoundary)
-	PauseSpeakingAtBoundary(boundary SpeechBoundary)
-	ContinueSpeaking()
-	Voice() obj.Object
-	SetVoice(voice obj.Object) bool
-	AddSpeechDictionary(speechDictionary obj.Object)
-	PhonemesFromText(text string) string
-	ObjectForPropertyError(property obj.Object) (result obj.Object, err error)
-	SetObjectForProperty(object obj.Object, property obj.Object) error
-	IsSpeaking() bool
-	Rate() float32
-	SetRate(rate float32)
-	Volume() float32
-	SetVolume(volume float32)
-	UsesFeedbackWindow() bool
-	SetUsesFeedbackWindow(usesFeedbackWindow bool)
-}
-
-var _ SpeechSynthesizerable = (*SpeechSynthesizer)(nil)

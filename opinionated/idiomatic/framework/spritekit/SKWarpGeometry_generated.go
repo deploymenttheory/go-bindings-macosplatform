@@ -48,36 +48,29 @@ func warpGeometryAdopt(id objc.ID) *WarpGeometry {
 }
 
 // Description returns the object's -description text.
-func (x *WarpGeometry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wg *WarpGeometry) Description() string {
+	return rt.Description(objref.IDOf(wg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WarpGeometry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wg *WarpGeometry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WarpGeometry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wg *WarpGeometry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WarpGeometry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wg *WarpGeometry) String() string {
+	return rt.Description(objref.IDOf(wg))
 }
-
-// WarpGeometryable is the interface implemented by [WarpGeometry], for mocking and DI.
-type WarpGeometryable interface {
-	obj.Object
-}
-
-var _ WarpGeometryable = (*WarpGeometry)(nil)
 
 // isWarpGeometry marks WarpGeometry — and, by embedding promotion, its
 // subclasses — as a member of the WarpGeometry hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *WarpGeometry) isWarpGeometry() {}
+func (wg *WarpGeometry) isWarpGeometry() {}
 
 var _ WarpGeometryProvider = (*WarpGeometry)(nil)

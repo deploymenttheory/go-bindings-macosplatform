@@ -44,24 +44,24 @@ func personIdentityAdopt(id objc.ID) *PersonIdentity {
 }
 
 // Description returns the object's -description text.
-func (x *PersonIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PersonIdentity) Description() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersonIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pi *PersonIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersonIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pi *PersonIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersonIdentity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PersonIdentity) String() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // NewPersonIdentityWithRootHash an initializer The data contains a SHA256 hash of the user's combined public identities.
@@ -71,16 +71,8 @@ func NewPersonIdentityWithRootHash(rootHash obj.Object) *PersonIdentity {
 	return personIdentityAdopt(_id)
 }
 
-// RootHash the root hash of the tree that represents this individual's identity. The data contains a SHA256 hash of the user's combined public identities.
-func (x *PersonIdentity) RootHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootHash"))
+// RootHash returns the root hash of the tree that represents this individual's identity. The data contains a SHA256 hash of the user's combined public identities.
+func (pi *PersonIdentity) RootHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("rootHash"))
 	return obj.Wrap(_r)
 }
-
-// PersonIdentityable is the interface implemented by [PersonIdentity], for mocking and DI.
-type PersonIdentityable interface {
-	obj.Object
-	RootHash() obj.Object
-}
-
-var _ PersonIdentityable = (*PersonIdentity)(nil)

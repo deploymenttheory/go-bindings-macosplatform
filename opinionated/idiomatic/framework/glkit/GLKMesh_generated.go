@@ -5,13 +5,14 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Mesh is an idiomatic wrapper over the Objective-C class GLKMesh.
@@ -46,24 +47,24 @@ func meshAdopt(id objc.ID) *Mesh {
 }
 
 // Description returns the object's -description text.
-func (x *Mesh) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Mesh) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Mesh) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Mesh) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Mesh) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Mesh) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Mesh) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Mesh) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMeshWithMeshError initialize the mesh and the mesh's submeshes This does NOT initialize any meshes that are children of the Model I/O mesh
@@ -77,51 +78,39 @@ func NewMeshWithMeshError(mesh obj.Object) (result *Mesh, err error) {
 	return meshAdopt(_id), nil
 }
 
-// VertexCount number of verticies in the vertexBuffers
-func (x *Mesh) VertexCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
+// VertexCount returns number of verticies in the vertexBuffers
+func (m *Mesh) VertexCount() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("vertexCount"))
 	return _r
 }
 
-// VertexBuffers array of buffers in which mesh vertex data resides
+// VertexBuffers returns array of buffers in which mesh vertex data resides
 //
 // VertexBuffers returns the collection as a Go slice.
-func (x *Mesh) VertexBuffers() []*MeshBuffer {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexBuffers"))
+func (m *Mesh) VertexBuffers() []*MeshBuffer {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("vertexBuffers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MeshBuffer { return MeshBufferFromID(_id) })
 }
 
-// VertexDescriptor model I/O vertex descriptor specifying the layout of data in vertexBuffers This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
-func (x *Mesh) VertexDescriptor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDescriptor"))
+// VertexDescriptor returns model I/O vertex descriptor specifying the layout of data in vertexBuffers This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
+func (m *Mesh) VertexDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("vertexDescriptor"))
 	return obj.Wrap(_r)
 }
 
-// Submeshes submeshes containing index buffers to rendering mesh verticies. Submeshes may also contain texture materials to apply when rendering this object
+// Submeshes returns submeshes containing index buffers to rendering mesh verticies. Submeshes may also contain texture materials to apply when rendering this object
 //
 // Submeshes returns the collection as a Go slice.
-func (x *Mesh) Submeshes() []*Submesh {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submeshes"))
+func (m *Mesh) Submeshes() []*Submesh {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("submeshes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Submesh { return SubmeshFromID(_id) })
 }
 
-// Name name of the mesh copies from the originating Model I/O mesh Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
-func (x *Mesh) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name of the mesh copies from the originating Model I/O mesh Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
+func (m *Mesh) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Meshable is the interface implemented by [Mesh], for mocking and DI.
-type Meshable interface {
-	obj.Object
-	VertexCount() int
-	VertexBuffers() []*MeshBuffer
-	VertexDescriptor() obj.Object
-	Submeshes() []*Submesh
-	Name() string
-}
-
-var _ Meshable = (*Mesh)(nil)

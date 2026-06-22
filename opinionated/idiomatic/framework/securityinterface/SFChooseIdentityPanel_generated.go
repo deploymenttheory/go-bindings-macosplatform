@@ -46,24 +46,24 @@ func chooseIdentityPanelAdopt(id objc.ID) *ChooseIdentityPanel {
 }
 
 // Description returns the object's -description text.
-func (x *ChooseIdentityPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cip *ChooseIdentityPanel) Description() string {
+	return rt.Description(objref.IDOf(cip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChooseIdentityPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cip *ChooseIdentityPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChooseIdentityPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cip *ChooseIdentityPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ChooseIdentityPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cip *ChooseIdentityPanel) String() string {
+	return rt.Description(objref.IDOf(cip))
 }
 
 // NewChooseIdentityPanel creates a new ChooseIdentityPanel.
@@ -73,57 +73,57 @@ func NewChooseIdentityPanel() *ChooseIdentityPanel {
 }
 
 // RunModalForIdentitiesMessage displays a list of identities in a modal panel.
-func (x *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities obj.Object, message string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForIdentities:message:"), objref.IDOf(identities), purego.NSString(message))
+func (cip *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities obj.Object, message string) int {
+	_r := objc.Send[int](objref.IDOf(cip), objc.RegisterName("runModalForIdentities:message:"), objref.IDOf(identities), purego.NSString(message))
 	return _r
 }
 
 // Identity returns the identity that the user chose in the panel or sheet.
-func (x *ChooseIdentityPanel) Identity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
+func (cip *ChooseIdentityPanel) Identity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
 // SetPolicies specifies one or more policies that apply to the displayed certificates.
-func (x *ChooseIdentityPanel) SetPolicies(policies obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
+func (cip *ChooseIdentityPanel) SetPolicies(policies obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 }
 
 // Policies returns an array of policies used to evaluate the status of the displayed certificates.
-func (x *ChooseIdentityPanel) Policies() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
+func (cip *ChooseIdentityPanel) Policies() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("policies"))
 	return obj.Wrap(_r)
 }
 
 // SetDefaultButtonTitle customizes the title of the default button.
-func (x *ChooseIdentityPanel) SetDefaultButtonTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
+func (cip *ChooseIdentityPanel) SetDefaultButtonTitle(title string) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
 }
 
 // SetAlternateButtonTitle customizes the title of the alternate button.
-func (x *ChooseIdentityPanel) SetAlternateButtonTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
+func (cip *ChooseIdentityPanel) SetAlternateButtonTitle(title string) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
 }
 
 // SetShowsHelp displays a Help button in the sheet or panel.
-func (x *ChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHelp:"), showsHelp)
+func (cip *ChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setShowsHelp:"), showsHelp)
 }
 
-// ShowsHelp indicates whether the help button is currently set to be displayed.
-func (x *ChooseIdentityPanel) ShowsHelp() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsHelp"))
+// ShowsHelp reports whether the help button is currently set to be displayed.
+func (cip *ChooseIdentityPanel) ShowsHelp() bool {
+	_r := objc.Send[bool](objref.IDOf(cip), objc.RegisterName("showsHelp"))
 	return _r
 }
 
 // SetHelpAnchor sets the help anchor string for the sheet or modal panel.
-func (x *ChooseIdentityPanel) SetHelpAnchor(anchor string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
+func (cip *ChooseIdentityPanel) SetHelpAnchor(anchor string) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
 }
 
 // HelpAnchor returns the current help anchor string for the sheet or panel.
-func (x *ChooseIdentityPanel) HelpAnchor() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+func (cip *ChooseIdentityPanel) HelpAnchor() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("helpAnchor"))
 	if _r == 0 {
 		return ""
 	}
@@ -131,13 +131,13 @@ func (x *ChooseIdentityPanel) HelpAnchor() string {
 }
 
 // SetInformativeText sets the optional informative text displayed in the panel.
-func (x *ChooseIdentityPanel) SetInformativeText(informativeText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
+func (cip *ChooseIdentityPanel) SetInformativeText(informativeText string) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
 // InformativeText returns the informative text currently displayed in the panel.
-func (x *ChooseIdentityPanel) InformativeText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
+func (cip *ChooseIdentityPanel) InformativeText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("informativeText"))
 	if _r == 0 {
 		return ""
 	}
@@ -145,36 +145,15 @@ func (x *ChooseIdentityPanel) InformativeText() string {
 }
 
 // SetDomain sets an optional domain in which the identity is to be used.
-func (x *ChooseIdentityPanel) SetDomain(domainString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomain:"), purego.NSString(domainString))
+func (cip *ChooseIdentityPanel) SetDomain(domainString string) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setDomain:"), purego.NSString(domainString))
 }
 
 // Domain returns the domain that will be associated with the chosen identity.
-func (x *ChooseIdentityPanel) Domain() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+func (cip *ChooseIdentityPanel) Domain() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("domain"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ChooseIdentityPanelable is the interface implemented by [ChooseIdentityPanel], for mocking and DI.
-type ChooseIdentityPanelable interface {
-	obj.Object
-	RunModalForIdentitiesMessage(identities obj.Object, message string) int
-	Identity() obj.Object
-	SetPolicies(policies obj.Object)
-	Policies() obj.Object
-	SetDefaultButtonTitle(title string)
-	SetAlternateButtonTitle(title string)
-	SetShowsHelp(showsHelp bool)
-	ShowsHelp() bool
-	SetHelpAnchor(anchor string)
-	HelpAnchor() string
-	SetInformativeText(informativeText string)
-	InformativeText() string
-	SetDomain(domainString string)
-	Domain() string
-}
-
-var _ ChooseIdentityPanelable = (*ChooseIdentityPanel)(nil)

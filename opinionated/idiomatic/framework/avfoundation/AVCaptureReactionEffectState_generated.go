@@ -46,24 +46,24 @@ func captureReactionEffectStateAdopt(id objc.ID) *CaptureReactionEffectState {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureReactionEffectState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cres *CaptureReactionEffectState) Description() string {
+	return rt.Description(objref.IDOf(cres))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureReactionEffectState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cres *CaptureReactionEffectState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cres), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureReactionEffectState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cres *CaptureReactionEffectState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cres), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureReactionEffectState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cres *CaptureReactionEffectState) String() string {
+	return rt.Description(objref.IDOf(cres))
 }
 
 // NewCaptureReactionEffectState creates a new CaptureReactionEffectState.
@@ -73,15 +73,7 @@ func NewCaptureReactionEffectState() *CaptureReactionEffectState {
 }
 
 // ReactionType indicates the reaction which is running. There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
-func (x *CaptureReactionEffectState) ReactionType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reactionType"))
+func (cres *CaptureReactionEffectState) ReactionType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cres), objc.RegisterName("reactionType"))
 	return obj.Wrap(_r)
 }
-
-// CaptureReactionEffectStateable is the interface implemented by [CaptureReactionEffectState], for mocking and DI.
-type CaptureReactionEffectStateable interface {
-	obj.Object
-	ReactionType() obj.Object
-}
-
-var _ CaptureReactionEffectStateable = (*CaptureReactionEffectState)(nil)

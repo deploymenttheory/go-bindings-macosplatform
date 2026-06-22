@@ -60,53 +60,35 @@ func NewMicroGamepadSnapshotWithControllerSnapshotData(controller *Controller, d
 	return microGamepadSnapshotAdopt(_id)
 }
 
-// WithSnapshotData the flattened control input values for the snapshot.
-func (x *MicroGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *MicroGamepadSnapshot {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
-	return x
+// WithSnapshotData sets the flattened control input values for the snapshot.
+func (mgs *MicroGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
+	return mgs
 }
 
-// WithReportsAbsoluteDpadValues a Boolean value that indicates whether the directional pad reports absolute or relative values.
-func (x *MicroGamepadSnapshot) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
-	return x
+// WithReportsAbsoluteDpadValues sets a Boolean value that indicates whether the directional pad reports absolute or relative values.
+func (mgs *MicroGamepadSnapshot) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
+	return mgs
 }
 
-// WithAllowsRotation a Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
-func (x *MicroGamepadSnapshot) WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRotation:"), allowsRotation)
-	return x
+// WithAllowsRotation sets a Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
+func (mgs *MicroGamepadSnapshot) WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setAllowsRotation:"), allowsRotation)
+	return mgs
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MicroGamepadSnapshot {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (mgs *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return mgs
 }
 
 // SnapshotData wraps the corresponding Objective-C method.
-func (x *MicroGamepadSnapshot) SnapshotData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotData"))
+func (mgs *MicroGamepadSnapshot) SnapshotData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("snapshotData"))
 	return obj.Wrap(_r)
 }
-
-// SetSnapshotData wraps the corresponding Objective-C method.
-func (x *MicroGamepadSnapshot) SetSnapshotData(snapshotData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
-}
-
-// MicroGamepadSnapshotable is the interface implemented by [MicroGamepadSnapshot], for mocking and DI.
-type MicroGamepadSnapshotable interface {
-	obj.Object
-	WithSnapshotData(snapshotData obj.Object) *MicroGamepadSnapshot
-	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot
-	WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MicroGamepadSnapshot
-	SnapshotData() obj.Object
-	SetSnapshotData(snapshotData obj.Object)
-}
-
-var _ MicroGamepadSnapshotable = (*MicroGamepadSnapshot)(nil)
 
 var _ MicroGamepadProvider = (*MicroGamepadSnapshot)(nil)
 

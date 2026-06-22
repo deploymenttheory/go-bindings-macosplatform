@@ -47,24 +47,24 @@ func renderingSessionAdopt(id objc.ID) *RenderingSession {
 }
 
 // Description returns the object's -description text.
-func (x *RenderingSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RenderingSession) Description() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderingSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rs *RenderingSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderingSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rs *RenderingSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderingSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RenderingSession) String() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // NewRenderingSession creates a new RenderingSession.
@@ -74,29 +74,19 @@ func NewRenderingSession() *RenderingSession {
 }
 
 // SessionAttributes wraps the corresponding Objective-C method.
-func (x *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionAttributes"))
+func (rs *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("sessionAttributes"))
 	return RenderingSessionAttributesFromID(_r)
 }
 
 // PreferredTransform wraps the corresponding Objective-C method.
-func (x *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+func (rs *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(rs), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
 // Quality wraps the corresponding Objective-C method.
-func (x *RenderingSession) Quality() RenderingQuality {
-	_r := objc.Send[RenderingQuality](objref.IDOf(x), objc.RegisterName("quality"))
+func (rs *RenderingSession) Quality() RenderingQuality {
+	_r := objc.Send[RenderingQuality](objref.IDOf(rs), objc.RegisterName("quality"))
 	return _r
 }
-
-// RenderingSessionable is the interface implemented by [RenderingSession], for mocking and DI.
-type RenderingSessionable interface {
-	obj.Object
-	SessionAttributes() *RenderingSessionAttributes
-	PreferredTransform() corefoundation.CGAffineTransform
-	Quality() RenderingQuality
-}
-
-var _ RenderingSessionable = (*RenderingSession)(nil)

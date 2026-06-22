@@ -6,6 +6,7 @@ package eventkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func virtualConferenceProviderAdopt(id objc.ID) *VirtualConferenceProvider {
 }
 
 // Description returns the object's -description text.
-func (x *VirtualConferenceProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcp *VirtualConferenceProvider) Description() string {
+	return rt.Description(objref.IDOf(vcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtualConferenceProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcp *VirtualConferenceProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtualConferenceProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcp *VirtualConferenceProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtualConferenceProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcp *VirtualConferenceProvider) String() string {
+	return rt.Description(objref.IDOf(vcp))
 }
 
 // NewVirtualConferenceProvider creates a new VirtualConferenceProvider.
@@ -77,7 +78,7 @@ func NewVirtualConferenceProvider() *VirtualConferenceProvider {
 // FetchAvailableRoomTypes provides an array of room types where events take place.
 //
 // FetchAvailableRoomTypes blocks until the operation completes or ctx is cancelled.
-func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context) (result obj.Object, err error) {
+func (vcp *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAvailableRoomTypesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(vcp), objc.RegisterName("fetchAvailableRoomTypesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,7 +103,7 @@ func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context)
 // FetchVirtualConferenceForIdentifier provides details about a virtual conference that takes place in a room the user selects.
 //
 // FetchVirtualConferenceForIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (result *VirtualConferenceDescriptor, err error) {
+func (vcp *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (result *VirtualConferenceDescriptor, err error) {
 	type _result struct {
 		val *VirtualConferenceDescriptor
 		err error
@@ -114,7 +115,7 @@ func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx cont
 		_o.val = VirtualConferenceDescriptorFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchVirtualConferenceForIdentifier:completionHandler:"), objref.IDOf(identifier), _block)
+	objc.Send[objc.ID](objref.IDOf(vcp), objc.RegisterName("fetchVirtualConferenceForIdentifier:completionHandler:"), objref.IDOf(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -123,12 +124,3 @@ func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx cont
 		return _zero, ctx.Err()
 	}
 }
-
-// VirtualConferenceProviderable is the interface implemented by [VirtualConferenceProvider], for mocking and DI.
-type VirtualConferenceProviderable interface {
-	obj.Object
-	FetchAvailableRoomTypes(ctx context.Context) (obj.Object, error)
-	FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (*VirtualConferenceDescriptor, error)
-}
-
-var _ VirtualConferenceProviderable = (*VirtualConferenceProvider)(nil)

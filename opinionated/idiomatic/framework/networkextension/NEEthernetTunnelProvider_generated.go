@@ -7,7 +7,6 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewNEEthernetTunnelProvider() *NEEthernetTunnelProvider {
 	return nEEthernetTunnelProviderAdopt(_id)
 }
 
-// WithReasserting indicate to the system that the tunnel is being re-established.
-func (x *NEEthernetTunnelProvider) WithReasserting(reasserting bool) *NEEthernetTunnelProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
-	return x
+// WithReasserting sets indicate to the system that the tunnel is being re-established.
+func (netp *NEEthernetTunnelProvider) WithReasserting(reasserting bool) *NEEthernetTunnelProvider {
+	objc.Send[objc.ID](objref.IDOf(netp), objc.RegisterName("setReasserting:"), reasserting)
+	return netp
 }
-
-// NEEthernetTunnelProviderable is the interface implemented by [NEEthernetTunnelProvider], for mocking and DI.
-type NEEthernetTunnelProviderable interface {
-	obj.Object
-	WithReasserting(reasserting bool) *NEEthernetTunnelProvider
-}
-
-var _ NEEthernetTunnelProviderable = (*NEEthernetTunnelProvider)(nil)
 
 var _ NEPacketTunnelProviderProvider = (*NEEthernetTunnelProvider)(nil)
 

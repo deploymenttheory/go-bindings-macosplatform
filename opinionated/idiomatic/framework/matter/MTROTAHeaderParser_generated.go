@@ -44,24 +44,24 @@ func mTROTAHeaderParserAdopt(id objc.ID) *MTROTAHeaderParser {
 }
 
 // Description returns the object's -description text.
-func (x *MTROTAHeaderParser) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mhp *MTROTAHeaderParser) Description() string {
+	return rt.Description(objref.IDOf(mhp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROTAHeaderParser) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mhp *MTROTAHeaderParser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mhp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROTAHeaderParser) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mhp *MTROTAHeaderParser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mhp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROTAHeaderParser) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mhp *MTROTAHeaderParser) String() string {
+	return rt.Description(objref.IDOf(mhp))
 }
 
 // NewMTROTAHeaderParser creates a new MTROTAHeaderParser.
@@ -69,10 +69,3 @@ func NewMTROTAHeaderParser() *MTROTAHeaderParser {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTROTAHeaderParser")), objc.RegisterName("new"))
 	return mTROTAHeaderParserAdopt(_id)
 }
-
-// MTROTAHeaderParserable is the interface implemented by [MTROTAHeaderParser], for mocking and DI.
-type MTROTAHeaderParserable interface {
-	obj.Object
-}
-
-var _ MTROTAHeaderParserable = (*MTROTAHeaderParser)(nil)

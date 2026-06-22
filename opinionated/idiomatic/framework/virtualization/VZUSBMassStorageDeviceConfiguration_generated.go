@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,12 +51,5 @@ func NewUSBMassStorageDeviceConfigurationWithAttachment(attachment *StorageDevic
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
 	return uSBMassStorageDeviceConfigurationAdopt(_id)
 }
-
-// USBMassStorageDeviceConfigurationable is the interface implemented by [USBMassStorageDeviceConfiguration], for mocking and DI.
-type USBMassStorageDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ USBMassStorageDeviceConfigurationable = (*USBMassStorageDeviceConfiguration)(nil)
 
 var _ StorageDeviceConfigurationProvider = (*USBMassStorageDeviceConfiguration)(nil)

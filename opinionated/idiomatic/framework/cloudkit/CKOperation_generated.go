@@ -5,7 +5,6 @@
 package cloudkit
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,208 +48,125 @@ func operationAdopt(id objc.ID) *Operation {
 }
 
 // Description returns the object's -description text.
-func (x *Operation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Operation) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Operation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Operation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Operation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Operation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Operation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Operation) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *Operation) WithConfiguration(configuration *OperationConfiguration) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (o *Operation) WithConfiguration(configuration *OperationConfiguration) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return o
 }
 
-// WithGroup the operation’s group.
-func (x *Operation) WithGroup(group *OperationGroup) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (o *Operation) WithGroup(group *OperationGroup) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return o
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *Operation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (o *Operation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return o
 }
 
-// WithContainer the operation's container.
-func (x *Operation) WithContainer(container *Container) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (o *Operation) WithContainer(container *Container) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return o
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *Operation) WithAllowsCellularAccess(allowsCellularAccess bool) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (o *Operation) WithAllowsCellularAccess(allowsCellularAccess bool) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return o
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *Operation) WithLongLived(longLived bool) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (o *Operation) WithLongLived(longLived bool) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setLongLived:"), longLived)
+	return o
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *Operation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (o *Operation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return o
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *Operation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (o *Operation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return o
 }
 
-// Configuration the operation's configuration.
-func (x *Operation) Configuration() *OperationConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+// Configuration returns the operation's configuration.
+func (o *Operation) Configuration() *OperationConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("configuration"))
 	return OperationConfigurationFromID(_r)
 }
 
-// SetConfiguration wraps the corresponding Objective-C method.
-func (x *Operation) SetConfiguration(configuration *OperationConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-}
-
-// Group the operation's group.
-func (x *Operation) Group() *OperationGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+// Group returns the operation's group.
+func (o *Operation) Group() *OperationGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("group"))
 	return OperationGroupFromID(_r)
 }
 
-// SetGroup wraps the corresponding Objective-C method.
-func (x *Operation) SetGroup(group *OperationGroup) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-}
-
-// OperationID a unique identifier for a long-lived operation. Pass this property's value to the “CKContainer/longLivedOperation(for:)“ method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
-func (x *Operation) OperationID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationID"))
+// OperationID returns a unique identifier for a long-lived operation. Pass this property's value to the “CKContainer/longLivedOperation(for:)“ method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+func (o *Operation) OperationID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("operationID"))
 	return obj.Wrap(_r)
 }
 
-// SetLongLivedOperationWasPersistedBlock wraps the corresponding Objective-C method.
-//
-// SetLongLivedOperationWasPersistedBlock blocks until the operation completes or ctx is cancelled.
-func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) error {
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block) {
-		_ch <- nil
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// Container the operation's container.
-func (x *Operation) Container() *Container {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("container"))
+// Container returns the operation's container.
+func (o *Operation) Container() *Container {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("container"))
 	return ContainerFromID(_r)
 }
 
-// SetContainer wraps the corresponding Objective-C method.
-func (x *Operation) SetContainer(container *Container) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-}
-
-// AllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *Operation) AllowsCellularAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCellularAccess"))
+// AllowsCellularAccess reports whether the operation can send data over the cellular network.
+func (o *Operation) AllowsCellularAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("allowsCellularAccess"))
 	return _r
 }
 
-// SetAllowsCellularAccess wraps the corresponding Objective-C method.
-func (x *Operation) SetAllowsCellularAccess(allowsCellularAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-}
-
-// IsLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *Operation) IsLongLived() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLongLived"))
+// IsLongLived reports whether the operation is long-lived.
+func (o *Operation) IsLongLived() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isLongLived"))
 	return _r
 }
 
-// SetLongLived wraps the corresponding Objective-C method.
-func (x *Operation) SetLongLived(longLived bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-}
-
-// TimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *Operation) TimeoutIntervalForRequest() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForRequest"))
+// TimeoutIntervalForRequest returns the timeout interval when waiting for additional data.
+func (o *Operation) TimeoutIntervalForRequest() float64 {
+	_r := objc.Send[float64](objref.IDOf(o), objc.RegisterName("timeoutIntervalForRequest"))
 	return _r
 }
 
-// SetTimeoutIntervalForRequest wraps the corresponding Objective-C method.
-func (x *Operation) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-}
-
-// TimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *Operation) TimeoutIntervalForResource() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForResource"))
+// TimeoutIntervalForResource returns the maximum amount of time that a resource request can use.
+func (o *Operation) TimeoutIntervalForResource() float64 {
+	_r := objc.Send[float64](objref.IDOf(o), objc.RegisterName("timeoutIntervalForResource"))
 	return _r
 }
-
-// SetTimeoutIntervalForResource wraps the corresponding Objective-C method.
-func (x *Operation) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-}
-
-// Operationable is the interface implemented by [Operation], for mocking and DI.
-type Operationable interface {
-	obj.Object
-	WithConfiguration(configuration *OperationConfiguration) *Operation
-	WithGroup(group *OperationGroup) *Operation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation
-	WithContainer(container *Container) *Operation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *Operation
-	WithLongLived(longLived bool) *Operation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation
-	Configuration() *OperationConfiguration
-	SetConfiguration(configuration *OperationConfiguration)
-	Group() *OperationGroup
-	SetGroup(group *OperationGroup)
-	OperationID() obj.Object
-	SetLongLivedOperationWasPersistedBlock(ctx context.Context) error
-	Container() *Container
-	SetContainer(container *Container)
-	AllowsCellularAccess() bool
-	SetAllowsCellularAccess(allowsCellularAccess bool)
-	IsLongLived() bool
-	SetLongLived(longLived bool)
-	TimeoutIntervalForRequest() float64
-	SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64)
-	TimeoutIntervalForResource() float64
-	SetTimeoutIntervalForResource(timeoutIntervalForResource float64)
-}
-
-var _ Operationable = (*Operation)(nil)
 
 // isOperation marks Operation — and, by embedding promotion, its
 // subclasses — as a member of the Operation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Operation) isOperation() {}
+func (o *Operation) isOperation() {}
 
 var _ OperationProvider = (*Operation)(nil)

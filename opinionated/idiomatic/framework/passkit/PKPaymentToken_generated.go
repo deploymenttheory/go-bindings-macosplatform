@@ -46,24 +46,24 @@ func paymentTokenAdopt(id objc.ID) *PaymentToken {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentToken) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pt *PaymentToken) Description() string {
+	return rt.Description(objref.IDOf(pt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentToken) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pt *PaymentToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentToken) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pt *PaymentToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentToken) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pt *PaymentToken) String() string {
+	return rt.Description(objref.IDOf(pt))
 }
 
 // NewPaymentToken creates a new PaymentToken.
@@ -73,14 +73,14 @@ func NewPaymentToken() *PaymentToken {
 }
 
 // PaymentMethod wraps the corresponding Objective-C method.
-func (x *PaymentToken) PaymentMethod() *PaymentMethod {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentMethod"))
+func (pt *PaymentToken) PaymentMethod() *PaymentMethod {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentMethod"))
 	return PaymentMethodFromID(_r)
 }
 
 // PaymentInstrumentName wraps the corresponding Objective-C method.
-func (x *PaymentToken) PaymentInstrumentName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentInstrumentName"))
+func (pt *PaymentToken) PaymentInstrumentName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentInstrumentName"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,8 +88,8 @@ func (x *PaymentToken) PaymentInstrumentName() string {
 }
 
 // PaymentNetwork wraps the corresponding Objective-C method.
-func (x *PaymentToken) PaymentNetwork() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentNetwork"))
+func (pt *PaymentToken) PaymentNetwork() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentNetwork"))
 	if _r == 0 {
 		return ""
 	}
@@ -97,8 +97,8 @@ func (x *PaymentToken) PaymentNetwork() string {
 }
 
 // TransactionIdentifier wraps the corresponding Objective-C method.
-func (x *PaymentToken) TransactionIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionIdentifier"))
+func (pt *PaymentToken) TransactionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -106,19 +106,7 @@ func (x *PaymentToken) TransactionIdentifier() string {
 }
 
 // PaymentData wraps the corresponding Objective-C method.
-func (x *PaymentToken) PaymentData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentData"))
+func (pt *PaymentToken) PaymentData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentData"))
 	return obj.Wrap(_r)
 }
-
-// PaymentTokenable is the interface implemented by [PaymentToken], for mocking and DI.
-type PaymentTokenable interface {
-	obj.Object
-	PaymentMethod() *PaymentMethod
-	PaymentInstrumentName() string
-	PaymentNetwork() string
-	TransactionIdentifier() string
-	PaymentData() obj.Object
-}
-
-var _ PaymentTokenable = (*PaymentToken)(nil)

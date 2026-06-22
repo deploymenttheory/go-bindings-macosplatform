@@ -46,24 +46,24 @@ func renderPassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPas
 }
 
 // Description returns the object's -description text.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpsbada *RenderPassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(rpsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpsbada *RenderPassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpsbada *RenderPassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpsbada *RenderPassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(rpsbada))
 }
 
 // NewRenderPassSampleBufferAttachmentDescriptorArray creates a new RenderPassSampleBufferAttachmentDescriptorArray.
@@ -73,21 +73,12 @@ func NewRenderPassSampleBufferAttachmentDescriptorArray() *RenderPassSampleBuffe
 }
 
 // ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassSampleBufferAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (rpsbada *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(rpsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return RenderPassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (rpsbada *RenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(rpsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// RenderPassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [RenderPassSampleBufferAttachmentDescriptorArray], for mocking and DI.
-type RenderPassSampleBufferAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *RenderPassSampleBufferAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ RenderPassSampleBufferAttachmentDescriptorArrayable = (*RenderPassSampleBufferAttachmentDescriptorArray)(nil)

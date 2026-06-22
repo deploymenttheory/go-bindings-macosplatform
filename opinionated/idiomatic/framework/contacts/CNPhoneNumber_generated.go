@@ -46,24 +46,24 @@ func phoneNumberAdopt(id objc.ID) *PhoneNumber {
 }
 
 // Description returns the object's -description text.
-func (x *PhoneNumber) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pn *PhoneNumber) Description() string {
+	return rt.Description(objref.IDOf(pn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhoneNumber) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pn *PhoneNumber) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhoneNumber) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pn *PhoneNumber) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhoneNumber) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pn *PhoneNumber) String() string {
+	return rt.Description(objref.IDOf(pn))
 }
 
 // NewPhoneNumber creates a new PhoneNumber.
@@ -80,18 +80,10 @@ func NewPhoneNumberWithStringValue(string_ string) *PhoneNumber {
 }
 
 // StringValue wraps the corresponding Objective-C method.
-func (x *PhoneNumber) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (pn *PhoneNumber) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pn), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// PhoneNumberable is the interface implemented by [PhoneNumber], for mocking and DI.
-type PhoneNumberable interface {
-	obj.Object
-	StringValue() string
-}
-
-var _ PhoneNumberable = (*PhoneNumber)(nil)

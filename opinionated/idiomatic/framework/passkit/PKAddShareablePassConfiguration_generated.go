@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,51 +51,39 @@ func NewAddShareablePassConfiguration() *AddShareablePassConfiguration {
 	return addShareablePassConfigurationAdopt(_id)
 }
 
-// WithIssuerIdentifier an opaque value for the configuration.
-func (x *AddShareablePassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
-	return x
+// WithIssuerIdentifier sets an opaque value for the configuration.
+func (aspc *AddShareablePassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration {
+	objc.Send[objc.ID](objref.IDOf(aspc), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
+	return aspc
 }
 
-// WithLocalizedDescription the configuration’s localized description.
-func (x *AddShareablePassConfiguration) WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
-	return x
+// WithLocalizedDescription sets the configuration’s localized description.
+func (aspc *AddShareablePassConfiguration) WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration {
+	objc.Send[objc.ID](objref.IDOf(aspc), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
+	return aspc
 }
 
 // PrimaryAction wraps the corresponding Objective-C method.
-func (x *AddShareablePassConfiguration) PrimaryAction() AddShareablePassConfigurationPrimaryAction {
-	_r := objc.Send[AddShareablePassConfigurationPrimaryAction](objref.IDOf(x), objc.RegisterName("primaryAction"))
+func (aspc *AddShareablePassConfiguration) PrimaryAction() AddShareablePassConfigurationPrimaryAction {
+	_r := objc.Send[AddShareablePassConfigurationPrimaryAction](objref.IDOf(aspc), objc.RegisterName("primaryAction"))
 	return _r
 }
 
 // CredentialsMetadata wraps the corresponding Objective-C method.
 //
 // CredentialsMetadata returns the collection as a Go slice.
-func (x *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePassMetadata {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialsMetadata"))
+func (aspc *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePassMetadata {
+	_arr := objc.Send[objc.ID](objref.IDOf(aspc), objc.RegisterName("credentialsMetadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareablePassMetadata { return ShareablePassMetadataFromID(_id) })
 }
 
 // ProvisioningPolicyIdentifier wraps the corresponding Objective-C method.
-func (x *AddShareablePassConfiguration) ProvisioningPolicyIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provisioningPolicyIdentifier"))
+func (aspc *AddShareablePassConfiguration) ProvisioningPolicyIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aspc), objc.RegisterName("provisioningPolicyIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AddShareablePassConfigurationable is the interface implemented by [AddShareablePassConfiguration], for mocking and DI.
-type AddShareablePassConfigurationable interface {
-	obj.Object
-	WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration
-	WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration
-	PrimaryAction() AddShareablePassConfigurationPrimaryAction
-	CredentialsMetadata() []*ShareablePassMetadata
-	ProvisioningPolicyIdentifier() string
-}
-
-var _ AddShareablePassConfigurationable = (*AddShareablePassConfiguration)(nil)
 
 var _ AddSecureElementPassConfigurationProvider = (*AddShareablePassConfiguration)(nil)

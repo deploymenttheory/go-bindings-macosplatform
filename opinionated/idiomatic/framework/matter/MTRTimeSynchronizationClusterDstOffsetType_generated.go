@@ -51,31 +51,21 @@ func NewMTRTimeSynchronizationClusterDstOffsetType() *MTRTimeSynchronizationClus
 }
 
 // WithOffset sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterDstOffsetType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
-	return x
+func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
+	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setOffset:"), objref.IDOf(offset))
+	return mtscdot
 }
 
 // WithValidStarting sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterDstOffsetType) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
-	return x
+func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
+	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
+	return mtscdot
 }
 
 // WithValidUntil sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterDstOffsetType) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
-	return x
+func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
+	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
+	return mtscdot
 }
-
-// MTRTimeSynchronizationClusterDstOffsetTypeable is the interface implemented by [MTRTimeSynchronizationClusterDstOffsetType], for mocking and DI.
-type MTRTimeSynchronizationClusterDstOffsetTypeable interface {
-	obj.Object
-	WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDstOffsetType
-	WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDstOffsetType
-	WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDstOffsetType
-}
-
-var _ MTRTimeSynchronizationClusterDstOffsetTypeable = (*MTRTimeSynchronizationClusterDstOffsetType)(nil)
 
 var _ MTRTimeSynchronizationClusterDSTOffsetStructProvider = (*MTRTimeSynchronizationClusterDstOffsetType)(nil)

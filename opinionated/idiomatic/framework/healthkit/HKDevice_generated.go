@@ -46,24 +46,24 @@ func deviceAdopt(id objc.ID) *Device {
 }
 
 // Description returns the object's -description text.
-func (x *Device) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Device) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Device) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Device) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier initializes a new device object.
@@ -73,63 +73,63 @@ func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVer
 	return deviceAdopt(_id)
 }
 
-// Name the name of the receiver. The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
-func (x *Device) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of the receiver. The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
+func (d *Device) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Manufacturer the manufacturer of the receiver.
-func (x *Device) Manufacturer() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturer"))
+// Manufacturer returns the manufacturer of the receiver.
+func (d *Device) Manufacturer() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("manufacturer"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Model the model of the receiver.
-func (x *Device) Model() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+// Model returns the model of the receiver.
+func (d *Device) Model() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("model"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// HardwareVersion the hardware revision of the receiver.
-func (x *Device) HardwareVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareVersion"))
+// HardwareVersion returns the hardware revision of the receiver.
+func (d *Device) HardwareVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("hardwareVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FirmwareVersion the firmware revision of the receiver.
-func (x *Device) FirmwareVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firmwareVersion"))
+// FirmwareVersion returns the firmware revision of the receiver.
+func (d *Device) FirmwareVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("firmwareVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SoftwareVersion the software revision of the receiver.
-func (x *Device) SoftwareVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
+// SoftwareVersion returns the software revision of the receiver.
+func (d *Device) SoftwareVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("softwareVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalIdentifier a unique identifier for the receiver. This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
-func (x *Device) LocalIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
+// LocalIdentifier returns a unique identifier for the receiver. This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
+func (d *Device) LocalIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("localIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -137,25 +137,10 @@ func (x *Device) LocalIdentifier() string {
 }
 
 // UDIDeviceIdentifier represents the device identifier portion of a device's FDA UDI (Unique Device Identifier). The device identifier can be used to reference the FDA's GUDID (Globally Unique Device Identifier Database). Note that for user privacy concerns this field should not be used to persist the production identifier portion of the device UDI. HealthKit clients should manage the production identifier independently, if needed. See http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/UniqueDeviceIdentification/ for more information.
-func (x *Device) UDIDeviceIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UDIDeviceIdentifier"))
+func (d *Device) UDIDeviceIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("UDIDeviceIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Deviceable is the interface implemented by [Device], for mocking and DI.
-type Deviceable interface {
-	obj.Object
-	Name() string
-	Manufacturer() string
-	Model() string
-	HardwareVersion() string
-	FirmwareVersion() string
-	SoftwareVersion() string
-	LocalIdentifier() string
-	UDIDeviceIdentifier() string
-}
-
-var _ Deviceable = (*Device)(nil)

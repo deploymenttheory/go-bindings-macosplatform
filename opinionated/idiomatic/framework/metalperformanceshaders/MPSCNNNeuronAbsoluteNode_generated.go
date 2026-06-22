@@ -53,19 +53,11 @@ func NewCNNNeuronAbsoluteNodeWithSource(sourceNode obj.Object) *CNNNeuronAbsolut
 	return cNNNeuronAbsoluteNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronAbsoluteNode) WithLabel(label string) *CNNNeuronAbsoluteNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnan *CNNNeuronAbsoluteNode) WithLabel(label string) *CNNNeuronAbsoluteNode {
+	objc.Send[objc.ID](objref.IDOf(cnan), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnan
 }
-
-// CNNNeuronAbsoluteNodeable is the interface implemented by [CNNNeuronAbsoluteNode], for mocking and DI.
-type CNNNeuronAbsoluteNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronAbsoluteNode
-}
-
-var _ CNNNeuronAbsoluteNodeable = (*CNNNeuronAbsoluteNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronAbsoluteNode)(nil)
 

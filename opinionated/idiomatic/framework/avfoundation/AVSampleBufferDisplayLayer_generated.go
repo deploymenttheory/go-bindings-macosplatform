@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func sampleBufferDisplayLayerAdopt(id objc.ID) *SampleBufferDisplayLayer {
 }
 
 // Description returns the object's -description text.
-func (x *SampleBufferDisplayLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sbdl *SampleBufferDisplayLayer) Description() string {
+	return rt.Description(objref.IDOf(sbdl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleBufferDisplayLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sbdl *SampleBufferDisplayLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sbdl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleBufferDisplayLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sbdl *SampleBufferDisplayLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sbdl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SampleBufferDisplayLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sbdl *SampleBufferDisplayLayer) String() string {
+	return rt.Description(objref.IDOf(sbdl))
 }
 
 // NewSampleBufferDisplayLayer creates a new SampleBufferDisplayLayer.
@@ -73,82 +74,72 @@ func NewSampleBufferDisplayLayer() *SampleBufferDisplayLayer {
 	return sampleBufferDisplayLayerAdopt(_id)
 }
 
-// WithControlTimebase a timebase that determines how the layer interprets timestamps.
-func (x *SampleBufferDisplayLayer) WithControlTimebase(controlTimebase obj.Object) *SampleBufferDisplayLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTimebase:"), objref.IDOf(controlTimebase))
-	return x
+// WithControlTimebase sets a timebase that determines how the layer interprets timestamps.
+func (sbdl *SampleBufferDisplayLayer) WithControlTimebase(controlTimebase obj.Object) *SampleBufferDisplayLayer {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("setControlTimebase:"), objref.IDOf(controlTimebase))
+	return sbdl
 }
 
-// WithVideoGravity a value that indicates how the layer displays video within its bounds.
-func (x *SampleBufferDisplayLayer) WithVideoGravity(videoGravity obj.Object) *SampleBufferDisplayLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-	return x
+// WithVideoGravity sets a value that indicates how the layer displays video within its bounds.
+func (sbdl *SampleBufferDisplayLayer) WithVideoGravity(videoGravity obj.Object) *SampleBufferDisplayLayer {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
+	return sbdl
 }
 
-// WithPreventsCapture a Boolean value that indicates whether the layer protects against screen capture.
-func (x *SampleBufferDisplayLayer) WithPreventsCapture(preventsCapture bool) *SampleBufferDisplayLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsCapture:"), preventsCapture)
-	return x
+// WithPreventsCapture sets a Boolean value that indicates whether the layer protects against screen capture.
+func (sbdl *SampleBufferDisplayLayer) WithPreventsCapture(preventsCapture bool) *SampleBufferDisplayLayer {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("setPreventsCapture:"), preventsCapture)
+	return sbdl
 }
 
-// WithPreventsDisplaySleepDuringVideoPlayback a Boolean value that indicates whether the layer prevents the system from sleeping during video playback.
-func (x *SampleBufferDisplayLayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *SampleBufferDisplayLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
-	return x
+// WithPreventsDisplaySleepDuringVideoPlayback sets a Boolean value that indicates whether the layer prevents the system from sleeping during video playback.
+func (sbdl *SampleBufferDisplayLayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *SampleBufferDisplayLayer {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
+	return sbdl
 }
 
-// ControlTimebase the layer's control timebase, which governs how time stamps are interpreted. By default, this property is NULL, in which case time stamps will be interpreted according to the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime).  With no control timebase, once frames are enqueued, it is not possible to adjust exactly when they are displayed. If a non-NULL control timebase is set, it will be used to interpret time stamps. You can control the timing of frame display by setting the rate and time of the control timebase. If you are synchronizing video to audio, you can use a timebase whose source clock is a CMAudioDeviceClock for the appropriate audio device to prevent drift. Note that prior to OSX 10.10 and iOS 8.0, the control timebase could not be changed after enqueueSampleBuffer: was called.  As of OSX 10.10 and iOS 8.0, the control timebase may be changed at any time.
-func (x *SampleBufferDisplayLayer) ControlTimebase() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlTimebase"))
+// ControlTimebase returns the layer's control timebase, which governs how time stamps are interpreted. By default, this property is NULL, in which case time stamps will be interpreted according to the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime).  With no control timebase, once frames are enqueued, it is not possible to adjust exactly when they are displayed. If a non-NULL control timebase is set, it will be used to interpret time stamps. You can control the timing of frame display by setting the rate and time of the control timebase. If you are synchronizing video to audio, you can use a timebase whose source clock is a CMAudioDeviceClock for the appropriate audio device to prevent drift. Note that prior to OSX 10.10 and iOS 8.0, the control timebase could not be changed after enqueueSampleBuffer: was called.  As of OSX 10.10 and iOS 8.0, the control timebase may be changed at any time.
+func (sbdl *SampleBufferDisplayLayer) ControlTimebase() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("controlTimebase"))
 	return obj.Wrap(_r)
 }
 
-// SetControlTimebase wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) SetControlTimebase(controlTimebase obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTimebase:"), objref.IDOf(controlTimebase))
-}
-
-// VideoGravity a string defining how the video is displayed within an AVSampleBufferDisplayLayer bounds rect.
-func (x *SampleBufferDisplayLayer) VideoGravity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoGravity"))
+// VideoGravity returns a string defining how the video is displayed within an AVSampleBufferDisplayLayer bounds rect.
+func (sbdl *SampleBufferDisplayLayer) VideoGravity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("videoGravity"))
 	return obj.Wrap(_r)
 }
 
-// SetVideoGravity wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) SetVideoGravity(videoGravity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-}
-
-// IsReadyForDisplay boolean indicating that the first video frame has been made ready for display.
-func (x *SampleBufferDisplayLayer) IsReadyForDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyForDisplay"))
+// IsReadyForDisplay reports whether boolean indicating that the first video frame has been made ready for display.
+func (sbdl *SampleBufferDisplayLayer) IsReadyForDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(sbdl), objc.RegisterName("isReadyForDisplay"))
 	return _r
 }
 
 // EnqueueSampleBuffer sends a sample buffer for display. If sampleBuffer has the kCMSampleAttachmentKey_DoNotDisplay attachment set to kCFBooleanTrue, the frame will be decoded but not displayed. Otherwise, if sampleBuffer has the kCMSampleAttachmentKey_DisplayImmediately attachment set to kCFBooleanTrue, the decoded image will be displayed as soon as possible, replacing all previously enqueued images regardless of their timestamps. Otherwise, the decoded image will be displayed at sampleBuffer's output presentation timestamp, as interpreted by the control timebase (or the mach_absolute_time timeline if there is no control timebase). To schedule the removal of previous images at a specific timestamp, enqueue a marker sample buffer containing no samples, with the kCMSampleBufferAttachmentKey_EmptyMedia attachment set to kCFBooleanTrue. IMPORTANT NOTE: attachments with the kCMSampleAttachmentKey_ prefix must be set via CMSampleBufferGetSampleAttachmentsArray and CFDictionarySetValue. Attachments with the kCMSampleBufferAttachmentKey_ prefix must be set via CMSetAttachment. IMPORTANT NOTE:  When using CMSampleBuffers that wrap CVPixelBuffer, it is important that such CVPixelBuffers be IOSurface-backed. CoreVideo allocates IOSurface-backed CVPixelBuffers when the pixel buffer attribute dictionary passed to CVPixelBufferPoolCreate contains an entry with key kCVPixelBufferIOSurfacePropertiesKey and value being a dictionary (which can be an empty dictionary). The combination of either a non-NULL controlTimebase or an AVSampleBufferRenderSynchronizer with the use of kCMSampleAttachmentKey_DisplayImmediately as an attachment to the CMSampleBuffers that are enqueued for display is not recommended.
-func (x *SampleBufferDisplayLayer) EnqueueSampleBuffer(sampleBuffer obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueSampleBuffer:"), objref.IDOf(sampleBuffer))
+func (sbdl *SampleBufferDisplayLayer) EnqueueSampleBuffer(sampleBuffer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("enqueueSampleBuffer:"), objref.IDOf(sampleBuffer))
 }
 
 // Flush instructs the layer to discard pending enqueued sample buffers. It is not possible to determine which sample buffers have been decoded, so the next frame passed to enqueueSampleBuffer: should be an IDR frame (also known as a key frame or sync sample).
-func (x *SampleBufferDisplayLayer) Flush() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flush"))
+func (sbdl *SampleBufferDisplayLayer) Flush() {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("flush"))
 }
 
 // FlushAndRemoveImage instructs the layer to discard pending enqueued sample buffers and remove any currently displayed image. It is not possible to determine which sample buffers have been decoded, so the next frame passed to enqueueSampleBuffer: should be an IDR frame (also known as a key frame or sync sample).
-func (x *SampleBufferDisplayLayer) FlushAndRemoveImage() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushAndRemoveImage"))
+func (sbdl *SampleBufferDisplayLayer) FlushAndRemoveImage() {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("flushAndRemoveImage"))
 }
 
 // RequestMediaDataWhenReadyOnQueueUsing instructs the target to invoke a client-supplied block repeatedly, at its convenience, in order to gather sample buffers for display. The block should enqueue sample buffers to the layer either until the layer's readyForMoreMediaData property becomes NO or until there is no more data to supply. When the layer has decoded enough of the media data it has received that it becomes ready for more media data again, it will invoke the block again in order to obtain more. If this function is called multiple times, only the last call is effective. Call stopRequestingMediaData to cancel this request. Each call to requestMediaDataWhenReadyOnQueue:usingBlock: should be paired with a corresponding call to stopRequestingMediaData:. Releasing the AVSampleBufferDisplayLayer without a call to stopRequestingMediaData will result in undefined behavior.
 //
 // RequestMediaDataWhenReadyOnQueueUsing blocks until the operation completes or ctx is cancelled.
-func (x *SampleBufferDisplayLayer) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue obj.Object) error {
+func (sbdl *SampleBufferDisplayLayer) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objref.IDOf(queue), _block)
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objref.IDOf(queue), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -158,102 +149,60 @@ func (x *SampleBufferDisplayLayer) RequestMediaDataWhenReadyOnQueueUsing(ctx con
 }
 
 // StopRequestingMediaData cancels any current requestMediaDataWhenReadyOnQueue:usingBlock: call. This method may be called from outside the block or from within the block.
-func (x *SampleBufferDisplayLayer) StopRequestingMediaData() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRequestingMediaData"))
+func (sbdl *SampleBufferDisplayLayer) StopRequestingMediaData() {
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("stopRequestingMediaData"))
 }
 
-// Timebase the renderer's timebase, which governs how time stamps are interpreted. The timebase is used to interpret time stamps. The timebase is read-only.  Use the AVSampleBufferRenderSynchronizer to set the rate or time.
-func (x *SampleBufferDisplayLayer) Timebase() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timebase"))
+// Timebase returns the renderer's timebase, which governs how time stamps are interpreted. The timebase is used to interpret time stamps. The timebase is read-only.  Use the AVSampleBufferRenderSynchronizer to set the rate or time.
+func (sbdl *SampleBufferDisplayLayer) Timebase() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("timebase"))
 	return obj.Wrap(_r)
 }
 
-// Status the ability of the display layer to be used for enqueuing sample buffers. The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueuing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the display layer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the display layer. This property is key value observable.
-func (x *SampleBufferDisplayLayer) Status() QueuedSampleBufferRenderingStatus {
-	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the ability of the display layer to be used for enqueuing sample buffers. The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueuing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the display layer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the display layer. This property is key value observable.
+func (sbdl *SampleBufferDisplayLayer) Status() QueuedSampleBufferRenderingStatus {
+	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(sbdl), objc.RegisterName("status"))
 	return _r
 }
 
-// RequiresFlushToResumeDecoding indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames. When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to YES along with the display layer's status changing to AVQueuedSampleBufferRenderingStatusFailed. To resume rendering sample buffers using the display layer after this property's value is YES, clients must first reset the display layer's status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the display layer. Clients can track changes to this property via AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification. This property is not key value observable.
-func (x *SampleBufferDisplayLayer) RequiresFlushToResumeDecoding() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresFlushToResumeDecoding"))
+// RequiresFlushToResumeDecoding reports whether indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames. When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to true along with the display layer's status changing to AVQueuedSampleBufferRenderingStatusFailed. To resume rendering sample buffers using the display layer after this property's value is true, clients must first reset the display layer's status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the display layer. Clients can track changes to this property via AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification. This property is not key value observable.
+func (sbdl *SampleBufferDisplayLayer) RequiresFlushToResumeDecoding() bool {
+	_r := objc.Send[bool](objref.IDOf(sbdl), objc.RegisterName("requiresFlushToResumeDecoding"))
 	return _r
 }
 
-// IsReadyForMoreMediaData indicates the readiness of the layer to accept more sample buffers. AVSampleBufferDisplayLayer keeps track of the occupancy levels of its internal queues for the benefit of clients that enqueue sample buffers from non-real-time sources -- i.e., clients that can supply sample buffers faster than they are consumed, and so need to decide when to hold back. Clients enqueueing sample buffers from non-real-time sources may hold off from generating or obtaining more sample buffers to enqueue when the value of readyForMoreMediaData is NO. It is safe to call enqueueSampleBuffer: when readyForMoreMediaData is NO, but it is a bad idea to enqueue sample buffers without bound. To help with control of the non-real-time supply of sample buffers, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the layer should invoke whenever it's ready for sample buffers to be appended. The value of readyForMoreMediaData will often change from NO to YES asynchronously, as previously supplied sample buffers are decoded and displayed. This property is not key value observable.
-func (x *SampleBufferDisplayLayer) IsReadyForMoreMediaData() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyForMoreMediaData"))
+// IsReadyForMoreMediaData reports whether indicates the readiness of the layer to accept more sample buffers. AVSampleBufferDisplayLayer keeps track of the occupancy levels of its internal queues for the benefit of clients that enqueue sample buffers from non-real-time sources -- i.e., clients that can supply sample buffers faster than they are consumed, and so need to decide when to hold back. Clients enqueueing sample buffers from non-real-time sources may hold off from generating or obtaining more sample buffers to enqueue when the value of readyForMoreMediaData is false. It is safe to call enqueueSampleBuffer: when readyForMoreMediaData is false, but it is a bad idea to enqueue sample buffers without bound. To help with control of the non-real-time supply of sample buffers, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the layer should invoke whenever it's ready for sample buffers to be appended. The value of readyForMoreMediaData will often change from false to true asynchronously, as previously supplied sample buffers are decoded and displayed. This property is not key value observable.
+func (sbdl *SampleBufferDisplayLayer) IsReadyForMoreMediaData() bool {
+	_r := objc.Send[bool](objref.IDOf(sbdl), objc.RegisterName("isReadyForMoreMediaData"))
 	return _r
 }
 
-// HasSufficientMediaDataForReliablePlaybackStart indicates whether the enqueued media data meets the renderer's preroll level. Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is NO may prevent smooth playback following an immediate start.
-func (x *SampleBufferDisplayLayer) HasSufficientMediaDataForReliablePlaybackStart() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSufficientMediaDataForReliablePlaybackStart"))
+// HasSufficientMediaDataForReliablePlaybackStart reports whether the enqueued media data meets the renderer's preroll level. Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is false may prevent smooth playback following an immediate start.
+func (sbdl *SampleBufferDisplayLayer) HasSufficientMediaDataForReliablePlaybackStart() bool {
+	_r := objc.Send[bool](objref.IDOf(sbdl), objc.RegisterName("hasSufficientMediaDataForReliablePlaybackStart"))
 	return _r
 }
 
 // PreventsCapture wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) PreventsCapture() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preventsCapture"))
+func (sbdl *SampleBufferDisplayLayer) PreventsCapture() bool {
+	_r := objc.Send[bool](objref.IDOf(sbdl), objc.RegisterName("preventsCapture"))
 	return _r
-}
-
-// SetPreventsCapture wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) SetPreventsCapture(preventsCapture bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsCapture:"), preventsCapture)
 }
 
 // PreventsDisplaySleepDuringVideoPlayback wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) PreventsDisplaySleepDuringVideoPlayback() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preventsDisplaySleepDuringVideoPlayback"))
+func (sbdl *SampleBufferDisplayLayer) PreventsDisplaySleepDuringVideoPlayback() bool {
+	_r := objc.Send[bool](objref.IDOf(sbdl), objc.RegisterName("preventsDisplaySleepDuringVideoPlayback"))
 	return _r
 }
 
-// SetPreventsDisplaySleepDuringVideoPlayback wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
-}
-
 // OutputObscuredDueToInsufficientExternalProtection wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) OutputObscuredDueToInsufficientExternalProtection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("outputObscuredDueToInsufficientExternalProtection"))
+func (sbdl *SampleBufferDisplayLayer) OutputObscuredDueToInsufficientExternalProtection() bool {
+	_r := objc.Send[bool](objref.IDOf(sbdl), objc.RegisterName("outputObscuredDueToInsufficientExternalProtection"))
 	return _r
 }
 
 // SampleBufferRenderer wraps the corresponding Objective-C method.
-func (x *SampleBufferDisplayLayer) SampleBufferRenderer() *SampleBufferVideoRenderer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferRenderer"))
+func (sbdl *SampleBufferDisplayLayer) SampleBufferRenderer() *SampleBufferVideoRenderer {
+	_r := objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("sampleBufferRenderer"))
 	return SampleBufferVideoRendererFromID(_r)
 }
-
-// SampleBufferDisplayLayerable is the interface implemented by [SampleBufferDisplayLayer], for mocking and DI.
-type SampleBufferDisplayLayerable interface {
-	obj.Object
-	WithControlTimebase(controlTimebase obj.Object) *SampleBufferDisplayLayer
-	WithVideoGravity(videoGravity obj.Object) *SampleBufferDisplayLayer
-	WithPreventsCapture(preventsCapture bool) *SampleBufferDisplayLayer
-	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *SampleBufferDisplayLayer
-	ControlTimebase() obj.Object
-	SetControlTimebase(controlTimebase obj.Object)
-	VideoGravity() obj.Object
-	SetVideoGravity(videoGravity obj.Object)
-	IsReadyForDisplay() bool
-	EnqueueSampleBuffer(sampleBuffer obj.Object)
-	Flush()
-	FlushAndRemoveImage()
-	RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue obj.Object) error
-	StopRequestingMediaData()
-	Timebase() obj.Object
-	Status() QueuedSampleBufferRenderingStatus
-	RequiresFlushToResumeDecoding() bool
-	IsReadyForMoreMediaData() bool
-	HasSufficientMediaDataForReliablePlaybackStart() bool
-	PreventsCapture() bool
-	SetPreventsCapture(preventsCapture bool)
-	PreventsDisplaySleepDuringVideoPlayback() bool
-	SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool)
-	OutputObscuredDueToInsufficientExternalProtection() bool
-	SampleBufferRenderer() *SampleBufferVideoRenderer
-}
-
-var _ SampleBufferDisplayLayerable = (*SampleBufferDisplayLayer)(nil)

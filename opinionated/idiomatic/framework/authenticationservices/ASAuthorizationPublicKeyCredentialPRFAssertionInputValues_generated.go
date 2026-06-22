@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(id objc.ID) *A
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) Description() string {
+	return rt.Description(objref.IDOf(apkcpaiv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkcpaiv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkcpaiv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) String() string {
+	return rt.Description(objref.IDOf(apkcpaiv))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2 initializes an input values object with the given salts.
@@ -74,22 +74,13 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1Sal
 }
 
 // SaltInput1 wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saltInput1"))
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpaiv), objc.RegisterName("saltInput1"))
 	return obj.Wrap(_r)
 }
 
 // SaltInput2 wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saltInput2"))
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpaiv), objc.RegisterName("saltInput2"))
 	return obj.Wrap(_r)
 }
-
-// AuthorizationPublicKeyCredentialPRFAssertionInputValuesable is the interface implemented by [AuthorizationPublicKeyCredentialPRFAssertionInputValues], for mocking and DI.
-type AuthorizationPublicKeyCredentialPRFAssertionInputValuesable interface {
-	obj.Object
-	SaltInput1() obj.Object
-	SaltInput2() obj.Object
-}
-
-var _ AuthorizationPublicKeyCredentialPRFAssertionInputValuesable = (*AuthorizationPublicKeyCredentialPRFAssertionInputValues)(nil)

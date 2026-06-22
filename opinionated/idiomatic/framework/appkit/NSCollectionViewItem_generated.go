@@ -53,186 +53,134 @@ func NewCollectionViewItem() *CollectionViewItem {
 	return collectionViewItemAdopt(_id)
 }
 
-// WithSelected a Boolean indicating whether the item is currently selected.
-func (x *CollectionViewItem) WithSelected(selected bool) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
-	return x
+// WithSelected sets a Boolean indicating whether the item is currently selected.
+func (cvi *CollectionViewItem) WithSelected(selected bool) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSelected:"), selected)
+	return cvi
 }
 
-// WithHighlightState the highlight state currently applied to the item.
-func (x *CollectionViewItem) WithHighlightState(highlightState CollectionViewItemHighlightState) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightState:"), highlightState)
-	return x
+// WithHighlightState sets the highlight state currently applied to the item.
+func (cvi *CollectionViewItem) WithHighlightState(highlightState CollectionViewItemHighlightState) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setHighlightState:"), highlightState)
+	return cvi
 }
 
-// WithImageView an image view outlet that you can use to display images.
-func (x *CollectionViewItem) WithImageView(imageView *ImageView) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
-	return x
+// WithImageView sets an image view outlet that you can use to display images.
+func (cvi *CollectionViewItem) WithImageView(imageView *ImageView) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
+	return cvi
 }
 
-// WithTextField a text field outlet that you can use to display a string.
-func (x *CollectionViewItem) WithTextField(textField TextFieldProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextField:"), objref.IDOf(textField))
-	return x
+// WithTextField sets a text field outlet that you can use to display a string.
+func (cvi *CollectionViewItem) WithTextField(textField TextFieldProvider) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTextField:"), objref.IDOf(textField))
+	return cvi
 }
 
-// WithRepresentedObject the object whose value is presented in the receiver’s primary view.
-func (x *CollectionViewItem) WithRepresentedObject(representedObject obj.Object) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
+func (cvi *CollectionViewItem) WithRepresentedObject(representedObject obj.Object) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return cvi
 }
 
-// WithTitle the localized title of the receiver’s primary view.
-func (x *CollectionViewItem) WithTitle(title string) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the localized title of the receiver’s primary view.
+func (cvi *CollectionViewItem) WithTitle(title string) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return cvi
 }
 
-// WithView the view controller’s primary view.
-func (x *CollectionViewItem) WithView(view ViewProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets the view controller’s primary view.
+func (cvi *CollectionViewItem) WithView(view ViewProvider) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setView:"), objref.IDOf(view))
+	return cvi
 }
 
-// WithPreferredContentSize the desired size of the view controller’s view, in screen units.
-func (x *CollectionViewItem) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
-	return x
+// WithPreferredContentSize sets the desired size of the view controller’s view, in screen units.
+func (cvi *CollectionViewItem) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	return cvi
 }
 
-// WithChildViewControllers an array of view controllers that are hierarchical children of the view controller.
-func (x *CollectionViewItem) WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem {
+// WithChildViewControllers sets an array of view controllers that are hierarchical children of the view controller.
+func (cvi *CollectionViewItem) WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setChildViewControllers:"), _arr)
+	return cvi
 }
 
 // WithSourceItemView sets the property and returns the receiver so calls can be chained.
-func (x *CollectionViewItem) WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
-	return x
+func (cvi *CollectionViewItem) WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	return cvi
 }
 
-// WithPreferredScreenOrigin for a view controller that is part of an app extension, the preferred screen origin.
-func (x *CollectionViewItem) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
-	return x
+// WithPreferredScreenOrigin sets for a view controller that is part of an app extension, the preferred screen origin.
+func (cvi *CollectionViewItem) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	return cvi
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (cvi *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return cvi
 }
 
-// WithMenu returns the responder’s menu.
-func (x *CollectionViewItem) WithMenu(menu *Menu) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (cvi *CollectionViewItem) WithMenu(menu *Menu) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return cvi
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *CollectionViewItem) WithUserActivity(userActivity obj.Object) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (cvi *CollectionViewItem) WithUserActivity(userActivity obj.Object) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return cvi
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (cvi *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewItem {
+	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return cvi
 }
 
 // CollectionView wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) CollectionView() *CollectionView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collectionView"))
+func (cvi *CollectionViewItem) CollectionView() *CollectionView {
+	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("collectionView"))
 	return CollectionViewFromID(_r)
 }
 
 // IsSelected wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) IsSelected() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
+func (cvi *CollectionViewItem) IsSelected() bool {
+	_r := objc.Send[bool](objref.IDOf(cvi), objc.RegisterName("isSelected"))
 	return _r
-}
-
-// SetSelected wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) SetSelected(selected bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 }
 
 // HighlightState wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) HighlightState() CollectionViewItemHighlightState {
-	_r := objc.Send[CollectionViewItemHighlightState](objref.IDOf(x), objc.RegisterName("highlightState"))
+func (cvi *CollectionViewItem) HighlightState() CollectionViewItemHighlightState {
+	_r := objc.Send[CollectionViewItemHighlightState](objref.IDOf(cvi), objc.RegisterName("highlightState"))
 	return _r
 }
 
-// SetHighlightState wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) SetHighlightState(highlightState CollectionViewItemHighlightState) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightState:"), highlightState)
-}
-
 // ImageView wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) ImageView() *ImageView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageView"))
+func (cvi *CollectionViewItem) ImageView() *ImageView {
+	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("imageView"))
 	return ImageViewFromID(_r)
 }
 
-// SetImageView wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) SetImageView(imageView *ImageView) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
-}
-
 // TextField wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) TextField() *TextField {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textField"))
+func (cvi *CollectionViewItem) TextField() *TextField {
+	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("textField"))
 	return TextFieldFromID(_r)
-}
-
-// SetTextField wraps the corresponding Objective-C method.
-func (x *CollectionViewItem) SetTextField(textField *TextField) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextField:"), objref.IDOf(textField))
 }
 
 // DraggingImageComponents wraps the corresponding Objective-C method.
 //
 // DraggingImageComponents returns the collection as a Go slice.
-func (x *CollectionViewItem) DraggingImageComponents() []*DraggingImageComponent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draggingImageComponents"))
+func (cvi *CollectionViewItem) DraggingImageComponents() []*DraggingImageComponent {
+	_arr := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("draggingImageComponents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
 }
-
-// CollectionViewItemable is the interface implemented by [CollectionViewItem], for mocking and DI.
-type CollectionViewItemable interface {
-	obj.Object
-	WithSelected(selected bool) *CollectionViewItem
-	WithHighlightState(highlightState CollectionViewItemHighlightState) *CollectionViewItem
-	WithImageView(imageView *ImageView) *CollectionViewItem
-	WithTextField(textField TextFieldProvider) *CollectionViewItem
-	WithRepresentedObject(representedObject obj.Object) *CollectionViewItem
-	WithTitle(title string) *CollectionViewItem
-	WithView(view ViewProvider) *CollectionViewItem
-	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *CollectionViewItem
-	WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem
-	WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem
-	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem
-	WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem
-	WithMenu(menu *Menu) *CollectionViewItem
-	WithUserActivity(userActivity obj.Object) *CollectionViewItem
-	WithTouchBar(touchBar *TouchBar) *CollectionViewItem
-	CollectionView() *CollectionView
-	IsSelected() bool
-	SetSelected(selected bool)
-	HighlightState() CollectionViewItemHighlightState
-	SetHighlightState(highlightState CollectionViewItemHighlightState)
-	ImageView() *ImageView
-	SetImageView(imageView *ImageView)
-	TextField() *TextField
-	SetTextField(textField *TextField)
-	DraggingImageComponents() []*DraggingImageComponent
-}
-
-var _ CollectionViewItemable = (*CollectionViewItem)(nil)
 
 var _ ViewControllerProvider = (*CollectionViewItem)(nil)
 

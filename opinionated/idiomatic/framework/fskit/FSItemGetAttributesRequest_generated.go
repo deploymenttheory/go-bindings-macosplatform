@@ -44,24 +44,24 @@ func itemGetAttributesRequestAdopt(id objc.ID) *ItemGetAttributesRequest {
 }
 
 // Description returns the object's -description text.
-func (x *ItemGetAttributesRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (igar *ItemGetAttributesRequest) Description() string {
+	return rt.Description(objref.IDOf(igar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ItemGetAttributesRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (igar *ItemGetAttributesRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(igar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ItemGetAttributesRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (igar *ItemGetAttributesRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(igar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ItemGetAttributesRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (igar *ItemGetAttributesRequest) String() string {
+	return rt.Description(objref.IDOf(igar))
 }
 
 // NewItemGetAttributesRequest creates a new ItemGetAttributesRequest.
@@ -70,36 +70,20 @@ func NewItemGetAttributesRequest() *ItemGetAttributesRequest {
 	return itemGetAttributesRequestAdopt(_id)
 }
 
-// WithWantedAttributes the attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes ItemAttribute) *ItemGetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantedAttributes:"), wantedAttributes)
-	return x
+// WithWantedAttributes sets the attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+func (igar *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes ItemAttribute) *ItemGetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(igar), objc.RegisterName("setWantedAttributes:"), wantedAttributes)
+	return igar
 }
 
 // IsAttributeWanted a method that indicates whether the request wants given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
-func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute ItemAttribute) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAttributeWanted:"), attribute)
+func (igar *ItemGetAttributesRequest) IsAttributeWanted(attribute ItemAttribute) bool {
+	_r := objc.Send[bool](objref.IDOf(igar), objc.RegisterName("isAttributeWanted:"), attribute)
 	return _r
 }
 
-// WantedAttributes the attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-func (x *ItemGetAttributesRequest) WantedAttributes() ItemAttribute {
-	_r := objc.Send[ItemAttribute](objref.IDOf(x), objc.RegisterName("wantedAttributes"))
+// WantedAttributes returns the attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+func (igar *ItemGetAttributesRequest) WantedAttributes() ItemAttribute {
+	_r := objc.Send[ItemAttribute](objref.IDOf(igar), objc.RegisterName("wantedAttributes"))
 	return _r
 }
-
-// SetWantedAttributes wraps the corresponding Objective-C method.
-func (x *ItemGetAttributesRequest) SetWantedAttributes(wantedAttributes ItemAttribute) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantedAttributes:"), wantedAttributes)
-}
-
-// ItemGetAttributesRequestable is the interface implemented by [ItemGetAttributesRequest], for mocking and DI.
-type ItemGetAttributesRequestable interface {
-	obj.Object
-	WithWantedAttributes(wantedAttributes ItemAttribute) *ItemGetAttributesRequest
-	IsAttributeWanted(attribute ItemAttribute) bool
-	WantedAttributes() ItemAttribute
-	SetWantedAttributes(wantedAttributes ItemAttribute)
-}
-
-var _ ItemGetAttributesRequestable = (*ItemGetAttributesRequest)(nil)

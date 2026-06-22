@@ -47,24 +47,24 @@ func accessibilityCustomRotorItemResultAdopt(id objc.ID) *AccessibilityCustomRot
 }
 
 // Description returns the object's -description text.
-func (x *AccessibilityCustomRotorItemResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (acrir *AccessibilityCustomRotorItemResult) Description() string {
+	return rt.Description(objref.IDOf(acrir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessibilityCustomRotorItemResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (acrir *AccessibilityCustomRotorItemResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(acrir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessibilityCustomRotorItemResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (acrir *AccessibilityCustomRotorItemResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(acrir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessibilityCustomRotorItemResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (acrir *AccessibilityCustomRotorItemResult) String() string {
+	return rt.Description(objref.IDOf(acrir))
 }
 
 // NewAccessibilityCustomRotorItemResultWithItemLoadingTokenCustomLabel creates an item result with a given item load token and custom label. Use this initializer if the application has not yet loaded the element backing the item result.
@@ -74,59 +74,35 @@ func NewAccessibilityCustomRotorItemResultWithItemLoadingTokenCustomLabel(itemLo
 	return accessibilityCustomRotorItemResultAdopt(_id)
 }
 
-// WithTargetRange for text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
-func (x *AccessibilityCustomRotorItemResult) WithTargetRange(targetRange foundation.NSRange) *AccessibilityCustomRotorItemResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetRange:"), targetRange)
-	return x
+// WithTargetRange sets for text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
+func (acrir *AccessibilityCustomRotorItemResult) WithTargetRange(targetRange foundation.NSRange) *AccessibilityCustomRotorItemResult {
+	objc.Send[objc.ID](objref.IDOf(acrir), objc.RegisterName("setTargetRange:"), targetRange)
+	return acrir
 }
 
-// WithCustomLabel a localized label that can be used instead of the default item label to describe the item result.
-func (x *AccessibilityCustomRotorItemResult) WithCustomLabel(customLabel string) *AccessibilityCustomRotorItemResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomLabel:"), purego.NSString(customLabel))
-	return x
+// WithCustomLabel sets a localized label that can be used instead of the default item label to describe the item result.
+func (acrir *AccessibilityCustomRotorItemResult) WithCustomLabel(customLabel string) *AccessibilityCustomRotorItemResult {
+	objc.Send[objc.ID](objref.IDOf(acrir), objc.RegisterName("setCustomLabel:"), purego.NSString(customLabel))
+	return acrir
 }
 
 // ItemLoadingToken provide an item load token if the application has not yet loaded the element backing the item result. Application can use the token to determine which item to return.
-func (x *AccessibilityCustomRotorItemResult) ItemLoadingToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemLoadingToken"))
+func (acrir *AccessibilityCustomRotorItemResult) ItemLoadingToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(acrir), objc.RegisterName("itemLoadingToken"))
 	return obj.Wrap(_r)
 }
 
-// TargetRange for text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
-func (x *AccessibilityCustomRotorItemResult) TargetRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("targetRange"))
+// TargetRange returns for text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
+func (acrir *AccessibilityCustomRotorItemResult) TargetRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(acrir), objc.RegisterName("targetRange"))
 	return _r
 }
 
-// SetTargetRange for text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
-func (x *AccessibilityCustomRotorItemResult) SetTargetRange(targetRange foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetRange:"), targetRange)
-}
-
-// CustomLabel a localized label that can be used instead of the default item label to describe the item result.
-func (x *AccessibilityCustomRotorItemResult) CustomLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customLabel"))
+// CustomLabel returns a localized label that can be used instead of the default item label to describe the item result.
+func (acrir *AccessibilityCustomRotorItemResult) CustomLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(acrir), objc.RegisterName("customLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetCustomLabel a localized label that can be used instead of the default item label to describe the item result.
-func (x *AccessibilityCustomRotorItemResult) SetCustomLabel(customLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomLabel:"), purego.NSString(customLabel))
-}
-
-// AccessibilityCustomRotorItemResultable is the interface implemented by [AccessibilityCustomRotorItemResult], for mocking and DI.
-type AccessibilityCustomRotorItemResultable interface {
-	obj.Object
-	WithTargetRange(targetRange foundation.NSRange) *AccessibilityCustomRotorItemResult
-	WithCustomLabel(customLabel string) *AccessibilityCustomRotorItemResult
-	ItemLoadingToken() obj.Object
-	TargetRange() foundation.NSRange
-	SetTargetRange(targetRange foundation.NSRange)
-	CustomLabel() string
-	SetCustomLabel(customLabel string)
-}
-
-var _ AccessibilityCustomRotorItemResultable = (*AccessibilityCustomRotorItemResult)(nil)

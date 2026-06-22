@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,28 @@ func NewGlassesLensSpecificationWithSphereCylinderAxisAddPowerVertexDistancePris
 	return glassesLensSpecificationAdopt(_id)
 }
 
-// VertexDistance the distance between the back of the eyeglass lens and the eye (measured in mm)
-func (x *GlassesLensSpecification) VertexDistance() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDistance"))
+// VertexDistance returns the distance between the back of the eyeglass lens and the eye (measured in mm)
+func (gls *GlassesLensSpecification) VertexDistance() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(gls), objc.RegisterName("vertexDistance"))
 	return QuantityFromID(_r)
 }
 
-// Prism the object encapsulating the prism fields
-func (x *GlassesLensSpecification) Prism() *VisionPrism {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prism"))
+// Prism returns the object encapsulating the prism fields
+func (gls *GlassesLensSpecification) Prism() *VisionPrism {
+	_r := objc.Send[objc.ID](objref.IDOf(gls), objc.RegisterName("prism"))
 	return VisionPrismFromID(_r)
 }
 
-// FarPupillaryDistance the distance from each pupil to the center of the nose (measured in mm) when looking at a far target. Can be described as combined or individual value. For distance prescriptions, the pupillary distance will be a far value.
-func (x *GlassesLensSpecification) FarPupillaryDistance() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("farPupillaryDistance"))
+// FarPupillaryDistance returns the distance from each pupil to the center of the nose (measured in mm) when looking at a far target. Can be described as combined or individual value. For distance prescriptions, the pupillary distance will be a far value.
+func (gls *GlassesLensSpecification) FarPupillaryDistance() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(gls), objc.RegisterName("farPupillaryDistance"))
 	return QuantityFromID(_r)
 }
 
-// NearPupillaryDistance the distance from each pupil to the center of the nose (measured in mm) when looking at a near target. Can be described as combined or individual value. For near prescriptions, the pupillary distance will be a near value.
-func (x *GlassesLensSpecification) NearPupillaryDistance() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nearPupillaryDistance"))
+// NearPupillaryDistance returns the distance from each pupil to the center of the nose (measured in mm) when looking at a near target. Can be described as combined or individual value. For near prescriptions, the pupillary distance will be a near value.
+func (gls *GlassesLensSpecification) NearPupillaryDistance() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(gls), objc.RegisterName("nearPupillaryDistance"))
 	return QuantityFromID(_r)
 }
-
-// GlassesLensSpecificationable is the interface implemented by [GlassesLensSpecification], for mocking and DI.
-type GlassesLensSpecificationable interface {
-	obj.Object
-	VertexDistance() *Quantity
-	Prism() *VisionPrism
-	FarPupillaryDistance() *Quantity
-	NearPupillaryDistance() *Quantity
-}
-
-var _ GlassesLensSpecificationable = (*GlassesLensSpecification)(nil)
 
 var _ LensSpecificationProvider = (*GlassesLensSpecification)(nil)

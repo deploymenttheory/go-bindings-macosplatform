@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionColumnMaxNode() *NNReductionColumnMaxNode {
 	return nNReductionColumnMaxNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionColumnMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrcmn *NNReductionColumnMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrcmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrcmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionColumnMaxNode) WithLabel(label string) *NNReductionColumnMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrcmn *NNReductionColumnMaxNode) WithLabel(label string) *NNReductionColumnMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrcmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrcmn
 }
-
-// NNReductionColumnMaxNodeable is the interface implemented by [NNReductionColumnMaxNode], for mocking and DI.
-type NNReductionColumnMaxNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMaxNode
-	WithLabel(label string) *NNReductionColumnMaxNode
-}
-
-var _ NNReductionColumnMaxNodeable = (*NNReductionColumnMaxNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionColumnMaxNode)(nil)
 

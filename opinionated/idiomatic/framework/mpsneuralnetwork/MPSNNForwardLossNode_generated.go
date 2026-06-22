@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,74 +66,58 @@ func NewNNForwardLossNodeWithSourcesLossDescriptor(sourceNodes []*NNImageNode, d
 	return nNForwardLossNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nfln *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
+	objc.Send[objc.ID](objref.IDOf(nfln), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nfln
 }
 
 // LossType wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) LossType() CNNLossType {
-	_r := objc.Send[CNNLossType](objref.IDOf(x), objc.RegisterName("lossType"))
+func (nfln *NNForwardLossNode) LossType() CNNLossType {
+	_r := objc.Send[CNNLossType](objref.IDOf(nfln), objc.RegisterName("lossType"))
 	return _r
 }
 
 // ReductionType wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) ReductionType() CNNReductionType {
-	_r := objc.Send[CNNReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+func (nfln *NNForwardLossNode) ReductionType() CNNReductionType {
+	_r := objc.Send[CNNReductionType](objref.IDOf(nfln), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // NumberOfClasses wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) NumberOfClasses() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+func (nfln *NNForwardLossNode) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(nfln), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) ReduceAcrossBatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+func (nfln *NNForwardLossNode) ReduceAcrossBatch() bool {
+	_r := objc.Send[bool](objref.IDOf(nfln), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // Weight wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) Weight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+func (nfln *NNForwardLossNode) Weight() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) LabelSmoothing() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+func (nfln *NNForwardLossNode) LabelSmoothing() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // Epsilon wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+func (nfln *NNForwardLossNode) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+func (nfln *NNForwardLossNode) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("delta"))
 	return _r
 }
-
-// NNForwardLossNodeable is the interface implemented by [NNForwardLossNode], for mocking and DI.
-type NNForwardLossNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNForwardLossNode
-	LossType() CNNLossType
-	ReductionType() CNNReductionType
-	NumberOfClasses() int
-	ReduceAcrossBatch() bool
-	Weight() float32
-	LabelSmoothing() float32
-	Epsilon() float32
-	Delta() float32
-}
-
-var _ NNForwardLossNodeable = (*NNForwardLossNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNForwardLossNode)(nil)

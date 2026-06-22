@@ -5,12 +5,13 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // OpenGLContext is an idiomatic wrapper over the Objective-C class NSOpenGLContext.
@@ -47,24 +48,24 @@ func openGLContextAdopt(id objc.ID) *OpenGLContext {
 }
 
 // Description returns the object's -description text.
-func (x *OpenGLContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ogc *OpenGLContext) Description() string {
+	return rt.Description(objref.IDOf(ogc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OpenGLContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ogc *OpenGLContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ogc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OpenGLContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ogc *OpenGLContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ogc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OpenGLContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ogc *OpenGLContext) String() string {
+	return rt.Description(objref.IDOf(ogc))
 }
 
 // NewOpenGLContextWithFormatShareContext returns an OpenGL context object initialized with the specified pixel format information.
@@ -81,154 +82,115 @@ func NewOpenGLContextWithCGLContextObj(context_ obj.Object) *OpenGLContext {
 	return openGLContextAdopt(_id)
 }
 
-// WithView returns the OpenGL context’s view.
-func (x *OpenGLContext) WithView(view ViewProvider) *OpenGLContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets returns the OpenGL context’s view.
+func (ogc *OpenGLContext) WithView(view ViewProvider) *OpenGLContext {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setView:"), objref.IDOf(view))
+	return ogc
 }
 
-// WithCurrentVirtualScreen returns the current virtual screen for the OpenGL context.
-func (x *OpenGLContext) WithCurrentVirtualScreen(currentVirtualScreen int32) *OpenGLContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentVirtualScreen:"), currentVirtualScreen)
-	return x
-}
-
-// SetView wraps the corresponding Objective-C method.
-func (x *OpenGLContext) SetView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
+// WithCurrentVirtualScreen sets returns the current virtual screen for the OpenGL context.
+func (ogc *OpenGLContext) WithCurrentVirtualScreen(currentVirtualScreen int32) *OpenGLContext {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setCurrentVirtualScreen:"), currentVirtualScreen)
+	return ogc
 }
 
 // SetFullScreen sets the OpenGL context to full-screen mode.
-func (x *OpenGLContext) SetFullScreen() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreen"))
+func (ogc *OpenGLContext) SetFullScreen() {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setFullScreen"))
 }
 
 // ClearDrawable disassociates the OpenGL context from its viewport.
-func (x *OpenGLContext) ClearDrawable() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearDrawable"))
+func (ogc *OpenGLContext) ClearDrawable() {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("clearDrawable"))
 }
 
 // Update updates the OpenGL context’s drawable object.
-func (x *OpenGLContext) Update() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("update"))
+func (ogc *OpenGLContext) Update() {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("update"))
 }
 
 // FlushBuffer copies the back buffer to the front buffer of the OpenGL context.
-func (x *OpenGLContext) FlushBuffer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushBuffer"))
+func (ogc *OpenGLContext) FlushBuffer() {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("flushBuffer"))
 }
 
 // MakeCurrentContext sets the context as the current OpenGL context object.
-func (x *OpenGLContext) MakeCurrentContext() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeCurrentContext"))
+func (ogc *OpenGLContext) MakeCurrentContext() {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("makeCurrentContext"))
 }
 
 // CopyAttributesFromContextWithMask copies selected groups of state variables to the OpenGL context.
-func (x *OpenGLContext) CopyAttributesFromContextWithMask(context_ *OpenGLContext, mask uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyAttributesFromContext:withMask:"), objref.IDOf(context_), mask)
+func (ogc *OpenGLContext) CopyAttributesFromContextWithMask(context_ *OpenGLContext, mask uint32) {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("copyAttributesFromContext:withMask:"), objref.IDOf(context_), mask)
 }
 
 // SetValuesForParameter sets the value of the specified parameter.
-func (x *OpenGLContext) SetValuesForParameter(param OpenGLContextParameter) (vals int32) {
+func (ogc *OpenGLContext) SetValuesForParameter(param OpenGLContextParameter) (vals int32) {
 	var _out0 int32
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:forParameter:"), unsafe.Pointer(&_out0), param)
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setValues:forParameter:"), unsafe.Pointer(&_out0), param)
 	return _out0
 }
 
 // GetValuesForParameter returns the value of the requested parameter.
-func (x *OpenGLContext) GetValuesForParameter(param OpenGLContextParameter) (vals int32) {
+func (ogc *OpenGLContext) GetValuesForParameter(param OpenGLContextParameter) (vals int32) {
 	var _out0 int32
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getValues:forParameter:"), unsafe.Pointer(&_out0), param)
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("getValues:forParameter:"), unsafe.Pointer(&_out0), param)
 	return _out0
 }
 
 // CreateTextureFromViewInternalFormat creates a new texture from the contents of the specified view.
-func (x *OpenGLContext) CreateTextureFromViewInternalFormat(target uint32, view *View, format uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createTexture:fromView:internalFormat:"), target, objref.IDOf(view), format)
+func (ogc *OpenGLContext) CreateTextureFromViewInternalFormat(target uint32, view *View, format uint32) {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("createTexture:fromView:internalFormat:"), target, objref.IDOf(view), format)
 }
 
 // PixelFormat wraps the corresponding Objective-C method.
-func (x *OpenGLContext) PixelFormat() *OpenGLPixelFormat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+func (ogc *OpenGLContext) PixelFormat() *OpenGLPixelFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("pixelFormat"))
 	return OpenGLPixelFormatFromID(_r)
 }
 
 // View wraps the corresponding Objective-C method.
-func (x *OpenGLContext) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (ogc *OpenGLContext) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
 // CurrentVirtualScreen wraps the corresponding Objective-C method.
-func (x *OpenGLContext) CurrentVirtualScreen() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("currentVirtualScreen"))
+func (ogc *OpenGLContext) CurrentVirtualScreen() int32 {
+	_r := objc.Send[int32](objref.IDOf(ogc), objc.RegisterName("currentVirtualScreen"))
 	return _r
 }
 
-// SetCurrentVirtualScreen wraps the corresponding Objective-C method.
-func (x *OpenGLContext) SetCurrentVirtualScreen(currentVirtualScreen int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentVirtualScreen:"), currentVirtualScreen)
-}
-
 // CGLContextObj wraps the corresponding Objective-C method.
-func (x *OpenGLContext) CGLContextObj() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGLContextObj"))
+func (ogc *OpenGLContext) CGLContextObj() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("CGLContextObj"))
 	return obj.Wrap(_r)
 }
 
 // SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen attaches the specified pixel buffer to the OpenGL context.
-func (x *OpenGLContext) SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen(pixelBuffer *OpenGLPixelBuffer, face uint32, level int32, screen int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBuffer:cubeMapFace:mipMapLevel:currentVirtualScreen:"), objref.IDOf(pixelBuffer), face, level, screen)
+func (ogc *OpenGLContext) SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen(pixelBuffer *OpenGLPixelBuffer, face uint32, level int32, screen int32) {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setPixelBuffer:cubeMapFace:mipMapLevel:currentVirtualScreen:"), objref.IDOf(pixelBuffer), face, level, screen)
 }
 
 // PixelBuffer returns the pixel-buffer object attached to the OpenGL context.
-func (x *OpenGLContext) PixelBuffer() *OpenGLPixelBuffer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBuffer"))
+func (ogc *OpenGLContext) PixelBuffer() *OpenGLPixelBuffer {
+	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("pixelBuffer"))
 	return OpenGLPixelBufferFromID(_r)
 }
 
 // PixelBufferCubeMapFace returns the cube map face of the pixel buffer attached to the OpenGL context.
-func (x *OpenGLContext) PixelBufferCubeMapFace() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("pixelBufferCubeMapFace"))
+func (ogc *OpenGLContext) PixelBufferCubeMapFace() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ogc), objc.RegisterName("pixelBufferCubeMapFace"))
 	return _r
 }
 
 // PixelBufferMipMapLevel returns the mipmap level of the pixel buffer attached to the OpenGL context.
-func (x *OpenGLContext) PixelBufferMipMapLevel() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("pixelBufferMipMapLevel"))
+func (ogc *OpenGLContext) PixelBufferMipMapLevel() int32 {
+	_r := objc.Send[int32](objref.IDOf(ogc), objc.RegisterName("pixelBufferMipMapLevel"))
 	return _r
 }
 
 // SetTextureImageToPixelBufferColorBuffer attaches the image data in the specified pixel buffer to the texture object currently bound by the OpenGL context.
-func (x *OpenGLContext) SetTextureImageToPixelBufferColorBuffer(pixelBuffer *OpenGLPixelBuffer, source uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureImageToPixelBuffer:colorBuffer:"), objref.IDOf(pixelBuffer), source)
+func (ogc *OpenGLContext) SetTextureImageToPixelBufferColorBuffer(pixelBuffer *OpenGLPixelBuffer, source uint32) {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setTextureImageToPixelBuffer:colorBuffer:"), objref.IDOf(pixelBuffer), source)
 }
-
-// OpenGLContextable is the interface implemented by [OpenGLContext], for mocking and DI.
-type OpenGLContextable interface {
-	obj.Object
-	WithView(view ViewProvider) *OpenGLContext
-	WithCurrentVirtualScreen(currentVirtualScreen int32) *OpenGLContext
-	SetView(view *View)
-	SetFullScreen()
-	ClearDrawable()
-	Update()
-	FlushBuffer()
-	MakeCurrentContext()
-	CopyAttributesFromContextWithMask(context_ *OpenGLContext, mask uint32)
-	SetValuesForParameter(param OpenGLContextParameter) (vals int32)
-	GetValuesForParameter(param OpenGLContextParameter) (vals int32)
-	CreateTextureFromViewInternalFormat(target uint32, view *View, format uint32)
-	PixelFormat() *OpenGLPixelFormat
-	View() *View
-	CurrentVirtualScreen() int32
-	SetCurrentVirtualScreen(currentVirtualScreen int32)
-	CGLContextObj() obj.Object
-	SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen(pixelBuffer *OpenGLPixelBuffer, face uint32, level int32, screen int32)
-	PixelBuffer() *OpenGLPixelBuffer
-	PixelBufferCubeMapFace() uint32
-	PixelBufferMipMapLevel() int32
-	SetTextureImageToPixelBufferColorBuffer(pixelBuffer *OpenGLPixelBuffer, source uint32)
-}
-
-var _ OpenGLContextable = (*OpenGLContext)(nil)

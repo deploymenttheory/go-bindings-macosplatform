@@ -44,24 +44,24 @@ func rNNMatrixInferenceLayerAdopt(id objc.ID) *RNNMatrixInferenceLayer {
 }
 
 // Description returns the object's -description text.
-func (x *RNNMatrixInferenceLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rmil *RNNMatrixInferenceLayer) Description() string {
+	return rt.Description(objref.IDOf(rmil))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNMatrixInferenceLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rmil *RNNMatrixInferenceLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rmil), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNMatrixInferenceLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rmil *RNNMatrixInferenceLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rmil), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RNNMatrixInferenceLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rmil *RNNMatrixInferenceLayer) String() string {
+	return rt.Description(objref.IDOf(rmil))
 }
 
 // NewRNNMatrixInferenceLayer creates a new RNNMatrixInferenceLayer.
@@ -70,90 +70,56 @@ func NewRNNMatrixInferenceLayer() *RNNMatrixInferenceLayer {
 	return rNNMatrixInferenceLayerAdopt(_id)
 }
 
-// WithRecurrentOutputIsTemporary how output states from
-func (x *RNNMatrixInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
-	return x
+// WithRecurrentOutputIsTemporary sets how output states from
+func (rmil *RNNMatrixInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(rmil), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
+	return rmil
 }
 
-// WithStoreAllIntermediateStates if YES then calls to
-func (x *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
-	return x
+// WithStoreAllIntermediateStates sets if YES then calls to
+func (rmil *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(rmil), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
+	return rmil
 }
 
-// WithBidirectionalCombineMode defines how to combine the output-results, when encoding bidirectional layers using
-func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode RNNBidirectionalCombineMode) *RNNMatrixInferenceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectionalCombineMode:"), bidirectionalCombineMode)
-	return x
+// WithBidirectionalCombineMode sets defines how to combine the output-results, when encoding bidirectional layers using
+func (rmil *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode RNNBidirectionalCombineMode) *RNNMatrixInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(rmil), objc.RegisterName("setBidirectionalCombineMode:"), bidirectionalCombineMode)
+	return rmil
 }
 
-// InputFeatureChannels the number of feature channels input vector/matrix.
-func (x *RNNMatrixInferenceLayer) InputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+// InputFeatureChannels returns the number of feature channels input vector/matrix.
+func (rmil *RNNMatrixInferenceLayer) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// OutputFeatureChannels the number of feature channels in the output vector/matrix.
-func (x *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+// OutputFeatureChannels returns the number of feature channels in the output vector/matrix.
+func (rmil *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// NumberOfLayers number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
-func (x *RNNMatrixInferenceLayer) NumberOfLayers() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLayers"))
+// NumberOfLayers returns number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
+func (rmil *RNNMatrixInferenceLayer) NumberOfLayers() int {
+	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
-// RecurrentOutputIsTemporary how output states from
-func (x *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
+// RecurrentOutputIsTemporary reports whether how output states from
+func (rmil *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
+	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
-// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
-func (x *RNNMatrixInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
-}
-
-// StoreAllIntermediateStates if YES then calls to
-func (x *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
+// StoreAllIntermediateStates reports whether if true then calls to
+func (rmil *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
+	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
-}
-
-// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
-func (x *RNNMatrixInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
 
 // BidirectionalCombineMode defines how to combine the output-results, when encoding bidirectional layers using
-func (x *RNNMatrixInferenceLayer) BidirectionalCombineMode() RNNBidirectionalCombineMode {
-	_r := objc.Send[RNNBidirectionalCombineMode](objref.IDOf(x), objc.RegisterName("bidirectionalCombineMode"))
+func (rmil *RNNMatrixInferenceLayer) BidirectionalCombineMode() RNNBidirectionalCombineMode {
+	_r := objc.Send[RNNBidirectionalCombineMode](objref.IDOf(rmil), objc.RegisterName("bidirectionalCombineMode"))
 	return _r
 }
-
-// SetBidirectionalCombineMode wraps the corresponding Objective-C method.
-func (x *RNNMatrixInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode RNNBidirectionalCombineMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectionalCombineMode:"), bidirectionalCombineMode)
-}
-
-// RNNMatrixInferenceLayerable is the interface implemented by [RNNMatrixInferenceLayer], for mocking and DI.
-type RNNMatrixInferenceLayerable interface {
-	obj.Object
-	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer
-	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer
-	WithBidirectionalCombineMode(bidirectionalCombineMode RNNBidirectionalCombineMode) *RNNMatrixInferenceLayer
-	InputFeatureChannels() int
-	OutputFeatureChannels() int
-	NumberOfLayers() int
-	RecurrentOutputIsTemporary() bool
-	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
-	StoreAllIntermediateStates() bool
-	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
-	BidirectionalCombineMode() RNNBidirectionalCombineMode
-	SetBidirectionalCombineMode(bidirectionalCombineMode RNNBidirectionalCombineMode)
-}
-
-var _ RNNMatrixInferenceLayerable = (*RNNMatrixInferenceLayer)(nil)

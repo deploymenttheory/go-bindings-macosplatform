@@ -46,24 +46,24 @@ func authorizationWebBrowserPlatformPublicKeyCredentialAdopt(id objc.ID) *Author
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) Description() string {
+	return rt.Description(objref.IDOf(awbppkc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(awbppkc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(awbppkc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) String() string {
-	return rt.Description(objref.IDOf(x))
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) String() string {
+	return rt.Description(objref.IDOf(awbppkc))
 }
 
 // NewAuthorizationWebBrowserPlatformPublicKeyCredential creates a new AuthorizationWebBrowserPlatformPublicKeyCredential.
@@ -72,63 +72,50 @@ func NewAuthorizationWebBrowserPlatformPublicKeyCredential() *AuthorizationWebBr
 	return authorizationWebBrowserPlatformPublicKeyCredentialAdopt(_id)
 }
 
-// Name the user name of the saved credential.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the user name of the saved credential.
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CustomTitle a user-specified title for the credential.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customTitle"))
+// CustomTitle returns a user-specified title for the credential.
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("customTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// RelyingParty the "relying party" (generally website) the credential was saved for.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingParty"))
+// RelyingParty returns the "relying party" (generally website) the credential was saved for.
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() string {
+	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("relyingParty"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CredentialID a unique identifier for this credential.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
+// CredentialID returns a unique identifier for this credential.
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("credentialID"))
 	return obj.Wrap(_r)
 }
 
-// UserHandle a unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userHandle"))
+// UserHandle returns a unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("userHandle"))
 	return obj.Wrap(_r)
 }
 
-// ProviderName the localized name of the credential provider that provided this passkey.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerName"))
+// ProviderName returns the localized name of the credential provider that provided this passkey.
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("providerName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AuthorizationWebBrowserPlatformPublicKeyCredentialable is the interface implemented by [AuthorizationWebBrowserPlatformPublicKeyCredential], for mocking and DI.
-type AuthorizationWebBrowserPlatformPublicKeyCredentialable interface {
-	obj.Object
-	Name() string
-	CustomTitle() string
-	RelyingParty() string
-	CredentialID() obj.Object
-	UserHandle() obj.Object
-	ProviderName() string
-}
-
-var _ AuthorizationWebBrowserPlatformPublicKeyCredentialable = (*AuthorizationWebBrowserPlatformPublicKeyCredential)(nil)

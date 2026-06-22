@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,40 +59,24 @@ func NewSourceWithEngineShapes(engine *Engine, shapes []*Shape) *Source {
 	return sourceAdopt(_id)
 }
 
-// WithGain the amount of sound the source emanates.
-func (x *Source) WithGain(gain float64) *Source {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-	return x
+// WithGain sets the amount of sound the source emanates.
+func (s *Source) WithGain(gain float64) *Source {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGain:"), gain)
+	return s
 }
 
-// Gain linear gain scalar.
-func (x *Source) Gain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns linear gain scalar.
+func (s *Source) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("gain"))
 	return _r
 }
 
-// SetGain wraps the corresponding Objective-C method.
-func (x *Source) SetGain(gain float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-}
-
-// Shapes array of shapes associated with this source.
+// Shapes returns array of shapes associated with this source.
 //
 // Shapes returns the collection as a Go slice.
-func (x *Source) Shapes() []*Shape {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapes"))
+func (s *Source) Shapes() []*Shape {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("shapes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }
-
-// Sourceable is the interface implemented by [Source], for mocking and DI.
-type Sourceable interface {
-	obj.Object
-	WithGain(gain float64) *Source
-	Gain() float64
-	SetGain(gain float64)
-	Shapes() []*Shape
-}
-
-var _ Sourceable = (*Source)(nil)
 
 var _ ObjectProvider = (*Source)(nil)

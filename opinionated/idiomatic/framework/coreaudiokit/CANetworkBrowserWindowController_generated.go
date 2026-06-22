@@ -46,24 +46,24 @@ func cANetworkBrowserWindowControllerAdopt(id objc.ID) *CANetworkBrowserWindowCo
 }
 
 // Description returns the object's -description text.
-func (x *CANetworkBrowserWindowController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cnbwc *CANetworkBrowserWindowController) Description() string {
+	return rt.Description(objref.IDOf(cnbwc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CANetworkBrowserWindowController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cnbwc *CANetworkBrowserWindowController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cnbwc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CANetworkBrowserWindowController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cnbwc *CANetworkBrowserWindowController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cnbwc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CANetworkBrowserWindowController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cnbwc *CANetworkBrowserWindowController) String() string {
+	return rt.Description(objref.IDOf(cnbwc))
 }
 
 // NewCANetworkBrowserWindowController creates a new CANetworkBrowserWindowController.
@@ -71,10 +71,3 @@ func NewCANetworkBrowserWindowController() *CANetworkBrowserWindowController {
 	_id := objc.Send[objc.ID](objc.ID(_class("CANetworkBrowserWindowController")), objc.RegisterName("new"))
 	return cANetworkBrowserWindowControllerAdopt(_id)
 }
-
-// CANetworkBrowserWindowControllerable is the interface implemented by [CANetworkBrowserWindowController], for mocking and DI.
-type CANetworkBrowserWindowControllerable interface {
-	obj.Object
-}
-
-var _ CANetworkBrowserWindowControllerable = (*CANetworkBrowserWindowController)(nil)

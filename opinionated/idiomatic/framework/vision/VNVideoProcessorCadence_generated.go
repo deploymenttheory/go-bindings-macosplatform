@@ -48,36 +48,29 @@ func videoProcessorCadenceAdopt(id objc.ID) *VideoProcessorCadence {
 }
 
 // Description returns the object's -description text.
-func (x *VideoProcessorCadence) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vpc *VideoProcessorCadence) Description() string {
+	return rt.Description(objref.IDOf(vpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoProcessorCadence) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vpc *VideoProcessorCadence) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoProcessorCadence) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vpc *VideoProcessorCadence) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoProcessorCadence) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vpc *VideoProcessorCadence) String() string {
+	return rt.Description(objref.IDOf(vpc))
 }
-
-// VideoProcessorCadenceable is the interface implemented by [VideoProcessorCadence], for mocking and DI.
-type VideoProcessorCadenceable interface {
-	obj.Object
-}
-
-var _ VideoProcessorCadenceable = (*VideoProcessorCadence)(nil)
 
 // isVideoProcessorCadence marks VideoProcessorCadence — and, by embedding promotion, its
 // subclasses — as a member of the VideoProcessorCadence hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *VideoProcessorCadence) isVideoProcessorCadence() {}
+func (vpc *VideoProcessorCadence) isVideoProcessorCadence() {}
 
 var _ VideoProcessorCadenceProvider = (*VideoProcessorCadence)(nil)

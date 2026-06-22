@@ -46,24 +46,24 @@ func superResolutionScalerParametersAdopt(id objc.ID) *SuperResolutionScalerPara
 }
 
 // Description returns the object's -description text.
-func (x *SuperResolutionScalerParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (srsp *SuperResolutionScalerParameters) Description() string {
+	return rt.Description(objref.IDOf(srsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (srsp *SuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(srsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SuperResolutionScalerParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (srsp *SuperResolutionScalerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(srsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SuperResolutionScalerParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (srsp *SuperResolutionScalerParameters) String() string {
+	return rt.Description(objref.IDOf(srsp))
 }
 
 // NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new super-resolution scaler parameters instance.
@@ -73,51 +73,38 @@ func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutpu
 	return superResolutionScalerParametersAdopt(_id)
 }
 
-// SourceFrame current source frame, which must be non `nil`.
-func (x *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+// SourceFrame returns current source frame, which must be non `nil`.
+func (srsp *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// PreviousFrame previous source frame in presentation time order, which is `nil` for the first frame.
-func (x *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFrame"))
+// PreviousFrame returns previous source frame in presentation time order, which is `nil` for the first frame.
+func (srsp *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("previousFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// PreviousOutputFrame previous output frame in presentation time order, which is `nil` for the first frame.
-func (x *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousOutputFrame"))
+// PreviousOutputFrame returns previous output frame in presentation time order, which is `nil` for the first frame.
+func (srsp *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("previousOutputFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// OpticalFlow optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
-func (x *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFlow {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opticalFlow"))
+// OpticalFlow returns optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
+func (srsp *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFlow {
+	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("opticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
 
-// SubmissionMode ordering of the input frames in this submission relative to the previous submission.
-func (x *SuperResolutionScalerParameters) SubmissionMode() SuperResolutionScalerParametersSubmissionMode {
-	_r := objc.Send[SuperResolutionScalerParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
+// SubmissionMode returns ordering of the input frames in this submission relative to the previous submission.
+func (srsp *SuperResolutionScalerParameters) SubmissionMode() SuperResolutionScalerParametersSubmissionMode {
+	_r := objc.Send[SuperResolutionScalerParametersSubmissionMode](objref.IDOf(srsp), objc.RegisterName("submissionMode"))
 	return _r
 }
 
-// DestinationFrame destination frame that contains user-allocated pixel buffer that receives the results.
-func (x *SuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
+// DestinationFrame returns destination frame that contains user-allocated pixel buffer that receives the results.
+func (srsp *SuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
-
-// SuperResolutionScalerParametersable is the interface implemented by [SuperResolutionScalerParameters], for mocking and DI.
-type SuperResolutionScalerParametersable interface {
-	obj.Object
-	SourceFrame() *FrameProcessorFrame
-	PreviousFrame() *FrameProcessorFrame
-	PreviousOutputFrame() *FrameProcessorFrame
-	OpticalFlow() *FrameProcessorOpticalFlow
-	SubmissionMode() SuperResolutionScalerParametersSubmissionMode
-	DestinationFrame() *FrameProcessorFrame
-}
-
-var _ SuperResolutionScalerParametersable = (*SuperResolutionScalerParameters)(nil)

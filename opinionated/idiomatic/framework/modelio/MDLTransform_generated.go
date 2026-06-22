@@ -46,24 +46,24 @@ func transformAdopt(id objc.ID) *Transform {
 }
 
 // Description returns the object's -description text.
-func (x *Transform) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transform) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Transform) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Transform) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Transform) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Transform) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Transform) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transform) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTransform creates a new Transform.
@@ -73,14 +73,6 @@ func NewTransform() *Transform {
 }
 
 // SetIdentity sets all factors of the transform to those of the identity transformation.
-func (x *Transform) SetIdentity() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentity"))
+func (t *Transform) SetIdentity() {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setIdentity"))
 }
-
-// Transformable is the interface implemented by [Transform], for mocking and DI.
-type Transformable interface {
-	obj.Object
-	SetIdentity()
-}
-
-var _ Transformable = (*Transform)(nil)

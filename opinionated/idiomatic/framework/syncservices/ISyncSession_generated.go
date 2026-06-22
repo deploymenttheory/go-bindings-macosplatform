@@ -44,24 +44,24 @@ func iSyncSessionAdopt(id objc.ID) *ISyncSession {
 }
 
 // Description returns the object's -description text.
-func (x *ISyncSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (iss *ISyncSession) Description() string {
+	return rt.Description(objref.IDOf(iss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ISyncSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (iss *ISyncSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(iss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ISyncSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (iss *ISyncSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(iss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ISyncSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (iss *ISyncSession) String() string {
+	return rt.Description(objref.IDOf(iss))
 }
 
 // NewISyncSession creates a new ISyncSession.
@@ -71,161 +71,130 @@ func NewISyncSession() *ISyncSession {
 }
 
 // ClientDidResetEntityNames wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientDidResetEntityNames(entityNames obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientDidResetEntityNames:"), objref.IDOf(entityNames))
+func (iss *ISyncSession) ClientDidResetEntityNames(entityNames obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientDidResetEntityNames:"), objref.IDOf(entityNames))
 }
 
 // ClientWantsToPushAllRecordsForEntityNames wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientWantsToPushAllRecordsForEntityNames(entityNames obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientWantsToPushAllRecordsForEntityNames:"), objref.IDOf(entityNames))
+func (iss *ISyncSession) ClientWantsToPushAllRecordsForEntityNames(entityNames obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientWantsToPushAllRecordsForEntityNames:"), objref.IDOf(entityNames))
 }
 
 // ShouldPushChangesForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncSession) ShouldPushChangesForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPushChangesForEntityName:"), purego.NSString(entityName))
+func (iss *ISyncSession) ShouldPushChangesForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("shouldPushChangesForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // ShouldPushAllRecordsForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncSession) ShouldPushAllRecordsForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPushAllRecordsForEntityName:"), purego.NSString(entityName))
+func (iss *ISyncSession) ShouldPushAllRecordsForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("shouldPushAllRecordsForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // ShouldPullChangesForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncSession) ShouldPullChangesForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPullChangesForEntityName:"), purego.NSString(entityName))
+func (iss *ISyncSession) ShouldPullChangesForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("shouldPullChangesForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // ShouldReplaceAllRecordsOnClientForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncSession) ShouldReplaceAllRecordsOnClientForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReplaceAllRecordsOnClientForEntityName:"), purego.NSString(entityName))
+func (iss *ISyncSession) ShouldReplaceAllRecordsOnClientForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("shouldReplaceAllRecordsOnClientForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // PushChange wraps the corresponding Objective-C method.
-func (x *ISyncSession) PushChange(change *ISyncChange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pushChange:"), objref.IDOf(change))
+func (iss *ISyncSession) PushChange(change *ISyncChange) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("pushChange:"), objref.IDOf(change))
 }
 
 // PushChangesFromRecordWithIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncSession) PushChangesFromRecordWithIdentifier(record obj.Object, recordId string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pushChangesFromRecord:withIdentifier:"), objref.IDOf(record), purego.NSString(recordId))
+func (iss *ISyncSession) PushChangesFromRecordWithIdentifier(record obj.Object, recordId string) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("pushChangesFromRecord:withIdentifier:"), objref.IDOf(record), purego.NSString(recordId))
 }
 
 // DeleteRecordWithIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncSession) DeleteRecordWithIdentifier(recordId string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRecordWithIdentifier:"), purego.NSString(recordId))
+func (iss *ISyncSession) DeleteRecordWithIdentifier(recordId string) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("deleteRecordWithIdentifier:"), purego.NSString(recordId))
 }
 
 // ClientLostRecordWithIdentifierShouldReplaceOnNextSync wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientLostRecordWithIdentifierShouldReplaceOnNextSync(recordId string, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientLostRecordWithIdentifier:shouldReplaceOnNextSync:"), purego.NSString(recordId), flag)
+func (iss *ISyncSession) ClientLostRecordWithIdentifierShouldReplaceOnNextSync(recordId string, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientLostRecordWithIdentifier:shouldReplaceOnNextSync:"), purego.NSString(recordId), flag)
 }
 
 // ClientFinishedPushingChangesWithNextAnchors wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientFinishedPushingChangesWithNextAnchors(anchors obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientFinishedPushingChangesWithNextAnchors:"), objref.IDOf(anchors))
+func (iss *ISyncSession) ClientFinishedPushingChangesWithNextAnchors(anchors obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientFinishedPushingChangesWithNextAnchors:"), objref.IDOf(anchors))
 }
 
 // PrepareToPullChangesForEntityNamesBeforeDate wraps the corresponding Objective-C method.
-func (x *ISyncSession) PrepareToPullChangesForEntityNamesBeforeDate(entityNames obj.Object, date obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prepareToPullChangesForEntityNames:beforeDate:"), objref.IDOf(entityNames), objref.IDOf(date))
+func (iss *ISyncSession) PrepareToPullChangesForEntityNamesBeforeDate(entityNames obj.Object, date obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("prepareToPullChangesForEntityNames:beforeDate:"), objref.IDOf(entityNames), objref.IDOf(date))
 	return _r
 }
 
 // ChangeEnumeratorForEntityNames wraps the corresponding Objective-C method.
-func (x *ISyncSession) ChangeEnumeratorForEntityNames(entityNames obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeEnumeratorForEntityNames:"), objref.IDOf(entityNames))
+func (iss *ISyncSession) ChangeEnumeratorForEntityNames(entityNames obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("changeEnumeratorForEntityNames:"), objref.IDOf(entityNames))
 	return obj.Wrap(_r)
 }
 
 // ClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier(recordId string, formattedRecord obj.Object, recordId2 string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientAcceptedChangesForRecordWithIdentifier:formattedRecord:newRecordIdentifier:"), purego.NSString(recordId), objref.IDOf(formattedRecord), purego.NSString(recordId2))
+func (iss *ISyncSession) ClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier(recordId string, formattedRecord obj.Object, recordId2 string) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientAcceptedChangesForRecordWithIdentifier:formattedRecord:newRecordIdentifier:"), purego.NSString(recordId), objref.IDOf(formattedRecord), purego.NSString(recordId2))
 }
 
 // ClientRefusedChangesForRecordWithIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientRefusedChangesForRecordWithIdentifier(recordId string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientRefusedChangesForRecordWithIdentifier:"), purego.NSString(recordId))
+func (iss *ISyncSession) ClientRefusedChangesForRecordWithIdentifier(recordId string) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientRefusedChangesForRecordWithIdentifier:"), purego.NSString(recordId))
 }
 
 // ClientCommittedAcceptedChanges wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientCommittedAcceptedChanges() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientCommittedAcceptedChanges"))
+func (iss *ISyncSession) ClientCommittedAcceptedChanges() {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientCommittedAcceptedChanges"))
 }
 
 // ClientCommittedAcceptedChangesWithNextAnchors wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientCommittedAcceptedChangesWithNextAnchors(anchors obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientCommittedAcceptedChangesWithNextAnchors:"), objref.IDOf(anchors))
+func (iss *ISyncSession) ClientCommittedAcceptedChangesWithNextAnchors(anchors obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientCommittedAcceptedChangesWithNextAnchors:"), objref.IDOf(anchors))
 }
 
 // ClientChangedRecordIdentifiers wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientChangedRecordIdentifiers(oldToNew obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientChangedRecordIdentifiers:"), objref.IDOf(oldToNew))
+func (iss *ISyncSession) ClientChangedRecordIdentifiers(oldToNew obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientChangedRecordIdentifiers:"), objref.IDOf(oldToNew))
 }
 
 // IsCancelled wraps the corresponding Objective-C method.
-func (x *ISyncSession) IsCancelled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+func (iss *ISyncSession) IsCancelled() bool {
+	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // CancelSyncing wraps the corresponding Objective-C method.
-func (x *ISyncSession) CancelSyncing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelSyncing"))
+func (iss *ISyncSession) CancelSyncing() {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("cancelSyncing"))
 }
 
 // FinishSyncing wraps the corresponding Objective-C method.
-func (x *ISyncSession) FinishSyncing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSyncing"))
+func (iss *ISyncSession) FinishSyncing() {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("finishSyncing"))
 }
 
 // ClientInfoForRecordWithIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncSession) ClientInfoForRecordWithIdentifier(recordId string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientInfoForRecordWithIdentifier:"), purego.NSString(recordId))
+func (iss *ISyncSession) ClientInfoForRecordWithIdentifier(recordId string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientInfoForRecordWithIdentifier:"), purego.NSString(recordId))
 	return obj.Wrap(_r)
 }
 
 // SnapshotOfRecordsInTruth wraps the corresponding Objective-C method.
-func (x *ISyncSession) SnapshotOfRecordsInTruth() *ISyncRecordSnapshot {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotOfRecordsInTruth"))
+func (iss *ISyncSession) SnapshotOfRecordsInTruth() *ISyncRecordSnapshot {
+	_r := objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("snapshotOfRecordsInTruth"))
 	return ISyncRecordSnapshotFromID(_r)
 }
 
 // Ping wraps the corresponding Objective-C method.
-func (x *ISyncSession) Ping() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ping"))
+func (iss *ISyncSession) Ping() {
+	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("ping"))
 }
-
-// ISyncSessionable is the interface implemented by [ISyncSession], for mocking and DI.
-type ISyncSessionable interface {
-	obj.Object
-	ClientDidResetEntityNames(entityNames obj.Object)
-	ClientWantsToPushAllRecordsForEntityNames(entityNames obj.Object)
-	ShouldPushChangesForEntityName(entityName string) bool
-	ShouldPushAllRecordsForEntityName(entityName string) bool
-	ShouldPullChangesForEntityName(entityName string) bool
-	ShouldReplaceAllRecordsOnClientForEntityName(entityName string) bool
-	PushChange(change *ISyncChange)
-	PushChangesFromRecordWithIdentifier(record obj.Object, recordId string)
-	DeleteRecordWithIdentifier(recordId string)
-	ClientLostRecordWithIdentifierShouldReplaceOnNextSync(recordId string, flag bool)
-	ClientFinishedPushingChangesWithNextAnchors(anchors obj.Object)
-	PrepareToPullChangesForEntityNamesBeforeDate(entityNames obj.Object, date obj.Object) bool
-	ChangeEnumeratorForEntityNames(entityNames obj.Object) obj.Object
-	ClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier(recordId string, formattedRecord obj.Object, recordId2 string)
-	ClientRefusedChangesForRecordWithIdentifier(recordId string)
-	ClientCommittedAcceptedChanges()
-	ClientCommittedAcceptedChangesWithNextAnchors(anchors obj.Object)
-	ClientChangedRecordIdentifiers(oldToNew obj.Object)
-	IsCancelled() bool
-	CancelSyncing()
-	FinishSyncing()
-	ClientInfoForRecordWithIdentifier(recordId string) obj.Object
-	SnapshotOfRecordsInTruth() *ISyncRecordSnapshot
-	Ping()
-}
-
-var _ ISyncSessionable = (*ISyncSession)(nil)

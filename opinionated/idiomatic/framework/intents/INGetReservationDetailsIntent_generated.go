@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,41 +52,30 @@ func NewGetReservationDetailsIntentWithReservationContainerReferenceReservationI
 	return getReservationDetailsIntentAdopt(_id)
 }
 
-// WithSuggestedInvocationPhrase the intent’s display name.
-func (x *GetReservationDetailsIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *GetReservationDetailsIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
-	return x
+// WithSuggestedInvocationPhrase sets the intent’s display name.
+func (grdi *GetReservationDetailsIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *GetReservationDetailsIntent {
+	objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return grdi
 }
 
 // WithDonationMetadata sets the property and returns the receiver so calls can be chained.
-func (x *GetReservationDetailsIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
-	return x
+func (grdi *GetReservationDetailsIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent {
+	objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return grdi
 }
 
 // ReservationContainerReference wraps the corresponding Objective-C method.
-func (x *GetReservationDetailsIntent) ReservationContainerReference() *SpeakableString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationContainerReference"))
+func (grdi *GetReservationDetailsIntent) ReservationContainerReference() *SpeakableString {
+	_r := objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("reservationContainerReference"))
 	return SpeakableStringFromID(_r)
 }
 
 // ReservationItemReferences wraps the corresponding Objective-C method.
 //
 // ReservationItemReferences returns the collection as a Go slice.
-func (x *GetReservationDetailsIntent) ReservationItemReferences() []*SpeakableString {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationItemReferences"))
+func (grdi *GetReservationDetailsIntent) ReservationItemReferences() []*SpeakableString {
+	_arr := objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("reservationItemReferences"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeakableString { return SpeakableStringFromID(_id) })
 }
-
-// GetReservationDetailsIntentable is the interface implemented by [GetReservationDetailsIntent], for mocking and DI.
-type GetReservationDetailsIntentable interface {
-	obj.Object
-	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *GetReservationDetailsIntent
-	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent
-	ReservationContainerReference() *SpeakableString
-	ReservationItemReferences() []*SpeakableString
-}
-
-var _ GetReservationDetailsIntentable = (*GetReservationDetailsIntent)(nil)
 
 var _ IntentProvider = (*GetReservationDetailsIntent)(nil)

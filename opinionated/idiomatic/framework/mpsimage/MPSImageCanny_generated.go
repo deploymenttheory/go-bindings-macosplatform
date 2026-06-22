@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,92 +51,58 @@ func NewImageCanny() *ImageCanny {
 	return imageCannyAdopt(_id)
 }
 
-// WithHighThreshold read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
-func (x *ImageCanny) WithHighThreshold(highThreshold float32) *ImageCanny {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighThreshold:"), highThreshold)
-	return x
+// WithHighThreshold sets read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
+func (ic *ImageCanny) WithHighThreshold(highThreshold float32) *ImageCanny {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setHighThreshold:"), highThreshold)
+	return ic
 }
 
-// WithLowThreshold read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
-func (x *ImageCanny) WithLowThreshold(lowThreshold float32) *ImageCanny {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowThreshold:"), lowThreshold)
-	return x
+// WithLowThreshold sets read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
+func (ic *ImageCanny) WithLowThreshold(lowThreshold float32) *ImageCanny {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setLowThreshold:"), lowThreshold)
+	return ic
 }
 
-// WithUseFastMode read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
-func (x *ImageCanny) WithUseFastMode(useFastMode bool) *ImageCanny {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFastMode:"), useFastMode)
-	return x
+// WithUseFastMode sets read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
+func (ic *ImageCanny) WithUseFastMode(useFastMode bool) *ImageCanny {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setUseFastMode:"), useFastMode)
+	return ic
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageCanny) WithOffset(offset mpscore.MPSOffset) *ImageCanny {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (ic *ImageCanny) WithOffset(offset mpscore.MPSOffset) *ImageCanny {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setOffset:"), offset)
+	return ic
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageCanny) WithClipRect(clipRect metal.MTLRegion) *ImageCanny {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ic *ImageCanny) WithClipRect(clipRect metal.MTLRegion) *ImageCanny {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setClipRect:"), clipRect)
+	return ic
 }
 
-// Sigma read-only sigma value used in performing Gaussian blur of the image
-func (x *ImageCanny) Sigma() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sigma"))
+// Sigma returns read-only sigma value used in performing Gaussian blur of the image
+func (ic *ImageCanny) Sigma() float32 {
+	_r := objc.Send[float32](objref.IDOf(ic), objc.RegisterName("sigma"))
 	return _r
 }
 
-// HighThreshold read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
-func (x *ImageCanny) HighThreshold() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("highThreshold"))
+// HighThreshold returns read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
+func (ic *ImageCanny) HighThreshold() float32 {
+	_r := objc.Send[float32](objref.IDOf(ic), objc.RegisterName("highThreshold"))
 	return _r
 }
 
-// SetHighThreshold wraps the corresponding Objective-C method.
-func (x *ImageCanny) SetHighThreshold(highThreshold float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighThreshold:"), highThreshold)
-}
-
-// LowThreshold read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
-func (x *ImageCanny) LowThreshold() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lowThreshold"))
+// LowThreshold returns read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
+func (ic *ImageCanny) LowThreshold() float32 {
+	_r := objc.Send[float32](objref.IDOf(ic), objc.RegisterName("lowThreshold"))
 	return _r
 }
 
-// SetLowThreshold wraps the corresponding Objective-C method.
-func (x *ImageCanny) SetLowThreshold(lowThreshold float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowThreshold:"), lowThreshold)
-}
-
-// UseFastMode read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
-func (x *ImageCanny) UseFastMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useFastMode"))
+// UseFastMode reports whether read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is true
+func (ic *ImageCanny) UseFastMode() bool {
+	_r := objc.Send[bool](objref.IDOf(ic), objc.RegisterName("useFastMode"))
 	return _r
 }
-
-// SetUseFastMode wraps the corresponding Objective-C method.
-func (x *ImageCanny) SetUseFastMode(useFastMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFastMode:"), useFastMode)
-}
-
-// ImageCannyable is the interface implemented by [ImageCanny], for mocking and DI.
-type ImageCannyable interface {
-	obj.Object
-	WithHighThreshold(highThreshold float32) *ImageCanny
-	WithLowThreshold(lowThreshold float32) *ImageCanny
-	WithUseFastMode(useFastMode bool) *ImageCanny
-	WithOffset(offset mpscore.MPSOffset) *ImageCanny
-	WithClipRect(clipRect metal.MTLRegion) *ImageCanny
-	Sigma() float32
-	HighThreshold() float32
-	SetHighThreshold(highThreshold float32)
-	LowThreshold() float32
-	SetLowThreshold(lowThreshold float32)
-	UseFastMode() bool
-	SetUseFastMode(useFastMode bool)
-}
-
-var _ ImageCannyable = (*ImageCanny)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageCanny)(nil)

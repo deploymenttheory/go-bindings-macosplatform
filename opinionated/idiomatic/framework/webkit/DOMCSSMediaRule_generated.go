@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,53 +49,40 @@ func NewDOMCSSMediaRule() *DOMCSSMediaRule {
 	return dOMCSSMediaRuleAdopt(_id)
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSMediaRule) WithCssText(cssText string) *DOMCSSMediaRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dmr *DOMCSSMediaRule) WithCSSText(cssText string) *DOMCSSMediaRule {
+	objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dmr
 }
 
 // InsertRuleIndex wraps the corresponding Objective-C method.
-func (x *DOMCSSMediaRule) InsertRuleIndex(rule string, index int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
+func (dmr *DOMCSSMediaRule) InsertRuleIndex(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(dmr), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
 // DeleteRule wraps the corresponding Objective-C method.
-func (x *DOMCSSMediaRule) DeleteRule(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRule:"), index)
+func (dmr *DOMCSSMediaRule) DeleteRule(index int) {
+	objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("deleteRule:"), index)
 }
 
 // Media wraps the corresponding Objective-C method.
-func (x *DOMCSSMediaRule) Media() *DOMMediaList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+func (dmr *DOMCSSMediaRule) Media() *DOMMediaList {
+	_r := objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
 
-// CssRules wraps the corresponding Objective-C method.
-func (x *DOMCSSMediaRule) CssRules() *DOMCSSRuleList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssRules"))
+// CSSRules wraps the corresponding Objective-C method.
+func (dmr *DOMCSSMediaRule) CSSRules() *DOMCSSRuleList {
+	_r := objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
 // InsertRule wraps the corresponding Objective-C method.
-func (x *DOMCSSMediaRule) InsertRule(rule string, index int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
+func (dmr *DOMCSSMediaRule) InsertRule(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(dmr), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r
 }
-
-// DOMCSSMediaRuleable is the interface implemented by [DOMCSSMediaRule], for mocking and DI.
-type DOMCSSMediaRuleable interface {
-	obj.Object
-	WithCssText(cssText string) *DOMCSSMediaRule
-	InsertRuleIndex(rule string, index int) int
-	DeleteRule(index int)
-	Media() *DOMMediaList
-	CssRules() *DOMCSSRuleList
-	InsertRule(rule string, index int) int
-}
-
-var _ DOMCSSMediaRuleable = (*DOMCSSMediaRule)(nil)
 
 var _ DOMCSSRuleProvider = (*DOMCSSMediaRule)(nil)
 

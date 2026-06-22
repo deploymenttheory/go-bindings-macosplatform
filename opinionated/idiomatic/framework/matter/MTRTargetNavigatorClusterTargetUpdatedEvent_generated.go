@@ -44,24 +44,24 @@ func mTRTargetNavigatorClusterTargetUpdatedEventAdopt(id objc.ID) *MTRTargetNavi
 }
 
 // Description returns the object's -description text.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) Description() string {
+	return rt.Description(objref.IDOf(mtnctue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtnctue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtnctue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) String() string {
+	return rt.Description(objref.IDOf(mtnctue))
 }
 
 // NewMTRTargetNavigatorClusterTargetUpdatedEvent creates a new MTRTargetNavigatorClusterTargetUpdatedEvent.
@@ -71,61 +71,36 @@ func NewMTRTargetNavigatorClusterTargetUpdatedEvent() *MTRTargetNavigatorCluster
 }
 
 // WithCurrentTarget sets the property and returns the receiver so calls can be chained.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) WithCurrentTarget(currentTarget obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentTarget:"), objref.IDOf(currentTarget))
-	return x
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) WithCurrentTarget(currentTarget obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
+	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setCurrentTarget:"), objref.IDOf(currentTarget))
+	return mtnctue
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) WithData(data obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-	return x
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) WithData(data obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
+	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setData:"), objref.IDOf(data))
+	return mtnctue
 }
 
 // TargetList wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) TargetList() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetList"))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) TargetList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("targetList"))
 	return obj.Wrap(_r)
 }
 
 // SetTargetList wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(targetList obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetList:"), objref.IDOf(targetList))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(targetList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setTargetList:"), objref.IDOf(targetList))
 }
 
 // CurrentTarget wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentTarget"))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("currentTarget"))
 	return obj.Wrap(_r)
-}
-
-// SetCurrentTarget wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetCurrentTarget(currentTarget obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentTarget:"), objref.IDOf(currentTarget))
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// SetData wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetData(data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-}
-
-// MTRTargetNavigatorClusterTargetUpdatedEventable is the interface implemented by [MTRTargetNavigatorClusterTargetUpdatedEvent], for mocking and DI.
-type MTRTargetNavigatorClusterTargetUpdatedEventable interface {
-	obj.Object
-	WithCurrentTarget(currentTarget obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent
-	WithData(data obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent
-	TargetList() obj.Object
-	SetTargetList(targetList obj.Object)
-	CurrentTarget() obj.Object
-	SetCurrentTarget(currentTarget obj.Object)
-	Data() obj.Object
-	SetData(data obj.Object)
-}
-
-var _ MTRTargetNavigatorClusterTargetUpdatedEventable = (*MTRTargetNavigatorClusterTargetUpdatedEvent)(nil)

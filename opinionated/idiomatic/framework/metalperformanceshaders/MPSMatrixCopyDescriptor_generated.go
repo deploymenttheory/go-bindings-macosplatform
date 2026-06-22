@@ -47,24 +47,24 @@ func matrixCopyDescriptorAdopt(id objc.ID) *MatrixCopyDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixCopyDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcd *MatrixCopyDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixCopyDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcd *MatrixCopyDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixCopyDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcd *MatrixCopyDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixCopyDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcd *MatrixCopyDescriptor) String() string {
+	return rt.Description(objref.IDOf(mcd))
 }
 
 // NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU Use this method when the offsets needed are coming from GPU based computation.
@@ -75,14 +75,6 @@ func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOff
 }
 
 // SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU This is for one at a time intialization of the copy operations
-func (x *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCopyOperationAtIndex:sourceMatrix:destinationMatrix:offsets:"), index, objref.IDOf(sourceMatrix), objref.IDOf(destinationMatrix), offsets)
+func (mcd *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets) {
+	objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("setCopyOperationAtIndex:sourceMatrix:destinationMatrix:offsets:"), index, objref.IDOf(sourceMatrix), objref.IDOf(destinationMatrix), offsets)
 }
-
-// MatrixCopyDescriptorable is the interface implemented by [MatrixCopyDescriptor], for mocking and DI.
-type MatrixCopyDescriptorable interface {
-	obj.Object
-	SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets)
-}
-
-var _ MatrixCopyDescriptorable = (*MatrixCopyDescriptor)(nil)

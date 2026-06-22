@@ -46,24 +46,24 @@ func mapSnapshotAdopt(id objc.ID) *MapSnapshot {
 }
 
 // Description returns the object's -description text.
-func (x *MapSnapshot) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MapSnapshot) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapSnapshot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MapSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapSnapshot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MapSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapSnapshot) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MapSnapshot) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMapSnapshot creates a new MapSnapshot.
@@ -73,15 +73,7 @@ func NewMapSnapshot() *MapSnapshot {
 }
 
 // Appearance wraps the corresponding Objective-C method.
-func (x *MapSnapshot) Appearance() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearance"))
+func (ms *MapSnapshot) Appearance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("appearance"))
 	return obj.Wrap(_r)
 }
-
-// MapSnapshotable is the interface implemented by [MapSnapshot], for mocking and DI.
-type MapSnapshotable interface {
-	obj.Object
-	Appearance() obj.Object
-}
-
-var _ MapSnapshotable = (*MapSnapshot)(nil)

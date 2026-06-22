@@ -51,31 +51,21 @@ func NewMTRTimeSynchronizationClusterTimeZoneType() *MTRTimeSynchronizationClust
 }
 
 // WithOffset sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterTimeZoneType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
-	return x
+func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
+	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setOffset:"), objref.IDOf(offset))
+	return mtsctzt
 }
 
 // WithValidAt sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterTimeZoneType) WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
-	return x
+func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
+	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
+	return mtsctzt
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterTimeZoneType) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneType {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneType {
+	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setName:"), purego.NSString(name))
+	return mtsctzt
 }
-
-// MTRTimeSynchronizationClusterTimeZoneTypeable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneType], for mocking and DI.
-type MTRTimeSynchronizationClusterTimeZoneTypeable interface {
-	obj.Object
-	WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneType
-	WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneType
-	WithName(name string) *MTRTimeSynchronizationClusterTimeZoneType
-}
-
-var _ MTRTimeSynchronizationClusterTimeZoneTypeable = (*MTRTimeSynchronizationClusterTimeZoneType)(nil)
 
 var _ MTRTimeSynchronizationClusterTimeZoneStructProvider = (*MTRTimeSynchronizationClusterTimeZoneType)(nil)

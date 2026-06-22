@@ -46,24 +46,24 @@ func sendMessageAttachmentAdopt(id objc.ID) *SendMessageAttachment {
 }
 
 // Description returns the object's -description text.
-func (x *SendMessageAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sma *SendMessageAttachment) Description() string {
+	return rt.Description(objref.IDOf(sma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SendMessageAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sma *SendMessageAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SendMessageAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sma *SendMessageAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SendMessageAttachment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sma *SendMessageAttachment) String() string {
+	return rt.Description(objref.IDOf(sma))
 }
 
 // NewSendMessageAttachment creates a new SendMessageAttachment.
@@ -73,15 +73,7 @@ func NewSendMessageAttachment() *SendMessageAttachment {
 }
 
 // AudioMessageFile wraps the corresponding Objective-C method.
-func (x *SendMessageAttachment) AudioMessageFile() *File {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMessageFile"))
+func (sma *SendMessageAttachment) AudioMessageFile() *File {
+	_r := objc.Send[objc.ID](objref.IDOf(sma), objc.RegisterName("audioMessageFile"))
 	return FileFromID(_r)
 }
-
-// SendMessageAttachmentable is the interface implemented by [SendMessageAttachment], for mocking and DI.
-type SendMessageAttachmentable interface {
-	obj.Object
-	AudioMessageFile() *File
-}
-
-var _ SendMessageAttachmentable = (*SendMessageAttachment)(nil)

@@ -5,13 +5,14 @@
 package backgroundassets
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DownloadManager is an idiomatic wrapper over the Objective-C class BADownloadManager.
@@ -48,24 +49,24 @@ func downloadManagerAdopt(id objc.ID) *DownloadManager {
 }
 
 // Description returns the object's -description text.
-func (x *DownloadManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dm *DownloadManager) Description() string {
+	return rt.Description(objref.IDOf(dm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DownloadManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dm *DownloadManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DownloadManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dm *DownloadManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DownloadManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dm *DownloadManager) String() string {
+	return rt.Description(objref.IDOf(dm))
 }
 
 // NewDownloadManager creates a new DownloadManager.
@@ -74,12 +75,12 @@ func NewDownloadManager() *DownloadManager {
 	return downloadManagerAdopt(_id)
 }
 
-// FetchCurrentDownloads fetches current downloads. Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
+// FetchCurrentDownloads returns fetches current downloads. Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
 //
 // FetchCurrentDownloads returns the collection as a Go slice.
-func (x *DownloadManager) FetchCurrentDownloads() (result []*Download, err error) {
+func (dm *DownloadManager) FetchCurrentDownloads() (result []*Download, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchCurrentDownloads:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("fetchCurrentDownloads:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -87,9 +88,9 @@ func (x *DownloadManager) FetchCurrentDownloads() (result []*Download, err error
 }
 
 // ScheduleDownload schedules an asset download to execute in the background at a nonspecific time in the future.
-func (x *DownloadManager) ScheduleDownload(download *Download) error {
+func (dm *DownloadManager) ScheduleDownload(download *Download) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("scheduleDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(dm), objc.RegisterName("scheduleDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -97,9 +98,9 @@ func (x *DownloadManager) ScheduleDownload(download *Download) error {
 }
 
 // StartForegroundDownload schedules an asset download that executes immediately in the foreground.
-func (x *DownloadManager) StartForegroundDownload(download *Download) error {
+func (dm *DownloadManager) StartForegroundDownload(download *Download) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startForegroundDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(dm), objc.RegisterName("startForegroundDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -107,22 +108,11 @@ func (x *DownloadManager) StartForegroundDownload(download *Download) error {
 }
 
 // CancelDownload cancels an asset download.
-func (x *DownloadManager) CancelDownload(download *Download) error {
+func (dm *DownloadManager) CancelDownload(download *Download) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(dm), objc.RegisterName("cancelDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// DownloadManagerable is the interface implemented by [DownloadManager], for mocking and DI.
-type DownloadManagerable interface {
-	obj.Object
-	FetchCurrentDownloads() ([]*Download, error)
-	ScheduleDownload(download *Download) error
-	StartForegroundDownload(download *Download) error
-	CancelDownload(download *Download) error
-}
-
-var _ DownloadManagerable = (*DownloadManager)(nil)

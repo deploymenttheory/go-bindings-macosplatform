@@ -46,24 +46,24 @@ func parameterDescriptionAdopt(id objc.ID) *ParameterDescription {
 }
 
 // Description returns the object's -description text.
-func (x *ParameterDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *ParameterDescription) Description() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ParameterDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pd *ParameterDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ParameterDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pd *ParameterDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ParameterDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *ParameterDescription) String() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // NewParameterDescription creates a new ParameterDescription.
@@ -73,29 +73,19 @@ func NewParameterDescription() *ParameterDescription {
 }
 
 // Key wraps the corresponding Objective-C method.
-func (x *ParameterDescription) Key() *ParameterKey {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+func (pd *ParameterDescription) Key() *ParameterKey {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("key"))
 	return ParameterKeyFromID(_r)
 }
 
 // DefaultValue wraps the corresponding Objective-C method.
-func (x *ParameterDescription) DefaultValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultValue"))
+func (pd *ParameterDescription) DefaultValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
 
 // NumericConstraint wraps the corresponding Objective-C method.
-func (x *ParameterDescription) NumericConstraint() *NumericConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numericConstraint"))
+func (pd *ParameterDescription) NumericConstraint() *NumericConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("numericConstraint"))
 	return NumericConstraintFromID(_r)
 }
-
-// ParameterDescriptionable is the interface implemented by [ParameterDescription], for mocking and DI.
-type ParameterDescriptionable interface {
-	obj.Object
-	Key() *ParameterKey
-	DefaultValue() obj.Object
-	NumericConstraint() *NumericConstraint
-}
-
-var _ ParameterDescriptionable = (*ParameterDescription)(nil)

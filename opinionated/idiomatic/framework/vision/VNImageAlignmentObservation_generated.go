@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,17 +45,10 @@ func imageAlignmentObservationAdopt(id objc.ID) *ImageAlignmentObservation {
 	return x
 }
 
-// ImageAlignmentObservationable is the interface implemented by [ImageAlignmentObservation], for mocking and DI.
-type ImageAlignmentObservationable interface {
-	obj.Object
-}
-
-var _ ImageAlignmentObservationable = (*ImageAlignmentObservation)(nil)
-
 // isImageAlignmentObservation marks ImageAlignmentObservation — and, by embedding promotion, its
 // subclasses — as a member of the ImageAlignmentObservation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageAlignmentObservation) isImageAlignmentObservation() {}
+func (iao *ImageAlignmentObservation) isImageAlignmentObservation() {}
 
 var _ ImageAlignmentObservationProvider = (*ImageAlignmentObservation)(nil)
 

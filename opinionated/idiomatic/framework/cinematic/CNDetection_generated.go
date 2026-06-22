@@ -47,24 +47,24 @@ func detectionAdopt(id objc.ID) *Detection {
 }
 
 // Description returns the object's -description text.
-func (x *Detection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Detection) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Detection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Detection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Detection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Detection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Detection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Detection) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDetection creates a new Detection.
@@ -73,44 +73,32 @@ func NewDetection() *Detection {
 	return detectionAdopt(_id)
 }
 
-// DetectionType the type of object that was detected (face, torso, cat, dog, etc.)
-func (x *Detection) DetectionType() DetectionType {
-	_r := objc.Send[DetectionType](objref.IDOf(x), objc.RegisterName("detectionType"))
+// DetectionType returns the type of object that was detected (face, torso, cat, dog, etc.)
+func (d *Detection) DetectionType() DetectionType {
+	_r := objc.Send[DetectionType](objref.IDOf(d), objc.RegisterName("detectionType"))
 	return _r
 }
 
-// NormalizedRect the rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right.
-func (x *Detection) NormalizedRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("normalizedRect"))
+// NormalizedRect returns the rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right.
+func (d *Detection) NormalizedRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(d), objc.RegisterName("normalizedRect"))
 	return _r
 }
 
-// FocusDisparity the disparity to use in order to focus on the object. If the disparity is unknown, use the class method to find it: `disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:`.
-func (x *Detection) FocusDisparity() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
+// FocusDisparity returns the disparity to use in order to focus on the object. If the disparity is unknown, use the class method to find it: `disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:`.
+func (d *Detection) FocusDisparity() float32 {
+	_r := objc.Send[float32](objref.IDOf(d), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
-// DetectionID an unique identifier assigned by the cinematic script to all detections of the same subject and detection type across time. If you build a custom detection track, the detectionID will be assigned when you add it to the script.
-func (x *Detection) DetectionID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
+// DetectionID returns an unique identifier assigned by the cinematic script to all detections of the same subject and detection type across time. If you build a custom detection track, the detectionID will be assigned when you add it to the script.
+func (d *Detection) DetectionID() int64 {
+	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionID"))
 	return _r
 }
 
-// DetectionGroupID an unique identifier assigned by the cinematic script to all detections of the same subject and related detection types across time. For example, the face/torso detections of the same person are assigned the same detectionGroupID.
-func (x *Detection) DetectionGroupID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
+// DetectionGroupID returns an unique identifier assigned by the cinematic script to all detections of the same subject and related detection types across time. For example, the face/torso detections of the same person are assigned the same detectionGroupID.
+func (d *Detection) DetectionGroupID() int64 {
+	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionGroupID"))
 	return _r
 }
-
-// Detectionable is the interface implemented by [Detection], for mocking and DI.
-type Detectionable interface {
-	obj.Object
-	DetectionType() DetectionType
-	NormalizedRect() corefoundation.CGRect
-	FocusDisparity() float32
-	DetectionID() int64
-	DetectionGroupID() int64
-}
-
-var _ Detectionable = (*Detection)(nil)

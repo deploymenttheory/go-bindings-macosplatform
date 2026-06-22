@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewPullStreamNode() *PullStreamNode {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEPullStreamNode")), objc.RegisterName("new"))
 	return pullStreamNodeAdopt(_id)
 }
-
-// PullStreamNodeable is the interface implemented by [PullStreamNode], for mocking and DI.
-type PullStreamNodeable interface {
-	obj.Object
-}
-
-var _ PullStreamNodeable = (*PullStreamNode)(nil)
 
 var _ StreamNodeProvider = (*PullStreamNode)(nil)

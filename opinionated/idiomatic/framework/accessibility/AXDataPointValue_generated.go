@@ -46,24 +46,24 @@ func dataPointValueAdopt(id objc.ID) *DataPointValue {
 }
 
 // Description returns the object's -description text.
-func (x *DataPointValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dpv *DataPointValue) Description() string {
+	return rt.Description(objref.IDOf(dpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DataPointValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dpv *DataPointValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DataPointValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dpv *DataPointValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DataPointValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dpv *DataPointValue) String() string {
+	return rt.Description(objref.IDOf(dpv))
 }
 
 // NewDataPointValue creates a new DataPointValue.
@@ -72,52 +72,29 @@ func NewDataPointValue() *DataPointValue {
 	return dataPointValueAdopt(_id)
 }
 
-// WithNumber a number that represents the numeric data value.
-func (x *DataPointValue) WithNumber(number float64) *DataPointValue {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
-	return x
+// WithNumber sets a number that represents the numeric data value.
+func (dpv *DataPointValue) WithNumber(number float64) *DataPointValue {
+	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setNumber:"), number)
+	return dpv
 }
 
-// WithCategory a string that represents the categorical data value.
-func (x *DataPointValue) WithCategory(category string) *DataPointValue {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
-	return x
+// WithCategory sets a string that represents the categorical data value.
+func (dpv *DataPointValue) WithCategory(category string) *DataPointValue {
+	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setCategory:"), purego.NSString(category))
+	return dpv
 }
 
 // Number wraps the corresponding Objective-C method.
-func (x *DataPointValue) Number() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("number"))
+func (dpv *DataPointValue) Number() float64 {
+	_r := objc.Send[float64](objref.IDOf(dpv), objc.RegisterName("number"))
 	return _r
 }
 
-// SetNumber wraps the corresponding Objective-C method.
-func (x *DataPointValue) SetNumber(number float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
-}
-
 // Category wraps the corresponding Objective-C method.
-func (x *DataPointValue) Category() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+func (dpv *DataPointValue) Category() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetCategory wraps the corresponding Objective-C method.
-func (x *DataPointValue) SetCategory(category string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
-}
-
-// DataPointValueable is the interface implemented by [DataPointValue], for mocking and DI.
-type DataPointValueable interface {
-	obj.Object
-	WithNumber(number float64) *DataPointValue
-	WithCategory(category string) *DataPointValue
-	Number() float64
-	SetNumber(number float64)
-	Category() string
-	SetCategory(category string)
-}
-
-var _ DataPointValueable = (*DataPointValue)(nil)

@@ -52,74 +52,58 @@ func NewQuitCommand() *QuitCommand {
 	return quitCommandAdopt(_id)
 }
 
-// WithDirectParameter sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
-func (x *QuitCommand) WithDirectParameter(directParameter obj.Object) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
-	return x
+// WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+func (qc *QuitCommand) WithDirectParameter(directParameter obj.Object) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
+	return qc
 }
 
-// WithReceiversSpecifier sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
-func (x *QuitCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
-	return x
+// WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+func (qc *QuitCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
+	return qc
 }
 
-// WithArguments sets the arguments of the command to args.
-func (x *QuitCommand) WithArguments(arguments obj.Object) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
-	return x
+// WithArguments sets sets the arguments of the command to args.
+func (qc *QuitCommand) WithArguments(arguments obj.Object) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+	return qc
 }
 
-// WithScriptErrorNumber sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
-func (x *QuitCommand) WithScriptErrorNumber(scriptErrorNumber int) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
-	return x
+// WithScriptErrorNumber sets sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+func (qc *QuitCommand) WithScriptErrorNumber(scriptErrorNumber int) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
+	return qc
 }
 
-// WithScriptErrorOffendingObjectDescriptor sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *QuitCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
-	return x
+// WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (qc *QuitCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
+	return qc
 }
 
-// WithScriptErrorExpectedTypeDescriptor sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *QuitCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
-	return x
+// WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (qc *QuitCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
+	return qc
 }
 
-// WithScriptErrorString sets a script error string that is associated with execution of the command.
-func (x *QuitCommand) WithScriptErrorString(scriptErrorString StringProvider) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
-	return x
+// WithScriptErrorString sets sets a script error string that is associated with execution of the command.
+func (qc *QuitCommand) WithScriptErrorString(scriptErrorString StringProvider) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
+	return qc
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *QuitCommand) WithScriptingProperties(scriptingProperties obj.Object) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (qc *QuitCommand) WithScriptingProperties(scriptingProperties obj.Object) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return qc
 }
 
 // SaveOptions wraps the corresponding Objective-C method.
-func (x *QuitCommand) SaveOptions() SaveOptions {
-	_r := objc.Send[SaveOptions](objref.IDOf(x), objc.RegisterName("saveOptions"))
+func (qc *QuitCommand) SaveOptions() SaveOptions {
+	_r := objc.Send[SaveOptions](objref.IDOf(qc), objc.RegisterName("saveOptions"))
 	return _r
 }
-
-// QuitCommandable is the interface implemented by [QuitCommand], for mocking and DI.
-type QuitCommandable interface {
-	obj.Object
-	WithDirectParameter(directParameter obj.Object) *QuitCommand
-	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *QuitCommand
-	WithArguments(arguments obj.Object) *QuitCommand
-	WithScriptErrorNumber(scriptErrorNumber int) *QuitCommand
-	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *QuitCommand
-	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *QuitCommand
-	WithScriptErrorString(scriptErrorString StringProvider) *QuitCommand
-	WithScriptingProperties(scriptingProperties obj.Object) *QuitCommand
-	SaveOptions() SaveOptions
-}
-
-var _ QuitCommandable = (*QuitCommand)(nil)
 
 var _ ScriptCommandProvider = (*QuitCommand)(nil)

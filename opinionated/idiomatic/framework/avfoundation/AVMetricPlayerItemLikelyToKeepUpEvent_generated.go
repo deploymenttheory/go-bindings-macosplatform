@@ -47,39 +47,29 @@ func metricPlayerItemLikelyToKeepUpEventAdopt(id objc.ID) *MetricPlayerItemLikel
 }
 
 // Variant returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
-func (x *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variant"))
+func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(mpiltkue), objc.RegisterName("variant"))
 	return AssetVariantFromID(_r)
 }
 
 // TimeTaken returns the total time taken to reach likely to keep up.
-func (x *MetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeTaken"))
+func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
+	_r := objc.Send[float64](objref.IDOf(mpiltkue), objc.RegisterName("timeTaken"))
 	return _r
 }
 
-// LoadedTimeRanges this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges returns this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *MetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpiltkue), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// MetricPlayerItemLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemLikelyToKeepUpEvent], for mocking and DI.
-type MetricPlayerItemLikelyToKeepUpEventable interface {
-	obj.Object
-	Variant() *AssetVariant
-	TimeTaken() float64
-	LoadedTimeRanges() []obj.Object
-}
-
-var _ MetricPlayerItemLikelyToKeepUpEventable = (*MetricPlayerItemLikelyToKeepUpEvent)(nil)
 
 // isMetricPlayerItemLikelyToKeepUpEvent marks MetricPlayerItemLikelyToKeepUpEvent — and, by embedding promotion, its
 // subclasses — as a member of the MetricPlayerItemLikelyToKeepUpEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetricPlayerItemLikelyToKeepUpEvent) isMetricPlayerItemLikelyToKeepUpEvent() {}
+func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) isMetricPlayerItemLikelyToKeepUpEvent() {}
 
 var _ MetricPlayerItemLikelyToKeepUpEventProvider = (*MetricPlayerItemLikelyToKeepUpEvent)(nil)
 

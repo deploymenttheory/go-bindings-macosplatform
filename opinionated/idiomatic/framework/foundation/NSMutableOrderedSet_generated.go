@@ -67,161 +67,129 @@ func NewMutableOrderedSetWithCapacity(numItems int) *MutableOrderedSet {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableOrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableOrderedSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mos *MutableOrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableOrderedSet {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mos
 }
 
 // InsertObjectAtIndex inserts the given object at the specified index of the mutable ordered set, if it is not already a member.
-func (x *MutableOrderedSet) InsertObjectAtIndex(object obj.Object, idx int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObject:atIndex:"), objref.IDOf(object), idx)
+func (mos *MutableOrderedSet) InsertObjectAtIndex(object obj.Object, idx int) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("insertObject:atIndex:"), objref.IDOf(object), idx)
 }
 
 // RemoveObjectAtIndex removes a the object at the specified index from the mutable ordered set.
-func (x *MutableOrderedSet) RemoveObjectAtIndex(idx int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectAtIndex:"), idx)
+func (mos *MutableOrderedSet) RemoveObjectAtIndex(idx int) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("removeObjectAtIndex:"), idx)
 }
 
 // ReplaceObjectAtIndexWithObject replaces the object at the specified index with the new object.
-func (x *MutableOrderedSet) ReplaceObjectAtIndexWithObject(idx int, object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObjectAtIndex:withObject:"), idx, objref.IDOf(object))
+func (mos *MutableOrderedSet) ReplaceObjectAtIndexWithObject(idx int, object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("replaceObjectAtIndex:withObject:"), idx, objref.IDOf(object))
 }
 
 // AddObject appends a given object to the end of the mutable ordered set, if it is not already a member.
-func (x *MutableOrderedSet) AddObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
+func (mos *MutableOrderedSet) AddObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // AddObjectsFromArray appends to the end of the mutable ordered set each object contained in a given array that is not already a member.
-func (x *MutableOrderedSet) AddObjectsFromArray(array []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mos *MutableOrderedSet) AddObjectsFromArray(array []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ExchangeObjectAtIndexWithObjectAtIndex exchanges the object at the specified index with the object at the other index.
-func (x *MutableOrderedSet) ExchangeObjectAtIndexWithObjectAtIndex(idx1 int, idx2 int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangeObjectAtIndex:withObjectAtIndex:"), idx1, idx2)
+func (mos *MutableOrderedSet) ExchangeObjectAtIndexWithObjectAtIndex(idx1 int, idx2 int) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("exchangeObjectAtIndex:withObjectAtIndex:"), idx1, idx2)
 }
 
 // MoveObjectsAtIndexesToIndex moves the objects at the specified indexes to the new location.
-func (x *MutableOrderedSet) MoveObjectsAtIndexesToIndex(indexes *IndexSet, idx int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveObjectsAtIndexes:toIndex:"), objref.IDOf(indexes), idx)
+func (mos *MutableOrderedSet) MoveObjectsAtIndexesToIndex(indexes *IndexSet, idx int) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("moveObjectsAtIndexes:toIndex:"), objref.IDOf(indexes), idx)
 }
 
 // InsertObjectsAtIndexes inserts the objects in the array at the specified indexes.
-func (x *MutableOrderedSet) InsertObjectsAtIndexes(objects []obj.Object, indexes *IndexSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObjects:atIndexes:"), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(indexes))
+func (mos *MutableOrderedSet) InsertObjectsAtIndexes(objects []obj.Object, indexes *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("insertObjects:atIndexes:"), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(indexes))
 }
 
 // SetObjectAtIndex appends or replaces the object at the specified index.
-func (x *MutableOrderedSet) SetObjectAtIndex(obj_ obj.Object, idx int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndex:"), objref.IDOf(obj_), idx)
+func (mos *MutableOrderedSet) SetObjectAtIndex(obj_ obj.Object, idx int) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("setObject:atIndex:"), objref.IDOf(obj_), idx)
 }
 
 // SetObjectAtIndexedSubscript replaces the given object at the specified index of the mutable ordered set.
-func (x *MutableOrderedSet) SetObjectAtIndexedSubscript(obj_ obj.Object, idx int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(obj_), idx)
+func (mos *MutableOrderedSet) SetObjectAtIndexedSubscript(obj_ obj.Object, idx int) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(obj_), idx)
 }
 
 // ReplaceObjectsAtIndexesWithObjects replaces the objects at the specified indexes with the new objects.
-func (x *MutableOrderedSet) ReplaceObjectsAtIndexesWithObjects(indexes *IndexSet, objects []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObjectsAtIndexes:withObjects:"), objref.IDOf(indexes), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mos *MutableOrderedSet) ReplaceObjectsAtIndexesWithObjects(indexes *IndexSet, objects []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("replaceObjectsAtIndexes:withObjects:"), objref.IDOf(indexes), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveObjectsAtIndexes removes the objects at the specified indexes from the mutable ordered set.
-func (x *MutableOrderedSet) RemoveObjectsAtIndexes(indexes *IndexSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsAtIndexes:"), objref.IDOf(indexes))
+func (mos *MutableOrderedSet) RemoveObjectsAtIndexes(indexes *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("removeObjectsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // RemoveAllObjects removes all the objects from the mutable ordered set.
-func (x *MutableOrderedSet) RemoveAllObjects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
+func (mos *MutableOrderedSet) RemoveAllObjects() {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("removeAllObjects"))
 }
 
 // RemoveObject removes a given object from the mutable ordered set.
-func (x *MutableOrderedSet) RemoveObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
+func (mos *MutableOrderedSet) RemoveObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // RemoveObjectsInArray removes the objects in the array from the mutable ordered set.
-func (x *MutableOrderedSet) RemoveObjectsInArray(array []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsInArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mos *MutableOrderedSet) RemoveObjectsInArray(array []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("removeObjectsInArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // IntersectOrderedSet removes from the receiving ordered set each object that isn’t a member of another ordered set.
-func (x *MutableOrderedSet) IntersectOrderedSet(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectOrderedSet:"), objref.IDOf(other))
+func (mos *MutableOrderedSet) IntersectOrderedSet(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("intersectOrderedSet:"), objref.IDOf(other))
 }
 
 // MinusOrderedSet removes each object in another given ordered set from the receiving mutable ordered set, if present.
-func (x *MutableOrderedSet) MinusOrderedSet(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minusOrderedSet:"), objref.IDOf(other))
+func (mos *MutableOrderedSet) MinusOrderedSet(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("minusOrderedSet:"), objref.IDOf(other))
 }
 
 // UnionOrderedSet adds each object in another given ordered set to the receiving mutable ordered set, if not present.
-func (x *MutableOrderedSet) UnionOrderedSet(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionOrderedSet:"), objref.IDOf(other))
+func (mos *MutableOrderedSet) UnionOrderedSet(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("unionOrderedSet:"), objref.IDOf(other))
 }
 
 // IntersectSet removes from the receiving ordered set each object that isn’t a member of another set.
-func (x *MutableOrderedSet) IntersectSet(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectSet:"), objref.IDOf(other))
+func (mos *MutableOrderedSet) IntersectSet(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("intersectSet:"), objref.IDOf(other))
 }
 
 // MinusSet removes each object in another given set from the receiving mutable ordered set, if present.
-func (x *MutableOrderedSet) MinusSet(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minusSet:"), objref.IDOf(other))
+func (mos *MutableOrderedSet) MinusSet(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("minusSet:"), objref.IDOf(other))
 }
 
 // UnionSet adds each object in another given set to the receiving mutable ordered set, if not present.
-func (x *MutableOrderedSet) UnionSet(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionSet:"), objref.IDOf(other))
+func (mos *MutableOrderedSet) UnionSet(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("unionSet:"), objref.IDOf(other))
 }
 
 // ApplyDifference wraps the corresponding Objective-C method.
-func (x *MutableOrderedSet) ApplyDifference(difference obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyDifference:"), objref.IDOf(difference))
+func (mos *MutableOrderedSet) ApplyDifference(difference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("applyDifference:"), objref.IDOf(difference))
 }
 
 // SortUsingDescriptors sorts the receiving ordered set using a given array of sort descriptors.
-func (x *MutableOrderedSet) SortUsingDescriptors(sortDescriptors []*SortDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
+func (mos *MutableOrderedSet) SortUsingDescriptors(sortDescriptors []*SortDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("sortUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FilterUsingPredicate evaluates a given predicate against the mutable ordered set’s content and leaves only objects that match.
-func (x *MutableOrderedSet) FilterUsingPredicate(p *Predicate) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(p))
+func (mos *MutableOrderedSet) FilterUsingPredicate(p *Predicate) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(p))
 }
-
-// MutableOrderedSetable is the interface implemented by [MutableOrderedSet], for mocking and DI.
-type MutableOrderedSetable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableOrderedSet
-	InsertObjectAtIndex(object obj.Object, idx int)
-	RemoveObjectAtIndex(idx int)
-	ReplaceObjectAtIndexWithObject(idx int, object obj.Object)
-	AddObject(object obj.Object)
-	AddObjectsFromArray(array []obj.Object)
-	ExchangeObjectAtIndexWithObjectAtIndex(idx1 int, idx2 int)
-	MoveObjectsAtIndexesToIndex(indexes *IndexSet, idx int)
-	InsertObjectsAtIndexes(objects []obj.Object, indexes *IndexSet)
-	SetObjectAtIndex(obj_ obj.Object, idx int)
-	SetObjectAtIndexedSubscript(obj_ obj.Object, idx int)
-	ReplaceObjectsAtIndexesWithObjects(indexes *IndexSet, objects []obj.Object)
-	RemoveObjectsAtIndexes(indexes *IndexSet)
-	RemoveAllObjects()
-	RemoveObject(object obj.Object)
-	RemoveObjectsInArray(array []obj.Object)
-	IntersectOrderedSet(other obj.Object)
-	MinusOrderedSet(other obj.Object)
-	UnionOrderedSet(other obj.Object)
-	IntersectSet(other obj.Object)
-	MinusSet(other obj.Object)
-	UnionSet(other obj.Object)
-	ApplyDifference(difference obj.Object)
-	SortUsingDescriptors(sortDescriptors []*SortDescriptor)
-	FilterUsingPredicate(p *Predicate)
-}
-
-var _ MutableOrderedSetable = (*MutableOrderedSet)(nil)
 
 var _ OrderedSetProvider = (*MutableOrderedSet)(nil)

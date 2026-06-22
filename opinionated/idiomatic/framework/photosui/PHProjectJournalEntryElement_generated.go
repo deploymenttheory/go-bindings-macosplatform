@@ -52,32 +52,22 @@ func NewProjectJournalEntryElement() *ProjectJournalEntryElement {
 	return projectJournalEntryElementAdopt(_id)
 }
 
-// Date date to which the provided asset and/or text pertain
-func (x *ProjectJournalEntryElement) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+// Date returns date to which the provided asset and/or text pertain
+func (pjee *ProjectJournalEntryElement) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pjee), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// AssetElement representative asset, if any, for that date.
-func (x *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetElement"))
+// AssetElement returns representative asset, if any, for that date.
+func (pjee *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
+	_r := objc.Send[objc.ID](objref.IDOf(pjee), objc.RegisterName("assetElement"))
 	return ProjectAssetElementFromID(_r)
 }
 
-// TextElement descriptive text (e.g., "Mom's Birthday") for that date.
-func (x *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElement"))
+// TextElement returns descriptive text (e.g., "Mom's Birthday") for that date.
+func (pjee *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
+	_r := objc.Send[objc.ID](objref.IDOf(pjee), objc.RegisterName("textElement"))
 	return ProjectTextElementFromID(_r)
 }
-
-// ProjectJournalEntryElementable is the interface implemented by [ProjectJournalEntryElement], for mocking and DI.
-type ProjectJournalEntryElementable interface {
-	obj.Object
-	Date() obj.Object
-	AssetElement() *ProjectAssetElement
-	TextElement() *ProjectTextElement
-}
-
-var _ ProjectJournalEntryElementable = (*ProjectJournalEntryElement)(nil)
 
 var _ ProjectElementProvider = (*ProjectJournalEntryElement)(nil)

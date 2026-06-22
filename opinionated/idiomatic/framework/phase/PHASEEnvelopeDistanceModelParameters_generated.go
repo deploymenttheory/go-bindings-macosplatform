@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *Envelope) *Envelop
 	return envelopeDistanceModelParametersAdopt(_id)
 }
 
-// WithFadeOutParameters a distance over which the framework fades out the mixer’s sound.
-func (x *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
-	return x
+// WithFadeOutParameters sets a distance over which the framework fades out the mixer’s sound.
+func (edmp *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {
+	objc.Send[objc.ID](objref.IDOf(edmp), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
+	return edmp
 }
 
 // Envelope wraps the corresponding Objective-C method.
-func (x *EnvelopeDistanceModelParameters) Envelope() *Envelope {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("envelope"))
+func (edmp *EnvelopeDistanceModelParameters) Envelope() *Envelope {
+	_r := objc.Send[objc.ID](objref.IDOf(edmp), objc.RegisterName("envelope"))
 	return EnvelopeFromID(_r)
 }
-
-// EnvelopeDistanceModelParametersable is the interface implemented by [EnvelopeDistanceModelParameters], for mocking and DI.
-type EnvelopeDistanceModelParametersable interface {
-	obj.Object
-	WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters
-	Envelope() *Envelope
-}
-
-var _ EnvelopeDistanceModelParametersable = (*EnvelopeDistanceModelParameters)(nil)
 
 var _ DistanceModelParametersProvider = (*EnvelopeDistanceModelParameters)(nil)

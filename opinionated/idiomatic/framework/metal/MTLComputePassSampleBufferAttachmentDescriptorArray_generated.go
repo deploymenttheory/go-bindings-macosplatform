@@ -46,24 +46,24 @@ func computePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *ComputeP
 }
 
 // Description returns the object's -description text.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(cpsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(cpsbada))
 }
 
 // NewComputePassSampleBufferAttachmentDescriptorArray creates a new ComputePassSampleBufferAttachmentDescriptorArray.
@@ -73,21 +73,12 @@ func NewComputePassSampleBufferAttachmentDescriptorArray() *ComputePassSampleBuf
 }
 
 // ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ComputePassSampleBufferAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ComputePassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(cpsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return ComputePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ComputePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ComputePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(cpsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// ComputePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [ComputePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
-type ComputePassSampleBufferAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *ComputePassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *ComputePassSampleBufferAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ ComputePassSampleBufferAttachmentDescriptorArrayable = (*ComputePassSampleBufferAttachmentDescriptorArray)(nil)

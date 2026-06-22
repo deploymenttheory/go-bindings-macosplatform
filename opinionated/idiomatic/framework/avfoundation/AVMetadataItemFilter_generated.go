@@ -46,24 +46,24 @@ func metadataItemFilterAdopt(id objc.ID) *MetadataItemFilter {
 }
 
 // Description returns the object's -description text.
-func (x *MetadataItemFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mif *MetadataItemFilter) Description() string {
+	return rt.Description(objref.IDOf(mif))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataItemFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mif *MetadataItemFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mif), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataItemFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mif *MetadataItemFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mif), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetadataItemFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mif *MetadataItemFilter) String() string {
+	return rt.Description(objref.IDOf(mif))
 }
 
 // NewMetadataItemFilter creates a new MetadataItemFilter.
@@ -71,10 +71,3 @@ func NewMetadataItemFilter() *MetadataItemFilter {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataItemFilter")), objc.RegisterName("new"))
 	return metadataItemFilterAdopt(_id)
 }
-
-// MetadataItemFilterable is the interface implemented by [MetadataItemFilter], for mocking and DI.
-type MetadataItemFilterable interface {
-	obj.Object
-}
-
-var _ MetadataItemFilterable = (*MetadataItemFilter)(nil)

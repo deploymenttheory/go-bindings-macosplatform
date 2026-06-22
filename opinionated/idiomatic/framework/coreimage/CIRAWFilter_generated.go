@@ -53,640 +53,420 @@ func NewRAWFilter() *RAWFilter {
 	return rAWFilterAdopt(_id)
 }
 
-// WithDraftModeEnabled a Boolean that indicates whether to enable draft mode.
-func (x *RAWFilter) WithDraftModeEnabled(draftModeEnabled bool) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraftModeEnabled:"), draftModeEnabled)
-	return x
+// WithDraftModeEnabled sets a Boolean that indicates whether to enable draft mode.
+func (rf *RAWFilter) WithDraftModeEnabled(draftModeEnabled bool) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setDraftModeEnabled:"), draftModeEnabled)
+	return rf
 }
 
-// WithDecoderVersion a value that indicates the decoder version to use.
-func (x *RAWFilter) WithDecoderVersion(decoderVersion obj.Object) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecoderVersion:"), objref.IDOf(decoderVersion))
-	return x
+// WithDecoderVersion sets a value that indicates the decoder version to use.
+func (rf *RAWFilter) WithDecoderVersion(decoderVersion obj.Object) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setDecoderVersion:"), objref.IDOf(decoderVersion))
+	return rf
 }
 
-// WithScaleFactor a value that indicates the desired scale factor to draw the output image.
-func (x *RAWFilter) WithScaleFactor(scaleFactor float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
-	return x
+// WithScaleFactor sets a value that indicates the desired scale factor to draw the output image.
+func (rf *RAWFilter) WithScaleFactor(scaleFactor float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setScaleFactor:"), scaleFactor)
+	return rf
 }
 
-// WithExposure a value that indicates the amount of exposure to apply to the image.
-func (x *RAWFilter) WithExposure(exposure float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposure:"), exposure)
-	return x
+// WithExposure sets a value that indicates the amount of exposure to apply to the image.
+func (rf *RAWFilter) WithExposure(exposure float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setExposure:"), exposure)
+	return rf
 }
 
-// WithBaselineExposure a value that indicates the baseline exposure to apply to the image.
-func (x *RAWFilter) WithBaselineExposure(baselineExposure float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaselineExposure:"), baselineExposure)
-	return x
+// WithBaselineExposure sets a value that indicates the baseline exposure to apply to the image.
+func (rf *RAWFilter) WithBaselineExposure(baselineExposure float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setBaselineExposure:"), baselineExposure)
+	return rf
 }
 
-// WithShadowBias a value that indicates the amount to subtract from the shadows in the image.
-func (x *RAWFilter) WithShadowBias(shadowBias float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBias:"), shadowBias)
-	return x
+// WithShadowBias sets a value that indicates the amount to subtract from the shadows in the image.
+func (rf *RAWFilter) WithShadowBias(shadowBias float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setShadowBias:"), shadowBias)
+	return rf
 }
 
-// WithBoostAmount a value that indicates the amount of global tone curve to apply to the image.
-func (x *RAWFilter) WithBoostAmount(boostAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostAmount:"), boostAmount)
-	return x
+// WithBoostAmount sets a value that indicates the amount of global tone curve to apply to the image.
+func (rf *RAWFilter) WithBoostAmount(boostAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setBoostAmount:"), boostAmount)
+	return rf
 }
 
-// WithBoostShadowAmount a value that indicates the amount to boost the shadow areas of the image.
-func (x *RAWFilter) WithBoostShadowAmount(boostShadowAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostShadowAmount:"), boostShadowAmount)
-	return x
+// WithBoostShadowAmount sets a value that indicates the amount to boost the shadow areas of the image.
+func (rf *RAWFilter) WithBoostShadowAmount(boostShadowAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setBoostShadowAmount:"), boostShadowAmount)
+	return rf
 }
 
 // WithHighlightRecoveryEnabled sets the property and returns the receiver so calls can be chained.
-func (x *RAWFilter) WithHighlightRecoveryEnabled(highlightRecoveryEnabled bool) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightRecoveryEnabled:"), highlightRecoveryEnabled)
-	return x
+func (rf *RAWFilter) WithHighlightRecoveryEnabled(highlightRecoveryEnabled bool) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setHighlightRecoveryEnabled:"), highlightRecoveryEnabled)
+	return rf
 }
 
-// WithGamutMappingEnabled a Boolean that indicates whether to enable gamut mapping.
-func (x *RAWFilter) WithGamutMappingEnabled(gamutMappingEnabled bool) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGamutMappingEnabled:"), gamutMappingEnabled)
-	return x
+// WithGamutMappingEnabled sets a Boolean that indicates whether to enable gamut mapping.
+func (rf *RAWFilter) WithGamutMappingEnabled(gamutMappingEnabled bool) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setGamutMappingEnabled:"), gamutMappingEnabled)
+	return rf
 }
 
-// WithLensCorrectionEnabled a Boolean that indicates whether to enable lens correction.
-func (x *RAWFilter) WithLensCorrectionEnabled(lensCorrectionEnabled bool) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLensCorrectionEnabled:"), lensCorrectionEnabled)
-	return x
+// WithLensCorrectionEnabled sets a Boolean that indicates whether to enable lens correction.
+func (rf *RAWFilter) WithLensCorrectionEnabled(lensCorrectionEnabled bool) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setLensCorrectionEnabled:"), lensCorrectionEnabled)
+	return rf
 }
 
-// WithLuminanceNoiseReductionAmount a value that indicates the amount of luminance noise reduction to apply to the image.
-func (x *RAWFilter) WithLuminanceNoiseReductionAmount(luminanceNoiseReductionAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminanceNoiseReductionAmount:"), luminanceNoiseReductionAmount)
-	return x
+// WithLuminanceNoiseReductionAmount sets a value that indicates the amount of luminance noise reduction to apply to the image.
+func (rf *RAWFilter) WithLuminanceNoiseReductionAmount(luminanceNoiseReductionAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setLuminanceNoiseReductionAmount:"), luminanceNoiseReductionAmount)
+	return rf
 }
 
-// WithColorNoiseReductionAmount a value that indicates the amount of chroma noise reduction to apply to the image.
-func (x *RAWFilter) WithColorNoiseReductionAmount(colorNoiseReductionAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorNoiseReductionAmount:"), colorNoiseReductionAmount)
-	return x
+// WithColorNoiseReductionAmount sets a value that indicates the amount of chroma noise reduction to apply to the image.
+func (rf *RAWFilter) WithColorNoiseReductionAmount(colorNoiseReductionAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setColorNoiseReductionAmount:"), colorNoiseReductionAmount)
+	return rf
 }
 
-// WithSharpnessAmount a value that indicates the amount of sharpness to apply to the edges of the image.
-func (x *RAWFilter) WithSharpnessAmount(sharpnessAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpnessAmount:"), sharpnessAmount)
-	return x
+// WithSharpnessAmount sets a value that indicates the amount of sharpness to apply to the edges of the image.
+func (rf *RAWFilter) WithSharpnessAmount(sharpnessAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setSharpnessAmount:"), sharpnessAmount)
+	return rf
 }
 
-// WithContrastAmount a value that indicates the amount of local contrast to apply to the edges of the image.
-func (x *RAWFilter) WithContrastAmount(contrastAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastAmount:"), contrastAmount)
-	return x
+// WithContrastAmount sets a value that indicates the amount of local contrast to apply to the edges of the image.
+func (rf *RAWFilter) WithContrastAmount(contrastAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setContrastAmount:"), contrastAmount)
+	return rf
 }
 
-// WithDetailAmount a value that indicates the amount of detail enhancement to apply to the edges of the image.
-func (x *RAWFilter) WithDetailAmount(detailAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailAmount:"), detailAmount)
-	return x
+// WithDetailAmount sets a value that indicates the amount of detail enhancement to apply to the edges of the image.
+func (rf *RAWFilter) WithDetailAmount(detailAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setDetailAmount:"), detailAmount)
+	return rf
 }
 
-// WithMoireReductionAmount a value that indicates the amount of moire artifact reduction to apply to high frequency areas of the image.
-func (x *RAWFilter) WithMoireReductionAmount(moireReductionAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoireReductionAmount:"), moireReductionAmount)
-	return x
+// WithMoireReductionAmount sets a value that indicates the amount of moire artifact reduction to apply to high frequency areas of the image.
+func (rf *RAWFilter) WithMoireReductionAmount(moireReductionAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setMoireReductionAmount:"), moireReductionAmount)
+	return rf
 }
 
-// WithLocalToneMapAmount a value that indicates the amount of local tone curve to apply to the image.
-func (x *RAWFilter) WithLocalToneMapAmount(localToneMapAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalToneMapAmount:"), localToneMapAmount)
-	return x
+// WithLocalToneMapAmount sets a value that indicates the amount of local tone curve to apply to the image.
+func (rf *RAWFilter) WithLocalToneMapAmount(localToneMapAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setLocalToneMapAmount:"), localToneMapAmount)
+	return rf
 }
 
-// WithExtendedDynamicRangeAmount a value that indicates the amount of extended dynamic range (EDR) to apply to the image.
-func (x *RAWFilter) WithExtendedDynamicRangeAmount(extendedDynamicRangeAmount float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedDynamicRangeAmount:"), extendedDynamicRangeAmount)
-	return x
+// WithExtendedDynamicRangeAmount sets a value that indicates the amount of extended dynamic range (EDR) to apply to the image.
+func (rf *RAWFilter) WithExtendedDynamicRangeAmount(extendedDynamicRangeAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setExtendedDynamicRangeAmount:"), extendedDynamicRangeAmount)
+	return rf
 }
 
-// WithNeutralChromaticity a value that indicates the amount of white balance based on chromaticity values to apply to the image.
-func (x *RAWFilter) WithNeutralChromaticity(neutralChromaticity corefoundation.CGPoint) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralChromaticity:"), neutralChromaticity)
-	return x
+// WithNeutralChromaticity sets a value that indicates the amount of white balance based on chromaticity values to apply to the image.
+func (rf *RAWFilter) WithNeutralChromaticity(neutralChromaticity corefoundation.CGPoint) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setNeutralChromaticity:"), neutralChromaticity)
+	return rf
 }
 
-// WithNeutralLocation a value that indicates the amount of white balance based on pixel coordinates to apply to the image.
-func (x *RAWFilter) WithNeutralLocation(neutralLocation corefoundation.CGPoint) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralLocation:"), neutralLocation)
-	return x
+// WithNeutralLocation sets a value that indicates the amount of white balance based on pixel coordinates to apply to the image.
+func (rf *RAWFilter) WithNeutralLocation(neutralLocation corefoundation.CGPoint) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setNeutralLocation:"), neutralLocation)
+	return rf
 }
 
-// WithNeutralTemperature a value that indicates the amount of white balance based on temperature values to apply to the image.
-func (x *RAWFilter) WithNeutralTemperature(neutralTemperature float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralTemperature:"), neutralTemperature)
-	return x
+// WithNeutralTemperature sets a value that indicates the amount of white balance based on temperature values to apply to the image.
+func (rf *RAWFilter) WithNeutralTemperature(neutralTemperature float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setNeutralTemperature:"), neutralTemperature)
+	return rf
 }
 
-// WithNeutralTint a value that indicates the amount of white balance based on tint values to apply to the image.
-func (x *RAWFilter) WithNeutralTint(neutralTint float32) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralTint:"), neutralTint)
-	return x
+// WithNeutralTint sets a value that indicates the amount of white balance based on tint values to apply to the image.
+func (rf *RAWFilter) WithNeutralTint(neutralTint float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setNeutralTint:"), neutralTint)
+	return rf
 }
 
-// WithLinearSpaceFilter an optional filter you can apply to the RAW image while it’s in linear space.
-func (x *RAWFilter) WithLinearSpaceFilter(linearSpaceFilter FilterProvider) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearSpaceFilter:"), objref.IDOf(linearSpaceFilter))
-	return x
+// WithLinearSpaceFilter sets an optional filter you can apply to the RAW image while it’s in linear space.
+func (rf *RAWFilter) WithLinearSpaceFilter(linearSpaceFilter FilterProvider) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setLinearSpaceFilter:"), objref.IDOf(linearSpaceFilter))
+	return rf
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *RAWFilter) WithName(name string) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (rf *RAWFilter) WithName(name string) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setName:"), purego.NSString(name))
+	return rf
 }
 
 // WithEnabled sets the property and returns the receiver so calls can be chained.
-func (x *RAWFilter) WithEnabled(enabled bool) *RAWFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+func (rf *RAWFilter) WithEnabled(enabled bool) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setEnabled:"), enabled)
+	return rf
 }
 
 // SupportedDecoderVersions wraps the corresponding Objective-C method.
 //
 // SupportedDecoderVersions returns the collection as a Go slice.
-func (x *RAWFilter) SupportedDecoderVersions() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedDecoderVersions"))
+func (rf *RAWFilter) SupportedDecoderVersions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("supportedDecoderVersions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NativeSize wraps the corresponding Objective-C method.
-func (x *RAWFilter) NativeSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("nativeSize"))
+func (rf *RAWFilter) NativeSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(rf), objc.RegisterName("nativeSize"))
 	return _r
 }
 
 // Properties wraps the corresponding Objective-C method.
-func (x *RAWFilter) Properties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+func (rf *RAWFilter) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // IsDraftModeEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsDraftModeEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDraftModeEnabled"))
+func (rf *RAWFilter) IsDraftModeEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isDraftModeEnabled"))
 	return _r
-}
-
-// SetDraftModeEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetDraftModeEnabled(draftModeEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraftModeEnabled:"), draftModeEnabled)
 }
 
 // DecoderVersion wraps the corresponding Objective-C method.
-func (x *RAWFilter) DecoderVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decoderVersion"))
+func (rf *RAWFilter) DecoderVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("decoderVersion"))
 	return obj.Wrap(_r)
 }
 
-// SetDecoderVersion wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetDecoderVersion(decoderVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecoderVersion:"), objref.IDOf(decoderVersion))
-}
-
 // ScaleFactor wraps the corresponding Objective-C method.
-func (x *RAWFilter) ScaleFactor() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleFactor"))
+func (rf *RAWFilter) ScaleFactor() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("scaleFactor"))
 	return _r
-}
-
-// SetScaleFactor wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetScaleFactor(scaleFactor float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 }
 
 // Exposure wraps the corresponding Objective-C method.
-func (x *RAWFilter) Exposure() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("exposure"))
+func (rf *RAWFilter) Exposure() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("exposure"))
 	return _r
-}
-
-// SetExposure wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetExposure(exposure float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposure:"), exposure)
 }
 
 // BaselineExposure wraps the corresponding Objective-C method.
-func (x *RAWFilter) BaselineExposure() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("baselineExposure"))
+func (rf *RAWFilter) BaselineExposure() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("baselineExposure"))
 	return _r
-}
-
-// SetBaselineExposure wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetBaselineExposure(baselineExposure float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaselineExposure:"), baselineExposure)
 }
 
 // ShadowBias wraps the corresponding Objective-C method.
-func (x *RAWFilter) ShadowBias() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shadowBias"))
+func (rf *RAWFilter) ShadowBias() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("shadowBias"))
 	return _r
-}
-
-// SetShadowBias wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetShadowBias(shadowBias float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBias:"), shadowBias)
 }
 
 // BoostAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) BoostAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("boostAmount"))
+func (rf *RAWFilter) BoostAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("boostAmount"))
 	return _r
-}
-
-// SetBoostAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetBoostAmount(boostAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostAmount:"), boostAmount)
 }
 
 // BoostShadowAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) BoostShadowAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("boostShadowAmount"))
+func (rf *RAWFilter) BoostShadowAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("boostShadowAmount"))
 	return _r
 }
 
-// SetBoostShadowAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetBoostShadowAmount(boostShadowAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostShadowAmount:"), boostShadowAmount)
-}
-
 // IsHighlightRecoverySupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsHighlightRecoverySupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighlightRecoverySupported"))
+func (rf *RAWFilter) IsHighlightRecoverySupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isHighlightRecoverySupported"))
 	return _r
 }
 
 // IsHighlightRecoveryEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsHighlightRecoveryEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighlightRecoveryEnabled"))
+func (rf *RAWFilter) IsHighlightRecoveryEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isHighlightRecoveryEnabled"))
 	return _r
-}
-
-// SetHighlightRecoveryEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetHighlightRecoveryEnabled(highlightRecoveryEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightRecoveryEnabled:"), highlightRecoveryEnabled)
 }
 
 // IsGamutMappingEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsGamutMappingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGamutMappingEnabled"))
+func (rf *RAWFilter) IsGamutMappingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isGamutMappingEnabled"))
 	return _r
 }
 
-// SetGamutMappingEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetGamutMappingEnabled(gamutMappingEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGamutMappingEnabled:"), gamutMappingEnabled)
-}
-
 // IsLensCorrectionSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsLensCorrectionSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLensCorrectionSupported"))
+func (rf *RAWFilter) IsLensCorrectionSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLensCorrectionSupported"))
 	return _r
 }
 
 // IsLensCorrectionEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsLensCorrectionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLensCorrectionEnabled"))
+func (rf *RAWFilter) IsLensCorrectionEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLensCorrectionEnabled"))
 	return _r
 }
 
-// SetLensCorrectionEnabled wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetLensCorrectionEnabled(lensCorrectionEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLensCorrectionEnabled:"), lensCorrectionEnabled)
-}
-
 // IsLuminanceNoiseReductionSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsLuminanceNoiseReductionSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLuminanceNoiseReductionSupported"))
+func (rf *RAWFilter) IsLuminanceNoiseReductionSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLuminanceNoiseReductionSupported"))
 	return _r
 }
 
 // LuminanceNoiseReductionAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) LuminanceNoiseReductionAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("luminanceNoiseReductionAmount"))
+func (rf *RAWFilter) LuminanceNoiseReductionAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("luminanceNoiseReductionAmount"))
 	return _r
 }
 
-// SetLuminanceNoiseReductionAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetLuminanceNoiseReductionAmount(luminanceNoiseReductionAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminanceNoiseReductionAmount:"), luminanceNoiseReductionAmount)
-}
-
 // IsColorNoiseReductionSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsColorNoiseReductionSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isColorNoiseReductionSupported"))
+func (rf *RAWFilter) IsColorNoiseReductionSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isColorNoiseReductionSupported"))
 	return _r
 }
 
 // ColorNoiseReductionAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) ColorNoiseReductionAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("colorNoiseReductionAmount"))
+func (rf *RAWFilter) ColorNoiseReductionAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("colorNoiseReductionAmount"))
 	return _r
 }
 
-// SetColorNoiseReductionAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetColorNoiseReductionAmount(colorNoiseReductionAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorNoiseReductionAmount:"), colorNoiseReductionAmount)
-}
-
 // IsSharpnessSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsSharpnessSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSharpnessSupported"))
+func (rf *RAWFilter) IsSharpnessSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isSharpnessSupported"))
 	return _r
 }
 
 // SharpnessAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SharpnessAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sharpnessAmount"))
+func (rf *RAWFilter) SharpnessAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("sharpnessAmount"))
 	return _r
 }
 
-// SetSharpnessAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetSharpnessAmount(sharpnessAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpnessAmount:"), sharpnessAmount)
-}
-
 // IsContrastSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsContrastSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContrastSupported"))
+func (rf *RAWFilter) IsContrastSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isContrastSupported"))
 	return _r
 }
 
 // ContrastAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) ContrastAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contrastAmount"))
+func (rf *RAWFilter) ContrastAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("contrastAmount"))
 	return _r
 }
 
-// SetContrastAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetContrastAmount(contrastAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastAmount:"), contrastAmount)
-}
-
 // IsDetailSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsDetailSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDetailSupported"))
+func (rf *RAWFilter) IsDetailSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isDetailSupported"))
 	return _r
 }
 
 // DetailAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) DetailAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("detailAmount"))
+func (rf *RAWFilter) DetailAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("detailAmount"))
 	return _r
 }
 
-// SetDetailAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetDetailAmount(detailAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailAmount:"), detailAmount)
-}
-
 // IsMoireReductionSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsMoireReductionSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMoireReductionSupported"))
+func (rf *RAWFilter) IsMoireReductionSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isMoireReductionSupported"))
 	return _r
 }
 
 // MoireReductionAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) MoireReductionAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("moireReductionAmount"))
+func (rf *RAWFilter) MoireReductionAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("moireReductionAmount"))
 	return _r
 }
 
-// SetMoireReductionAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetMoireReductionAmount(moireReductionAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoireReductionAmount:"), moireReductionAmount)
-}
-
 // IsLocalToneMapSupported wraps the corresponding Objective-C method.
-func (x *RAWFilter) IsLocalToneMapSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocalToneMapSupported"))
+func (rf *RAWFilter) IsLocalToneMapSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLocalToneMapSupported"))
 	return _r
 }
 
 // LocalToneMapAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) LocalToneMapAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("localToneMapAmount"))
+func (rf *RAWFilter) LocalToneMapAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("localToneMapAmount"))
 	return _r
-}
-
-// SetLocalToneMapAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetLocalToneMapAmount(localToneMapAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalToneMapAmount:"), localToneMapAmount)
 }
 
 // ExtendedDynamicRangeAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) ExtendedDynamicRangeAmount() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("extendedDynamicRangeAmount"))
+func (rf *RAWFilter) ExtendedDynamicRangeAmount() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("extendedDynamicRangeAmount"))
 	return _r
-}
-
-// SetExtendedDynamicRangeAmount wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetExtendedDynamicRangeAmount(extendedDynamicRangeAmount float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedDynamicRangeAmount:"), extendedDynamicRangeAmount)
 }
 
 // NeutralChromaticity wraps the corresponding Objective-C method.
-func (x *RAWFilter) NeutralChromaticity() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("neutralChromaticity"))
+func (rf *RAWFilter) NeutralChromaticity() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("neutralChromaticity"))
 	return _r
-}
-
-// SetNeutralChromaticity wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetNeutralChromaticity(neutralChromaticity corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralChromaticity:"), neutralChromaticity)
 }
 
 // NeutralLocation wraps the corresponding Objective-C method.
-func (x *RAWFilter) NeutralLocation() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("neutralLocation"))
+func (rf *RAWFilter) NeutralLocation() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("neutralLocation"))
 	return _r
-}
-
-// SetNeutralLocation wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetNeutralLocation(neutralLocation corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralLocation:"), neutralLocation)
 }
 
 // NeutralTemperature wraps the corresponding Objective-C method.
-func (x *RAWFilter) NeutralTemperature() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neutralTemperature"))
+func (rf *RAWFilter) NeutralTemperature() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("neutralTemperature"))
 	return _r
-}
-
-// SetNeutralTemperature wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetNeutralTemperature(neutralTemperature float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralTemperature:"), neutralTemperature)
 }
 
 // NeutralTint wraps the corresponding Objective-C method.
-func (x *RAWFilter) NeutralTint() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neutralTint"))
+func (rf *RAWFilter) NeutralTint() float32 {
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("neutralTint"))
 	return _r
 }
 
-// SetNeutralTint wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetNeutralTint(neutralTint float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralTint:"), neutralTint)
-}
-
 // LinearSpaceFilter wraps the corresponding Objective-C method.
-func (x *RAWFilter) LinearSpaceFilter() *Filter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linearSpaceFilter"))
+func (rf *RAWFilter) LinearSpaceFilter() *Filter {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("linearSpaceFilter"))
 	return FilterFromID(_r)
 }
 
-// SetLinearSpaceFilter wraps the corresponding Objective-C method.
-func (x *RAWFilter) SetLinearSpaceFilter(linearSpaceFilter *Filter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearSpaceFilter:"), objref.IDOf(linearSpaceFilter))
-}
-
 // PreviewImage wraps the corresponding Objective-C method.
-func (x *RAWFilter) PreviewImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previewImage"))
+func (rf *RAWFilter) PreviewImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("previewImage"))
 	return ImageFromID(_r)
 }
 
 // PortraitEffectsMatte wraps the corresponding Objective-C method.
-func (x *RAWFilter) PortraitEffectsMatte() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portraitEffectsMatte"))
+func (rf *RAWFilter) PortraitEffectsMatte() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("portraitEffectsMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationSkinMatte wraps the corresponding Objective-C method.
-func (x *RAWFilter) SemanticSegmentationSkinMatte() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticSegmentationSkinMatte"))
+func (rf *RAWFilter) SemanticSegmentationSkinMatte() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationSkinMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationHairMatte wraps the corresponding Objective-C method.
-func (x *RAWFilter) SemanticSegmentationHairMatte() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticSegmentationHairMatte"))
+func (rf *RAWFilter) SemanticSegmentationHairMatte() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationHairMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationGlassesMatte wraps the corresponding Objective-C method.
-func (x *RAWFilter) SemanticSegmentationGlassesMatte() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticSegmentationGlassesMatte"))
+func (rf *RAWFilter) SemanticSegmentationGlassesMatte() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationGlassesMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationSkyMatte wraps the corresponding Objective-C method.
-func (x *RAWFilter) SemanticSegmentationSkyMatte() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticSegmentationSkyMatte"))
+func (rf *RAWFilter) SemanticSegmentationSkyMatte() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationSkyMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationTeethMatte wraps the corresponding Objective-C method.
-func (x *RAWFilter) SemanticSegmentationTeethMatte() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticSegmentationTeethMatte"))
+func (rf *RAWFilter) SemanticSegmentationTeethMatte() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationTeethMatte"))
 	return ImageFromID(_r)
 }
-
-// RAWFilterable is the interface implemented by [RAWFilter], for mocking and DI.
-type RAWFilterable interface {
-	obj.Object
-	WithDraftModeEnabled(draftModeEnabled bool) *RAWFilter
-	WithDecoderVersion(decoderVersion obj.Object) *RAWFilter
-	WithScaleFactor(scaleFactor float32) *RAWFilter
-	WithExposure(exposure float32) *RAWFilter
-	WithBaselineExposure(baselineExposure float32) *RAWFilter
-	WithShadowBias(shadowBias float32) *RAWFilter
-	WithBoostAmount(boostAmount float32) *RAWFilter
-	WithBoostShadowAmount(boostShadowAmount float32) *RAWFilter
-	WithHighlightRecoveryEnabled(highlightRecoveryEnabled bool) *RAWFilter
-	WithGamutMappingEnabled(gamutMappingEnabled bool) *RAWFilter
-	WithLensCorrectionEnabled(lensCorrectionEnabled bool) *RAWFilter
-	WithLuminanceNoiseReductionAmount(luminanceNoiseReductionAmount float32) *RAWFilter
-	WithColorNoiseReductionAmount(colorNoiseReductionAmount float32) *RAWFilter
-	WithSharpnessAmount(sharpnessAmount float32) *RAWFilter
-	WithContrastAmount(contrastAmount float32) *RAWFilter
-	WithDetailAmount(detailAmount float32) *RAWFilter
-	WithMoireReductionAmount(moireReductionAmount float32) *RAWFilter
-	WithLocalToneMapAmount(localToneMapAmount float32) *RAWFilter
-	WithExtendedDynamicRangeAmount(extendedDynamicRangeAmount float32) *RAWFilter
-	WithNeutralChromaticity(neutralChromaticity corefoundation.CGPoint) *RAWFilter
-	WithNeutralLocation(neutralLocation corefoundation.CGPoint) *RAWFilter
-	WithNeutralTemperature(neutralTemperature float32) *RAWFilter
-	WithNeutralTint(neutralTint float32) *RAWFilter
-	WithLinearSpaceFilter(linearSpaceFilter FilterProvider) *RAWFilter
-	WithName(name string) *RAWFilter
-	WithEnabled(enabled bool) *RAWFilter
-	SupportedDecoderVersions() []obj.Object
-	NativeSize() corefoundation.CGSize
-	Properties() obj.Object
-	IsDraftModeEnabled() bool
-	SetDraftModeEnabled(draftModeEnabled bool)
-	DecoderVersion() obj.Object
-	SetDecoderVersion(decoderVersion obj.Object)
-	ScaleFactor() float32
-	SetScaleFactor(scaleFactor float32)
-	Exposure() float32
-	SetExposure(exposure float32)
-	BaselineExposure() float32
-	SetBaselineExposure(baselineExposure float32)
-	ShadowBias() float32
-	SetShadowBias(shadowBias float32)
-	BoostAmount() float32
-	SetBoostAmount(boostAmount float32)
-	BoostShadowAmount() float32
-	SetBoostShadowAmount(boostShadowAmount float32)
-	IsHighlightRecoverySupported() bool
-	IsHighlightRecoveryEnabled() bool
-	SetHighlightRecoveryEnabled(highlightRecoveryEnabled bool)
-	IsGamutMappingEnabled() bool
-	SetGamutMappingEnabled(gamutMappingEnabled bool)
-	IsLensCorrectionSupported() bool
-	IsLensCorrectionEnabled() bool
-	SetLensCorrectionEnabled(lensCorrectionEnabled bool)
-	IsLuminanceNoiseReductionSupported() bool
-	LuminanceNoiseReductionAmount() float32
-	SetLuminanceNoiseReductionAmount(luminanceNoiseReductionAmount float32)
-	IsColorNoiseReductionSupported() bool
-	ColorNoiseReductionAmount() float32
-	SetColorNoiseReductionAmount(colorNoiseReductionAmount float32)
-	IsSharpnessSupported() bool
-	SharpnessAmount() float32
-	SetSharpnessAmount(sharpnessAmount float32)
-	IsContrastSupported() bool
-	ContrastAmount() float32
-	SetContrastAmount(contrastAmount float32)
-	IsDetailSupported() bool
-	DetailAmount() float32
-	SetDetailAmount(detailAmount float32)
-	IsMoireReductionSupported() bool
-	MoireReductionAmount() float32
-	SetMoireReductionAmount(moireReductionAmount float32)
-	IsLocalToneMapSupported() bool
-	LocalToneMapAmount() float32
-	SetLocalToneMapAmount(localToneMapAmount float32)
-	ExtendedDynamicRangeAmount() float32
-	SetExtendedDynamicRangeAmount(extendedDynamicRangeAmount float32)
-	NeutralChromaticity() corefoundation.CGPoint
-	SetNeutralChromaticity(neutralChromaticity corefoundation.CGPoint)
-	NeutralLocation() corefoundation.CGPoint
-	SetNeutralLocation(neutralLocation corefoundation.CGPoint)
-	NeutralTemperature() float32
-	SetNeutralTemperature(neutralTemperature float32)
-	NeutralTint() float32
-	SetNeutralTint(neutralTint float32)
-	LinearSpaceFilter() *Filter
-	SetLinearSpaceFilter(linearSpaceFilter *Filter)
-	PreviewImage() *Image
-	PortraitEffectsMatte() *Image
-	SemanticSegmentationSkinMatte() *Image
-	SemanticSegmentationHairMatte() *Image
-	SemanticSegmentationGlassesMatte() *Image
-	SemanticSegmentationSkyMatte() *Image
-	SemanticSegmentationTeethMatte() *Image
-}
-
-var _ RAWFilterable = (*RAWFilter)(nil)
 
 var _ FilterProvider = (*RAWFilter)(nil)

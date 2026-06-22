@@ -5,13 +5,14 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PersistentDocument is an idiomatic wrapper over the Objective-C class NSPersistentDocument.
@@ -55,82 +56,82 @@ func NewPersistentDocument() *PersistentDocument {
 	return persistentDocumentAdopt(_id)
 }
 
-// WithManagedObjectContext the managed object context for the document.
-func (x *PersistentDocument) WithManagedObjectContext(managedObjectContext obj.Object) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
-	return x
+// WithManagedObjectContext sets the managed object context for the document.
+func (pd *PersistentDocument) WithManagedObjectContext(managedObjectContext obj.Object) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
+	return pd
 }
 
-// WithFileType the name of the document type, as specified in the app’s information property-list file.
-func (x *PersistentDocument) WithFileType(fileType string) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
-	return x
+// WithFileType sets the name of the document type, as specified in the app’s information property-list file.
+func (pd *PersistentDocument) WithFileType(fileType string) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setFileType:"), purego.NSString(fileType))
+	return pd
 }
 
-// WithFileURL the location of the document’s on-disk representation.
-func (x *PersistentDocument) WithFileURL(fileURL string) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
-	return x
+// WithFileURL sets the location of the document’s on-disk representation.
+func (pd *PersistentDocument) WithFileURL(fileURL string) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
+	return pd
 }
 
-// WithFileModificationDate the last-known modification date of the document’s on-disk representation.
-func (x *PersistentDocument) WithFileModificationDate(fileModificationDate obj.Object) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileModificationDate:"), objref.IDOf(fileModificationDate))
-	return x
+// WithFileModificationDate sets the last-known modification date of the document’s on-disk representation.
+func (pd *PersistentDocument) WithFileModificationDate(fileModificationDate obj.Object) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setFileModificationDate:"), objref.IDOf(fileModificationDate))
+	return pd
 }
 
-// WithDraft a Boolean value that indicates whether the document is a draft that the user has not yet saved.
-func (x *PersistentDocument) WithDraft(draft bool) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraft:"), draft)
-	return x
+// WithDraft sets a Boolean value that indicates whether the document is a draft that the user has not yet saved.
+func (pd *PersistentDocument) WithDraft(draft bool) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setDraft:"), draft)
+	return pd
 }
 
-// WithAutosavedContentsFileURL the location of the most recently autosaved document contents.
-func (x *PersistentDocument) WithAutosavedContentsFileURL(autosavedContentsFileURL string) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosavedContentsFileURL:"), rt.FileURL(autosavedContentsFileURL))
-	return x
+// WithAutosavedContentsFileURL sets the location of the most recently autosaved document contents.
+func (pd *PersistentDocument) WithAutosavedContentsFileURL(autosavedContentsFileURL string) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setAutosavedContentsFileURL:"), rt.FileURL(autosavedContentsFileURL))
+	return pd
 }
 
-// WithPrintInfo the printing information associated with the document.
-func (x *PersistentDocument) WithPrintInfo(printInfo *PrintInfo) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
-	return x
+// WithPrintInfo sets the printing information associated with the document.
+func (pd *PersistentDocument) WithPrintInfo(printInfo *PrintInfo) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
+	return pd
 }
 
-// WithUndoManager the object that the document uses to support undo/redo operations.
-func (x *PersistentDocument) WithUndoManager(undoManager obj.Object) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUndoManager:"), objref.IDOf(undoManager))
-	return x
+// WithUndoManager sets the object that the document uses to support undo/redo operations.
+func (pd *PersistentDocument) WithUndoManager(undoManager obj.Object) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setUndoManager:"), objref.IDOf(undoManager))
+	return pd
 }
 
-// WithHasUndoManager a Boolean value that indicates whether the document owns an undo manager object.
-func (x *PersistentDocument) WithHasUndoManager(hasUndoManager bool) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasUndoManager:"), hasUndoManager)
-	return x
+// WithHasUndoManager sets a Boolean value that indicates whether the document owns an undo manager object.
+func (pd *PersistentDocument) WithHasUndoManager(hasUndoManager bool) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setHasUndoManager:"), hasUndoManager)
+	return pd
 }
 
-// WithDisplayName the name of the document as displayed in the title bars of the document’s windows and in alert dialogs related to the document.
-func (x *PersistentDocument) WithDisplayName(displayName string) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
-	return x
+// WithDisplayName sets the name of the document as displayed in the title bars of the document’s windows and in alert dialogs related to the document.
+func (pd *PersistentDocument) WithDisplayName(displayName string) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
+	return pd
 }
 
-// WithUserActivity an object that encapsulates a user activity the document supports.
-func (x *PersistentDocument) WithUserActivity(userActivity obj.Object) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object that encapsulates a user activity the document supports.
+func (pd *PersistentDocument) WithUserActivity(userActivity obj.Object) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return pd
 }
 
-// WithLastComponentOfFileName the name of the document seen by the user in AppleScript.
-func (x *PersistentDocument) WithLastComponentOfFileName(lastComponentOfFileName string) *PersistentDocument {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastComponentOfFileName:"), purego.NSString(lastComponentOfFileName))
-	return x
+// WithLastComponentOfFileName sets the name of the document seen by the user in AppleScript.
+func (pd *PersistentDocument) WithLastComponentOfFileName(lastComponentOfFileName string) *PersistentDocument {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setLastComponentOfFileName:"), purego.NSString(lastComponentOfFileName))
+	return pd
 }
 
 // ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptions configures the receiver’s persistent store coordinator with the appropriate stores for a given URL.
-func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptions(url string, fileType string, configuration string, storeOptions obj.Object) error {
+func (pd *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptions(url string, fileType string, configuration string, storeOptions obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:modelConfiguration:storeOptions:error:"), rt.FileURL(url), purego.NSString(fileType), purego.NSString(configuration), objref.IDOf(storeOptions), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(pd), objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:modelConfiguration:storeOptions:error:"), rt.FileURL(url), purego.NSString(fileType), purego.NSString(configuration), objref.IDOf(storeOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -138,8 +139,8 @@ func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeMode
 }
 
 // PersistentStoreTypeForFileType returns the type of persistent store associated with the specified file type.
-func (x *PersistentDocument) PersistentStoreTypeForFileType(fileType string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStoreTypeForFileType:"), purego.NSString(fileType))
+func (pd *PersistentDocument) PersistentStoreTypeForFileType(fileType string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("persistentStoreTypeForFileType:"), purego.NSString(fileType))
 	if _r == 0 {
 		return ""
 	}
@@ -147,55 +148,25 @@ func (x *PersistentDocument) PersistentStoreTypeForFileType(fileType string) str
 }
 
 // ManagedObjectContext wraps the corresponding Objective-C method.
-func (x *PersistentDocument) ManagedObjectContext() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContext"))
+func (pd *PersistentDocument) ManagedObjectContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("managedObjectContext"))
 	return obj.Wrap(_r)
 }
 
-// SetManagedObjectContext wraps the corresponding Objective-C method.
-func (x *PersistentDocument) SetManagedObjectContext(managedObjectContext obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
-}
-
 // ManagedObjectModel wraps the corresponding Objective-C method.
-func (x *PersistentDocument) ManagedObjectModel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectModel"))
+func (pd *PersistentDocument) ManagedObjectModel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("managedObjectModel"))
 	return obj.Wrap(_r)
 }
 
 // ConfigurePersistentStoreCoordinatorForURLOfType configures the receiver’s persistent store coordinator for a given URL and document type.
-func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfType(url string, fileType string) error {
+func (pd *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfType(url string, fileType string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:error:"), rt.FileURL(url), purego.NSString(fileType), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(pd), objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:error:"), rt.FileURL(url), purego.NSString(fileType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// PersistentDocumentable is the interface implemented by [PersistentDocument], for mocking and DI.
-type PersistentDocumentable interface {
-	obj.Object
-	WithManagedObjectContext(managedObjectContext obj.Object) *PersistentDocument
-	WithFileType(fileType string) *PersistentDocument
-	WithFileURL(fileURL string) *PersistentDocument
-	WithFileModificationDate(fileModificationDate obj.Object) *PersistentDocument
-	WithDraft(draft bool) *PersistentDocument
-	WithAutosavedContentsFileURL(autosavedContentsFileURL string) *PersistentDocument
-	WithPrintInfo(printInfo *PrintInfo) *PersistentDocument
-	WithUndoManager(undoManager obj.Object) *PersistentDocument
-	WithHasUndoManager(hasUndoManager bool) *PersistentDocument
-	WithDisplayName(displayName string) *PersistentDocument
-	WithUserActivity(userActivity obj.Object) *PersistentDocument
-	WithLastComponentOfFileName(lastComponentOfFileName string) *PersistentDocument
-	ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptions(url string, fileType string, configuration string, storeOptions obj.Object) error
-	PersistentStoreTypeForFileType(fileType string) string
-	ManagedObjectContext() obj.Object
-	SetManagedObjectContext(managedObjectContext obj.Object)
-	ManagedObjectModel() obj.Object
-	ConfigurePersistentStoreCoordinatorForURLOfType(url string, fileType string) error
-}
-
-var _ PersistentDocumentable = (*PersistentDocument)(nil)
 
 var _ DocumentProvider = (*PersistentDocument)(nil)

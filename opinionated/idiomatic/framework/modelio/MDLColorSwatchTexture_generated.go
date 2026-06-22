@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewColorSwatchTexture() *ColorSwatchTexture {
 	return colorSwatchTextureAdopt(_id)
 }
 
-// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
-func (x *ColorSwatchTexture) WithIsCube(isCube bool) *ColorSwatchTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
-	return x
+// WithIsCube sets a Boolean value that indicates whether the texture is a cube textures.
+func (cst *ColorSwatchTexture) WithIsCube(isCube bool) *ColorSwatchTexture {
+	objc.Send[objc.ID](objref.IDOf(cst), objc.RegisterName("setIsCube:"), isCube)
+	return cst
 }
 
-// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-func (x *ColorSwatchTexture) WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
-	return x
+// WithHasAlphaValues sets hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+func (cst *ColorSwatchTexture) WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture {
+	objc.Send[objc.ID](objref.IDOf(cst), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
+	return cst
 }
-
-// ColorSwatchTextureable is the interface implemented by [ColorSwatchTexture], for mocking and DI.
-type ColorSwatchTextureable interface {
-	obj.Object
-	WithIsCube(isCube bool) *ColorSwatchTexture
-	WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture
-}
-
-var _ ColorSwatchTextureable = (*ColorSwatchTexture)(nil)
 
 var _ TextureProvider = (*ColorSwatchTexture)(nil)

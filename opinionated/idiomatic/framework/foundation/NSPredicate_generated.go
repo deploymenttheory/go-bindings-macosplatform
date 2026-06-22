@@ -48,80 +48,67 @@ func predicateAdopt(id objc.ID) *Predicate {
 }
 
 // Description returns the object's -description text.
-func (x *Predicate) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Predicate) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Predicate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Predicate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Predicate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Predicate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Predicate) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Predicate) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Predicate) WithScriptingProperties(scriptingProperties obj.Object) *Predicate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (p *Predicate) WithScriptingProperties(scriptingProperties obj.Object) *Predicate {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return p
 }
 
 // PredicateWithSubstitutionVariables returns a copy of the predicate and substitutes the predicates variables with specified values from a specified substitution variables dictionary.
-func (x *Predicate) PredicateWithSubstitutionVariables(variables obj.Object) *Predicate {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateWithSubstitutionVariables:"), objref.IDOf(variables))
+func (p *Predicate) PredicateWithSubstitutionVariables(variables obj.Object) *Predicate {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("predicateWithSubstitutionVariables:"), objref.IDOf(variables))
 	return PredicateFromID(_r)
 }
 
 // EvaluateWithObject returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
-func (x *Predicate) EvaluateWithObject(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluateWithObject:"), objref.IDOf(object))
+func (p *Predicate) EvaluateWithObject(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("evaluateWithObject:"), objref.IDOf(object))
 	return _r
 }
 
 // EvaluateWithObjectSubstitutionVariables returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies after substituting in the values from a specified variables dictionary.
-func (x *Predicate) EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluateWithObject:substitutionVariables:"), objref.IDOf(object), objref.IDOf(bindings))
+func (p *Predicate) EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("evaluateWithObject:substitutionVariables:"), objref.IDOf(object), objref.IDOf(bindings))
 	return _r
 }
 
 // AllowEvaluation forces a securely decoded predicate to allow evaluation.
-func (x *Predicate) AllowEvaluation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
+func (p *Predicate) AllowEvaluation() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("allowEvaluation"))
 }
 
 // PredicateFormat wraps the corresponding Objective-C method.
-func (x *Predicate) PredicateFormat() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateFormat"))
+func (p *Predicate) PredicateFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("predicateFormat"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Predicateable is the interface implemented by [Predicate], for mocking and DI.
-type Predicateable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Predicate
-	PredicateWithSubstitutionVariables(variables obj.Object) *Predicate
-	EvaluateWithObject(object obj.Object) bool
-	EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings obj.Object) bool
-	AllowEvaluation()
-	PredicateFormat() string
-}
-
-var _ Predicateable = (*Predicate)(nil)
-
 // isPredicate marks Predicate — and, by embedding promotion, its
 // subclasses — as a member of the Predicate hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Predicate) isPredicate() {}
+func (p *Predicate) isPredicate() {}
 
 var _ PredicateProvider = (*Predicate)(nil)

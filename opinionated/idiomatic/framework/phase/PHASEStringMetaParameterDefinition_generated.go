@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,13 +58,6 @@ func NewStringMetaParameterDefinitionWithValue(value string) *StringMetaParamete
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), purego.NSString(value))
 	return stringMetaParameterDefinitionAdopt(_id)
 }
-
-// StringMetaParameterDefinitionable is the interface implemented by [StringMetaParameterDefinition], for mocking and DI.
-type StringMetaParameterDefinitionable interface {
-	obj.Object
-}
-
-var _ StringMetaParameterDefinitionable = (*StringMetaParameterDefinition)(nil)
 
 var _ MetaParameterDefinitionProvider = (*StringMetaParameterDefinition)(nil)
 

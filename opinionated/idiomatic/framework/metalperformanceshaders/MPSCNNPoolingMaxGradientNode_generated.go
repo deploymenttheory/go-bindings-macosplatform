@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCNNPoolingMaxGradientNode() *CNNPoolingMaxGradientNode {
 	return cNNPoolingMaxGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingMaxGradientNode) WithLabel(label string) *CNNPoolingMaxGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cpmgn *CNNPoolingMaxGradientNode) WithLabel(label string) *CNNPoolingMaxGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cpmgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cpmgn
 }
-
-// CNNPoolingMaxGradientNodeable is the interface implemented by [CNNPoolingMaxGradientNode], for mocking and DI.
-type CNNPoolingMaxGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingMaxGradientNode
-}
-
-var _ CNNPoolingMaxGradientNodeable = (*CNNPoolingMaxGradientNode)(nil)
 
 var _ CNNPoolingGradientNodeProvider = (*CNNPoolingMaxGradientNode)(nil)
 

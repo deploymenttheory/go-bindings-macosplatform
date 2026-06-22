@@ -53,530 +53,408 @@ func NewReplicatorLayer() *ReplicatorLayer {
 	return replicatorLayerAdopt(_id)
 }
 
-// WithInstanceCount the number of copies to create, including the source layers.
-func (x *ReplicatorLayer) WithInstanceCount(instanceCount int) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCount:"), instanceCount)
-	return x
+// WithInstanceCount sets the number of copies to create, including the source layers.
+func (rl *ReplicatorLayer) WithInstanceCount(instanceCount int) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceCount:"), instanceCount)
+	return rl
 }
 
-// WithPreservesDepth defines whether this layer flattens its sublayers into its plane.
-func (x *ReplicatorLayer) WithPreservesDepth(preservesDepth bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesDepth:"), preservesDepth)
-	return x
+// WithPreservesDepth sets defines whether this layer flattens its sublayers into its plane.
+func (rl *ReplicatorLayer) WithPreservesDepth(preservesDepth bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setPreservesDepth:"), preservesDepth)
+	return rl
 }
 
-// WithInstanceDelay specifies the delay, in seconds, between replicated copies. Animatable.
-func (x *ReplicatorLayer) WithInstanceDelay(instanceDelay float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDelay:"), instanceDelay)
-	return x
+// WithInstanceDelay sets specifies the delay, in seconds, between replicated copies. Animatable.
+func (rl *ReplicatorLayer) WithInstanceDelay(instanceDelay float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceDelay:"), instanceDelay)
+	return rl
 }
 
-// WithInstanceColor defines the color used to multiply the source object. Animatable.
-func (x *ReplicatorLayer) WithInstanceColor(instanceColor obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceColor:"), objref.IDOf(instanceColor))
-	return x
+// WithInstanceColor sets defines the color used to multiply the source object. Animatable.
+func (rl *ReplicatorLayer) WithInstanceColor(instanceColor obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceColor:"), objref.IDOf(instanceColor))
+	return rl
 }
 
-// WithInstanceRedOffset defines the offset added to the red component of the color for each replicated instance. Animatable.
-func (x *ReplicatorLayer) WithInstanceRedOffset(instanceRedOffset float32) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceRedOffset:"), instanceRedOffset)
-	return x
+// WithInstanceRedOffset sets defines the offset added to the red component of the color for each replicated instance. Animatable.
+func (rl *ReplicatorLayer) WithInstanceRedOffset(instanceRedOffset float32) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceRedOffset:"), instanceRedOffset)
+	return rl
 }
 
-// WithInstanceGreenOffset defines the offset added to the green component of the color for each replicated instance. Animatable.
-func (x *ReplicatorLayer) WithInstanceGreenOffset(instanceGreenOffset float32) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceGreenOffset:"), instanceGreenOffset)
-	return x
+// WithInstanceGreenOffset sets defines the offset added to the green component of the color for each replicated instance. Animatable.
+func (rl *ReplicatorLayer) WithInstanceGreenOffset(instanceGreenOffset float32) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceGreenOffset:"), instanceGreenOffset)
+	return rl
 }
 
-// WithInstanceBlueOffset defines the offset added to the blue component of the color for each replicated instance. Animatable.
-func (x *ReplicatorLayer) WithInstanceBlueOffset(instanceBlueOffset float32) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceBlueOffset:"), instanceBlueOffset)
-	return x
+// WithInstanceBlueOffset sets defines the offset added to the blue component of the color for each replicated instance. Animatable.
+func (rl *ReplicatorLayer) WithInstanceBlueOffset(instanceBlueOffset float32) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceBlueOffset:"), instanceBlueOffset)
+	return rl
 }
 
-// WithInstanceAlphaOffset defines the offset added to the alpha component of the color for each replicated instance. Animatable.
-func (x *ReplicatorLayer) WithInstanceAlphaOffset(instanceAlphaOffset float32) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceAlphaOffset:"), instanceAlphaOffset)
-	return x
+// WithInstanceAlphaOffset sets defines the offset added to the alpha component of the color for each replicated instance. Animatable.
+func (rl *ReplicatorLayer) WithInstanceAlphaOffset(instanceAlphaOffset float32) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceAlphaOffset:"), instanceAlphaOffset)
+	return rl
 }
 
-// WithBounds the layer’s bounds rectangle. Animatable.
-func (x *ReplicatorLayer) WithBounds(bounds corefoundation.CGRect) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the layer’s bounds rectangle. Animatable.
+func (rl *ReplicatorLayer) WithBounds(bounds corefoundation.CGRect) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBounds:"), bounds)
+	return rl
 }
 
-// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
-func (x *ReplicatorLayer) WithPosition(position corefoundation.CGPoint) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the layer’s position in its superlayer’s coordinate space. Animatable.
+func (rl *ReplicatorLayer) WithPosition(position corefoundation.CGPoint) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setPosition:"), position)
+	return rl
 }
 
-// WithZPosition the layer’s position on the z axis. Animatable.
-func (x *ReplicatorLayer) WithZPosition(zPosition float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the layer’s position on the z axis. Animatable.
+func (rl *ReplicatorLayer) WithZPosition(zPosition float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setZPosition:"), zPosition)
+	return rl
 }
 
-// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
-func (x *ReplicatorLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (rl *ReplicatorLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return rl
 }
 
-// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
-func (x *ReplicatorLayer) WithAnchorPointZ(anchorPointZ float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
-	return x
+// WithAnchorPointZ sets the anchor point for the layer’s position along the z axis. Animatable.
+func (rl *ReplicatorLayer) WithAnchorPointZ(anchorPointZ float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return rl
 }
 
-// WithFrame the layer’s frame rectangle.
-func (x *ReplicatorLayer) WithFrame(frame corefoundation.CGRect) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the layer’s frame rectangle.
+func (rl *ReplicatorLayer) WithFrame(frame corefoundation.CGRect) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setFrame:"), frame)
+	return rl
 }
 
-// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
-func (x *ReplicatorLayer) WithHidden(hidden bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean indicating whether the layer is displayed. Animatable.
+func (rl *ReplicatorLayer) WithHidden(hidden bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setHidden:"), hidden)
+	return rl
 }
 
-// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-func (x *ReplicatorLayer) WithDoubleSided(doubleSided bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
-	return x
+// WithDoubleSided sets a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (rl *ReplicatorLayer) WithDoubleSided(doubleSided bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return rl
 }
 
-// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-func (x *ReplicatorLayer) WithGeometryFlipped(geometryFlipped bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
-	return x
+// WithGeometryFlipped sets a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (rl *ReplicatorLayer) WithGeometryFlipped(geometryFlipped bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return rl
 }
 
-// WithSublayers an array containing the layer’s sublayers.
-func (x *ReplicatorLayer) WithSublayers(items ...LayerProvider) *ReplicatorLayer {
+// WithSublayers sets an array containing the layer’s sublayers.
+func (rl *ReplicatorLayer) WithSublayers(items ...LayerProvider) *ReplicatorLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setSublayers:"), _arr)
+	return rl
 }
 
-// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
-func (x *ReplicatorLayer) WithMask(mask LayerProvider) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-	return x
+// WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
+func (rl *ReplicatorLayer) WithMask(mask LayerProvider) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return rl
 }
 
-// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-func (x *ReplicatorLayer) WithMasksToBounds(masksToBounds bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
-	return x
+// WithMasksToBounds sets a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (rl *ReplicatorLayer) WithMasksToBounds(masksToBounds bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return rl
 }
 
-// WithContents an object that provides the contents of the layer. Animatable.
-func (x *ReplicatorLayer) WithContents(contents obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
-	return x
+// WithContents sets an object that provides the contents of the layer. Animatable.
+func (rl *ReplicatorLayer) WithContents(contents obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return rl
 }
 
-// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-func (x *ReplicatorLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-	return x
+// WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (rl *ReplicatorLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsRect:"), contentsRect)
+	return rl
 }
 
-// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-func (x *ReplicatorLayer) WithContentsGravity(contentsGravity obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
-	return x
+// WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (rl *ReplicatorLayer) WithContentsGravity(contentsGravity obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return rl
 }
 
-// WithContentsScale the scale factor applied to the layer.
-func (x *ReplicatorLayer) WithContentsScale(contentsScale float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
-	return x
+// WithContentsScale sets the scale factor applied to the layer.
+func (rl *ReplicatorLayer) WithContentsScale(contentsScale float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsScale:"), contentsScale)
+	return rl
 }
 
-// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-func (x *ReplicatorLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
-	return x
+// WithContentsCenter sets the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (rl *ReplicatorLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return rl
 }
 
-// WithContentsFormat a hint for the desired storage format of the layer contents.
-func (x *ReplicatorLayer) WithContentsFormat(contentsFormat obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
-	return x
+// WithContentsFormat sets a hint for the desired storage format of the layer contents.
+func (rl *ReplicatorLayer) WithContentsFormat(contentsFormat obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return rl
 }
 
 // WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
-func (x *ReplicatorLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
-	return x
+func (rl *ReplicatorLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return rl
 }
 
 // WithToneMapMode sets the property and returns the receiver so calls can be chained.
-func (x *ReplicatorLayer) WithToneMapMode(toneMapMode obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
-	return x
+func (rl *ReplicatorLayer) WithToneMapMode(toneMapMode obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return rl
 }
 
 // WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
-func (x *ReplicatorLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
-	return x
+func (rl *ReplicatorLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return rl
 }
 
 // WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
-func (x *ReplicatorLayer) WithContentsHeadroom(contentsHeadroom float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
-	return x
+func (rl *ReplicatorLayer) WithContentsHeadroom(contentsHeadroom float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return rl
 }
 
-// WithMinificationFilter the filter used when reducing the size of the content.
-func (x *ReplicatorLayer) WithMinificationFilter(minificationFilter obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
-	return x
+// WithMinificationFilter sets the filter used when reducing the size of the content.
+func (rl *ReplicatorLayer) WithMinificationFilter(minificationFilter obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return rl
 }
 
-// WithMagnificationFilter the filter used when increasing the size of the content.
-func (x *ReplicatorLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
-	return x
+// WithMagnificationFilter sets the filter used when increasing the size of the content.
+func (rl *ReplicatorLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return rl
 }
 
-// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
-func (x *ReplicatorLayer) WithMinificationFilterBias(minificationFilterBias float32) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
-	return x
+// WithMinificationFilterBias sets the bias factor used by the minification filter to determine the levels of detail.
+func (rl *ReplicatorLayer) WithMinificationFilterBias(minificationFilterBias float32) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return rl
 }
 
-// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
-func (x *ReplicatorLayer) WithOpaque(opaque bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value indicating whether the layer contains completely opaque content.
+func (rl *ReplicatorLayer) WithOpaque(opaque bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setOpaque:"), opaque)
+	return rl
 }
 
-// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-func (x *ReplicatorLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
-	return x
+// WithNeedsDisplayOnBoundsChange sets a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (rl *ReplicatorLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return rl
 }
 
-// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-func (x *ReplicatorLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
-	return x
+// WithDrawsAsynchronously sets a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (rl *ReplicatorLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return rl
 }
 
-// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
-func (x *ReplicatorLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
-	return x
+// WithEdgeAntialiasingMask sets a bitmask defining how the edges of the receiver are rasterized.
+func (rl *ReplicatorLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return rl
 }
 
-// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
-func (x *ReplicatorLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
-	return x
+// WithAllowsEdgeAntialiasing sets a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (rl *ReplicatorLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return rl
 }
 
-// WithBackgroundColor the background color of the receiver. Animatable.
-func (x *ReplicatorLayer) WithBackgroundColor(backgroundColor obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the receiver. Animatable.
+func (rl *ReplicatorLayer) WithBackgroundColor(backgroundColor obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return rl
 }
 
-// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
-func (x *ReplicatorLayer) WithCornerRadius(cornerRadius float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (rl *ReplicatorLayer) WithCornerRadius(cornerRadius float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return rl
 }
 
 // WithMaskedCorners sets the property and returns the receiver so calls can be chained.
-func (x *ReplicatorLayer) WithMaskedCorners(maskedCorners CornerMask) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
-	return x
+func (rl *ReplicatorLayer) WithMaskedCorners(maskedCorners CornerMask) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return rl
 }
 
 // WithCornerCurve sets the property and returns the receiver so calls can be chained.
-func (x *ReplicatorLayer) WithCornerCurve(cornerCurve obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
-	return x
+func (rl *ReplicatorLayer) WithCornerCurve(cornerCurve obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return rl
 }
 
-// WithBorderWidth the width of the layer’s border. Animatable.
-func (x *ReplicatorLayer) WithBorderWidth(borderWidth float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
-	return x
+// WithBorderWidth sets the width of the layer’s border. Animatable.
+func (rl *ReplicatorLayer) WithBorderWidth(borderWidth float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return rl
 }
 
-// WithBorderColor the color of the layer’s border. Animatable.
-func (x *ReplicatorLayer) WithBorderColor(borderColor obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the color of the layer’s border. Animatable.
+func (rl *ReplicatorLayer) WithBorderColor(borderColor obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return rl
 }
 
-// WithOpacity the opacity of the receiver. Animatable.
-func (x *ReplicatorLayer) WithOpacity(opacity float32) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
-	return x
+// WithOpacity sets the opacity of the receiver. Animatable.
+func (rl *ReplicatorLayer) WithOpacity(opacity float32) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setOpacity:"), opacity)
+	return rl
 }
 
-// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-func (x *ReplicatorLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
-	return x
+// WithAllowsGroupOpacity sets a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (rl *ReplicatorLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return rl
 }
 
-// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
-func (x *ReplicatorLayer) WithCompositingFilter(compositingFilter obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+// WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (rl *ReplicatorLayer) WithCompositingFilter(compositingFilter obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return rl
 }
 
-// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-func (x *ReplicatorLayer) WithShouldRasterize(shouldRasterize bool) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (rl *ReplicatorLayer) WithShouldRasterize(shouldRasterize bool) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return rl
 }
 
-// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-func (x *ReplicatorLayer) WithRasterizationScale(rasterizationScale float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
-	return x
+// WithRasterizationScale sets the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (rl *ReplicatorLayer) WithRasterizationScale(rasterizationScale float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return rl
 }
 
-// WithShadowColor the color of the layer’s shadow. Animatable.
-func (x *ReplicatorLayer) WithShadowColor(shadowColor obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
-	return x
+// WithShadowColor sets the color of the layer’s shadow. Animatable.
+func (rl *ReplicatorLayer) WithShadowColor(shadowColor obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return rl
 }
 
-// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
-func (x *ReplicatorLayer) WithShadowOpacity(shadowOpacity float32) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
-	return x
+// WithShadowOpacity sets the opacity of the layer’s shadow. Animatable.
+func (rl *ReplicatorLayer) WithShadowOpacity(shadowOpacity float32) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return rl
 }
 
-// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
-func (x *ReplicatorLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
-	return x
+// WithShadowOffset sets the offset (in points) of the layer’s shadow. Animatable.
+func (rl *ReplicatorLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return rl
 }
 
-// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
-func (x *ReplicatorLayer) WithShadowRadius(shadowRadius float64) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
-	return x
+// WithShadowRadius sets the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (rl *ReplicatorLayer) WithShadowRadius(shadowRadius float64) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return rl
 }
 
-// WithShadowPath the shape of the layer’s shadow. Animatable.
-func (x *ReplicatorLayer) WithShadowPath(shadowPath obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
-	return x
+// WithShadowPath sets the shape of the layer’s shadow. Animatable.
+func (rl *ReplicatorLayer) WithShadowPath(shadowPath obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return rl
 }
 
-// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
-func (x *ReplicatorLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+// WithAutoresizingMask sets a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (rl *ReplicatorLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return rl
 }
 
-// WithActions a dictionary containing layer actions.
-func (x *ReplicatorLayer) WithActions(actions obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
-	return x
+// WithActions sets a dictionary containing layer actions.
+func (rl *ReplicatorLayer) WithActions(actions obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return rl
 }
 
-// WithName the name of the receiver.
-func (x *ReplicatorLayer) WithName(name string) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (rl *ReplicatorLayer) WithName(name string) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setName:"), purego.NSString(name))
+	return rl
 }
 
-// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
-func (x *ReplicatorLayer) WithStyle(style obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
-	return x
+// WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (rl *ReplicatorLayer) WithStyle(style obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return rl
 }
 
-// WithConstraints the constraints used to position current layer’s sublayers.
-func (x *ReplicatorLayer) WithConstraints(items ...*Constraint) *ReplicatorLayer {
+// WithConstraints sets the constraints used to position current layer’s sublayers.
+func (rl *ReplicatorLayer) WithConstraints(items ...*Constraint) *ReplicatorLayer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setConstraints:"), _arr)
+	return rl
 }
 
 // InstanceCount wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) InstanceCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceCount"))
+func (rl *ReplicatorLayer) InstanceCount() int {
+	_r := objc.Send[int](objref.IDOf(rl), objc.RegisterName("instanceCount"))
 	return _r
-}
-
-// SetInstanceCount wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetInstanceCount(instanceCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCount:"), instanceCount)
 }
 
 // PreservesDepth wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) PreservesDepth() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesDepth"))
+func (rl *ReplicatorLayer) PreservesDepth() bool {
+	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("preservesDepth"))
 	return _r
-}
-
-// SetPreservesDepth wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetPreservesDepth(preservesDepth bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesDepth:"), preservesDepth)
 }
 
 // InstanceDelay wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) InstanceDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("instanceDelay"))
+func (rl *ReplicatorLayer) InstanceDelay() float64 {
+	_r := objc.Send[float64](objref.IDOf(rl), objc.RegisterName("instanceDelay"))
 	return _r
-}
-
-// SetInstanceDelay wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetInstanceDelay(instanceDelay float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDelay:"), instanceDelay)
 }
 
 // InstanceColor wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) InstanceColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceColor"))
+func (rl *ReplicatorLayer) InstanceColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("instanceColor"))
 	return obj.Wrap(_r)
 }
 
-// SetInstanceColor wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetInstanceColor(instanceColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceColor:"), objref.IDOf(instanceColor))
-}
-
 // InstanceRedOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) InstanceRedOffset() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("instanceRedOffset"))
+func (rl *ReplicatorLayer) InstanceRedOffset() float32 {
+	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceRedOffset"))
 	return _r
-}
-
-// SetInstanceRedOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetInstanceRedOffset(instanceRedOffset float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceRedOffset:"), instanceRedOffset)
 }
 
 // InstanceGreenOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) InstanceGreenOffset() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("instanceGreenOffset"))
+func (rl *ReplicatorLayer) InstanceGreenOffset() float32 {
+	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceGreenOffset"))
 	return _r
-}
-
-// SetInstanceGreenOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetInstanceGreenOffset(instanceGreenOffset float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceGreenOffset:"), instanceGreenOffset)
 }
 
 // InstanceBlueOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) InstanceBlueOffset() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("instanceBlueOffset"))
+func (rl *ReplicatorLayer) InstanceBlueOffset() float32 {
+	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceBlueOffset"))
 	return _r
-}
-
-// SetInstanceBlueOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetInstanceBlueOffset(instanceBlueOffset float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceBlueOffset:"), instanceBlueOffset)
 }
 
 // InstanceAlphaOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) InstanceAlphaOffset() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("instanceAlphaOffset"))
+func (rl *ReplicatorLayer) InstanceAlphaOffset() float32 {
+	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceAlphaOffset"))
 	return _r
 }
-
-// SetInstanceAlphaOffset wraps the corresponding Objective-C method.
-func (x *ReplicatorLayer) SetInstanceAlphaOffset(instanceAlphaOffset float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceAlphaOffset:"), instanceAlphaOffset)
-}
-
-// ReplicatorLayerable is the interface implemented by [ReplicatorLayer], for mocking and DI.
-type ReplicatorLayerable interface {
-	obj.Object
-	WithInstanceCount(instanceCount int) *ReplicatorLayer
-	WithPreservesDepth(preservesDepth bool) *ReplicatorLayer
-	WithInstanceDelay(instanceDelay float64) *ReplicatorLayer
-	WithInstanceColor(instanceColor obj.Object) *ReplicatorLayer
-	WithInstanceRedOffset(instanceRedOffset float32) *ReplicatorLayer
-	WithInstanceGreenOffset(instanceGreenOffset float32) *ReplicatorLayer
-	WithInstanceBlueOffset(instanceBlueOffset float32) *ReplicatorLayer
-	WithInstanceAlphaOffset(instanceAlphaOffset float32) *ReplicatorLayer
-	WithBounds(bounds corefoundation.CGRect) *ReplicatorLayer
-	WithPosition(position corefoundation.CGPoint) *ReplicatorLayer
-	WithZPosition(zPosition float64) *ReplicatorLayer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ReplicatorLayer
-	WithAnchorPointZ(anchorPointZ float64) *ReplicatorLayer
-	WithFrame(frame corefoundation.CGRect) *ReplicatorLayer
-	WithHidden(hidden bool) *ReplicatorLayer
-	WithDoubleSided(doubleSided bool) *ReplicatorLayer
-	WithGeometryFlipped(geometryFlipped bool) *ReplicatorLayer
-	WithSublayers(items ...LayerProvider) *ReplicatorLayer
-	WithMask(mask LayerProvider) *ReplicatorLayer
-	WithMasksToBounds(masksToBounds bool) *ReplicatorLayer
-	WithContents(contents obj.Object) *ReplicatorLayer
-	WithContentsRect(contentsRect corefoundation.CGRect) *ReplicatorLayer
-	WithContentsGravity(contentsGravity obj.Object) *ReplicatorLayer
-	WithContentsScale(contentsScale float64) *ReplicatorLayer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *ReplicatorLayer
-	WithContentsFormat(contentsFormat obj.Object) *ReplicatorLayer
-	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ReplicatorLayer
-	WithToneMapMode(toneMapMode obj.Object) *ReplicatorLayer
-	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ReplicatorLayer
-	WithContentsHeadroom(contentsHeadroom float64) *ReplicatorLayer
-	WithMinificationFilter(minificationFilter obj.Object) *ReplicatorLayer
-	WithMagnificationFilter(magnificationFilter obj.Object) *ReplicatorLayer
-	WithMinificationFilterBias(minificationFilterBias float32) *ReplicatorLayer
-	WithOpaque(opaque bool) *ReplicatorLayer
-	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ReplicatorLayer
-	WithDrawsAsynchronously(drawsAsynchronously bool) *ReplicatorLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ReplicatorLayer
-	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ReplicatorLayer
-	WithBackgroundColor(backgroundColor obj.Object) *ReplicatorLayer
-	WithCornerRadius(cornerRadius float64) *ReplicatorLayer
-	WithMaskedCorners(maskedCorners CornerMask) *ReplicatorLayer
-	WithCornerCurve(cornerCurve obj.Object) *ReplicatorLayer
-	WithBorderWidth(borderWidth float64) *ReplicatorLayer
-	WithBorderColor(borderColor obj.Object) *ReplicatorLayer
-	WithOpacity(opacity float32) *ReplicatorLayer
-	WithAllowsGroupOpacity(allowsGroupOpacity bool) *ReplicatorLayer
-	WithCompositingFilter(compositingFilter obj.Object) *ReplicatorLayer
-	WithShouldRasterize(shouldRasterize bool) *ReplicatorLayer
-	WithRasterizationScale(rasterizationScale float64) *ReplicatorLayer
-	WithShadowColor(shadowColor obj.Object) *ReplicatorLayer
-	WithShadowOpacity(shadowOpacity float32) *ReplicatorLayer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *ReplicatorLayer
-	WithShadowRadius(shadowRadius float64) *ReplicatorLayer
-	WithShadowPath(shadowPath obj.Object) *ReplicatorLayer
-	WithAutoresizingMask(autoresizingMask AutoresizingMask) *ReplicatorLayer
-	WithActions(actions obj.Object) *ReplicatorLayer
-	WithName(name string) *ReplicatorLayer
-	WithStyle(style obj.Object) *ReplicatorLayer
-	WithConstraints(items ...*Constraint) *ReplicatorLayer
-	InstanceCount() int
-	SetInstanceCount(instanceCount int)
-	PreservesDepth() bool
-	SetPreservesDepth(preservesDepth bool)
-	InstanceDelay() float64
-	SetInstanceDelay(instanceDelay float64)
-	InstanceColor() obj.Object
-	SetInstanceColor(instanceColor obj.Object)
-	InstanceRedOffset() float32
-	SetInstanceRedOffset(instanceRedOffset float32)
-	InstanceGreenOffset() float32
-	SetInstanceGreenOffset(instanceGreenOffset float32)
-	InstanceBlueOffset() float32
-	SetInstanceBlueOffset(instanceBlueOffset float32)
-	InstanceAlphaOffset() float32
-	SetInstanceAlphaOffset(instanceAlphaOffset float32)
-}
-
-var _ ReplicatorLayerable = (*ReplicatorLayer)(nil)
 
 var _ LayerProvider = (*ReplicatorLayer)(nil)

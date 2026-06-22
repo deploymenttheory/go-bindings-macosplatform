@@ -46,24 +46,24 @@ func scrubberSelectionStyleAdopt(id objc.ID) *ScrubberSelectionStyle {
 }
 
 // Description returns the object's -description text.
-func (x *ScrubberSelectionStyle) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sss *ScrubberSelectionStyle) Description() string {
+	return rt.Description(objref.IDOf(sss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScrubberSelectionStyle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sss *ScrubberSelectionStyle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScrubberSelectionStyle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sss *ScrubberSelectionStyle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScrubberSelectionStyle) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sss *ScrubberSelectionStyle) String() string {
+	return rt.Description(objref.IDOf(sss))
 }
 
 // NewScrubberSelectionStyle creates a new ScrubberSelectionStyle.
@@ -80,15 +80,7 @@ func NewScrubberSelectionStyleWithCoder(coder obj.Object) *ScrubberSelectionStyl
 }
 
 // MakeSelectionView provides an opportunity to create a customized scrubber selection style.
-func (x *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSelectionView"))
+func (sss *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
+	_r := objc.Send[objc.ID](objref.IDOf(sss), objc.RegisterName("makeSelectionView"))
 	return ScrubberSelectionViewFromID(_r)
 }
-
-// ScrubberSelectionStyleable is the interface implemented by [ScrubberSelectionStyle], for mocking and DI.
-type ScrubberSelectionStyleable interface {
-	obj.Object
-	MakeSelectionView() *ScrubberSelectionView
-}
-
-var _ ScrubberSelectionStyleable = (*ScrubberSelectionStyle)(nil)

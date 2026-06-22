@@ -53,61 +53,42 @@ func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTrack
 	return assetReaderVideoCompositionOutputAdopt(_id)
 }
 
-// WithVideoComposition the video composition to use for the output.
-func (x *AssetReaderVideoCompositionOutput) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
-	return x
+// WithVideoComposition sets the video composition to use for the output.
+func (arvco *AssetReaderVideoCompositionOutput) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput {
+	objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
+	return arvco
 }
 
-// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
-func (x *AssetReaderVideoCompositionOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
-	return x
+// WithAlwaysCopiesSampleData sets a Boolean value that indicates whether the output vends copied sample data.
+func (arvco *AssetReaderVideoCompositionOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput {
+	objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
+	return arvco
 }
 
-// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-func (x *AssetReaderVideoCompositionOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
-	return x
+// WithSupportsRandomAccess sets a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
+func (arvco *AssetReaderVideoCompositionOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput {
+	objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
+	return arvco
 }
 
-// VideoTracks the tracks from which the receiver reads composited video. The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
+// VideoTracks returns the tracks from which the receiver reads composited video. The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
 //
 // VideoTracks returns the collection as a Go slice.
-func (x *AssetReaderVideoCompositionOutput) VideoTracks() []*AssetTrack {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoTracks"))
+func (arvco *AssetReaderVideoCompositionOutput) VideoTracks() []*AssetTrack {
+	_arr := objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("videoTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
-// VideoSettings the video settings used by the receiver. The value of this property is an NSDictionary that contains values for keys as specified by AVVideoSettings.h.  A value of nil indicates that the receiver will return video frames in a convenient uncompressed format, with properties determined according to the properties of the receiver's video tracks.
-func (x *AssetReaderVideoCompositionOutput) VideoSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoSettings"))
+// VideoSettings returns the video settings used by the receiver. The value of this property is an NSDictionary that contains values for keys as specified by AVVideoSettings.h.  A value of nil indicates that the receiver will return video frames in a convenient uncompressed format, with properties determined according to the properties of the receiver's video tracks.
+func (arvco *AssetReaderVideoCompositionOutput) VideoSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("videoSettings"))
 	return obj.Wrap(_r)
 }
 
-// VideoComposition the composition of video used by the receiver. The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset. This property throws an exception if a value is set after reading has started.
-func (x *AssetReaderVideoCompositionOutput) VideoComposition() *VideoComposition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
+// VideoComposition returns the composition of video used by the receiver. The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset. This property throws an exception if a value is set after reading has started.
+func (arvco *AssetReaderVideoCompositionOutput) VideoComposition() *VideoComposition {
+	_r := objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }
-
-// SetVideoComposition wraps the corresponding Objective-C method.
-func (x *AssetReaderVideoCompositionOutput) SetVideoComposition(videoComposition *VideoComposition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
-}
-
-// AssetReaderVideoCompositionOutputable is the interface implemented by [AssetReaderVideoCompositionOutput], for mocking and DI.
-type AssetReaderVideoCompositionOutputable interface {
-	obj.Object
-	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput
-	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput
-	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput
-	VideoTracks() []*AssetTrack
-	VideoSettings() obj.Object
-	VideoComposition() *VideoComposition
-	SetVideoComposition(videoComposition *VideoComposition)
-}
-
-var _ AssetReaderVideoCompositionOutputable = (*AssetReaderVideoCompositionOutput)(nil)
 
 var _ AssetReaderOutputProvider = (*AssetReaderVideoCompositionOutput)(nil)

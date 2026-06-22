@@ -46,24 +46,24 @@ func skyboxEffectAdopt(id objc.ID) *SkyboxEffect {
 }
 
 // Description returns the object's -description text.
-func (x *SkyboxEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SkyboxEffect) Description() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SkyboxEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (se *SkyboxEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SkyboxEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (se *SkyboxEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SkyboxEffect) String() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SkyboxEffect) String() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // NewSkyboxEffect creates a new SkyboxEffect.
@@ -72,118 +72,75 @@ func NewSkyboxEffect() *SkyboxEffect {
 	return skyboxEffectAdopt(_id)
 }
 
-// WithXSize the width of the skybox.
-func (x *SkyboxEffect) WithXSize(xSize float32) *SkyboxEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXSize:"), xSize)
-	return x
+// WithXSize sets the width of the skybox.
+func (se *SkyboxEffect) WithXSize(xSize float32) *SkyboxEffect {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("setXSize:"), xSize)
+	return se
 }
 
-// WithYSize the height of the skybox.
-func (x *SkyboxEffect) WithYSize(ySize float32) *SkyboxEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYSize:"), ySize)
-	return x
+// WithYSize sets the height of the skybox.
+func (se *SkyboxEffect) WithYSize(ySize float32) *SkyboxEffect {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("setYSize:"), ySize)
+	return se
 }
 
-// WithZSize the depth of the skybox.
-func (x *SkyboxEffect) WithZSize(zSize float32) *SkyboxEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZSize:"), zSize)
-	return x
+// WithZSize sets the depth of the skybox.
+func (se *SkyboxEffect) WithZSize(zSize float32) *SkyboxEffect {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("setZSize:"), zSize)
+	return se
 }
 
-// WithLabel a string used to name your effect.
-func (x *SkyboxEffect) WithLabel(label string) *SkyboxEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string used to name your effect.
+func (se *SkyboxEffect) WithLabel(label string) *SkyboxEffect {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return se
 }
 
 // PrepareToDraw prepares an effect for rendering.
-func (x *SkyboxEffect) PrepareToDraw() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareToDraw"))
+func (se *SkyboxEffect) PrepareToDraw() {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("prepareToDraw"))
 }
 
 // Draw draws the skybox.
-func (x *SkyboxEffect) Draw() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draw"))
+func (se *SkyboxEffect) Draw() {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("draw"))
 }
 
 // XSize wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) XSize() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("xSize"))
+func (se *SkyboxEffect) XSize() float32 {
+	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("xSize"))
 	return _r
-}
-
-// SetXSize wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) SetXSize(xSize float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXSize:"), xSize)
 }
 
 // YSize wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) YSize() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("ySize"))
+func (se *SkyboxEffect) YSize() float32 {
+	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("ySize"))
 	return _r
-}
-
-// SetYSize wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) SetYSize(ySize float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYSize:"), ySize)
 }
 
 // ZSize wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) ZSize() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("zSize"))
+func (se *SkyboxEffect) ZSize() float32 {
+	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("zSize"))
 	return _r
 }
 
-// SetZSize wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) SetZSize(zSize float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZSize:"), zSize)
-}
-
 // TextureCubeMap wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) TextureCubeMap() *EffectPropertyTexture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureCubeMap"))
+func (se *SkyboxEffect) TextureCubeMap() *EffectPropertyTexture {
+	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("textureCubeMap"))
 	return EffectPropertyTextureFromID(_r)
 }
 
 // Transform wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) Transform() *EffectPropertyTransform {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transform"))
+func (se *SkyboxEffect) Transform() *EffectPropertyTransform {
+	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("transform"))
 	return EffectPropertyTransformFromID(_r)
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (se *SkyboxEffect) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *SkyboxEffect) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// SkyboxEffectable is the interface implemented by [SkyboxEffect], for mocking and DI.
-type SkyboxEffectable interface {
-	obj.Object
-	WithXSize(xSize float32) *SkyboxEffect
-	WithYSize(ySize float32) *SkyboxEffect
-	WithZSize(zSize float32) *SkyboxEffect
-	WithLabel(label string) *SkyboxEffect
-	PrepareToDraw()
-	Draw()
-	XSize() float32
-	SetXSize(xSize float32)
-	YSize() float32
-	SetYSize(ySize float32)
-	ZSize() float32
-	SetZSize(zSize float32)
-	TextureCubeMap() *EffectPropertyTexture
-	Transform() *EffectPropertyTransform
-	Label() string
-	SetLabel(label string)
-}
-
-var _ SkyboxEffectable = (*SkyboxEffect)(nil)

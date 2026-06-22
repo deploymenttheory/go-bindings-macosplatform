@@ -46,24 +46,24 @@ func mixerParametersAdopt(id objc.ID) *MixerParameters {
 }
 
 // Description returns the object's -description text.
-func (x *MixerParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MixerParameters) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MixerParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MixerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MixerParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MixerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MixerParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MixerParameters) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMixerParameters creates a new MixerParameters.
@@ -73,20 +73,11 @@ func NewMixerParameters() *MixerParameters {
 }
 
 // AddSpatialMixerParametersWithIdentifierSourceListener adds runtime parameters for a spatial mixer.
-func (x *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *Source, listener *Listener) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSpatialMixerParametersWithIdentifier:source:listener:"), purego.NSString(identifier), objref.IDOf(source), objref.IDOf(listener))
+func (mp *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *Source, listener *Listener) {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("addSpatialMixerParametersWithIdentifier:source:listener:"), purego.NSString(identifier), objref.IDOf(source), objref.IDOf(listener))
 }
 
 // AddAmbientMixerParametersWithIdentifierListener adds runtime parameters for an ambient mixer.
-func (x *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *Listener) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAmbientMixerParametersWithIdentifier:listener:"), purego.NSString(identifier), objref.IDOf(listener))
+func (mp *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *Listener) {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("addAmbientMixerParametersWithIdentifier:listener:"), purego.NSString(identifier), objref.IDOf(listener))
 }
-
-// MixerParametersable is the interface implemented by [MixerParameters], for mocking and DI.
-type MixerParametersable interface {
-	obj.Object
-	AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *Source, listener *Listener)
-	AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *Listener)
-}
-
-var _ MixerParametersable = (*MixerParameters)(nil)

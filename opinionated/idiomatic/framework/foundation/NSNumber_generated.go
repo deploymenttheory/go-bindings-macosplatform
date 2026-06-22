@@ -159,26 +159,26 @@ func NewNumberWithUnsignedInteger(value int) *Number {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Number) WithScriptingProperties(scriptingProperties obj.Object) *Number {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (n *Number) WithScriptingProperties(scriptingProperties obj.Object) *Number {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return n
 }
 
 // Compare returns an NSComparisonResult value that indicates whether the number object’s value is greater than, equal to, or less than a given number.
-func (x *Number) Compare(otherNumber *Number) ComparisonResult {
-	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:"), objref.IDOf(otherNumber))
+func (n *Number) Compare(otherNumber *Number) ComparisonResult {
+	_r := objc.Send[ComparisonResult](objref.IDOf(n), objc.RegisterName("compare:"), objref.IDOf(otherNumber))
 	return _r
 }
 
 // IsEqualToNumber returns a Boolean value that indicates whether the number object’s value and a given number are equal.
-func (x *Number) IsEqualToNumber(number *Number) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToNumber:"), objref.IDOf(number))
+func (n *Number) IsEqualToNumber(number *Number) bool {
+	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("isEqualToNumber:"), objref.IDOf(number))
 	return _r
 }
 
 // DescriptionWithLocale returns a string that represents the contents of the number object for a given locale.
-func (x *Number) DescriptionWithLocale(locale obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
+func (n *Number) DescriptionWithLocale(locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
 	}
@@ -186,135 +186,108 @@ func (x *Number) DescriptionWithLocale(locale obj.Object) string {
 }
 
 // CharValue wraps the corresponding Objective-C method.
-func (x *Number) CharValue() int8 {
-	_r := objc.Send[int8](objref.IDOf(x), objc.RegisterName("charValue"))
+func (n *Number) CharValue() int8 {
+	_r := objc.Send[int8](objref.IDOf(n), objc.RegisterName("charValue"))
 	return _r
 }
 
 // UnsignedCharValue wraps the corresponding Objective-C method.
-func (x *Number) UnsignedCharValue() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("unsignedCharValue"))
+func (n *Number) UnsignedCharValue() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(n), objc.RegisterName("unsignedCharValue"))
 	return _r
 }
 
 // ShortValue wraps the corresponding Objective-C method.
-func (x *Number) ShortValue() int16 {
-	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("shortValue"))
+func (n *Number) ShortValue() int16 {
+	_r := objc.Send[int16](objref.IDOf(n), objc.RegisterName("shortValue"))
 	return _r
 }
 
 // UnsignedShortValue wraps the corresponding Objective-C method.
-func (x *Number) UnsignedShortValue() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("unsignedShortValue"))
+func (n *Number) UnsignedShortValue() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(n), objc.RegisterName("unsignedShortValue"))
 	return _r
 }
 
 // IntValue wraps the corresponding Objective-C method.
-func (x *Number) IntValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intValue"))
+func (n *Number) IntValue() int {
+	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("intValue"))
 	return _r
 }
 
 // UnsignedIntValue wraps the corresponding Objective-C method.
-func (x *Number) UnsignedIntValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("unsignedIntValue"))
+func (n *Number) UnsignedIntValue() int {
+	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntValue"))
 	return _r
 }
 
 // LongValue wraps the corresponding Objective-C method.
-func (x *Number) LongValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("longValue"))
+func (n *Number) LongValue() int {
+	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("longValue"))
 	return _r
 }
 
 // UnsignedLongValue wraps the corresponding Objective-C method.
-func (x *Number) UnsignedLongValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("unsignedLongValue"))
+func (n *Number) UnsignedLongValue() int {
+	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedLongValue"))
 	return _r
 }
 
 // LongLongValue wraps the corresponding Objective-C method.
-func (x *Number) LongLongValue() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("longLongValue"))
+func (n *Number) LongLongValue() int64 {
+	_r := objc.Send[int64](objref.IDOf(n), objc.RegisterName("longLongValue"))
 	return _r
 }
 
 // UnsignedLongLongValue wraps the corresponding Objective-C method.
-func (x *Number) UnsignedLongLongValue() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("unsignedLongLongValue"))
+func (n *Number) UnsignedLongLongValue() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(n), objc.RegisterName("unsignedLongLongValue"))
 	return _r
 }
 
 // FloatValue wraps the corresponding Objective-C method.
-func (x *Number) FloatValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+func (n *Number) FloatValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(n), objc.RegisterName("floatValue"))
 	return _r
 }
 
 // DoubleValue wraps the corresponding Objective-C method.
-func (x *Number) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+func (n *Number) DoubleValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(n), objc.RegisterName("doubleValue"))
 	return _r
 }
 
 // BoolValue wraps the corresponding Objective-C method.
-func (x *Number) BoolValue() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("boolValue"))
+func (n *Number) BoolValue() bool {
+	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("boolValue"))
 	return _r
 }
 
 // IntegerValue wraps the corresponding Objective-C method.
-func (x *Number) IntegerValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("integerValue"))
+func (n *Number) IntegerValue() int {
+	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("integerValue"))
 	return _r
 }
 
 // UnsignedIntegerValue wraps the corresponding Objective-C method.
-func (x *Number) UnsignedIntegerValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("unsignedIntegerValue"))
+func (n *Number) UnsignedIntegerValue() int {
+	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntegerValue"))
 	return _r
 }
 
 // StringValue wraps the corresponding Objective-C method.
-func (x *Number) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (n *Number) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Numberable is the interface implemented by [Number], for mocking and DI.
-type Numberable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Number
-	Compare(otherNumber *Number) ComparisonResult
-	IsEqualToNumber(number *Number) bool
-	DescriptionWithLocale(locale obj.Object) string
-	CharValue() int8
-	UnsignedCharValue() uint8
-	ShortValue() int16
-	UnsignedShortValue() uint16
-	IntValue() int
-	UnsignedIntValue() int
-	LongValue() int
-	UnsignedLongValue() int
-	LongLongValue() int64
-	UnsignedLongLongValue() uint64
-	FloatValue() float32
-	DoubleValue() float64
-	BoolValue() bool
-	IntegerValue() int
-	UnsignedIntegerValue() int
-	StringValue() string
-}
-
-var _ Numberable = (*Number)(nil)
-
 // isNumber marks Number — and, by embedding promotion, its
 // subclasses — as a member of the Number hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Number) isNumber() {}
+func (n *Number) isNumber() {}
 
 var _ NumberProvider = (*Number)(nil)
 

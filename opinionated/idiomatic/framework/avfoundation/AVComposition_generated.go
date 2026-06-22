@@ -47,23 +47,15 @@ func compositionAdopt(id objc.ID) *Composition {
 }
 
 // URLAssetInitializationOptions specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks. The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
-func (x *Composition) URLAssetInitializationOptions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAssetInitializationOptions"))
+func (c *Composition) URLAssetInitializationOptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("URLAssetInitializationOptions"))
 	return obj.Wrap(_r)
 }
-
-// Compositionable is the interface implemented by [Composition], for mocking and DI.
-type Compositionable interface {
-	obj.Object
-	URLAssetInitializationOptions() obj.Object
-}
-
-var _ Compositionable = (*Composition)(nil)
 
 // isComposition marks Composition — and, by embedding promotion, its
 // subclasses — as a member of the Composition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Composition) isComposition() {}
+func (c *Composition) isComposition() {}
 
 var _ CompositionProvider = (*Composition)(nil)
 

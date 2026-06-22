@@ -46,24 +46,24 @@ func motionKeyframeDataAdopt(id objc.ID) *MotionKeyframeData {
 }
 
 // Description returns the object's -description text.
-func (x *MotionKeyframeData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mkd *MotionKeyframeData) Description() string {
+	return rt.Description(objref.IDOf(mkd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MotionKeyframeData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mkd *MotionKeyframeData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mkd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MotionKeyframeData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mkd *MotionKeyframeData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mkd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MotionKeyframeData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mkd *MotionKeyframeData) String() string {
+	return rt.Description(objref.IDOf(mkd))
 }
 
 // NewMotionKeyframeData creates a new MotionKeyframeData.
@@ -72,29 +72,14 @@ func NewMotionKeyframeData() *MotionKeyframeData {
 	return motionKeyframeDataAdopt(_id)
 }
 
-// WithOffset the offset, in bytes, to the keyframe data.
-func (x *MotionKeyframeData) WithOffset(offset int) *MotionKeyframeData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the offset, in bytes, to the keyframe data.
+func (mkd *MotionKeyframeData) WithOffset(offset int) *MotionKeyframeData {
+	objc.Send[objc.ID](objref.IDOf(mkd), objc.RegisterName("setOffset:"), offset)
+	return mkd
 }
 
-// Offset buffer offset. Must be a multiple of 4 bytes.
-func (x *MotionKeyframeData) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+// Offset returns buffer offset. Must be a multiple of 4 bytes.
+func (mkd *MotionKeyframeData) Offset() int {
+	_r := objc.Send[int](objref.IDOf(mkd), objc.RegisterName("offset"))
 	return _r
 }
-
-// SetOffset wraps the corresponding Objective-C method.
-func (x *MotionKeyframeData) SetOffset(offset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-}
-
-// MotionKeyframeDataable is the interface implemented by [MotionKeyframeData], for mocking and DI.
-type MotionKeyframeDataable interface {
-	obj.Object
-	WithOffset(offset int) *MotionKeyframeData
-	Offset() int
-	SetOffset(offset int)
-}
-
-var _ MotionKeyframeDataable = (*MotionKeyframeData)(nil)

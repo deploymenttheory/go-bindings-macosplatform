@@ -5,13 +5,14 @@
 package shazamkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // CustomCatalog is an idiomatic wrapper over the Objective-C class SHCustomCatalog.
@@ -67,9 +68,9 @@ func NewCustomCatalogWithDataRepresentationError(dataRepresentation obj.Object) 
 }
 
 // AddReferenceSignatureRepresentingMediaItems adds a reference signature and its associated metadata to a catalog.
-func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *Signature, mediaItems []*MediaItem) error {
+func (cc *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *Signature, mediaItems []*MediaItem) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addReferenceSignature:representingMediaItems:error:"), objref.IDOf(signature), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(cc), objc.RegisterName("addReferenceSignature:representingMediaItems:error:"), objref.IDOf(signature), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -77,9 +78,9 @@ func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *S
 }
 
 // AddCustomCatalogFromURL loads a saved custom catalog from a file.
-func (x *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error {
+func (cc *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addCustomCatalogFromURL:error:"), rt.FileURL(customCatalogURL), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(cc), objc.RegisterName("addCustomCatalogFromURL:error:"), rt.FileURL(customCatalogURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -87,30 +88,19 @@ func (x *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error {
 }
 
 // WriteToURL saves the custom catalog to a local file.
-func (x *CustomCatalog) WriteToURL(destinationURL string) error {
+func (cc *CustomCatalog) WriteToURL(destinationURL string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(destinationURL), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(cc), objc.RegisterName("writeToURL:error:"), rt.FileURL(destinationURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// DataRepresentation the data representation of this file, it can be written to disk
-func (x *CustomCatalog) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+// DataRepresentation returns the data representation of this file, it can be written to disk
+func (cc *CustomCatalog) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// CustomCatalogable is the interface implemented by [CustomCatalog], for mocking and DI.
-type CustomCatalogable interface {
-	obj.Object
-	AddReferenceSignatureRepresentingMediaItems(signature *Signature, mediaItems []*MediaItem) error
-	AddCustomCatalogFromURL(customCatalogURL string) error
-	WriteToURL(destinationURL string) error
-	DataRepresentation() obj.Object
-}
-
-var _ CustomCatalogable = (*CustomCatalog)(nil)
 
 var _ CatalogProvider = (*CustomCatalog)(nil)

@@ -48,46 +48,38 @@ func actionAdopt(id objc.ID) *Action {
 }
 
 // Description returns the object's -description text.
-func (x *Action) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Action) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Action) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Action) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Action) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Action) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Action) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (a *Action) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Actionable is the interface implemented by [Action], for mocking and DI.
-type Actionable interface {
-	obj.Object
-	Type() string
-}
-
-var _ Actionable = (*Action)(nil)
-
 // isAction marks Action — and, by embedding promotion, its
 // subclasses — as a member of the Action hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Action) isAction() {}
+func (a *Action) isAction() {}
 
 var _ ActionProvider = (*Action)(nil)

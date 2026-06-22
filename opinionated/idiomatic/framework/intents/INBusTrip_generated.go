@@ -46,24 +46,24 @@ func busTripAdopt(id objc.ID) *BusTrip {
 }
 
 // Description returns the object's -description text.
-func (x *BusTrip) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BusTrip) Description() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BusTrip) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bt *BusTrip) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BusTrip) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bt *BusTrip) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BusTrip) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BusTrip) String() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform creates a bus trip with the specified contents and attributes.
@@ -74,8 +74,8 @@ func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationD
 }
 
 // Provider wraps the corresponding Objective-C method.
-func (x *BusTrip) Provider() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
+func (bt *BusTrip) Provider() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("provider"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *BusTrip) Provider() string {
 }
 
 // BusName wraps the corresponding Objective-C method.
-func (x *BusTrip) BusName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("busName"))
+func (bt *BusTrip) BusName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("busName"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +92,8 @@ func (x *BusTrip) BusName() string {
 }
 
 // BusNumber wraps the corresponding Objective-C method.
-func (x *BusTrip) BusNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("busNumber"))
+func (bt *BusTrip) BusNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("busNumber"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,20 +101,20 @@ func (x *BusTrip) BusNumber() string {
 }
 
 // TripDuration wraps the corresponding Objective-C method.
-func (x *BusTrip) TripDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
+func (bt *BusTrip) TripDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // DepartureBusStopLocation wraps the corresponding Objective-C method.
-func (x *BusTrip) DepartureBusStopLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureBusStopLocation"))
+func (bt *BusTrip) DepartureBusStopLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departureBusStopLocation"))
 	return obj.Wrap(_r)
 }
 
 // DeparturePlatform wraps the corresponding Objective-C method.
-func (x *BusTrip) DeparturePlatform() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departurePlatform"))
+func (bt *BusTrip) DeparturePlatform() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departurePlatform"))
 	if _r == 0 {
 		return ""
 	}
@@ -122,31 +122,16 @@ func (x *BusTrip) DeparturePlatform() string {
 }
 
 // ArrivalBusStopLocation wraps the corresponding Objective-C method.
-func (x *BusTrip) ArrivalBusStopLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalBusStopLocation"))
+func (bt *BusTrip) ArrivalBusStopLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalBusStopLocation"))
 	return obj.Wrap(_r)
 }
 
 // ArrivalPlatform wraps the corresponding Objective-C method.
-func (x *BusTrip) ArrivalPlatform() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalPlatform"))
+func (bt *BusTrip) ArrivalPlatform() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalPlatform"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// BusTripable is the interface implemented by [BusTrip], for mocking and DI.
-type BusTripable interface {
-	obj.Object
-	Provider() string
-	BusName() string
-	BusNumber() string
-	TripDuration() *DateComponentsRange
-	DepartureBusStopLocation() obj.Object
-	DeparturePlatform() string
-	ArrivalBusStopLocation() obj.Object
-	ArrivalPlatform() string
-}
-
-var _ BusTripable = (*BusTrip)(nil)

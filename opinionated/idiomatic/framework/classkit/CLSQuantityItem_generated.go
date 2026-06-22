@@ -7,7 +7,6 @@ package classkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,23 @@ func NewQuantityItemWithIdentifierTitle(identifier string, title string) *Quanti
 	return quantityItemAdopt(_id)
 }
 
-// WithQuantity a quantity associated with the task.
-func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
-	return x
+// WithQuantity sets a quantity associated with the task.
+func (qi *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
+	objc.Send[objc.ID](objref.IDOf(qi), objc.RegisterName("setQuantity:"), quantity)
+	return qi
 }
 
-// WithTitle a human readable name for the activity item.
-func (x *QuantityItem) WithTitle(title string) *QuantityItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets a human readable name for the activity item.
+func (qi *QuantityItem) WithTitle(title string) *QuantityItem {
+	objc.Send[objc.ID](objref.IDOf(qi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return qi
 }
 
-// Quantity quantity awarded.
-func (x *QuantityItem) Quantity() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("quantity"))
+// Quantity returns quantity awarded.
+func (qi *QuantityItem) Quantity() float64 {
+	_r := objc.Send[float64](objref.IDOf(qi), objc.RegisterName("quantity"))
 	return _r
 }
-
-// SetQuantity wraps the corresponding Objective-C method.
-func (x *QuantityItem) SetQuantity(quantity float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
-}
-
-// QuantityItemable is the interface implemented by [QuantityItem], for mocking and DI.
-type QuantityItemable interface {
-	obj.Object
-	WithQuantity(quantity float64) *QuantityItem
-	WithTitle(title string) *QuantityItem
-	Quantity() float64
-	SetQuantity(quantity float64)
-}
-
-var _ QuantityItemable = (*QuantityItem)(nil)
 
 var _ ActivityItemProvider = (*QuantityItem)(nil)
 

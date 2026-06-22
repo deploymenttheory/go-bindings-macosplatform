@@ -46,24 +46,24 @@ func intersectionFunctionTableDescriptorAdopt(id objc.ID) *IntersectionFunctionT
 }
 
 // Description returns the object's -description text.
-func (x *IntersectionFunctionTableDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (iftd *IntersectionFunctionTableDescriptor) Description() string {
+	return rt.Description(objref.IDOf(iftd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IntersectionFunctionTableDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (iftd *IntersectionFunctionTableDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(iftd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IntersectionFunctionTableDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (iftd *IntersectionFunctionTableDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(iftd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IntersectionFunctionTableDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (iftd *IntersectionFunctionTableDescriptor) String() string {
+	return rt.Description(objref.IDOf(iftd))
 }
 
 // NewIntersectionFunctionTableDescriptor creates a new IntersectionFunctionTableDescriptor.
@@ -72,29 +72,14 @@ func NewIntersectionFunctionTableDescriptor() *IntersectionFunctionTableDescript
 	return intersectionFunctionTableDescriptorAdopt(_id)
 }
 
-// WithFunctionCount the number of entries in the intersection function table.
-func (x *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount int) *IntersectionFunctionTableDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
-	return x
+// WithFunctionCount sets the number of entries in the intersection function table.
+func (iftd *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount int) *IntersectionFunctionTableDescriptor {
+	objc.Send[objc.ID](objref.IDOf(iftd), objc.RegisterName("setFunctionCount:"), functionCount)
+	return iftd
 }
 
 // FunctionCount wraps the corresponding Objective-C method.
-func (x *IntersectionFunctionTableDescriptor) FunctionCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("functionCount"))
+func (iftd *IntersectionFunctionTableDescriptor) FunctionCount() int {
+	_r := objc.Send[int](objref.IDOf(iftd), objc.RegisterName("functionCount"))
 	return _r
 }
-
-// SetFunctionCount wraps the corresponding Objective-C method.
-func (x *IntersectionFunctionTableDescriptor) SetFunctionCount(functionCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
-}
-
-// IntersectionFunctionTableDescriptorable is the interface implemented by [IntersectionFunctionTableDescriptor], for mocking and DI.
-type IntersectionFunctionTableDescriptorable interface {
-	obj.Object
-	WithFunctionCount(functionCount int) *IntersectionFunctionTableDescriptor
-	FunctionCount() int
-	SetFunctionCount(functionCount int)
-}
-
-var _ IntersectionFunctionTableDescriptorable = (*IntersectionFunctionTableDescriptor)(nil)

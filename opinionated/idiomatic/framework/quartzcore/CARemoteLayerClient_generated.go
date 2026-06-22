@@ -46,24 +46,24 @@ func remoteLayerClientAdopt(id objc.ID) *RemoteLayerClient {
 }
 
 // Description returns the object's -description text.
-func (x *RemoteLayerClient) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rlc *RemoteLayerClient) Description() string {
+	return rt.Description(objref.IDOf(rlc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RemoteLayerClient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rlc *RemoteLayerClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rlc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RemoteLayerClient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rlc *RemoteLayerClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rlc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RemoteLayerClient) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rlc *RemoteLayerClient) String() string {
+	return rt.Description(objref.IDOf(rlc))
 }
 
 // NewRemoteLayerClientWithServerPort creates a layer client from a server port.
@@ -73,42 +73,25 @@ func NewRemoteLayerClientWithServerPort(port int) *RemoteLayerClient {
 	return remoteLayerClientAdopt(_id)
 }
 
-// WithLayer the layer associated with the remote client.
-func (x *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+// WithLayer sets the layer associated with the remote client.
+func (rlc *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
+	objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return rlc
 }
 
 // Invalidate invalidates a remote layer client.
-func (x *RemoteLayerClient) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (rlc *RemoteLayerClient) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("invalidate"))
 }
 
-// ClientId wraps the corresponding Objective-C method.
-func (x *RemoteLayerClient) ClientId() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("clientId"))
+// ClientID wraps the corresponding Objective-C method.
+func (rlc *RemoteLayerClient) ClientID() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(rlc), objc.RegisterName("clientId"))
 	return _r
 }
 
 // Layer wraps the corresponding Objective-C method.
-func (x *RemoteLayerClient) Layer() *Layer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layer"))
+func (rlc *RemoteLayerClient) Layer() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("layer"))
 	return LayerFromID(_r)
 }
-
-// SetLayer wraps the corresponding Objective-C method.
-func (x *RemoteLayerClient) SetLayer(layer *Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-}
-
-// RemoteLayerClientable is the interface implemented by [RemoteLayerClient], for mocking and DI.
-type RemoteLayerClientable interface {
-	obj.Object
-	WithLayer(layer LayerProvider) *RemoteLayerClient
-	Invalidate()
-	ClientId() uint32
-	Layer() *Layer
-	SetLayer(layer *Layer)
-}
-
-var _ RemoteLayerClientable = (*RemoteLayerClient)(nil)

@@ -7,7 +7,6 @@ package audiotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,35 +45,26 @@ func parameterGroupAdopt(id objc.ID) *ParameterGroup {
 	return x
 }
 
-// Children the group's child nodes (AUParameterGroupNode).
+// Children returns the group's child nodes (AUParameterGroupNode).
 //
 // Children returns the collection as a Go slice.
-func (x *ParameterGroup) Children() []*ParameterNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+func (pg *ParameterGroup) Children() []*ParameterNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(pg), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParameterNode { return ParameterNodeFromID(_id) })
 }
 
 // AllParameters returns a flat array of all parameters in the group, including those in child groups.
 //
 // AllParameters returns the collection as a Go slice.
-func (x *ParameterGroup) AllParameters() []*Parameter {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allParameters"))
+func (pg *ParameterGroup) AllParameters() []*Parameter {
+	_arr := objc.Send[objc.ID](objref.IDOf(pg), objc.RegisterName("allParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Parameter { return ParameterFromID(_id) })
 }
-
-// ParameterGroupable is the interface implemented by [ParameterGroup], for mocking and DI.
-type ParameterGroupable interface {
-	obj.Object
-	Children() []*ParameterNode
-	AllParameters() []*Parameter
-}
-
-var _ ParameterGroupable = (*ParameterGroup)(nil)
 
 // isParameterGroup marks ParameterGroup — and, by embedding promotion, its
 // subclasses — as a member of the ParameterGroup hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ParameterGroup) isParameterGroup() {}
+func (pg *ParameterGroup) isParameterGroup() {}
 
 var _ ParameterGroupProvider = (*ParameterGroup)(nil)
 

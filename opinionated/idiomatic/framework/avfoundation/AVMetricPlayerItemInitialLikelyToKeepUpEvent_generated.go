@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,16 +54,16 @@ func NewMetricPlayerItemInitialLikelyToKeepUpEvent() *MetricPlayerItemInitialLik
 // PlaylistRequestEvents returns the playlist request events required to reach likely to keep up.
 //
 // PlaylistRequestEvents returns the collection as a Go slice.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playlistRequestEvents"))
+func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpiiltkue), objc.RegisterName("playlistRequestEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricHLSPlaylistRequestEvent { return MetricHLSPlaylistRequestEventFromID(_id) })
 }
 
 // MediaSegmentRequestEvents returns the media segment request events required to reach likely to keep up.
 //
 // MediaSegmentRequestEvents returns the collection as a Go slice.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSegmentRequestEvents"))
+func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpiiltkue), objc.RegisterName("mediaSegmentRequestEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricHLSMediaSegmentRequestEvent {
 		return MetricHLSMediaSegmentRequestEventFromID(_id)
 	})
@@ -73,20 +72,10 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents()
 // ContentKeyRequestEvents returns the content key request required to reach likely to keep up.
 //
 // ContentKeyRequestEvents returns the collection as a Go slice.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*MetricContentKeyRequestEvent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeyRequestEvents"))
+func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*MetricContentKeyRequestEvent {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpiiltkue), objc.RegisterName("contentKeyRequestEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricContentKeyRequestEvent { return MetricContentKeyRequestEventFromID(_id) })
 }
-
-// MetricPlayerItemInitialLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemInitialLikelyToKeepUpEvent], for mocking and DI.
-type MetricPlayerItemInitialLikelyToKeepUpEventable interface {
-	obj.Object
-	PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent
-	MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent
-	ContentKeyRequestEvents() []*MetricContentKeyRequestEvent
-}
-
-var _ MetricPlayerItemInitialLikelyToKeepUpEventable = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
 
 var _ MetricPlayerItemLikelyToKeepUpEventProvider = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
 

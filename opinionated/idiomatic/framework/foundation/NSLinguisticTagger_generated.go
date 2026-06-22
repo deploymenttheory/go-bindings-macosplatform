@@ -46,24 +46,24 @@ func linguisticTaggerAdopt(id objc.ID) *LinguisticTagger {
 }
 
 // Description returns the object's -description text.
-func (x *LinguisticTagger) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lt *LinguisticTagger) Description() string {
+	return rt.Description(objref.IDOf(lt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LinguisticTagger) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lt *LinguisticTagger) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LinguisticTagger) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lt *LinguisticTagger) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LinguisticTagger) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lt *LinguisticTagger) String() string {
+	return rt.Description(objref.IDOf(lt))
 }
 
 // NewLinguisticTaggerWithTagSchemesOptions creates a linguistic tagger instance using the specified tag schemes and options.
@@ -73,48 +73,31 @@ func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes []*String, opts int) *L
 	return linguisticTaggerAdopt(_id)
 }
 
-// WithString the string being analyzed by the linguistic tagger.
-func (x *LinguisticTagger) WithString(string_ StringProvider) *LinguisticTagger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), objref.IDOf(string_))
-	return x
+// WithString sets the string being analyzed by the linguistic tagger.
+func (lt *LinguisticTagger) WithString(string_ StringProvider) *LinguisticTagger {
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setString:"), objref.IDOf(string_))
+	return lt
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *LinguisticTagger) WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (lt *LinguisticTagger) WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger {
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return lt
 }
 
 // TagSchemes wraps the corresponding Objective-C method.
 //
 // TagSchemes returns the collection as a Go slice.
-func (x *LinguisticTagger) TagSchemes() []*String {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagSchemes"))
+func (lt *LinguisticTagger) TagSchemes() []*String {
+	_arr := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("tagSchemes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// SetString wraps the corresponding Objective-C method.
-func (x *LinguisticTagger) SetString(string_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
-}
-
 // DominantLanguage wraps the corresponding Objective-C method.
-func (x *LinguisticTagger) DominantLanguage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dominantLanguage"))
+func (lt *LinguisticTagger) DominantLanguage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("dominantLanguage"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// LinguisticTaggerable is the interface implemented by [LinguisticTagger], for mocking and DI.
-type LinguisticTaggerable interface {
-	obj.Object
-	WithString(string_ StringProvider) *LinguisticTagger
-	WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger
-	TagSchemes() []*String
-	SetString(string_ string)
-	DominantLanguage() string
-}
-
-var _ LinguisticTaggerable = (*LinguisticTagger)(nil)

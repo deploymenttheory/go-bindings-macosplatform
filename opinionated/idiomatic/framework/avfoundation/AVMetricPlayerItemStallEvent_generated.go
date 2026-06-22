@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewMetricPlayerItemStallEvent() *MetricPlayerItemStallEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemStallEvent")), objc.RegisterName("new"))
 	return metricPlayerItemStallEventAdopt(_id)
 }
-
-// MetricPlayerItemStallEventable is the interface implemented by [MetricPlayerItemStallEvent], for mocking and DI.
-type MetricPlayerItemStallEventable interface {
-	obj.Object
-}
-
-var _ MetricPlayerItemStallEventable = (*MetricPlayerItemStallEvent)(nil)
 
 var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemStallEvent)(nil)
 

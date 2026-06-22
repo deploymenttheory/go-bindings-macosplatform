@@ -46,24 +46,24 @@ func storeProductViewControllerAdopt(id objc.ID) *StoreProductViewController {
 }
 
 // Description returns the object's -description text.
-func (x *StoreProductViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (spvc *StoreProductViewController) Description() string {
+	return rt.Description(objref.IDOf(spvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StoreProductViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (spvc *StoreProductViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(spvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StoreProductViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (spvc *StoreProductViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(spvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StoreProductViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (spvc *StoreProductViewController) String() string {
+	return rt.Description(objref.IDOf(spvc))
 }
 
 // NewStoreProductViewController creates a new StoreProductViewController.
@@ -71,10 +71,3 @@ func NewStoreProductViewController() *StoreProductViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKStoreProductViewController")), objc.RegisterName("new"))
 	return storeProductViewControllerAdopt(_id)
 }
-
-// StoreProductViewControllerable is the interface implemented by [StoreProductViewController], for mocking and DI.
-type StoreProductViewControllerable interface {
-	obj.Object
-}
-
-var _ StoreProductViewControllerable = (*StoreProductViewController)(nil)

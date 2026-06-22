@@ -46,97 +46,66 @@ func mTRUnitTestingClusterSimpleStructEchoRequestParamsAdopt(id objc.ID) *MTRUni
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) Description() string {
+	return rt.Description(objref.IDOf(mutcsserp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutcsserp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutcsserp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) String() string {
+	return rt.Description(objref.IDOf(mutcsserp))
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mutcsserp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mutcsserp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mutcsserp
 }
 
 // Arg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("arg1"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-// SetArg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetArg1(arg1 *MTRUnitTestingClusterSimpleStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRUnitTestingClusterSimpleStructEchoRequestParamsable is the interface implemented by [MTRUnitTestingClusterSimpleStructEchoRequestParams], for mocking and DI.
-type MTRUnitTestingClusterSimpleStructEchoRequestParamsable interface {
-	obj.Object
-	WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams
-	Arg1() *MTRUnitTestingClusterSimpleStruct
-	SetArg1(arg1 *MTRUnitTestingClusterSimpleStruct)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRUnitTestingClusterSimpleStructEchoRequestParamsable = (*MTRUnitTestingClusterSimpleStructEchoRequestParams)(nil)
 
 // isMTRUnitTestingClusterSimpleStructEchoRequestParams marks MTRUnitTestingClusterSimpleStructEchoRequestParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterSimpleStructEchoRequestParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) isMTRUnitTestingClusterSimpleStructEchoRequestParams() {
+func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) isMTRUnitTestingClusterSimpleStructEchoRequestParams() {
 }
 
 var _ MTRUnitTestingClusterSimpleStructEchoRequestParamsProvider = (*MTRUnitTestingClusterSimpleStructEchoRequestParams)(nil)

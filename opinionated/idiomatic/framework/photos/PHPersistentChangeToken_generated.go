@@ -46,24 +46,24 @@ func persistentChangeTokenAdopt(id objc.ID) *PersistentChangeToken {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentChangeToken) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pct *PersistentChangeToken) Description() string {
+	return rt.Description(objref.IDOf(pct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentChangeToken) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pct *PersistentChangeToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentChangeToken) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pct *PersistentChangeToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentChangeToken) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pct *PersistentChangeToken) String() string {
+	return rt.Description(objref.IDOf(pct))
 }
 
 // NewPersistentChangeToken creates a new PersistentChangeToken.
@@ -71,10 +71,3 @@ func NewPersistentChangeToken() *PersistentChangeToken {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPersistentChangeToken")), objc.RegisterName("new"))
 	return persistentChangeTokenAdopt(_id)
 }
-
-// PersistentChangeTokenable is the interface implemented by [PersistentChangeToken], for mocking and DI.
-type PersistentChangeTokenable interface {
-	obj.Object
-}
-
-var _ PersistentChangeTokenable = (*PersistentChangeToken)(nil)

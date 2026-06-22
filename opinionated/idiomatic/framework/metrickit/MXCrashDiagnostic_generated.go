@@ -52,66 +52,52 @@ func NewCrashDiagnostic() *CrashDiagnostic {
 	return crashDiagnosticAdopt(_id)
 }
 
-// CallStackTree the application call stack tree associated with this crash. This call stack tree includes those stack frames present at the time of the crash.
-func (x *CrashDiagnostic) CallStackTree() *CallStackTree {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+// CallStackTree returns the application call stack tree associated with this crash. This call stack tree includes those stack frames present at the time of the crash.
+func (cd *CrashDiagnostic) CallStackTree() *CallStackTree {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
-// TerminationReason the termination reason associated with this crash. Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
-func (x *CrashDiagnostic) TerminationReason() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminationReason"))
+// TerminationReason returns the termination reason associated with this crash. Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
+func (cd *CrashDiagnostic) TerminationReason() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("terminationReason"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// VirtualMemoryRegionInfo details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. This property is set when a bad memory access crash occurs.
-func (x *CrashDiagnostic) VirtualMemoryRegionInfo() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualMemoryRegionInfo"))
+// VirtualMemoryRegionInfo returns details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. This property is set when a bad memory access crash occurs.
+func (cd *CrashDiagnostic) VirtualMemoryRegionInfo() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("virtualMemoryRegionInfo"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ExceptionType the name of the Mach exception that terminated the app.
-func (x *CrashDiagnostic) ExceptionType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionType"))
+// ExceptionType returns the name of the Mach exception that terminated the app.
+func (cd *CrashDiagnostic) ExceptionType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("exceptionType"))
 	return obj.Wrap(_r)
 }
 
-// ExceptionCode processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers
-func (x *CrashDiagnostic) ExceptionCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionCode"))
+// ExceptionCode returns processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers
+func (cd *CrashDiagnostic) ExceptionCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("exceptionCode"))
 	return obj.Wrap(_r)
 }
 
-// Signal the signal associated with this crash.
-func (x *CrashDiagnostic) Signal() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signal"))
+// Signal returns the signal associated with this crash.
+func (cd *CrashDiagnostic) Signal() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("signal"))
 	return obj.Wrap(_r)
 }
 
-// ExceptionReason the MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash.
-func (x *CrashDiagnostic) ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionReason"))
+// ExceptionReason returns the MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash.
+func (cd *CrashDiagnostic) ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("exceptionReason"))
 	return CrashDiagnosticObjectiveCExceptionReasonFromID(_r)
 }
-
-// CrashDiagnosticable is the interface implemented by [CrashDiagnostic], for mocking and DI.
-type CrashDiagnosticable interface {
-	obj.Object
-	CallStackTree() *CallStackTree
-	TerminationReason() string
-	VirtualMemoryRegionInfo() string
-	ExceptionType() obj.Object
-	ExceptionCode() obj.Object
-	Signal() obj.Object
-	ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason
-}
-
-var _ CrashDiagnosticable = (*CrashDiagnostic)(nil)
 
 var _ DiagnosticProvider = (*CrashDiagnostic)(nil)

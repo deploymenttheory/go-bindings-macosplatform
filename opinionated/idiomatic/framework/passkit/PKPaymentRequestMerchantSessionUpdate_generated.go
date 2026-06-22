@@ -46,24 +46,24 @@ func paymentRequestMerchantSessionUpdateAdopt(id objc.ID) *PaymentRequestMerchan
 }
 
 // Description returns the object's -description text.
-func (x *PaymentRequestMerchantSessionUpdate) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (prmsu *PaymentRequestMerchantSessionUpdate) Description() string {
+	return rt.Description(objref.IDOf(prmsu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentRequestMerchantSessionUpdate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (prmsu *PaymentRequestMerchantSessionUpdate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(prmsu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentRequestMerchantSessionUpdate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (prmsu *PaymentRequestMerchantSessionUpdate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(prmsu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentRequestMerchantSessionUpdate) String() string {
-	return rt.Description(objref.IDOf(x))
+func (prmsu *PaymentRequestMerchantSessionUpdate) String() string {
+	return rt.Description(objref.IDOf(prmsu))
 }
 
 // NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession creates a payment method update with the specified status and merchant session.
@@ -73,49 +73,26 @@ func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status Paym
 	return paymentRequestMerchantSessionUpdateAdopt(_id)
 }
 
-// WithStatus the current authorization status for the payment.
-func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the current authorization status for the payment.
+func (prmsu *PaymentRequestMerchantSessionUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
+	objc.Send[objc.ID](objref.IDOf(prmsu), objc.RegisterName("setStatus:"), status)
+	return prmsu
 }
 
-// WithSession an object that validates the identity of a merchant for the payment request.
-func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
-	return x
+// WithSession sets an object that validates the identity of a merchant for the payment request.
+func (prmsu *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
+	objc.Send[objc.ID](objref.IDOf(prmsu), objc.RegisterName("setSession:"), objref.IDOf(session))
+	return prmsu
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *PaymentRequestMerchantSessionUpdate) Status() PaymentAuthorizationStatus {
-	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(x), objc.RegisterName("status"))
+func (prmsu *PaymentRequestMerchantSessionUpdate) Status() PaymentAuthorizationStatus {
+	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(prmsu), objc.RegisterName("status"))
 	return _r
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *PaymentRequestMerchantSessionUpdate) SetStatus(status PaymentAuthorizationStatus) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-}
-
 // Session wraps the corresponding Objective-C method.
-func (x *PaymentRequestMerchantSessionUpdate) Session() *PaymentMerchantSession {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+func (prmsu *PaymentRequestMerchantSessionUpdate) Session() *PaymentMerchantSession {
+	_r := objc.Send[objc.ID](objref.IDOf(prmsu), objc.RegisterName("session"))
 	return PaymentMerchantSessionFromID(_r)
 }
-
-// SetSession wraps the corresponding Objective-C method.
-func (x *PaymentRequestMerchantSessionUpdate) SetSession(session *PaymentMerchantSession) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
-}
-
-// PaymentRequestMerchantSessionUpdateable is the interface implemented by [PaymentRequestMerchantSessionUpdate], for mocking and DI.
-type PaymentRequestMerchantSessionUpdateable interface {
-	obj.Object
-	WithStatus(status PaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate
-	WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate
-	Status() PaymentAuthorizationStatus
-	SetStatus(status PaymentAuthorizationStatus)
-	Session() *PaymentMerchantSession
-	SetSession(session *PaymentMerchantSession)
-}
-
-var _ PaymentRequestMerchantSessionUpdateable = (*PaymentRequestMerchantSessionUpdate)(nil)

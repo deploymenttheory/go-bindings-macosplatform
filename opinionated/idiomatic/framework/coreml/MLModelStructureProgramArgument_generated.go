@@ -46,24 +46,24 @@ func modelStructureProgramArgumentAdopt(id objc.ID) *ModelStructureProgramArgume
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureProgramArgument) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mspa *ModelStructureProgramArgument) Description() string {
+	return rt.Description(objref.IDOf(mspa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureProgramArgument) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mspa *ModelStructureProgramArgument) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mspa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureProgramArgument) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mspa *ModelStructureProgramArgument) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mspa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureProgramArgument) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mspa *ModelStructureProgramArgument) String() string {
+	return rt.Description(objref.IDOf(mspa))
 }
 
 // NewModelStructureProgramArgument creates a new ModelStructureProgramArgument.
@@ -75,15 +75,7 @@ func NewModelStructureProgramArgument() *ModelStructureProgramArgument {
 // Bindings wraps the corresponding Objective-C method.
 //
 // Bindings returns the collection as a Go slice.
-func (x *ModelStructureProgramArgument) Bindings() []*ModelStructureProgramBinding {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
+func (mspa *ModelStructureProgramArgument) Bindings() []*ModelStructureProgramBinding {
+	_arr := objc.Send[objc.ID](objref.IDOf(mspa), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramBinding { return ModelStructureProgramBindingFromID(_id) })
 }
-
-// ModelStructureProgramArgumentable is the interface implemented by [ModelStructureProgramArgument], for mocking and DI.
-type ModelStructureProgramArgumentable interface {
-	obj.Object
-	Bindings() []*ModelStructureProgramBinding
-}
-
-var _ ModelStructureProgramArgumentable = (*ModelStructureProgramArgument)(nil)

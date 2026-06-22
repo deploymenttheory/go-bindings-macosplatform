@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRBaseClusterTestClusterWithDeviceEndpointQueue(device *MTRBaseDevice, 
 // TestSpecificWithParams wraps the corresponding Objective-C method.
 //
 // TestSpecificWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestSpecificWithParams(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestSpecificWithParams(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -68,7 +69,7 @@ func (x *MTRBaseClusterTestCluster) TestSpecificWithParams(ctx context.Context, 
 		_o.val = MTRTestClusterClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testSpecificWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRBaseClusterTestCluster) TestSpecificWithParams(ctx context.Context, 
 // TestSpecific wraps the corresponding Objective-C method.
 //
 // TestSpecific blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestSpecific(ctx context.Context) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestSpecific(ctx context.Context) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -93,7 +94,7 @@ func (x *MTRBaseClusterTestCluster) TestSpecific(ctx context.Context) (result *M
 		_o.val = MTRTestClusterClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testSpecificWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,7 +107,7 @@ func (x *MTRBaseClusterTestCluster) TestSpecific(ctx context.Context) (result *M
 // TestAddArgumentsWithParams wraps the corresponding Objective-C method.
 //
 // TestAddArgumentsWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestAddArgumentsWithParams(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams) (result *MTRTestClusterClusterTestAddArgumentsResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestAddArgumentsWithParams(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams) (result *MTRTestClusterClusterTestAddArgumentsResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestAddArgumentsResponseParams
 		err error
@@ -118,7 +119,7 @@ func (x *MTRBaseClusterTestCluster) TestAddArgumentsWithParams(ctx context.Conte
 		_o.val = MTRTestClusterClusterTestAddArgumentsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testAddArgumentsWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testAddArgumentsWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -131,7 +132,7 @@ func (x *MTRBaseClusterTestCluster) TestAddArgumentsWithParams(ctx context.Conte
 // TestSimpleArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestSimpleArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestSimpleArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams) (result *MTRTestClusterClusterTestSimpleArgumentResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestSimpleArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams) (result *MTRTestClusterClusterTestSimpleArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSimpleArgumentResponseParams
 		err error
@@ -143,7 +144,7 @@ func (x *MTRBaseClusterTestCluster) TestSimpleArgumentRequestWithParams(ctx cont
 		_o.val = MTRTestClusterClusterTestSimpleArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSimpleArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testSimpleArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +157,7 @@ func (x *MTRBaseClusterTestCluster) TestSimpleArgumentRequestWithParams(ctx cont
 // TestStructArrayArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestStructArrayArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestStructArrayArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams) (result *MTRTestClusterClusterTestStructArrayArgumentResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestStructArrayArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams) (result *MTRTestClusterClusterTestStructArrayArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestStructArrayArgumentResponseParams
 		err error
@@ -168,7 +169,7 @@ func (x *MTRBaseClusterTestCluster) TestStructArrayArgumentRequestWithParams(ctx
 		_o.val = MTRTestClusterClusterTestStructArrayArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArrayArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testStructArrayArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -181,7 +182,7 @@ func (x *MTRBaseClusterTestCluster) TestStructArrayArgumentRequestWithParams(ctx
 // TestStructArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestStructArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -193,7 +194,7 @@ func (x *MTRBaseClusterTestCluster) TestStructArgumentRequestWithParams(ctx cont
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testStructArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,7 +207,7 @@ func (x *MTRBaseClusterTestCluster) TestStructArgumentRequestWithParams(ctx cont
 // TestNestedStructArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestNestedStructArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestNestedStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestNestedStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -218,7 +219,7 @@ func (x *MTRBaseClusterTestCluster) TestNestedStructArgumentRequestWithParams(ct
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testNestedStructArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,7 +232,7 @@ func (x *MTRBaseClusterTestCluster) TestNestedStructArgumentRequestWithParams(ct
 // TestListStructArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestListStructArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestListStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestListStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -243,7 +244,7 @@ func (x *MTRBaseClusterTestCluster) TestListStructArgumentRequestWithParams(ctx 
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListStructArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testListStructArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -256,7 +257,7 @@ func (x *MTRBaseClusterTestCluster) TestListStructArgumentRequestWithParams(ctx 
 // TestListInt8UArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestListInt8UArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestListInt8UArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestListInt8UArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -268,7 +269,7 @@ func (x *MTRBaseClusterTestCluster) TestListInt8UArgumentRequestWithParams(ctx c
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testListInt8UArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -281,7 +282,7 @@ func (x *MTRBaseClusterTestCluster) TestListInt8UArgumentRequestWithParams(ctx c
 // TestNestedStructListArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestNestedStructListArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestNestedStructListArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestNestedStructListArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -293,7 +294,7 @@ func (x *MTRBaseClusterTestCluster) TestNestedStructListArgumentRequestWithParam
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructListArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testNestedStructListArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -306,7 +307,7 @@ func (x *MTRBaseClusterTestCluster) TestNestedStructListArgumentRequestWithParam
 // TestListNestedStructListArgumentRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestListNestedStructListArgumentRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestListNestedStructListArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestListNestedStructListArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -318,7 +319,7 @@ func (x *MTRBaseClusterTestCluster) TestListNestedStructListArgumentRequestWithP
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -331,7 +332,7 @@ func (x *MTRBaseClusterTestCluster) TestListNestedStructListArgumentRequestWithP
 // TestListInt8UReverseRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestListInt8UReverseRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestListInt8UReverseRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams) (result *MTRTestClusterClusterTestListInt8UReverseResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestListInt8UReverseRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams) (result *MTRTestClusterClusterTestListInt8UReverseResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestListInt8UReverseResponseParams
 		err error
@@ -343,7 +344,7 @@ func (x *MTRBaseClusterTestCluster) TestListInt8UReverseRequestWithParams(ctx co
 		_o.val = MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UReverseRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testListInt8UReverseRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -356,7 +357,7 @@ func (x *MTRBaseClusterTestCluster) TestListInt8UReverseRequestWithParams(ctx co
 // TestEnumsRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestEnumsRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestEnumsRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams) (result *MTRTestClusterClusterTestEnumsResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestEnumsRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams) (result *MTRTestClusterClusterTestEnumsResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEnumsResponseParams
 		err error
@@ -368,7 +369,7 @@ func (x *MTRBaseClusterTestCluster) TestEnumsRequestWithParams(ctx context.Conte
 		_o.val = MTRTestClusterClusterTestEnumsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEnumsRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testEnumsRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -381,7 +382,7 @@ func (x *MTRBaseClusterTestCluster) TestEnumsRequestWithParams(ctx context.Conte
 // TestNullableOptionalRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestNullableOptionalRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestNullableOptionalRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestNullableOptionalRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -393,7 +394,7 @@ func (x *MTRBaseClusterTestCluster) TestNullableOptionalRequestWithParams(ctx co
 		_o.val = MTRTestClusterClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testNullableOptionalRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -406,7 +407,7 @@ func (x *MTRBaseClusterTestCluster) TestNullableOptionalRequestWithParams(ctx co
 // TestNullableOptionalRequest wraps the corresponding Objective-C method.
 //
 // TestNullableOptionalRequest blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestNullableOptionalRequest(ctx context.Context) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestNullableOptionalRequest(ctx context.Context) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -418,7 +419,7 @@ func (x *MTRBaseClusterTestCluster) TestNullableOptionalRequest(ctx context.Cont
 		_o.val = MTRTestClusterClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testNullableOptionalRequestWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +432,7 @@ func (x *MTRBaseClusterTestCluster) TestNullableOptionalRequest(ctx context.Cont
 // TestComplexNullableOptionalRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestComplexNullableOptionalRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestComplexNullableOptionalRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) (result *MTRTestClusterClusterTestComplexNullableOptionalResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestComplexNullableOptionalRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) (result *MTRTestClusterClusterTestComplexNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestComplexNullableOptionalResponseParams
 		err error
@@ -443,7 +444,7 @@ func (x *MTRBaseClusterTestCluster) TestComplexNullableOptionalRequestWithParams
 		_o.val = MTRTestClusterClusterTestComplexNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testComplexNullableOptionalRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testComplexNullableOptionalRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -456,7 +457,7 @@ func (x *MTRBaseClusterTestCluster) TestComplexNullableOptionalRequestWithParams
 // SimpleStructEchoRequestWithParams wraps the corresponding Objective-C method.
 //
 // SimpleStructEchoRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SimpleStructEchoRequestWithParams(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams) (result *MTRTestClusterClusterSimpleStructResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SimpleStructEchoRequestWithParams(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams) (result *MTRTestClusterClusterSimpleStructResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStructResponseParams
 		err error
@@ -468,7 +469,7 @@ func (x *MTRBaseClusterTestCluster) SimpleStructEchoRequestWithParams(ctx contex
 		_o.val = MTRTestClusterClusterSimpleStructResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("simpleStructEchoRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("simpleStructEchoRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +482,7 @@ func (x *MTRBaseClusterTestCluster) SimpleStructEchoRequestWithParams(ctx contex
 // TestEmitTestEventRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestEmitTestEventRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestEmitTestEventRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams) (result *MTRTestClusterClusterTestEmitTestEventResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestEmitTestEventRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams) (result *MTRTestClusterClusterTestEmitTestEventResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestEventResponseParams
 		err error
@@ -493,7 +494,7 @@ func (x *MTRBaseClusterTestCluster) TestEmitTestEventRequestWithParams(ctx conte
 		_o.val = MTRTestClusterClusterTestEmitTestEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestEventRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testEmitTestEventRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -506,7 +507,7 @@ func (x *MTRBaseClusterTestCluster) TestEmitTestEventRequestWithParams(ctx conte
 // TestEmitTestFabricScopedEventRequestWithParams wraps the corresponding Objective-C method.
 //
 // TestEmitTestFabricScopedEventRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) (result *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+func (mbctc *MTRBaseClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) (result *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
 		err error
@@ -518,7 +519,7 @@ func (x *MTRBaseClusterTestCluster) TestEmitTestFabricScopedEventRequestWithPara
 		_o.val = MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -531,7 +532,7 @@ func (x *MTRBaseClusterTestCluster) TestEmitTestFabricScopedEventRequestWithPara
 // ReadAttributeBoolean wraps the corresponding Objective-C method.
 //
 // ReadAttributeBoolean blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeBoolean(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBoolean(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -543,7 +544,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBoolean(ctx context.Context) (r
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBooleanWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeBooleanWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -556,7 +557,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBoolean(ctx context.Context) (r
 // SubscribeAttributeBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -568,7 +569,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBooleanWithMinIntervalMaxI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -581,7 +582,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBooleanWithMinIntervalMaxI
 // ReadAttributeBitmap8 wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap8 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap8(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap8(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -593,7 +594,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap8(ctx context.Context) (r
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap8WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeBitmap8WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -606,7 +607,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap8(ctx context.Context) (r
 // SubscribeAttributeBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -618,7 +619,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap8WithMinIntervalMaxI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeBitmap8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +632,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap8WithMinIntervalMaxI
 // ReadAttributeBitmap16 wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap16 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap16(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap16(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -643,7 +644,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap16(ctx context.Context) (
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap16WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeBitmap16WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -656,7 +657,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap16(ctx context.Context) (
 // SubscribeAttributeBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -668,7 +669,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap16WithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeBitmap16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -681,7 +682,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap16WithMinIntervalMax
 // ReadAttributeBitmap32 wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap32 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap32(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap32(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -693,7 +694,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap32(ctx context.Context) (
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap32WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeBitmap32WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -706,7 +707,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap32(ctx context.Context) (
 // SubscribeAttributeBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,7 +719,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap32WithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap32WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeBitmap32WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -731,7 +732,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap32WithMinIntervalMax
 // ReadAttributeBitmap64 wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap64 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap64(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap64(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -743,7 +744,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap64(ctx context.Context) (
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap64WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeBitmap64WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -756,7 +757,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeBitmap64(ctx context.Context) (
 // SubscribeAttributeBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -768,7 +769,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap64WithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap64WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeBitmap64WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -781,7 +782,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeBitmap64WithMinIntervalMax
 // ReadAttributeInt8u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt8u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt8u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt8u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -793,7 +794,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt8u(ctx context.Context) (res
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt8uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt8uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -806,7 +807,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt8u(ctx context.Context) (res
 // SubscribeAttributeInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -818,7 +819,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt8uWithMinIntervalMaxInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -831,7 +832,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt8uWithMinIntervalMaxInt
 // ReadAttributeInt16u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt16u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt16u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt16u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -843,7 +844,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt16u(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt16uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt16uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -856,7 +857,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt16u(ctx context.Context) (re
 // SubscribeAttributeInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -868,7 +869,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt16uWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -881,7 +882,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt16uWithMinIntervalMaxIn
 // ReadAttributeInt24u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt24u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt24u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt24u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -893,7 +894,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt24u(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt24uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt24uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -906,7 +907,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt24u(ctx context.Context) (re
 // SubscribeAttributeInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -918,7 +919,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt24uWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt24uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt24uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -931,7 +932,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt24uWithMinIntervalMaxIn
 // ReadAttributeInt32u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt32u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt32u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt32u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -943,7 +944,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt32u(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt32uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt32uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -956,7 +957,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt32u(ctx context.Context) (re
 // SubscribeAttributeInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -968,7 +969,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt32uWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt32uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt32uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -981,7 +982,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt32uWithMinIntervalMaxIn
 // ReadAttributeInt40u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt40u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt40u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt40u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -993,7 +994,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt40u(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt40uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt40uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1006,7 +1007,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt40u(ctx context.Context) (re
 // SubscribeAttributeInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1018,7 +1019,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt40uWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt40uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt40uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1031,7 +1032,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt40uWithMinIntervalMaxIn
 // ReadAttributeInt48u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt48u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt48u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt48u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1043,7 +1044,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt48u(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt48uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt48uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1056,7 +1057,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt48u(ctx context.Context) (re
 // SubscribeAttributeInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1068,7 +1069,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt48uWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt48uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt48uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1081,7 +1082,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt48uWithMinIntervalMaxIn
 // ReadAttributeInt56u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt56u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt56u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt56u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1093,7 +1094,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt56u(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt56uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt56uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1106,7 +1107,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt56u(ctx context.Context) (re
 // SubscribeAttributeInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1118,7 +1119,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt56uWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt56uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt56uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1131,7 +1132,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt56uWithMinIntervalMaxIn
 // ReadAttributeInt64u wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt64u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt64u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt64u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1143,7 +1144,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt64u(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt64uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt64uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1156,7 +1157,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt64u(ctx context.Context) (re
 // SubscribeAttributeInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1168,7 +1169,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt64uWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt64uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt64uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1181,7 +1182,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt64uWithMinIntervalMaxIn
 // ReadAttributeInt8s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt8s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt8s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt8s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1193,7 +1194,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt8s(ctx context.Context) (res
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt8sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt8sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1206,7 +1207,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt8s(ctx context.Context) (res
 // SubscribeAttributeInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1218,7 +1219,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt8sWithMinIntervalMaxInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1231,7 +1232,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt8sWithMinIntervalMaxInt
 // ReadAttributeInt16s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt16s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt16s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt16s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1243,7 +1244,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt16s(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt16sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt16sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1256,7 +1257,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt16s(ctx context.Context) (re
 // SubscribeAttributeInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1268,7 +1269,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt16sWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1281,7 +1282,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt16sWithMinIntervalMaxIn
 // ReadAttributeInt24s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt24s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt24s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt24s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,7 +1294,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt24s(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt24sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt24sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1306,7 +1307,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt24s(ctx context.Context) (re
 // SubscribeAttributeInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1318,7 +1319,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt24sWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt24sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt24sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1331,7 +1332,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt24sWithMinIntervalMaxIn
 // ReadAttributeInt32s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt32s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt32s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt32s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1343,7 +1344,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt32s(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt32sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt32sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1356,7 +1357,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt32s(ctx context.Context) (re
 // SubscribeAttributeInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1368,7 +1369,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt32sWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt32sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt32sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1381,7 +1382,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt32sWithMinIntervalMaxIn
 // ReadAttributeInt40s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt40s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt40s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt40s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1393,7 +1394,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt40s(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt40sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt40sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1406,7 +1407,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt40s(ctx context.Context) (re
 // SubscribeAttributeInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1418,7 +1419,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt40sWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt40sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt40sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1431,7 +1432,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt40sWithMinIntervalMaxIn
 // ReadAttributeInt48s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt48s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt48s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt48s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1443,7 +1444,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt48s(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt48sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt48sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1456,7 +1457,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt48s(ctx context.Context) (re
 // SubscribeAttributeInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1468,7 +1469,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt48sWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt48sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt48sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1481,7 +1482,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt48sWithMinIntervalMaxIn
 // ReadAttributeInt56s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt56s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt56s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt56s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1493,7 +1494,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt56s(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt56sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt56sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1506,7 +1507,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt56s(ctx context.Context) (re
 // SubscribeAttributeInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1518,7 +1519,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt56sWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt56sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt56sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1531,7 +1532,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt56sWithMinIntervalMaxIn
 // ReadAttributeInt64s wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt64s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeInt64s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt64s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1543,7 +1544,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt64s(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt64sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeInt64sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1556,7 +1557,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeInt64s(ctx context.Context) (re
 // SubscribeAttributeInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1568,7 +1569,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt64sWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt64sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeInt64sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1581,7 +1582,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeInt64sWithMinIntervalMaxIn
 // ReadAttributeEnum8 wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnum8 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeEnum8(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEnum8(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1593,7 +1594,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEnum8(ctx context.Context) (res
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnum8WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeEnum8WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1606,7 +1607,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEnum8(ctx context.Context) (res
 // SubscribeAttributeEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1618,7 +1619,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnum8WithMinIntervalMaxInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnum8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeEnum8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1631,7 +1632,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnum8WithMinIntervalMaxInt
 // ReadAttributeEnum16 wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnum16 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeEnum16(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEnum16(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1643,7 +1644,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEnum16(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnum16WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeEnum16WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1656,7 +1657,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEnum16(ctx context.Context) (re
 // SubscribeAttributeEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1668,7 +1669,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnum16WithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnum16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeEnum16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1681,7 +1682,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnum16WithMinIntervalMaxIn
 // ReadAttributeFloatSingle wraps the corresponding Objective-C method.
 //
 // ReadAttributeFloatSingle blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeFloatSingle(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeFloatSingle(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1693,7 +1694,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeFloatSingle(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFloatSingleWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeFloatSingleWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1706,7 +1707,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeFloatSingle(ctx context.Context
 // SubscribeAttributeFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1718,7 +1719,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeFloatSingleWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFloatSingleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeFloatSingleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1731,7 +1732,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeFloatSingleWithMinInterval
 // ReadAttributeFloatDouble wraps the corresponding Objective-C method.
 //
 // ReadAttributeFloatDouble blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeFloatDouble(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeFloatDouble(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1743,7 +1744,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeFloatDouble(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFloatDoubleWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeFloatDoubleWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1756,7 +1757,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeFloatDouble(ctx context.Context
 // SubscribeAttributeFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1768,7 +1769,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeFloatDoubleWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFloatDoubleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeFloatDoubleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1781,7 +1782,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeFloatDoubleWithMinInterval
 // ReadAttributeOctetString wraps the corresponding Objective-C method.
 //
 // ReadAttributeOctetString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeOctetString(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeOctetString(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1793,7 +1794,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeOctetString(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOctetStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeOctetStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1806,7 +1807,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeOctetString(ctx context.Context
 // SubscribeAttributeOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1818,7 +1819,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeOctetStringWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1831,7 +1832,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeOctetStringWithMinInterval
 // ReadAttributeListInt8u wraps the corresponding Objective-C method.
 //
 // ReadAttributeListInt8u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListInt8u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListInt8u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1843,7 +1844,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListInt8u(ctx context.Context) 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListInt8uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeListInt8uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1856,7 +1857,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListInt8u(ctx context.Context) 
 // SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1868,7 +1869,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListInt8uWithMinIntervalMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeListInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1881,7 +1882,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListInt8uWithMinIntervalMa
 // ReadAttributeListOctetString wraps the corresponding Objective-C method.
 //
 // ReadAttributeListOctetString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListOctetString(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListOctetString(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1893,7 +1894,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListOctetString(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListOctetStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeListOctetStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1906,7 +1907,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListOctetString(ctx context.Con
 // SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1918,7 +1919,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListOctetStringWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeListOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1931,7 +1932,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListOctetStringWithMinInte
 // ReadAttributeListStructOctetString wraps the corresponding Objective-C method.
 //
 // ReadAttributeListStructOctetString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListStructOctetString(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListStructOctetString(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1943,7 +1944,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListStructOctetString(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListStructOctetStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeListStructOctetStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1956,7 +1957,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListStructOctetString(ctx conte
 // SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1968,7 +1969,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListStructOctetStringWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListStructOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeListStructOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1981,7 +1982,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListStructOctetStringWithM
 // ReadAttributeLongOctetString wraps the corresponding Objective-C method.
 //
 // ReadAttributeLongOctetString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeLongOctetString(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeLongOctetString(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1993,7 +1994,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeLongOctetString(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLongOctetStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeLongOctetStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2006,7 +2007,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeLongOctetString(ctx context.Con
 // SubscribeAttributeLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2018,7 +2019,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeLongOctetStringWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLongOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeLongOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2031,7 +2032,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeLongOctetStringWithMinInte
 // ReadAttributeCharString wraps the corresponding Objective-C method.
 //
 // ReadAttributeCharString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeCharString(ctx context.Context) (result string, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeCharString(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2043,7 +2044,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeCharString(ctx context.Context)
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCharStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeCharStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2056,7 +2057,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeCharString(ctx context.Context)
 // SubscribeAttributeCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2068,7 +2069,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeCharStringWithMinIntervalM
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCharStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeCharStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2081,7 +2082,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeCharStringWithMinIntervalM
 // ReadAttributeLongCharString wraps the corresponding Objective-C method.
 //
 // ReadAttributeLongCharString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeLongCharString(ctx context.Context) (result string, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeLongCharString(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2093,7 +2094,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeLongCharString(ctx context.Cont
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLongCharStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeLongCharStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2106,7 +2107,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeLongCharString(ctx context.Cont
 // SubscribeAttributeLongCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLongCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeLongCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeLongCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2118,7 +2119,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeLongCharStringWithMinInter
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLongCharStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeLongCharStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2131,7 +2132,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeLongCharStringWithMinInter
 // ReadAttributeEpochUs wraps the corresponding Objective-C method.
 //
 // ReadAttributeEpochUs blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeEpochUs(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEpochUs(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2143,7 +2144,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEpochUs(ctx context.Context) (r
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEpochUsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeEpochUsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2156,7 +2157,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEpochUs(ctx context.Context) (r
 // SubscribeAttributeEpochUsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEpochUsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeEpochUsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEpochUsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2168,7 +2169,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEpochUsWithMinIntervalMaxI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEpochUsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeEpochUsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2181,7 +2182,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEpochUsWithMinIntervalMaxI
 // ReadAttributeEpochS wraps the corresponding Objective-C method.
 //
 // ReadAttributeEpochS blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeEpochS(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEpochS(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2193,7 +2194,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEpochS(ctx context.Context) (re
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEpochSWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeEpochSWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2206,7 +2207,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEpochS(ctx context.Context) (re
 // SubscribeAttributeEpochSWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEpochSWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeEpochSWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEpochSWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2218,7 +2219,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEpochSWithMinIntervalMaxIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEpochSWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeEpochSWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2228,10 +2229,10 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEpochSWithMinIntervalMaxIn
 	}
 }
 
-// ReadAttributeVendorId wraps the corresponding Objective-C method.
+// ReadAttributeVendorID wraps the corresponding Objective-C method.
 //
-// ReadAttributeVendorId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeVendorId(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributeVendorID blocks until the operation completes or ctx is cancelled.
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeVendorID(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2243,7 +2244,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeVendorId(ctx context.Context) (
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIdWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeVendorIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2253,10 +2254,10 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeVendorId(ctx context.Context) (
 	}
 }
 
-// SubscribeAttributeVendorIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributeVendorIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributeVendorIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeVendorIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+// SubscribeAttributeVendorIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeVendorIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2268,7 +2269,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeVendorIdWithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeVendorIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeVendorIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2281,7 +2282,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeVendorIdWithMinIntervalMax
 // ReadAttributeListNullablesAndOptionalsStruct wraps the corresponding Objective-C method.
 //
 // ReadAttributeListNullablesAndOptionalsStruct blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListNullablesAndOptionalsStruct(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListNullablesAndOptionalsStruct(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2293,7 +2294,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListNullablesAndOptionalsStruct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListNullablesAndOptionalsStructWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeListNullablesAndOptionalsStructWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2306,7 +2307,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListNullablesAndOptionalsStruct
 // SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2318,7 +2319,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListNullablesAndOptionalsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListNullablesAndOptionalsStructWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeListNullablesAndOptionalsStructWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2331,7 +2332,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListNullablesAndOptionalsS
 // ReadAttributeEnumAttr wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnumAttr blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeEnumAttr(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEnumAttr(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2343,7 +2344,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEnumAttr(ctx context.Context) (
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnumAttrWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeEnumAttrWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2356,7 +2357,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeEnumAttr(ctx context.Context) (
 // SubscribeAttributeEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2368,7 +2369,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnumAttrWithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnumAttrWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeEnumAttrWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2381,7 +2382,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeEnumAttrWithMinIntervalMax
 // ReadAttributeStructAttr wraps the corresponding Objective-C method.
 //
 // ReadAttributeStructAttr blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeStructAttr(ctx context.Context) (result *MTRTestClusterClusterSimpleStruct, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeStructAttr(ctx context.Context) (result *MTRTestClusterClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStruct
 		err error
@@ -2393,7 +2394,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeStructAttr(ctx context.Context)
 		_o.val = MTRTestClusterClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStructAttrWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeStructAttrWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2406,7 +2407,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeStructAttr(ctx context.Context)
 // SubscribeAttributeStructAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStructAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeStructAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRTestClusterClusterSimpleStruct, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeStructAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRTestClusterClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStruct
 		err error
@@ -2418,7 +2419,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeStructAttrWithMinIntervalM
 		_o.val = MTRTestClusterClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStructAttrWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeStructAttrWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2431,7 +2432,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeStructAttrWithMinIntervalM
 // ReadAttributeRangeRestrictedInt8u wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt8u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2443,7 +2444,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8u(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt8uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeRangeRestrictedInt8uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2456,7 +2457,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8u(ctx contex
 // SubscribeAttributeRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2468,7 +2469,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8uWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeRangeRestrictedInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2481,7 +2482,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8uWithMi
 // ReadAttributeRangeRestrictedInt8s wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt8s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2493,7 +2494,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8s(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt8sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeRangeRestrictedInt8sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2506,7 +2507,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8s(ctx contex
 // SubscribeAttributeRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2518,7 +2519,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8sWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeRangeRestrictedInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2531,7 +2532,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8sWithMi
 // ReadAttributeRangeRestrictedInt16u wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt16u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2543,7 +2544,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16u(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt16uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeRangeRestrictedInt16uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2556,7 +2557,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16u(ctx conte
 // SubscribeAttributeRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2568,7 +2569,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16uWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeRangeRestrictedInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2581,7 +2582,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16uWithM
 // ReadAttributeRangeRestrictedInt16s wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt16s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2593,7 +2594,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16s(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt16sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeRangeRestrictedInt16sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2606,7 +2607,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16s(ctx conte
 // SubscribeAttributeRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2618,7 +2619,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16sWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeRangeRestrictedInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2631,7 +2632,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16sWithM
 // ReadAttributeListLongOctetString wraps the corresponding Objective-C method.
 //
 // ReadAttributeListLongOctetString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListLongOctetString(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListLongOctetString(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2643,7 +2644,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListLongOctetString(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListLongOctetStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeListLongOctetStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2656,7 +2657,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListLongOctetString(ctx context
 // SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2668,7 +2669,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListLongOctetStringWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListLongOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeListLongOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2681,7 +2682,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListLongOctetStringWithMin
 // ReadAttributeListFabricScopedWithParams wraps the corresponding Objective-C method.
 //
 // ReadAttributeListFabricScopedWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListFabricScopedWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListFabricScopedWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2693,7 +2694,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListFabricScopedWithParams(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListFabricScopedWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeListFabricScopedWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2706,7 +2707,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeListFabricScopedWithParams(ctx 
 // SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2718,7 +2719,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListFabricScopedWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListFabricScopedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeListFabricScopedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2731,7 +2732,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeListFabricScopedWithMinInt
 // ReadAttributeTimedWriteBoolean wraps the corresponding Objective-C method.
 //
 // ReadAttributeTimedWriteBoolean blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeTimedWriteBoolean(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeTimedWriteBoolean(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2743,7 +2744,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeTimedWriteBoolean(ctx context.C
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimedWriteBooleanWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeTimedWriteBooleanWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2756,7 +2757,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeTimedWriteBoolean(ctx context.C
 // SubscribeAttributeTimedWriteBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTimedWriteBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeTimedWriteBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeTimedWriteBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2768,7 +2769,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeTimedWriteBooleanWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTimedWriteBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeTimedWriteBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2781,7 +2782,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeTimedWriteBooleanWithMinIn
 // ReadAttributeGeneralErrorBoolean wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneralErrorBoolean blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeGeneralErrorBoolean(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeGeneralErrorBoolean(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2793,7 +2794,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeGeneralErrorBoolean(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneralErrorBooleanWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeGeneralErrorBooleanWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2806,7 +2807,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeGeneralErrorBoolean(ctx context
 // SubscribeAttributeGeneralErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneralErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneralErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeGeneralErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2818,7 +2819,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneralErrorBooleanWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneralErrorBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeGeneralErrorBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2831,7 +2832,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneralErrorBooleanWithMin
 // ReadAttributeClusterErrorBoolean wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterErrorBoolean blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeClusterErrorBoolean(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeClusterErrorBoolean(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2843,7 +2844,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeClusterErrorBoolean(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterErrorBooleanWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeClusterErrorBooleanWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2856,7 +2857,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeClusterErrorBoolean(ctx context
 // SubscribeAttributeClusterErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeClusterErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeClusterErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2868,7 +2869,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeClusterErrorBooleanWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterErrorBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeClusterErrorBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2881,7 +2882,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeClusterErrorBooleanWithMin
 // ReadAttributeUnsupported wraps the corresponding Objective-C method.
 //
 // ReadAttributeUnsupported blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeUnsupported(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeUnsupported(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2893,7 +2894,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeUnsupported(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnsupportedWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeUnsupportedWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2906,7 +2907,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeUnsupported(ctx context.Context
 // SubscribeAttributeUnsupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUnsupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeUnsupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeUnsupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2918,7 +2919,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeUnsupportedWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUnsupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeUnsupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2931,7 +2932,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeUnsupportedWithMinInterval
 // ReadAttributeNullableBoolean wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBoolean blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBoolean(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBoolean(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2943,7 +2944,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBoolean(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBooleanWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableBooleanWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2956,7 +2957,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBoolean(ctx context.Con
 // SubscribeAttributeNullableBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2968,7 +2969,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBooleanWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableBooleanWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2981,7 +2982,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBooleanWithMinInte
 // ReadAttributeNullableBitmap8 wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap8 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap8(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap8(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2993,7 +2994,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap8(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap8WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableBitmap8WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3006,7 +3007,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap8(ctx context.Con
 // SubscribeAttributeNullableBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3018,7 +3019,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap8WithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableBitmap8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3031,7 +3032,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap8WithMinInte
 // ReadAttributeNullableBitmap16 wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap16 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap16(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap16(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3043,7 +3044,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap16(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap16WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableBitmap16WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3056,7 +3057,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap16(ctx context.Co
 // SubscribeAttributeNullableBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3068,7 +3069,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap16WithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableBitmap16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3081,7 +3082,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap16WithMinInt
 // ReadAttributeNullableBitmap32 wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap32 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap32(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap32(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3093,7 +3094,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap32(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap32WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableBitmap32WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3106,7 +3107,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap32(ctx context.Co
 // SubscribeAttributeNullableBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3118,7 +3119,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap32WithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap32WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableBitmap32WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3131,7 +3132,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap32WithMinInt
 // ReadAttributeNullableBitmap64 wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap64 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap64(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap64(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3143,7 +3144,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap64(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap64WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableBitmap64WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3156,7 +3157,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap64(ctx context.Co
 // SubscribeAttributeNullableBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3168,7 +3169,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap64WithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap64WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableBitmap64WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3181,7 +3182,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap64WithMinInt
 // ReadAttributeNullableInt8u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt8u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt8u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt8u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3193,7 +3194,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt8u(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt8uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt8uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3206,7 +3207,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt8u(ctx context.Conte
 // SubscribeAttributeNullableInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3218,7 +3219,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8uWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3231,7 +3232,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8uWithMinInterv
 // ReadAttributeNullableInt16u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt16u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt16u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt16u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3243,7 +3244,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt16u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt16uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt16uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3256,7 +3257,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt16u(ctx context.Cont
 // SubscribeAttributeNullableInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3268,7 +3269,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3281,7 +3282,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16uWithMinInter
 // ReadAttributeNullableInt24u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt24u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt24u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt24u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3293,7 +3294,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt24u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt24uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt24uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3306,7 +3307,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt24u(ctx context.Cont
 // SubscribeAttributeNullableInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3318,7 +3319,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt24uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt24uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3331,7 +3332,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24uWithMinInter
 // ReadAttributeNullableInt32u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt32u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt32u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt32u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3343,7 +3344,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt32u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt32uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt32uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3356,7 +3357,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt32u(ctx context.Cont
 // SubscribeAttributeNullableInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3368,7 +3369,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt32uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt32uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3381,7 +3382,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32uWithMinInter
 // ReadAttributeNullableInt40u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt40u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt40u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt40u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3393,7 +3394,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt40u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt40uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt40uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3406,7 +3407,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt40u(ctx context.Cont
 // SubscribeAttributeNullableInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3418,7 +3419,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt40uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt40uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3431,7 +3432,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40uWithMinInter
 // ReadAttributeNullableInt48u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt48u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt48u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt48u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3443,7 +3444,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt48u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt48uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt48uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3456,7 +3457,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt48u(ctx context.Cont
 // SubscribeAttributeNullableInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3468,7 +3469,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt48uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt48uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3481,7 +3482,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48uWithMinInter
 // ReadAttributeNullableInt56u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt56u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt56u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt56u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3493,7 +3494,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt56u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt56uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt56uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3506,7 +3507,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt56u(ctx context.Cont
 // SubscribeAttributeNullableInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3518,7 +3519,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt56uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt56uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3531,7 +3532,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56uWithMinInter
 // ReadAttributeNullableInt64u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt64u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt64u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt64u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3543,7 +3544,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt64u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt64uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt64uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3556,7 +3557,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt64u(ctx context.Cont
 // SubscribeAttributeNullableInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3568,7 +3569,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt64uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt64uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3581,7 +3582,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64uWithMinInter
 // ReadAttributeNullableInt8s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt8s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt8s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt8s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3593,7 +3594,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt8s(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt8sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt8sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3606,7 +3607,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt8s(ctx context.Conte
 // SubscribeAttributeNullableInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3618,7 +3619,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8sWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3631,7 +3632,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8sWithMinInterv
 // ReadAttributeNullableInt16s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt16s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt16s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt16s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3643,7 +3644,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt16s(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt16sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt16sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3656,7 +3657,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt16s(ctx context.Cont
 // SubscribeAttributeNullableInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3668,7 +3669,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16sWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3681,7 +3682,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16sWithMinInter
 // ReadAttributeNullableInt24s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt24s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt24s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt24s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3693,7 +3694,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt24s(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt24sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt24sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3706,7 +3707,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt24s(ctx context.Cont
 // SubscribeAttributeNullableInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3718,7 +3719,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24sWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt24sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt24sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3731,7 +3732,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24sWithMinInter
 // ReadAttributeNullableInt32s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt32s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt32s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt32s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3743,7 +3744,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt32s(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt32sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt32sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3756,7 +3757,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt32s(ctx context.Cont
 // SubscribeAttributeNullableInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3768,7 +3769,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32sWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt32sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt32sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3781,7 +3782,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32sWithMinInter
 // ReadAttributeNullableInt40s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt40s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt40s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt40s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3793,7 +3794,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt40s(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt40sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt40sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3806,7 +3807,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt40s(ctx context.Cont
 // SubscribeAttributeNullableInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3818,7 +3819,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40sWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt40sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt40sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3831,7 +3832,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40sWithMinInter
 // ReadAttributeNullableInt48s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt48s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt48s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt48s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3843,7 +3844,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt48s(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt48sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt48sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3856,7 +3857,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt48s(ctx context.Cont
 // SubscribeAttributeNullableInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3868,7 +3869,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48sWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt48sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt48sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3881,7 +3882,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48sWithMinInter
 // ReadAttributeNullableInt56s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt56s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt56s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt56s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3893,7 +3894,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt56s(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt56sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt56sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3906,7 +3907,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt56s(ctx context.Cont
 // SubscribeAttributeNullableInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3918,7 +3919,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56sWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt56sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt56sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3931,7 +3932,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56sWithMinInter
 // ReadAttributeNullableInt64s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt64s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt64s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt64s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3943,7 +3944,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt64s(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt64sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableInt64sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3956,7 +3957,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableInt64s(ctx context.Cont
 // SubscribeAttributeNullableInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3968,7 +3969,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64sWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt64sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableInt64sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3981,7 +3982,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64sWithMinInter
 // ReadAttributeNullableEnum8 wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableEnum8 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnum8(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableEnum8(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3993,7 +3994,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnum8(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnum8WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableEnum8WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4006,7 +4007,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnum8(ctx context.Conte
 // SubscribeAttributeNullableEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4018,7 +4019,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum8WithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableEnum8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableEnum8WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4031,7 +4032,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum8WithMinInterv
 // ReadAttributeNullableEnum16 wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableEnum16 blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnum16(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableEnum16(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4043,7 +4044,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnum16(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnum16WithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableEnum16WithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4056,7 +4057,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnum16(ctx context.Cont
 // SubscribeAttributeNullableEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4068,7 +4069,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum16WithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableEnum16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableEnum16WithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4081,7 +4082,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum16WithMinInter
 // ReadAttributeNullableFloatSingle wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableFloatSingle blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableFloatSingle(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableFloatSingle(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4093,7 +4094,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableFloatSingle(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableFloatSingleWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableFloatSingleWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4106,7 +4107,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableFloatSingle(ctx context
 // SubscribeAttributeNullableFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4118,7 +4119,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatSingleWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableFloatSingleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableFloatSingleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4131,7 +4132,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatSingleWithMin
 // ReadAttributeNullableFloatDouble wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableFloatDouble blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableFloatDouble(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableFloatDouble(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4143,7 +4144,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableFloatDouble(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableFloatDoubleWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableFloatDoubleWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4156,7 +4157,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableFloatDouble(ctx context
 // SubscribeAttributeNullableFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4168,7 +4169,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatDoubleWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableFloatDoubleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableFloatDoubleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4181,7 +4182,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatDoubleWithMin
 // ReadAttributeNullableOctetString wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableOctetString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableOctetString(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableOctetString(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4193,7 +4194,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableOctetString(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableOctetStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableOctetStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4206,7 +4207,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableOctetString(ctx context
 // SubscribeAttributeNullableOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4218,7 +4219,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableOctetStringWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableOctetStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4231,7 +4232,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableOctetStringWithMin
 // ReadAttributeNullableCharString wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableCharString blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableCharString(ctx context.Context) (result string, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableCharString(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -4243,7 +4244,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableCharString(ctx context.
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableCharStringWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableCharStringWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4256,7 +4257,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableCharString(ctx context.
 // SubscribeAttributeNullableCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -4268,7 +4269,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableCharStringWithMinI
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableCharStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableCharStringWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4281,7 +4282,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableCharStringWithMinI
 // ReadAttributeNullableEnumAttr wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableEnumAttr blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnumAttr(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableEnumAttr(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4293,7 +4294,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnumAttr(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnumAttrWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableEnumAttrWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4306,7 +4307,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableEnumAttr(ctx context.Co
 // SubscribeAttributeNullableEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4318,7 +4319,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnumAttrWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableEnumAttrWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableEnumAttrWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4331,7 +4332,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnumAttrWithMinInt
 // ReadAttributeNullableStruct wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableStruct blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableStruct(ctx context.Context) (result *MTRTestClusterClusterSimpleStruct, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableStruct(ctx context.Context) (result *MTRTestClusterClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStruct
 		err error
@@ -4343,7 +4344,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableStruct(ctx context.Cont
 		_o.val = MTRTestClusterClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableStructWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableStructWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4356,7 +4357,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableStruct(ctx context.Cont
 // SubscribeAttributeNullableStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRTestClusterClusterSimpleStruct, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRTestClusterClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStruct
 		err error
@@ -4368,7 +4369,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableStructWithMinInter
 		_o.val = MTRTestClusterClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableStructWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableStructWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4381,7 +4382,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableStructWithMinInter
 // ReadAttributeNullableRangeRestrictedInt8u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt8u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4393,7 +4394,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8u(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt8uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableRangeRestrictedInt8uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4406,7 +4407,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8u(ct
 // SubscribeAttributeNullableRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4418,7 +4419,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4431,7 +4432,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeNullableRangeRestrictedInt8s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt8s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4443,7 +4444,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8s(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt8sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableRangeRestrictedInt8sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4456,7 +4457,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8s(ct
 // SubscribeAttributeNullableRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4468,7 +4469,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4481,7 +4482,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeNullableRangeRestrictedInt16u wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt16u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4493,7 +4494,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16u(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt16uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableRangeRestrictedInt16uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4506,7 +4507,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16u(c
 // SubscribeAttributeNullableRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4518,7 +4519,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4531,7 +4532,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeNullableRangeRestrictedInt16s wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt16s blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16s(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16s(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4543,7 +4544,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16s(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt16sWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeNullableRangeRestrictedInt16sWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4556,7 +4557,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16s(c
 // SubscribeAttributeNullableRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4568,7 +4569,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16sWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4581,7 +4582,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeWriteOnlyInt8u wraps the corresponding Objective-C method.
 //
 // ReadAttributeWriteOnlyInt8u blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeWriteOnlyInt8u(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeWriteOnlyInt8u(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4593,7 +4594,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeWriteOnlyInt8u(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWriteOnlyInt8uWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeWriteOnlyInt8uWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4606,7 +4607,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeWriteOnlyInt8u(ctx context.Cont
 // SubscribeAttributeWriteOnlyInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWriteOnlyInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeWriteOnlyInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeWriteOnlyInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4618,7 +4619,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeWriteOnlyInt8uWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWriteOnlyInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeWriteOnlyInt8uWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4631,7 +4632,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeWriteOnlyInt8uWithMinInter
 // ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4643,7 +4644,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeGeneratedCommandList(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4656,7 +4657,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeGeneratedCommandList(ctx contex
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4668,7 +4669,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneratedCommandListWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4681,7 +4682,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneratedCommandListWithMi
 // ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4693,7 +4694,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeAcceptedCommandList(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4706,7 +4707,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeAcceptedCommandList(ctx context
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4718,7 +4719,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeAcceptedCommandListWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4731,7 +4732,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeAcceptedCommandListWithMin
 // ReadAttributeAttributeList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4743,7 +4744,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeAttributeList(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4756,7 +4757,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeAttributeList(ctx context.Conte
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4768,7 +4769,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeAttributeListWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4781,7 +4782,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeAttributeListWithMinInterv
 // ReadAttributeFeatureMap wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4793,7 +4794,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeFeatureMap(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4806,7 +4807,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeFeatureMap(ctx context.Context)
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4818,7 +4819,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeFeatureMapWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4831,7 +4832,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeFeatureMapWithMinIntervalM
 // ReadAttributeClusterRevision wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4843,7 +4844,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeClusterRevision(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4856,7 +4857,7 @@ func (x *MTRBaseClusterTestCluster) ReadAttributeClusterRevision(ctx context.Con
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4868,7 +4869,7 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeClusterRevisionWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4877,206 +4878,6 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeClusterRevisionWithMinInte
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterTestClusterable is the interface implemented by [MTRBaseClusterTestCluster], for mocking and DI.
-type MTRBaseClusterTestClusterable interface {
-	obj.Object
-	TestSpecificWithParams(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams) (*MTRTestClusterClusterTestSpecificResponseParams, error)
-	TestSpecific(ctx context.Context) (*MTRTestClusterClusterTestSpecificResponseParams, error)
-	TestAddArgumentsWithParams(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams) (*MTRTestClusterClusterTestAddArgumentsResponseParams, error)
-	TestSimpleArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams) (*MTRTestClusterClusterTestSimpleArgumentResponseParams, error)
-	TestStructArrayArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams) (*MTRTestClusterClusterTestStructArrayArgumentResponseParams, error)
-	TestStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestNestedStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListStructArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListInt8UArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestNestedStructListArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListNestedStructListArgumentRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListInt8UReverseRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams) (*MTRTestClusterClusterTestListInt8UReverseResponseParams, error)
-	TestEnumsRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams) (*MTRTestClusterClusterTestEnumsResponseParams, error)
-	TestNullableOptionalRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams) (*MTRTestClusterClusterTestNullableOptionalResponseParams, error)
-	TestNullableOptionalRequest(ctx context.Context) (*MTRTestClusterClusterTestNullableOptionalResponseParams, error)
-	TestComplexNullableOptionalRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) (*MTRTestClusterClusterTestComplexNullableOptionalResponseParams, error)
-	SimpleStructEchoRequestWithParams(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams) (*MTRTestClusterClusterSimpleStructResponseParams, error)
-	TestEmitTestEventRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams) (*MTRTestClusterClusterTestEmitTestEventResponseParams, error)
-	TestEmitTestFabricScopedEventRequestWithParams(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) (*MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, error)
-	ReadAttributeBoolean(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeBitmap8(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeBitmap16(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeBitmap32(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeBitmap64(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt8u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt16u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt24u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt32u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt40u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt48u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt56u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt64u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt8s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt16s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt24s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt32s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt40s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt48s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt56s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInt64s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeEnum8(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeEnum16(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFloatSingle(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFloatDouble(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeOctetString(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeListInt8u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeListOctetString(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeListStructOctetString(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeLongOctetString(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCharString(ctx context.Context) (string, error)
-	SubscribeAttributeCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
-	ReadAttributeLongCharString(ctx context.Context) (string, error)
-	SubscribeAttributeLongCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
-	ReadAttributeEpochUs(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEpochUsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeEpochS(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEpochSWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeVendorId(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeVendorIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeListNullablesAndOptionalsStruct(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeEnumAttr(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeStructAttr(ctx context.Context) (*MTRTestClusterClusterSimpleStruct, error)
-	SubscribeAttributeStructAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRTestClusterClusterSimpleStruct, error)
-	ReadAttributeRangeRestrictedInt8u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRangeRestrictedInt8s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRangeRestrictedInt16u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRangeRestrictedInt16s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeListLongOctetString(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeListFabricScopedWithParams(ctx context.Context, params *MTRReadParams) (obj.Object, error)
-	SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTimedWriteBoolean(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTimedWriteBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeGeneralErrorBoolean(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneralErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterErrorBoolean(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterErrorBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeUnsupported(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeUnsupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableBoolean(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBooleanWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableBitmap8(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableBitmap16(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableBitmap32(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap32WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableBitmap64(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap64WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt8u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt16u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt24u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt24uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt32u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt32uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt40u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt40uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt48u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt48uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt56u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt56uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt64u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt64uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt8s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt16s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt24s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt24sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt32s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt32sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt40s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt40sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt48s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt48sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt56s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt56sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableInt64s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt64sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableEnum8(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableEnum8WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableEnum16(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableEnum16WithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableFloatSingle(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableFloatSingleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableFloatDouble(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableFloatDoubleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableOctetString(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableCharString(ctx context.Context) (string, error)
-	SubscribeAttributeNullableCharStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
-	ReadAttributeNullableEnumAttr(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableEnumAttrWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableStruct(ctx context.Context) (*MTRTestClusterClusterSimpleStruct, error)
-	SubscribeAttributeNullableStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRTestClusterClusterSimpleStruct, error)
-	ReadAttributeNullableRangeRestrictedInt8u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableRangeRestrictedInt8s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt8sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableRangeRestrictedInt16u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt16uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNullableRangeRestrictedInt16s(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeWriteOnlyInt8u(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWriteOnlyInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterTestClusterable = (*MTRBaseClusterTestCluster)(nil)
 
 var _ MTRBaseClusterUnitTestingProvider = (*MTRBaseClusterTestCluster)(nil)
 

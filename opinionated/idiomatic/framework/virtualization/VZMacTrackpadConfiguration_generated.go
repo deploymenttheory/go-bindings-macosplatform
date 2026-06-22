@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMacTrackpadConfiguration() *MacTrackpadConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZMacTrackpadConfiguration")), objc.RegisterName("new"))
 	return macTrackpadConfigurationAdopt(_id)
 }
-
-// MacTrackpadConfigurationable is the interface implemented by [MacTrackpadConfiguration], for mocking and DI.
-type MacTrackpadConfigurationable interface {
-	obj.Object
-}
-
-var _ MacTrackpadConfigurationable = (*MacTrackpadConfiguration)(nil)
 
 var _ PointingDeviceConfigurationProvider = (*MacTrackpadConfiguration)(nil)

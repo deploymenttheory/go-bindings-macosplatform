@@ -7,7 +7,6 @@ package glkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,61 +51,47 @@ func NewReflectionMapEffect() *ReflectionMapEffect {
 	return reflectionMapEffectAdopt(_id)
 }
 
-// WithColorMaterialEnabled a Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
-func (x *ReflectionMapEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorMaterialEnabled:"), colorMaterialEnabled)
-	return x
+// WithColorMaterialEnabled sets a Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
+func (rme *ReflectionMapEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setColorMaterialEnabled:"), colorMaterialEnabled)
+	return rme
 }
 
-// WithLightModelTwoSided a Boolean value that indicates whether lighting is calculated for both sides of a primitive.
-func (x *ReflectionMapEffect) WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightModelTwoSided:"), lightModelTwoSided)
-	return x
+// WithLightModelTwoSided sets a Boolean value that indicates whether lighting is calculated for both sides of a primitive.
+func (rme *ReflectionMapEffect) WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setLightModelTwoSided:"), lightModelTwoSided)
+	return rme
 }
 
-// WithUseConstantColor a Boolean value that indicates whether or not to use the constant color.
-func (x *ReflectionMapEffect) WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseConstantColor:"), useConstantColor)
-	return x
+// WithUseConstantColor sets a Boolean value that indicates whether or not to use the constant color.
+func (rme *ReflectionMapEffect) WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setUseConstantColor:"), useConstantColor)
+	return rme
 }
 
-// WithLightingType the strategy the effect uses to calculate light values at each fragment. See GLKLightingType.
-func (x *ReflectionMapEffect) WithLightingType(lightingType LightingType) *ReflectionMapEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingType:"), lightingType)
-	return x
+// WithLightingType sets the strategy the effect uses to calculate light values at each fragment. See GLKLightingType.
+func (rme *ReflectionMapEffect) WithLightingType(lightingType LightingType) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setLightingType:"), lightingType)
+	return rme
 }
 
-// WithTextureOrder the order in which textures are applied to rendered primitives.
-func (x *ReflectionMapEffect) WithTextureOrder(items ...*EffectPropertyTexture) *ReflectionMapEffect {
+// WithTextureOrder sets the order in which textures are applied to rendered primitives.
+func (rme *ReflectionMapEffect) WithTextureOrder(items ...*EffectPropertyTexture) *ReflectionMapEffect {
 	_arr := purego.SliceToNSArray(items, func(_v *EffectPropertyTexture) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureOrder:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setTextureOrder:"), _arr)
+	return rme
 }
 
-// WithLabel a string used to name your effect.
-func (x *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string used to name your effect.
+func (rme *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rme
 }
 
 // TextureCubeMap wraps the corresponding Objective-C method.
-func (x *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureCubeMap"))
+func (rme *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
+	_r := objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("textureCubeMap"))
 	return EffectPropertyTextureFromID(_r)
 }
-
-// ReflectionMapEffectable is the interface implemented by [ReflectionMapEffect], for mocking and DI.
-type ReflectionMapEffectable interface {
-	obj.Object
-	WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect
-	WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect
-	WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect
-	WithLightingType(lightingType LightingType) *ReflectionMapEffect
-	WithTextureOrder(items ...*EffectPropertyTexture) *ReflectionMapEffect
-	WithLabel(label string) *ReflectionMapEffect
-	TextureCubeMap() *EffectPropertyTexture
-}
-
-var _ ReflectionMapEffectable = (*ReflectionMapEffect)(nil)
 
 var _ BaseEffectProvider = (*ReflectionMapEffect)(nil)

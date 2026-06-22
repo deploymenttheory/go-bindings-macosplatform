@@ -46,24 +46,24 @@ func locationSortDescriptorAdopt(id objc.ID) *LocationSortDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *LocationSortDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lsd *LocationSortDescriptor) Description() string {
+	return rt.Description(objref.IDOf(lsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocationSortDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lsd *LocationSortDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocationSortDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lsd *LocationSortDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocationSortDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lsd *LocationSortDescriptor) String() string {
+	return rt.Description(objref.IDOf(lsd))
 }
 
 // NewLocationSortDescriptorWithCoder creates a location sort descriptor from a serialized instance.
@@ -72,10 +72,3 @@ func NewLocationSortDescriptorWithCoder(aDecoder obj.Object) *LocationSortDescri
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return locationSortDescriptorAdopt(_id)
 }
-
-// LocationSortDescriptorable is the interface implemented by [LocationSortDescriptor], for mocking and DI.
-type LocationSortDescriptorable interface {
-	obj.Object
-}
-
-var _ LocationSortDescriptorable = (*LocationSortDescriptor)(nil)

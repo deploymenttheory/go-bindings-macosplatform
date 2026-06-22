@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,60 +52,41 @@ func NewBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequ
 	return billowNoiseSourceAdopt(_id)
 }
 
-// WithPersistence the rate at which successive octaves of the noise function decrease in amplitude.
-func (x *BillowNoiseSource) WithPersistence(persistence float64) *BillowNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
-	return x
+// WithPersistence sets the rate at which successive octaves of the noise function decrease in amplitude.
+func (bns *BillowNoiseSource) WithPersistence(persistence float64) *BillowNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(bns), objc.RegisterName("setPersistence:"), persistence)
+	return bns
 }
 
-// WithFrequency a value that determines the size and spacing of features in generated noise.
-func (x *BillowNoiseSource) WithFrequency(frequency float64) *BillowNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a value that determines the size and spacing of features in generated noise.
+func (bns *BillowNoiseSource) WithFrequency(frequency float64) *BillowNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(bns), objc.RegisterName("setFrequency:"), frequency)
+	return bns
 }
 
-// WithOctaveCount the number of octaves of the underlying noise function to use for generating noise.
-func (x *BillowNoiseSource) WithOctaveCount(octaveCount int) *BillowNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
-	return x
+// WithOctaveCount sets the number of octaves of the underlying noise function to use for generating noise.
+func (bns *BillowNoiseSource) WithOctaveCount(octaveCount int) *BillowNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(bns), objc.RegisterName("setOctaveCount:"), octaveCount)
+	return bns
 }
 
-// WithLacunarity the rate at which successive octaves of the noise function increase in frequency.
-func (x *BillowNoiseSource) WithLacunarity(lacunarity float64) *BillowNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
-	return x
+// WithLacunarity sets the rate at which successive octaves of the noise function increase in frequency.
+func (bns *BillowNoiseSource) WithLacunarity(lacunarity float64) *BillowNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(bns), objc.RegisterName("setLacunarity:"), lacunarity)
+	return bns
 }
 
-// WithSeed the value that determines the specific configuration of noise produced by the noise source.
-func (x *BillowNoiseSource) WithSeed(seed int32) *BillowNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-	return x
+// WithSeed sets the value that determines the specific configuration of noise produced by the noise source.
+func (bns *BillowNoiseSource) WithSeed(seed int32) *BillowNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(bns), objc.RegisterName("setSeed:"), seed)
+	return bns
 }
 
 // Persistence wraps the corresponding Objective-C method.
-func (x *BillowNoiseSource) Persistence() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("persistence"))
+func (bns *BillowNoiseSource) Persistence() float64 {
+	_r := objc.Send[float64](objref.IDOf(bns), objc.RegisterName("persistence"))
 	return _r
 }
-
-// SetPersistence wraps the corresponding Objective-C method.
-func (x *BillowNoiseSource) SetPersistence(persistence float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
-}
-
-// BillowNoiseSourceable is the interface implemented by [BillowNoiseSource], for mocking and DI.
-type BillowNoiseSourceable interface {
-	obj.Object
-	WithPersistence(persistence float64) *BillowNoiseSource
-	WithFrequency(frequency float64) *BillowNoiseSource
-	WithOctaveCount(octaveCount int) *BillowNoiseSource
-	WithLacunarity(lacunarity float64) *BillowNoiseSource
-	WithSeed(seed int32) *BillowNoiseSource
-	Persistence() float64
-	SetPersistence(persistence float64)
-}
-
-var _ BillowNoiseSourceable = (*BillowNoiseSource)(nil)
 
 var _ CoherentNoiseSourceProvider = (*BillowNoiseSource)(nil)
 

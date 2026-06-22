@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewCNNBatchNormalizationNode() *CNNBatchNormalizationNode {
 	return cNNBatchNormalizationNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbnn *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cbnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbnn
 }
-
-// CNNBatchNormalizationNodeable is the interface implemented by [CNNBatchNormalizationNode], for mocking and DI.
-type CNNBatchNormalizationNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNBatchNormalizationNode
-}
-
-var _ CNNBatchNormalizationNodeable = (*CNNBatchNormalizationNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNBatchNormalizationNode)(nil)

@@ -44,24 +44,24 @@ func mTRContentAppObserverClusterContentAppMessageParamsAdopt(id objc.ID) *MTRCo
 }
 
 // Description returns the object's -description text.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) Description() string {
+	return rt.Description(objref.IDOf(mcaoccamp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcaoccamp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcaoccamp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) String() string {
+	return rt.Description(objref.IDOf(mcaoccamp))
 }
 
 // NewMTRContentAppObserverClusterContentAppMessageParams creates a new MTRContentAppObserverClusterContentAppMessageParams.
@@ -71,94 +71,55 @@ func NewMTRContentAppObserverClusterContentAppMessageParams() *MTRContentAppObse
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-	return x
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams {
+	objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("setData:"), purego.NSString(data))
+	return mcaoccamp
 }
 
 // WithEncodingHint sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
-	return x
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageParams {
+	objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
+	return mcaoccamp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRContentAppObserverClusterContentAppMessageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentAppObserverClusterContentAppMessageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentAppObserverClusterContentAppMessageParams {
+	objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mcaoccamp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentAppObserverClusterContentAppMessageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentAppObserverClusterContentAppMessageParams {
+	objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mcaoccamp
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) Data() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) Data() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetData wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) SetData(data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
 // EncodingHint wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) EncodingHint() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodingHint"))
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) EncodingHint() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("encodingHint"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetEncodingHint wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) SetEncodingHint(encodingHint string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRContentAppObserverClusterContentAppMessageParamsable is the interface implemented by [MTRContentAppObserverClusterContentAppMessageParams], for mocking and DI.
-type MTRContentAppObserverClusterContentAppMessageParamsable interface {
-	obj.Object
-	WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams
-	WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentAppObserverClusterContentAppMessageParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentAppObserverClusterContentAppMessageParams
-	Data() string
-	SetData(data string)
-	EncodingHint() string
-	SetEncodingHint(encodingHint string)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRContentAppObserverClusterContentAppMessageParamsable = (*MTRContentAppObserverClusterContentAppMessageParams)(nil)

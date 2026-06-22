@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func scoreAdopt(id objc.ID) *Score {
 }
 
 // Description returns the object's -description text.
-func (x *Score) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Score) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Score) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Score) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Score) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Score) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Score) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Score) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewScoreWithLeaderboardIdentifier returns an initialized score object using the local player and the current date.
@@ -96,121 +97,101 @@ func NewScoreWithLeaderboardIdentifierForPlayer(identifier string, playerID stri
 	return scoreAdopt(_id)
 }
 
-// WithValue the score earned by the player.
-func (x *Score) WithValue(value int64) *Score {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the score earned by the player.
+func (s *Score) WithValue(value int64) *Score {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setValue:"), value)
+	return s
 }
 
-// WithLeaderboardIdentifier the identifier for the leaderboard.
-func (x *Score) WithLeaderboardIdentifier(leaderboardIdentifier string) *Score {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
-	return x
+// WithLeaderboardIdentifier sets the identifier for the leaderboard.
+func (s *Score) WithLeaderboardIdentifier(leaderboardIdentifier string) *Score {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
+	return s
 }
 
-// WithContext an integer value used by your game.
-func (x *Score) WithContext(context_ uint64) *Score {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), context_)
-	return x
+// WithContext sets an integer value used by your game.
+func (s *Score) WithContext(context_ uint64) *Score {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContext:"), context_)
+	return s
 }
 
-// WithShouldSetDefaultLeaderboard a Boolean value that indicates whether this score should also update the default leaderboard.
-func (x *Score) WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) *Score {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSetDefaultLeaderboard:"), shouldSetDefaultLeaderboard)
-	return x
+// WithShouldSetDefaultLeaderboard sets a Boolean value that indicates whether this score should also update the default leaderboard.
+func (s *Score) WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) *Score {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldSetDefaultLeaderboard:"), shouldSetDefaultLeaderboard)
+	return s
 }
 
-// WithCategory the leaderboard that this score belongs to.
-func (x *Score) WithCategory(category string) *Score {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
-	return x
+// WithCategory sets the leaderboard that this score belongs to.
+func (s *Score) WithCategory(category string) *Score {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCategory:"), purego.NSString(category))
+	return s
 }
 
-// Value the score value as a 64bit integer.
-func (x *Score) Value() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the score value as a 64bit integer.
+func (s *Score) Value() int64 {
+	_r := objc.Send[int64](objref.IDOf(s), objc.RegisterName("value"))
 	return _r
 }
 
-// SetValue wraps the corresponding Objective-C method.
-func (x *Score) SetValue(value int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// FormattedValue the score formatted as a string, localized with a label
-func (x *Score) FormattedValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedValue"))
+// FormattedValue returns the score formatted as a string, localized with a label
+func (s *Score) FormattedValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("formattedValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LeaderboardIdentifier leaderboard identifier (required)
-func (x *Score) LeaderboardIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardIdentifier"))
+// LeaderboardIdentifier returns leaderboard identifier (required)
+func (s *Score) LeaderboardIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("leaderboardIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLeaderboardIdentifier wraps the corresponding Objective-C method.
-func (x *Score) SetLeaderboardIdentifier(leaderboardIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
-}
-
-// Context optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
-func (x *Score) Context() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("context"))
+// Context returns optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
+func (s *Score) Context() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(s), objc.RegisterName("context"))
 	return _r
 }
 
-// SetContext wraps the corresponding Objective-C method.
-func (x *Score) SetContext(context_ uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), context_)
-}
-
-// Date the date this score was recorded. A newly initialized, unsubmitted GKScore records the current date at init time.
-func (x *Score) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+// Date returns the date this score was recorded. A newly initialized, unsubmitted GKScore records the current date at init time.
+func (s *Score) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// Player the player that recorded the score.
-func (x *Score) Player() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+// Player returns the player that recorded the score.
+func (s *Score) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
-// Rank the rank of the player within the leaderboard, only valid when returned from GKLeaderboard
-func (x *Score) Rank() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+// Rank returns the rank of the player within the leaderboard, only valid when returned from GKLeaderboard
+func (s *Score) Rank() int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("rank"))
 	return _r
 }
 
-// ShouldSetDefaultLeaderboard convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
-func (x *Score) ShouldSetDefaultLeaderboard() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSetDefaultLeaderboard"))
+// ShouldSetDefaultLeaderboard reports whether convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
+func (s *Score) ShouldSetDefaultLeaderboard() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("shouldSetDefaultLeaderboard"))
 	return _r
-}
-
-// SetShouldSetDefaultLeaderboard wraps the corresponding Objective-C method.
-func (x *Score) SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSetDefaultLeaderboard:"), shouldSetDefaultLeaderboard)
 }
 
 // ReportScore reports a score to Game Center.
 //
 // ReportScore blocks until the operation completes or ctx is cancelled.
-func (x *Score) ReportScore(ctx context.Context) error {
+func (s *Score) ReportScore(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportScoreWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("reportScoreWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -220,22 +201,17 @@ func (x *Score) ReportScore(ctx context.Context) error {
 }
 
 // Category wraps the corresponding Objective-C method.
-func (x *Score) Category() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+func (s *Score) Category() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCategory wraps the corresponding Objective-C method.
-func (x *Score) SetCategory(category string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
-}
-
 // PlayerID wraps the corresponding Objective-C method.
-func (x *Score) PlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
+func (s *Score) PlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""
 	}
@@ -243,35 +219,6 @@ func (x *Score) PlayerID() string {
 }
 
 // IssueChallengeToPlayersMessage issues a score challenge to a set of players.
-func (x *Score) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
+func (s *Score) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
 }
-
-// Scoreable is the interface implemented by [Score], for mocking and DI.
-type Scoreable interface {
-	obj.Object
-	WithValue(value int64) *Score
-	WithLeaderboardIdentifier(leaderboardIdentifier string) *Score
-	WithContext(context_ uint64) *Score
-	WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) *Score
-	WithCategory(category string) *Score
-	Value() int64
-	SetValue(value int64)
-	FormattedValue() string
-	LeaderboardIdentifier() string
-	SetLeaderboardIdentifier(leaderboardIdentifier string)
-	Context() uint64
-	SetContext(context_ uint64)
-	Date() obj.Object
-	Player() *Player
-	Rank() int
-	ShouldSetDefaultLeaderboard() bool
-	SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool)
-	ReportScore(ctx context.Context) error
-	Category() string
-	SetCategory(category string)
-	PlayerID() string
-	IssueChallengeToPlayersMessage(playerIDs []string, message string)
-}
-
-var _ Scoreable = (*Score)(nil)

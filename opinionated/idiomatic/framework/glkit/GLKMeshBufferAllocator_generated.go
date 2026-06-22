@@ -44,24 +44,24 @@ func meshBufferAllocatorAdopt(id objc.ID) *MeshBufferAllocator {
 }
 
 // Description returns the object's -description text.
-func (x *MeshBufferAllocator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mba *MeshBufferAllocator) Description() string {
+	return rt.Description(objref.IDOf(mba))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeshBufferAllocator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mba *MeshBufferAllocator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mba), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeshBufferAllocator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mba *MeshBufferAllocator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mba), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MeshBufferAllocator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mba *MeshBufferAllocator) String() string {
+	return rt.Description(objref.IDOf(mba))
 }
 
 // NewMeshBufferAllocator creates a new MeshBufferAllocator.
@@ -69,10 +69,3 @@ func NewMeshBufferAllocator() *MeshBufferAllocator {
 	_id := objc.Send[objc.ID](objc.ID(_class("GLKMeshBufferAllocator")), objc.RegisterName("new"))
 	return meshBufferAllocatorAdopt(_id)
 }
-
-// MeshBufferAllocatorable is the interface implemented by [MeshBufferAllocator], for mocking and DI.
-type MeshBufferAllocatorable interface {
-	obj.Object
-}
-
-var _ MeshBufferAllocatorable = (*MeshBufferAllocator)(nil)

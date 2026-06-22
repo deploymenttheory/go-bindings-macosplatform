@@ -47,24 +47,24 @@ func thumbnailViewAdopt(id objc.ID) *ThumbnailView {
 }
 
 // Description returns the object's -description text.
-func (x *ThumbnailView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tv *ThumbnailView) Description() string {
+	return rt.Description(objref.IDOf(tv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ThumbnailView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tv *ThumbnailView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ThumbnailView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tv *ThumbnailView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ThumbnailView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tv *ThumbnailView) String() string {
+	return rt.Description(objref.IDOf(tv))
 }
 
 // NewThumbnailView creates a new ThumbnailView.
@@ -73,158 +73,94 @@ func NewThumbnailView() *ThumbnailView {
 	return thumbnailViewAdopt(_id)
 }
 
-// WithPDFView returns the PDFView object associated with the thumbnail view.
-func (x *ThumbnailView) WithPDFView(pDFView *View) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
-	return x
+// WithPDFView sets returns the PDFView object associated with the thumbnail view.
+func (tv *ThumbnailView) WithPDFView(pDFView *View) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
+	return tv
 }
 
-// WithBackgroundColor returns the color used in the background of the thumbnail view.
-func (x *ThumbnailView) WithBackgroundColor(backgroundColor obj.Object) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets returns the color used in the background of the thumbnail view.
+func (tv *ThumbnailView) WithBackgroundColor(backgroundColor obj.Object) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return tv
 }
 
-// WithThumbnailSize returns the maximum width and height of the thumbnails in the thumbnail view.
-func (x *ThumbnailView) WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailSize:"), thumbnailSize)
-	return x
+// WithThumbnailSize sets returns the maximum width and height of the thumbnails in the thumbnail view.
+func (tv *ThumbnailView) WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setThumbnailSize:"), thumbnailSize)
+	return tv
 }
 
-// WithMaximumNumberOfColumns returns the maximum number of columns of thumbnails the thumbnail view can display.
-func (x *ThumbnailView) WithMaximumNumberOfColumns(maximumNumberOfColumns int) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
-	return x
+// WithMaximumNumberOfColumns sets returns the maximum number of columns of thumbnails the thumbnail view can display.
+func (tv *ThumbnailView) WithMaximumNumberOfColumns(maximumNumberOfColumns int) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
+	return tv
 }
 
-// WithLabelFont returns the font used to label the thumbnails.
-func (x *ThumbnailView) WithLabelFont(labelFont obj.Object) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
-	return x
+// WithLabelFont sets returns the font used to label the thumbnails.
+func (tv *ThumbnailView) WithLabelFont(labelFont obj.Object) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
+	return tv
 }
 
-// WithAllowsDragging returns a Boolean value indicating whether users can drag thumbnails (that is, re-order pages in the document) within the thumbnail view.
-func (x *ThumbnailView) WithAllowsDragging(allowsDragging bool) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
-	return x
+// WithAllowsDragging sets returns a Boolean value indicating whether users can drag thumbnails (that is, re-order pages in the document) within the thumbnail view.
+func (tv *ThumbnailView) WithAllowsDragging(allowsDragging bool) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsDragging:"), allowsDragging)
+	return tv
 }
 
-// WithAllowsMultipleSelection returns a Boolean value indicating whether users can select multiple thumbnails in the thumbnail view at one time.
-func (x *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
-	return x
+// WithAllowsMultipleSelection sets returns a Boolean value indicating whether users can select multiple thumbnails in the thumbnail view at one time.
+func (tv *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
+	return tv
 }
 
 // PDFView wraps the corresponding Objective-C method.
-func (x *ThumbnailView) PDFView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PDFView"))
+func (tv *ThumbnailView) PDFView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("PDFView"))
 	return ViewFromID(_r)
 }
 
-// SetPDFView wraps the corresponding Objective-C method.
-func (x *ThumbnailView) SetPDFView(pDFView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
-}
-
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *ThumbnailView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (tv *ThumbnailView) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
-}
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *ThumbnailView) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
 // SelectedPages wraps the corresponding Objective-C method.
 //
 // SelectedPages returns the collection as a Go slice.
-func (x *ThumbnailView) SelectedPages() []*Page {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedPages"))
+func (tv *ThumbnailView) SelectedPages() []*Page {
+	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedPages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
 // ThumbnailSize wraps the corresponding Objective-C method.
-func (x *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("thumbnailSize"))
+func (tv *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("thumbnailSize"))
 	return _r
-}
-
-// SetThumbnailSize wraps the corresponding Objective-C method.
-func (x *ThumbnailView) SetThumbnailSize(thumbnailSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailSize:"), thumbnailSize)
 }
 
 // MaximumNumberOfColumns wraps the corresponding Objective-C method.
-func (x *ThumbnailView) MaximumNumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfColumns"))
+func (tv *ThumbnailView) MaximumNumberOfColumns() int {
+	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("maximumNumberOfColumns"))
 	return _r
-}
-
-// SetMaximumNumberOfColumns wraps the corresponding Objective-C method.
-func (x *ThumbnailView) SetMaximumNumberOfColumns(maximumNumberOfColumns int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
 }
 
 // LabelFont wraps the corresponding Objective-C method.
-func (x *ThumbnailView) LabelFont() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelFont"))
+func (tv *ThumbnailView) LabelFont() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("labelFont"))
 	return obj.Wrap(_r)
 }
 
-// SetLabelFont wraps the corresponding Objective-C method.
-func (x *ThumbnailView) SetLabelFont(labelFont obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
-}
-
 // AllowsDragging wraps the corresponding Objective-C method.
-func (x *ThumbnailView) AllowsDragging() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDragging"))
+func (tv *ThumbnailView) AllowsDragging() bool {
+	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsDragging"))
 	return _r
-}
-
-// SetAllowsDragging wraps the corresponding Objective-C method.
-func (x *ThumbnailView) SetAllowsDragging(allowsDragging bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 }
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
-func (x *ThumbnailView) AllowsMultipleSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
+func (tv *ThumbnailView) AllowsMultipleSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
-
-// SetAllowsMultipleSelection wraps the corresponding Objective-C method.
-func (x *ThumbnailView) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
-}
-
-// ThumbnailViewable is the interface implemented by [ThumbnailView], for mocking and DI.
-type ThumbnailViewable interface {
-	obj.Object
-	WithPDFView(pDFView *View) *ThumbnailView
-	WithBackgroundColor(backgroundColor obj.Object) *ThumbnailView
-	WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView
-	WithMaximumNumberOfColumns(maximumNumberOfColumns int) *ThumbnailView
-	WithLabelFont(labelFont obj.Object) *ThumbnailView
-	WithAllowsDragging(allowsDragging bool) *ThumbnailView
-	WithAllowsMultipleSelection(allowsMultipleSelection bool) *ThumbnailView
-	PDFView() *View
-	SetPDFView(pDFView *View)
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-	SelectedPages() []*Page
-	ThumbnailSize() corefoundation.CGSize
-	SetThumbnailSize(thumbnailSize corefoundation.CGSize)
-	MaximumNumberOfColumns() int
-	SetMaximumNumberOfColumns(maximumNumberOfColumns int)
-	LabelFont() obj.Object
-	SetLabelFont(labelFont obj.Object)
-	AllowsDragging() bool
-	SetAllowsDragging(allowsDragging bool)
-	AllowsMultipleSelection() bool
-	SetAllowsMultipleSelection(allowsMultipleSelection bool)
-}
-
-var _ ThumbnailViewable = (*ThumbnailView)(nil)

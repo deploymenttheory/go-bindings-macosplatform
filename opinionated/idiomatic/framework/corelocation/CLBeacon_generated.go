@@ -46,24 +46,24 @@ func beaconAdopt(id objc.ID) *Beacon {
 }
 
 // Description returns the object's -description text.
-func (x *Beacon) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (b *Beacon) Description() string {
+	return rt.Description(objref.IDOf(b))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Beacon) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (b *Beacon) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(b), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Beacon) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (b *Beacon) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(b), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Beacon) String() string {
-	return rt.Description(objref.IDOf(x))
+func (b *Beacon) String() string {
+	return rt.Description(objref.IDOf(b))
 }
 
 // NewBeacon creates a new Beacon.
@@ -73,57 +73,43 @@ func NewBeacon() *Beacon {
 }
 
 // Timestamp wraps the corresponding Objective-C method.
-func (x *Beacon) Timestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+func (b *Beacon) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
 // UUID wraps the corresponding Objective-C method.
-func (x *Beacon) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+func (b *Beacon) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
 // ProximityUUID wraps the corresponding Objective-C method.
-func (x *Beacon) ProximityUUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proximityUUID"))
+func (b *Beacon) ProximityUUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("proximityUUID"))
 	return obj.Wrap(_r)
 }
 
 // Major wraps the corresponding Objective-C method.
-func (x *Beacon) Major() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
+func (b *Beacon) Major() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
 // Minor wraps the corresponding Objective-C method.
-func (x *Beacon) Minor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
+func (b *Beacon) Minor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("minor"))
 	return obj.Wrap(_r)
 }
 
 // Proximity wraps the corresponding Objective-C method.
-func (x *Beacon) Proximity() Proximity {
-	_r := objc.Send[Proximity](objref.IDOf(x), objc.RegisterName("proximity"))
+func (b *Beacon) Proximity() Proximity {
+	_r := objc.Send[Proximity](objref.IDOf(b), objc.RegisterName("proximity"))
 	return _r
 }
 
 // Rssi wraps the corresponding Objective-C method.
-func (x *Beacon) Rssi() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rssi"))
+func (b *Beacon) Rssi() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("rssi"))
 	return _r
 }
-
-// Beaconable is the interface implemented by [Beacon], for mocking and DI.
-type Beaconable interface {
-	obj.Object
-	Timestamp() obj.Object
-	UUID() obj.Object
-	ProximityUUID() obj.Object
-	Major() obj.Object
-	Minor() obj.Object
-	Proximity() Proximity
-	Rssi() int
-}
-
-var _ Beaconable = (*Beacon)(nil)

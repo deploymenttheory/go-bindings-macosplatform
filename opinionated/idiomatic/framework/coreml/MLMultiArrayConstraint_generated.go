@@ -46,24 +46,24 @@ func multiArrayConstraintAdopt(id objc.ID) *MultiArrayConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *MultiArrayConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mac *MultiArrayConstraint) Description() string {
+	return rt.Description(objref.IDOf(mac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiArrayConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mac *MultiArrayConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiArrayConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mac *MultiArrayConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MultiArrayConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mac *MultiArrayConstraint) String() string {
+	return rt.Description(objref.IDOf(mac))
 }
 
 // NewMultiArrayConstraint creates a new MultiArrayConstraint.
@@ -75,29 +75,19 @@ func NewMultiArrayConstraint() *MultiArrayConstraint {
 // Shape wraps the corresponding Objective-C method.
 //
 // Shape returns the collection as a Go slice.
-func (x *MultiArrayConstraint) Shape() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+func (mac *MultiArrayConstraint) Shape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mac), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DataType wraps the corresponding Objective-C method.
-func (x *MultiArrayConstraint) DataType() MultiArrayDataType {
-	_r := objc.Send[MultiArrayDataType](objref.IDOf(x), objc.RegisterName("dataType"))
+func (mac *MultiArrayConstraint) DataType() MultiArrayDataType {
+	_r := objc.Send[MultiArrayDataType](objref.IDOf(mac), objc.RegisterName("dataType"))
 	return _r
 }
 
 // ShapeConstraint wraps the corresponding Objective-C method.
-func (x *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapeConstraint"))
+func (mac *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(mac), objc.RegisterName("shapeConstraint"))
 	return MultiArrayShapeConstraintFromID(_r)
 }
-
-// MultiArrayConstraintable is the interface implemented by [MultiArrayConstraint], for mocking and DI.
-type MultiArrayConstraintable interface {
-	obj.Object
-	Shape() []obj.Object
-	DataType() MultiArrayDataType
-	ShapeConstraint() *MultiArrayShapeConstraint
-}
-
-var _ MultiArrayConstraintable = (*MultiArrayConstraint)(nil)

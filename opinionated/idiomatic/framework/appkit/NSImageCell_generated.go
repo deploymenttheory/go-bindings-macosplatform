@@ -52,379 +52,304 @@ func NewImageCell() *ImageCell {
 	return imageCellAdopt(_id)
 }
 
-// WithImageAlignment the alignment of the receiver’s image relative to its frame.
-func (x *ImageCell) WithImageAlignment(imageAlignment ImageAlignment) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageAlignment:"), imageAlignment)
-	return x
+// WithImageAlignment sets the alignment of the receiver’s image relative to its frame.
+func (ic *ImageCell) WithImageAlignment(imageAlignment ImageAlignment) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	return ic
 }
 
-// WithImageScaling the scaling mode used to fit the receiver’s image into the frame.
-func (x *ImageCell) WithImageScaling(imageScaling ImageScaling) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
-	return x
+// WithImageScaling sets the scaling mode used to fit the receiver’s image into the frame.
+func (ic *ImageCell) WithImageScaling(imageScaling ImageScaling) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageScaling:"), imageScaling)
+	return ic
 }
 
-// WithImageFrameStyle the style of the frame that borders the image.
-func (x *ImageCell) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
-	return x
+// WithImageFrameStyle sets the style of the frame that borders the image.
+func (ic *ImageCell) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
+	return ic
 }
 
-// WithControlView the view associated with the cell.
-func (x *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (ic *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return ic
 }
 
-// WithType the type of the cell.
-func (x *ImageCell) WithType(type_ CellType) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (ic *ImageCell) WithType(type_ CellType) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setType:"), type_)
+	return ic
 }
 
-// WithState the cell’s current state.
-func (x *ImageCell) WithState(state int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (ic *ImageCell) WithState(state int) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setState:"), state)
+	return ic
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *ImageCell) WithTarget(target obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (ic *ImageCell) WithTarget(target obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return ic
 }
 
-// WithTag a tag for identifying the cell.
-func (x *ImageCell) WithTag(tag int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (ic *ImageCell) WithTag(tag int) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTag:"), tag)
+	return ic
 }
 
-// WithTitle the cell’s title text.
-func (x *ImageCell) WithTitle(title string) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (ic *ImageCell) WithTitle(title string) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ic
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *ImageCell) WithEnabled(enabled bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (ic *ImageCell) WithEnabled(enabled bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEnabled:"), enabled)
+	return ic
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *ImageCell) WithContinuous(continuous bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (ic *ImageCell) WithContinuous(continuous bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setContinuous:"), continuous)
+	return ic
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *ImageCell) WithEditable(editable bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (ic *ImageCell) WithEditable(editable bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEditable:"), editable)
+	return ic
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *ImageCell) WithSelectable(selectable bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (ic *ImageCell) WithSelectable(selectable bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setSelectable:"), selectable)
+	return ic
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *ImageCell) WithBordered(bordered bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (ic *ImageCell) WithBordered(bordered bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBordered:"), bordered)
+	return ic
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *ImageCell) WithBezeled(bezeled bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (ic *ImageCell) WithBezeled(bezeled bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBezeled:"), bezeled)
+	return ic
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *ImageCell) WithScrollable(scrollable bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (ic *ImageCell) WithScrollable(scrollable bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setScrollable:"), scrollable)
+	return ic
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *ImageCell) WithHighlighted(highlighted bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (ic *ImageCell) WithHighlighted(highlighted bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setHighlighted:"), highlighted)
+	return ic
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *ImageCell) WithAlignment(alignment TextAlignment) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (ic *ImageCell) WithAlignment(alignment TextAlignment) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAlignment:"), alignment)
+	return ic
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *ImageCell) WithWraps(wraps bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (ic *ImageCell) WithWraps(wraps bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setWraps:"), wraps)
+	return ic
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *ImageCell) WithFont(font *Font) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (ic *ImageCell) WithFont(font *Font) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return ic
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *ImageCell) WithFormatter(formatter obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (ic *ImageCell) WithFormatter(formatter obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return ic
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *ImageCell) WithObjectValue(objectValue obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (ic *ImageCell) WithObjectValue(objectValue obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return ic
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *ImageCell) WithStringValue(stringValue string) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (ic *ImageCell) WithStringValue(stringValue string) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return ic
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *ImageCell) WithIntValue(intValue int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (ic *ImageCell) WithIntValue(intValue int) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setIntValue:"), intValue)
+	return ic
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *ImageCell) WithFloatValue(floatValue float32) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (ic *ImageCell) WithFloatValue(floatValue float32) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFloatValue:"), floatValue)
+	return ic
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *ImageCell) WithDoubleValue(doubleValue float64) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (ic *ImageCell) WithDoubleValue(doubleValue float64) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return ic
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (ic *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setIntegerValue:"), integerValue)
+	return ic
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *ImageCell) WithImage(image *Image) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (ic *ImageCell) WithImage(image *Image) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return ic
 }
 
-// WithControlSize the size of the cell.
-func (x *ImageCell) WithControlSize(controlSize ControlSize) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (ic *ImageCell) WithControlSize(controlSize ControlSize) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlSize:"), controlSize)
+	return ic
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *ImageCell) WithRepresentedObject(representedObject obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (ic *ImageCell) WithRepresentedObject(representedObject obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return ic
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *ImageCell) WithMenu(menu *Menu) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (ic *ImageCell) WithMenu(menu *Menu) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return ic
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *ImageCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (ic *ImageCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return ic
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *ImageCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (ic *ImageCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return ic
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *ImageCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (ic *ImageCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return ic
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *ImageCell) WithAllowsUndo(allowsUndo bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (ic *ImageCell) WithAllowsUndo(allowsUndo bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return ic
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *ImageCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (ic *ImageCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return ic
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (ic *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return ic
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *ImageCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (ic *ImageCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return ic
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *ImageCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (ic *ImageCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return ic
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *ImageCell) WithShowsFirstResponder(showsFirstResponder bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (ic *ImageCell) WithShowsFirstResponder(showsFirstResponder bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return ic
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *ImageCell) WithFocusRingType(focusRingType FocusRingType) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (ic *ImageCell) WithFocusRingType(focusRingType FocusRingType) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return ic
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *ImageCell) WithAttributedStringValue(attributedStringValue obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (ic *ImageCell) WithAttributedStringValue(attributedStringValue obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return ic
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *ImageCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (ic *ImageCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return ic
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *ImageCell) WithImportsGraphics(importsGraphics bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (ic *ImageCell) WithImportsGraphics(importsGraphics bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return ic
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *ImageCell) WithAllowsMixedState(allowsMixedState bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (ic *ImageCell) WithAllowsMixedState(allowsMixedState bool) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return ic
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *ImageCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (ic *ImageCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return ic
 }
 
-// WithControlTint the cell’s control tint.
-func (x *ImageCell) WithControlTint(controlTint ControlTint) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (ic *ImageCell) WithControlTint(controlTint ControlTint) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlTint:"), controlTint)
+	return ic
 }
 
 // ImageAlignment wraps the corresponding Objective-C method.
-func (x *ImageCell) ImageAlignment() ImageAlignment {
-	_r := objc.Send[ImageAlignment](objref.IDOf(x), objc.RegisterName("imageAlignment"))
+func (ic *ImageCell) ImageAlignment() ImageAlignment {
+	_r := objc.Send[ImageAlignment](objref.IDOf(ic), objc.RegisterName("imageAlignment"))
 	return _r
-}
-
-// SetImageAlignment wraps the corresponding Objective-C method.
-func (x *ImageCell) SetImageAlignment(imageAlignment ImageAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageAlignment:"), imageAlignment)
 }
 
 // ImageScaling wraps the corresponding Objective-C method.
-func (x *ImageCell) ImageScaling() ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("imageScaling"))
+func (ic *ImageCell) ImageScaling() ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(ic), objc.RegisterName("imageScaling"))
 	return _r
-}
-
-// SetImageScaling wraps the corresponding Objective-C method.
-func (x *ImageCell) SetImageScaling(imageScaling ImageScaling) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 }
 
 // ImageFrameStyle wraps the corresponding Objective-C method.
-func (x *ImageCell) ImageFrameStyle() ImageFrameStyle {
-	_r := objc.Send[ImageFrameStyle](objref.IDOf(x), objc.RegisterName("imageFrameStyle"))
+func (ic *ImageCell) ImageFrameStyle() ImageFrameStyle {
+	_r := objc.Send[ImageFrameStyle](objref.IDOf(ic), objc.RegisterName("imageFrameStyle"))
 	return _r
 }
-
-// SetImageFrameStyle wraps the corresponding Objective-C method.
-func (x *ImageCell) SetImageFrameStyle(imageFrameStyle ImageFrameStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
-}
-
-// ImageCellable is the interface implemented by [ImageCell], for mocking and DI.
-type ImageCellable interface {
-	obj.Object
-	WithImageAlignment(imageAlignment ImageAlignment) *ImageCell
-	WithImageScaling(imageScaling ImageScaling) *ImageCell
-	WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageCell
-	WithControlView(controlView ViewProvider) *ImageCell
-	WithType(type_ CellType) *ImageCell
-	WithState(state int) *ImageCell
-	WithTarget(target obj.Object) *ImageCell
-	WithTag(tag int) *ImageCell
-	WithTitle(title string) *ImageCell
-	WithEnabled(enabled bool) *ImageCell
-	WithContinuous(continuous bool) *ImageCell
-	WithEditable(editable bool) *ImageCell
-	WithSelectable(selectable bool) *ImageCell
-	WithBordered(bordered bool) *ImageCell
-	WithBezeled(bezeled bool) *ImageCell
-	WithScrollable(scrollable bool) *ImageCell
-	WithHighlighted(highlighted bool) *ImageCell
-	WithAlignment(alignment TextAlignment) *ImageCell
-	WithWraps(wraps bool) *ImageCell
-	WithFont(font *Font) *ImageCell
-	WithFormatter(formatter obj.Object) *ImageCell
-	WithObjectValue(objectValue obj.Object) *ImageCell
-	WithStringValue(stringValue string) *ImageCell
-	WithIntValue(intValue int) *ImageCell
-	WithFloatValue(floatValue float32) *ImageCell
-	WithDoubleValue(doubleValue float64) *ImageCell
-	WithIntegerValue(integerValue int) *ImageCell
-	WithImage(image *Image) *ImageCell
-	WithControlSize(controlSize ControlSize) *ImageCell
-	WithRepresentedObject(representedObject obj.Object) *ImageCell
-	WithMenu(menu *Menu) *ImageCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *ImageCell
-	WithAllowsUndo(allowsUndo bool) *ImageCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell
-	WithShowsFirstResponder(showsFirstResponder bool) *ImageCell
-	WithFocusRingType(focusRingType FocusRingType) *ImageCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *ImageCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell
-	WithImportsGraphics(importsGraphics bool) *ImageCell
-	WithAllowsMixedState(allowsMixedState bool) *ImageCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *ImageCell
-	WithControlTint(controlTint ControlTint) *ImageCell
-	ImageAlignment() ImageAlignment
-	SetImageAlignment(imageAlignment ImageAlignment)
-	ImageScaling() ImageScaling
-	SetImageScaling(imageScaling ImageScaling)
-	ImageFrameStyle() ImageFrameStyle
-	SetImageFrameStyle(imageFrameStyle ImageFrameStyle)
-}
-
-var _ ImageCellable = (*ImageCell)(nil)
 
 var _ CellProvider = (*ImageCell)(nil)

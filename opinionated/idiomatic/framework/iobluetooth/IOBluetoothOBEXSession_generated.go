@@ -7,7 +7,6 @@ package iobluetooth
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,44 +60,32 @@ func NewIOBluetoothOBEXSessionWithDeviceChannelID(inDevice *IOBluetoothDevice, i
 }
 
 // GetRFCOMMChannel get the Bluetooth RFCOMM channel being used by the session object.
-func (x *IOBluetoothOBEXSession) GetRFCOMMChannel() *IOBluetoothRFCOMMChannel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRFCOMMChannel"))
+func (ibos *IOBluetoothOBEXSession) GetRFCOMMChannel() *IOBluetoothRFCOMMChannel {
+	_r := objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("getRFCOMMChannel"))
 	return IOBluetoothRFCOMMChannelFromID(_r)
 }
 
 // GetDevice get the Bluetooth Device being used by the session object.
-func (x *IOBluetoothOBEXSession) GetDevice() *IOBluetoothDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
+func (ibos *IOBluetoothOBEXSession) GetDevice() *IOBluetoothDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
-// SendBufferTroughChannel sends the next block of data through the rfcomm channel.
-func (x *IOBluetoothOBEXSession) SendBufferTroughChannel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendBufferTroughChannel"))
+// SendBufferTroughChannel returns sends the next block of data through the rfcomm channel.
+func (ibos *IOBluetoothOBEXSession) SendBufferTroughChannel() int {
+	_r := objc.Send[int](objref.IDOf(ibos), objc.RegisterName("sendBufferTroughChannel"))
 	return _r
 }
 
 // RestartTransmission if the transmission was stopped due to the lack of buffers this call restarts it.
-func (x *IOBluetoothOBEXSession) RestartTransmission() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restartTransmission"))
+func (ibos *IOBluetoothOBEXSession) RestartTransmission() {
+	objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("restartTransmission"))
 }
 
-// IsSessionTargetAMac tells whether the target device is a Mac by checking its service record.
-func (x *IOBluetoothOBEXSession) IsSessionTargetAMac() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSessionTargetAMac"))
+// IsSessionTargetAMAC reports whether tells whether the target device is a Mac by checking its service record.
+func (ibos *IOBluetoothOBEXSession) IsSessionTargetAMAC() bool {
+	_r := objc.Send[bool](objref.IDOf(ibos), objc.RegisterName("isSessionTargetAMac"))
 	return _r
 }
-
-// IOBluetoothOBEXSessionable is the interface implemented by [IOBluetoothOBEXSession], for mocking and DI.
-type IOBluetoothOBEXSessionable interface {
-	obj.Object
-	GetRFCOMMChannel() *IOBluetoothRFCOMMChannel
-	GetDevice() *IOBluetoothDevice
-	SendBufferTroughChannel() int
-	RestartTransmission()
-	IsSessionTargetAMac() bool
-}
-
-var _ IOBluetoothOBEXSessionable = (*IOBluetoothOBEXSession)(nil)
 
 var _ OBEXSessionProvider = (*IOBluetoothOBEXSession)(nil)

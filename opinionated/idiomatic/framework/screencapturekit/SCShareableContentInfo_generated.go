@@ -47,24 +47,24 @@ func shareableContentInfoAdopt(id objc.ID) *ShareableContentInfo {
 }
 
 // Description returns the object's -description text.
-func (x *ShareableContentInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sci *ShareableContentInfo) Description() string {
+	return rt.Description(objref.IDOf(sci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareableContentInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sci *ShareableContentInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareableContentInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sci *ShareableContentInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShareableContentInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sci *ShareableContentInfo) String() string {
+	return rt.Description(objref.IDOf(sci))
 }
 
 // NewShareableContentInfo creates a new ShareableContentInfo.
@@ -73,30 +73,20 @@ func NewShareableContentInfo() *ShareableContentInfo {
 	return shareableContentInfoAdopt(_id)
 }
 
-// Style style of stream
-func (x *ShareableContentInfo) Style() ShareableContentStyle {
-	_r := objc.Send[ShareableContentStyle](objref.IDOf(x), objc.RegisterName("style"))
+// Style returns style of stream
+func (sci *ShareableContentInfo) Style() ShareableContentStyle {
+	_r := objc.Send[ShareableContentStyle](objref.IDOf(sci), objc.RegisterName("style"))
 	return _r
 }
 
-// PointPixelScale pixel to points scaling factor
-func (x *ShareableContentInfo) PointPixelScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pointPixelScale"))
+// PointPixelScale returns pixel to points scaling factor
+func (sci *ShareableContentInfo) PointPixelScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(sci), objc.RegisterName("pointPixelScale"))
 	return _r
 }
 
-// ContentRect size and location of content in points
-func (x *ShareableContentInfo) ContentRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentRect"))
+// ContentRect returns size and location of content in points
+func (sci *ShareableContentInfo) ContentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sci), objc.RegisterName("contentRect"))
 	return _r
 }
-
-// ShareableContentInfoable is the interface implemented by [ShareableContentInfo], for mocking and DI.
-type ShareableContentInfoable interface {
-	obj.Object
-	Style() ShareableContentStyle
-	PointPixelScale() float32
-	ContentRect() corefoundation.CGRect
-}
-
-var _ ShareableContentInfoable = (*ShareableContentInfo)(nil)

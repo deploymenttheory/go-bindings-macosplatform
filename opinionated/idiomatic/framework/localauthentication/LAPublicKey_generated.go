@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func publicKeyAdopt(id objc.ID) *PublicKey {
 }
 
 // Description returns the object's -description text.
-func (x *PublicKey) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pk *PublicKey) Description() string {
+	return rt.Description(objref.IDOf(pk))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PublicKey) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pk *PublicKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pk), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PublicKey) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pk *PublicKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pk), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PublicKey) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pk *PublicKey) String() string {
+	return rt.Description(objref.IDOf(pk))
 }
 
 // NewPublicKey creates a new PublicKey.
@@ -77,7 +78,7 @@ func NewPublicKey() *PublicKey {
 // ExportBytesWithCompletion exports the data that represents a public key.
 //
 // ExportBytesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (pk *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.O
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportBytesWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("exportBytesWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -98,11 +99,3 @@ func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.O
 		return _zero, ctx.Err()
 	}
 }
-
-// PublicKeyable is the interface implemented by [PublicKey], for mocking and DI.
-type PublicKeyable interface {
-	obj.Object
-	ExportBytesWithCompletion(ctx context.Context) (obj.Object, error)
-}
-
-var _ PublicKeyable = (*PublicKey)(nil)

@@ -46,24 +46,24 @@ func wKFindConfigurationAdopt(id objc.ID) *WKFindConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *WKFindConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wfc *WKFindConfiguration) Description() string {
+	return rt.Description(objref.IDOf(wfc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKFindConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wfc *WKFindConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wfc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKFindConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wfc *WKFindConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wfc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKFindConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wfc *WKFindConfiguration) String() string {
+	return rt.Description(objref.IDOf(wfc))
 }
 
 // NewWKFindConfiguration creates a new WKFindConfiguration.
@@ -72,69 +72,38 @@ func NewWKFindConfiguration() *WKFindConfiguration {
 	return wKFindConfigurationAdopt(_id)
 }
 
-// WithBackwards a Boolean value that indicates the search direction, relative to the current selection.
-func (x *WKFindConfiguration) WithBackwards(backwards bool) *WKFindConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackwards:"), backwards)
-	return x
+// WithBackwards sets a Boolean value that indicates the search direction, relative to the current selection.
+func (wfc *WKFindConfiguration) WithBackwards(backwards bool) *WKFindConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setBackwards:"), backwards)
+	return wfc
 }
 
-// WithCaseSensitive a Boolean value that indicates whether to consider case when matching the search string.
-func (x *WKFindConfiguration) WithCaseSensitive(caseSensitive bool) *WKFindConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
-	return x
+// WithCaseSensitive sets a Boolean value that indicates whether to consider case when matching the search string.
+func (wfc *WKFindConfiguration) WithCaseSensitive(caseSensitive bool) *WKFindConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setCaseSensitive:"), caseSensitive)
+	return wfc
 }
 
-// WithWraps a Boolean value that indicates whether the search wraps around to the other side of the page.
-func (x *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value that indicates whether the search wraps around to the other side of the page.
+func (wfc *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setWraps:"), wraps)
+	return wfc
 }
 
 // Backwards wraps the corresponding Objective-C method.
-func (x *WKFindConfiguration) Backwards() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("backwards"))
+func (wfc *WKFindConfiguration) Backwards() bool {
+	_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("backwards"))
 	return _r
-}
-
-// SetBackwards wraps the corresponding Objective-C method.
-func (x *WKFindConfiguration) SetBackwards(backwards bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackwards:"), backwards)
 }
 
 // CaseSensitive wraps the corresponding Objective-C method.
-func (x *WKFindConfiguration) CaseSensitive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("caseSensitive"))
+func (wfc *WKFindConfiguration) CaseSensitive() bool {
+	_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("caseSensitive"))
 	return _r
-}
-
-// SetCaseSensitive wraps the corresponding Objective-C method.
-func (x *WKFindConfiguration) SetCaseSensitive(caseSensitive bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
 }
 
 // Wraps wraps the corresponding Objective-C method.
-func (x *WKFindConfiguration) Wraps() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wraps"))
+func (wfc *WKFindConfiguration) Wraps() bool {
+	_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("wraps"))
 	return _r
 }
-
-// SetWraps wraps the corresponding Objective-C method.
-func (x *WKFindConfiguration) SetWraps(wraps bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-}
-
-// WKFindConfigurationable is the interface implemented by [WKFindConfiguration], for mocking and DI.
-type WKFindConfigurationable interface {
-	obj.Object
-	WithBackwards(backwards bool) *WKFindConfiguration
-	WithCaseSensitive(caseSensitive bool) *WKFindConfiguration
-	WithWraps(wraps bool) *WKFindConfiguration
-	Backwards() bool
-	SetBackwards(backwards bool)
-	CaseSensitive() bool
-	SetCaseSensitive(caseSensitive bool)
-	Wraps() bool
-	SetWraps(wraps bool)
-}
-
-var _ WKFindConfigurationable = (*WKFindConfiguration)(nil)

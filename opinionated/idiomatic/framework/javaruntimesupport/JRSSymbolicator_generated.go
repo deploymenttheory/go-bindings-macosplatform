@@ -44,24 +44,24 @@ func symbolicatorAdopt(id objc.ID) *Symbolicator {
 }
 
 // Description returns the object's -description text.
-func (x *Symbolicator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Symbolicator) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Symbolicator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Symbolicator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Symbolicator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Symbolicator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Symbolicator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Symbolicator) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSymbolicator creates a new Symbolicator.
@@ -71,15 +71,7 @@ func NewSymbolicator() *Symbolicator {
 }
 
 // AddressForSymbol wraps the corresponding Objective-C method.
-func (x *Symbolicator) AddressForSymbol(symbolName string) uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("addressForSymbol:"), purego.NSString(symbolName))
+func (s *Symbolicator) AddressForSymbol(symbolName string) uint64 {
+	_r := objc.Send[uint64](objref.IDOf(s), objc.RegisterName("addressForSymbol:"), purego.NSString(symbolName))
 	return _r
 }
-
-// Symbolicatorable is the interface implemented by [Symbolicator], for mocking and DI.
-type Symbolicatorable interface {
-	obj.Object
-	AddressForSymbol(symbolName string) uint64
-}
-
-var _ Symbolicatorable = (*Symbolicator)(nil)

@@ -46,24 +46,24 @@ func rasterizationRateMapDescriptorAdopt(id objc.ID) *RasterizationRateMapDescri
 }
 
 // Description returns the object's -description text.
-func (x *RasterizationRateMapDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rrmd *RasterizationRateMapDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rrmd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RasterizationRateMapDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rrmd *RasterizationRateMapDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rrmd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RasterizationRateMapDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rrmd *RasterizationRateMapDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rrmd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RasterizationRateMapDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rrmd *RasterizationRateMapDescriptor) String() string {
+	return rt.Description(objref.IDOf(rrmd))
 }
 
 // NewRasterizationRateMapDescriptor creates a new RasterizationRateMapDescriptor.
@@ -72,59 +72,40 @@ func NewRasterizationRateMapDescriptor() *RasterizationRateMapDescriptor {
 	return rasterizationRateMapDescriptorAdopt(_id)
 }
 
-// WithLabel a string used to identify the rate map you create with the descriptor.
-func (x *RasterizationRateMapDescriptor) WithLabel(label string) *RasterizationRateMapDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string used to identify the rate map you create with the descriptor.
+func (rrmd *RasterizationRateMapDescriptor) WithLabel(label string) *RasterizationRateMapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rrmd
 }
 
 // LayerAtIndex returns the layer description for a layer in the rate map.
-func (x *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex int) *RasterizationRateLayerDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerAtIndex:"), layerIndex)
+func (rrmd *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex int) *RasterizationRateLayerDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("layerAtIndex:"), layerIndex)
 	return RasterizationRateLayerDescriptorFromID(_r)
 }
 
 // SetLayerAtIndex sets a configuration for a layer rate map.
-func (x *RasterizationRateMapDescriptor) SetLayerAtIndex(layer *RasterizationRateLayerDescriptor, layerIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:atIndex:"), objref.IDOf(layer), layerIndex)
+func (rrmd *RasterizationRateMapDescriptor) SetLayerAtIndex(layer *RasterizationRateLayerDescriptor, layerIndex int) {
+	objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("setLayer:atIndex:"), objref.IDOf(layer), layerIndex)
 }
 
-// Layers accesses the layers currently stored in the descriptor. Syntactic sugar around "layerAtIndex:" and "setLayer:atIndex:"
-func (x *RasterizationRateMapDescriptor) Layers() *RasterizationRateLayerArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layers"))
+// Layers returns accesses the layers currently stored in the descriptor. Syntactic sugar around "layerAtIndex:" and "setLayer:atIndex:"
+func (rrmd *RasterizationRateMapDescriptor) Layers() *RasterizationRateLayerArray {
+	_r := objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("layers"))
 	return RasterizationRateLayerArrayFromID(_r)
 }
 
-// Label a string to help identify this object. The default value is nil.
-func (x *RasterizationRateMapDescriptor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a string to help identify this object. The default value is nil.
+func (rrmd *RasterizationRateMapDescriptor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *RasterizationRateMapDescriptor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// LayerCount this property is modified by setting new layer instances using setLayer:atIndex: or assigning to layers[X]
-func (x *RasterizationRateMapDescriptor) LayerCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerCount"))
+// LayerCount returns this property is modified by setting new layer instances using setLayer:atIndex: or assigning to layers[X]
+func (rrmd *RasterizationRateMapDescriptor) LayerCount() int {
+	_r := objc.Send[int](objref.IDOf(rrmd), objc.RegisterName("layerCount"))
 	return _r
 }
-
-// RasterizationRateMapDescriptorable is the interface implemented by [RasterizationRateMapDescriptor], for mocking and DI.
-type RasterizationRateMapDescriptorable interface {
-	obj.Object
-	WithLabel(label string) *RasterizationRateMapDescriptor
-	LayerAtIndex(layerIndex int) *RasterizationRateLayerDescriptor
-	SetLayerAtIndex(layer *RasterizationRateLayerDescriptor, layerIndex int)
-	Layers() *RasterizationRateLayerArray
-	Label() string
-	SetLabel(label string)
-	LayerCount() int
-}
-
-var _ RasterizationRateMapDescriptorable = (*RasterizationRateMapDescriptor)(nil)

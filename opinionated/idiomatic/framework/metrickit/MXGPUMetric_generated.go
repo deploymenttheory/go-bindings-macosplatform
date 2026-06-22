@@ -53,17 +53,9 @@ func NewGPUMetric() *GPUMetric {
 }
 
 // CumulativeGPUTime wraps the corresponding Objective-C method.
-func (x *GPUMetric) CumulativeGPUTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeGPUTime"))
+func (gm *GPUMetric) CumulativeGPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gm), objc.RegisterName("cumulativeGPUTime"))
 	return obj.Wrap(_r)
 }
-
-// GPUMetricable is the interface implemented by [GPUMetric], for mocking and DI.
-type GPUMetricable interface {
-	obj.Object
-	CumulativeGPUTime() obj.Object
-}
-
-var _ GPUMetricable = (*GPUMetric)(nil)
 
 var _ MetricProvider = (*GPUMetric)(nil)

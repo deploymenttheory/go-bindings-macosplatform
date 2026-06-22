@@ -46,24 +46,24 @@ func wheelchairUseObjectAdopt(id objc.ID) *WheelchairUseObject {
 }
 
 // Description returns the object's -description text.
-func (x *WheelchairUseObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wuo *WheelchairUseObject) Description() string {
+	return rt.Description(objref.IDOf(wuo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WheelchairUseObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wuo *WheelchairUseObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wuo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WheelchairUseObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wuo *WheelchairUseObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wuo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WheelchairUseObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wuo *WheelchairUseObject) String() string {
+	return rt.Description(objref.IDOf(wuo))
 }
 
 // NewWheelchairUseObject creates a new WheelchairUseObject.
@@ -73,15 +73,7 @@ func NewWheelchairUseObject() *WheelchairUseObject {
 }
 
 // WheelchairUse wraps the corresponding Objective-C method.
-func (x *WheelchairUseObject) WheelchairUse() WheelchairUse {
-	_r := objc.Send[WheelchairUse](objref.IDOf(x), objc.RegisterName("wheelchairUse"))
+func (wuo *WheelchairUseObject) WheelchairUse() WheelchairUse {
+	_r := objc.Send[WheelchairUse](objref.IDOf(wuo), objc.RegisterName("wheelchairUse"))
 	return _r
 }
-
-// WheelchairUseObjectable is the interface implemented by [WheelchairUseObject], for mocking and DI.
-type WheelchairUseObjectable interface {
-	obj.Object
-	WheelchairUse() WheelchairUse
-}
-
-var _ WheelchairUseObjectable = (*WheelchairUseObject)(nil)

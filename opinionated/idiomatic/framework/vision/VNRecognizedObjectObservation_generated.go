@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,18 +54,10 @@ func NewRecognizedObjectObservation() *RecognizedObjectObservation {
 // Labels wraps the corresponding Objective-C method.
 //
 // Labels returns the collection as a Go slice.
-func (x *RecognizedObjectObservation) Labels() []*ClassificationObservation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labels"))
+func (roo *RecognizedObjectObservation) Labels() []*ClassificationObservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(roo), objc.RegisterName("labels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ClassificationObservation { return ClassificationObservationFromID(_id) })
 }
-
-// RecognizedObjectObservationable is the interface implemented by [RecognizedObjectObservation], for mocking and DI.
-type RecognizedObjectObservationable interface {
-	obj.Object
-	Labels() []*ClassificationObservation
-}
-
-var _ RecognizedObjectObservationable = (*RecognizedObjectObservation)(nil)
 
 var _ DetectedObjectObservationProvider = (*RecognizedObjectObservation)(nil)
 

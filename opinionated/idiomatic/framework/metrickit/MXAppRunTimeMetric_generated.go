@@ -52,39 +52,28 @@ func NewAppRunTimeMetric() *AppRunTimeMetric {
 	return appRunTimeMetricAdopt(_id)
 }
 
-// CumulativeForegroundTime cumulative application foreground time. Time spent on screen and visible to the user. Dimensioned as NSUnitDuration.
-func (x *AppRunTimeMetric) CumulativeForegroundTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeForegroundTime"))
+// CumulativeForegroundTime returns cumulative application foreground time. Time spent on screen and visible to the user. Dimensioned as NSUnitDuration.
+func (artm *AppRunTimeMetric) CumulativeForegroundTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeForegroundTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeBackgroundTime cumulative application background time. Time spent off screen and in the background, invisible to the user. Dimensioned as NSUnitDuration.
-func (x *AppRunTimeMetric) CumulativeBackgroundTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundTime"))
+// CumulativeBackgroundTime returns cumulative application background time. Time spent off screen and in the background, invisible to the user. Dimensioned as NSUnitDuration.
+func (artm *AppRunTimeMetric) CumulativeBackgroundTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeBackgroundTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeBackgroundAudioTime cumulative time the application spent running in the background to play audio Dimensioned as NSUnitDuration.
-func (x *AppRunTimeMetric) CumulativeBackgroundAudioTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundAudioTime"))
+// CumulativeBackgroundAudioTime returns cumulative time the application spent running in the background to play audio Dimensioned as NSUnitDuration.
+func (artm *AppRunTimeMetric) CumulativeBackgroundAudioTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeBackgroundAudioTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeBackgroundLocationTime cumulative time the application spent running in the background to acquire or process location. Dimensioned as NSUnitDuration.
-func (x *AppRunTimeMetric) CumulativeBackgroundLocationTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundLocationTime"))
+// CumulativeBackgroundLocationTime returns cumulative time the application spent running in the background to acquire or process location. Dimensioned as NSUnitDuration.
+func (artm *AppRunTimeMetric) CumulativeBackgroundLocationTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeBackgroundLocationTime"))
 	return obj.Wrap(_r)
 }
-
-// AppRunTimeMetricable is the interface implemented by [AppRunTimeMetric], for mocking and DI.
-type AppRunTimeMetricable interface {
-	obj.Object
-	CumulativeForegroundTime() obj.Object
-	CumulativeBackgroundTime() obj.Object
-	CumulativeBackgroundAudioTime() obj.Object
-	CumulativeBackgroundLocationTime() obj.Object
-}
-
-var _ AppRunTimeMetricable = (*AppRunTimeMetric)(nil)
 
 var _ MetricProvider = (*AppRunTimeMetric)(nil)

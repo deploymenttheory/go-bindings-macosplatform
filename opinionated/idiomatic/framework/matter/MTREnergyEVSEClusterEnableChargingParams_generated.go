@@ -44,24 +44,24 @@ func mTREnergyEVSEClusterEnableChargingParamsAdopt(id objc.ID) *MTREnergyEVSEClu
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEClusterEnableChargingParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) Description() string {
+	return rt.Description(objref.IDOf(meececp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEClusterEnableChargingParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meececp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEClusterEnableChargingParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meececp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEClusterEnableChargingParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) String() string {
+	return rt.Description(objref.IDOf(meececp))
 }
 
 // NewMTREnergyEVSEClusterEnableChargingParams creates a new MTREnergyEVSEClusterEnableChargingParams.
@@ -71,108 +71,61 @@ func NewMTREnergyEVSEClusterEnableChargingParams() *MTREnergyEVSEClusterEnableCh
 }
 
 // WithChargingEnabledUntil sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterEnableChargingParams) WithChargingEnabledUntil(chargingEnabledUntil obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChargingEnabledUntil:"), objref.IDOf(chargingEnabledUntil))
-	return x
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithChargingEnabledUntil(chargingEnabledUntil obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
+	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setChargingEnabledUntil:"), objref.IDOf(chargingEnabledUntil))
+	return meececp
 }
 
 // WithMinimumChargeCurrent sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterEnableChargingParams) WithMinimumChargeCurrent(minimumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumChargeCurrent:"), objref.IDOf(minimumChargeCurrent))
-	return x
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithMinimumChargeCurrent(minimumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
+	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setMinimumChargeCurrent:"), objref.IDOf(minimumChargeCurrent))
+	return meececp
 }
 
 // WithMaximumChargeCurrent sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterEnableChargingParams) WithMaximumChargeCurrent(maximumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumChargeCurrent:"), objref.IDOf(maximumChargeCurrent))
-	return x
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithMaximumChargeCurrent(maximumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
+	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setMaximumChargeCurrent:"), objref.IDOf(maximumChargeCurrent))
+	return meececp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTREnergyEVSEClusterEnableChargingParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
+	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return meececp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTREnergyEVSEClusterEnableChargingParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
+	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return meececp
 }
 
 // ChargingEnabledUntil wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) ChargingEnabledUntil() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chargingEnabledUntil"))
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) ChargingEnabledUntil() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("chargingEnabledUntil"))
 	return obj.Wrap(_r)
-}
-
-// SetChargingEnabledUntil wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) SetChargingEnabledUntil(chargingEnabledUntil obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChargingEnabledUntil:"), objref.IDOf(chargingEnabledUntil))
 }
 
 // MinimumChargeCurrent wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) MinimumChargeCurrent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumChargeCurrent"))
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) MinimumChargeCurrent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("minimumChargeCurrent"))
 	return obj.Wrap(_r)
-}
-
-// SetMinimumChargeCurrent wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) SetMinimumChargeCurrent(minimumChargeCurrent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumChargeCurrent:"), objref.IDOf(minimumChargeCurrent))
 }
 
 // MaximumChargeCurrent wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) MaximumChargeCurrent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumChargeCurrent"))
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) MaximumChargeCurrent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("maximumChargeCurrent"))
 	return obj.Wrap(_r)
 }
 
-// SetMaximumChargeCurrent wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) SetMaximumChargeCurrent(maximumChargeCurrent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumChargeCurrent:"), objref.IDOf(maximumChargeCurrent))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTREnergyEVSEClusterEnableChargingParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTREnergyEVSEClusterEnableChargingParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (meececp *MTREnergyEVSEClusterEnableChargingParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEnableChargingParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTREnergyEVSEClusterEnableChargingParamsable is the interface implemented by [MTREnergyEVSEClusterEnableChargingParams], for mocking and DI.
-type MTREnergyEVSEClusterEnableChargingParamsable interface {
-	obj.Object
-	WithChargingEnabledUntil(chargingEnabledUntil obj.Object) *MTREnergyEVSEClusterEnableChargingParams
-	WithMinimumChargeCurrent(minimumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams
-	WithMaximumChargeCurrent(maximumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterEnableChargingParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterEnableChargingParams
-	ChargingEnabledUntil() obj.Object
-	SetChargingEnabledUntil(chargingEnabledUntil obj.Object)
-	MinimumChargeCurrent() obj.Object
-	SetMinimumChargeCurrent(minimumChargeCurrent obj.Object)
-	MaximumChargeCurrent() obj.Object
-	SetMaximumChargeCurrent(maximumChargeCurrent obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTREnergyEVSEClusterEnableChargingParamsable = (*MTREnergyEVSEClusterEnableChargingParams)(nil)

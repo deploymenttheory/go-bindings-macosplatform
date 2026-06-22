@@ -53,24 +53,15 @@ func NewBatchUpdateResult() *BatchUpdateResult {
 }
 
 // Result wraps the corresponding Objective-C method.
-func (x *BatchUpdateResult) Result() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+func (bur *BatchUpdateResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *BatchUpdateResult) ResultType() BatchUpdateRequestResultType {
-	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (bur *BatchUpdateResult) ResultType() BatchUpdateRequestResultType {
+	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(bur), objc.RegisterName("resultType"))
 	return _r
 }
-
-// BatchUpdateResultable is the interface implemented by [BatchUpdateResult], for mocking and DI.
-type BatchUpdateResultable interface {
-	obj.Object
-	Result() obj.Object
-	ResultType() BatchUpdateRequestResultType
-}
-
-var _ BatchUpdateResultable = (*BatchUpdateResult)(nil)
 
 var _ PersistentStoreResultProvider = (*BatchUpdateResult)(nil)

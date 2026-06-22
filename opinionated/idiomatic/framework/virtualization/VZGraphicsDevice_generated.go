@@ -48,45 +48,37 @@ func graphicsDeviceAdopt(id objc.ID) *GraphicsDevice {
 }
 
 // Description returns the object's -description text.
-func (x *GraphicsDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gd *GraphicsDevice) Description() string {
+	return rt.Description(objref.IDOf(gd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphicsDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gd *GraphicsDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphicsDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gd *GraphicsDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GraphicsDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gd *GraphicsDevice) String() string {
+	return rt.Description(objref.IDOf(gd))
 }
 
 // Displays wraps the corresponding Objective-C method.
 //
 // Displays returns the collection as a Go slice.
-func (x *GraphicsDevice) Displays() []*GraphicsDisplay {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displays"))
+func (gd *GraphicsDevice) Displays() []*GraphicsDisplay {
+	_arr := objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("displays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDisplay { return GraphicsDisplayFromID(_id) })
 }
-
-// GraphicsDeviceable is the interface implemented by [GraphicsDevice], for mocking and DI.
-type GraphicsDeviceable interface {
-	obj.Object
-	Displays() []*GraphicsDisplay
-}
-
-var _ GraphicsDeviceable = (*GraphicsDevice)(nil)
 
 // isGraphicsDevice marks GraphicsDevice — and, by embedding promotion, its
 // subclasses — as a member of the GraphicsDevice hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GraphicsDevice) isGraphicsDevice() {}
+func (gd *GraphicsDevice) isGraphicsDevice() {}
 
 var _ GraphicsDeviceProvider = (*GraphicsDevice)(nil)

@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,35 +50,25 @@ func NewHangUpCallIntentWithCallIdentifier(callIdentifier string) *HangUpCallInt
 	return hangUpCallIntentAdopt(_id)
 }
 
-// WithSuggestedInvocationPhrase the intent’s display name.
-func (x *HangUpCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *HangUpCallIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
-	return x
+// WithSuggestedInvocationPhrase sets the intent’s display name.
+func (huci *HangUpCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *HangUpCallIntent {
+	objc.Send[objc.ID](objref.IDOf(huci), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return huci
 }
 
 // WithDonationMetadata sets the property and returns the receiver so calls can be chained.
-func (x *HangUpCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *HangUpCallIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
-	return x
+func (huci *HangUpCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *HangUpCallIntent {
+	objc.Send[objc.ID](objref.IDOf(huci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return huci
 }
 
 // CallIdentifier wraps the corresponding Objective-C method.
-func (x *HangUpCallIntent) CallIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callIdentifier"))
+func (huci *HangUpCallIntent) CallIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(huci), objc.RegisterName("callIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// HangUpCallIntentable is the interface implemented by [HangUpCallIntent], for mocking and DI.
-type HangUpCallIntentable interface {
-	obj.Object
-	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *HangUpCallIntent
-	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *HangUpCallIntent
-	CallIdentifier() string
-}
-
-var _ HangUpCallIntentable = (*HangUpCallIntent)(nil)
 
 var _ IntentProvider = (*HangUpCallIntent)(nil)

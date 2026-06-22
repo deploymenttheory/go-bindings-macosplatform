@@ -60,31 +60,21 @@ func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsA
 }
 
 // AnchorDate wraps the corresponding Objective-C method.
-func (x *StatisticsCollectionQuery) AnchorDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorDate"))
+func (scq *StatisticsCollectionQuery) AnchorDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("anchorDate"))
 	return obj.Wrap(_r)
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *StatisticsCollectionQuery) Options() StatisticsOptions {
-	_r := objc.Send[StatisticsOptions](objref.IDOf(x), objc.RegisterName("options"))
+func (scq *StatisticsCollectionQuery) Options() StatisticsOptions {
+	_r := objc.Send[StatisticsOptions](objref.IDOf(scq), objc.RegisterName("options"))
 	return _r
 }
 
 // IntervalComponents wraps the corresponding Objective-C method.
-func (x *StatisticsCollectionQuery) IntervalComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intervalComponents"))
+func (scq *StatisticsCollectionQuery) IntervalComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("intervalComponents"))
 	return obj.Wrap(_r)
 }
-
-// StatisticsCollectionQueryable is the interface implemented by [StatisticsCollectionQuery], for mocking and DI.
-type StatisticsCollectionQueryable interface {
-	obj.Object
-	AnchorDate() obj.Object
-	Options() StatisticsOptions
-	IntervalComponents() obj.Object
-}
-
-var _ StatisticsCollectionQueryable = (*StatisticsCollectionQuery)(nil)
 
 var _ QueryProvider = (*StatisticsCollectionQuery)(nil)

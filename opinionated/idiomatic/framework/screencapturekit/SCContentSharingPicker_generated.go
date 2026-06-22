@@ -46,24 +46,24 @@ func contentSharingPickerAdopt(id objc.ID) *ContentSharingPicker {
 }
 
 // Description returns the object's -description text.
-func (x *ContentSharingPicker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (csp *ContentSharingPicker) Description() string {
+	return rt.Description(objref.IDOf(csp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentSharingPicker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (csp *ContentSharingPicker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(csp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentSharingPicker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (csp *ContentSharingPicker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(csp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentSharingPicker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (csp *ContentSharingPicker) String() string {
+	return rt.Description(objref.IDOf(csp))
 }
 
 // NewContentSharingPicker creates a new ContentSharingPicker.
@@ -72,99 +72,63 @@ func NewContentSharingPicker() *ContentSharingPicker {
 	return contentSharingPickerAdopt(_id)
 }
 
-// WithDefaultConfiguration the default configuration to use for the content capture picker.
-func (x *ContentSharingPicker) WithDefaultConfiguration(defaultConfiguration obj.Object) *ContentSharingPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
-	return x
+// WithDefaultConfiguration sets the default configuration to use for the content capture picker.
+func (csp *ContentSharingPicker) WithDefaultConfiguration(defaultConfiguration obj.Object) *ContentSharingPicker {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
+	return csp
 }
 
-// WithMaximumStreamCount the maximum number of streams the content capture picker allows.
-func (x *ContentSharingPicker) WithMaximumStreamCount(maximumStreamCount obj.Object) *ContentSharingPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumStreamCount:"), objref.IDOf(maximumStreamCount))
-	return x
+// WithMaximumStreamCount sets the maximum number of streams the content capture picker allows.
+func (csp *ContentSharingPicker) WithMaximumStreamCount(maximumStreamCount obj.Object) *ContentSharingPicker {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("setMaximumStreamCount:"), objref.IDOf(maximumStreamCount))
+	return csp
 }
 
-// WithActive a Boolean value that indicates if the picker is active.
-func (x *ContentSharingPicker) WithActive(active bool) *ContentSharingPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
-	return x
+// WithActive sets a Boolean value that indicates if the picker is active.
+func (csp *ContentSharingPicker) WithActive(active bool) *ContentSharingPicker {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("setActive:"), active)
+	return csp
 }
 
 // SetConfigurationForStream sets the configuration for the content capture picker for a capture stream, providing allowed selection modes and content excluded from selection.
-func (x *ContentSharingPicker) SetConfigurationForStream(pickerConfig obj.Object, stream *Stream) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:forStream:"), objref.IDOf(pickerConfig), objref.IDOf(stream))
+func (csp *ContentSharingPicker) SetConfigurationForStream(pickerConfig obj.Object, stream *Stream) {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("setConfiguration:forStream:"), objref.IDOf(pickerConfig), objref.IDOf(stream))
 }
 
 // Present displays the picker with no active selection for capture.
-func (x *ContentSharingPicker) Present() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("present"))
+func (csp *ContentSharingPicker) Present() {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("present"))
 }
 
 // PresentPickerUsingContentStyle displays the picker for a single type of capture selection.
-func (x *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle ShareableContentStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentPickerUsingContentStyle:"), contentStyle)
+func (csp *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle ShareableContentStyle) {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("presentPickerUsingContentStyle:"), contentStyle)
 }
 
 // PresentPickerForStream displays the picker with an already running capture stream.
-func (x *ContentSharingPicker) PresentPickerForStream(stream *Stream) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentPickerForStream:"), objref.IDOf(stream))
+func (csp *ContentSharingPicker) PresentPickerForStream(stream *Stream) {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("presentPickerForStream:"), objref.IDOf(stream))
 }
 
 // PresentPickerForStreamUsingContentStyle displays the picker with an existing capture stream, allowing for a single type of capture selection.
-func (x *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *Stream, contentStyle ShareableContentStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentPickerForStream:usingContentStyle:"), objref.IDOf(stream), contentStyle)
+func (csp *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *Stream, contentStyle ShareableContentStyle) {
+	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("presentPickerForStream:usingContentStyle:"), objref.IDOf(stream), contentStyle)
 }
 
-// DefaultConfiguration defaultConfiguration for the content sharing picker. If a stream does not have a configuration, the default configuration will be used.
-func (x *ContentSharingPicker) DefaultConfiguration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultConfiguration"))
+// DefaultConfiguration returns defaultConfiguration for the content sharing picker. If a stream does not have a configuration, the default configuration will be used.
+func (csp *ContentSharingPicker) DefaultConfiguration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("defaultConfiguration"))
 	return obj.Wrap(_r)
 }
 
-// SetDefaultConfiguration wraps the corresponding Objective-C method.
-func (x *ContentSharingPicker) SetDefaultConfiguration(defaultConfiguration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
-}
-
-// MaximumStreamCount maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.
-func (x *ContentSharingPicker) MaximumStreamCount() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumStreamCount"))
+// MaximumStreamCount returns maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.
+func (csp *ContentSharingPicker) MaximumStreamCount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("maximumStreamCount"))
 	return obj.Wrap(_r)
 }
 
-// SetMaximumStreamCount wraps the corresponding Objective-C method.
-func (x *ContentSharingPicker) SetMaximumStreamCount(maximumStreamCount obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumStreamCount:"), objref.IDOf(maximumStreamCount))
-}
-
-// IsActive active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
-func (x *ContentSharingPicker) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+// IsActive reports whether active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
+func (csp *ContentSharingPicker) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(csp), objc.RegisterName("isActive"))
 	return _r
 }
-
-// SetActive wraps the corresponding Objective-C method.
-func (x *ContentSharingPicker) SetActive(active bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
-}
-
-// ContentSharingPickerable is the interface implemented by [ContentSharingPicker], for mocking and DI.
-type ContentSharingPickerable interface {
-	obj.Object
-	WithDefaultConfiguration(defaultConfiguration obj.Object) *ContentSharingPicker
-	WithMaximumStreamCount(maximumStreamCount obj.Object) *ContentSharingPicker
-	WithActive(active bool) *ContentSharingPicker
-	SetConfigurationForStream(pickerConfig obj.Object, stream *Stream)
-	Present()
-	PresentPickerUsingContentStyle(contentStyle ShareableContentStyle)
-	PresentPickerForStream(stream *Stream)
-	PresentPickerForStreamUsingContentStyle(stream *Stream, contentStyle ShareableContentStyle)
-	DefaultConfiguration() obj.Object
-	SetDefaultConfiguration(defaultConfiguration obj.Object)
-	MaximumStreamCount() obj.Object
-	SetMaximumStreamCount(maximumStreamCount obj.Object)
-	IsActive() bool
-	SetActive(active bool)
-}
-
-var _ ContentSharingPickerable = (*ContentSharingPicker)(nil)

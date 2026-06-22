@@ -7,7 +7,6 @@ package cryptotokenkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,34 +51,19 @@ func NewTokenPasswordAuthOperation() *TokenPasswordAuthOperation {
 	return tokenPasswordAuthOperationAdopt(_id)
 }
 
-// WithPassword the password to be filled in when the finishWithError: is called.
-func (x *TokenPasswordAuthOperation) WithPassword(password string) *TokenPasswordAuthOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
-	return x
+// WithPassword sets the password to be filled in when the finishWithError: is called.
+func (tpao *TokenPasswordAuthOperation) WithPassword(password string) *TokenPasswordAuthOperation {
+	objc.Send[objc.ID](objref.IDOf(tpao), objc.RegisterName("setPassword:"), purego.NSString(password))
+	return tpao
 }
 
 // Password wraps the corresponding Objective-C method.
-func (x *TokenPasswordAuthOperation) Password() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+func (tpao *TokenPasswordAuthOperation) Password() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tpao), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetPassword wraps the corresponding Objective-C method.
-func (x *TokenPasswordAuthOperation) SetPassword(password string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
-}
-
-// TokenPasswordAuthOperationable is the interface implemented by [TokenPasswordAuthOperation], for mocking and DI.
-type TokenPasswordAuthOperationable interface {
-	obj.Object
-	WithPassword(password string) *TokenPasswordAuthOperation
-	Password() string
-	SetPassword(password string)
-}
-
-var _ TokenPasswordAuthOperationable = (*TokenPasswordAuthOperation)(nil)
 
 var _ TokenAuthOperationProvider = (*TokenPasswordAuthOperation)(nil)

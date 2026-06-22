@@ -46,24 +46,24 @@ func constraintAdopt(id objc.ID) *Constraint {
 }
 
 // Description returns the object's -description text.
-func (x *Constraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Constraint) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Constraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Constraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Constraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Constraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Constraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Constraint) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewConstraintWithAttributeRelativeToAttributeScaleOffset returns an CAConstraint object with the specified parameters. Designated initializer.
@@ -74,14 +74,14 @@ func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr ConstraintAtt
 }
 
 // Attribute wraps the corresponding Objective-C method.
-func (x *Constraint) Attribute() ConstraintAttribute {
-	_r := objc.Send[ConstraintAttribute](objref.IDOf(x), objc.RegisterName("attribute"))
+func (c *Constraint) Attribute() ConstraintAttribute {
+	_r := objc.Send[ConstraintAttribute](objref.IDOf(c), objc.RegisterName("attribute"))
 	return _r
 }
 
 // SourceName wraps the corresponding Objective-C method.
-func (x *Constraint) SourceName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceName"))
+func (c *Constraint) SourceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sourceName"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,31 +89,19 @@ func (x *Constraint) SourceName() string {
 }
 
 // SourceAttribute wraps the corresponding Objective-C method.
-func (x *Constraint) SourceAttribute() ConstraintAttribute {
-	_r := objc.Send[ConstraintAttribute](objref.IDOf(x), objc.RegisterName("sourceAttribute"))
+func (c *Constraint) SourceAttribute() ConstraintAttribute {
+	_r := objc.Send[ConstraintAttribute](objref.IDOf(c), objc.RegisterName("sourceAttribute"))
 	return _r
 }
 
 // Scale wraps the corresponding Objective-C method.
-func (x *Constraint) Scale() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
+func (c *Constraint) Scale() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("scale"))
 	return _r
 }
 
 // Offset wraps the corresponding Objective-C method.
-func (x *Constraint) Offset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("offset"))
+func (c *Constraint) Offset() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("offset"))
 	return _r
 }
-
-// Constraintable is the interface implemented by [Constraint], for mocking and DI.
-type Constraintable interface {
-	obj.Object
-	Attribute() ConstraintAttribute
-	SourceName() string
-	SourceAttribute() ConstraintAttribute
-	Scale() float64
-	Offset() float64
-}
-
-var _ Constraintable = (*Constraint)(nil)

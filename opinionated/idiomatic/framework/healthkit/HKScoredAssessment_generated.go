@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,24 +43,16 @@ func scoredAssessmentAdopt(id objc.ID) *ScoredAssessment {
 	return x
 }
 
-// Score the score determined by the answers on an assessment
-func (x *ScoredAssessment) Score() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("score"))
+// Score returns the score determined by the answers on an assessment
+func (sa *ScoredAssessment) Score() int {
+	_r := objc.Send[int](objref.IDOf(sa), objc.RegisterName("score"))
 	return _r
 }
-
-// ScoredAssessmentable is the interface implemented by [ScoredAssessment], for mocking and DI.
-type ScoredAssessmentable interface {
-	obj.Object
-	Score() int
-}
-
-var _ ScoredAssessmentable = (*ScoredAssessment)(nil)
 
 // isScoredAssessment marks ScoredAssessment — and, by embedding promotion, its
 // subclasses — as a member of the ScoredAssessment hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ScoredAssessment) isScoredAssessment() {}
+func (sa *ScoredAssessment) isScoredAssessment() {}
 
 var _ ScoredAssessmentProvider = (*ScoredAssessment)(nil)
 

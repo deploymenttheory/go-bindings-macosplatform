@@ -46,24 +46,24 @@ func odometerDataAdopt(id objc.ID) *OdometerData {
 }
 
 // Description returns the object's -description text.
-func (x *OdometerData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (od *OdometerData) Description() string {
+	return rt.Description(objref.IDOf(od))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OdometerData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (od *OdometerData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(od), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OdometerData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (od *OdometerData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(od), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OdometerData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (od *OdometerData) String() string {
+	return rt.Description(objref.IDOf(od))
 }
 
 // NewOdometerData creates a new OdometerData.
@@ -73,50 +73,37 @@ func NewOdometerData() *OdometerData {
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *OdometerData) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (od *OdometerData) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *OdometerData) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (od *OdometerData) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
 // GpsDate wraps the corresponding Objective-C method.
-func (x *OdometerData) GpsDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpsDate"))
+func (od *OdometerData) GpsDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("gpsDate"))
 	return obj.Wrap(_r)
 }
 
 // OriginDevice wraps the corresponding Objective-C method.
-func (x *OdometerData) OriginDevice() OdometerOriginDevice {
-	_r := objc.Send[OdometerOriginDevice](objref.IDOf(x), objc.RegisterName("originDevice"))
+func (od *OdometerData) OriginDevice() OdometerOriginDevice {
+	_r := objc.Send[OdometerOriginDevice](objref.IDOf(od), objc.RegisterName("originDevice"))
 	return _r
 }
 
 // Slope wraps the corresponding Objective-C method.
-func (x *OdometerData) Slope() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slope"))
+func (od *OdometerData) Slope() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("slope"))
 	return obj.Wrap(_r)
 }
 
 // MaxAbsSlope wraps the corresponding Objective-C method.
-func (x *OdometerData) MaxAbsSlope() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxAbsSlope"))
+func (od *OdometerData) MaxAbsSlope() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("maxAbsSlope"))
 	return obj.Wrap(_r)
 }
-
-// OdometerDataable is the interface implemented by [OdometerData], for mocking and DI.
-type OdometerDataable interface {
-	obj.Object
-	StartDate() obj.Object
-	EndDate() obj.Object
-	GpsDate() obj.Object
-	OriginDevice() OdometerOriginDevice
-	Slope() obj.Object
-	MaxAbsSlope() obj.Object
-}
-
-var _ OdometerDataable = (*OdometerData)(nil)

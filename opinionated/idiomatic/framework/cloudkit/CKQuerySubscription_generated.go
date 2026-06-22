@@ -67,59 +67,40 @@ func NewQuerySubscriptionWithCoder(aDecoder obj.Object) *QuerySubscription {
 	return querySubscriptionAdopt(_id)
 }
 
-// WithZoneID the ID of the record zone that the subscription queries.
-func (x *QuerySubscription) WithZoneID(zoneID *RecordZoneID) *QuerySubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoneID:"), objref.IDOf(zoneID))
-	return x
+// WithZoneID sets the ID of the record zone that the subscription queries.
+func (qs *QuerySubscription) WithZoneID(zoneID *RecordZoneID) *QuerySubscription {
+	objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("setZoneID:"), objref.IDOf(zoneID))
+	return qs
 }
 
-// WithNotificationInfo the configuration for a subscription’s push notifications.
-func (x *QuerySubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *QuerySubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
-	return x
+// WithNotificationInfo sets the configuration for a subscription’s push notifications.
+func (qs *QuerySubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *QuerySubscription {
+	objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
+	return qs
 }
 
-// RecordType the type of record that the subscription queries.
-func (x *QuerySubscription) RecordType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+// RecordType returns the type of record that the subscription queries.
+func (qs *QuerySubscription) RecordType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)
 }
 
-// Predicate the matching criteria to apply to records. A query-based subscription uses its search predicate to identify potential matches for records. It combines the predicate information with the value in the “CKQuerySubscription/querySubscriptionOptions“ property to determine when to send a push notification to the app. The search predicate defines the records that the subscription object monitors for changes. The system only uses the property's value when the “CKSubscription/subscriptionType“ property is “CKSubscription/SubscriptionType/query“. Otherwise, the system ignores it.
-func (x *QuerySubscription) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+// Predicate returns the matching criteria to apply to records. A query-based subscription uses its search predicate to identify potential matches for records. It combines the predicate information with the value in the “CKQuerySubscription/querySubscriptionOptions“ property to determine when to send a push notification to the app. The search predicate defines the records that the subscription object monitors for changes. The system only uses the property's value when the “CKSubscription/subscriptionType“ property is “CKSubscription/SubscriptionType/query“. Otherwise, the system ignores it.
+func (qs *QuerySubscription) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
 
-// ZoneID the ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
-func (x *QuerySubscription) ZoneID() *RecordZoneID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+// ZoneID returns the ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
+func (qs *QuerySubscription) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// SetZoneID wraps the corresponding Objective-C method.
-func (x *QuerySubscription) SetZoneID(zoneID *RecordZoneID) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoneID:"), objref.IDOf(zoneID))
-}
-
-// QuerySubscriptionOptions options that define the behavior of the subscription. Set the value of this property at initialization time. When you configure a query-based subscription, use one of the following values: - “CKQuerySubscription/Options/firesOnRecordCreation“ - “CKQuerySubscription/Options/firesOnRecordUpdate“ - “CKQuerySubscription/Options/firesOnRecordDeletion“ If you don't set an option, the system throws an <doc://com.apple.documentation/documentation/foundation/nsexceptionname/invalidargumentexception>.
-func (x *QuerySubscription) QuerySubscriptionOptions() QuerySubscriptionOptions {
-	_r := objc.Send[QuerySubscriptionOptions](objref.IDOf(x), objc.RegisterName("querySubscriptionOptions"))
+// QuerySubscriptionOptions returns options that define the behavior of the subscription. Set the value of this property at initialization time. When you configure a query-based subscription, use one of the following values: - “CKQuerySubscription/Options/firesOnRecordCreation“ - “CKQuerySubscription/Options/firesOnRecordUpdate“ - “CKQuerySubscription/Options/firesOnRecordDeletion“ If you don't set an option, the system throws an <doc://com.apple.documentation/documentation/foundation/nsexceptionname/invalidargumentexception>.
+func (qs *QuerySubscription) QuerySubscriptionOptions() QuerySubscriptionOptions {
+	_r := objc.Send[QuerySubscriptionOptions](objref.IDOf(qs), objc.RegisterName("querySubscriptionOptions"))
 	return _r
 }
-
-// QuerySubscriptionable is the interface implemented by [QuerySubscription], for mocking and DI.
-type QuerySubscriptionable interface {
-	obj.Object
-	WithZoneID(zoneID *RecordZoneID) *QuerySubscription
-	WithNotificationInfo(notificationInfo *NotificationInfo) *QuerySubscription
-	RecordType() obj.Object
-	Predicate() obj.Object
-	ZoneID() *RecordZoneID
-	SetZoneID(zoneID *RecordZoneID)
-	QuerySubscriptionOptions() QuerySubscriptionOptions
-}
-
-var _ QuerySubscriptionable = (*QuerySubscription)(nil)
 
 var _ SubscriptionProvider = (*QuerySubscription)(nil)

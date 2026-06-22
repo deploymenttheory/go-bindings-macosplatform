@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewGatherLayer() *GatherLayer {
 	return gatherLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *GatherLayer) WithLabel(label string) *GatherLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (gl *GatherLayer) WithLabel(label string) *GatherLayer {
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return gl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *GatherLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (gl *GatherLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer {
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return gl
 }
 
-// Dimension the dimension along which to index
-func (x *GatherLayer) Dimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+// Dimension returns the dimension along which to index
+func (gl *GatherLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(gl), objc.RegisterName("dimension"))
 	return _r
 }
-
-// GatherLayerable is the interface implemented by [GatherLayer], for mocking and DI.
-type GatherLayerable interface {
-	obj.Object
-	WithLabel(label string) *GatherLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer
-	Dimension() int
-}
-
-var _ GatherLayerable = (*GatherLayer)(nil)
 
 var _ LayerProvider = (*GatherLayer)(nil)

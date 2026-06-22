@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,33 +49,23 @@ func NewMatrixRandomPhilox() *MatrixRandomPhilox {
 	return matrixRandomPhiloxAdopt(_id)
 }
 
-// WithBatchStart the starting index in the destination batch.
-func (x *MatrixRandomPhilox) WithBatchStart(batchStart int) *MatrixRandomPhilox {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the starting index in the destination batch.
+func (mrp *MatrixRandomPhilox) WithBatchStart(batchStart int) *MatrixRandomPhilox {
+	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setBatchStart:"), batchStart)
+	return mrp
 }
 
-// WithBatchSize the size of the batch to process.
-func (x *MatrixRandomPhilox) WithBatchSize(batchSize int) *MatrixRandomPhilox {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the size of the batch to process.
+func (mrp *MatrixRandomPhilox) WithBatchSize(batchSize int) *MatrixRandomPhilox {
+	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setBatchSize:"), batchSize)
+	return mrp
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixRandomPhilox) WithLabel(label string) *MatrixRandomPhilox {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (mrp *MatrixRandomPhilox) WithLabel(label string) *MatrixRandomPhilox {
+	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mrp
 }
-
-// MatrixRandomPhiloxable is the interface implemented by [MatrixRandomPhilox], for mocking and DI.
-type MatrixRandomPhiloxable interface {
-	obj.Object
-	WithBatchStart(batchStart int) *MatrixRandomPhilox
-	WithBatchSize(batchSize int) *MatrixRandomPhilox
-	WithLabel(label string) *MatrixRandomPhilox
-}
-
-var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)
 
 var _ MatrixRandomProvider = (*MatrixRandomPhilox)(nil)
 

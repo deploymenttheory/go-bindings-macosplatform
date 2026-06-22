@@ -46,24 +46,24 @@ func positionalSpecifierAdopt(id objc.ID) *PositionalSpecifier {
 }
 
 // Description returns the object's -description text.
-func (x *PositionalSpecifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *PositionalSpecifier) Description() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PositionalSpecifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ps *PositionalSpecifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PositionalSpecifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ps *PositionalSpecifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PositionalSpecifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *PositionalSpecifier) String() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // NewPositionalSpecifierWithPositionObjectSpecifier initializes a positional specifier with a given position relative to another given specifier.
@@ -74,36 +74,36 @@ func NewPositionalSpecifierWithPositionObjectSpecifier(position InsertionPositio
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PositionalSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *PositionalSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ps *PositionalSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *PositionalSpecifier {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ps
 }
 
 // SetInsertionClassDescription sets the class description for the object or objects to be inserted.
-func (x *PositionalSpecifier) SetInsertionClassDescription(classDescription *ScriptClassDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInsertionClassDescription:"), objref.IDOf(classDescription))
+func (ps *PositionalSpecifier) SetInsertionClassDescription(classDescription *ScriptClassDescription) {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setInsertionClassDescription:"), objref.IDOf(classDescription))
 }
 
 // Evaluate causes the receiver to evaluate its position.
-func (x *PositionalSpecifier) Evaluate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate"))
+func (ps *PositionalSpecifier) Evaluate() {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("evaluate"))
 }
 
 // Position wraps the corresponding Objective-C method.
-func (x *PositionalSpecifier) Position() InsertionPosition {
-	_r := objc.Send[InsertionPosition](objref.IDOf(x), objc.RegisterName("position"))
+func (ps *PositionalSpecifier) Position() InsertionPosition {
+	_r := objc.Send[InsertionPosition](objref.IDOf(ps), objc.RegisterName("position"))
 	return _r
 }
 
 // InsertionContainer wraps the corresponding Objective-C method.
-func (x *PositionalSpecifier) InsertionContainer() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertionContainer"))
+func (ps *PositionalSpecifier) InsertionContainer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionContainer"))
 	return obj.Wrap(_r)
 }
 
 // InsertionKey wraps the corresponding Objective-C method.
-func (x *PositionalSpecifier) InsertionKey() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertionKey"))
+func (ps *PositionalSpecifier) InsertionKey() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionKey"))
 	if _r == 0 {
 		return ""
 	}
@@ -111,28 +111,13 @@ func (x *PositionalSpecifier) InsertionKey() string {
 }
 
 // InsertionIndex wraps the corresponding Objective-C method.
-func (x *PositionalSpecifier) InsertionIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertionIndex"))
+func (ps *PositionalSpecifier) InsertionIndex() int {
+	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("insertionIndex"))
 	return _r
 }
 
 // InsertionReplaces wraps the corresponding Objective-C method.
-func (x *PositionalSpecifier) InsertionReplaces() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("insertionReplaces"))
+func (ps *PositionalSpecifier) InsertionReplaces() bool {
+	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("insertionReplaces"))
 	return _r
 }
-
-// PositionalSpecifierable is the interface implemented by [PositionalSpecifier], for mocking and DI.
-type PositionalSpecifierable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *PositionalSpecifier
-	SetInsertionClassDescription(classDescription *ScriptClassDescription)
-	Evaluate()
-	Position() InsertionPosition
-	InsertionContainer() obj.Object
-	InsertionKey() string
-	InsertionIndex() int
-	InsertionReplaces() bool
-}
-
-var _ PositionalSpecifierable = (*PositionalSpecifier)(nil)

@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterSupplyVoltageLowEventAdopt(id objc.ID)
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsvle *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccsvle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccsvle *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccsvle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccsvle *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccsvle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsvle *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccsvle))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent creates a new MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent() *MTRPumpCon
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterSupplyVoltageLowEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable = (*MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent)(nil)

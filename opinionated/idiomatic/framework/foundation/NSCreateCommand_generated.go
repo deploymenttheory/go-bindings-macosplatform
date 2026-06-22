@@ -52,81 +52,64 @@ func NewCreateCommand() *CreateCommand {
 	return createCommandAdopt(_id)
 }
 
-// WithDirectParameter sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
-func (x *CreateCommand) WithDirectParameter(directParameter obj.Object) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
-	return x
+// WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+func (cc *CreateCommand) WithDirectParameter(directParameter obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
+	return cc
 }
 
-// WithReceiversSpecifier sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
-func (x *CreateCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
-	return x
+// WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+func (cc *CreateCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
+	return cc
 }
 
-// WithArguments sets the arguments of the command to args.
-func (x *CreateCommand) WithArguments(arguments obj.Object) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
-	return x
+// WithArguments sets sets the arguments of the command to args.
+func (cc *CreateCommand) WithArguments(arguments obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+	return cc
 }
 
-// WithScriptErrorNumber sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
-func (x *CreateCommand) WithScriptErrorNumber(scriptErrorNumber int) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
-	return x
+// WithScriptErrorNumber sets sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+func (cc *CreateCommand) WithScriptErrorNumber(scriptErrorNumber int) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
+	return cc
 }
 
-// WithScriptErrorOffendingObjectDescriptor sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *CreateCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
-	return x
+// WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (cc *CreateCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
+	return cc
 }
 
-// WithScriptErrorExpectedTypeDescriptor sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *CreateCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
-	return x
+// WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (cc *CreateCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
+	return cc
 }
 
-// WithScriptErrorString sets a script error string that is associated with execution of the command.
-func (x *CreateCommand) WithScriptErrorString(scriptErrorString StringProvider) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
-	return x
+// WithScriptErrorString sets sets a script error string that is associated with execution of the command.
+func (cc *CreateCommand) WithScriptErrorString(scriptErrorString StringProvider) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
+	return cc
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *CreateCommand) WithScriptingProperties(scriptingProperties obj.Object) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cc *CreateCommand) WithScriptingProperties(scriptingProperties obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cc
 }
 
 // CreateClassDescription wraps the corresponding Objective-C method.
-func (x *CreateCommand) CreateClassDescription() *ScriptClassDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createClassDescription"))
+func (cc *CreateCommand) CreateClassDescription() *ScriptClassDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("createClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // ResolvedKeyDictionary wraps the corresponding Objective-C method.
-func (x *CreateCommand) ResolvedKeyDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvedKeyDictionary"))
+func (cc *CreateCommand) ResolvedKeyDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("resolvedKeyDictionary"))
 	return obj.Wrap(_r)
 }
-
-// CreateCommandable is the interface implemented by [CreateCommand], for mocking and DI.
-type CreateCommandable interface {
-	obj.Object
-	WithDirectParameter(directParameter obj.Object) *CreateCommand
-	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand
-	WithArguments(arguments obj.Object) *CreateCommand
-	WithScriptErrorNumber(scriptErrorNumber int) *CreateCommand
-	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CreateCommand
-	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CreateCommand
-	WithScriptErrorString(scriptErrorString StringProvider) *CreateCommand
-	WithScriptingProperties(scriptingProperties obj.Object) *CreateCommand
-	CreateClassDescription() *ScriptClassDescription
-	ResolvedKeyDictionary() obj.Object
-}
-
-var _ CreateCommandable = (*CreateCommand)(nil)
 
 var _ ScriptCommandProvider = (*CreateCommand)(nil)

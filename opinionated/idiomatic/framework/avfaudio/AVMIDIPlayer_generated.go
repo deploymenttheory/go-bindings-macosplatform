@@ -5,13 +5,14 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MIDIPlayer is an idiomatic wrapper over the Objective-C class AVMIDIPlayer.
@@ -48,24 +49,24 @@ func mIDIPlayerAdopt(id objc.ID) *MIDIPlayer {
 }
 
 // Description returns the object's -description text.
-func (x *MIDIPlayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MIDIPlayer) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDIPlayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MIDIPlayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDIPlayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MIDIPlayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MIDIPlayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MIDIPlayer) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMIDIPlayerWithContentsOfURLSoundBankURLError creates a player to play a MIDI file with the specified soundbank.
@@ -90,81 +91,53 @@ func NewMIDIPlayerWithDataSoundBankURLError(data obj.Object, bankURL string) (re
 	return mIDIPlayerAdopt(_id), nil
 }
 
-// WithRate the playback rate of the player.
-func (x *MIDIPlayer) WithRate(rate float32) *MIDIPlayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the playback rate of the player.
+func (mp *MIDIPlayer) WithRate(rate float32) *MIDIPlayer {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setRate:"), rate)
+	return mp
 }
 
-// WithCurrentPosition the current playback position, in seconds.
-func (x *MIDIPlayer) WithCurrentPosition(currentPosition float64) *MIDIPlayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPosition:"), currentPosition)
-	return x
+// WithCurrentPosition sets the current playback position, in seconds.
+func (mp *MIDIPlayer) WithCurrentPosition(currentPosition float64) *MIDIPlayer {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setCurrentPosition:"), currentPosition)
+	return mp
 }
 
 // PrepareToPlay prepares the player to play the sequence by prerolling all events.
-func (x *MIDIPlayer) PrepareToPlay() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareToPlay"))
+func (mp *MIDIPlayer) PrepareToPlay() {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("prepareToPlay"))
 }
 
 // Play plays the MIDI sequence.
-func (x *MIDIPlayer) Play(completionHandler func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play:"), completionHandler)
+func (mp *MIDIPlayer) Play(completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("play:"), completionHandler)
 }
 
 // Stop stops playing the sequence.
-func (x *MIDIPlayer) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (mp *MIDIPlayer) Stop() {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("stop"))
 }
 
-// Duration the length of the currently loaded file in seconds.
-func (x *MIDIPlayer) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns the length of the currently loaded file in seconds.
+func (mp *MIDIPlayer) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("duration"))
 	return _r
 }
 
-// IsPlaying indicates whether or not the player is playing
-func (x *MIDIPlayer) IsPlaying() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaying"))
+// IsPlaying reports whether the player is playing
+func (mp *MIDIPlayer) IsPlaying() bool {
+	_r := objc.Send[bool](objref.IDOf(mp), objc.RegisterName("isPlaying"))
 	return _r
 }
 
-// Rate the playback rate of the player 1.0 is normal playback rate.  Rate must be > 0.0.
-func (x *MIDIPlayer) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns the playback rate of the player 1.0 is normal playback rate.  Rate must be > 0.0.
+func (mp *MIDIPlayer) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("rate"))
 	return _r
 }
 
-// SetRate wraps the corresponding Objective-C method.
-func (x *MIDIPlayer) SetRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-}
-
-// CurrentPosition the current playback position in seconds Setting this positions the player to the specified time.  No range checking on the time value is done. This can be set while the player is playing, in which case playback will resume at the new time.
-func (x *MIDIPlayer) CurrentPosition() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("currentPosition"))
+// CurrentPosition returns the current playback position in seconds Setting this positions the player to the specified time.  No range checking on the time value is done. This can be set while the player is playing, in which case playback will resume at the new time.
+func (mp *MIDIPlayer) CurrentPosition() float64 {
+	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("currentPosition"))
 	return _r
 }
-
-// SetCurrentPosition wraps the corresponding Objective-C method.
-func (x *MIDIPlayer) SetCurrentPosition(currentPosition float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPosition:"), currentPosition)
-}
-
-// MIDIPlayerable is the interface implemented by [MIDIPlayer], for mocking and DI.
-type MIDIPlayerable interface {
-	obj.Object
-	WithRate(rate float32) *MIDIPlayer
-	WithCurrentPosition(currentPosition float64) *MIDIPlayer
-	PrepareToPlay()
-	Play(completionHandler func())
-	Stop()
-	Duration() float64
-	IsPlaying() bool
-	Rate() float32
-	SetRate(rate float32)
-	CurrentPosition() float64
-	SetCurrentPosition(currentPosition float64)
-}
-
-var _ MIDIPlayerable = (*MIDIPlayer)(nil)

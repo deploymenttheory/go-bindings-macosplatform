@@ -52,85 +52,52 @@ func NewCheckerboardTexture() *CheckerboardTexture {
 	return checkerboardTextureAdopt(_id)
 }
 
-// WithDivisions the number of squares along each dimension in the checkerboard pattern.
-func (x *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDivisions:"), divisions)
-	return x
+// WithDivisions sets the number of squares along each dimension in the checkerboard pattern.
+func (ct *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardTexture {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setDivisions:"), divisions)
+	return ct
 }
 
-// WithColor1 the color for half of the squares in the checkerboard pattern.
-func (x *CheckerboardTexture) WithColor1(color1 obj.Object) *CheckerboardTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor1:"), objref.IDOf(color1))
-	return x
+// WithColor1 sets the color for half of the squares in the checkerboard pattern.
+func (ct *CheckerboardTexture) WithColor1(color1 obj.Object) *CheckerboardTexture {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor1:"), objref.IDOf(color1))
+	return ct
 }
 
-// WithColor2 the color for the other half of the squares in the checkerboard pattern.
-func (x *CheckerboardTexture) WithColor2(color2 obj.Object) *CheckerboardTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor2:"), objref.IDOf(color2))
-	return x
+// WithColor2 sets the color for the other half of the squares in the checkerboard pattern.
+func (ct *CheckerboardTexture) WithColor2(color2 obj.Object) *CheckerboardTexture {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor2:"), objref.IDOf(color2))
+	return ct
 }
 
-// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
-func (x *CheckerboardTexture) WithIsCube(isCube bool) *CheckerboardTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
-	return x
+// WithIsCube sets a Boolean value that indicates whether the texture is a cube textures.
+func (ct *CheckerboardTexture) WithIsCube(isCube bool) *CheckerboardTexture {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setIsCube:"), isCube)
+	return ct
 }
 
-// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-func (x *CheckerboardTexture) WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
-	return x
+// WithHasAlphaValues sets hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+func (ct *CheckerboardTexture) WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
+	return ct
 }
 
 // Divisions wraps the corresponding Objective-C method.
-func (x *CheckerboardTexture) Divisions() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("divisions"))
+func (ct *CheckerboardTexture) Divisions() float32 {
+	_r := objc.Send[float32](objref.IDOf(ct), objc.RegisterName("divisions"))
 	return _r
 }
 
-// SetDivisions wraps the corresponding Objective-C method.
-func (x *CheckerboardTexture) SetDivisions(divisions float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDivisions:"), divisions)
-}
-
 // Color1 wraps the corresponding Objective-C method.
-func (x *CheckerboardTexture) Color1() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color1"))
+func (ct *CheckerboardTexture) Color1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color1"))
 	return obj.Wrap(_r)
-}
-
-// SetColor1 wraps the corresponding Objective-C method.
-func (x *CheckerboardTexture) SetColor1(color1 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor1:"), objref.IDOf(color1))
 }
 
 // Color2 wraps the corresponding Objective-C method.
-func (x *CheckerboardTexture) Color2() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color2"))
+func (ct *CheckerboardTexture) Color2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color2"))
 	return obj.Wrap(_r)
 }
-
-// SetColor2 wraps the corresponding Objective-C method.
-func (x *CheckerboardTexture) SetColor2(color2 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor2:"), objref.IDOf(color2))
-}
-
-// CheckerboardTextureable is the interface implemented by [CheckerboardTexture], for mocking and DI.
-type CheckerboardTextureable interface {
-	obj.Object
-	WithDivisions(divisions float32) *CheckerboardTexture
-	WithColor1(color1 obj.Object) *CheckerboardTexture
-	WithColor2(color2 obj.Object) *CheckerboardTexture
-	WithIsCube(isCube bool) *CheckerboardTexture
-	WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture
-	Divisions() float32
-	SetDivisions(divisions float32)
-	Color1() obj.Object
-	SetColor1(color1 obj.Object)
-	Color2() obj.Object
-	SetColor2(color2 obj.Object)
-}
-
-var _ CheckerboardTextureable = (*CheckerboardTexture)(nil)
 
 var _ TextureProvider = (*CheckerboardTexture)(nil)

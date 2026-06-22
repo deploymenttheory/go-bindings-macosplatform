@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,99 +51,59 @@ func NewAudioUnitDelay() *AudioUnitDelay {
 	return audioUnitDelayAdopt(_id)
 }
 
-// WithDelayTime the time for the input signal to reach the output.
-func (x *AudioUnitDelay) WithDelayTime(delayTime float64) *AudioUnitDelay {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelayTime:"), delayTime)
-	return x
+// WithDelayTime sets the time for the input signal to reach the output.
+func (aud *AudioUnitDelay) WithDelayTime(delayTime float64) *AudioUnitDelay {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setDelayTime:"), delayTime)
+	return aud
 }
 
-// WithFeedback the amount of the output signal that feeds back into the delay line.
-func (x *AudioUnitDelay) WithFeedback(feedback float32) *AudioUnitDelay {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeedback:"), feedback)
-	return x
+// WithFeedback sets the amount of the output signal that feeds back into the delay line.
+func (aud *AudioUnitDelay) WithFeedback(feedback float32) *AudioUnitDelay {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setFeedback:"), feedback)
+	return aud
 }
 
-// WithLowPassCutoff the cutoff frequency above which high frequency content rolls off, in hertz.
-func (x *AudioUnitDelay) WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDelay {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowPassCutoff:"), lowPassCutoff)
-	return x
+// WithLowPassCutoff sets the cutoff frequency above which high frequency content rolls off, in hertz.
+func (aud *AudioUnitDelay) WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDelay {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setLowPassCutoff:"), lowPassCutoff)
+	return aud
 }
 
-// WithWetDryMix the blend of the wet and dry signals.
-func (x *AudioUnitDelay) WithWetDryMix(wetDryMix float32) *AudioUnitDelay {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
-	return x
+// WithWetDryMix sets the blend of the wet and dry signals.
+func (aud *AudioUnitDelay) WithWetDryMix(wetDryMix float32) *AudioUnitDelay {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setWetDryMix:"), wetDryMix)
+	return aud
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitDelay) WithBypass(bypass bool) *AudioUnitDelay {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (aud *AudioUnitDelay) WithBypass(bypass bool) *AudioUnitDelay {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setBypass:"), bypass)
+	return aud
 }
 
-// DelayTime range:      0 -> 2 Default:    1 Unit:       Seconds
-func (x *AudioUnitDelay) DelayTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("delayTime"))
+// DelayTime returns range:      0 -> 2 Default:    1 Unit:       Seconds
+func (aud *AudioUnitDelay) DelayTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(aud), objc.RegisterName("delayTime"))
 	return _r
 }
 
-// SetDelayTime wraps the corresponding Objective-C method.
-func (x *AudioUnitDelay) SetDelayTime(delayTime float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelayTime:"), delayTime)
-}
-
-// Feedback amount of the output signal fed back into the delay line Range:      -100 -> 100 Default:    50 Unit:       Percent
-func (x *AudioUnitDelay) Feedback() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("feedback"))
+// Feedback returns amount of the output signal fed back into the delay line Range:      -100 -> 100 Default:    50 Unit:       Percent
+func (aud *AudioUnitDelay) Feedback() float32 {
+	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("feedback"))
 	return _r
 }
 
-// SetFeedback wraps the corresponding Objective-C method.
-func (x *AudioUnitDelay) SetFeedback(feedback float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeedback:"), feedback)
-}
-
-// LowPassCutoff cutoff frequency above which high frequency content is rolled off Range:      10 -> (samplerate/2) Default:    15000 Unit:       Hertz
-func (x *AudioUnitDelay) LowPassCutoff() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lowPassCutoff"))
+// LowPassCutoff returns cutoff frequency above which high frequency content is rolled off Range:      10 -> (samplerate/2) Default:    15000 Unit:       Hertz
+func (aud *AudioUnitDelay) LowPassCutoff() float32 {
+	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("lowPassCutoff"))
 	return _r
 }
 
-// SetLowPassCutoff wraps the corresponding Objective-C method.
-func (x *AudioUnitDelay) SetLowPassCutoff(lowPassCutoff float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowPassCutoff:"), lowPassCutoff)
-}
-
-// WetDryMix blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Default:    100 Unit:       Percent
-func (x *AudioUnitDelay) WetDryMix() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
+// WetDryMix returns blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Default:    100 Unit:       Percent
+func (aud *AudioUnitDelay) WetDryMix() float32 {
+	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("wetDryMix"))
 	return _r
 }
-
-// SetWetDryMix wraps the corresponding Objective-C method.
-func (x *AudioUnitDelay) SetWetDryMix(wetDryMix float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
-}
-
-// AudioUnitDelayable is the interface implemented by [AudioUnitDelay], for mocking and DI.
-type AudioUnitDelayable interface {
-	obj.Object
-	WithDelayTime(delayTime float64) *AudioUnitDelay
-	WithFeedback(feedback float32) *AudioUnitDelay
-	WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDelay
-	WithWetDryMix(wetDryMix float32) *AudioUnitDelay
-	WithBypass(bypass bool) *AudioUnitDelay
-	DelayTime() float64
-	SetDelayTime(delayTime float64)
-	Feedback() float32
-	SetFeedback(feedback float32)
-	LowPassCutoff() float32
-	SetLowPassCutoff(lowPassCutoff float32)
-	WetDryMix() float32
-	SetWetDryMix(wetDryMix float32)
-}
-
-var _ AudioUnitDelayable = (*AudioUnitDelay)(nil)
 
 var _ AudioUnitEffectProvider = (*AudioUnitDelay)(nil)
 

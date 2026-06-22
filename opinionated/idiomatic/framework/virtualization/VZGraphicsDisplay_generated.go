@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -12,7 +14,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // GraphicsDisplay is an idiomatic wrapper over the Objective-C class VZGraphicsDisplay.
@@ -51,30 +52,30 @@ func graphicsDisplayAdopt(id objc.ID) *GraphicsDisplay {
 }
 
 // Description returns the object's -description text.
-func (x *GraphicsDisplay) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gd *GraphicsDisplay) Description() string {
+	return rt.Description(objref.IDOf(gd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphicsDisplay) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gd *GraphicsDisplay) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphicsDisplay) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gd *GraphicsDisplay) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GraphicsDisplay) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gd *GraphicsDisplay) String() string {
+	return rt.Description(objref.IDOf(gd))
 }
 
 // ReconfigureWithSizeInPixels resize this display with the new dimensions you provide.
-func (x *GraphicsDisplay) ReconfigureWithSizeInPixels(sizeInPixels corefoundation.CGSize) error {
+func (gd *GraphicsDisplay) ReconfigureWithSizeInPixels(sizeInPixels corefoundation.CGSize) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("reconfigureWithSizeInPixels:error:"), sizeInPixels, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(gd), objc.RegisterName("reconfigureWithSizeInPixels:error:"), sizeInPixels, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -82,34 +83,24 @@ func (x *GraphicsDisplay) ReconfigureWithSizeInPixels(sizeInPixels corefoundatio
 }
 
 // ReconfigureWithConfiguration reconfigure this display with the new display configuration you provide.
-func (x *GraphicsDisplay) ReconfigureWithConfiguration(configuration *GraphicsDisplayConfiguration) error {
+func (gd *GraphicsDisplay) ReconfigureWithConfiguration(configuration *GraphicsDisplayConfiguration) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("reconfigureWithConfiguration:error:"), objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(gd), objc.RegisterName("reconfigureWithConfiguration:error:"), objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SizeInPixels the size of the display, in pixels.
-func (x *GraphicsDisplay) SizeInPixels() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeInPixels"))
+// SizeInPixels returns the size of the display, in pixels.
+func (gd *GraphicsDisplay) SizeInPixels() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(gd), objc.RegisterName("sizeInPixels"))
 	return _r
 }
-
-// GraphicsDisplayable is the interface implemented by [GraphicsDisplay], for mocking and DI.
-type GraphicsDisplayable interface {
-	obj.Object
-	ReconfigureWithSizeInPixels(sizeInPixels corefoundation.CGSize) error
-	ReconfigureWithConfiguration(configuration *GraphicsDisplayConfiguration) error
-	SizeInPixels() corefoundation.CGSize
-}
-
-var _ GraphicsDisplayable = (*GraphicsDisplay)(nil)
 
 // isGraphicsDisplay marks GraphicsDisplay — and, by embedding promotion, its
 // subclasses — as a member of the GraphicsDisplay hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GraphicsDisplay) isGraphicsDisplay() {}
+func (gd *GraphicsDisplay) isGraphicsDisplay() {}
 
 var _ GraphicsDisplayProvider = (*GraphicsDisplay)(nil)

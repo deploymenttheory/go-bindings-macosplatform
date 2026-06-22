@@ -49,24 +49,24 @@ func annotationAdopt(id objc.ID) *Annotation {
 }
 
 // Description returns the object's -description text.
-func (x *Annotation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Annotation) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Annotation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Annotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Annotation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Annotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Annotation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Annotation) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAnnotationWithDictionaryForPage creates a new Annotation.
@@ -83,446 +83,366 @@ func NewAnnotationWithBounds(bounds corefoundation.CGRect) *Annotation {
 	return annotationAdopt(_id)
 }
 
-// WithPage returns the page that the annotation is associated with.
-func (x *Annotation) WithPage(page *Page) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), objref.IDOf(page))
-	return x
+// WithPage sets returns the page that the annotation is associated with.
+func (a *Annotation) WithPage(page *Page) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPage:"), objref.IDOf(page))
+	return a
 }
 
-// WithType returns the type of the annotation.
-func (x *Annotation) WithType(type_ string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
-	return x
+// WithType sets returns the type of the annotation.
+func (a *Annotation) WithType(type_ string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setType:"), purego.NSString(type_))
+	return a
 }
 
-// WithBounds returns the bounding box for the annotation in page space.
-func (x *Annotation) WithBounds(bounds corefoundation.CGRect) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets returns the bounding box for the annotation in page space.
+func (a *Annotation) WithBounds(bounds corefoundation.CGRect) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setBounds:"), bounds)
+	return a
 }
 
-// WithShouldDisplay returns a Boolean value indicating whether the annotation should be displayed.
-func (x *Annotation) WithShouldDisplay(shouldDisplay bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
-	return x
+// WithShouldDisplay sets returns a Boolean value indicating whether the annotation should be displayed.
+func (a *Annotation) WithShouldDisplay(shouldDisplay bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
+	return a
 }
 
-// WithShouldPrint returns a Boolean value indicating whether the annotation should appear when the document is printed.
-func (x *Annotation) WithShouldPrint(shouldPrint bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrint:"), shouldPrint)
-	return x
+// WithShouldPrint sets returns a Boolean value indicating whether the annotation should appear when the document is printed.
+func (a *Annotation) WithShouldPrint(shouldPrint bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setShouldPrint:"), shouldPrint)
+	return a
 }
 
-// WithHighlighted a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
-func (x *Annotation) WithHighlighted(highlighted bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
+func (a *Annotation) WithHighlighted(highlighted bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setHighlighted:"), highlighted)
+	return a
 }
 
-// WithFont the font the annotation uses to display text.
-func (x *Annotation) WithFont(font obj.Object) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font the annotation uses to display text.
+func (a *Annotation) WithFont(font obj.Object) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return a
 }
 
-// WithFontColor the font color the annotation uses to display text.
-func (x *Annotation) WithFontColor(fontColor obj.Object) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
-	return x
+// WithFontColor sets the font color the annotation uses to display text.
+func (a *Annotation) WithFontColor(fontColor obj.Object) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
+	return a
 }
 
-// WithInteriorColor the fill color for drawing a circle, line, or square annotation.
-func (x *Annotation) WithInteriorColor(interiorColor obj.Object) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
-	return x
+// WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
+func (a *Annotation) WithInteriorColor(interiorColor obj.Object) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
+	return a
 }
 
-// WithStartPoint the point where a line begins, in annotation-space coordinates.
-func (x *Annotation) WithStartPoint(startPoint corefoundation.CGPoint) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
-	return x
+// WithStartPoint sets the point where a line begins, in annotation-space coordinates.
+func (a *Annotation) WithStartPoint(startPoint corefoundation.CGPoint) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setStartPoint:"), startPoint)
+	return a
 }
 
-// WithEndPoint the point where a line ends, in annotation-space coordinates.
-func (x *Annotation) WithEndPoint(endPoint corefoundation.CGPoint) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
-	return x
+// WithEndPoint sets the point where a line ends, in annotation-space coordinates.
+func (a *Annotation) WithEndPoint(endPoint corefoundation.CGPoint) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setEndPoint:"), endPoint)
+	return a
 }
 
-// WithStartLineStyle the style of the line annotation’s starting point, such as square or filled arrowhead.
-func (x *Annotation) WithStartLineStyle(startLineStyle LineStyle) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartLineStyle:"), startLineStyle)
-	return x
+// WithStartLineStyle sets the style of the line annotation’s starting point, such as square or filled arrowhead.
+func (a *Annotation) WithStartLineStyle(startLineStyle LineStyle) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setStartLineStyle:"), startLineStyle)
+	return a
 }
 
-// WithEndLineStyle the style of the line annotation’s ending point, such as square or filled arrowhead.
-func (x *Annotation) WithEndLineStyle(endLineStyle LineStyle) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndLineStyle:"), endLineStyle)
-	return x
+// WithEndLineStyle sets the style of the line annotation’s ending point, such as square or filled arrowhead.
+func (a *Annotation) WithEndLineStyle(endLineStyle LineStyle) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setEndLineStyle:"), endLineStyle)
+	return a
 }
 
-// WithIconType the type of icon to display for a pop-up text annotation.
-func (x *Annotation) WithIconType(iconType TextAnnotationIconType) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconType:"), iconType)
-	return x
+// WithIconType sets the type of icon to display for a pop-up text annotation.
+func (a *Annotation) WithIconType(iconType TextAnnotationIconType) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setIconType:"), iconType)
+	return a
 }
 
-// WithQuadrilateralPoints an array of values that represents the points bounding the marked-up text.
-func (x *Annotation) WithQuadrilateralPoints(items ...obj.Object) *Annotation {
+// WithQuadrilateralPoints sets an array of values that represents the points bounding the marked-up text.
+func (a *Annotation) WithQuadrilateralPoints(items ...obj.Object) *Annotation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralPoints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setQuadrilateralPoints:"), _arr)
+	return a
 }
 
-// WithMarkupType the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
-func (x *Annotation) WithMarkupType(markupType MarkupType) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkupType:"), markupType)
-	return x
+// WithMarkupType sets the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
+func (a *Annotation) WithMarkupType(markupType MarkupType) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMarkupType:"), markupType)
+	return a
 }
 
-// WithWidgetControlType the type of button widget control, either radio button, push button, or checkbox.
-func (x *Annotation) WithWidgetControlType(widgetControlType WidgetControlType) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetControlType:"), widgetControlType)
-	return x
+// WithWidgetControlType sets the type of button widget control, either radio button, push button, or checkbox.
+func (a *Annotation) WithWidgetControlType(widgetControlType WidgetControlType) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetControlType:"), widgetControlType)
+	return a
 }
 
-// WithMultiline a Boolean value that indicates whether the text widget annotation displays multiple lines.
-func (x *Annotation) WithMultiline(multiline bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiline:"), multiline)
-	return x
+// WithMultiline sets a Boolean value that indicates whether the text widget annotation displays multiple lines.
+func (a *Annotation) WithMultiline(multiline bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMultiline:"), multiline)
+	return a
 }
 
-// WithComb a Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
-func (x *Annotation) WithComb(comb bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComb:"), comb)
-	return x
+// WithComb sets a Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
+func (a *Annotation) WithComb(comb bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setComb:"), comb)
+	return a
 }
 
-// WithMaximumLength the maximum number of characters the text widget annotation allows.
-func (x *Annotation) WithMaximumLength(maximumLength int) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLength:"), maximumLength)
-	return x
+// WithMaximumLength sets the maximum number of characters the text widget annotation allows.
+func (a *Annotation) WithMaximumLength(maximumLength int) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMaximumLength:"), maximumLength)
+	return a
 }
 
-// WithWidgetStringValue the string value of the widget annotation.
-func (x *Annotation) WithWidgetStringValue(widgetStringValue string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
-	return x
+// WithWidgetStringValue sets the string value of the widget annotation.
+func (a *Annotation) WithWidgetStringValue(widgetStringValue string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
+	return a
 }
 
-// WithWidgetDefaultStringValue the string value that the widget reverts to when performing a reset form action.
-func (x *Annotation) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
-	return x
+// WithWidgetDefaultStringValue sets the string value that the widget reverts to when performing a reset form action.
+func (a *Annotation) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
+	return a
 }
 
-// WithAllowsToggleToOff a Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
-func (x *Annotation) WithAllowsToggleToOff(allowsToggleToOff bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
-	return x
+// WithAllowsToggleToOff sets a Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
+func (a *Annotation) WithAllowsToggleToOff(allowsToggleToOff bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
+	return a
 }
 
-// WithRadiosInUnison a Boolean value that indicates whether radio buttons in a group turn on and off in unison.
-func (x *Annotation) WithRadiosInUnison(radiosInUnison bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
-	return x
+// WithRadiosInUnison sets a Boolean value that indicates whether radio buttons in a group turn on and off in unison.
+func (a *Annotation) WithRadiosInUnison(radiosInUnison bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
+	return a
 }
 
-// WithReadOnly a Boolean value that determines whether the widget is editable.
-func (x *Annotation) WithReadOnly(readOnly bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
-	return x
+// WithReadOnly sets a Boolean value that determines whether the widget is editable.
+func (a *Annotation) WithReadOnly(readOnly bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setReadOnly:"), readOnly)
+	return a
 }
 
-// WithListChoice a Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
-func (x *Annotation) WithListChoice(listChoice bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListChoice:"), listChoice)
-	return x
+// WithListChoice sets a Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
+func (a *Annotation) WithListChoice(listChoice bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setListChoice:"), listChoice)
+	return a
 }
 
-// WithChoices an array of strings that specifies the options in either a list or a pop-up menu.
-func (x *Annotation) WithChoices(items ...obj.Object) *Annotation {
+// WithChoices sets an array of strings that specifies the options in either a list or a pop-up menu.
+func (a *Annotation) WithChoices(items ...obj.Object) *Annotation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChoices:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setChoices:"), _arr)
+	return a
 }
 
-// WithValues an array of strings that specifies the export values for items in a list or a pop-up menu.
-func (x *Annotation) WithValues(items ...obj.Object) *Annotation {
+// WithValues sets an array of strings that specifies the export values for items in a list or a pop-up menu.
+func (a *Annotation) WithValues(items ...obj.Object) *Annotation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setValues:"), _arr)
+	return a
 }
 
-// WithButtonWidgetState the current state of the button widget annotation.
-func (x *Annotation) WithButtonWidgetState(buttonWidgetState WidgetCellState) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
-	return x
+// WithButtonWidgetState sets the current state of the button widget annotation.
+func (a *Annotation) WithButtonWidgetState(buttonWidgetState WidgetCellState) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
+	return a
 }
 
-// WithButtonWidgetStateString a string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
-func (x *Annotation) WithButtonWidgetStateString(buttonWidgetStateString string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
-	return x
+// WithButtonWidgetStateString sets a string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
+func (a *Annotation) WithButtonWidgetStateString(buttonWidgetStateString string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
+	return a
 }
 
-// WithOpen a Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
-func (x *Annotation) WithOpen(open bool) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpen:"), open)
-	return x
+// WithOpen sets a Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
+func (a *Annotation) WithOpen(open bool) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setOpen:"), open)
+	return a
 }
 
-// WithDestination the destination for a link annotation.
-func (x *Annotation) WithDestination(destination *Destination) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
-	return x
+// WithDestination sets the destination for a link annotation.
+func (a *Annotation) WithDestination(destination *Destination) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setDestination:"), objref.IDOf(destination))
+	return a
 }
 
-// WithURL a URL for a link annotation.
-func (x *Annotation) WithURL(uRL string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets a URL for a link annotation.
+func (a *Annotation) WithURL(uRL string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return a
 }
 
-// WithFieldName the widget identifier for form annotation actions and behaviors.
-func (x *Annotation) WithFieldName(fieldName string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
-	return x
+// WithFieldName sets the widget identifier for form annotation actions and behaviors.
+func (a *Annotation) WithFieldName(fieldName string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
+	return a
 }
 
-// WithCaption the title of push button widget annotations.
-func (x *Annotation) WithCaption(caption string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
-	return x
+// WithCaption sets the title of push button widget annotations.
+func (a *Annotation) WithCaption(caption string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setCaption:"), purego.NSString(caption))
+	return a
 }
 
-// WithBackgroundColor the color of the widget’s background.
-func (x *Annotation) WithBackgroundColor(backgroundColor obj.Object) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the widget’s background.
+func (a *Annotation) WithBackgroundColor(backgroundColor obj.Object) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return a
 }
 
-// WithStampName the name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
-func (x *Annotation) WithStampName(stampName string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStampName:"), purego.NSString(stampName))
-	return x
+// WithStampName sets the name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
+func (a *Annotation) WithStampName(stampName string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setStampName:"), purego.NSString(stampName))
+	return a
 }
 
 // DrawWithBoxInContext draws the annotation in a graphics context using page-space coordinates relative to the origin of the specified box.
-func (x *Annotation) DrawWithBoxInContext(box DisplayBox, context_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWithBox:inContext:"), box, objref.IDOf(context_))
+func (a *Annotation) DrawWithBoxInContext(box DisplayBox, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:inContext:"), box, objref.IDOf(context_))
 }
 
 // Page wraps the corresponding Objective-C method.
-func (x *Annotation) Page() *Page {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("page"))
+func (a *Annotation) Page() *Page {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("page"))
 	return PageFromID(_r)
 }
 
-// SetPage wraps the corresponding Objective-C method.
-func (x *Annotation) SetPage(page *Page) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), objref.IDOf(page))
-}
-
 // Type wraps the corresponding Objective-C method.
-func (x *Annotation) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (a *Annotation) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetType wraps the corresponding Objective-C method.
-func (x *Annotation) SetType(type_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
-}
-
 // Bounds wraps the corresponding Objective-C method.
-func (x *Annotation) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+func (a *Annotation) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(a), objc.RegisterName("bounds"))
 	return _r
-}
-
-// SetBounds wraps the corresponding Objective-C method.
-func (x *Annotation) SetBounds(bounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 }
 
 // ShouldDisplay wraps the corresponding Objective-C method.
-func (x *Annotation) ShouldDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldDisplay"))
+func (a *Annotation) ShouldDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("shouldDisplay"))
 	return _r
-}
-
-// SetShouldDisplay wraps the corresponding Objective-C method.
-func (x *Annotation) SetShouldDisplay(shouldDisplay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
 }
 
 // ShouldPrint wraps the corresponding Objective-C method.
-func (x *Annotation) ShouldPrint() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPrint"))
+func (a *Annotation) ShouldPrint() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("shouldPrint"))
 	return _r
 }
 
-// SetShouldPrint wraps the corresponding Objective-C method.
-func (x *Annotation) SetShouldPrint(shouldPrint bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrint:"), shouldPrint)
-}
-
 // HasAppearanceStream wraps the corresponding Objective-C method.
-func (x *Annotation) HasAppearanceStream() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAppearanceStream"))
+func (a *Annotation) HasAppearanceStream() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasAppearanceStream"))
 	return _r
 }
 
 // IsHighlighted wraps the corresponding Objective-C method.
-func (x *Annotation) IsHighlighted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighlighted"))
+func (a *Annotation) IsHighlighted() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHighlighted"))
 	return _r
-}
-
-// SetHighlighted wraps the corresponding Objective-C method.
-func (x *Annotation) SetHighlighted(highlighted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 }
 
 // RemoveAllAppearanceStreams wraps the corresponding Objective-C method.
-func (x *Annotation) RemoveAllAppearanceStreams() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllAppearanceStreams"))
+func (a *Annotation) RemoveAllAppearanceStreams() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeAllAppearanceStreams"))
 }
 
 // DrawWithBox wraps the corresponding Objective-C method.
-func (x *Annotation) DrawWithBox(box DisplayBox) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWithBox:"), box)
+func (a *Annotation) DrawWithBox(box DisplayBox) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:"), box)
 }
 
 // AddBezierPath adds a bezier path to the ink annotation.
-func (x *Annotation) AddBezierPath(path obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addBezierPath:"), objref.IDOf(path))
+func (a *Annotation) AddBezierPath(path obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addBezierPath:"), objref.IDOf(path))
 }
 
 // RemoveBezierPath removes a bezier path from an ink annotation.
-func (x *Annotation) RemoveBezierPath(path obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBezierPath:"), objref.IDOf(path))
+func (a *Annotation) RemoveBezierPath(path obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeBezierPath:"), objref.IDOf(path))
 }
 
 // Font wraps the corresponding Objective-C method.
-func (x *Annotation) Font() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+func (a *Annotation) Font() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("font"))
 	return obj.Wrap(_r)
-}
-
-// SetFont wraps the corresponding Objective-C method.
-func (x *Annotation) SetFont(font obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 }
 
 // FontColor wraps the corresponding Objective-C method.
-func (x *Annotation) FontColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontColor"))
+func (a *Annotation) FontColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fontColor"))
 	return obj.Wrap(_r)
-}
-
-// SetFontColor wraps the corresponding Objective-C method.
-func (x *Annotation) SetFontColor(fontColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 }
 
 // InteriorColor wraps the corresponding Objective-C method.
-func (x *Annotation) InteriorColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interiorColor"))
+func (a *Annotation) InteriorColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("interiorColor"))
 	return obj.Wrap(_r)
 }
 
-// SetInteriorColor wraps the corresponding Objective-C method.
-func (x *Annotation) SetInteriorColor(interiorColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
-}
-
 // StartPoint wraps the corresponding Objective-C method.
-func (x *Annotation) StartPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("startPoint"))
+func (a *Annotation) StartPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(a), objc.RegisterName("startPoint"))
 	return _r
-}
-
-// SetStartPoint wraps the corresponding Objective-C method.
-func (x *Annotation) SetStartPoint(startPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
 }
 
 // EndPoint wraps the corresponding Objective-C method.
-func (x *Annotation) EndPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("endPoint"))
+func (a *Annotation) EndPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(a), objc.RegisterName("endPoint"))
 	return _r
-}
-
-// SetEndPoint wraps the corresponding Objective-C method.
-func (x *Annotation) SetEndPoint(endPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
 }
 
 // StartLineStyle wraps the corresponding Objective-C method.
-func (x *Annotation) StartLineStyle() LineStyle {
-	_r := objc.Send[LineStyle](objref.IDOf(x), objc.RegisterName("startLineStyle"))
+func (a *Annotation) StartLineStyle() LineStyle {
+	_r := objc.Send[LineStyle](objref.IDOf(a), objc.RegisterName("startLineStyle"))
 	return _r
-}
-
-// SetStartLineStyle wraps the corresponding Objective-C method.
-func (x *Annotation) SetStartLineStyle(startLineStyle LineStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartLineStyle:"), startLineStyle)
 }
 
 // EndLineStyle wraps the corresponding Objective-C method.
-func (x *Annotation) EndLineStyle() LineStyle {
-	_r := objc.Send[LineStyle](objref.IDOf(x), objc.RegisterName("endLineStyle"))
+func (a *Annotation) EndLineStyle() LineStyle {
+	_r := objc.Send[LineStyle](objref.IDOf(a), objc.RegisterName("endLineStyle"))
 	return _r
-}
-
-// SetEndLineStyle wraps the corresponding Objective-C method.
-func (x *Annotation) SetEndLineStyle(endLineStyle LineStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndLineStyle:"), endLineStyle)
 }
 
 // IconType wraps the corresponding Objective-C method.
-func (x *Annotation) IconType() TextAnnotationIconType {
-	_r := objc.Send[TextAnnotationIconType](objref.IDOf(x), objc.RegisterName("iconType"))
+func (a *Annotation) IconType() TextAnnotationIconType {
+	_r := objc.Send[TextAnnotationIconType](objref.IDOf(a), objc.RegisterName("iconType"))
 	return _r
-}
-
-// SetIconType wraps the corresponding Objective-C method.
-func (x *Annotation) SetIconType(iconType TextAnnotationIconType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconType:"), iconType)
 }
 
 // QuadrilateralPoints wraps the corresponding Objective-C method.
 //
 // QuadrilateralPoints returns the collection as a Go slice.
-func (x *Annotation) QuadrilateralPoints() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quadrilateralPoints"))
+func (a *Annotation) QuadrilateralPoints() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("quadrilateralPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetQuadrilateralPoints wraps the corresponding Objective-C method.
-func (x *Annotation) SetQuadrilateralPoints(quadrilateralPoints []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralPoints:"), purego.SliceToNSArray(quadrilateralPoints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // MarkupType wraps the corresponding Objective-C method.
-func (x *Annotation) MarkupType() MarkupType {
-	_r := objc.Send[MarkupType](objref.IDOf(x), objc.RegisterName("markupType"))
+func (a *Annotation) MarkupType() MarkupType {
+	_r := objc.Send[MarkupType](objref.IDOf(a), objc.RegisterName("markupType"))
 	return _r
 }
 
-// SetMarkupType wraps the corresponding Objective-C method.
-func (x *Annotation) SetMarkupType(markupType MarkupType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkupType:"), markupType)
-}
-
 // WidgetFieldType wraps the corresponding Objective-C method.
-func (x *Annotation) WidgetFieldType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widgetFieldType"))
+func (a *Annotation) WidgetFieldType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetFieldType"))
 	if _r == 0 {
 		return ""
 	}
@@ -530,415 +450,181 @@ func (x *Annotation) WidgetFieldType() string {
 }
 
 // SetWidgetFieldType wraps the corresponding Objective-C method.
-func (x *Annotation) SetWidgetFieldType(widgetFieldType string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetFieldType:"), purego.NSString(widgetFieldType))
+func (a *Annotation) SetWidgetFieldType(widgetFieldType string) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetFieldType:"), purego.NSString(widgetFieldType))
 }
 
 // WidgetControlType wraps the corresponding Objective-C method.
-func (x *Annotation) WidgetControlType() WidgetControlType {
-	_r := objc.Send[WidgetControlType](objref.IDOf(x), objc.RegisterName("widgetControlType"))
+func (a *Annotation) WidgetControlType() WidgetControlType {
+	_r := objc.Send[WidgetControlType](objref.IDOf(a), objc.RegisterName("widgetControlType"))
 	return _r
-}
-
-// SetWidgetControlType wraps the corresponding Objective-C method.
-func (x *Annotation) SetWidgetControlType(widgetControlType WidgetControlType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetControlType:"), widgetControlType)
 }
 
 // IsMultiline wraps the corresponding Objective-C method.
-func (x *Annotation) IsMultiline() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultiline"))
+func (a *Annotation) IsMultiline() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isMultiline"))
 	return _r
 }
 
-// SetMultiline wraps the corresponding Objective-C method.
-func (x *Annotation) SetMultiline(multiline bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiline:"), multiline)
-}
-
 // IsActivatableTextField wraps the corresponding Objective-C method.
-func (x *Annotation) IsActivatableTextField() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActivatableTextField"))
+func (a *Annotation) IsActivatableTextField() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActivatableTextField"))
 	return _r
 }
 
 // IsPasswordField wraps the corresponding Objective-C method.
-func (x *Annotation) IsPasswordField() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPasswordField"))
+func (a *Annotation) IsPasswordField() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isPasswordField"))
 	return _r
 }
 
 // HasComb wraps the corresponding Objective-C method.
-func (x *Annotation) HasComb() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasComb"))
+func (a *Annotation) HasComb() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasComb"))
 	return _r
-}
-
-// SetComb wraps the corresponding Objective-C method.
-func (x *Annotation) SetComb(comb bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComb:"), comb)
 }
 
 // MaximumLength wraps the corresponding Objective-C method.
-func (x *Annotation) MaximumLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumLength"))
+func (a *Annotation) MaximumLength() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("maximumLength"))
 	return _r
-}
-
-// SetMaximumLength wraps the corresponding Objective-C method.
-func (x *Annotation) SetMaximumLength(maximumLength int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLength:"), maximumLength)
 }
 
 // WidgetStringValue wraps the corresponding Objective-C method.
-func (x *Annotation) WidgetStringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widgetStringValue"))
+func (a *Annotation) WidgetStringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetStringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetWidgetStringValue wraps the corresponding Objective-C method.
-func (x *Annotation) SetWidgetStringValue(widgetStringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
 }
 
 // WidgetDefaultStringValue wraps the corresponding Objective-C method.
-func (x *Annotation) WidgetDefaultStringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widgetDefaultStringValue"))
+func (a *Annotation) WidgetDefaultStringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetDefaultStringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetWidgetDefaultStringValue wraps the corresponding Objective-C method.
-func (x *Annotation) SetWidgetDefaultStringValue(widgetDefaultStringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
-}
-
 // AllowsToggleToOff wraps the corresponding Objective-C method.
-func (x *Annotation) AllowsToggleToOff() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsToggleToOff"))
+func (a *Annotation) AllowsToggleToOff() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("allowsToggleToOff"))
 	return _r
-}
-
-// SetAllowsToggleToOff wraps the corresponding Objective-C method.
-func (x *Annotation) SetAllowsToggleToOff(allowsToggleToOff bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
 }
 
 // RadiosInUnison wraps the corresponding Objective-C method.
-func (x *Annotation) RadiosInUnison() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("radiosInUnison"))
+func (a *Annotation) RadiosInUnison() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("radiosInUnison"))
 	return _r
-}
-
-// SetRadiosInUnison wraps the corresponding Objective-C method.
-func (x *Annotation) SetRadiosInUnison(radiosInUnison bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
 }
 
 // IsReadOnly wraps the corresponding Objective-C method.
-func (x *Annotation) IsReadOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+func (a *Annotation) IsReadOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isReadOnly"))
 	return _r
-}
-
-// SetReadOnly wraps the corresponding Objective-C method.
-func (x *Annotation) SetReadOnly(readOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 }
 
 // IsListChoice wraps the corresponding Objective-C method.
-func (x *Annotation) IsListChoice() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isListChoice"))
+func (a *Annotation) IsListChoice() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isListChoice"))
 	return _r
-}
-
-// SetListChoice wraps the corresponding Objective-C method.
-func (x *Annotation) SetListChoice(listChoice bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListChoice:"), listChoice)
 }
 
 // Choices wraps the corresponding Objective-C method.
 //
 // Choices returns the collection as a Go slice.
-func (x *Annotation) Choices() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("choices"))
+func (a *Annotation) Choices() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("choices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
-}
-
-// SetChoices wraps the corresponding Objective-C method.
-func (x *Annotation) SetChoices(choices []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChoices:"), purego.SliceToNSArray(choices, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // Values wraps the corresponding Objective-C method.
 //
 // Values returns the collection as a Go slice.
-func (x *Annotation) Values() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("values"))
+func (a *Annotation) Values() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("values"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetValues wraps the corresponding Objective-C method.
-func (x *Annotation) SetValues(values []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), purego.SliceToNSArray(values, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
 // ButtonWidgetState wraps the corresponding Objective-C method.
-func (x *Annotation) ButtonWidgetState() WidgetCellState {
-	_r := objc.Send[WidgetCellState](objref.IDOf(x), objc.RegisterName("buttonWidgetState"))
+func (a *Annotation) ButtonWidgetState() WidgetCellState {
+	_r := objc.Send[WidgetCellState](objref.IDOf(a), objc.RegisterName("buttonWidgetState"))
 	return _r
 }
 
-// SetButtonWidgetState wraps the corresponding Objective-C method.
-func (x *Annotation) SetButtonWidgetState(buttonWidgetState WidgetCellState) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
-}
-
 // ButtonWidgetStateString wraps the corresponding Objective-C method.
-func (x *Annotation) ButtonWidgetStateString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonWidgetStateString"))
+func (a *Annotation) ButtonWidgetStateString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("buttonWidgetStateString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetButtonWidgetStateString wraps the corresponding Objective-C method.
-func (x *Annotation) SetButtonWidgetStateString(buttonWidgetStateString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
-}
-
 // IsOpen wraps the corresponding Objective-C method.
-func (x *Annotation) IsOpen() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
+func (a *Annotation) IsOpen() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isOpen"))
 	return _r
-}
-
-// SetOpen wraps the corresponding Objective-C method.
-func (x *Annotation) SetOpen(open bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpen:"), open)
 }
 
 // Paths wraps the corresponding Objective-C method.
 //
 // Paths returns the collection as a Go slice.
-func (x *Annotation) Paths() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paths"))
+func (a *Annotation) Paths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("paths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Destination wraps the corresponding Objective-C method.
-func (x *Annotation) Destination() *Destination {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+func (a *Annotation) Destination() *Destination {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
 }
 
-// SetDestination wraps the corresponding Objective-C method.
-func (x *Annotation) SetDestination(destination *Destination) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
-}
-
 // URL wraps the corresponding Objective-C method.
-func (x *Annotation) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (a *Annotation) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
-}
-
-// SetURL wraps the corresponding Objective-C method.
-func (x *Annotation) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
 // FieldName wraps the corresponding Objective-C method.
-func (x *Annotation) FieldName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fieldName"))
+func (a *Annotation) FieldName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fieldName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetFieldName wraps the corresponding Objective-C method.
-func (x *Annotation) SetFieldName(fieldName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
 }
 
 // Caption wraps the corresponding Objective-C method.
-func (x *Annotation) Caption() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caption"))
+func (a *Annotation) Caption() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("caption"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCaption wraps the corresponding Objective-C method.
-func (x *Annotation) SetCaption(caption string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *Annotation) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (a *Annotation) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *Annotation) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
 // StampName wraps the corresponding Objective-C method.
-func (x *Annotation) StampName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stampName"))
+func (a *Annotation) StampName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stampName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetStampName wraps the corresponding Objective-C method.
-func (x *Annotation) SetStampName(stampName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStampName:"), purego.NSString(stampName))
-}
-
-// Annotationable is the interface implemented by [Annotation], for mocking and DI.
-type Annotationable interface {
-	obj.Object
-	WithPage(page *Page) *Annotation
-	WithType(type_ string) *Annotation
-	WithBounds(bounds corefoundation.CGRect) *Annotation
-	WithShouldDisplay(shouldDisplay bool) *Annotation
-	WithShouldPrint(shouldPrint bool) *Annotation
-	WithHighlighted(highlighted bool) *Annotation
-	WithFont(font obj.Object) *Annotation
-	WithFontColor(fontColor obj.Object) *Annotation
-	WithInteriorColor(interiorColor obj.Object) *Annotation
-	WithStartPoint(startPoint corefoundation.CGPoint) *Annotation
-	WithEndPoint(endPoint corefoundation.CGPoint) *Annotation
-	WithStartLineStyle(startLineStyle LineStyle) *Annotation
-	WithEndLineStyle(endLineStyle LineStyle) *Annotation
-	WithIconType(iconType TextAnnotationIconType) *Annotation
-	WithQuadrilateralPoints(items ...obj.Object) *Annotation
-	WithMarkupType(markupType MarkupType) *Annotation
-	WithWidgetControlType(widgetControlType WidgetControlType) *Annotation
-	WithMultiline(multiline bool) *Annotation
-	WithComb(comb bool) *Annotation
-	WithMaximumLength(maximumLength int) *Annotation
-	WithWidgetStringValue(widgetStringValue string) *Annotation
-	WithWidgetDefaultStringValue(widgetDefaultStringValue string) *Annotation
-	WithAllowsToggleToOff(allowsToggleToOff bool) *Annotation
-	WithRadiosInUnison(radiosInUnison bool) *Annotation
-	WithReadOnly(readOnly bool) *Annotation
-	WithListChoice(listChoice bool) *Annotation
-	WithChoices(items ...obj.Object) *Annotation
-	WithValues(items ...obj.Object) *Annotation
-	WithButtonWidgetState(buttonWidgetState WidgetCellState) *Annotation
-	WithButtonWidgetStateString(buttonWidgetStateString string) *Annotation
-	WithOpen(open bool) *Annotation
-	WithDestination(destination *Destination) *Annotation
-	WithURL(uRL string) *Annotation
-	WithFieldName(fieldName string) *Annotation
-	WithCaption(caption string) *Annotation
-	WithBackgroundColor(backgroundColor obj.Object) *Annotation
-	WithStampName(stampName string) *Annotation
-	DrawWithBoxInContext(box DisplayBox, context_ obj.Object)
-	Page() *Page
-	SetPage(page *Page)
-	Type() string
-	SetType(type_ string)
-	Bounds() corefoundation.CGRect
-	SetBounds(bounds corefoundation.CGRect)
-	ShouldDisplay() bool
-	SetShouldDisplay(shouldDisplay bool)
-	ShouldPrint() bool
-	SetShouldPrint(shouldPrint bool)
-	HasAppearanceStream() bool
-	IsHighlighted() bool
-	SetHighlighted(highlighted bool)
-	RemoveAllAppearanceStreams()
-	DrawWithBox(box DisplayBox)
-	AddBezierPath(path obj.Object)
-	RemoveBezierPath(path obj.Object)
-	Font() obj.Object
-	SetFont(font obj.Object)
-	FontColor() obj.Object
-	SetFontColor(fontColor obj.Object)
-	InteriorColor() obj.Object
-	SetInteriorColor(interiorColor obj.Object)
-	StartPoint() corefoundation.CGPoint
-	SetStartPoint(startPoint corefoundation.CGPoint)
-	EndPoint() corefoundation.CGPoint
-	SetEndPoint(endPoint corefoundation.CGPoint)
-	StartLineStyle() LineStyle
-	SetStartLineStyle(startLineStyle LineStyle)
-	EndLineStyle() LineStyle
-	SetEndLineStyle(endLineStyle LineStyle)
-	IconType() TextAnnotationIconType
-	SetIconType(iconType TextAnnotationIconType)
-	QuadrilateralPoints() []obj.Object
-	SetQuadrilateralPoints(quadrilateralPoints []obj.Object)
-	MarkupType() MarkupType
-	SetMarkupType(markupType MarkupType)
-	WidgetFieldType() string
-	SetWidgetFieldType(widgetFieldType string)
-	WidgetControlType() WidgetControlType
-	SetWidgetControlType(widgetControlType WidgetControlType)
-	IsMultiline() bool
-	SetMultiline(multiline bool)
-	IsActivatableTextField() bool
-	IsPasswordField() bool
-	HasComb() bool
-	SetComb(comb bool)
-	MaximumLength() int
-	SetMaximumLength(maximumLength int)
-	WidgetStringValue() string
-	SetWidgetStringValue(widgetStringValue string)
-	WidgetDefaultStringValue() string
-	SetWidgetDefaultStringValue(widgetDefaultStringValue string)
-	AllowsToggleToOff() bool
-	SetAllowsToggleToOff(allowsToggleToOff bool)
-	RadiosInUnison() bool
-	SetRadiosInUnison(radiosInUnison bool)
-	IsReadOnly() bool
-	SetReadOnly(readOnly bool)
-	IsListChoice() bool
-	SetListChoice(listChoice bool)
-	Choices() []string
-	SetChoices(choices []string)
-	Values() []string
-	SetValues(values []string)
-	ButtonWidgetState() WidgetCellState
-	SetButtonWidgetState(buttonWidgetState WidgetCellState)
-	ButtonWidgetStateString() string
-	SetButtonWidgetStateString(buttonWidgetStateString string)
-	IsOpen() bool
-	SetOpen(open bool)
-	Paths() []obj.Object
-	Destination() *Destination
-	SetDestination(destination *Destination)
-	URL() obj.Object
-	SetURL(uRL string)
-	FieldName() string
-	SetFieldName(fieldName string)
-	Caption() string
-	SetCaption(caption string)
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-	StampName() string
-	SetStampName(stampName string)
-}
-
-var _ Annotationable = (*Annotation)(nil)
 
 // isAnnotation marks Annotation — and, by embedding promotion, its
 // subclasses — as a member of the Annotation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Annotation) isAnnotation() {}
+func (a *Annotation) isAnnotation() {}
 
 var _ AnnotationProvider = (*Annotation)(nil)

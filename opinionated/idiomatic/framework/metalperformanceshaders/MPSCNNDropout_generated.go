@@ -54,82 +54,65 @@ func NewCNNDropout() *CNNDropout {
 	return cNNDropoutAdopt(_id)
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *CNNDropout) WithOffset(offset mpscore.MPSOffset) *CNNDropout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (cd *CNNDropout) WithOffset(offset mpscore.MPSOffset) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setOffset:"), offset)
+	return cd
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *CNNDropout) WithClipRect(clipRect metal.MTLRegion) *CNNDropout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (cd *CNNDropout) WithClipRect(clipRect metal.MTLRegion) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setClipRect:"), clipRect)
+	return cd
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *CNNDropout) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDropout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (cd *CNNDropout) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cd
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNDropout) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDropout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cd *CNNDropout) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cd
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNDropout) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDropout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cd *CNNDropout) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cd
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNDropout) WithLabel(label string) *CNNDropout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cd *CNNDropout) WithLabel(label string) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cd
 }
 
 // ResultStateForSourceImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
-func (x *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
+func (cd *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
 }
 
-// KeepProbability the probability that each element in the input is kept. The valid range is (0.0f, 1.0f).
-func (x *CNNDropout) KeepProbability() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
+// KeepProbability returns the probability that each element in the input is kept. The valid range is (0.0f, 1.0f).
+func (cd *CNNDropout) KeepProbability() float32 {
+	_r := objc.Send[float32](objref.IDOf(cd), objc.RegisterName("keepProbability"))
 	return _r
 }
 
-// Seed the seed used to generate random numbers.
-func (x *CNNDropout) Seed() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+// Seed returns the seed used to generate random numbers.
+func (cd *CNNDropout) Seed() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("seed"))
 	return _r
 }
 
-// MaskStrideInPixels the mask stride in the x, y, and x dimensions, which allows for the broadcasting the mask data. The only valid values are 0 and 1 for each dimension. For no broadcasting, set the values for each dimension to 1. For broadcasting, set desired values to 0.
-func (x *CNNDropout) MaskStrideInPixels() metal.MTLSize {
-	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("maskStrideInPixels"))
+// MaskStrideInPixels returns the mask stride in the x, y, and x dimensions, which allows for the broadcasting the mask data. The only valid values are 0 and 1 for each dimension. For no broadcasting, set the values for each dimension to 1. For broadcasting, set desired values to 0.
+func (cd *CNNDropout) MaskStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(cd), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }
-
-// CNNDropoutable is the interface implemented by [CNNDropout], for mocking and DI.
-type CNNDropoutable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *CNNDropout
-	WithClipRect(clipRect metal.MTLRegion) *CNNDropout
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDropout
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDropout
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDropout
-	WithLabel(label string) *CNNDropout
-	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object
-	KeepProbability() float32
-	Seed() int
-	MaskStrideInPixels() metal.MTLSize
-}
-
-var _ CNNDropoutable = (*CNNDropout)(nil)
 
 var _ CNNKernelProvider = (*CNNDropout)(nil)
 

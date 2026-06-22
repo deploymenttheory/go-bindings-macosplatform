@@ -74,53 +74,40 @@ func NewInkingToolWithInkWidth(ink *Ink, width float64) *InkingTool {
 	return inkingToolAdopt(_id)
 }
 
-// InkType the type of ink, eg. pen, pencil...
-func (x *InkingTool) InkType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkType"))
+// InkType returns the type of ink, eg. pen, pencil...
+func (it *InkingTool) InkType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("inkType"))
 	return obj.Wrap(_r)
 }
 
 // Color wraps the corresponding Objective-C method.
-func (x *InkingTool) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+func (it *InkingTool) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// Width the base width of the ink.
-func (x *InkingTool) Width() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+// Width returns the base width of the ink.
+func (it *InkingTool) Width() float64 {
+	_r := objc.Send[float64](objref.IDOf(it), objc.RegisterName("width"))
 	return _r
 }
 
-// Azimuth the base angle of the ink.
-func (x *InkingTool) Azimuth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("azimuth"))
+// Azimuth returns the base angle of the ink.
+func (it *InkingTool) Azimuth() float64 {
+	_r := objc.Send[float64](objref.IDOf(it), objc.RegisterName("azimuth"))
 	return _r
 }
 
-// Ink the ink that this tool will create strokes with.
-func (x *InkingTool) Ink() *Ink {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ink"))
+// Ink returns the ink that this tool will create strokes with.
+func (it *InkingTool) Ink() *Ink {
+	_r := objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("ink"))
 	return InkFromID(_r)
 }
 
-// RequiredContentVersion the PencilKit version required to use this inking tool.
-func (x *InkingTool) RequiredContentVersion() ContentVersion {
-	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
+// RequiredContentVersion returns the PencilKit version required to use this inking tool.
+func (it *InkingTool) RequiredContentVersion() ContentVersion {
+	_r := objc.Send[ContentVersion](objref.IDOf(it), objc.RegisterName("requiredContentVersion"))
 	return _r
 }
-
-// InkingToolable is the interface implemented by [InkingTool], for mocking and DI.
-type InkingToolable interface {
-	obj.Object
-	InkType() obj.Object
-	Color() obj.Object
-	Width() float64
-	Azimuth() float64
-	Ink() *Ink
-	RequiredContentVersion() ContentVersion
-}
-
-var _ InkingToolable = (*InkingTool)(nil)
 
 var _ ToolProvider = (*InkingTool)(nil)

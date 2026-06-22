@@ -46,36 +46,29 @@ func intentDonationMetadataAdopt(id objc.ID) *IntentDonationMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *IntentDonationMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (idm *IntentDonationMetadata) Description() string {
+	return rt.Description(objref.IDOf(idm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IntentDonationMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (idm *IntentDonationMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(idm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IntentDonationMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (idm *IntentDonationMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(idm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IntentDonationMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (idm *IntentDonationMetadata) String() string {
+	return rt.Description(objref.IDOf(idm))
 }
-
-// IntentDonationMetadataable is the interface implemented by [IntentDonationMetadata], for mocking and DI.
-type IntentDonationMetadataable interface {
-	obj.Object
-}
-
-var _ IntentDonationMetadataable = (*IntentDonationMetadata)(nil)
 
 // isIntentDonationMetadata marks IntentDonationMetadata — and, by embedding promotion, its
 // subclasses — as a member of the IntentDonationMetadata hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *IntentDonationMetadata) isIntentDonationMetadata() {}
+func (idm *IntentDonationMetadata) isIntentDonationMetadata() {}
 
 var _ IntentDonationMetadataProvider = (*IntentDonationMetadata)(nil)

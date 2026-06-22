@@ -51,32 +51,22 @@ func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientS
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNConvolutionTransposeGradientState) WithReadCount(readCount int) *CNNConvolutionTransposeGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cctgs *CNNConvolutionTransposeGradientState) WithReadCount(readCount int) *CNNConvolutionTransposeGradientState {
+	objc.Send[objc.ID](objref.IDOf(cctgs), objc.RegisterName("setReadCount:"), readCount)
+	return cctgs
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionTransposeGradientState) WithLabel(label string) *CNNConvolutionTransposeGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cctgs *CNNConvolutionTransposeGradientState) WithLabel(label string) *CNNConvolutionTransposeGradientState {
+	objc.Send[objc.ID](objref.IDOf(cctgs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cctgs
 }
 
-// ConvolutionTranspose the convolutionTranspose filter that produced the state.
-func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose"))
+// ConvolutionTranspose returns the convolutionTranspose filter that produced the state.
+func (cctgs *CNNConvolutionTransposeGradientState) ConvolutionTranspose() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cctgs), objc.RegisterName("convolutionTranspose"))
 	return obj.Wrap(_r)
 }
-
-// CNNConvolutionTransposeGradientStateable is the interface implemented by [CNNConvolutionTransposeGradientState], for mocking and DI.
-type CNNConvolutionTransposeGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNConvolutionTransposeGradientState
-	WithLabel(label string) *CNNConvolutionTransposeGradientState
-	ConvolutionTranspose() obj.Object
-}
-
-var _ CNNConvolutionTransposeGradientStateable = (*CNNConvolutionTransposeGradientState)(nil)
 
 var _ CNNConvolutionGradientStateProvider = (*CNNConvolutionTransposeGradientState)(nil)
 

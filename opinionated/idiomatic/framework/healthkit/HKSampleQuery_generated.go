@@ -52,27 +52,18 @@ func NewSampleQuery() *SampleQuery {
 	return sampleQueryAdopt(_id)
 }
 
-// Limit the maximum number of results the receiver will return upon completion.
-func (x *SampleQuery) Limit() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("limit"))
+// Limit returns the maximum number of results the receiver will return upon completion.
+func (sq *SampleQuery) Limit() int {
+	_r := objc.Send[int](objref.IDOf(sq), objc.RegisterName("limit"))
 	return _r
 }
 
-// SortDescriptors an array of NSSortDescriptors.
+// SortDescriptors returns an array of NSSortDescriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
-func (x *SampleQuery) SortDescriptors() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+func (sq *SampleQuery) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SampleQueryable is the interface implemented by [SampleQuery], for mocking and DI.
-type SampleQueryable interface {
-	obj.Object
-	Limit() int
-	SortDescriptors() []obj.Object
-}
-
-var _ SampleQueryable = (*SampleQuery)(nil)
 
 var _ QueryProvider = (*SampleQuery)(nil)

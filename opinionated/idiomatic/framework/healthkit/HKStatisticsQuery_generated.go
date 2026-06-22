@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewStatisticsQuery() *StatisticsQuery {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKStatisticsQuery")), objc.RegisterName("new"))
 	return statisticsQueryAdopt(_id)
 }
-
-// StatisticsQueryable is the interface implemented by [StatisticsQuery], for mocking and DI.
-type StatisticsQueryable interface {
-	obj.Object
-}
-
-var _ StatisticsQueryable = (*StatisticsQuery)(nil)
 
 var _ QueryProvider = (*StatisticsQuery)(nil)

@@ -6,6 +6,7 @@ package devicecheck
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func appAttestServiceAdopt(id objc.ID) *AppAttestService {
 }
 
 // Description returns the object's -description text.
-func (x *AppAttestService) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aas *AppAttestService) Description() string {
+	return rt.Description(objref.IDOf(aas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppAttestService) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aas *AppAttestService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppAttestService) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aas *AppAttestService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppAttestService) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aas *AppAttestService) String() string {
+	return rt.Description(objref.IDOf(aas))
 }
 
 // NewAppAttestService creates a new AppAttestService.
@@ -77,7 +78,7 @@ func NewAppAttestService() *AppAttestService {
 // GenerateKey creates a new cryptographic key for use with the App Attest service.
 //
 // GenerateKey blocks until the operation completes or ctx is cancelled.
-func (x *AppAttestService) GenerateKey(ctx context.Context) (result string, err error) {
+func (aas *AppAttestService) GenerateKey(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -89,7 +90,7 @@ func (x *AppAttestService) GenerateKey(ctx context.Context) (result string, err 
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateKeyWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(aas), objc.RegisterName("generateKeyWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,7 +103,7 @@ func (x *AppAttestService) GenerateKey(ctx context.Context) (result string, err 
 // AttestKeyClientDataHash asks Apple to attest to the validity of a generated cryptographic key.
 //
 // AttestKeyClientDataHash blocks until the operation completes or ctx is cancelled.
-func (x *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
+func (aas *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -114,7 +115,7 @@ func (x *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId st
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestKey:clientDataHash:completionHandler:"), purego.NSString(keyId), objref.IDOf(clientDataHash), _block)
+	objc.Send[objc.ID](objref.IDOf(aas), objc.RegisterName("attestKey:clientDataHash:completionHandler:"), purego.NSString(keyId), objref.IDOf(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -127,7 +128,7 @@ func (x *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId st
 // GenerateAssertionClientDataHash creates a block of data that demonstrates the legitimacy of an instance of your app running on a device.
 //
 // GenerateAssertionClientDataHash blocks until the operation completes or ctx is cancelled.
-func (x *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
+func (aas *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -139,7 +140,7 @@ func (x *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateAssertion:clientDataHash:completionHandler:"), purego.NSString(keyId), objref.IDOf(clientDataHash), _block)
+	objc.Send[objc.ID](objref.IDOf(aas), objc.RegisterName("generateAssertion:clientDataHash:completionHandler:"), purego.NSString(keyId), objref.IDOf(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -149,19 +150,8 @@ func (x *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, 
 	}
 }
 
-// IsSupported a Boolean value that indicates whether a particular device provides the App Attest service. > Important: Not all device types support the App Attest service, so check > for support before using the service. > > If you read “DeviceCheck/DCAppAttestService/supported“ from an app running > on a Mac device, the value is > <doc://com.apple.documentation/documentation/swift/false>. This includes > Mac Catalyst apps, and iOS or iPadOS apps running on Apple silicon. If you read “DeviceCheck/DCAppAttestService/supported“ from within an app extension, the value might be <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>, depending on the extension type. However, most extensions don’t support App Attest. The “DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:“ method fails when you call it from an app extension, regardless of the value of “DeviceCheck/DCAppAttestService/supported“. The only app extensions that support App Attest are watchOS extensions in watchOS 9 or later. For these extensions, you can use the results from “DeviceCheck/DCAppAttestService/supported“ to indicate whether your WatchKit extension bypasses attestation.
-func (x *AppAttestService) IsSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+// IsSupported reports whether a particular device provides the App Attest service. > Important: Not all device types support the App Attest service, so check > for support before using the service. > > If you read “DeviceCheck/DCAppAttestService/supported“ from an app running > on a Mac device, the value is > <doc://com.apple.documentation/documentation/swift/false>. This includes > Mac Catalyst apps, and iOS or iPadOS apps running on Apple silicon. If you read “DeviceCheck/DCAppAttestService/supported“ from within an app extension, the value might be <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>, depending on the extension type. However, most extensions don’t support App Attest. The “DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:“ method fails when you call it from an app extension, regardless of the value of “DeviceCheck/DCAppAttestService/supported“. The only app extensions that support App Attest are watchOS extensions in watchOS 9 or later. For these extensions, you can use the results from “DeviceCheck/DCAppAttestService/supported“ to indicate whether your WatchKit extension bypasses attestation.
+func (aas *AppAttestService) IsSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(aas), objc.RegisterName("isSupported"))
 	return _r
 }
-
-// AppAttestServiceable is the interface implemented by [AppAttestService], for mocking and DI.
-type AppAttestServiceable interface {
-	obj.Object
-	GenerateKey(ctx context.Context) (string, error)
-	AttestKeyClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (obj.Object, error)
-	GenerateAssertionClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (obj.Object, error)
-	IsSupported() bool
-}
-
-var _ AppAttestServiceable = (*AppAttestService)(nil)

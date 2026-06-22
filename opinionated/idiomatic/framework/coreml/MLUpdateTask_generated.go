@@ -53,16 +53,8 @@ func NewUpdateTask() *UpdateTask {
 }
 
 // ResumeWithParameters resumes a model update with updated parameter values.
-func (x *UpdateTask) ResumeWithParameters(updateParameters obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithParameters:"), objref.IDOf(updateParameters))
+func (ut *UpdateTask) ResumeWithParameters(updateParameters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("resumeWithParameters:"), objref.IDOf(updateParameters))
 }
-
-// UpdateTaskable is the interface implemented by [UpdateTask], for mocking and DI.
-type UpdateTaskable interface {
-	obj.Object
-	ResumeWithParameters(updateParameters obj.Object)
-}
-
-var _ UpdateTaskable = (*UpdateTask)(nil)
 
 var _ TaskProvider = (*UpdateTask)(nil)

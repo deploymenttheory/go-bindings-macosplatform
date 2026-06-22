@@ -44,24 +44,24 @@ func systemExtensionsWorkspaceAdopt(id objc.ID) *SystemExtensionsWorkspace {
 }
 
 // Description returns the object's -description text.
-func (x *SystemExtensionsWorkspace) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sew *SystemExtensionsWorkspace) Description() string {
+	return rt.Description(objref.IDOf(sew))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SystemExtensionsWorkspace) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sew *SystemExtensionsWorkspace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sew), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SystemExtensionsWorkspace) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sew *SystemExtensionsWorkspace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sew), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SystemExtensionsWorkspace) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sew *SystemExtensionsWorkspace) String() string {
+	return rt.Description(objref.IDOf(sew))
 }
 
 // NewSystemExtensionsWorkspace creates a new SystemExtensionsWorkspace.
@@ -69,10 +69,3 @@ func NewSystemExtensionsWorkspace() *SystemExtensionsWorkspace {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionsWorkspace")), objc.RegisterName("new"))
 	return systemExtensionsWorkspaceAdopt(_id)
 }
-
-// SystemExtensionsWorkspaceable is the interface implemented by [SystemExtensionsWorkspace], for mocking and DI.
-type SystemExtensionsWorkspaceable interface {
-	obj.Object
-}
-
-var _ SystemExtensionsWorkspaceable = (*SystemExtensionsWorkspace)(nil)

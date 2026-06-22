@@ -47,24 +47,24 @@ func capturePhotoSettingsAdopt(id objc.ID) *CapturePhotoSettings {
 }
 
 // Description returns the object's -description text.
-func (x *CapturePhotoSettings) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cps *CapturePhotoSettings) Description() string {
+	return rt.Description(objref.IDOf(cps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CapturePhotoSettings) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cps *CapturePhotoSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CapturePhotoSettings) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cps *CapturePhotoSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CapturePhotoSettings) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cps *CapturePhotoSettings) String() string {
+	return rt.Description(objref.IDOf(cps))
 }
 
 // NewCapturePhotoSettings creates a new CapturePhotoSettings.
@@ -73,170 +73,104 @@ func NewCapturePhotoSettings() *CapturePhotoSettings {
 	return capturePhotoSettingsAdopt(_id)
 }
 
-// WithFlashMode a setting for whether to fire the flash when capturing photos.
-func (x *CapturePhotoSettings) WithFlashMode(flashMode CaptureFlashMode) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlashMode:"), flashMode)
-	return x
+// WithFlashMode sets a setting for whether to fire the flash when capturing photos.
+func (cps *CapturePhotoSettings) WithFlashMode(flashMode CaptureFlashMode) *CapturePhotoSettings {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setFlashMode:"), flashMode)
+	return cps
 }
 
-// WithPhotoQualityPrioritization a setting that indicates how to prioritize photo quality against speed of photo delivery.
-func (x *CapturePhotoSettings) WithPhotoQualityPrioritization(photoQualityPrioritization CapturePhotoQualityPrioritization) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhotoQualityPrioritization:"), photoQualityPrioritization)
-	return x
+// WithPhotoQualityPrioritization sets a setting that indicates how to prioritize photo quality against speed of photo delivery.
+func (cps *CapturePhotoSettings) WithPhotoQualityPrioritization(photoQualityPrioritization CapturePhotoQualityPrioritization) *CapturePhotoSettings {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setPhotoQualityPrioritization:"), photoQualityPrioritization)
+	return cps
 }
 
-// WithHighResolutionPhotoEnabled a Boolean value that specifies whether to capture still images at the highest resolution supported by the active device and format.
-func (x *CapturePhotoSettings) WithHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighResolutionPhotoEnabled:"), highResolutionPhotoEnabled)
-	return x
+// WithHighResolutionPhotoEnabled sets a Boolean value that specifies whether to capture still images at the highest resolution supported by the active device and format.
+func (cps *CapturePhotoSettings) WithHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) *CapturePhotoSettings {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setHighResolutionPhotoEnabled:"), highResolutionPhotoEnabled)
+	return cps
 }
 
-// WithMaxPhotoDimensions the maximum resolution of the photo to capture.
-func (x *CapturePhotoSettings) WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
-	return x
+// WithMaxPhotoDimensions sets the maximum resolution of the photo to capture.
+func (cps *CapturePhotoSettings) WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoSettings {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
+	return cps
 }
 
-// WithConstantColorEnabled a Boolean value that indicates whether to capture the photo with constant color.
-func (x *CapturePhotoSettings) WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantColorEnabled:"), constantColorEnabled)
-	return x
+// WithConstantColorEnabled sets a Boolean value that indicates whether to capture the photo with constant color.
+func (cps *CapturePhotoSettings) WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoSettings {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setConstantColorEnabled:"), constantColorEnabled)
+	return cps
 }
 
-// WithConstantColorFallbackPhotoDeliveryEnabled a Boolean value that indicates whether to deliver a fallback photo when taking a constant color capture.
-func (x *CapturePhotoSettings) WithConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantColorFallbackPhotoDeliveryEnabled:"), constantColorFallbackPhotoDeliveryEnabled)
-	return x
+// WithConstantColorFallbackPhotoDeliveryEnabled sets a Boolean value that indicates whether to deliver a fallback photo when taking a constant color capture.
+func (cps *CapturePhotoSettings) WithConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool) *CapturePhotoSettings {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setConstantColorFallbackPhotoDeliveryEnabled:"), constantColorFallbackPhotoDeliveryEnabled)
+	return cps
 }
 
-// WithShutterSoundSuppressionEnabled a Boolean value that indicates whether to suppress the built-in shutter sound when capturing a photo.
-func (x *CapturePhotoSettings) WithShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShutterSoundSuppressionEnabled:"), shutterSoundSuppressionEnabled)
-	return x
+// WithShutterSoundSuppressionEnabled sets a Boolean value that indicates whether to suppress the built-in shutter sound when capturing a photo.
+func (cps *CapturePhotoSettings) WithShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) *CapturePhotoSettings {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setShutterSoundSuppressionEnabled:"), shutterSoundSuppressionEnabled)
+	return cps
 }
 
-// UniqueID a 64-bit number that uniquely identifies this instance. When you create an instance of AVCapturePhotoSettings, a uniqueID is generated automatically. This uniqueID is guaranteed to be unique for the life time of your process.
-func (x *CapturePhotoSettings) UniqueID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("uniqueID"))
+// UniqueID returns a 64-bit number that uniquely identifies this instance. When you create an instance of AVCapturePhotoSettings, a uniqueID is generated automatically. This uniqueID is guaranteed to be unique for the life time of your process.
+func (cps *CapturePhotoSettings) UniqueID() int64 {
+	_r := objc.Send[int64](objref.IDOf(cps), objc.RegisterName("uniqueID"))
 	return _r
 }
 
-// Format a dictionary of Core Video pixel buffer attributes or AVVideoSettings, analogous to AVCaptureStillImageOutput's outputSettings property. The format dictionary you passed to one of the creation methods. May be nil if you've specified RAW-only capture.
-func (x *CapturePhotoSettings) Format() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+// Format returns a dictionary of Core Video pixel buffer attributes or AVVideoSettings, analogous to AVCaptureStillImageOutput's outputSettings property. The format dictionary you passed to one of the creation methods. May be nil if you've specified RAW-only capture.
+func (cps *CapturePhotoSettings) Format() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("format"))
 	return obj.Wrap(_r)
 }
 
-// ProcessedFileType the file container for which the processed photo is formatted to be stored. The formatting of data within a photo buffer is often dependent on the file format intended for storage. For instance, a JPEG encoded photo buffer intended for storage in a JPEG (JPEG File Interchange Format) file differs from JPEG to be stored in HEIF. The HEIF-containerized JPEG buffer is tiled for readback efficiency and partitioned into the box structure dictated by the HEIF file format. Some codecs are only supported by AVCapturePhotoOutput if containerized. For instance, the AVVideoCodecTypeHEVC is only supported with AVFileTypeHEIF and AVFileTypeHEIC formatting. To discover which photo pixel format types and video codecs are supported for a given file type, you may query AVCapturePhotoOutput's -supportedPhotoPixelFormatTypesForFileType:, or -supportedPhotoCodecTypesForFileType: respectively.
-func (x *CapturePhotoSettings) ProcessedFileType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processedFileType"))
+// ProcessedFileType returns the file container for which the processed photo is formatted to be stored. The formatting of data within a photo buffer is often dependent on the file format intended for storage. For instance, a JPEG encoded photo buffer intended for storage in a JPEG (JPEG File Interchange Format) file differs from JPEG to be stored in HEIF. The HEIF-containerized JPEG buffer is tiled for readback efficiency and partitioned into the box structure dictated by the HEIF file format. Some codecs are only supported by AVCapturePhotoOutput if containerized. For instance, the AVVideoCodecTypeHEVC is only supported with AVFileTypeHEIF and AVFileTypeHEIC formatting. To discover which photo pixel format types and video codecs are supported for a given file type, you may query AVCapturePhotoOutput's -supportedPhotoPixelFormatTypesForFileType:, or -supportedPhotoCodecTypesForFileType: respectively.
+func (cps *CapturePhotoSettings) ProcessedFileType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("processedFileType"))
 	return obj.Wrap(_r)
 }
 
 // FlashMode specifies whether the flash should be on, off, or chosen automatically by AVCapturePhotoOutput. flashMode takes the place of the deprecated AVCaptureDevice -flashMode API. Setting AVCaptureDevice.flashMode has no effect on AVCapturePhotoOutput, which only pays attention to the flashMode specified in your AVCapturePhotoSettings. The default value is AVCaptureFlashModeOff. Flash modes are defined in AVCaptureDevice.h. If you specify a flashMode of AVCaptureFlashModeOn, it wins over autoStillImageStabilizationEnabled=YES. When the device becomes very hot, the flash becomes temporarily unavailable until the device cools down (see AVCaptureDevice's -flashAvailable). While the flash is unavailable, AVCapturePhotoOutput's -supportedFlashModes property still reports AVCaptureFlashModeOn and AVCaptureFlashModeAuto as being available, thus allowing you to specify a flashMode of AVCaptureModeOn. You should always check the AVCaptureResolvedPhotoSettings provided to you in the AVCapturePhotoCaptureDelegate callbacks, as the resolved flashEnabled property will tell you definitively if the flash is being used.
-func (x *CapturePhotoSettings) FlashMode() CaptureFlashMode {
-	_r := objc.Send[CaptureFlashMode](objref.IDOf(x), objc.RegisterName("flashMode"))
+func (cps *CapturePhotoSettings) FlashMode() CaptureFlashMode {
+	_r := objc.Send[CaptureFlashMode](objref.IDOf(cps), objc.RegisterName("flashMode"))
 	return _r
-}
-
-// SetFlashMode wraps the corresponding Objective-C method.
-func (x *CapturePhotoSettings) SetFlashMode(flashMode CaptureFlashMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlashMode:"), flashMode)
 }
 
 // PhotoQualityPrioritization indicates how photo quality should be prioritized against speed of photo delivery. Default value is AVCapturePhotoQualityPrioritizationBalanced. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), depending on the source device's activeFormat. Some of these techniques can take significant processing time before the photo is returned to your delegate callback. The photoQualityPrioritization property allows you to specify your preferred quality vs speed of delivery. By default, speed and quality are considered to be of equal importance. When you specify AVCapturePhotoQualityPrioritizationSpeed, you indicate that speed should be prioritized at the expense of quality. Likewise, when you choose AVCapturePhotoQualityPrioritizationQuality, you signal your willingness to prioritize the very best quality at the expense of speed, and your readiness to wait (perhaps significantly) longer for the photo to be returned to your delegate.
-func (x *CapturePhotoSettings) PhotoQualityPrioritization() CapturePhotoQualityPrioritization {
-	_r := objc.Send[CapturePhotoQualityPrioritization](objref.IDOf(x), objc.RegisterName("photoQualityPrioritization"))
+func (cps *CapturePhotoSettings) PhotoQualityPrioritization() CapturePhotoQualityPrioritization {
+	_r := objc.Send[CapturePhotoQualityPrioritization](objref.IDOf(cps), objc.RegisterName("photoQualityPrioritization"))
 	return _r
 }
 
-// SetPhotoQualityPrioritization wraps the corresponding Objective-C method.
-func (x *CapturePhotoSettings) SetPhotoQualityPrioritization(photoQualityPrioritization CapturePhotoQualityPrioritization) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhotoQualityPrioritization:"), photoQualityPrioritization)
-}
-
-// IsHighResolutionPhotoEnabled specifies whether photos should be captured at the highest resolution supported by the source AVCaptureDevice's activeFormat. Default is NO. By default, AVCapturePhotoOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the AVCapturePhotoOutput emits images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution photos emitted by AVCapturePhotoOutput may be smaller by 10 or more percent. You may inspect your AVCaptureResolvedPhotoSettings in the delegate callbacks to discover the exact dimensions of the capture photo(s). Starting in iOS 14.5 if you disable geometric distortion correction, the high resolution photo emitted by AVCapturePhotoOutput may be is smaller depending on the format.
-func (x *CapturePhotoSettings) IsHighResolutionPhotoEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighResolutionPhotoEnabled"))
+// IsHighResolutionPhotoEnabled reports whether photos should be captured at the highest resolution supported by the source AVCaptureDevice's activeFormat. Default is false. By default, AVCapturePhotoOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to true, the AVCapturePhotoOutput emits images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution photos emitted by AVCapturePhotoOutput may be smaller by 10 or more percent. You may inspect your AVCaptureResolvedPhotoSettings in the delegate callbacks to discover the exact dimensions of the capture photo(s). Starting in iOS 14.5 if you disable geometric distortion correction, the high resolution photo emitted by AVCapturePhotoOutput may be is smaller depending on the format.
+func (cps *CapturePhotoSettings) IsHighResolutionPhotoEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isHighResolutionPhotoEnabled"))
 	return _r
-}
-
-// SetHighResolutionPhotoEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoSettings) SetHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighResolutionPhotoEnabled:"), highResolutionPhotoEnabled)
 }
 
 // MaxPhotoDimensions indicates the maximum resolution photo that will be captured. By setting this property you are requesting an image that may be up to as large as the specified dimensions, but no larger. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the currently configured format and be equal to or smaller than the value of AVCapturePhotoOutput.maxPhotoDimensions. This property defaults to the smallest dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions.
-func (x *CapturePhotoSettings) MaxPhotoDimensions() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(x), objc.RegisterName("maxPhotoDimensions"))
+func (cps *CapturePhotoSettings) MaxPhotoDimensions() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cps), objc.RegisterName("maxPhotoDimensions"))
 	return _r
 }
 
-// SetMaxPhotoDimensions wraps the corresponding Objective-C method.
-func (x *CapturePhotoSettings) SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
-}
-
-// IsConstantColorEnabled specifies whether the photo will be captured with constant color. Default is NO. Set to YES if you wish to capture a constant color photo. Throws an exception if -[AVCapturePhotoOutput constantColorEnabled] is not set to YES.
-func (x *CapturePhotoSettings) IsConstantColorEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstantColorEnabled"))
+// IsConstantColorEnabled reports whether the photo will be captured with constant color. Default is false. Set to true if you wish to capture a constant color photo. Throws an exception if -[AVCapturePhotoOutput constantColorEnabled] is not set to true.
+func (cps *CapturePhotoSettings) IsConstantColorEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isConstantColorEnabled"))
 	return _r
 }
 
-// SetConstantColorEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoSettings) SetConstantColorEnabled(constantColorEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantColorEnabled:"), constantColorEnabled)
-}
-
-// IsConstantColorFallbackPhotoDeliveryEnabled specifies whether a fallback photo is delivered when taking a constant color capture. Default is NO. Set to YES if you wish to receive a fallback photo that can be used in case the main constant color photo's confidence level is too low for your use case.
-func (x *CapturePhotoSettings) IsConstantColorFallbackPhotoDeliveryEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstantColorFallbackPhotoDeliveryEnabled"))
+// IsConstantColorFallbackPhotoDeliveryEnabled reports whether a fallback photo is delivered when taking a constant color capture. Default is false. Set to true if you wish to receive a fallback photo that can be used in case the main constant color photo's confidence level is too low for your use case.
+func (cps *CapturePhotoSettings) IsConstantColorFallbackPhotoDeliveryEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isConstantColorFallbackPhotoDeliveryEnabled"))
 	return _r
 }
 
-// SetConstantColorFallbackPhotoDeliveryEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoSettings) SetConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantColorFallbackPhotoDeliveryEnabled:"), constantColorFallbackPhotoDeliveryEnabled)
-}
-
-// IsShutterSoundSuppressionEnabled specifies whether the built-in shutter sound should be suppressed when capturing a photo with these settings. Default is NO. Set to YES if you wish to suppress AVCapturePhotoOutput's built-in shutter sound for this request. AVCapturePhotoOutput throws an NSInvalidArgumentException in `-capturePhotoWithSettings:` if its `shutterSoundSuppressionSupported` property returns NO.
-func (x *CapturePhotoSettings) IsShutterSoundSuppressionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isShutterSoundSuppressionEnabled"))
+// IsShutterSoundSuppressionEnabled reports whether the built-in shutter sound should be suppressed when capturing a photo with these settings. Default is false. Set to true if you wish to suppress AVCapturePhotoOutput's built-in shutter sound for this request. AVCapturePhotoOutput throws an NSInvalidArgumentException in `-capturePhotoWithSettings:` if its `shutterSoundSuppressionSupported` property returns false.
+func (cps *CapturePhotoSettings) IsShutterSoundSuppressionEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isShutterSoundSuppressionEnabled"))
 	return _r
 }
-
-// SetShutterSoundSuppressionEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoSettings) SetShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShutterSoundSuppressionEnabled:"), shutterSoundSuppressionEnabled)
-}
-
-// CapturePhotoSettingsable is the interface implemented by [CapturePhotoSettings], for mocking and DI.
-type CapturePhotoSettingsable interface {
-	obj.Object
-	WithFlashMode(flashMode CaptureFlashMode) *CapturePhotoSettings
-	WithPhotoQualityPrioritization(photoQualityPrioritization CapturePhotoQualityPrioritization) *CapturePhotoSettings
-	WithHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) *CapturePhotoSettings
-	WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoSettings
-	WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoSettings
-	WithConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool) *CapturePhotoSettings
-	WithShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) *CapturePhotoSettings
-	UniqueID() int64
-	Format() obj.Object
-	ProcessedFileType() obj.Object
-	FlashMode() CaptureFlashMode
-	SetFlashMode(flashMode CaptureFlashMode)
-	PhotoQualityPrioritization() CapturePhotoQualityPrioritization
-	SetPhotoQualityPrioritization(photoQualityPrioritization CapturePhotoQualityPrioritization)
-	IsHighResolutionPhotoEnabled() bool
-	SetHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool)
-	MaxPhotoDimensions() coremedia.CMVideoDimensions
-	SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions)
-	IsConstantColorEnabled() bool
-	SetConstantColorEnabled(constantColorEnabled bool)
-	IsConstantColorFallbackPhotoDeliveryEnabled() bool
-	SetConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool)
-	IsShutterSoundSuppressionEnabled() bool
-	SetShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool)
-}
-
-var _ CapturePhotoSettingsable = (*CapturePhotoSettings)(nil)

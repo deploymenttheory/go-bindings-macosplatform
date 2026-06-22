@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewHostAudioOutputStreamSink() *HostAudioOutputStreamSink {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZHostAudioOutputStreamSink")), objc.RegisterName("new"))
 	return hostAudioOutputStreamSinkAdopt(_id)
 }
-
-// HostAudioOutputStreamSinkable is the interface implemented by [HostAudioOutputStreamSink], for mocking and DI.
-type HostAudioOutputStreamSinkable interface {
-	obj.Object
-}
-
-var _ HostAudioOutputStreamSinkable = (*HostAudioOutputStreamSink)(nil)
 
 var _ AudioOutputStreamSinkProvider = (*HostAudioOutputStreamSink)(nil)

@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewVirtioSocketDeviceConfiguration() *VirtioSocketDeviceConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSocketDeviceConfiguration")), objc.RegisterName("new"))
 	return virtioSocketDeviceConfigurationAdopt(_id)
 }
-
-// VirtioSocketDeviceConfigurationable is the interface implemented by [VirtioSocketDeviceConfiguration], for mocking and DI.
-type VirtioSocketDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ VirtioSocketDeviceConfigurationable = (*VirtioSocketDeviceConfiguration)(nil)
 
 var _ SocketDeviceConfigurationProvider = (*VirtioSocketDeviceConfiguration)(nil)

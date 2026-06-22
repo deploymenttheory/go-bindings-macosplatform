@@ -46,24 +46,24 @@ func plugInAdopt(id objc.ID) *PlugIn {
 }
 
 // Description returns the object's -description text.
-func (x *PlugIn) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PlugIn) Description() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlugIn) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pi *PlugIn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlugIn) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pi *PlugIn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlugIn) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PlugIn) String() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // NewPlugIn creates a new PlugIn.
@@ -71,10 +71,3 @@ func NewPlugIn() *PlugIn {
 	_id := objc.Send[objc.ID](objc.ID(_class("CIPlugIn")), objc.RegisterName("new"))
 	return plugInAdopt(_id)
 }
-
-// PlugInable is the interface implemented by [PlugIn], for mocking and DI.
-type PlugInable interface {
-	obj.Object
-}
-
-var _ PlugInable = (*PlugIn)(nil)

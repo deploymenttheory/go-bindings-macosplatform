@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,166 +51,106 @@ func NewCNNLocalContrastNormalization() *CNNLocalContrastNormalization {
 	return cNNLocalContrastNormalizationAdopt(_id)
 }
 
-// WithAlpha the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
-func (x *CNNLocalContrastNormalization) WithAlpha(alpha float32) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+func (clcn *CNNLocalContrastNormalization) WithAlpha(alpha float32) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setAlpha:"), alpha)
+	return clcn
 }
 
-// WithBeta the value of beta.  Default is 0.5
-func (x *CNNLocalContrastNormalization) WithBeta(beta float32) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the value of beta.  Default is 0.5
+func (clcn *CNNLocalContrastNormalization) WithBeta(beta float32) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setBeta:"), beta)
+	return clcn
 }
 
-// WithDelta the value of delta.  Default is 1/1024
-func (x *CNNLocalContrastNormalization) WithDelta(delta float32) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+// WithDelta sets the value of delta.  Default is 1/1024
+func (clcn *CNNLocalContrastNormalization) WithDelta(delta float32) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setDelta:"), delta)
+	return clcn
 }
 
-// WithP0 the value of p0.  Default is 1.0
-func (x *CNNLocalContrastNormalization) WithP0(p0 float32) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
-	return x
+// WithP0 sets the value of p0.  Default is 1.0
+func (clcn *CNNLocalContrastNormalization) WithP0(p0 float32) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setP0:"), p0)
+	return clcn
 }
 
-// WithPm the value of pm.  Default is 0.0
-func (x *CNNLocalContrastNormalization) WithPm(pm float32) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
-	return x
+// WithPm sets the value of pm.  Default is 0.0
+func (clcn *CNNLocalContrastNormalization) WithPm(pm float32) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setPm:"), pm)
+	return clcn
 }
 
-// WithPs the value of ps.  Default is 1.0
-func (x *CNNLocalContrastNormalization) WithPs(ps float32) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
-	return x
+// WithPs sets the value of ps.  Default is 1.0
+func (clcn *CNNLocalContrastNormalization) WithPs(ps float32) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setPs:"), ps)
+	return clcn
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNLocalContrastNormalization) WithOffset(offset mpscore.MPSOffset) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (clcn *CNNLocalContrastNormalization) WithOffset(offset mpscore.MPSOffset) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setOffset:"), offset)
+	return clcn
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNLocalContrastNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (clcn *CNNLocalContrastNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setClipRect:"), clipRect)
+	return clcn
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNLocalContrastNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (clcn *CNNLocalContrastNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return clcn
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNLocalContrastNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (clcn *CNNLocalContrastNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return clcn
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNLocalContrastNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLocalContrastNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (clcn *CNNLocalContrastNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLocalContrastNormalization {
+	objc.Send[objc.ID](objref.IDOf(clcn), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return clcn
 }
 
-// Alpha the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
-func (x *CNNLocalContrastNormalization) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+func (clcn *CNNLocalContrastNormalization) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("alpha"))
 	return _r
 }
 
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalization) SetAlpha(alpha float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// Beta the value of beta.  Default is 0.5
-func (x *CNNLocalContrastNormalization) Beta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the value of beta.  Default is 0.5
+func (clcn *CNNLocalContrastNormalization) Beta() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("beta"))
 	return _r
 }
 
-// SetBeta wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalization) SetBeta(beta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-}
-
-// Delta the value of delta.  Default is 1/1024
-func (x *CNNLocalContrastNormalization) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+// Delta returns the value of delta.  Default is 1/1024
+func (clcn *CNNLocalContrastNormalization) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("delta"))
 	return _r
 }
 
-// SetDelta wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalization) SetDelta(delta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-}
-
-// P0 the value of p0.  Default is 1.0
-func (x *CNNLocalContrastNormalization) P0() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("p0"))
+// P0 returns the value of p0.  Default is 1.0
+func (clcn *CNNLocalContrastNormalization) P0() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("p0"))
 	return _r
 }
 
-// SetP0 wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalization) SetP0(p0 float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
-}
-
-// Pm the value of pm.  Default is 0.0
-func (x *CNNLocalContrastNormalization) Pm() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pm"))
+// Pm returns the value of pm.  Default is 0.0
+func (clcn *CNNLocalContrastNormalization) Pm() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("pm"))
 	return _r
 }
 
-// SetPm wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalization) SetPm(pm float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
-}
-
-// Ps the value of ps.  Default is 1.0
-func (x *CNNLocalContrastNormalization) Ps() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("ps"))
+// Ps returns the value of ps.  Default is 1.0
+func (clcn *CNNLocalContrastNormalization) Ps() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("ps"))
 	return _r
 }
-
-// SetPs wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalization) SetPs(ps float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
-}
-
-// CNNLocalContrastNormalizationable is the interface implemented by [CNNLocalContrastNormalization], for mocking and DI.
-type CNNLocalContrastNormalizationable interface {
-	obj.Object
-	WithAlpha(alpha float32) *CNNLocalContrastNormalization
-	WithBeta(beta float32) *CNNLocalContrastNormalization
-	WithDelta(delta float32) *CNNLocalContrastNormalization
-	WithP0(p0 float32) *CNNLocalContrastNormalization
-	WithPm(pm float32) *CNNLocalContrastNormalization
-	WithPs(ps float32) *CNNLocalContrastNormalization
-	WithOffset(offset mpscore.MPSOffset) *CNNLocalContrastNormalization
-	WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalization
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLocalContrastNormalization
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLocalContrastNormalization
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLocalContrastNormalization
-	Alpha() float32
-	SetAlpha(alpha float32)
-	Beta() float32
-	SetBeta(beta float32)
-	Delta() float32
-	SetDelta(delta float32)
-	P0() float32
-	SetP0(p0 float32)
-	Pm() float32
-	SetPm(pm float32)
-	Ps() float32
-	SetPs(ps float32)
-}
-
-var _ CNNLocalContrastNormalizationable = (*CNNLocalContrastNormalization)(nil)
 
 var _ CNNKernelProvider = (*CNNLocalContrastNormalization)(nil)

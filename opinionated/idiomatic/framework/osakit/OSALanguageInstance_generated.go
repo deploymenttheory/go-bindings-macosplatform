@@ -44,24 +44,24 @@ func languageInstanceAdopt(id objc.ID) *LanguageInstance {
 }
 
 // Description returns the object's -description text.
-func (x *LanguageInstance) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (li *LanguageInstance) Description() string {
+	return rt.Description(objref.IDOf(li))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LanguageInstance) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (li *LanguageInstance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(li), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LanguageInstance) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (li *LanguageInstance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(li), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LanguageInstance) String() string {
-	return rt.Description(objref.IDOf(x))
+func (li *LanguageInstance) String() string {
+	return rt.Description(objref.IDOf(li))
 }
 
 // NewLanguageInstanceWithLanguage creates a new LanguageInstance.
@@ -72,42 +72,25 @@ func NewLanguageInstanceWithLanguage(language *Language) *LanguageInstance {
 }
 
 // WithDefaultTarget sets the property and returns the receiver so calls can be chained.
-func (x *LanguageInstance) WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
-	return x
+func (li *LanguageInstance) WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
+	return li
 }
 
 // RichTextFromDescriptor wraps the corresponding Objective-C method.
-func (x *LanguageInstance) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
+func (li *LanguageInstance) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
 	return obj.Wrap(_r)
 }
 
 // Language wraps the corresponding Objective-C method.
-func (x *LanguageInstance) Language() *Language {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (li *LanguageInstance) Language() *Language {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
 // DefaultTarget wraps the corresponding Objective-C method.
-func (x *LanguageInstance) DefaultTarget() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultTarget"))
+func (li *LanguageInstance) DefaultTarget() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("defaultTarget"))
 	return obj.Wrap(_r)
 }
-
-// SetDefaultTarget wraps the corresponding Objective-C method.
-func (x *LanguageInstance) SetDefaultTarget(defaultTarget obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
-}
-
-// LanguageInstanceable is the interface implemented by [LanguageInstance], for mocking and DI.
-type LanguageInstanceable interface {
-	obj.Object
-	WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance
-	RichTextFromDescriptor(descriptor obj.Object) obj.Object
-	Language() *Language
-	DefaultTarget() obj.Object
-	SetDefaultTarget(defaultTarget obj.Object)
-}
-
-var _ LanguageInstanceable = (*LanguageInstance)(nil)

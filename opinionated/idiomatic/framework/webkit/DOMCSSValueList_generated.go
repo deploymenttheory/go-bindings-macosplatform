@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,33 +49,23 @@ func NewDOMCSSValueList() *DOMCSSValueList {
 	return dOMCSSValueListAdopt(_id)
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSValueList) WithCssText(cssText string) *DOMCSSValueList {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dvl *DOMCSSValueList) WithCSSText(cssText string) *DOMCSSValueList {
+	objc.Send[objc.ID](objref.IDOf(dvl), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dvl
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMCSSValueList) Item(index int) *DOMCSSValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dvl *DOMCSSValueList) Item(index int) *DOMCSSValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dvl), objc.RegisterName("item:"), index)
 	return DOMCSSValueFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMCSSValueList) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dvl *DOMCSSValueList) Length() int {
+	_r := objc.Send[int](objref.IDOf(dvl), objc.RegisterName("length"))
 	return _r
 }
-
-// DOMCSSValueListable is the interface implemented by [DOMCSSValueList], for mocking and DI.
-type DOMCSSValueListable interface {
-	obj.Object
-	WithCssText(cssText string) *DOMCSSValueList
-	Item(index int) *DOMCSSValue
-	Length() int
-}
-
-var _ DOMCSSValueListable = (*DOMCSSValueList)(nil)
 
 var _ DOMCSSValueProvider = (*DOMCSSValueList)(nil)
 

@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,45 +45,34 @@ func cNNNeuronNodeAdopt(id objc.ID) *CNNNeuronNode {
 	return x
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronNode) WithLabel(label string) *CNNNeuronNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnn *CNNNeuronNode) WithLabel(label string) *CNNNeuronNode {
+	objc.Send[objc.ID](objref.IDOf(cnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnn
 }
 
-// A filter parameter a
-func (x *CNNNeuronNode) A() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
+// A returns filter parameter a
+func (cnn *CNNNeuronNode) A() float32 {
+	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("a"))
 	return _r
 }
 
-// B filter parameter b
-func (x *CNNNeuronNode) B() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
+// B returns filter parameter b
+func (cnn *CNNNeuronNode) B() float32 {
+	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("b"))
 	return _r
 }
 
-// C filter parameter c
-func (x *CNNNeuronNode) C() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
+// C returns filter parameter c
+func (cnn *CNNNeuronNode) C() float32 {
+	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("c"))
 	return _r
 }
-
-// CNNNeuronNodeable is the interface implemented by [CNNNeuronNode], for mocking and DI.
-type CNNNeuronNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronNode
-	A() float32
-	B() float32
-	C() float32
-}
-
-var _ CNNNeuronNodeable = (*CNNNeuronNode)(nil)
 
 // isCNNNeuronNode marks CNNNeuronNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNNeuronNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNNeuronNode) isCNNNeuronNode() {}
+func (cnn *CNNNeuronNode) isCNNNeuronNode() {}
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronNode)(nil)
 

@@ -5,13 +5,14 @@
 package automator
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Action is an idiomatic wrapper over the Objective-C class AMAction.
@@ -50,24 +51,24 @@ func actionAdopt(id objc.ID) *Action {
 }
 
 // Description returns the object's -description text.
-func (x *Action) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Action) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Action) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Action) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Action) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Action) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewActionWithDefinitionFromArchive initializes the action with the specified definition.
@@ -88,22 +89,22 @@ func NewActionWithContentsOfURLError(fileURL string) (result *Action, err error)
 	return actionAdopt(_id), nil
 }
 
-// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
-func (x *Action) WithProgressValue(progressValue float64) *Action {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
-	return x
+// WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
+func (a *Action) WithProgressValue(progressValue float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setProgressValue:"), progressValue)
+	return a
 }
 
 // RunWithInputFromActionError requests the action to perform its task using the specified input from the specified action.
-func (x *Action) RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWithInput:fromAction:error:"), objref.IDOf(input), objref.IDOf(anAction), objref.IDOf(errorInfo))
+func (a *Action) RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runWithInput:fromAction:error:"), objref.IDOf(input), objref.IDOf(anAction), objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
 // RunWithInputError requests the action to perform its task using the specified input.
-func (x *Action) RunWithInputError(input obj.Object) (result obj.Object, err error) {
+func (a *Action) RunWithInputError(input obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWithInput:error:"), objref.IDOf(input), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runWithInput:error:"), objref.IDOf(input), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -111,117 +112,86 @@ func (x *Action) RunWithInputError(input obj.Object) (result obj.Object, err err
 }
 
 // RunAsynchronouslyWithInput causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
-func (x *Action) RunAsynchronouslyWithInput(input obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runAsynchronouslyWithInput:"), objref.IDOf(input))
+func (a *Action) RunAsynchronouslyWithInput(input obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runAsynchronouslyWithInput:"), objref.IDOf(input))
 }
 
 // WillFinishRunning provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
-func (x *Action) WillFinishRunning() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willFinishRunning"))
+func (a *Action) WillFinishRunning() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("willFinishRunning"))
 }
 
 // DidFinishRunningWithError sent by the action to itself when it has finished running asynchronously.
-func (x *Action) DidFinishRunningWithError(errorInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFinishRunningWithError:"), objref.IDOf(errorInfo))
+func (a *Action) DidFinishRunningWithError(errorInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("didFinishRunningWithError:"), objref.IDOf(errorInfo))
 }
 
 // Stop stops the action from running.
-func (x *Action) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (a *Action) Stop() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop"))
 }
 
 // Reset resets the action to its initial state.
-func (x *Action) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (a *Action) Reset() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reset"))
 }
 
 // WriteToDictionary examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
-func (x *Action) WriteToDictionary(dictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeToDictionary:"), objref.IDOf(dictionary))
+func (a *Action) WriteToDictionary(dictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("writeToDictionary:"), objref.IDOf(dictionary))
 }
 
 // Opened allows the action to initialize its user interface.
-func (x *Action) Opened() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opened"))
+func (a *Action) Opened() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("opened"))
 }
 
 // Activated allows the action to synchronize its information with settings in another app.
-func (x *Action) Activated() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activated"))
+func (a *Action) Activated() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activated"))
 }
 
 // Closed invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
-func (x *Action) Closed() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closed"))
+func (a *Action) Closed() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("closed"))
 }
 
 // UpdateParameters requests the action to update its stored set of parameters from the settings in the action’s user interface.
-func (x *Action) UpdateParameters() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateParameters"))
+func (a *Action) UpdateParameters() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateParameters"))
 }
 
 // ParametersUpdated requests the action to update its user interface from its stored parameters, which have changed.
-func (x *Action) ParametersUpdated() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parametersUpdated"))
+func (a *Action) ParametersUpdated() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("parametersUpdated"))
 }
 
 // LogMessageWithLevelFormat displays a message in Automator’s log area.
-func (x *Action) LogMessageWithLevelFormat(level LogLevel, format string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logMessageWithLevel:format:"), level, purego.NSString(format))
+func (a *Action) LogMessageWithLevelFormat(level LogLevel, format string) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("logMessageWithLevel:format:"), level, purego.NSString(format))
 }
 
 // IgnoresInput wraps the corresponding Objective-C method.
-func (x *Action) IgnoresInput() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresInput"))
+func (a *Action) IgnoresInput() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("ignoresInput"))
 	return _r
 }
 
 // ProgressValue wraps the corresponding Objective-C method.
-func (x *Action) ProgressValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("progressValue"))
+func (a *Action) ProgressValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("progressValue"))
 	return _r
-}
-
-// SetProgressValue wraps the corresponding Objective-C method.
-func (x *Action) SetProgressValue(progressValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 }
 
 // IsStopped wraps the corresponding Objective-C method.
-func (x *Action) IsStopped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStopped"))
+func (a *Action) IsStopped() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isStopped"))
 	return _r
 }
-
-// Actionable is the interface implemented by [Action], for mocking and DI.
-type Actionable interface {
-	obj.Object
-	WithProgressValue(progressValue float64) *Action
-	RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object
-	RunWithInputError(input obj.Object) (result obj.Object, err error)
-	RunAsynchronouslyWithInput(input obj.Object)
-	WillFinishRunning()
-	DidFinishRunningWithError(errorInfo obj.Object)
-	Stop()
-	Reset()
-	WriteToDictionary(dictionary obj.Object)
-	Opened()
-	Activated()
-	Closed()
-	UpdateParameters()
-	ParametersUpdated()
-	LogMessageWithLevelFormat(level LogLevel, format string)
-	IgnoresInput() bool
-	ProgressValue() float64
-	SetProgressValue(progressValue float64)
-	IsStopped() bool
-}
-
-var _ Actionable = (*Action)(nil)
 
 // isAction marks Action — and, by embedding promotion, its
 // subclasses — as a member of the Action hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Action) isAction() {}
+func (a *Action) isAction() {}
 
 var _ ActionProvider = (*Action)(nil)

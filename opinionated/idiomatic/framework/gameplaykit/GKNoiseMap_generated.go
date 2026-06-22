@@ -46,24 +46,24 @@ func noiseMapAdopt(id objc.ID) *NoiseMap {
 }
 
 // Description returns the object's -description text.
-func (x *NoiseMap) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nm *NoiseMap) Description() string {
+	return rt.Description(objref.IDOf(nm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NoiseMap) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nm *NoiseMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NoiseMap) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nm *NoiseMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NoiseMap) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nm *NoiseMap) String() string {
+	return rt.Description(objref.IDOf(nm))
 }
 
 // NewNoiseMap creates a new NoiseMap.
@@ -79,16 +79,8 @@ func NewNoiseMapWithNoise(noise *Noise) *NoiseMap {
 	return noiseMapAdopt(_id)
 }
 
-// IsSeamless whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
-func (x *NoiseMap) IsSeamless() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSeamless"))
+// IsSeamless reports whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
+func (nm *NoiseMap) IsSeamless() bool {
+	_r := objc.Send[bool](objref.IDOf(nm), objc.RegisterName("isSeamless"))
 	return _r
 }
-
-// NoiseMapable is the interface implemented by [NoiseMap], for mocking and DI.
-type NoiseMapable interface {
-	obj.Object
-	IsSeamless() bool
-}
-
-var _ NoiseMapable = (*NoiseMap)(nil)

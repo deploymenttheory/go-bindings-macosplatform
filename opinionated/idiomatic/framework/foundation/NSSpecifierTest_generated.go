@@ -61,17 +61,9 @@ func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *Scrip
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *SpecifierTest) WithScriptingProperties(scriptingProperties obj.Object) *SpecifierTest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (st *SpecifierTest) WithScriptingProperties(scriptingProperties obj.Object) *SpecifierTest {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return st
 }
-
-// SpecifierTestable is the interface implemented by [SpecifierTest], for mocking and DI.
-type SpecifierTestable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *SpecifierTest
-}
-
-var _ SpecifierTestable = (*SpecifierTest)(nil)
 
 var _ ScriptWhoseTestProvider = (*SpecifierTest)(nil)

@@ -54,18 +54,10 @@ func NewGenericURLResourceWithURL(url string) *GenericURLResource {
 	return genericURLResourceAdopt(_id)
 }
 
-// Url the URL represented by the resource.
-func (x *GenericURLResource) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the URL represented by the resource.
+func (gur *GenericURLResource) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gur), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
-
-// GenericURLResourceable is the interface implemented by [GenericURLResource], for mocking and DI.
-type GenericURLResourceable interface {
-	obj.Object
-	Url() obj.Object
-}
-
-var _ GenericURLResourceable = (*GenericURLResource)(nil)
 
 var _ ResourceProvider = (*GenericURLResource)(nil)

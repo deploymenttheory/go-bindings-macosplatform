@@ -46,24 +46,24 @@ func quadtreeNodeAdopt(id objc.ID) *QuadtreeNode {
 }
 
 // Description returns the object's -description text.
-func (x *QuadtreeNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qn *QuadtreeNode) Description() string {
+	return rt.Description(objref.IDOf(qn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuadtreeNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qn *QuadtreeNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuadtreeNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qn *QuadtreeNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QuadtreeNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qn *QuadtreeNode) String() string {
+	return rt.Description(objref.IDOf(qn))
 }
 
 // NewQuadtreeNode creates a new QuadtreeNode.
@@ -71,10 +71,3 @@ func NewQuadtreeNode() *QuadtreeNode {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKQuadtreeNode")), objc.RegisterName("new"))
 	return quadtreeNodeAdopt(_id)
 }
-
-// QuadtreeNodeable is the interface implemented by [QuadtreeNode], for mocking and DI.
-type QuadtreeNodeable interface {
-	obj.Object
-}
-
-var _ QuadtreeNodeable = (*QuadtreeNode)(nil)

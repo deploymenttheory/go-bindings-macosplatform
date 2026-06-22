@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewCNNArithmeticGradientState() *CNNArithmeticGradientState {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNArithmeticGradientState")), objc.RegisterName("new"))
 	return cNNArithmeticGradientStateAdopt(_id)
 }
-
-// CNNArithmeticGradientStateable is the interface implemented by [CNNArithmeticGradientState], for mocking and DI.
-type CNNArithmeticGradientStateable interface {
-	obj.Object
-}
-
-var _ CNNArithmeticGradientStateable = (*CNNArithmeticGradientState)(nil)
 
 var _ NNBinaryGradientStateProvider = (*CNNArithmeticGradientState)(nil)

@@ -48,43 +48,35 @@ func uSBControllerAdopt(id objc.ID) *USBController {
 }
 
 // Description returns the object's -description text.
-func (x *USBController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *USBController) Description() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *USBController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uc *USBController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *USBController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uc *USBController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *USBController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *USBController) String() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
-// UsbDevices wraps the corresponding Objective-C method.
-func (x *USBController) UsbDevices() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("usbDevices"))
+// USBDevices wraps the corresponding Objective-C method.
+func (uc *USBController) USBDevices() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("usbDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// USBControllerable is the interface implemented by [USBController], for mocking and DI.
-type USBControllerable interface {
-	obj.Object
-	UsbDevices() []obj.Object
-}
-
-var _ USBControllerable = (*USBController)(nil)
 
 // isUSBController marks USBController — and, by embedding promotion, its
 // subclasses — as a member of the USBController hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *USBController) isUSBController() {}
+func (uc *USBController) isUSBController() {}
 
 var _ USBControllerProvider = (*USBController)(nil)

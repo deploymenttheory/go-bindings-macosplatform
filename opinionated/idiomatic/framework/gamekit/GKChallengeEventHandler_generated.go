@@ -46,24 +46,24 @@ func challengeEventHandlerAdopt(id objc.ID) *ChallengeEventHandler {
 }
 
 // Description returns the object's -description text.
-func (x *ChallengeEventHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ceh *ChallengeEventHandler) Description() string {
+	return rt.Description(objref.IDOf(ceh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChallengeEventHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ceh *ChallengeEventHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ceh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChallengeEventHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ceh *ChallengeEventHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ceh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ChallengeEventHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ceh *ChallengeEventHandler) String() string {
+	return rt.Description(objref.IDOf(ceh))
 }
 
 // NewChallengeEventHandler creates a new ChallengeEventHandler.
@@ -71,10 +71,3 @@ func NewChallengeEventHandler() *ChallengeEventHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKChallengeEventHandler")), objc.RegisterName("new"))
 	return challengeEventHandlerAdopt(_id)
 }
-
-// ChallengeEventHandlerable is the interface implemented by [ChallengeEventHandler], for mocking and DI.
-type ChallengeEventHandlerable interface {
-	obj.Object
-}
-
-var _ ChallengeEventHandlerable = (*ChallengeEventHandler)(nil)

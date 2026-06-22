@@ -46,24 +46,24 @@ func focusStatusAdopt(id objc.ID) *FocusStatus {
 }
 
 // Description returns the object's -description text.
-func (x *FocusStatus) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FocusStatus) Description() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FocusStatus) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fs *FocusStatus) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FocusStatus) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fs *FocusStatus) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FocusStatus) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FocusStatus) String() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // NewFocusStatusWithIsFocused creates an object that indicates the user’s ability to receive communication notifications.
@@ -74,15 +74,7 @@ func NewFocusStatusWithIsFocused(isFocused obj.Object) *FocusStatus {
 }
 
 // IsFocused wraps the corresponding Objective-C method.
-func (x *FocusStatus) IsFocused() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isFocused"))
+func (fs *FocusStatus) IsFocused() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("isFocused"))
 	return obj.Wrap(_r)
 }
-
-// FocusStatusable is the interface implemented by [FocusStatus], for mocking and DI.
-type FocusStatusable interface {
-	obj.Object
-	IsFocused() obj.Object
-}
-
-var _ FocusStatusable = (*FocusStatus)(nil)

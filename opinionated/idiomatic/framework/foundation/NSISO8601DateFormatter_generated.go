@@ -53,26 +53,26 @@ func NewISO8601DateFormatter() *ISO8601DateFormatter {
 }
 
 // WithTimeZone sets the property and returns the receiver so calls can be chained.
-func (x *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
-	return x
+func (idf *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+	return idf
 }
 
 // WithFormatOptions sets the property and returns the receiver so calls can be chained.
-func (x *ISO8601DateFormatter) WithFormatOptions(formatOptions ISO8601DateFormatOptions) *ISO8601DateFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatOptions:"), formatOptions)
-	return x
+func (idf *ISO8601DateFormatter) WithFormatOptions(formatOptions ISO8601DateFormatOptions) *ISO8601DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setFormatOptions:"), formatOptions)
+	return idf
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ISO8601DateFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (idf *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ISO8601DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return idf
 }
 
 // StringFromDate wraps the corresponding Objective-C method.
-func (x *ISO8601DateFormatter) StringFromDate(date *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDate:"), objref.IDOf(date))
+func (idf *ISO8601DateFormatter) StringFromDate(date *Date) string {
+	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("stringFromDate:"), objref.IDOf(date))
 	if _r == 0 {
 		return ""
 	}
@@ -80,47 +80,21 @@ func (x *ISO8601DateFormatter) StringFromDate(date *Date) string {
 }
 
 // DateFromString wraps the corresponding Objective-C method.
-func (x *ISO8601DateFormatter) DateFromString(string_ string) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateFromString:"), purego.NSString(string_))
+func (idf *ISO8601DateFormatter) DateFromString(string_ string) *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("dateFromString:"), purego.NSString(string_))
 	return DateFromID(_r)
 }
 
 // TimeZone wraps the corresponding Objective-C method.
-func (x *ISO8601DateFormatter) TimeZone() *TimeZone {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+func (idf *ISO8601DateFormatter) TimeZone() *TimeZone {
+	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// SetTimeZone wraps the corresponding Objective-C method.
-func (x *ISO8601DateFormatter) SetTimeZone(timeZone *TimeZone) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
-}
-
 // FormatOptions wraps the corresponding Objective-C method.
-func (x *ISO8601DateFormatter) FormatOptions() ISO8601DateFormatOptions {
-	_r := objc.Send[ISO8601DateFormatOptions](objref.IDOf(x), objc.RegisterName("formatOptions"))
+func (idf *ISO8601DateFormatter) FormatOptions() ISO8601DateFormatOptions {
+	_r := objc.Send[ISO8601DateFormatOptions](objref.IDOf(idf), objc.RegisterName("formatOptions"))
 	return _r
 }
-
-// SetFormatOptions wraps the corresponding Objective-C method.
-func (x *ISO8601DateFormatter) SetFormatOptions(formatOptions ISO8601DateFormatOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatOptions:"), formatOptions)
-}
-
-// ISO8601DateFormatterable is the interface implemented by [ISO8601DateFormatter], for mocking and DI.
-type ISO8601DateFormatterable interface {
-	obj.Object
-	WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter
-	WithFormatOptions(formatOptions ISO8601DateFormatOptions) *ISO8601DateFormatter
-	WithScriptingProperties(scriptingProperties obj.Object) *ISO8601DateFormatter
-	StringFromDate(date *Date) string
-	DateFromString(string_ string) *Date
-	TimeZone() *TimeZone
-	SetTimeZone(timeZone *TimeZone)
-	FormatOptions() ISO8601DateFormatOptions
-	SetFormatOptions(formatOptions ISO8601DateFormatOptions)
-}
-
-var _ ISO8601DateFormatterable = (*ISO8601DateFormatter)(nil)
 
 var _ FormatterProvider = (*ISO8601DateFormatter)(nil)

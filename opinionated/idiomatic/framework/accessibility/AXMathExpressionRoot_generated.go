@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,24 +53,15 @@ func NewMathExpressionRootWithRadicandExpressionsRootIndexExpression(radicandExp
 // RadicandExpressions wraps the corresponding Objective-C method.
 //
 // RadicandExpressions returns the collection as a Go slice.
-func (x *MathExpressionRoot) RadicandExpressions() []*MathExpression {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("radicandExpressions"))
+func (mer *MathExpressionRoot) RadicandExpressions() []*MathExpression {
+	_arr := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("radicandExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // RootIndexExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionRoot) RootIndexExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootIndexExpression"))
+func (mer *MathExpressionRoot) RootIndexExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("rootIndexExpression"))
 	return MathExpressionFromID(_r)
 }
-
-// MathExpressionRootable is the interface implemented by [MathExpressionRoot], for mocking and DI.
-type MathExpressionRootable interface {
-	obj.Object
-	RadicandExpressions() []*MathExpression
-	RootIndexExpression() *MathExpression
-}
-
-var _ MathExpressionRootable = (*MathExpressionRoot)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionRoot)(nil)

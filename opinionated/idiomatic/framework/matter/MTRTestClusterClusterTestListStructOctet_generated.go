@@ -51,24 +51,15 @@ func NewMTRTestClusterClusterTestListStructOctet() *MTRTestClusterClusterTestLis
 }
 
 // WithMember1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRTestClusterClusterTestListStructOctet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
-	return x
+func (mtcctlso *MTRTestClusterClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRTestClusterClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(mtcctlso), objc.RegisterName("setMember1:"), objref.IDOf(member1))
+	return mtcctlso
 }
 
 // WithMember2 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRTestClusterClusterTestListStructOctet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
-	return x
+func (mtcctlso *MTRTestClusterClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRTestClusterClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(mtcctlso), objc.RegisterName("setMember2:"), objref.IDOf(member2))
+	return mtcctlso
 }
-
-// MTRTestClusterClusterTestListStructOctetable is the interface implemented by [MTRTestClusterClusterTestListStructOctet], for mocking and DI.
-type MTRTestClusterClusterTestListStructOctetable interface {
-	obj.Object
-	WithMember1(member1 obj.Object) *MTRTestClusterClusterTestListStructOctet
-	WithMember2(member2 obj.Object) *MTRTestClusterClusterTestListStructOctet
-}
-
-var _ MTRTestClusterClusterTestListStructOctetable = (*MTRTestClusterClusterTestListStructOctet)(nil)
 
 var _ MTRUnitTestingClusterTestListStructOctetProvider = (*MTRTestClusterClusterTestListStructOctet)(nil)

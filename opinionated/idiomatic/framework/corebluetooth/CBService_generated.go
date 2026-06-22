@@ -7,7 +7,6 @@ package corebluetooth
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,49 +45,38 @@ func serviceAdopt(id objc.ID) *Service {
 	return x
 }
 
-// Peripheral a back-pointer to the peripheral this service belongs to.
-func (x *Service) Peripheral() *Peripheral {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peripheral"))
+// Peripheral returns a back-pointer to the peripheral this service belongs to.
+func (s *Service) Peripheral() *Peripheral {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("peripheral"))
 	return PeripheralFromID(_r)
 }
 
-// IsPrimary the type of the service (primary or secondary).
-func (x *Service) IsPrimary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPrimary"))
+// IsPrimary reports whether the type of the service (primary or secondary).
+func (s *Service) IsPrimary() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isPrimary"))
 	return _r
 }
 
-// IncludedServices a list of included CBServices that have so far been discovered in this service.
+// IncludedServices returns a list of included CBServices that have so far been discovered in this service.
 //
 // IncludedServices returns the collection as a Go slice.
-func (x *Service) IncludedServices() []*Service {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("includedServices"))
+func (s *Service) IncludedServices() []*Service {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("includedServices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Service { return ServiceFromID(_id) })
 }
 
-// Characteristics a list of CBCharacteristics that have so far been discovered in this service.
+// Characteristics returns a list of CBCharacteristics that have so far been discovered in this service.
 //
 // Characteristics returns the collection as a Go slice.
-func (x *Service) Characteristics() []*Characteristic {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characteristics"))
+func (s *Service) Characteristics() []*Characteristic {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("characteristics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Characteristic { return CharacteristicFromID(_id) })
 }
-
-// Serviceable is the interface implemented by [Service], for mocking and DI.
-type Serviceable interface {
-	obj.Object
-	Peripheral() *Peripheral
-	IsPrimary() bool
-	IncludedServices() []*Service
-	Characteristics() []*Characteristic
-}
-
-var _ Serviceable = (*Service)(nil)
 
 // isService marks Service — and, by embedding promotion, its
 // subclasses — as a member of the Service hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Service) isService() {}
+func (s *Service) isService() {}
 
 var _ ServiceProvider = (*Service)(nil)
 

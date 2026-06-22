@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewEFIBootLoader() *EFIBootLoader {
 	return eFIBootLoaderAdopt(_id)
 }
 
-// WithVariableStore the boot loader’s EFI variable store.
-func (x *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
-	return x
+// WithVariableStore sets the boot loader’s EFI variable store.
+func (ebl *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader {
+	objc.Send[objc.ID](objref.IDOf(ebl), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
+	return ebl
 }
 
 // VariableStore wraps the corresponding Objective-C method.
-func (x *EFIBootLoader) VariableStore() *EFIVariableStore {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variableStore"))
+func (ebl *EFIBootLoader) VariableStore() *EFIVariableStore {
+	_r := objc.Send[objc.ID](objref.IDOf(ebl), objc.RegisterName("variableStore"))
 	return EFIVariableStoreFromID(_r)
 }
-
-// SetVariableStore wraps the corresponding Objective-C method.
-func (x *EFIBootLoader) SetVariableStore(variableStore *EFIVariableStore) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
-}
-
-// EFIBootLoaderable is the interface implemented by [EFIBootLoader], for mocking and DI.
-type EFIBootLoaderable interface {
-	obj.Object
-	WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader
-	VariableStore() *EFIVariableStore
-	SetVariableStore(variableStore *EFIVariableStore)
-}
-
-var _ EFIBootLoaderable = (*EFIBootLoader)(nil)
 
 var _ BootLoaderProvider = (*EFIBootLoader)(nil)

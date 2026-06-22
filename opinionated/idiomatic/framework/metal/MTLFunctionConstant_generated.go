@@ -46,24 +46,24 @@ func functionConstantAdopt(id objc.ID) *FunctionConstant {
 }
 
 // Description returns the object's -description text.
-func (x *FunctionConstant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fc *FunctionConstant) Description() string {
+	return rt.Description(objref.IDOf(fc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FunctionConstant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fc *FunctionConstant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FunctionConstant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fc *FunctionConstant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FunctionConstant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fc *FunctionConstant) String() string {
+	return rt.Description(objref.IDOf(fc))
 }
 
 // NewFunctionConstant creates a new FunctionConstant.
@@ -73,8 +73,8 @@ func NewFunctionConstant() *FunctionConstant {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *FunctionConstant) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (fc *FunctionConstant) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,30 +82,19 @@ func (x *FunctionConstant) Name() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *FunctionConstant) Type() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("type"))
+func (fc *FunctionConstant) Type() DataType {
+	_r := objc.Send[DataType](objref.IDOf(fc), objc.RegisterName("type"))
 	return _r
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *FunctionConstant) Index() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+func (fc *FunctionConstant) Index() int {
+	_r := objc.Send[int](objref.IDOf(fc), objc.RegisterName("index"))
 	return _r
 }
 
 // Required wraps the corresponding Objective-C method.
-func (x *FunctionConstant) Required() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("required"))
+func (fc *FunctionConstant) Required() bool {
+	_r := objc.Send[bool](objref.IDOf(fc), objc.RegisterName("required"))
 	return _r
 }
-
-// FunctionConstantable is the interface implemented by [FunctionConstant], for mocking and DI.
-type FunctionConstantable interface {
-	obj.Object
-	Name() string
-	Type() DataType
-	Index() int
-	Required() bool
-}
-
-var _ FunctionConstantable = (*FunctionConstant)(nil)

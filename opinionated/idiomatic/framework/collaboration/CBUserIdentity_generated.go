@@ -53,38 +53,27 @@ func NewUserIdentity() *UserIdentity {
 }
 
 // AuthenticateWithPassword returns a Boolean value indicating whether the given password is correct for the identity.
-func (x *UserIdentity) AuthenticateWithPassword(password string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authenticateWithPassword:"), purego.NSString(password))
+func (ui *UserIdentity) AuthenticateWithPassword(password string) bool {
+	_r := objc.Send[bool](objref.IDOf(ui), objc.RegisterName("authenticateWithPassword:"), purego.NSString(password))
 	return _r
 }
 
 // PosixUID returns the POSIX UID of the identity. The POSIX UID is a integer that can identify a user within an identity authority. UIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX UID of the identity.
-func (x *UserIdentity) PosixUID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("posixUID"))
+func (ui *UserIdentity) PosixUID() int {
+	_r := objc.Send[int](objref.IDOf(ui), objc.RegisterName("posixUID"))
 	return _r
 }
 
 // Certificate returns the public authentication certificate associated with a user identity. The Collaboration framework supports certificate-based authentication in addition to passwords. If a certificate is stored for a user identity, it will be the default method of authentication. When a .Mac account is associated with a user identity, the authentication certificate is automatically downloaded from the .Mac servers. - Returns: The public authentication certificate, or `nil` if none exists.
-func (x *UserIdentity) Certificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificate"))
+func (ui *UserIdentity) Certificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ui), objc.RegisterName("certificate"))
 	return obj.Wrap(_r)
 }
 
-// IsEnabled returns a Boolean value indicating whether the identity is allowed to authenticate. If the identity does not have authentication credentials (a password or certificate), it is not able to log in. However, an identity with authentication credentials does not ensure that it is enabled. Any identity can be disabled. - Returns: `TRUE` if the identity can authenticate; otherwise, `FALSE`.
-func (x *UserIdentity) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether returns a Boolean value indicating whether the identity is allowed to authenticate. If the identity does not have authentication credentials (a password or certificate), it is not able to log in. However, an identity with authentication credentials does not ensure that it is enabled. Any identity can be disabled. - Returns: `TRUE` if the identity can authenticate; otherwise, `FALSE`.
+func (ui *UserIdentity) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ui), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// UserIdentityable is the interface implemented by [UserIdentity], for mocking and DI.
-type UserIdentityable interface {
-	obj.Object
-	AuthenticateWithPassword(password string) bool
-	PosixUID() int
-	Certificate() obj.Object
-	IsEnabled() bool
-}
-
-var _ UserIdentityable = (*UserIdentity)(nil)
 
 var _ IdentityProvider = (*UserIdentity)(nil)

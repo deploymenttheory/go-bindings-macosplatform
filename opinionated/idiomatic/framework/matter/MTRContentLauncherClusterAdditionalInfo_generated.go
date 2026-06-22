@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,24 +50,15 @@ func NewMTRContentLauncherClusterAdditionalInfo() *MTRContentLauncherClusterAddi
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterAdditionalInfo) WithName(name string) *MTRContentLauncherClusterAdditionalInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mclcai *MTRContentLauncherClusterAdditionalInfo) WithName(name string) *MTRContentLauncherClusterAdditionalInfo {
+	objc.Send[objc.ID](objref.IDOf(mclcai), objc.RegisterName("setName:"), purego.NSString(name))
+	return mclcai
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterAdditionalInfo) WithValue(value string) *MTRContentLauncherClusterAdditionalInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (mclcai *MTRContentLauncherClusterAdditionalInfo) WithValue(value string) *MTRContentLauncherClusterAdditionalInfo {
+	objc.Send[objc.ID](objref.IDOf(mclcai), objc.RegisterName("setValue:"), purego.NSString(value))
+	return mclcai
 }
-
-// MTRContentLauncherClusterAdditionalInfoable is the interface implemented by [MTRContentLauncherClusterAdditionalInfo], for mocking and DI.
-type MTRContentLauncherClusterAdditionalInfoable interface {
-	obj.Object
-	WithName(name string) *MTRContentLauncherClusterAdditionalInfo
-	WithValue(value string) *MTRContentLauncherClusterAdditionalInfo
-}
-
-var _ MTRContentLauncherClusterAdditionalInfoable = (*MTRContentLauncherClusterAdditionalInfo)(nil)
 
 var _ MTRContentLauncherClusterAdditionalInfoStructProvider = (*MTRContentLauncherClusterAdditionalInfo)(nil)

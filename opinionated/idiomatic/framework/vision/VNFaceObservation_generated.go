@@ -52,47 +52,35 @@ func NewFaceObservation() *FaceObservation {
 	return faceObservationAdopt(_id)
 }
 
-// Landmarks the face landmarks populated by the VNDetectFaceLandmarksRequest. This is set to nil if only a VNDetectFaceRectanglesRequest was performed.
-func (x *FaceObservation) Landmarks() *FaceLandmarks2D {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("landmarks"))
+// Landmarks returns the face landmarks populated by the VNDetectFaceLandmarksRequest. This is set to nil if only a VNDetectFaceRectanglesRequest was performed.
+func (fo *FaceObservation) Landmarks() *FaceLandmarks2D {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("landmarks"))
 	return FaceLandmarks2DFromID(_r)
 }
 
-// FaceCaptureQuality the capture quality of the face as a normalized value between 0.0 and 1.0 that can be used to compare the quality of the face in terms of it capture attributes (lighting, blur, position). This score can be used to compare the capture quality of a face against other captures of the same face in a given set.
-func (x *FaceObservation) FaceCaptureQuality() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("faceCaptureQuality"))
+// FaceCaptureQuality returns the capture quality of the face as a normalized value between 0.0 and 1.0 that can be used to compare the quality of the face in terms of it capture attributes (lighting, blur, position). This score can be used to compare the capture quality of a face against other captures of the same face in a given set.
+func (fo *FaceObservation) FaceCaptureQuality() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("faceCaptureQuality"))
 	return obj.Wrap(_r)
 }
 
-// Roll face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicates that the roll angle hasn't been computed
-func (x *FaceObservation) Roll() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roll"))
+// Roll returns face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicates that the roll angle hasn't been computed
+func (fo *FaceObservation) Roll() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("roll"))
 	return obj.Wrap(_r)
 }
 
-// Yaw face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2]. nil value indicates that the yaw angle hasn't been computed
-func (x *FaceObservation) Yaw() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yaw"))
+// Yaw returns face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2]. nil value indicates that the yaw angle hasn't been computed
+func (fo *FaceObservation) Yaw() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("yaw"))
 	return obj.Wrap(_r)
 }
 
-// Pitch face pitch angle populated by VNDetectFaceRectanglesRequest. The pitch is reported in radians, positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. nil value indicates that the pitch angle hasn't been computed
-func (x *FaceObservation) Pitch() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pitch"))
+// Pitch returns face pitch angle populated by VNDetectFaceRectanglesRequest. The pitch is reported in radians, positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. nil value indicates that the pitch angle hasn't been computed
+func (fo *FaceObservation) Pitch() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("pitch"))
 	return obj.Wrap(_r)
 }
-
-// FaceObservationable is the interface implemented by [FaceObservation], for mocking and DI.
-type FaceObservationable interface {
-	obj.Object
-	Landmarks() *FaceLandmarks2D
-	FaceCaptureQuality() obj.Object
-	Roll() obj.Object
-	Yaw() obj.Object
-	Pitch() obj.Object
-}
-
-var _ FaceObservationable = (*FaceObservation)(nil)
 
 var _ DetectedObjectObservationProvider = (*FaceObservation)(nil)
 

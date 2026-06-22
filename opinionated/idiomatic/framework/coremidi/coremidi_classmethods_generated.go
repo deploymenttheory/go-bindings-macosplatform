@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedInstance retrieve the shared MIDI-CI device manager for the client process. After the first access of the property, the client process may observe notifications which are posted when the system-wide cache changes. In environments where virtual MIDI endpoint creation is not allowed, callbacks are only invoked when the process is not suspended. However, any suspended process will receive an updated copy of the cache when it resumes its running state.
+// SharedInstance returns retrieve the shared MIDI-CI device manager for the client process. After the first access of the property, the client process may observe notifications which are posted when the system-wide cache changes. In environments where virtual MIDI endpoint creation is not allowed, callbacks are only invoked when the process is not suspended. However, any suspended process will receive an updated copy of the cache when it resumes its running state.
 func SharedInstance() *CIDeviceManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceManager")), objc.RegisterName("sharedInstance"))
 	return CIDeviceManagerFromID(_r)
@@ -53,7 +53,7 @@ func DefaultSession() *NetworkSession {
 	return NetworkSessionFromID(_r)
 }
 
-// MIDIUMPEndpointManagerSharedInstance retrieve the shared UMP Endpoint manager for the client process. After first access to this property, the client process may begin observing notifications which are posted when the system-wide cache changes.
+// MIDIUMPEndpointManagerSharedInstance returns retrieve the shared UMP Endpoint manager for the client process. After first access to this property, the client process may begin observing notifications which are posted when the system-wide cache changes.
 func MIDIUMPEndpointManagerSharedInstance() *UMPEndpointManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDIUMPEndpointManager")), objc.RegisterName("sharedInstance"))
 	return UMPEndpointManagerFromID(_r)

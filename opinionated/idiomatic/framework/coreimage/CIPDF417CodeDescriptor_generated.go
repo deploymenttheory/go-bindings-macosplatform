@@ -53,39 +53,28 @@ func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrect
 	return pDF417CodeDescriptorAdopt(_id)
 }
 
-// ErrorCorrectedPayload the error-corrected payload containing the data encoded in the PDF417 code symbol. The first codeword indicates the number of data codewords in the errorCorrectedPayload. PDF417 codes are comprised of a start character on the left and a stop character on the right. Each row begins and ends with special characters indicating the current row as well as information about the dimensions of the PDF417 symbol. The errorCorrectedPayload represents the sequence of PDF417 codewords that make up the body of the message. The first codeword indicates the number of codewords in the message. This count includes the "count" codeword and any padding codewords, but does not include the error correction codewords. Each codeword is a 16-bit value in the range of 0...928. The sequence is to be interpreted as described in the PDF417 bar code symbology specification -- ISO/IEC 15438:2006(E).
-func (x *PDF417CodeDescriptor) ErrorCorrectedPayload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+// ErrorCorrectedPayload returns the error-corrected payload containing the data encoded in the PDF417 code symbol. The first codeword indicates the number of data codewords in the errorCorrectedPayload. PDF417 codes are comprised of a start character on the left and a stop character on the right. Each row begins and ends with special characters indicating the current row as well as information about the dimensions of the PDF417 symbol. The errorCorrectedPayload represents the sequence of PDF417 codewords that make up the body of the message. The first codeword indicates the number of codewords in the message. This count includes the "count" codeword and any padding codewords, but does not include the error correction codewords. Each codeword is a 16-bit value in the range of 0...928. The sequence is to be interpreted as described in the PDF417 bar code symbology specification -- ISO/IEC 15438:2006(E).
+func (pcd *PDF417CodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pcd), objc.RegisterName("errorCorrectedPayload"))
 	return obj.Wrap(_r)
 }
 
-// IsCompact a boolean value telling if the PDF417 code is compact. Compact PDF417 symbols have abbreviated right-side guard bars.
-func (x *PDF417CodeDescriptor) IsCompact() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompact"))
+// IsCompact reports whether a boolean value telling if the PDF417 code is compact. Compact PDF417 symbols have abbreviated right-side guard bars.
+func (pcd *PDF417CodeDescriptor) IsCompact() bool {
+	_r := objc.Send[bool](objref.IDOf(pcd), objc.RegisterName("isCompact"))
 	return _r
 }
 
-// RowCount the number of rows in the PDF417 code symbol. Valid row count values are from 3 to 90.
-func (x *PDF417CodeDescriptor) RowCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowCount"))
+// RowCount returns the number of rows in the PDF417 code symbol. Valid row count values are from 3 to 90.
+func (pcd *PDF417CodeDescriptor) RowCount() int {
+	_r := objc.Send[int](objref.IDOf(pcd), objc.RegisterName("rowCount"))
 	return _r
 }
 
-// ColumnCount the number of columns in the PDF417 code symbol. Valid column count values are from 1 to 30. This count excluded the columns used to indicate the symbol structure.
-func (x *PDF417CodeDescriptor) ColumnCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnCount"))
+// ColumnCount returns the number of columns in the PDF417 code symbol. Valid column count values are from 1 to 30. This count excluded the columns used to indicate the symbol structure.
+func (pcd *PDF417CodeDescriptor) ColumnCount() int {
+	_r := objc.Send[int](objref.IDOf(pcd), objc.RegisterName("columnCount"))
 	return _r
 }
-
-// PDF417CodeDescriptorable is the interface implemented by [PDF417CodeDescriptor], for mocking and DI.
-type PDF417CodeDescriptorable interface {
-	obj.Object
-	ErrorCorrectedPayload() obj.Object
-	IsCompact() bool
-	RowCount() int
-	ColumnCount() int
-}
-
-var _ PDF417CodeDescriptorable = (*PDF417CodeDescriptor)(nil)
 
 var _ BarcodeDescriptorProvider = (*PDF417CodeDescriptor)(nil)

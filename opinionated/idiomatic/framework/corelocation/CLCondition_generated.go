@@ -48,36 +48,29 @@ func conditionAdopt(id objc.ID) *Condition {
 }
 
 // Description returns the object's -description text.
-func (x *Condition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Condition) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Condition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Condition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Condition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Condition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Condition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Condition) String() string {
+	return rt.Description(objref.IDOf(c))
 }
-
-// Conditionable is the interface implemented by [Condition], for mocking and DI.
-type Conditionable interface {
-	obj.Object
-}
-
-var _ Conditionable = (*Condition)(nil)
 
 // isCondition marks Condition — and, by embedding promotion, its
 // subclasses — as a member of the Condition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Condition) isCondition() {}
+func (c *Condition) isCondition() {}
 
 var _ ConditionProvider = (*Condition)(nil)

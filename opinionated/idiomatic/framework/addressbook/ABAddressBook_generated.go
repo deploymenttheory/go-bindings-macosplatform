@@ -5,13 +5,14 @@
 package addressbook
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AddressBook is an idiomatic wrapper over the Objective-C class ABAddressBook.
@@ -48,24 +49,24 @@ func addressBookAdopt(id objc.ID) *AddressBook {
 }
 
 // Description returns the object's -description text.
-func (x *AddressBook) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ab *AddressBook) Description() string {
+	return rt.Description(objref.IDOf(ab))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddressBook) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ab *AddressBook) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ab), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddressBook) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ab *AddressBook) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ab), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddressBook) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ab *AddressBook) String() string {
+	return rt.Description(objref.IDOf(ab))
 }
 
 // NewAddressBook creates a new AddressBook.
@@ -75,56 +76,56 @@ func NewAddressBook() *AddressBook {
 }
 
 // RecordsMatchingSearchElement returns an array of records that match the given search element, or returns an empty array if no records match the search element.
-func (x *AddressBook) RecordsMatchingSearchElement(search *SearchElement) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsMatchingSearchElement:"), objref.IDOf(search))
+func (ab *AddressBook) RecordsMatchingSearchElement(search *SearchElement) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordsMatchingSearchElement:"), objref.IDOf(search))
 	return obj.Wrap(_r)
 }
 
-// Save saves all the changes made since the last save.
-func (x *AddressBook) Save() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("save"))
+// Save reports whether saves all the changes made since the last save.
+func (ab *AddressBook) Save() bool {
+	_r := objc.Send[bool](objref.IDOf(ab), objc.RegisterName("save"))
 	return _r
 }
 
 // SaveAndReturnError saves all the changes made since the last save.
 //
 // SaveAndReturnError returns an error if the operation did not succeed.
-func (x *AddressBook) SaveAndReturnError() error {
+func (ab *AddressBook) SaveAndReturnError() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveAndReturnError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(ab), objc.RegisterName("saveAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// HasUnsavedChanges indicates whether an address book has changes that have not been saved to the Address Book database.
-func (x *AddressBook) HasUnsavedChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUnsavedChanges"))
+// HasUnsavedChanges reports whether an address book has changes that have not been saved to the Address Book database.
+func (ab *AddressBook) HasUnsavedChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(ab), objc.RegisterName("hasUnsavedChanges"))
 	return _r
 }
 
 // Me returns the ABPerson record that represents the logged-in user.
-func (x *AddressBook) Me() *Person {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("me"))
+func (ab *AddressBook) Me() *Person {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("me"))
 	return PersonFromID(_r)
 }
 
 // SetMe sets the record that represents the logged-in user.
-func (x *AddressBook) SetMe(moi *Person) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMe:"), objref.IDOf(moi))
+func (ab *AddressBook) SetMe(moi *Person) {
+	objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("setMe:"), objref.IDOf(moi))
 }
 
-// RecordForUniqueId returns the person or group record that matches the given unique ID.
-func (x *AddressBook) RecordForUniqueId(uniqueId string) *Record {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordForUniqueId:"), purego.NSString(uniqueId))
+// RecordForUniqueID returns the person or group record that matches the given unique ID.
+func (ab *AddressBook) RecordForUniqueID(uniqueId string) *Record {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordForUniqueId:"), purego.NSString(uniqueId))
 	return RecordFromID(_r)
 }
 
 // AddRecord adds an ABPerson or ABGroup record to the Address Book database.
-func (x *AddressBook) AddRecord(record *Record) error {
+func (ab *AddressBook) AddRecord(record *Record) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ab), objc.RegisterName("addRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -132,9 +133,9 @@ func (x *AddressBook) AddRecord(record *Record) error {
 }
 
 // RemoveRecord removes an ABPerson or ABGroup record from the Address Book database.
-func (x *AddressBook) RemoveRecord(record *Record) error {
+func (ab *AddressBook) RemoveRecord(record *Record) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ab), objc.RegisterName("removeRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -142,20 +143,20 @@ func (x *AddressBook) RemoveRecord(record *Record) error {
 }
 
 // People returns an array of all the people in the Address Book database.
-func (x *AddressBook) People() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("people"))
+func (ab *AddressBook) People() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("people"))
 	return obj.Wrap(_r)
 }
 
 // Groups returns an array of all the groups in the Address Book database.
-func (x *AddressBook) Groups() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groups"))
+func (ab *AddressBook) Groups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("groups"))
 	return obj.Wrap(_r)
 }
 
-// RecordClassFromUniqueId returns the class name of the record that matches the given unique ID.
-func (x *AddressBook) RecordClassFromUniqueId(uniqueId string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordClassFromUniqueId:"), purego.NSString(uniqueId))
+// RecordClassFromUniqueID returns the class name of the record that matches the given unique ID.
+func (ab *AddressBook) RecordClassFromUniqueID(uniqueId string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordClassFromUniqueId:"), purego.NSString(uniqueId))
 	if _r == 0 {
 		return ""
 	}
@@ -163,14 +164,14 @@ func (x *AddressBook) RecordClassFromUniqueId(uniqueId string) string {
 }
 
 // FormattedAddressFromDictionary returns an attributed string containing the formatted address.
-func (x *AddressBook) FormattedAddressFromDictionary(address obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedAddressFromDictionary:"), objref.IDOf(address))
+func (ab *AddressBook) FormattedAddressFromDictionary(address obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("formattedAddressFromDictionary:"), objref.IDOf(address))
 	return obj.Wrap(_r)
 }
 
 // DefaultCountryCode returns the default country code for records with unspecified country codes.
-func (x *AddressBook) DefaultCountryCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCountryCode"))
+func (ab *AddressBook) DefaultCountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("defaultCountryCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -178,29 +179,7 @@ func (x *AddressBook) DefaultCountryCode() string {
 }
 
 // DefaultNameOrdering returns the default name ordering defined by the user in the Address Book application’s preferences.
-func (x *AddressBook) DefaultNameOrdering() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultNameOrdering"))
+func (ab *AddressBook) DefaultNameOrdering() int {
+	_r := objc.Send[int](objref.IDOf(ab), objc.RegisterName("defaultNameOrdering"))
 	return _r
 }
-
-// AddressBookable is the interface implemented by [AddressBook], for mocking and DI.
-type AddressBookable interface {
-	obj.Object
-	RecordsMatchingSearchElement(search *SearchElement) obj.Object
-	Save() bool
-	SaveAndReturnError() error
-	HasUnsavedChanges() bool
-	Me() *Person
-	SetMe(moi *Person)
-	RecordForUniqueId(uniqueId string) *Record
-	AddRecord(record *Record) error
-	RemoveRecord(record *Record) error
-	People() obj.Object
-	Groups() obj.Object
-	RecordClassFromUniqueId(uniqueId string) string
-	FormattedAddressFromDictionary(address obj.Object) obj.Object
-	DefaultCountryCode() string
-	DefaultNameOrdering() int
-}
-
-var _ AddressBookable = (*AddressBook)(nil)

@@ -60,31 +60,16 @@ func NewScrubberProportionalLayoutWithCoder(coder obj.Object) *ScrubberProportio
 	return scrubberProportionalLayoutAdopt(_id)
 }
 
-// WithNumberOfVisibleItems the number of items visible in the scrubber at once.
-func (x *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
-	return x
+// WithNumberOfVisibleItems sets the number of items visible in the scrubber at once.
+func (spl *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
+	objc.Send[objc.ID](objref.IDOf(spl), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
+	return spl
 }
 
-// NumberOfVisibleItems the number of items that should fit within the scrubber's viewport at once.
-func (x *ScrubberProportionalLayout) NumberOfVisibleItems() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfVisibleItems"))
+// NumberOfVisibleItems returns the number of items that should fit within the scrubber's viewport at once.
+func (spl *ScrubberProportionalLayout) NumberOfVisibleItems() int {
+	_r := objc.Send[int](objref.IDOf(spl), objc.RegisterName("numberOfVisibleItems"))
 	return _r
 }
-
-// SetNumberOfVisibleItems the number of items that should fit within the scrubber's viewport at once.
-func (x *ScrubberProportionalLayout) SetNumberOfVisibleItems(numberOfVisibleItems int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
-}
-
-// ScrubberProportionalLayoutable is the interface implemented by [ScrubberProportionalLayout], for mocking and DI.
-type ScrubberProportionalLayoutable interface {
-	obj.Object
-	WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout
-	NumberOfVisibleItems() int
-	SetNumberOfVisibleItems(numberOfVisibleItems int)
-}
-
-var _ ScrubberProportionalLayoutable = (*ScrubberProportionalLayout)(nil)
 
 var _ ScrubberLayoutProvider = (*ScrubberProportionalLayout)(nil)

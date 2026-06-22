@@ -44,24 +44,24 @@ func chooseIdentityTableCellViewAdopt(id objc.ID) *ChooseIdentityTableCellView {
 }
 
 // Description returns the object's -description text.
-func (x *ChooseIdentityTableCellView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (citcv *ChooseIdentityTableCellView) Description() string {
+	return rt.Description(objref.IDOf(citcv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChooseIdentityTableCellView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (citcv *ChooseIdentityTableCellView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(citcv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChooseIdentityTableCellView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (citcv *ChooseIdentityTableCellView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(citcv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ChooseIdentityTableCellView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (citcv *ChooseIdentityTableCellView) String() string {
+	return rt.Description(objref.IDOf(citcv))
 }
 
 // NewChooseIdentityTableCellView creates a new ChooseIdentityTableCellView.
@@ -71,28 +71,13 @@ func NewChooseIdentityTableCellView() *ChooseIdentityTableCellView {
 }
 
 // WithIssuerTextField sets the property and returns the receiver so calls can be chained.
-func (x *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
-	return x
+func (citcv *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView {
+	objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
+	return citcv
 }
 
 // IssuerTextField wraps the corresponding Objective-C method.
-func (x *ChooseIdentityTableCellView) IssuerTextField() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuerTextField"))
+func (citcv *ChooseIdentityTableCellView) IssuerTextField() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("issuerTextField"))
 	return obj.Wrap(_r)
 }
-
-// SetIssuerTextField wraps the corresponding Objective-C method.
-func (x *ChooseIdentityTableCellView) SetIssuerTextField(issuerTextField obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
-}
-
-// ChooseIdentityTableCellViewable is the interface implemented by [ChooseIdentityTableCellView], for mocking and DI.
-type ChooseIdentityTableCellViewable interface {
-	obj.Object
-	WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView
-	IssuerTextField() obj.Object
-	SetIssuerTextField(issuerTextField obj.Object)
-}
-
-var _ ChooseIdentityTableCellViewable = (*ChooseIdentityTableCellView)(nil)

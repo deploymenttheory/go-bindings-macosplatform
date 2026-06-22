@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMetadataCatHeadObject() *MetadataCatHeadObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataCatHeadObject")), objc.RegisterName("new"))
 	return metadataCatHeadObjectAdopt(_id)
 }
-
-// MetadataCatHeadObjectable is the interface implemented by [MetadataCatHeadObject], for mocking and DI.
-type MetadataCatHeadObjectable interface {
-	obj.Object
-}
-
-var _ MetadataCatHeadObjectable = (*MetadataCatHeadObject)(nil)
 
 var _ MetadataObjectProvider = (*MetadataCatHeadObject)(nil)

@@ -44,24 +44,24 @@ func mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructAdopt(id objc.
 }
 
 // Description returns the object's -description text.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Description() string {
+	return rt.Description(objref.IDOf(mepmchms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mepmchms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mepmchms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) String() string {
+	return rt.Description(objref.IDOf(mepmchms))
 }
 
 // NewMTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct creates a new MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct.
@@ -71,48 +71,25 @@ func NewMTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct() *MTRElec
 }
 
 // WithOrder sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithOrder(order obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrder:"), objref.IDOf(order))
-	return x
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithOrder(order obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
+	objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("setOrder:"), objref.IDOf(order))
+	return mepmchms
 }
 
 // WithMeasurement sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithMeasurement(measurement obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurement:"), objref.IDOf(measurement))
-	return x
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithMeasurement(measurement obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
+	objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("setMeasurement:"), objref.IDOf(measurement))
+	return mepmchms
 }
 
 // Order wraps the corresponding Objective-C method.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Order() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("order"))
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Order() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("order"))
 	return obj.Wrap(_r)
-}
-
-// SetOrder wraps the corresponding Objective-C method.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) SetOrder(order obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrder:"), objref.IDOf(order))
 }
 
 // Measurement wraps the corresponding Objective-C method.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Measurement() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurement"))
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Measurement() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("measurement"))
 	return obj.Wrap(_r)
 }
-
-// SetMeasurement wraps the corresponding Objective-C method.
-func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) SetMeasurement(measurement obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurement:"), objref.IDOf(measurement))
-}
-
-// MTRElectricalPowerMeasurementClusterHarmonicMeasurementStructable is the interface implemented by [MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct], for mocking and DI.
-type MTRElectricalPowerMeasurementClusterHarmonicMeasurementStructable interface {
-	obj.Object
-	WithOrder(order obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct
-	WithMeasurement(measurement obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct
-	Order() obj.Object
-	SetOrder(order obj.Object)
-	Measurement() obj.Object
-	SetMeasurement(measurement obj.Object)
-}
-
-var _ MTRElectricalPowerMeasurementClusterHarmonicMeasurementStructable = (*MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct)(nil)

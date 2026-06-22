@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float6
 	return ridgedNoiseSourceAdopt(_id)
 }
 
-// WithFrequency a value that determines the size and spacing of features in generated noise.
-func (x *RidgedNoiseSource) WithFrequency(frequency float64) *RidgedNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a value that determines the size and spacing of features in generated noise.
+func (rns *RidgedNoiseSource) WithFrequency(frequency float64) *RidgedNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(rns), objc.RegisterName("setFrequency:"), frequency)
+	return rns
 }
 
-// WithOctaveCount the number of octaves of the underlying noise function to use for generating noise.
-func (x *RidgedNoiseSource) WithOctaveCount(octaveCount int) *RidgedNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
-	return x
+// WithOctaveCount sets the number of octaves of the underlying noise function to use for generating noise.
+func (rns *RidgedNoiseSource) WithOctaveCount(octaveCount int) *RidgedNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(rns), objc.RegisterName("setOctaveCount:"), octaveCount)
+	return rns
 }
 
-// WithLacunarity the rate at which successive octaves of the noise function increase in frequency.
-func (x *RidgedNoiseSource) WithLacunarity(lacunarity float64) *RidgedNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
-	return x
+// WithLacunarity sets the rate at which successive octaves of the noise function increase in frequency.
+func (rns *RidgedNoiseSource) WithLacunarity(lacunarity float64) *RidgedNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(rns), objc.RegisterName("setLacunarity:"), lacunarity)
+	return rns
 }
 
-// WithSeed the value that determines the specific configuration of noise produced by the noise source.
-func (x *RidgedNoiseSource) WithSeed(seed int32) *RidgedNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-	return x
+// WithSeed sets the value that determines the specific configuration of noise produced by the noise source.
+func (rns *RidgedNoiseSource) WithSeed(seed int32) *RidgedNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(rns), objc.RegisterName("setSeed:"), seed)
+	return rns
 }
-
-// RidgedNoiseSourceable is the interface implemented by [RidgedNoiseSource], for mocking and DI.
-type RidgedNoiseSourceable interface {
-	obj.Object
-	WithFrequency(frequency float64) *RidgedNoiseSource
-	WithOctaveCount(octaveCount int) *RidgedNoiseSource
-	WithLacunarity(lacunarity float64) *RidgedNoiseSource
-	WithSeed(seed int32) *RidgedNoiseSource
-}
-
-var _ RidgedNoiseSourceable = (*RidgedNoiseSource)(nil)
 
 var _ CoherentNoiseSourceProvider = (*RidgedNoiseSource)(nil)
 

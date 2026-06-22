@@ -44,24 +44,24 @@ func mTRServiceAreaClusterAreaInfoStructAdopt(id objc.ID) *MTRServiceAreaCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRServiceAreaClusterAreaInfoStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(msacais))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServiceAreaClusterAreaInfoStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msacais), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServiceAreaClusterAreaInfoStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msacais), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServiceAreaClusterAreaInfoStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) String() string {
+	return rt.Description(objref.IDOf(msacais))
 }
 
 // NewMTRServiceAreaClusterAreaInfoStruct creates a new MTRServiceAreaClusterAreaInfoStruct.
@@ -71,48 +71,25 @@ func NewMTRServiceAreaClusterAreaInfoStruct() *MTRServiceAreaClusterAreaInfoStru
 }
 
 // WithLocationInfo sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterAreaInfoStruct) WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationInfo:"), objref.IDOf(locationInfo))
-	return x
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("setLocationInfo:"), objref.IDOf(locationInfo))
+	return msacais
 }
 
 // WithLandmarkInfo sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkInfo:"), objref.IDOf(landmarkInfo))
-	return x
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("setLandmarkInfo:"), objref.IDOf(landmarkInfo))
+	return msacais
 }
 
 // LocationInfo wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaInfoStruct) LocationInfo() *MTRDataTypeLocationDescriptorStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationInfo"))
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) LocationInfo() *MTRDataTypeLocationDescriptorStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("locationInfo"))
 	return MTRDataTypeLocationDescriptorStructFromID(_r)
 }
 
-// SetLocationInfo wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaInfoStruct) SetLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationInfo:"), objref.IDOf(locationInfo))
-}
-
 // LandmarkInfo wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaInfoStruct) LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("landmarkInfo"))
+func (msacais *MTRServiceAreaClusterAreaInfoStruct) LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("landmarkInfo"))
 	return MTRServiceAreaClusterLandmarkInfoStructFromID(_r)
 }
-
-// SetLandmarkInfo wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaInfoStruct) SetLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkInfo:"), objref.IDOf(landmarkInfo))
-}
-
-// MTRServiceAreaClusterAreaInfoStructable is the interface implemented by [MTRServiceAreaClusterAreaInfoStruct], for mocking and DI.
-type MTRServiceAreaClusterAreaInfoStructable interface {
-	obj.Object
-	WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct
-	WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct
-	LocationInfo() *MTRDataTypeLocationDescriptorStruct
-	SetLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct)
-	LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct
-	SetLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct)
-}
-
-var _ MTRServiceAreaClusterAreaInfoStructable = (*MTRServiceAreaClusterAreaInfoStruct)(nil)

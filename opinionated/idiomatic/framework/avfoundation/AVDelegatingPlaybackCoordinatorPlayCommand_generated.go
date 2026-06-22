@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewDelegatingPlaybackCoordinatorPlayCommand() *DelegatingPlaybackCoordinato
 	return delegatingPlaybackCoordinatorPlayCommandAdopt(_id)
 }
 
-// Rate playback rate. Will always be non-zero.
-func (x *DelegatingPlaybackCoordinatorPlayCommand) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns playback rate. Will always be non-zero.
+func (dpcpc *DelegatingPlaybackCoordinatorPlayCommand) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(dpcpc), objc.RegisterName("rate"))
 	return _r
 }
-
-// DelegatingPlaybackCoordinatorPlayCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlayCommand], for mocking and DI.
-type DelegatingPlaybackCoordinatorPlayCommandable interface {
-	obj.Object
-	Rate() float32
-}
-
-var _ DelegatingPlaybackCoordinatorPlayCommandable = (*DelegatingPlaybackCoordinatorPlayCommand)(nil)
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorPlayCommand)(nil)

@@ -67,142 +67,105 @@ func NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(as
 	return voxelArrayAdopt(_id)
 }
 
-// WithShellFieldInteriorThickness if voxel grid is in a valid signed shell field form, sets the interior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
-func (x *VoxelArray) WithShellFieldInteriorThickness(shellFieldInteriorThickness float32) *VoxelArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldInteriorThickness:"), shellFieldInteriorThickness)
-	return x
+// WithShellFieldInteriorThickness sets if voxel grid is in a valid signed shell field form, sets the interior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
+func (va *VoxelArray) WithShellFieldInteriorThickness(shellFieldInteriorThickness float32) *VoxelArray {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setShellFieldInteriorThickness:"), shellFieldInteriorThickness)
+	return va
 }
 
-// WithShellFieldExteriorThickness if voxel grid is in a valid signed shell field form, sets the exterior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
-func (x *VoxelArray) WithShellFieldExteriorThickness(shellFieldExteriorThickness float32) *VoxelArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldExteriorThickness:"), shellFieldExteriorThickness)
-	return x
+// WithShellFieldExteriorThickness sets if voxel grid is in a valid signed shell field form, sets the exterior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
+func (va *VoxelArray) WithShellFieldExteriorThickness(shellFieldExteriorThickness float32) *VoxelArray {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setShellFieldExteriorThickness:"), shellFieldExteriorThickness)
+	return va
 }
 
-// WithParent the parent object that contains this object.
-func (x *VoxelArray) WithParent(parent ObjectProvider) *VoxelArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (va *VoxelArray) WithParent(parent ObjectProvider) *VoxelArray {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return va
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *VoxelArray) WithInstance(instance ObjectProvider) *VoxelArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (va *VoxelArray) WithInstance(instance ObjectProvider) *VoxelArray {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return va
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *VoxelArray) WithHidden(hidden bool) *VoxelArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (va *VoxelArray) WithHidden(hidden bool) *VoxelArray {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setHidden:"), hidden)
+	return va
 }
 
 // VoxelIndices returns a data object containing all voxels within the voxel array.
-func (x *VoxelArray) VoxelIndices() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voxelIndices"))
+func (va *VoxelArray) VoxelIndices() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("voxelIndices"))
 	return obj.Wrap(_r)
 }
 
 // SetVoxelsForMeshDivisionsPatchRadius set voxels corresponding to a mesh. Routine will attempt to create a closed volume model by applying "patches" of a given radius to any holes it may find in the mesh.
-func (x *VoxelArray) SetVoxelsForMeshDivisionsPatchRadius(mesh *Mesh, divisions int, patchRadius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoxelsForMesh:divisions:patchRadius:"), objref.IDOf(mesh), divisions, patchRadius)
+func (va *VoxelArray) SetVoxelsForMeshDivisionsPatchRadius(mesh *Mesh, divisions int, patchRadius float32) {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelsForMesh:divisions:patchRadius:"), objref.IDOf(mesh), divisions, patchRadius)
 }
 
 // SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius sets voxel values in the array to model the volume of the specified mesh and creates the specified number of voxel shells.
-func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *Mesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoxelsForMesh:divisions:interiorShells:exteriorShells:patchRadius:"), objref.IDOf(mesh), divisions, interiorShells, exteriorShells, patchRadius)
+func (va *VoxelArray) SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *Mesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32) {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelsForMesh:divisions:interiorShells:exteriorShells:patchRadius:"), objref.IDOf(mesh), divisions, interiorShells, exteriorShells, patchRadius)
 }
 
 // SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius sets voxel values in the array to model the volume of the specified mesh and creates voxel shells for the specified distances from the object’s surface.
-func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *Mesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoxelsForMesh:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:"), objref.IDOf(mesh), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
+func (va *VoxelArray) SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *Mesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelsForMesh:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:"), objref.IDOf(mesh), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
 }
 
 // UnionWithVoxels extends the voxel array to also cover the volume of the specified voxel array.
-func (x *VoxelArray) UnionWithVoxels(voxels *VoxelArray) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionWithVoxels:"), objref.IDOf(voxels))
+func (va *VoxelArray) UnionWithVoxels(voxels *VoxelArray) {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("unionWithVoxels:"), objref.IDOf(voxels))
 }
 
 // IntersectWithVoxels reduces the voxel array to cover only the volume within both it and another voxel array.
-func (x *VoxelArray) IntersectWithVoxels(voxels *VoxelArray) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectWithVoxels:"), objref.IDOf(voxels))
+func (va *VoxelArray) IntersectWithVoxels(voxels *VoxelArray) {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("intersectWithVoxels:"), objref.IDOf(voxels))
 }
 
 // DifferenceWithVoxels reduces the voxel array to cover only the portion of its volume not covered by another voxel array.
-func (x *VoxelArray) DifferenceWithVoxels(voxels *VoxelArray) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceWithVoxels:"), objref.IDOf(voxels))
+func (va *VoxelArray) DifferenceWithVoxels(voxels *VoxelArray) {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("differenceWithVoxels:"), objref.IDOf(voxels))
 }
 
 // ConvertToSignedShellField converts volume grid into a signed shell field by surrounding the surface voxels, which have shell level values of zero, by an inner layer of voxels with shell level values of negative one and an outer layer of voxels with shell level values of positive one. The volume model must be closed in order to generate a signed shell field.
-func (x *VoxelArray) ConvertToSignedShellField() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertToSignedShellField"))
+func (va *VoxelArray) ConvertToSignedShellField() {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("convertToSignedShellField"))
 }
 
 // CoarseMesh creates a coarse mesh from the voxel grid
-func (x *VoxelArray) CoarseMesh() *Mesh {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coarseMesh"))
+func (va *VoxelArray) CoarseMesh() *Mesh {
+	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("coarseMesh"))
 	return MeshFromID(_r)
 }
 
-// Count the number of voxels in the grid
-func (x *VoxelArray) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of voxels in the grid
+func (va *VoxelArray) Count() int {
+	_r := objc.Send[int](objref.IDOf(va), objc.RegisterName("count"))
 	return _r
 }
 
-// IsValidSignedShellField returns whether or not the volume grid is in a valid signed shell field form. This property will be set to YES after calling generateSignedShellField. All other methods that modify the voxel grid will cause this property to be set to NO. Setting shellFieldInteriorThickness and shellFieldExteriorThickness will not affect the value of this property.
-func (x *VoxelArray) IsValidSignedShellField() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValidSignedShellField"))
+// IsValidSignedShellField reports whether the volume grid is in a valid signed shell field form. This property will be set to true after calling generateSignedShellField. All other methods that modify the voxel grid will cause this property to be set to false. Setting shellFieldInteriorThickness and shellFieldExteriorThickness will not affect the value of this property.
+func (va *VoxelArray) IsValidSignedShellField() bool {
+	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isValidSignedShellField"))
 	return _r
 }
 
-// ShellFieldInteriorThickness if voxel grid is in a valid signed shell field form, sets the interior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
-func (x *VoxelArray) ShellFieldInteriorThickness() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shellFieldInteriorThickness"))
+// ShellFieldInteriorThickness returns if voxel grid is in a valid signed shell field form, sets the interior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
+func (va *VoxelArray) ShellFieldInteriorThickness() float32 {
+	_r := objc.Send[float32](objref.IDOf(va), objc.RegisterName("shellFieldInteriorThickness"))
 	return _r
 }
 
-// SetShellFieldInteriorThickness wraps the corresponding Objective-C method.
-func (x *VoxelArray) SetShellFieldInteriorThickness(shellFieldInteriorThickness float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldInteriorThickness:"), shellFieldInteriorThickness)
-}
-
-// ShellFieldExteriorThickness if voxel grid is in a valid signed shell field form, sets the exterior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
-func (x *VoxelArray) ShellFieldExteriorThickness() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shellFieldExteriorThickness"))
+// ShellFieldExteriorThickness returns if voxel grid is in a valid signed shell field form, sets the exterior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
+func (va *VoxelArray) ShellFieldExteriorThickness() float32 {
+	_r := objc.Send[float32](objref.IDOf(va), objc.RegisterName("shellFieldExteriorThickness"))
 	return _r
 }
-
-// SetShellFieldExteriorThickness wraps the corresponding Objective-C method.
-func (x *VoxelArray) SetShellFieldExteriorThickness(shellFieldExteriorThickness float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldExteriorThickness:"), shellFieldExteriorThickness)
-}
-
-// VoxelArrayable is the interface implemented by [VoxelArray], for mocking and DI.
-type VoxelArrayable interface {
-	obj.Object
-	WithShellFieldInteriorThickness(shellFieldInteriorThickness float32) *VoxelArray
-	WithShellFieldExteriorThickness(shellFieldExteriorThickness float32) *VoxelArray
-	WithParent(parent ObjectProvider) *VoxelArray
-	WithInstance(instance ObjectProvider) *VoxelArray
-	WithHidden(hidden bool) *VoxelArray
-	VoxelIndices() obj.Object
-	SetVoxelsForMeshDivisionsPatchRadius(mesh *Mesh, divisions int, patchRadius float32)
-	SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *Mesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32)
-	SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *Mesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32)
-	UnionWithVoxels(voxels *VoxelArray)
-	IntersectWithVoxels(voxels *VoxelArray)
-	DifferenceWithVoxels(voxels *VoxelArray)
-	ConvertToSignedShellField()
-	CoarseMesh() *Mesh
-	Count() int
-	IsValidSignedShellField() bool
-	ShellFieldInteriorThickness() float32
-	SetShellFieldInteriorThickness(shellFieldInteriorThickness float32)
-	ShellFieldExteriorThickness() float32
-	SetShellFieldExteriorThickness(shellFieldExteriorThickness float32)
-}
-
-var _ VoxelArrayable = (*VoxelArray)(nil)
 
 var _ ObjectProvider = (*VoxelArray)(nil)

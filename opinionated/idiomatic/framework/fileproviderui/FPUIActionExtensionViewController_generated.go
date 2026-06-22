@@ -46,24 +46,24 @@ func actionExtensionViewControllerAdopt(id objc.ID) *ActionExtensionViewControll
 }
 
 // Description returns the object's -description text.
-func (x *ActionExtensionViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aevc *ActionExtensionViewController) Description() string {
+	return rt.Description(objref.IDOf(aevc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActionExtensionViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aevc *ActionExtensionViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aevc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActionExtensionViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aevc *ActionExtensionViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aevc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ActionExtensionViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aevc *ActionExtensionViewController) String() string {
+	return rt.Description(objref.IDOf(aevc))
 }
 
 // NewActionExtensionViewController creates a new ActionExtensionViewController.
@@ -73,14 +73,6 @@ func NewActionExtensionViewController() *ActionExtensionViewController {
 }
 
 // PrepareForActionWithIdentifierItemIdentifiers performs any necessary setup or configuration for the specified action.
-func (x *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (aevc *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// ActionExtensionViewControllerable is the interface implemented by [ActionExtensionViewController], for mocking and DI.
-type ActionExtensionViewControllerable interface {
-	obj.Object
-	PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object)
-}
-
-var _ ActionExtensionViewControllerable = (*ActionExtensionViewController)(nil)

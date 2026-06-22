@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue(device *MTRBaseDevice
 // TestSpecificWithParamsCompletion command TestSpecific Simple command without any parameters and with a specific response
 //
 // TestSpecificWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSpecificParams) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSpecificParams) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestSpecificResponseParams
 		err error
@@ -68,7 +69,7 @@ func (x *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx context
 		_o.val = MTRUnitTestingClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testSpecificWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx context
 // TestSpecificWithCompletion wraps the corresponding Objective-C method.
 //
 // TestSpecificWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestSpecificResponseParams
 		err error
@@ -93,7 +94,7 @@ func (x *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.Conte
 		_o.val = MTRUnitTestingClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testSpecificWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,7 +107,7 @@ func (x *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.Conte
 // TestAddArgumentsWithParamsCompletion command TestAddArguments Command that takes two arguments and returns their sum.
 //
 // TestAddArgumentsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestAddArgumentsParams) (result *MTRUnitTestingClusterTestAddArgumentsResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestAddArgumentsParams) (result *MTRUnitTestingClusterTestAddArgumentsResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestAddArgumentsResponseParams
 		err error
@@ -118,7 +119,7 @@ func (x *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx con
 		_o.val = MTRUnitTestingClusterTestAddArgumentsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testAddArgumentsWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testAddArgumentsWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -131,7 +132,7 @@ func (x *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx con
 // TestSimpleArgumentRequestWithParamsCompletion command TestSimpleArgumentRequest Command that takes an argument which is bool
 //
 // TestSimpleArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSimpleArgumentRequestParams) (result *MTRUnitTestingClusterTestSimpleArgumentResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSimpleArgumentRequestParams) (result *MTRUnitTestingClusterTestSimpleArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestSimpleArgumentResponseParams
 		err error
@@ -143,7 +144,7 @@ func (x *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletio
 		_o.val = MTRUnitTestingClusterTestSimpleArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSimpleArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testSimpleArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +157,7 @@ func (x *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletio
 // TestStructArrayArgumentRequestWithParamsCompletion command TestStructArrayArgumentRequest Command that takes various arguments that are arrays, including an array of structs which have a list member.
 //
 // TestStructArrayArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) (result *MTRUnitTestingClusterTestStructArrayArgumentResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) (result *MTRUnitTestingClusterTestStructArrayArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
 		err error
@@ -168,7 +169,7 @@ func (x *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsComp
 		_o.val = MTRUnitTestingClusterTestStructArrayArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArrayArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testStructArrayArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -181,7 +182,7 @@ func (x *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsComp
 // TestStructArgumentRequestWithParamsCompletion command TestStructArgumentRequest Command that takes an argument which is struct.  The response echoes the 'b' field of the single arg.
 //
 // TestStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -193,7 +194,7 @@ func (x *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletio
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testStructArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,7 +207,7 @@ func (x *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletio
 // TestNestedStructArgumentRequestWithParamsCompletion command TestNestedStructArgumentRequest Command that takes an argument which is nested struct.  The response echoes the 'b' field of ar1.c.
 //
 // TestNestedStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -218,7 +219,7 @@ func (x *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCom
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testNestedStructArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,7 +232,7 @@ func (x *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCom
 // TestListStructArgumentRequestWithParamsCompletion command TestListStructArgumentRequest Command that takes an argument which is a list of structs.  The response returns false if there is some struct in the list whose 'b' field is false, and true otherwise (including if the list is empty).
 //
 // TestListStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -243,7 +244,7 @@ func (x *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompl
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListStructArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testListStructArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -256,7 +257,7 @@ func (x *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompl
 // TestListInt8UArgumentRequestWithParamsCompletion command TestListInt8UArgumentRequest Command that takes an argument which is a list of INT8U.  The response returns false if the list contains a 0 in it, true otherwise (including if the list is empty).
 //
 // TestListInt8UArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -268,7 +269,7 @@ func (x *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsComple
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testListInt8UArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -281,7 +282,7 @@ func (x *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsComple
 // TestNestedStructListArgumentRequestWithParamsCompletion command TestNestedStructListArgumentRequest Command that takes an argument which is a Nested Struct List.  The response returns false if there is some struct in arg1 (either directly in arg1.c or in the arg1.d list) whose 'b' field is false, and true otherwise.
 //
 // TestNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -293,7 +294,7 @@ func (x *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParam
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructListArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testNestedStructListArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -306,7 +307,7 @@ func (x *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParam
 // TestListNestedStructListArgumentRequestWithParamsCompletion command TestListNestedStructListArgumentRequest Command that takes an argument which is a list of Nested Struct List. The response returns false if there is some struct in arg1 (either directly in as the 'c' field of an entry 'd' list of an entry) whose 'b' field is false, and true otherwise (including if the list is empty).
 //
 // TestListNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -318,7 +319,7 @@ func (x *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithP
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -331,7 +332,7 @@ func (x *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithP
 // TestListInt8UReverseRequestWithParamsCompletion command TestListInt8UReverseRequest Command that takes an argument which is a list of INT8U and expects a response that reverses the list.
 //
 // TestListInt8UReverseRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UReverseRequestParams) (result *MTRUnitTestingClusterTestListInt8UReverseResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UReverseRequestParams) (result *MTRUnitTestingClusterTestListInt8UReverseResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestListInt8UReverseResponseParams
 		err error
@@ -343,7 +344,7 @@ func (x *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsComplet
 		_o.val = MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UReverseRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testListInt8UReverseRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -356,7 +357,7 @@ func (x *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsComplet
 // TestEnumsRequestWithParamsCompletion command TestEnumsRequest Command that sends a vendor id and an enum.  The server is expected to echo them back.
 //
 // TestEnumsRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEnumsRequestParams) (result *MTRUnitTestingClusterTestEnumsResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEnumsRequestParams) (result *MTRUnitTestingClusterTestEnumsResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestEnumsResponseParams
 		err error
@@ -368,7 +369,7 @@ func (x *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx con
 		_o.val = MTRUnitTestingClusterTestEnumsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEnumsRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testEnumsRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -381,7 +382,7 @@ func (x *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx con
 // TestNullableOptionalRequestWithParamsCompletion command TestNullableOptionalRequest Command that takes an argument which is nullable and optional.  The response returns a boolean indicating whether the argument was present, if that's true a boolean indicating whether the argument was null, and if that' false the argument it received.
 //
 // TestNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNullableOptionalRequestParams) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNullableOptionalRequestParams) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
 		err error
@@ -393,7 +394,7 @@ func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsComplet
 		_o.val = MTRUnitTestingClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testNullableOptionalRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -406,7 +407,7 @@ func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsComplet
 // TestNullableOptionalRequestWithCompletion wraps the corresponding Objective-C method.
 //
 // TestNullableOptionalRequestWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
 		err error
@@ -418,7 +419,7 @@ func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletion(ct
 		_o.val = MTRUnitTestingClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testNullableOptionalRequestWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +432,7 @@ func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletion(ct
 // TestComplexNullableOptionalRequestWithParamsCompletion command TestComplexNullableOptionalRequest Command that takes various arguments which can be nullable and/or optional.  The response returns information about which things were received and what their state was.
 //
 // TestComplexNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) (result *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) (result *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
 		err error
@@ -443,7 +444,7 @@ func (x *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParams
 		_o.val = MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testComplexNullableOptionalRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testComplexNullableOptionalRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -456,7 +457,7 @@ func (x *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParams
 // SimpleStructEchoRequestWithParamsCompletion command SimpleStructEchoRequest Command that takes an argument which is a struct.  The response echoes the struct back.
 //
 // SimpleStructEchoRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterSimpleStructEchoRequestParams) (result *MTRUnitTestingClusterSimpleStructResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterSimpleStructEchoRequestParams) (result *MTRUnitTestingClusterSimpleStructResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStructResponseParams
 		err error
@@ -468,7 +469,7 @@ func (x *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(
 		_o.val = MTRUnitTestingClusterSimpleStructResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("simpleStructEchoRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("simpleStructEchoRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +482,7 @@ func (x *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(
 // TestEmitTestEventRequestWithParamsCompletion command TestEmitTestEventRequest Command that takes identical arguments to the fields of the TestEvent and logs the TestEvent to the buffer.  Command returns an event ID as the response.
 //
 // TestEmitTestEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestEventRequestParams) (result *MTRUnitTestingClusterTestEmitTestEventResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestEventRequestParams) (result *MTRUnitTestingClusterTestEmitTestEventResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestEmitTestEventResponseParams
 		err error
@@ -493,7 +494,7 @@ func (x *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion
 		_o.val = MTRUnitTestingClusterTestEmitTestEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestEventRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testEmitTestEventRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -506,7 +507,7 @@ func (x *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion
 // TestEmitTestFabricScopedEventRequestWithParamsCompletion command TestEmitTestFabricScopedEventRequest Command that takes identical arguments to the fields of the TestFabricScopedEvent and logs the TestFabricScopedEvent to the buffer.  Command returns an event ID as the response.
 //
 // TestEmitTestFabricScopedEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
 		err error
@@ -518,7 +519,7 @@ func (x *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithPara
 		_o.val = MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -531,7 +532,7 @@ func (x *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithPara
 // ReadAttributeBooleanWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -543,7 +544,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBooleanWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeBooleanWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -556,7 +557,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx conte
 // SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -568,7 +569,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubscript
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -581,7 +582,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubscript
 // ReadAttributeBitmap8WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -593,7 +594,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap8WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeBitmap8WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -606,7 +607,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx conte
 // SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -618,7 +619,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubscript
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +632,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubscript
 // ReadAttributeBitmap16WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -643,7 +644,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap16WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeBitmap16WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -656,7 +657,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx cont
 // SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -668,7 +669,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -681,7 +682,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubscrip
 // ReadAttributeBitmap32WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -693,7 +694,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap32WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeBitmap32WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -706,7 +707,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx cont
 // SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,7 +719,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -731,7 +732,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubscrip
 // ReadAttributeBitmap64WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -743,7 +744,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap64WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeBitmap64WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -756,7 +757,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx cont
 // SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -768,7 +769,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -781,7 +782,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubscrip
 // ReadAttributeInt8uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -793,7 +794,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt8uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt8uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -806,7 +807,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx context
 // SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -818,7 +819,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscriptio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -831,7 +832,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscriptio
 // ReadAttributeInt16uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -843,7 +844,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt16uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt16uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -856,7 +857,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx contex
 // SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -868,7 +869,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -881,7 +882,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscripti
 // ReadAttributeInt24uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -893,7 +894,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt24uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt24uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -906,7 +907,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx contex
 // SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -918,7 +919,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -931,7 +932,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscripti
 // ReadAttributeInt32uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -943,7 +944,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt32uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt32uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -956,7 +957,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx contex
 // SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -968,7 +969,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -981,7 +982,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscripti
 // ReadAttributeInt40uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -993,7 +994,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt40uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt40uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1006,7 +1007,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx contex
 // SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1018,7 +1019,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1031,7 +1032,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscripti
 // ReadAttributeInt48uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1043,7 +1044,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt48uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt48uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1056,7 +1057,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx contex
 // SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1068,7 +1069,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1081,7 +1082,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscripti
 // ReadAttributeInt56uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1093,7 +1094,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt56uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt56uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1106,7 +1107,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx contex
 // SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1118,7 +1119,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1131,7 +1132,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscripti
 // ReadAttributeInt64uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1143,7 +1144,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt64uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt64uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1156,7 +1157,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx contex
 // SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1168,7 +1169,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1181,7 +1182,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscripti
 // ReadAttributeInt8sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1193,7 +1194,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt8sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt8sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1206,7 +1207,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx context
 // SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1218,7 +1219,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscriptio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1231,7 +1232,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscriptio
 // ReadAttributeInt16sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1243,7 +1244,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt16sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt16sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1256,7 +1257,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx contex
 // SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1268,7 +1269,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1281,7 +1282,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscripti
 // ReadAttributeInt24sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,7 +1294,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt24sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt24sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1306,7 +1307,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx contex
 // SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1318,7 +1319,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1331,7 +1332,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscripti
 // ReadAttributeInt32sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1343,7 +1344,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt32sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt32sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1356,7 +1357,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx contex
 // SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1368,7 +1369,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1381,7 +1382,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscripti
 // ReadAttributeInt40sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1393,7 +1394,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt40sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt40sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1406,7 +1407,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx contex
 // SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1418,7 +1419,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1431,7 +1432,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscripti
 // ReadAttributeInt48sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1443,7 +1444,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt48sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt48sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1456,7 +1457,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx contex
 // SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1468,7 +1469,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1481,7 +1482,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscripti
 // ReadAttributeInt56sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1493,7 +1494,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt56sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt56sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1506,7 +1507,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx contex
 // SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1518,7 +1519,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1531,7 +1532,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscripti
 // ReadAttributeInt64sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1543,7 +1544,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt64sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeInt64sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1556,7 +1557,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx contex
 // SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1568,7 +1569,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1581,7 +1582,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscripti
 // ReadAttributeEnum8WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1593,7 +1594,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnum8WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeEnum8WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1606,7 +1607,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx context
 // SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1618,7 +1619,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscriptio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1631,7 +1632,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscriptio
 // ReadAttributeEnum16WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1643,7 +1644,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnum16WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeEnum16WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1656,7 +1657,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx contex
 // SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1668,7 +1669,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1681,7 +1682,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscripti
 // ReadAttributeFloatSingleWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1693,7 +1694,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFloatSingleWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeFloatSingleWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1706,7 +1707,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(ctx c
 // SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1718,7 +1719,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1731,7 +1732,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsSubsc
 // ReadAttributeFloatDoubleWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1743,7 +1744,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFloatDoubleWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeFloatDoubleWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1756,7 +1757,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(ctx c
 // SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1768,7 +1769,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1781,7 +1782,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsSubsc
 // ReadAttributeOctetStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1793,7 +1794,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOctetStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeOctetStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1806,7 +1807,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(ctx c
 // SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1818,7 +1819,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1831,7 +1832,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsSubsc
 // ReadAttributeListInt8uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeListInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1843,7 +1844,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListInt8uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeListInt8uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1856,7 +1857,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx con
 // SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1868,7 +1869,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1881,7 +1882,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSubscri
 // ReadAttributeListOctetStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeListOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1893,7 +1894,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListOctetStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeListOctetStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1906,7 +1907,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompletion(c
 // SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1918,7 +1919,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1931,7 +1932,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithParamsS
 // ReadAttributeListStructOctetStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeListStructOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1943,7 +1944,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListStructOctetStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeListStructOctetStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1956,7 +1957,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithComple
 // SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1968,7 +1969,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListStructOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListStructOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1981,7 +1982,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringWithP
 // ReadAttributeLongOctetStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeLongOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1993,7 +1994,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLongOctetStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeLongOctetStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2006,7 +2007,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompletion(c
 // SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2018,7 +2019,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2031,7 +2032,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithParamsS
 // ReadAttributeCharStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ctx context.Context) (result string, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2043,7 +2044,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ctx co
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCharStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeCharStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2056,7 +2057,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ctx co
 // SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2068,7 +2069,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSubscr
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2081,7 +2082,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSubscr
 // ReadAttributeLongCharStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeLongCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletion(ctx context.Context) (result string, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2093,7 +2094,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletion(ct
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLongCharStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeLongCharStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2106,7 +2107,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletion(ct
 // SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2118,7 +2119,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithParamsSu
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLongCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeLongCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2131,7 +2132,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithParamsSu
 // ReadAttributeEpochUsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEpochUsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2143,7 +2144,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEpochUsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeEpochUsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2156,7 +2157,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx conte
 // SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2168,7 +2169,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubscript
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEpochUsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEpochUsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2181,7 +2182,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubscript
 // ReadAttributeEpochSWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEpochSWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2193,7 +2194,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEpochSWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeEpochSWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2206,7 +2207,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx contex
 // SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2218,7 +2219,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscripti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEpochSWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEpochSWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2228,10 +2229,10 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscripti
 	}
 }
 
-// ReadAttributeVendorIdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorIDWithCompletion wraps the corresponding Objective-C method.
 //
-// ReadAttributeVendorIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeVendorIdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2243,7 +2244,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeVendorIdWithCompletion(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIdWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeVendorIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2253,10 +2254,10 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeVendorIdWithCompletion(ctx cont
 	}
 }
 
-// SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+// SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2268,7 +2269,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIdWithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeVendorIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeVendorIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2281,7 +2282,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIdWithParamsSubscrip
 // ReadAttributeListNullablesAndOptionalsStructWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeListNullablesAndOptionalsStructWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStructWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStructWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2293,7 +2294,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStruct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListNullablesAndOptionalsStructWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeListNullablesAndOptionalsStructWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2306,7 +2307,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStruct
 // SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2318,7 +2319,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOptionalsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListNullablesAndOptionalsStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListNullablesAndOptionalsStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2331,7 +2332,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOptionalsS
 // ReadAttributeEnumAttrWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2343,7 +2344,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnumAttrWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeEnumAttrWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2356,7 +2357,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx cont
 // SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2368,7 +2369,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2381,7 +2382,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubscrip
 // ReadAttributeStructAttrWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeStructAttrWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -2393,7 +2394,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ctx co
 		_o.val = MTRUnitTestingClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStructAttrWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeStructAttrWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2406,7 +2407,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ctx co
 // SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRUnitTestingClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -2418,7 +2419,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSubscr
 		_o.val = MTRUnitTestingClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStructAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeStructAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2431,7 +2432,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSubscr
 // ReadAttributeRangeRestrictedInt8uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2443,7 +2444,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithComplet
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt8uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeRangeRestrictedInt8uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2456,7 +2457,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithComplet
 // SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2468,7 +2469,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2481,7 +2482,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWithPa
 // ReadAttributeRangeRestrictedInt8sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2493,7 +2494,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithComplet
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt8sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeRangeRestrictedInt8sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2506,7 +2507,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithComplet
 // SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2518,7 +2519,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2531,7 +2532,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWithPa
 // ReadAttributeRangeRestrictedInt16uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2543,7 +2544,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt16uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeRangeRestrictedInt16uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2556,7 +2557,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithComple
 // SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2568,7 +2569,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2581,7 +2582,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uWithP
 // ReadAttributeRangeRestrictedInt16sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2593,7 +2594,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt16sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeRangeRestrictedInt16sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2606,7 +2607,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithComple
 // SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2618,7 +2619,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2631,7 +2632,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sWithP
 // ReadAttributeListLongOctetStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeListLongOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2643,7 +2644,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListLongOctetStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeListLongOctetStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2656,7 +2657,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithCompleti
 // SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2668,7 +2669,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2681,7 +2682,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWithPar
 // ReadAttributeListFabricScopedWithParamsCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeListFabricScopedWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2693,7 +2694,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsCompl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListFabricScopedWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeListFabricScopedWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2706,7 +2707,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsCompl
 // SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2718,7 +2719,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeListFabricScopedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListFabricScopedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2731,7 +2732,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithParams
 // ReadAttributeTimedWriteBooleanWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTimedWriteBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2743,7 +2744,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithCompletion
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimedWriteBooleanWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeTimedWriteBooleanWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2756,7 +2757,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithCompletion
 // SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2768,7 +2769,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTimedWriteBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeTimedWriteBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2781,7 +2782,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithParam
 // ReadAttributeGeneralErrorBooleanWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneralErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2793,7 +2794,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneralErrorBooleanWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeGeneralErrorBooleanWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2806,7 +2807,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithCompleti
 // SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2818,7 +2819,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneralErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeGeneralErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2831,7 +2832,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWithPar
 // ReadAttributeClusterErrorBooleanWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2843,7 +2844,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterErrorBooleanWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeClusterErrorBooleanWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2856,7 +2857,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithCompleti
 // SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2868,7 +2869,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeClusterErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2881,7 +2882,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWithPar
 // ReadAttributeUnsupportedWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeUnsupportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2893,7 +2894,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnsupportedWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeUnsupportedWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2906,7 +2907,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(ctx c
 // SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2918,7 +2919,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUnsupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeUnsupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2931,7 +2932,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsSubsc
 // ReadAttributeNullableBooleanWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2943,7 +2944,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBooleanWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableBooleanWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2956,7 +2957,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompletion(c
 // SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2968,7 +2969,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2981,7 +2982,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithParamsS
 // ReadAttributeNullableBitmap8WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2993,7 +2994,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap8WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableBitmap8WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3006,7 +3007,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompletion(c
 // SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3018,7 +3019,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3031,7 +3032,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithParamsS
 // ReadAttributeNullableBitmap16WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3043,7 +3044,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap16WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableBitmap16WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3056,7 +3057,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithCompletion(
 // SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3068,7 +3069,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3081,7 +3082,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithParams
 // ReadAttributeNullableBitmap32WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3093,7 +3094,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap32WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableBitmap32WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3106,7 +3107,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithCompletion(
 // SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3118,7 +3119,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3131,7 +3132,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithParams
 // ReadAttributeNullableBitmap64WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3143,7 +3144,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap64WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableBitmap64WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3156,7 +3157,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithCompletion(
 // SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3168,7 +3169,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3181,7 +3182,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithParams
 // ReadAttributeNullableInt8uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3193,7 +3194,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt8uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt8uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3206,7 +3207,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion(ctx
 // SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3218,7 +3219,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3231,7 +3232,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParamsSub
 // ReadAttributeNullableInt16uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3243,7 +3244,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt16uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt16uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3256,7 +3257,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletion(ct
 // SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3268,7 +3269,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3281,7 +3282,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithParamsSu
 // ReadAttributeNullableInt24uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3293,7 +3294,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt24uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt24uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3306,7 +3307,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletion(ct
 // SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3318,7 +3319,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3331,7 +3332,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithParamsSu
 // ReadAttributeNullableInt32uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3343,7 +3344,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt32uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt32uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3356,7 +3357,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletion(ct
 // SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3368,7 +3369,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3381,7 +3382,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithParamsSu
 // ReadAttributeNullableInt40uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3393,7 +3394,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt40uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt40uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3406,7 +3407,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletion(ct
 // SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3418,7 +3419,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3431,7 +3432,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithParamsSu
 // ReadAttributeNullableInt48uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3443,7 +3444,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt48uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt48uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3456,7 +3457,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletion(ct
 // SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3468,7 +3469,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3481,7 +3482,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithParamsSu
 // ReadAttributeNullableInt56uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3493,7 +3494,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt56uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt56uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3506,7 +3507,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletion(ct
 // SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3518,7 +3519,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3531,7 +3532,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithParamsSu
 // ReadAttributeNullableInt64uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3543,7 +3544,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt64uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt64uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3556,7 +3557,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletion(ct
 // SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3568,7 +3569,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3581,7 +3582,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithParamsSu
 // ReadAttributeNullableInt8sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3593,7 +3594,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt8sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt8sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3606,7 +3607,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion(ctx
 // SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3618,7 +3619,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3631,7 +3632,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParamsSub
 // ReadAttributeNullableInt16sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3643,7 +3644,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt16sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt16sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3656,7 +3657,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletion(ct
 // SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3668,7 +3669,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3681,7 +3682,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithParamsSu
 // ReadAttributeNullableInt24sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3693,7 +3694,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt24sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt24sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3706,7 +3707,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletion(ct
 // SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3718,7 +3719,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3731,7 +3732,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithParamsSu
 // ReadAttributeNullableInt32sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3743,7 +3744,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt32sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt32sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3756,7 +3757,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletion(ct
 // SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3768,7 +3769,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3781,7 +3782,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithParamsSu
 // ReadAttributeNullableInt40sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3793,7 +3794,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt40sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt40sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3806,7 +3807,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletion(ct
 // SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3818,7 +3819,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3831,7 +3832,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithParamsSu
 // ReadAttributeNullableInt48sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3843,7 +3844,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt48sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt48sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3856,7 +3857,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletion(ct
 // SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3868,7 +3869,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3881,7 +3882,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithParamsSu
 // ReadAttributeNullableInt56sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3893,7 +3894,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt56sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt56sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3906,7 +3907,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletion(ct
 // SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3918,7 +3919,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3931,7 +3932,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithParamsSu
 // ReadAttributeNullableInt64sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3943,7 +3944,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt64sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableInt64sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3956,7 +3957,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletion(ct
 // SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3968,7 +3969,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3981,7 +3982,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithParamsSu
 // ReadAttributeNullableEnum8WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3993,7 +3994,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnum8WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableEnum8WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4006,7 +4007,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion(ctx
 // SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4018,7 +4019,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4031,7 +4032,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParamsSub
 // ReadAttributeNullableEnum16WithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4043,7 +4044,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnum16WithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableEnum16WithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4056,7 +4057,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletion(ct
 // SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4068,7 +4069,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4081,7 +4082,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithParamsSu
 // ReadAttributeNullableFloatSingleWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4093,7 +4094,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableFloatSingleWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableFloatSingleWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4106,7 +4107,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithCompleti
 // SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4118,7 +4119,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4131,7 +4132,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWithPar
 // ReadAttributeNullableFloatDoubleWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4143,7 +4144,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableFloatDoubleWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableFloatDoubleWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4156,7 +4157,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithCompleti
 // SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4168,7 +4169,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4181,7 +4182,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWithPar
 // ReadAttributeNullableOctetStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4193,7 +4194,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableOctetStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableOctetStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4206,7 +4207,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithCompleti
 // SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4218,7 +4219,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4231,7 +4232,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWithPar
 // ReadAttributeNullableCharStringWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompletion(ctx context.Context) (result string, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -4243,7 +4244,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompletio
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableCharStringWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableCharStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4256,7 +4257,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompletio
 // SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -4268,7 +4269,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWithPara
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4281,7 +4282,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWithPara
 // ReadAttributeNullableEnumAttrWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4293,7 +4294,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnumAttrWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableEnumAttrWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4306,7 +4307,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithCompletion(
 // SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4318,7 +4319,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4331,7 +4332,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithParams
 // ReadAttributeNullableStructWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableStructWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -4343,7 +4344,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletion(ct
 		_o.val = MTRUnitTestingClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableStructWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableStructWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4356,7 +4357,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletion(ct
 // SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRUnitTestingClusterSimpleStruct, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -4368,7 +4369,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithParamsSu
 		_o.val = MTRUnitTestingClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4381,7 +4382,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithParamsSu
 // ReadAttributeNullableRangeRestrictedInt8uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4393,7 +4394,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt8uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt8uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4406,7 +4407,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWit
 // SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4418,7 +4419,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4431,7 +4432,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeNullableRangeRestrictedInt8sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4443,7 +4444,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt8sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt8sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4456,7 +4457,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWit
 // SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4468,7 +4469,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4481,7 +4482,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeNullableRangeRestrictedInt16uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4493,7 +4494,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt16uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt16uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4506,7 +4507,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWi
 // SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4518,7 +4519,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4531,7 +4532,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeNullableRangeRestrictedInt16sWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNullableRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4543,7 +4544,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt16sWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt16sWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4556,7 +4557,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWi
 // SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4568,7 +4569,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4581,7 +4582,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt
 // ReadAttributeWriteOnlyInt8uWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeWriteOnlyInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4593,7 +4594,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWriteOnlyInt8uWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeWriteOnlyInt8uWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4606,7 +4607,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletion(ct
 // SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4618,7 +4619,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWriteOnlyInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeWriteOnlyInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4631,7 +4632,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithParamsSu
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4643,7 +4644,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithComplet
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4656,7 +4657,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithComplet
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4668,7 +4669,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4681,7 +4682,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWithPa
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4693,7 +4694,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4706,7 +4707,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithCompleti
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4718,7 +4719,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4731,7 +4732,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWithPar
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4743,7 +4744,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4756,7 +4757,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion(ctx
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4768,7 +4769,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4781,7 +4782,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParamsSub
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4793,7 +4794,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4806,7 +4807,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ctx co
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4818,7 +4819,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4831,7 +4832,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSubscr
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4843,7 +4844,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4856,7 +4857,7 @@ func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompletion(c
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4868,7 +4869,7 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4878,210 +4879,10 @@ func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithParamsS
 	}
 }
 
-// MTRBaseClusterUnitTestingable is the interface implemented by [MTRBaseClusterUnitTesting], for mocking and DI.
-type MTRBaseClusterUnitTestingable interface {
-	obj.Object
-	TestSpecificWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSpecificParams) (*MTRUnitTestingClusterTestSpecificResponseParams, error)
-	TestSpecificWithCompletion(ctx context.Context) (*MTRUnitTestingClusterTestSpecificResponseParams, error)
-	TestAddArgumentsWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestAddArgumentsParams) (*MTRUnitTestingClusterTestAddArgumentsResponseParams, error)
-	TestSimpleArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSimpleArgumentRequestParams) (*MTRUnitTestingClusterTestSimpleArgumentResponseParams, error)
-	TestStructArrayArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams, error)
-	TestStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestNestedStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListInt8UArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListInt8UReverseRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UReverseRequestParams) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error)
-	TestEnumsRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEnumsRequestParams) (*MTRUnitTestingClusterTestEnumsResponseParams, error)
-	TestNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNullableOptionalRequestParams) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error)
-	TestNullableOptionalRequestWithCompletion(ctx context.Context) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error)
-	TestComplexNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, error)
-	SimpleStructEchoRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterSimpleStructEchoRequestParams) (*MTRUnitTestingClusterSimpleStructResponseParams, error)
-	TestEmitTestEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestEventRequestParams) (*MTRUnitTestingClusterTestEmitTestEventResponseParams, error)
-	TestEmitTestFabricScopedEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error)
-	ReadAttributeBooleanWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeBitmap8WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeBitmap16WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeBitmap32WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeBitmap64WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt8uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt16uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt24uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt32uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt40uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt48uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt56uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt64uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt8sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt16sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt24sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt32sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt40sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt48sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt56sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInt64sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeEnum8WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeEnum16WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFloatSingleWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFloatDoubleWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOctetStringWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeListInt8uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeListOctetStringWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeListStructOctetStringWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeLongOctetStringWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCharStringWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeLongCharStringWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeEpochUsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeEpochSWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeVendorIdWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeListNullablesAndOptionalsStructWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeEnumAttrWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeStructAttrWithCompletion(ctx context.Context) (*MTRUnitTestingClusterSimpleStruct, error)
-	SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRUnitTestingClusterSimpleStruct, error)
-	ReadAttributeRangeRestrictedInt8uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRangeRestrictedInt8sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRangeRestrictedInt16uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRangeRestrictedInt16sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeListLongOctetStringWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeListFabricScopedWithParamsCompletion(ctx context.Context, params *MTRReadParams) (obj.Object, error)
-	SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTimedWriteBooleanWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneralErrorBooleanWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterErrorBooleanWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeUnsupportedWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableBooleanWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableBitmap8WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableBitmap16WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableBitmap32WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableBitmap64WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt8uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt16uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt24uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt32uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt40uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt48uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt56uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt64uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt8sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt16sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt24sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt32sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt40sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt48sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt56sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableInt64sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableEnum8WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableEnum16WithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableFloatSingleWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableFloatDoubleWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableOctetStringWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableCharStringWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeNullableEnumAttrWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableStructWithCompletion(ctx context.Context) (*MTRUnitTestingClusterSimpleStruct, error)
-	SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRUnitTestingClusterSimpleStruct, error)
-	ReadAttributeNullableRangeRestrictedInt8uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableRangeRestrictedInt8sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableRangeRestrictedInt16uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNullableRangeRestrictedInt16sWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeWriteOnlyInt8uWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterUnitTestingable = (*MTRBaseClusterUnitTesting)(nil)
-
 // isMTRBaseClusterUnitTesting marks MTRBaseClusterUnitTesting — and, by embedding promotion, its
 // subclasses — as a member of the MTRBaseClusterUnitTesting hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBaseClusterUnitTesting) isMTRBaseClusterUnitTesting() {}
+func (mbcut *MTRBaseClusterUnitTesting) isMTRBaseClusterUnitTesting() {}
 
 var _ MTRBaseClusterUnitTestingProvider = (*MTRBaseClusterUnitTesting)(nil)
 

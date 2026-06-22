@@ -154,8 +154,9 @@ func buildWithSetter(
 		return nil
 	}
 
-	// Derive With* Go name from the property name.
-	goWithName := "With" + strings.ToUpper(prop.Name[:1]) + prop.Name[1:]
+	// Derive With* Go name from the property name, re-casing any initialism
+	// (WithUsbController → WithUSBController) for idiomatic capitalisation.
+	goWithName := applyInitialisms("With" + strings.ToUpper(prop.Name[:1]) + prop.Name[1:])
 
 	norm := normaliseObjC(prop.ObjCType)
 
@@ -255,13 +256,21 @@ func buildWithSetter(
 }
 
 func writeWithMethod(w io.Writer, typeName string, we withEntry) {
+	// The setter's single parameter ("items" for a collection, otherwise the
+	// property name) must not collide with the receiver variable.
+	paramName := "items"
+	if !we.isNSArray {
+		paramName = we.param.goName
+	}
 	view := withSetterView{
-		DocComment: docLead(
+		DocComment: docLeadKind(
 			we.goName,
 			we.doc,
 			"sets the property and returns the receiver so calls can be chained.",
+			docSetter,
 		),
 		TypeName:       typeName,
+		RecvVar:        uniqueReceiver(typeName, []string{paramName}),
 		GoName:         we.goName,
 		SetterSelector: we.setterSelector,
 		IsNSArray:      we.isNSArray,
@@ -281,6 +290,7 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 type withSetterView struct {
 	DocComment     string
 	TypeName       string
+	RecvVar        string
 	GoName         string
 	SetterSelector string
 	IsNSArray      bool

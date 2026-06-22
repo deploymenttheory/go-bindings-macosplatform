@@ -15,43 +15,43 @@ func BiometryRequirementWithFallback(fallback *BiometryFallbackRequirement) *Aut
 	return AuthenticationRequirementFromID(_r)
 }
 
-// DefaultRequirement requires user authentication
+// DefaultRequirement returns requires user authentication
 func DefaultRequirement() *AuthenticationRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("defaultRequirement"))
 	return AuthenticationRequirementFromID(_r)
 }
 
-// BiometryRequirement requires biometric authentication The authorization will fail if:
+// BiometryRequirement returns requires biometric authentication The authorization will fail if:
 func BiometryRequirement() *AuthenticationRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryRequirement"))
 	return AuthenticationRequirementFromID(_r)
 }
 
-// BiometryCurrentSetRequirement requires user authentication with the current biometric set The authorization will fail if:
+// BiometryCurrentSetRequirement returns requires user authentication with the current biometric set The authorization will fail if:
 func BiometryCurrentSetRequirement() *AuthenticationRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryCurrentSetRequirement"))
 	return AuthenticationRequirementFromID(_r)
 }
 
-// LABiometryFallbackRequirementDefaultRequirement use default biometric fallback
+// LABiometryFallbackRequirementDefaultRequirement returns use default biometric fallback
 func LABiometryFallbackRequirementDefaultRequirement() *BiometryFallbackRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("defaultRequirement"))
 	return BiometryFallbackRequirementFromID(_r)
 }
 
-// DevicePasscodeRequirement requires authorization using the device passcode
+// DevicePasscodeRequirement returns requires authorization using the device passcode
 func DevicePasscodeRequirement() *BiometryFallbackRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("devicePasscodeRequirement"))
 	return BiometryFallbackRequirementFromID(_r)
 }
 
-// CurrentUser environment of the current user.
+// CurrentUser returns environment of the current user.
 func CurrentUser() *Environment {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAEnvironment")), objc.RegisterName("currentUser"))
 	return EnvironmentFromID(_r)
 }
 
-// SharedStore shared instance of
+// SharedStore returns shared instance of
 func SharedStore() *RightStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("LARightStore")), objc.RegisterName("sharedStore"))
 	return RightStoreFromID(_r)

@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -58,7 +59,7 @@ func NewWorkoutRouteBuilderWithHealthStoreDevice(healthStore *HealthStore, devic
 // FinishRouteWithWorkoutMetadataCompletion creates, saves, and associates the route with the provided workout.
 //
 // FinishRouteWithWorkoutMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (x *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *Workout, metadata obj.Object) (result *WorkoutRoute, err error) {
+func (wrb *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *Workout, metadata obj.Object) (result *WorkoutRoute, err error) {
 	type _result struct {
 		val *WorkoutRoute
 		err error
@@ -70,7 +71,7 @@ func (x *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx conte
 		_o.val = WorkoutRouteFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishRouteWithWorkout:metadata:completion:"), objref.IDOf(workout), objref.IDOf(metadata), _block)
+	objc.Send[objc.ID](objref.IDOf(wrb), objc.RegisterName("finishRouteWithWorkout:metadata:completion:"), objref.IDOf(workout), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -79,13 +80,5 @@ func (x *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx conte
 		return _zero, ctx.Err()
 	}
 }
-
-// WorkoutRouteBuilderable is the interface implemented by [WorkoutRouteBuilder], for mocking and DI.
-type WorkoutRouteBuilderable interface {
-	obj.Object
-	FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *Workout, metadata obj.Object) (*WorkoutRoute, error)
-}
-
-var _ WorkoutRouteBuilderable = (*WorkoutRouteBuilder)(nil)
 
 var _ SeriesBuilderProvider = (*WorkoutRouteBuilder)(nil)

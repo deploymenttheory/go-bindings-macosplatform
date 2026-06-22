@@ -52,32 +52,22 @@ func NewDisbursementSummaryItem() *DisbursementSummaryItem {
 	return disbursementSummaryItemAdopt(_id)
 }
 
-// WithLabel a short, localized description of the item.
-func (x *DisbursementSummaryItem) WithLabel(label string) *DisbursementSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a short, localized description of the item.
+func (dsi *DisbursementSummaryItem) WithLabel(label string) *DisbursementSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dsi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return dsi
 }
 
-// WithAmount the summary item’s amount.
-func (x *DisbursementSummaryItem) WithAmount(amount obj.Object) *DisbursementSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
-	return x
+// WithAmount sets the summary item’s amount.
+func (dsi *DisbursementSummaryItem) WithAmount(amount obj.Object) *DisbursementSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
+	return dsi
 }
 
-// WithType the summary item’s type that indicates whether the amount is final.
-func (x *DisbursementSummaryItem) WithType(type_ PaymentSummaryItemType) *DisbursementSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the summary item’s type that indicates whether the amount is final.
+func (dsi *DisbursementSummaryItem) WithType(type_ PaymentSummaryItemType) *DisbursementSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dsi), objc.RegisterName("setType:"), type_)
+	return dsi
 }
-
-// DisbursementSummaryItemable is the interface implemented by [DisbursementSummaryItem], for mocking and DI.
-type DisbursementSummaryItemable interface {
-	obj.Object
-	WithLabel(label string) *DisbursementSummaryItem
-	WithAmount(amount obj.Object) *DisbursementSummaryItem
-	WithType(type_ PaymentSummaryItemType) *DisbursementSummaryItem
-}
-
-var _ DisbursementSummaryItemable = (*DisbursementSummaryItem)(nil)
 
 var _ PaymentSummaryItemProvider = (*DisbursementSummaryItem)(nil)

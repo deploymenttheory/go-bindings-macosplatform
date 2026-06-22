@@ -53,55 +53,41 @@ func NewCentralManager() *CentralManager {
 }
 
 // RetrievePeripheralsWithIdentifiers returns a list of known peripherals by their identifiers.
-func (x *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers []obj.Object) []*Peripheral {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrievePeripheralsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (cm *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers []obj.Object) []*Peripheral {
+	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("retrievePeripheralsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
 // RetrieveConnectedPeripheralsWithServices returns a list of the peripherals connected to the system whose services match a given set of criteria.
-func (x *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs []*UUID) []*Peripheral {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrieveConnectedPeripheralsWithServices:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }))
+func (cm *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs []*UUID) []*Peripheral {
+	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("retrieveConnectedPeripheralsWithServices:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
 // ScanForPeripheralsWithServicesOptions scans for peripherals that are advertising services.
-func (x *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanForPeripheralsWithServices:options:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
+func (cm *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("scanForPeripheralsWithServices:options:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
 }
 
 // StopScan asks the central manager to stop scanning for peripherals.
-func (x *CentralManager) StopScan() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopScan"))
+func (cm *CentralManager) StopScan() {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("stopScan"))
 }
 
 // ConnectPeripheralOptions establishes a local connection to a peripheral.
-func (x *CentralManager) ConnectPeripheralOptions(peripheral *Peripheral, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectPeripheral:options:"), objref.IDOf(peripheral), objref.IDOf(options))
+func (cm *CentralManager) ConnectPeripheralOptions(peripheral *Peripheral, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("connectPeripheral:options:"), objref.IDOf(peripheral), objref.IDOf(options))
 }
 
 // CancelPeripheralConnection cancels an active or pending local connection to a peripheral.
-func (x *CentralManager) CancelPeripheralConnection(peripheral *Peripheral) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPeripheralConnection:"), objref.IDOf(peripheral))
+func (cm *CentralManager) CancelPeripheralConnection(peripheral *Peripheral) {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("cancelPeripheralConnection:"), objref.IDOf(peripheral))
 }
 
-// IsScanning whether or not the central is currently scanning.
-func (x *CentralManager) IsScanning() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isScanning"))
+// IsScanning reports whether the central is currently scanning.
+func (cm *CentralManager) IsScanning() bool {
+	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("isScanning"))
 	return _r
 }
-
-// CentralManagerable is the interface implemented by [CentralManager], for mocking and DI.
-type CentralManagerable interface {
-	obj.Object
-	RetrievePeripheralsWithIdentifiers(identifiers []obj.Object) []*Peripheral
-	RetrieveConnectedPeripheralsWithServices(serviceUUIDs []*UUID) []*Peripheral
-	ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options obj.Object)
-	StopScan()
-	ConnectPeripheralOptions(peripheral *Peripheral, options obj.Object)
-	CancelPeripheralConnection(peripheral *Peripheral)
-	IsScanning() bool
-}
-
-var _ CentralManagerable = (*CentralManager)(nil)
 
 var _ ManagerProvider = (*CentralManager)(nil)

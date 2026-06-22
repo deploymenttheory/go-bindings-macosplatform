@@ -46,24 +46,24 @@ func vertexBufferLayoutDescriptorArrayAdopt(id objc.ID) *VertexBufferLayoutDescr
 }
 
 // Description returns the object's -description text.
-func (x *VertexBufferLayoutDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vblda *VertexBufferLayoutDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(vblda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VertexBufferLayoutDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vblda *VertexBufferLayoutDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vblda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VertexBufferLayoutDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vblda *VertexBufferLayoutDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vblda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VertexBufferLayoutDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vblda *VertexBufferLayoutDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(vblda))
 }
 
 // NewVertexBufferLayoutDescriptorArray creates a new VertexBufferLayoutDescriptorArray.
@@ -73,21 +73,12 @@ func NewVertexBufferLayoutDescriptorArray() *VertexBufferLayoutDescriptorArray {
 }
 
 // ObjectAtIndexedSubscript returns the state of the specified vertex buffer layout.
-func (x *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexBufferLayoutDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+func (vblda *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexBufferLayoutDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(vblda), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return VertexBufferLayoutDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the state of the specified vertex buffer layout.
-func (x *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *VertexBufferLayoutDescriptor, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
+func (vblda *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *VertexBufferLayoutDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(vblda), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
 }
-
-// VertexBufferLayoutDescriptorArrayable is the interface implemented by [VertexBufferLayoutDescriptorArray], for mocking and DI.
-type VertexBufferLayoutDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(index int) *VertexBufferLayoutDescriptor
-	SetObjectAtIndexedSubscript(bufferDesc *VertexBufferLayoutDescriptor, index int)
-}
-
-var _ VertexBufferLayoutDescriptorArrayable = (*VertexBufferLayoutDescriptorArray)(nil)

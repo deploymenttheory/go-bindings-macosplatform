@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedManager the shared asset-pack manager.
+// SharedManager returns the shared asset-pack manager.
 func SharedManager() *AssetPackManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManager")), objc.RegisterName("sharedManager"))
 	return AssetPackManagerFromID(_r)

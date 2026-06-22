@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,33 +49,33 @@ func playerAdopt(id objc.ID) *Player {
 	return x
 }
 
-// ScopedIDsArePersistent returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
-func (x *Player) ScopedIDsArePersistent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scopedIDsArePersistent"))
+// ScopedIDsArePersistent reports whether returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
+func (p *Player) ScopedIDsArePersistent() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("scopedIDsArePersistent"))
 	return _r
 }
 
-// GamePlayerID this is the player's unique and persistent ID that is scoped to this application.
-func (x *Player) GamePlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamePlayerID"))
+// GamePlayerID returns this is the player's unique and persistent ID that is scoped to this application.
+func (p *Player) GamePlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("gamePlayerID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// TeamPlayerID this is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
-func (x *Player) TeamPlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("teamPlayerID"))
+// TeamPlayerID returns this is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
+func (p *Player) TeamPlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("teamPlayerID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Alias the alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
-func (x *Player) Alias() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alias"))
+// Alias returns the alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
+func (p *Player) Alias() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("alias"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +83,8 @@ func (x *Player) Alias() string {
 }
 
 // GuestIdentifier wraps the corresponding Objective-C method.
-func (x *Player) GuestIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("guestIdentifier"))
+func (p *Player) GuestIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("guestIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,15 +92,15 @@ func (x *Player) GuestIdentifier() string {
 }
 
 // IsInvitable wraps the corresponding Objective-C method.
-func (x *Player) IsInvitable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInvitable"))
+func (p *Player) IsInvitable() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isInvitable"))
 	return _r
 }
 
 // LoadPhotoForSize loads a photo of the player from Game Center.
 //
 // LoadPhotoForSize blocks until the operation completes or ctx is cancelled.
-func (x *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result obj.Object, err error) {
+func (p *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -111,7 +112,7 @@ func (x *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result o
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadPhotoForSize:withCompletionHandler:"), size, _block)
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("loadPhotoForSize:withCompletionHandler:"), size, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -122,30 +123,15 @@ func (x *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result o
 }
 
 // IsFriend wraps the corresponding Objective-C method.
-func (x *Player) IsFriend() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFriend"))
+func (p *Player) IsFriend() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFriend"))
 	return _r
 }
-
-// Playerable is the interface implemented by [Player], for mocking and DI.
-type Playerable interface {
-	obj.Object
-	ScopedIDsArePersistent() bool
-	GamePlayerID() string
-	TeamPlayerID() string
-	Alias() string
-	GuestIdentifier() string
-	IsInvitable() bool
-	LoadPhotoForSize(ctx context.Context, size PhotoSize) (obj.Object, error)
-	IsFriend() bool
-}
-
-var _ Playerable = (*Player)(nil)
 
 // isPlayer marks Player — and, by embedding promotion, its
 // subclasses — as a member of the Player hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Player) isPlayer() {}
+func (p *Player) isPlayer() {}
 
 var _ PlayerProvider = (*Player)(nil)
 

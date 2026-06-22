@@ -46,24 +46,24 @@ func sequenceAdopt(id objc.ID) *Sequence {
 }
 
 // Description returns the object's -description text.
-func (x *Sequence) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Sequence) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Sequence) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Sequence) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Sequence) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Sequence) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Sequence) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Sequence) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSequence creates a new Sequence.
@@ -72,34 +72,24 @@ func NewSequence() *Sequence {
 	return sequenceAdopt(_id)
 }
 
-// Type type of values held
-func (x *Sequence) Type() FeatureType {
-	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns type of values held
+func (s *Sequence) Type() FeatureType {
+	_r := objc.Send[FeatureType](objref.IDOf(s), objc.RegisterName("type"))
 	return _r
 }
 
 // StringValues wraps the corresponding Objective-C method.
 //
 // StringValues returns the collection as a Go slice.
-func (x *Sequence) StringValues() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValues"))
+func (s *Sequence) StringValues() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Int64Values wraps the corresponding Objective-C method.
 //
 // Int64Values returns the collection as a Go slice.
-func (x *Sequence) Int64Values() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("int64Values"))
+func (s *Sequence) Int64Values() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("int64Values"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// Sequenceable is the interface implemented by [Sequence], for mocking and DI.
-type Sequenceable interface {
-	obj.Object
-	Type() FeatureType
-	StringValues() []string
-	Int64Values() []obj.Object
-}
-
-var _ Sequenceable = (*Sequence)(nil)

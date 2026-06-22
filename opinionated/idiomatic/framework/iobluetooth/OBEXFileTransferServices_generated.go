@@ -46,24 +46,24 @@ func oBEXFileTransferServicesAdopt(id objc.ID) *OBEXFileTransferServices {
 }
 
 // Description returns the object's -description text.
-func (x *OBEXFileTransferServices) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ofts *OBEXFileTransferServices) Description() string {
+	return rt.Description(objref.IDOf(ofts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OBEXFileTransferServices) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ofts *OBEXFileTransferServices) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ofts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OBEXFileTransferServices) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ofts *OBEXFileTransferServices) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ofts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OBEXFileTransferServices) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ofts *OBEXFileTransferServices) String() string {
+	return rt.Description(objref.IDOf(ofts))
 }
 
 // NewOBEXFileTransferServicesWithOBEXSession create a new OBEXFileTransferServices object
@@ -74,150 +74,118 @@ func NewOBEXFileTransferServicesWithOBEXSession(inOBEXSession *IOBluetoothOBEXSe
 }
 
 // WithDelegate sets the property and returns the receiver so calls can be chained.
-func (x *OBEXFileTransferServices) WithDelegate(delegate obj.Object) *OBEXFileTransferServices {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+func (ofts *OBEXFileTransferServices) WithDelegate(delegate obj.Object) *OBEXFileTransferServices {
+	objc.Send[objc.ID](objref.IDOf(ofts), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return ofts
 }
 
 // CurrentPath get the remote current directory path during an FTP session
-func (x *OBEXFileTransferServices) CurrentPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPath"))
+func (ofts *OBEXFileTransferServices) CurrentPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ofts), objc.RegisterName("currentPath"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsBusy get the action state of the module
-func (x *OBEXFileTransferServices) IsBusy() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBusy"))
+// IsBusy reports whether get the action state of the module
+func (ofts *OBEXFileTransferServices) IsBusy() bool {
+	_r := objc.Send[bool](objref.IDOf(ofts), objc.RegisterName("isBusy"))
 	return _r
 }
 
-// IsConnected get the connected state of this module.
-func (x *OBEXFileTransferServices) IsConnected() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
+// IsConnected reports whether get the connected state of this module.
+func (ofts *OBEXFileTransferServices) IsConnected() bool {
+	_r := objc.Send[bool](objref.IDOf(ofts), objc.RegisterName("isConnected"))
 	return _r
 }
 
-// ConnectToFTPService connect to a remote device for FTP operations
-func (x *OBEXFileTransferServices) ConnectToFTPService() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("connectToFTPService"))
+// ConnectToFTPService returns connect to a remote device for FTP operations
+func (ofts *OBEXFileTransferServices) ConnectToFTPService() int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("connectToFTPService"))
 	return _r
 }
 
-// ConnectToObjectPushService connect to a remote device for ObjectPush operations. Most of the FTP functionality of this object will be disabled.
-func (x *OBEXFileTransferServices) ConnectToObjectPushService() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("connectToObjectPushService"))
+// ConnectToObjectPushService returns connect to a remote device for ObjectPush operations. Most of the FTP functionality of this object will be disabled.
+func (ofts *OBEXFileTransferServices) ConnectToObjectPushService() int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("connectToObjectPushService"))
 	return _r
 }
 
-// Disconnect disconnect from the remote device
-func (x *OBEXFileTransferServices) Disconnect() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("disconnect"))
+// Disconnect returns disconnect from the remote device
+func (ofts *OBEXFileTransferServices) Disconnect() int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("disconnect"))
 	return _r
 }
 
-// ChangeCurrentFolderToRoot asynchronously change to the remote root directory
-func (x *OBEXFileTransferServices) ChangeCurrentFolderToRoot() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("changeCurrentFolderToRoot"))
+// ChangeCurrentFolderToRoot returns asynchronously change to the remote root directory
+func (ofts *OBEXFileTransferServices) ChangeCurrentFolderToRoot() int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("changeCurrentFolderToRoot"))
 	return _r
 }
 
-// ChangeCurrentFolderBackward change to the directory above the current level if not at the root
-func (x *OBEXFileTransferServices) ChangeCurrentFolderBackward() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("changeCurrentFolderBackward"))
+// ChangeCurrentFolderBackward returns change to the directory above the current level if not at the root
+func (ofts *OBEXFileTransferServices) ChangeCurrentFolderBackward() int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("changeCurrentFolderBackward"))
 	return _r
 }
 
 // ChangeCurrentFolderForwardToPath change the remote path
-func (x *OBEXFileTransferServices) ChangeCurrentFolderForwardToPath(inDirName string) int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("changeCurrentFolderForwardToPath:"), purego.NSString(inDirName))
+func (ofts *OBEXFileTransferServices) ChangeCurrentFolderForwardToPath(inDirName string) int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("changeCurrentFolderForwardToPath:"), purego.NSString(inDirName))
 	return _r
 }
 
 // CreateFolder create a folder on the remote target
-func (x *OBEXFileTransferServices) CreateFolder(inDirName string) int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("createFolder:"), purego.NSString(inDirName))
+func (ofts *OBEXFileTransferServices) CreateFolder(inDirName string) int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("createFolder:"), purego.NSString(inDirName))
 	return _r
 }
 
 // RemoveItem remove a remote item.
-func (x *OBEXFileTransferServices) RemoveItem(inItemName string) int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("removeItem:"), purego.NSString(inItemName))
+func (ofts *OBEXFileTransferServices) RemoveItem(inItemName string) int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("removeItem:"), purego.NSString(inItemName))
 	return _r
 }
 
 // RetrieveFolderListing get a remote directory listing
-func (x *OBEXFileTransferServices) RetrieveFolderListing() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("retrieveFolderListing"))
+func (ofts *OBEXFileTransferServices) RetrieveFolderListing() int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("retrieveFolderListing"))
 	return _r
 }
 
 // SendFile put a local file to the remote target
-func (x *OBEXFileTransferServices) SendFile(inLocalPathAndName string) int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("sendFile:"), purego.NSString(inLocalPathAndName))
+func (ofts *OBEXFileTransferServices) SendFile(inLocalPathAndName string) int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("sendFile:"), purego.NSString(inLocalPathAndName))
 	return _r
 }
 
 // CopyRemoteFileToLocalPath copy a remote file to a local path
-func (x *OBEXFileTransferServices) CopyRemoteFileToLocalPath(inRemoteFileName string, inLocalPathAndName string) int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("copyRemoteFile:toLocalPath:"), purego.NSString(inRemoteFileName), purego.NSString(inLocalPathAndName))
+func (ofts *OBEXFileTransferServices) CopyRemoteFileToLocalPath(inRemoteFileName string, inLocalPathAndName string) int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("copyRemoteFile:toLocalPath:"), purego.NSString(inRemoteFileName), purego.NSString(inLocalPathAndName))
 	return _r
 }
 
 // SendDataTypeName send data to a remote target
-func (x *OBEXFileTransferServices) SendDataTypeName(inData obj.Object, inType string, inName string) int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("sendData:type:name:"), objref.IDOf(inData), purego.NSString(inType), purego.NSString(inName))
+func (ofts *OBEXFileTransferServices) SendDataTypeName(inData obj.Object, inType string, inName string) int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("sendData:type:name:"), objref.IDOf(inData), purego.NSString(inType), purego.NSString(inName))
 	return _r
 }
 
 // GetDefaultVCard get the remote default VCard, if it is supported
-func (x *OBEXFileTransferServices) GetDefaultVCard(inLocalPathAndName string) int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("getDefaultVCard:"), purego.NSString(inLocalPathAndName))
+func (ofts *OBEXFileTransferServices) GetDefaultVCard(inLocalPathAndName string) int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("getDefaultVCard:"), purego.NSString(inLocalPathAndName))
 	return _r
 }
 
-// Abort abort the current operation
-func (x *OBEXFileTransferServices) Abort() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("abort"))
+// Abort returns abort the current operation
+func (ofts *OBEXFileTransferServices) Abort() int32 {
+	_r := objc.Send[int32](objref.IDOf(ofts), objc.RegisterName("abort"))
 	return _r
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *OBEXFileTransferServices) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (ofts *OBEXFileTransferServices) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ofts), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
-
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *OBEXFileTransferServices) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
-// OBEXFileTransferServicesable is the interface implemented by [OBEXFileTransferServices], for mocking and DI.
-type OBEXFileTransferServicesable interface {
-	obj.Object
-	WithDelegate(delegate obj.Object) *OBEXFileTransferServices
-	CurrentPath() string
-	IsBusy() bool
-	IsConnected() bool
-	ConnectToFTPService() int32
-	ConnectToObjectPushService() int32
-	Disconnect() int32
-	ChangeCurrentFolderToRoot() int32
-	ChangeCurrentFolderBackward() int32
-	ChangeCurrentFolderForwardToPath(inDirName string) int32
-	CreateFolder(inDirName string) int32
-	RemoveItem(inItemName string) int32
-	RetrieveFolderListing() int32
-	SendFile(inLocalPathAndName string) int32
-	CopyRemoteFileToLocalPath(inRemoteFileName string, inLocalPathAndName string) int32
-	SendDataTypeName(inData obj.Object, inType string, inName string) int32
-	GetDefaultVCard(inLocalPathAndName string) int32
-	Abort() int32
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-}
-
-var _ OBEXFileTransferServicesable = (*OBEXFileTransferServices)(nil)

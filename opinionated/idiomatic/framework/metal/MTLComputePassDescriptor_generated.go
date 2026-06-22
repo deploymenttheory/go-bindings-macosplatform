@@ -46,24 +46,24 @@ func computePassDescriptorAdopt(id objc.ID) *ComputePassDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ComputePassDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpd *ComputePassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComputePassDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpd *ComputePassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComputePassDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpd *ComputePassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComputePassDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpd *ComputePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(cpd))
 }
 
 // NewComputePassDescriptor creates a new ComputePassDescriptor.
@@ -72,36 +72,20 @@ func NewComputePassDescriptor() *ComputePassDescriptor {
 	return computePassDescriptorAdopt(_id)
 }
 
-// WithDispatchType the strategy for dispatching any compute commands encoded in the compute pass.
-func (x *ComputePassDescriptor) WithDispatchType(dispatchType DispatchType) *ComputePassDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchType:"), dispatchType)
-	return x
+// WithDispatchType sets the strategy for dispatching any compute commands encoded in the compute pass.
+func (cpd *ComputePassDescriptor) WithDispatchType(dispatchType DispatchType) *ComputePassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cpd), objc.RegisterName("setDispatchType:"), dispatchType)
+	return cpd
 }
 
-// DispatchType the dispatch type of the compute command encoder.
-func (x *ComputePassDescriptor) DispatchType() DispatchType {
-	_r := objc.Send[DispatchType](objref.IDOf(x), objc.RegisterName("dispatchType"))
+// DispatchType returns the dispatch type of the compute command encoder.
+func (cpd *ComputePassDescriptor) DispatchType() DispatchType {
+	_r := objc.Send[DispatchType](objref.IDOf(cpd), objc.RegisterName("dispatchType"))
 	return _r
 }
 
-// SetDispatchType wraps the corresponding Objective-C method.
-func (x *ComputePassDescriptor) SetDispatchType(dispatchType DispatchType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchType:"), dispatchType)
-}
-
-// SampleBufferAttachments an array of sample buffers and associated sample indices.
-func (x *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+// SampleBufferAttachments returns an array of sample buffers and associated sample indices.
+func (cpd *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(cpd), objc.RegisterName("sampleBufferAttachments"))
 	return ComputePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
-
-// ComputePassDescriptorable is the interface implemented by [ComputePassDescriptor], for mocking and DI.
-type ComputePassDescriptorable interface {
-	obj.Object
-	WithDispatchType(dispatchType DispatchType) *ComputePassDescriptor
-	DispatchType() DispatchType
-	SetDispatchType(dispatchType DispatchType)
-	SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray
-}
-
-var _ ComputePassDescriptorable = (*ComputePassDescriptor)(nil)

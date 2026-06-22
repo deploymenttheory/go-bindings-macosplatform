@@ -46,24 +46,24 @@ func commandQueueDescriptorAdopt(id objc.ID) *CommandQueueDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *CommandQueueDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cqd *CommandQueueDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cqd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CommandQueueDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cqd *CommandQueueDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cqd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CommandQueueDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cqd *CommandQueueDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cqd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CommandQueueDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cqd *CommandQueueDescriptor) String() string {
+	return rt.Description(objref.IDOf(cqd))
 }
 
 // NewCommandQueueDescriptor creates a new CommandQueueDescriptor.
@@ -72,29 +72,14 @@ func NewCommandQueueDescriptor() *CommandQueueDescriptor {
 	return commandQueueDescriptorAdopt(_id)
 }
 
-// WithMaxCommandBufferCount an integer that sets the maximum number of uncompleted command buffers the queue can allow.
-func (x *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *CommandQueueDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
-	return x
+// WithMaxCommandBufferCount sets an integer that sets the maximum number of uncompleted command buffers the queue can allow.
+func (cqd *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *CommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cqd), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
+	return cqd
 }
 
 // MaxCommandBufferCount wraps the corresponding Objective-C method.
-func (x *CommandQueueDescriptor) MaxCommandBufferCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandBufferCount"))
+func (cqd *CommandQueueDescriptor) MaxCommandBufferCount() int {
+	_r := objc.Send[int](objref.IDOf(cqd), objc.RegisterName("maxCommandBufferCount"))
 	return _r
 }
-
-// SetMaxCommandBufferCount wraps the corresponding Objective-C method.
-func (x *CommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
-}
-
-// CommandQueueDescriptorable is the interface implemented by [CommandQueueDescriptor], for mocking and DI.
-type CommandQueueDescriptorable interface {
-	obj.Object
-	WithMaxCommandBufferCount(maxCommandBufferCount int) *CommandQueueDescriptor
-	MaxCommandBufferCount() int
-	SetMaxCommandBufferCount(maxCommandBufferCount int)
-}
-
-var _ CommandQueueDescriptorable = (*CommandQueueDescriptor)(nil)

@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewUSBScreenCoordinatePointingDeviceConfiguration() *USBScreenCoordinatePoi
 	_id := objc.Send[objc.ID](objc.ID(_class("VZUSBScreenCoordinatePointingDeviceConfiguration")), objc.RegisterName("new"))
 	return uSBScreenCoordinatePointingDeviceConfigurationAdopt(_id)
 }
-
-// USBScreenCoordinatePointingDeviceConfigurationable is the interface implemented by [USBScreenCoordinatePointingDeviceConfiguration], for mocking and DI.
-type USBScreenCoordinatePointingDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ USBScreenCoordinatePointingDeviceConfigurationable = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)
 
 var _ PointingDeviceConfigurationProvider = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)

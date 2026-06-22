@@ -46,24 +46,24 @@ func histogramBucketAdopt(id objc.ID) *HistogramBucket {
 }
 
 // Description returns the object's -description text.
-func (x *HistogramBucket) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hb *HistogramBucket) Description() string {
+	return rt.Description(objref.IDOf(hb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HistogramBucket) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hb *HistogramBucket) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HistogramBucket) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hb *HistogramBucket) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HistogramBucket) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hb *HistogramBucket) String() string {
+	return rt.Description(objref.IDOf(hb))
 }
 
 // NewHistogramBucket creates a new HistogramBucket.
@@ -72,30 +72,20 @@ func NewHistogramBucket() *HistogramBucket {
 	return histogramBucketAdopt(_id)
 }
 
-// BucketStart an NSMeasurement representing the start of a histogram bucket.
-func (x *HistogramBucket) BucketStart() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketStart"))
+// BucketStart returns an NSMeasurement representing the start of a histogram bucket.
+func (hb *HistogramBucket) BucketStart() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hb), objc.RegisterName("bucketStart"))
 	return obj.Wrap(_r)
 }
 
-// BucketEnd an NSMeasurement representing the end of a histogram bucket.
-func (x *HistogramBucket) BucketEnd() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketEnd"))
+// BucketEnd returns an NSMeasurement representing the end of a histogram bucket.
+func (hb *HistogramBucket) BucketEnd() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hb), objc.RegisterName("bucketEnd"))
 	return obj.Wrap(_r)
 }
 
-// BucketCount an NSUInteger representing the number of samples in this histogram bucket.
-func (x *HistogramBucket) BucketCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bucketCount"))
+// BucketCount returns an NSUInteger representing the number of samples in this histogram bucket.
+func (hb *HistogramBucket) BucketCount() int {
+	_r := objc.Send[int](objref.IDOf(hb), objc.RegisterName("bucketCount"))
 	return _r
 }
-
-// HistogramBucketable is the interface implemented by [HistogramBucket], for mocking and DI.
-type HistogramBucketable interface {
-	obj.Object
-	BucketStart() obj.Object
-	BucketEnd() obj.Object
-	BucketCount() int
-}
-
-var _ HistogramBucketable = (*HistogramBucket)(nil)

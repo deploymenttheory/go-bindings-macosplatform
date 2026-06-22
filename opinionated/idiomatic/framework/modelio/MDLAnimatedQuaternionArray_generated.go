@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,24 +51,15 @@ func NewAnimatedQuaternionArrayWithElementCount(arrayElementCount int) *Animated
 }
 
 // WithInterpolation sets the property and returns the receiver so calls can be chained.
-func (x *AnimatedQuaternionArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternionArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
-	return x
+func (aqa *AnimatedQuaternionArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternionArray {
+	objc.Send[objc.ID](objref.IDOf(aqa), objc.RegisterName("setInterpolation:"), interpolation)
+	return aqa
 }
 
 // ElementCount wraps the corresponding Objective-C method.
-func (x *AnimatedQuaternionArray) ElementCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+func (aqa *AnimatedQuaternionArray) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(aqa), objc.RegisterName("elementCount"))
 	return _r
 }
-
-// AnimatedQuaternionArrayable is the interface implemented by [AnimatedQuaternionArray], for mocking and DI.
-type AnimatedQuaternionArrayable interface {
-	obj.Object
-	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternionArray
-	ElementCount() int
-}
-
-var _ AnimatedQuaternionArrayable = (*AnimatedQuaternionArray)(nil)
 
 var _ AnimatedValueProvider = (*AnimatedQuaternionArray)(nil)

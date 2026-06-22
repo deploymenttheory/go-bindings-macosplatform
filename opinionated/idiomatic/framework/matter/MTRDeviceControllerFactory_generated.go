@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRDeviceControllerFactory is an idiomatic wrapper over the Objective-C class MTRDeviceControllerFactory.
@@ -46,24 +47,24 @@ func mTRDeviceControllerFactoryAdopt(id objc.ID) *MTRDeviceControllerFactory {
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceControllerFactory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdcf *MTRDeviceControllerFactory) Description() string {
+	return rt.Description(objref.IDOf(mdcf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceControllerFactory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdcf *MTRDeviceControllerFactory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdcf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceControllerFactory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdcf *MTRDeviceControllerFactory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdcf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceControllerFactory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdcf *MTRDeviceControllerFactory) String() string {
+	return rt.Description(objref.IDOf(mdcf))
 }
 
 // NewMTRDeviceControllerFactory creates a new MTRDeviceControllerFactory.
@@ -73,9 +74,9 @@ func NewMTRDeviceControllerFactory() *MTRDeviceControllerFactory {
 }
 
 // StartControllerFactory start the controller factory. Repeated calls to startControllerFactory without calls to stopControllerFactory in between are NO-OPs. Use the isRunning property to check whether the controller factory needs to be started up.
-func (x *MTRDeviceControllerFactory) StartControllerFactory(startupParams *MTRDeviceControllerFactoryParams) error {
+func (mdcf *MTRDeviceControllerFactory) StartControllerFactory(startupParams *MTRDeviceControllerFactoryParams) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startControllerFactory:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(mdcf), objc.RegisterName("startControllerFactory:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -83,14 +84,14 @@ func (x *MTRDeviceControllerFactory) StartControllerFactory(startupParams *MTRDe
 }
 
 // StopControllerFactory stop the controller factory. This will shut down any outstanding controllers as part of the factory stopping. Repeated calls to stopControllerFactory without calls to startControllerFactory in between are NO-OPs.
-func (x *MTRDeviceControllerFactory) StopControllerFactory() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopControllerFactory"))
+func (mdcf *MTRDeviceControllerFactory) StopControllerFactory() {
+	objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("stopControllerFactory"))
 }
 
 // CreateControllerOnExistingFabricError create a MTRDeviceController on an existing fabric.  Returns nil on failure. This method will fail if there is no such fabric or if there is already a controller started for that fabric. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
-func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
+func (mdcf *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createControllerOnExistingFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("createControllerOnExistingFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -98,9 +99,9 @@ func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(start
 }
 
 // CreateControllerOnNewFabricError create a MTRDeviceController on a new fabric.  Returns nil on failure. This method will fail if the given fabric already exists. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
-func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
+func (mdcf *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createControllerOnNewFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("createControllerOnNewFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -108,34 +109,20 @@ func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupPar
 }
 
 // PreWarmCommissioningSession if possible, pre-warm the Matter stack for setting up a commissioning session. This may be called before -[MTRDeviceController setupCommissioningSessionWithPayload:] if it is known that a commissioning attempt will soon take place, but the commissioning payload is not known yet. The controller factory must be running for pre-warming to take place.  Pre-warming can take place before any controllers are started.
-func (x *MTRDeviceControllerFactory) PreWarmCommissioningSession() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preWarmCommissioningSession"))
+func (mdcf *MTRDeviceControllerFactory) PreWarmCommissioningSession() {
+	objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("preWarmCommissioningSession"))
 }
 
-// IsRunning if true, the factory is in a state where it can create controllers: startControllerFactory has been called, but stopControllerFactory has not been called since then.
-func (x *MTRDeviceControllerFactory) IsRunning() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+// IsRunning reports whether if true, the factory is in a state where it can create controllers: startControllerFactory has been called, but stopControllerFactory has not been called since then.
+func (mdcf *MTRDeviceControllerFactory) IsRunning() bool {
+	_r := objc.Send[bool](objref.IDOf(mdcf), objc.RegisterName("isRunning"))
 	return _r
 }
 
 // KnownFabrics returns the list of MTRFabricInfo representing the fabrics the MTRDeviceControllerFactory knows about and the corresponding node identities of the controller factory on those fabrics.  Returns nil if the factory is not running or if there is an error reading fabric information. All entries in this list will have a non-nil rootCertificate.
 //
 // KnownFabrics returns the collection as a Go slice.
-func (x *MTRDeviceControllerFactory) KnownFabrics() []*MTRFabricInfo {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("knownFabrics"))
+func (mdcf *MTRDeviceControllerFactory) KnownFabrics() []*MTRFabricInfo {
+	_arr := objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("knownFabrics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRFabricInfo { return MTRFabricInfoFromID(_id) })
 }
-
-// MTRDeviceControllerFactoryable is the interface implemented by [MTRDeviceControllerFactory], for mocking and DI.
-type MTRDeviceControllerFactoryable interface {
-	obj.Object
-	StartControllerFactory(startupParams *MTRDeviceControllerFactoryParams) error
-	StopControllerFactory()
-	CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error)
-	CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error)
-	PreWarmCommissioningSession()
-	IsRunning() bool
-	KnownFabrics() []*MTRFabricInfo
-}
-
-var _ MTRDeviceControllerFactoryable = (*MTRDeviceControllerFactory)(nil)

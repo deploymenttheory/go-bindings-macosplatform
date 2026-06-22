@@ -44,24 +44,24 @@ func mTRUserLabelClusterLabelStructAdopt(id objc.ID) *MTRUserLabelClusterLabelSt
 }
 
 // Description returns the object's -description text.
-func (x *MTRUserLabelClusterLabelStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mulcls *MTRUserLabelClusterLabelStruct) Description() string {
+	return rt.Description(objref.IDOf(mulcls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUserLabelClusterLabelStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mulcls *MTRUserLabelClusterLabelStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mulcls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUserLabelClusterLabelStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mulcls *MTRUserLabelClusterLabelStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mulcls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUserLabelClusterLabelStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mulcls *MTRUserLabelClusterLabelStruct) String() string {
+	return rt.Description(objref.IDOf(mulcls))
 }
 
 // NewMTRUserLabelClusterLabelStruct creates a new MTRUserLabelClusterLabelStruct.
@@ -71,54 +71,31 @@ func NewMTRUserLabelClusterLabelStruct() *MTRUserLabelClusterLabelStruct {
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRUserLabelClusterLabelStruct) WithLabel(label string) *MTRUserLabelClusterLabelStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mulcls *MTRUserLabelClusterLabelStruct) WithLabel(label string) *MTRUserLabelClusterLabelStruct {
+	objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mulcls
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUserLabelClusterLabelStruct) WithValue(value string) *MTRUserLabelClusterLabelStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (mulcls *MTRUserLabelClusterLabelStruct) WithValue(value string) *MTRUserLabelClusterLabelStruct {
+	objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("setValue:"), purego.NSString(value))
+	return mulcls
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTRUserLabelClusterLabelStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mulcls *MTRUserLabelClusterLabelStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRUserLabelClusterLabelStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRUserLabelClusterLabelStruct) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mulcls *MTRUserLabelClusterLabelStruct) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRUserLabelClusterLabelStruct) SetValue(value string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-}
-
-// MTRUserLabelClusterLabelStructable is the interface implemented by [MTRUserLabelClusterLabelStruct], for mocking and DI.
-type MTRUserLabelClusterLabelStructable interface {
-	obj.Object
-	WithLabel(label string) *MTRUserLabelClusterLabelStruct
-	WithValue(value string) *MTRUserLabelClusterLabelStruct
-	Label() string
-	SetLabel(label string)
-	Value() string
-	SetValue(value string)
-}
-
-var _ MTRUserLabelClusterLabelStructable = (*MTRUserLabelClusterLabelStruct)(nil)

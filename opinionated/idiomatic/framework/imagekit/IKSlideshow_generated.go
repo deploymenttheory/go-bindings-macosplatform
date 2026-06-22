@@ -46,24 +46,24 @@ func slideshowAdopt(id objc.ID) *Slideshow {
 }
 
 // Description returns the object's -description text.
-func (x *Slideshow) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Slideshow) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Slideshow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Slideshow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Slideshow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Slideshow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Slideshow) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Slideshow) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSlideshow creates a new Slideshow.
@@ -72,54 +72,35 @@ func NewSlideshow() *Slideshow {
 	return slideshowAdopt(_id)
 }
 
-// WithAutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
-func (x *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
-	return x
+// WithAutoPlayDelay sets array of filters reflecting the current user adjustments in the adjust or effects tab.
+func (s *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
+	return s
 }
 
 // StopSlideshow stop the slideshow.
-func (x *Slideshow) StopSlideshow(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
+func (s *Slideshow) StopSlideshow(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
 }
 
 // ReloadData reloadData.
-func (x *Slideshow) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
+func (s *Slideshow) ReloadData() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("reloadData"))
 }
 
 // ReloadSlideshowItemAtIndex reloadSlideshowItemAtIndex.
-func (x *Slideshow) ReloadSlideshowItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
+func (s *Slideshow) ReloadSlideshowItemAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
 }
 
 // IndexOfCurrentSlideshowItem returns index of current slideshow item.
-func (x *Slideshow) IndexOfCurrentSlideshowItem() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfCurrentSlideshowItem"))
+func (s *Slideshow) IndexOfCurrentSlideshowItem() int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("indexOfCurrentSlideshowItem"))
 	return _r
 }
 
-// AutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
-func (x *Slideshow) AutoPlayDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("autoPlayDelay"))
+// AutoPlayDelay returns array of filters reflecting the current user adjustments in the adjust or effects tab.
+func (s *Slideshow) AutoPlayDelay() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("autoPlayDelay"))
 	return _r
 }
-
-// SetAutoPlayDelay wraps the corresponding Objective-C method.
-func (x *Slideshow) SetAutoPlayDelay(autoPlayDelay float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
-}
-
-// Slideshowable is the interface implemented by [Slideshow], for mocking and DI.
-type Slideshowable interface {
-	obj.Object
-	WithAutoPlayDelay(autoPlayDelay float64) *Slideshow
-	StopSlideshow(sender obj.Object)
-	ReloadData()
-	ReloadSlideshowItemAtIndex(index int)
-	IndexOfCurrentSlideshowItem() int
-	AutoPlayDelay() float64
-	SetAutoPlayDelay(autoPlayDelay float64)
-}
-
-var _ Slideshowable = (*Slideshow)(nil)

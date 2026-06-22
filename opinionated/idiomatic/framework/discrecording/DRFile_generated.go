@@ -74,11 +74,4 @@ func NewFileWithLinkTypePointingToInFilesystem(linkType string, original *FSObje
 	return fileAdopt(_id)
 }
 
-// Fileable is the interface implemented by [File], for mocking and DI.
-type Fileable interface {
-	obj.Object
-}
-
-var _ Fileable = (*File)(nil)
-
 var _ FSObjectProvider = (*File)(nil)

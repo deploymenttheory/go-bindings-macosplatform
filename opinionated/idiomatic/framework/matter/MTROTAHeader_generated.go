@@ -44,24 +44,24 @@ func mTROTAHeaderAdopt(id objc.ID) *MTROTAHeader {
 }
 
 // Description returns the object's -description text.
-func (x *MTROTAHeader) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mh *MTROTAHeader) Description() string {
+	return rt.Description(objref.IDOf(mh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROTAHeader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mh *MTROTAHeader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROTAHeader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mh *MTROTAHeader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROTAHeader) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mh *MTROTAHeader) String() string {
+	return rt.Description(objref.IDOf(mh))
 }
 
 // NewMTROTAHeaderWithData initialize the MTROTAHeader with the given Matter OTA software image data (as defined in the "Over-the-Air (OTA) Software Update File Format" section of the Matter specification).  The provided data is expected to point to a large enough initial chunk of an OTA software image that it includes the entire header (e.g. the entire image). If the passed-in data is too small and does not contain the entire OTA image header, initWithData will return nil and the caller should try creating a new MTROTAHeader object and initializing it with a larger chunk of the image.
@@ -71,215 +71,128 @@ func NewMTROTAHeaderWithData(data obj.Object) *MTROTAHeader {
 	return mTROTAHeaderAdopt(_id)
 }
 
-// WithVendorID the identifier of the vendor whose product this image is meant for. This field can be compared to the vendor id received in the Query Image command to determine whether an image matches. This field may be 0, in which case the image might apply to products from more than one vendor.  If it's nonzero, it must match the vendor id in Query Image for this image to be considered.
-func (x *MTROTAHeader) WithVendorID(vendorID obj.Object) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
-	return x
+// WithVendorID sets the identifier of the vendor whose product this image is meant for. This field can be compared to the vendor id received in the Query Image command to determine whether an image matches. This field may be 0, in which case the image might apply to products from more than one vendor.  If it's nonzero, it must match the vendor id in Query Image for this image to be considered.
+func (mh *MTROTAHeader) WithVendorID(vendorID obj.Object) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
+	return mh
 }
 
-// WithProductID the identifier of the specific product the image is meant for.  May be 0, if the image might apply to more than one product.  This is allowed, but not required, to be matched against the product id received in Query Image.
-func (x *MTROTAHeader) WithProductID(productID obj.Object) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
-	return x
+// WithProductID sets the identifier of the specific product the image is meant for.  May be 0, if the image might apply to more than one product.  This is allowed, but not required, to be matched against the product id received in Query Image.
+func (mh *MTROTAHeader) WithProductID(productID obj.Object) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setProductID:"), objref.IDOf(productID))
+	return mh
 }
 
-// WithPayloadSize the size of the actual image payload, which follows the header in the OTA file.
-func (x *MTROTAHeader) WithPayloadSize(payloadSize obj.Object) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayloadSize:"), objref.IDOf(payloadSize))
-	return x
+// WithPayloadSize sets the size of the actual image payload, which follows the header in the OTA file.
+func (mh *MTROTAHeader) WithPayloadSize(payloadSize obj.Object) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setPayloadSize:"), objref.IDOf(payloadSize))
+	return mh
 }
 
-// WithSoftwareVersion the version of the software contained in this image.  This is the version the OTA requestor will be updated to if this image is installed.  This can be used to determine whether this image is newer than what the requestor is currently running, by comparing it to the SoftwareVersion in the Query Image command.
-func (x *MTROTAHeader) WithSoftwareVersion(softwareVersion obj.Object) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-	return x
+// WithSoftwareVersion sets the version of the software contained in this image.  This is the version the OTA requestor will be updated to if this image is installed.  This can be used to determine whether this image is newer than what the requestor is currently running, by comparing it to the SoftwareVersion in the Query Image command.
+func (mh *MTROTAHeader) WithSoftwareVersion(softwareVersion obj.Object) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return mh
 }
 
-// WithSoftwareVersionString human-readable version of softwareVersion.  This must not be used for deciding which versions are newer or older; use softwareVersion for that.
-func (x *MTROTAHeader) WithSoftwareVersionString(softwareVersionString string) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersionString:"), purego.NSString(softwareVersionString))
-	return x
+// WithSoftwareVersionString sets human-readable version of softwareVersion.  This must not be used for deciding which versions are newer or older; use softwareVersion for that.
+func (mh *MTROTAHeader) WithSoftwareVersionString(softwareVersionString string) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setSoftwareVersionString:"), purego.NSString(softwareVersionString))
+	return mh
 }
 
-// WithReleaseNotesURL if not nil a URL pointing to release notes for the software update represented by the image.
-func (x *MTROTAHeader) WithReleaseNotesURL(releaseNotesURL string) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleaseNotesURL:"), purego.NSString(releaseNotesURL))
-	return x
+// WithReleaseNotesURL sets if not nil a URL pointing to release notes for the software update represented by the image.
+func (mh *MTROTAHeader) WithReleaseNotesURL(releaseNotesURL string) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setReleaseNotesURL:"), purego.NSString(releaseNotesURL))
+	return mh
 }
 
-// WithImageDigest a digest of the payload that follows the header.  Can be used to verify that the payload is not truncated or corrupted.
-func (x *MTROTAHeader) WithImageDigest(imageDigest obj.Object) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDigest:"), objref.IDOf(imageDigest))
-	return x
+// WithImageDigest sets a digest of the payload that follows the header.  Can be used to verify that the payload is not truncated or corrupted.
+func (mh *MTROTAHeader) WithImageDigest(imageDigest obj.Object) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setImageDigest:"), objref.IDOf(imageDigest))
+	return mh
 }
 
-// WithImageDigestType the specific algorithm that was used to compute imageDigest.
-func (x *MTROTAHeader) WithImageDigestType(imageDigestType MTROTAImageDigestType) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDigestType:"), imageDigestType)
-	return x
+// WithImageDigestType sets the specific algorithm that was used to compute imageDigest.
+func (mh *MTROTAHeader) WithImageDigestType(imageDigestType MTROTAImageDigestType) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setImageDigestType:"), imageDigestType)
+	return mh
 }
 
-// WithMinApplicableVersion if not nil, specifies the smallest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
-func (x *MTROTAHeader) WithMinApplicableVersion(minApplicableVersion obj.Object) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinApplicableVersion:"), objref.IDOf(minApplicableVersion))
-	return x
+// WithMinApplicableVersion sets if not nil, specifies the smallest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+func (mh *MTROTAHeader) WithMinApplicableVersion(minApplicableVersion obj.Object) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setMinApplicableVersion:"), objref.IDOf(minApplicableVersion))
+	return mh
 }
 
-// WithMaxApplicableVersion if not nil, specifies the largest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
-func (x *MTROTAHeader) WithMaxApplicableVersion(maxApplicableVersion obj.Object) *MTROTAHeader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxApplicableVersion:"), objref.IDOf(maxApplicableVersion))
-	return x
+// WithMaxApplicableVersion sets if not nil, specifies the largest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+func (mh *MTROTAHeader) WithMaxApplicableVersion(maxApplicableVersion obj.Object) *MTROTAHeader {
+	objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("setMaxApplicableVersion:"), objref.IDOf(maxApplicableVersion))
+	return mh
 }
 
-// VendorID the identifier of the vendor whose product this image is meant for. This field can be compared to the vendor id received in the Query Image command to determine whether an image matches. This field may be 0, in which case the image might apply to products from more than one vendor.  If it's nonzero, it must match the vendor id in Query Image for this image to be considered.
-func (x *MTROTAHeader) VendorID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+// VendorID returns the identifier of the vendor whose product this image is meant for. This field can be compared to the vendor id received in the Query Image command to determine whether an image matches. This field may be 0, in which case the image might apply to products from more than one vendor.  If it's nonzero, it must match the vendor id in Query Image for this image to be considered.
+func (mh *MTROTAHeader) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// SetVendorID wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetVendorID(vendorID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
-}
-
-// ProductID the identifier of the specific product the image is meant for.  May be 0, if the image might apply to more than one product.  This is allowed, but not required, to be matched against the product id received in Query Image.
-func (x *MTROTAHeader) ProductID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+// ProductID returns the identifier of the specific product the image is meant for.  May be 0, if the image might apply to more than one product.  This is allowed, but not required, to be matched against the product id received in Query Image.
+func (mh *MTROTAHeader) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// SetProductID wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetProductID(productID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
-}
-
-// PayloadSize the size of the actual image payload, which follows the header in the OTA file.
-func (x *MTROTAHeader) PayloadSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payloadSize"))
+// PayloadSize returns the size of the actual image payload, which follows the header in the OTA file.
+func (mh *MTROTAHeader) PayloadSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("payloadSize"))
 	return obj.Wrap(_r)
 }
 
-// SetPayloadSize wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetPayloadSize(payloadSize obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayloadSize:"), objref.IDOf(payloadSize))
-}
-
-// SoftwareVersion the version of the software contained in this image.  This is the version the OTA requestor will be updated to if this image is installed.  This can be used to determine whether this image is newer than what the requestor is currently running, by comparing it to the SoftwareVersion in the Query Image command.
-func (x *MTROTAHeader) SoftwareVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
+// SoftwareVersion returns the version of the software contained in this image.  This is the version the OTA requestor will be updated to if this image is installed.  This can be used to determine whether this image is newer than what the requestor is currently running, by comparing it to the SoftwareVersion in the Query Image command.
+func (mh *MTROTAHeader) SoftwareVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
 
-// SetSoftwareVersion wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetSoftwareVersion(softwareVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-}
-
-// SoftwareVersionString human-readable version of softwareVersion.  This must not be used for deciding which versions are newer or older; use softwareVersion for that.
-func (x *MTROTAHeader) SoftwareVersionString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersionString"))
+// SoftwareVersionString returns human-readable version of softwareVersion.  This must not be used for deciding which versions are newer or older; use softwareVersion for that.
+func (mh *MTROTAHeader) SoftwareVersionString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("softwareVersionString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSoftwareVersionString wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetSoftwareVersionString(softwareVersionString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersionString:"), purego.NSString(softwareVersionString))
-}
-
-// ReleaseNotesURL if not nil a URL pointing to release notes for the software update represented by the image.
-func (x *MTROTAHeader) ReleaseNotesURL() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseNotesURL"))
+// ReleaseNotesURL returns if not nil a URL pointing to release notes for the software update represented by the image.
+func (mh *MTROTAHeader) ReleaseNotesURL() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("releaseNotesURL"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetReleaseNotesURL wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetReleaseNotesURL(releaseNotesURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleaseNotesURL:"), purego.NSString(releaseNotesURL))
-}
-
-// ImageDigest a digest of the payload that follows the header.  Can be used to verify that the payload is not truncated or corrupted.
-func (x *MTROTAHeader) ImageDigest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageDigest"))
+// ImageDigest returns a digest of the payload that follows the header.  Can be used to verify that the payload is not truncated or corrupted.
+func (mh *MTROTAHeader) ImageDigest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("imageDigest"))
 	return obj.Wrap(_r)
 }
 
-// SetImageDigest wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetImageDigest(imageDigest obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDigest:"), objref.IDOf(imageDigest))
-}
-
-// ImageDigestType the specific algorithm that was used to compute imageDigest.
-func (x *MTROTAHeader) ImageDigestType() MTROTAImageDigestType {
-	_r := objc.Send[MTROTAImageDigestType](objref.IDOf(x), objc.RegisterName("imageDigestType"))
+// ImageDigestType returns the specific algorithm that was used to compute imageDigest.
+func (mh *MTROTAHeader) ImageDigestType() MTROTAImageDigestType {
+	_r := objc.Send[MTROTAImageDigestType](objref.IDOf(mh), objc.RegisterName("imageDigestType"))
 	return _r
 }
 
-// SetImageDigestType wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetImageDigestType(imageDigestType MTROTAImageDigestType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDigestType:"), imageDigestType)
-}
-
-// MinApplicableVersion if not nil, specifies the smallest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
-func (x *MTROTAHeader) MinApplicableVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minApplicableVersion"))
+// MinApplicableVersion returns if not nil, specifies the smallest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+func (mh *MTROTAHeader) MinApplicableVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("minApplicableVersion"))
 	return obj.Wrap(_r)
 }
 
-// SetMinApplicableVersion wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetMinApplicableVersion(minApplicableVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinApplicableVersion:"), objref.IDOf(minApplicableVersion))
-}
-
-// MaxApplicableVersion if not nil, specifies the largest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
-func (x *MTROTAHeader) MaxApplicableVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxApplicableVersion"))
+// MaxApplicableVersion returns if not nil, specifies the largest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+func (mh *MTROTAHeader) MaxApplicableVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mh), objc.RegisterName("maxApplicableVersion"))
 	return obj.Wrap(_r)
 }
-
-// SetMaxApplicableVersion wraps the corresponding Objective-C method.
-func (x *MTROTAHeader) SetMaxApplicableVersion(maxApplicableVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxApplicableVersion:"), objref.IDOf(maxApplicableVersion))
-}
-
-// MTROTAHeaderable is the interface implemented by [MTROTAHeader], for mocking and DI.
-type MTROTAHeaderable interface {
-	obj.Object
-	WithVendorID(vendorID obj.Object) *MTROTAHeader
-	WithProductID(productID obj.Object) *MTROTAHeader
-	WithPayloadSize(payloadSize obj.Object) *MTROTAHeader
-	WithSoftwareVersion(softwareVersion obj.Object) *MTROTAHeader
-	WithSoftwareVersionString(softwareVersionString string) *MTROTAHeader
-	WithReleaseNotesURL(releaseNotesURL string) *MTROTAHeader
-	WithImageDigest(imageDigest obj.Object) *MTROTAHeader
-	WithImageDigestType(imageDigestType MTROTAImageDigestType) *MTROTAHeader
-	WithMinApplicableVersion(minApplicableVersion obj.Object) *MTROTAHeader
-	WithMaxApplicableVersion(maxApplicableVersion obj.Object) *MTROTAHeader
-	VendorID() obj.Object
-	SetVendorID(vendorID obj.Object)
-	ProductID() obj.Object
-	SetProductID(productID obj.Object)
-	PayloadSize() obj.Object
-	SetPayloadSize(payloadSize obj.Object)
-	SoftwareVersion() obj.Object
-	SetSoftwareVersion(softwareVersion obj.Object)
-	SoftwareVersionString() string
-	SetSoftwareVersionString(softwareVersionString string)
-	ReleaseNotesURL() string
-	SetReleaseNotesURL(releaseNotesURL string)
-	ImageDigest() obj.Object
-	SetImageDigest(imageDigest obj.Object)
-	ImageDigestType() MTROTAImageDigestType
-	SetImageDigestType(imageDigestType MTROTAImageDigestType)
-	MinApplicableVersion() obj.Object
-	SetMinApplicableVersion(minApplicableVersion obj.Object)
-	MaxApplicableVersion() obj.Object
-	SetMaxApplicableVersion(maxApplicableVersion obj.Object)
-}
-
-var _ MTROTAHeaderable = (*MTROTAHeader)(nil)

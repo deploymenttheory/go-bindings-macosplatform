@@ -44,24 +44,24 @@ func mTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructAdopt(id ob
 }
 
 // Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Description() string {
+	return rt.Description(objref.IDOf(mtscfsttss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtscfsttss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtscfsttss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) String() string {
+	return rt.Description(objref.IDOf(mtscfsttss))
 }
 
 // NewMTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct creates a new MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct.
@@ -71,48 +71,25 @@ func NewMTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct() *MTRT
 }
 
 // WithNodeID sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithNodeID(nodeID obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
-	return x
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithNodeID(nodeID obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
+	objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
+	return mtscfsttss
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithEndpoint(endpoint obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithEndpoint(endpoint obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
+	objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return mtscfsttss
 }
 
 // NodeID wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) NodeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) NodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("nodeID"))
 	return obj.Wrap(_r)
-}
-
-// SetNodeID wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) SetNodeID(nodeID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
-
-// SetEndpoint wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) SetEndpoint(endpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-}
-
-// MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable is the interface implemented by [MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct], for mocking and DI.
-type MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable interface {
-	obj.Object
-	WithNodeID(nodeID obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct
-	WithEndpoint(endpoint obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct
-	NodeID() obj.Object
-	SetNodeID(nodeID obj.Object)
-	Endpoint() obj.Object
-	SetEndpoint(endpoint obj.Object)
-}
-
-var _ MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable = (*MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct)(nil)

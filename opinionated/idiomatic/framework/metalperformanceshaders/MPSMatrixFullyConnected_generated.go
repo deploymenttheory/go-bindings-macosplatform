@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,155 +52,107 @@ func NewMatrixFullyConnected() *MatrixFullyConnected {
 	return matrixFullyConnectedAdopt(_id)
 }
 
-// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at primarySourceMatrixOrigin.x) should be considered.
-func (x *MatrixFullyConnected) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-	return x
+// WithSourceNumberOfFeatureVectors sets the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at primarySourceMatrixOrigin.x) should be considered.
+func (mfc *MatrixFullyConnected) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return mfc
 }
 
-// WithSourceInputFeatureChannels the input size to to use in the operation.  This is equivalent to the number of columns and the number of rows in the primary (input array) and secondary (weight array) source matrices respectively. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at primarySourceMatrixOrigin.y) and all available rows in the weight array (beginning at secondarySourceMatrixOrigin.x) should be considered. Note: The value used in the operation will be MIN(MIN(inputMatrix.columns - primarySourceMatrixOrigin.y, weightMatrix.rows - secondarySourceMatrixOrigin.x), sourceInputFeatureChannels)
-func (x *MatrixFullyConnected) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-	return x
+// WithSourceInputFeatureChannels sets the input size to to use in the operation.  This is equivalent to the number of columns and the number of rows in the primary (input array) and secondary (weight array) source matrices respectively. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at primarySourceMatrixOrigin.y) and all available rows in the weight array (beginning at secondarySourceMatrixOrigin.x) should be considered. Note: The value used in the operation will be MIN(MIN(inputMatrix.columns - primarySourceMatrixOrigin.y, weightMatrix.rows - secondarySourceMatrixOrigin.x), sourceInputFeatureChannels)
+func (mfc *MatrixFullyConnected) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return mfc
 }
 
-// WithSourceOutputFeatureChannels the output size to to use in the operation.  This is equivalent to the number of columns to consider in the weight array, or the secondary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available output size is used. The value of NSUIntegerMax thus indicates that all available columns in the weight array (beginning at secondarySourceMatrixOrigin.y) should be considered.
-func (x *MatrixFullyConnected) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
-	return x
+// WithSourceOutputFeatureChannels sets the output size to to use in the operation.  This is equivalent to the number of columns to consider in the weight array, or the secondary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available output size is used. The value of NSUIntegerMax thus indicates that all available columns in the weight array (beginning at secondarySourceMatrixOrigin.y) should be considered.
+func (mfc *MatrixFullyConnected) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
+	return mfc
 }
 
-// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *MatrixFullyConnected) WithAlpha(alpha float64) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (mfc *MatrixFullyConnected) WithAlpha(alpha float64) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setAlpha:"), alpha)
+	return mfc
 }
 
-// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixFullyConnected) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
-	return x
+// WithPrimarySourceMatrixOrigin sets the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mfc *MatrixFullyConnected) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return mfc
 }
 
-// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixFullyConnected) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
-	return x
+// WithSecondarySourceMatrixOrigin sets the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mfc *MatrixFullyConnected) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return mfc
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixFullyConnected) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mfc *MatrixFullyConnected) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return mfc
 }
 
-// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-func (x *MatrixFullyConnected) WithBatchStart(batchStart int) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (mfc *MatrixFullyConnected) WithBatchStart(batchStart int) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setBatchStart:"), batchStart)
+	return mfc
 }
 
-// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-func (x *MatrixFullyConnected) WithBatchSize(batchSize int) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (mfc *MatrixFullyConnected) WithBatchSize(batchSize int) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setBatchSize:"), batchSize)
+	return mfc
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixFullyConnected) WithLabel(label string) *MatrixFullyConnected {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (mfc *MatrixFullyConnected) WithLabel(label string) *MatrixFullyConnected {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mfc
 }
 
-// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixFullyConnected) NeuronParameterA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+// NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mfc *MatrixFullyConnected) NeuronParameterA() float32 {
+	_r := objc.Send[float32](objref.IDOf(mfc), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixFullyConnected) NeuronParameterB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+// NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mfc *MatrixFullyConnected) NeuronParameterB() float32 {
+	_r := objc.Send[float32](objref.IDOf(mfc), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixFullyConnected) NeuronParameterC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+// NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mfc *MatrixFullyConnected) NeuronParameterC() float32 {
+	_r := objc.Send[float32](objref.IDOf(mfc), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at primarySourceMatrixOrigin.x) should be considered.
-func (x *MatrixFullyConnected) SourceNumberOfFeatureVectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+// SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at primarySourceMatrixOrigin.x) should be considered.
+func (mfc *MatrixFullyConnected) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(mfc), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
-// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnected) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-}
-
-// SourceInputFeatureChannels the input size to to use in the operation.  This is equivalent to the number of columns and the number of rows in the primary (input array) and secondary (weight array) source matrices respectively. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at primarySourceMatrixOrigin.y) and all available rows in the weight array (beginning at secondarySourceMatrixOrigin.x) should be considered. Note: The value used in the operation will be MIN(MIN(inputMatrix.columns - primarySourceMatrixOrigin.y, weightMatrix.rows - secondarySourceMatrixOrigin.x), sourceInputFeatureChannels)
-func (x *MatrixFullyConnected) SourceInputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+// SourceInputFeatureChannels returns the input size to to use in the operation.  This is equivalent to the number of columns and the number of rows in the primary (input array) and secondary (weight array) source matrices respectively. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at primarySourceMatrixOrigin.y) and all available rows in the weight array (beginning at secondarySourceMatrixOrigin.x) should be considered. Note: The value used in the operation will be MIN(MIN(inputMatrix.columns - primarySourceMatrixOrigin.y, weightMatrix.rows - secondarySourceMatrixOrigin.x), sourceInputFeatureChannels)
+func (mfc *MatrixFullyConnected) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mfc), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
-// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnected) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-}
-
-// SourceOutputFeatureChannels the output size to to use in the operation.  This is equivalent to the number of columns to consider in the weight array, or the secondary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available output size is used. The value of NSUIntegerMax thus indicates that all available columns in the weight array (beginning at secondarySourceMatrixOrigin.y) should be considered.
-func (x *MatrixFullyConnected) SourceOutputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceOutputFeatureChannels"))
+// SourceOutputFeatureChannels returns the output size to to use in the operation.  This is equivalent to the number of columns to consider in the weight array, or the secondary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available output size is used. The value of NSUIntegerMax thus indicates that all available columns in the weight array (beginning at secondarySourceMatrixOrigin.y) should be considered.
+func (mfc *MatrixFullyConnected) SourceOutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mfc), objc.RegisterName("sourceOutputFeatureChannels"))
 	return _r
 }
 
-// SetSourceOutputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnected) SetSourceOutputFeatureChannels(sourceOutputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
-}
-
-// Alpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *MatrixFullyConnected) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (mfc *MatrixFullyConnected) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(mfc), objc.RegisterName("alpha"))
 	return _r
 }
-
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnected) SetAlpha(alpha float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// MatrixFullyConnectedable is the interface implemented by [MatrixFullyConnected], for mocking and DI.
-type MatrixFullyConnectedable interface {
-	obj.Object
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnected
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnected
-	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnected
-	WithAlpha(alpha float64) *MatrixFullyConnected
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected
-	WithBatchStart(batchStart int) *MatrixFullyConnected
-	WithBatchSize(batchSize int) *MatrixFullyConnected
-	WithLabel(label string) *MatrixFullyConnected
-	NeuronParameterA() float32
-	NeuronParameterB() float32
-	NeuronParameterC() float32
-	SourceNumberOfFeatureVectors() int
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
-	SourceInputFeatureChannels() int
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
-	SourceOutputFeatureChannels() int
-	SetSourceOutputFeatureChannels(sourceOutputFeatureChannels int)
-	Alpha() float64
-	SetAlpha(alpha float64)
-}
-
-var _ MatrixFullyConnectedable = (*MatrixFullyConnected)(nil)
 
 var _ MatrixBinaryKernelProvider = (*MatrixFullyConnected)(nil)
 

@@ -44,24 +44,24 @@ func mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt(id objc.ID) *MTRThrea
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Description() string {
+	return rt.Description(objref.IDOf(mtndcsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtndcsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtndcsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) String() string {
+	return rt.Description(objref.IDOf(mtndcsp))
 }
 
 // NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy creates a new MTRThreadNetworkDiagnosticsClusterSecurityPolicy.
@@ -71,48 +71,25 @@ func NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy() *MTRThreadNetworkDiag
 }
 
 // WithRotationTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
-	return x
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
+	objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
+	return mtndcsp
 }
 
 // WithFlags sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), objref.IDOf(flags))
-	return x
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
+	objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("setFlags:"), objref.IDOf(flags))
+	return mtndcsp
 }
 
 // RotationTime wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotationTime"))
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("rotationTime"))
 	return obj.Wrap(_r)
-}
-
-// SetRotationTime wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetRotationTime(rotationTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
 }
 
 // Flags wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flags"))
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("flags"))
 	return obj.Wrap(_r)
 }
-
-// SetFlags wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetFlags(flags obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), objref.IDOf(flags))
-}
-
-// MTRThreadNetworkDiagnosticsClusterSecurityPolicyable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterSecurityPolicy], for mocking and DI.
-type MTRThreadNetworkDiagnosticsClusterSecurityPolicyable interface {
-	obj.Object
-	WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
-	WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
-	RotationTime() obj.Object
-	SetRotationTime(rotationTime obj.Object)
-	Flags() obj.Object
-	SetFlags(flags obj.Object)
-}
-
-var _ MTRThreadNetworkDiagnosticsClusterSecurityPolicyable = (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy)(nil)

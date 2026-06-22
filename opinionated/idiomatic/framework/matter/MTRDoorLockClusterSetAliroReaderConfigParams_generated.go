@@ -44,24 +44,24 @@ func mTRDoorLockClusterSetAliroReaderConfigParamsAdopt(id objc.ID) *MTRDoorLockC
 }
 
 // Description returns the object's -description text.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) Description() string {
+	return rt.Description(objref.IDOf(mdlcsarcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlcsarcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlcsarcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) String() string {
+	return rt.Description(objref.IDOf(mdlcsarcp))
 }
 
 // NewMTRDoorLockClusterSetAliroReaderConfigParams creates a new MTRDoorLockClusterSetAliroReaderConfigParams.
@@ -71,128 +71,73 @@ func NewMTRDoorLockClusterSetAliroReaderConfigParams() *MTRDoorLockClusterSetAli
 }
 
 // WithSigningKey sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) WithSigningKey(signingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSigningKey:"), objref.IDOf(signingKey))
-	return x
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithSigningKey(signingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setSigningKey:"), objref.IDOf(signingKey))
+	return mdlcsarcp
 }
 
 // WithVerificationKey sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) WithVerificationKey(verificationKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
-	return x
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithVerificationKey(verificationKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
+	return mdlcsarcp
 }
 
 // WithGroupIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) WithGroupIdentifier(groupIdentifier obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupIdentifier:"), objref.IDOf(groupIdentifier))
-	return x
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithGroupIdentifier(groupIdentifier obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setGroupIdentifier:"), objref.IDOf(groupIdentifier))
+	return mdlcsarcp
 }
 
 // WithGroupResolvingKey sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) WithGroupResolvingKey(groupResolvingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupResolvingKey:"), objref.IDOf(groupResolvingKey))
-	return x
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithGroupResolvingKey(groupResolvingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setGroupResolvingKey:"), objref.IDOf(groupResolvingKey))
+	return mdlcsarcp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mdlcsarcp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mdlcsarcp
 }
 
 // SigningKey wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SigningKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signingKey"))
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) SigningKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("signingKey"))
 	return obj.Wrap(_r)
-}
-
-// SetSigningKey wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetSigningKey(signingKey obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSigningKey:"), objref.IDOf(signingKey))
 }
 
 // VerificationKey wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) VerificationKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verificationKey"))
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) VerificationKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("verificationKey"))
 	return obj.Wrap(_r)
-}
-
-// SetVerificationKey wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetVerificationKey(verificationKey obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 }
 
 // GroupIdentifier wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) GroupIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) GroupIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("groupIdentifier"))
 	return obj.Wrap(_r)
-}
-
-// SetGroupIdentifier wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetGroupIdentifier(groupIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupIdentifier:"), objref.IDOf(groupIdentifier))
 }
 
 // GroupResolvingKey wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) GroupResolvingKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupResolvingKey"))
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) GroupResolvingKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("groupResolvingKey"))
 	return obj.Wrap(_r)
 }
 
-// SetGroupResolvingKey wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetGroupResolvingKey(groupResolvingKey obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupResolvingKey:"), objref.IDOf(groupResolvingKey))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRDoorLockClusterSetAliroReaderConfigParamsable is the interface implemented by [MTRDoorLockClusterSetAliroReaderConfigParams], for mocking and DI.
-type MTRDoorLockClusterSetAliroReaderConfigParamsable interface {
-	obj.Object
-	WithSigningKey(signingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams
-	WithVerificationKey(verificationKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams
-	WithGroupIdentifier(groupIdentifier obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams
-	WithGroupResolvingKey(groupResolvingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams
-	SigningKey() obj.Object
-	SetSigningKey(signingKey obj.Object)
-	VerificationKey() obj.Object
-	SetVerificationKey(verificationKey obj.Object)
-	GroupIdentifier() obj.Object
-	SetGroupIdentifier(groupIdentifier obj.Object)
-	GroupResolvingKey() obj.Object
-	SetGroupResolvingKey(groupResolvingKey obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRDoorLockClusterSetAliroReaderConfigParamsable = (*MTRDoorLockClusterSetAliroReaderConfigParams)(nil)

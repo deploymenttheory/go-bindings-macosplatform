@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,44 +53,28 @@ func NewNNUnaryReductionNodeWithSource(sourceNode *NNImageNode) *NNUnaryReductio
 	return nNUnaryReductionNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNUnaryReductionNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nurn *NNUnaryReductionNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode {
+	objc.Send[objc.ID](objref.IDOf(nurn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nurn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNUnaryReductionNode) WithLabel(label string) *NNUnaryReductionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nurn *NNUnaryReductionNode) WithLabel(label string) *NNUnaryReductionNode {
+	objc.Send[objc.ID](objref.IDOf(nurn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nurn
 }
 
-// ClipRectSource the clip rectangle to apply to the source image.
-func (x *NNUnaryReductionNode) ClipRectSource() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+// ClipRectSource returns the clip rectangle to apply to the source image.
+func (nurn *NNUnaryReductionNode) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(nurn), objc.RegisterName("clipRectSource"))
 	return _r
 }
-
-// SetClipRectSource wraps the corresponding Objective-C method.
-func (x *NNUnaryReductionNode) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-}
-
-// NNUnaryReductionNodeable is the interface implemented by [NNUnaryReductionNode], for mocking and DI.
-type NNUnaryReductionNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode
-	WithLabel(label string) *NNUnaryReductionNode
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-}
-
-var _ NNUnaryReductionNodeable = (*NNUnaryReductionNode)(nil)
 
 // isNNUnaryReductionNode marks NNUnaryReductionNode — and, by embedding promotion, its
 // subclasses — as a member of the NNUnaryReductionNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNUnaryReductionNode) isNNUnaryReductionNode() {}
+func (nurn *NNUnaryReductionNode) isNNUnaryReductionNode() {}
 
 var _ NNUnaryReductionNodeProvider = (*NNUnaryReductionNode)(nil)
 

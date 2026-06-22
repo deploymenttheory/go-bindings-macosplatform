@@ -52,214 +52,127 @@ func NewSliderTouchBarItem() *SliderTouchBarItem {
 	return sliderTouchBarItemAdopt(_id)
 }
 
-// WithSlider the slider displayed by the bar item.
-func (x *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlider:"), objref.IDOf(slider))
-	return x
+// WithSlider sets the slider displayed by the bar item.
+func (stbi *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setSlider:"), objref.IDOf(slider))
+	return stbi
 }
 
-// WithDoubleValue the double value of the slider.
-func (x *SliderTouchBarItem) WithDoubleValue(doubleValue float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the double value of the slider.
+func (stbi *SliderTouchBarItem) WithDoubleValue(doubleValue float64) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return stbi
 }
 
-// WithMinimumSliderWidth the minimum width of the slider’s track.
-func (x *SliderTouchBarItem) WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSliderWidth:"), minimumSliderWidth)
-	return x
+// WithMinimumSliderWidth sets the minimum width of the slider’s track.
+func (stbi *SliderTouchBarItem) WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinimumSliderWidth:"), minimumSliderWidth)
+	return stbi
 }
 
-// WithMaximumSliderWidth the maximum width of the slider’s track.
-func (x *SliderTouchBarItem) WithMaximumSliderWidth(maximumSliderWidth float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSliderWidth:"), maximumSliderWidth)
-	return x
+// WithMaximumSliderWidth sets the maximum width of the slider’s track.
+func (stbi *SliderTouchBarItem) WithMaximumSliderWidth(maximumSliderWidth float64) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaximumSliderWidth:"), maximumSliderWidth)
+	return stbi
 }
 
-// WithLabel the text displayed alongside the slider.
-func (x *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the text displayed alongside the slider.
+func (stbi *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return stbi
 }
 
-// WithMinimumValueAccessory the accessory that appears at the end of the slider with the minimum value.
-func (x *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValueAccessory:"), objref.IDOf(minimumValueAccessory))
-	return x
+// WithMinimumValueAccessory sets the accessory that appears at the end of the slider with the minimum value.
+func (stbi *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinimumValueAccessory:"), objref.IDOf(minimumValueAccessory))
+	return stbi
 }
 
-// WithMaximumValueAccessory the accessory that appears at the end of the slider with the maximum value.
-func (x *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValueAccessory:"), objref.IDOf(maximumValueAccessory))
-	return x
+// WithMaximumValueAccessory sets the accessory that appears at the end of the slider with the maximum value.
+func (stbi *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaximumValueAccessory:"), objref.IDOf(maximumValueAccessory))
+	return stbi
 }
 
-// WithValueAccessoryWidth the width of the value accessories that appear at either end of the slider.
-func (x *SliderTouchBarItem) WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueAccessoryWidth:"), valueAccessoryWidth)
-	return x
+// WithValueAccessoryWidth sets the width of the value accessories that appear at either end of the slider.
+func (stbi *SliderTouchBarItem) WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setValueAccessoryWidth:"), valueAccessoryWidth)
+	return stbi
 }
 
-// WithTarget an object that is notified when a user interacts with the slider or either of the accessories.
-func (x *SliderTouchBarItem) WithTarget(target obj.Object) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets an object that is notified when a user interacts with the slider or either of the accessories.
+func (stbi *SliderTouchBarItem) WithTarget(target obj.Object) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return stbi
 }
 
-// WithCustomizationLabel the user-visible string identifying this item during bar customization.
-func (x *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-	return x
+// WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
+func (stbi *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	return stbi
 }
 
-// WithVisibilityPriority determines which items are shown in a bar when space is limited.
-func (x *SliderTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-	return x
+// WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
+func (stbi *SliderTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SliderTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return stbi
 }
 
-// Slider the slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
-func (x *SliderTouchBarItem) Slider() *Slider {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slider"))
+// Slider returns the slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
+func (stbi *SliderTouchBarItem) Slider() *Slider {
+	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("slider"))
 	return SliderFromID(_r)
 }
 
-// SetSlider wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetSlider(slider *Slider) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlider:"), objref.IDOf(slider))
-}
-
-// DoubleValue the double value of the control
-func (x *SliderTouchBarItem) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+// DoubleValue returns the double value of the control
+func (stbi *SliderTouchBarItem) DoubleValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// SetDoubleValue wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetDoubleValue(doubleValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-}
-
-// MinimumSliderWidth the width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
-func (x *SliderTouchBarItem) MinimumSliderWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumSliderWidth"))
+// MinimumSliderWidth returns the width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
+func (stbi *SliderTouchBarItem) MinimumSliderWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("minimumSliderWidth"))
 	return _r
-}
-
-// SetMinimumSliderWidth wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetMinimumSliderWidth(minimumSliderWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSliderWidth:"), minimumSliderWidth)
 }
 
 // MaximumSliderWidth wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) MaximumSliderWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumSliderWidth"))
+func (stbi *SliderTouchBarItem) MaximumSliderWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("maximumSliderWidth"))
 	return _r
 }
 
-// SetMaximumSliderWidth wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetMaximumSliderWidth(maximumSliderWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSliderWidth:"), maximumSliderWidth)
-}
-
-// Label the text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
-func (x *SliderTouchBarItem) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns the text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
+func (stbi *SliderTouchBarItem) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// MinimumValueAccessory the accessory that appears on the end of the slider with the minimum value
-func (x *SliderTouchBarItem) MinimumValueAccessory() *SliderAccessory {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumValueAccessory"))
+// MinimumValueAccessory returns the accessory that appears on the end of the slider with the minimum value
+func (stbi *SliderTouchBarItem) MinimumValueAccessory() *SliderAccessory {
+	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("minimumValueAccessory"))
 	return SliderAccessoryFromID(_r)
 }
 
-// SetMinimumValueAccessory wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetMinimumValueAccessory(minimumValueAccessory *SliderAccessory) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValueAccessory:"), objref.IDOf(minimumValueAccessory))
-}
-
-// MaximumValueAccessory the accessory that appears on the end of the slider with the maximum value
-func (x *SliderTouchBarItem) MaximumValueAccessory() *SliderAccessory {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumValueAccessory"))
+// MaximumValueAccessory returns the accessory that appears on the end of the slider with the maximum value
+func (stbi *SliderTouchBarItem) MaximumValueAccessory() *SliderAccessory {
+	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("maximumValueAccessory"))
 	return SliderAccessoryFromID(_r)
 }
 
-// SetMaximumValueAccessory wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetMaximumValueAccessory(maximumValueAccessory *SliderAccessory) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValueAccessory:"), objref.IDOf(maximumValueAccessory))
-}
-
-// ValueAccessoryWidth the width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
-func (x *SliderTouchBarItem) ValueAccessoryWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueAccessoryWidth"))
+// ValueAccessoryWidth returns the width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
+func (stbi *SliderTouchBarItem) ValueAccessoryWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("valueAccessoryWidth"))
 	return _r
 }
 
-// SetValueAccessoryWidth wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetValueAccessoryWidth(valueAccessoryWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueAccessoryWidth:"), valueAccessoryWidth)
-}
-
-// Target the target of the item, notified when the slider or accessories receive user interaction.
-func (x *SliderTouchBarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+// Target returns the target of the item, notified when the slider or accessories receive user interaction.
+func (stbi *SliderTouchBarItem) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
-
-// SetTarget wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
-// SetCustomizationLabel wraps the corresponding Objective-C method.
-func (x *SliderTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-}
-
-// SliderTouchBarItemable is the interface implemented by [SliderTouchBarItem], for mocking and DI.
-type SliderTouchBarItemable interface {
-	obj.Object
-	WithSlider(slider *Slider) *SliderTouchBarItem
-	WithDoubleValue(doubleValue float64) *SliderTouchBarItem
-	WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem
-	WithMaximumSliderWidth(maximumSliderWidth float64) *SliderTouchBarItem
-	WithLabel(label string) *SliderTouchBarItem
-	WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem
-	WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem
-	WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem
-	WithTarget(target obj.Object) *SliderTouchBarItem
-	WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem
-	WithVisibilityPriority(visibilityPriority float32) *SliderTouchBarItem
-	Slider() *Slider
-	SetSlider(slider *Slider)
-	DoubleValue() float64
-	SetDoubleValue(doubleValue float64)
-	MinimumSliderWidth() float64
-	SetMinimumSliderWidth(minimumSliderWidth float64)
-	MaximumSliderWidth() float64
-	SetMaximumSliderWidth(maximumSliderWidth float64)
-	Label() string
-	SetLabel(label string)
-	MinimumValueAccessory() *SliderAccessory
-	SetMinimumValueAccessory(minimumValueAccessory *SliderAccessory)
-	MaximumValueAccessory() *SliderAccessory
-	SetMaximumValueAccessory(maximumValueAccessory *SliderAccessory)
-	ValueAccessoryWidth() float64
-	SetValueAccessoryWidth(valueAccessoryWidth float64)
-	Target() obj.Object
-	SetTarget(target obj.Object)
-	SetCustomizationLabel(customizationLabel string)
-}
-
-var _ SliderTouchBarItemable = (*SliderTouchBarItem)(nil)
 
 var _ TouchBarItemProvider = (*SliderTouchBarItem)(nil)

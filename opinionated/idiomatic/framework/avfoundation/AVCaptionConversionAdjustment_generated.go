@@ -48,43 +48,35 @@ func captionConversionAdjustmentAdopt(id objc.ID) *CaptionConversionAdjustment {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionConversionAdjustment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cca *CaptionConversionAdjustment) Description() string {
+	return rt.Description(objref.IDOf(cca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionConversionAdjustment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cca *CaptionConversionAdjustment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionConversionAdjustment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cca *CaptionConversionAdjustment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionConversionAdjustment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cca *CaptionConversionAdjustment) String() string {
+	return rt.Description(objref.IDOf(cca))
 }
 
 // AdjustmentType wraps the corresponding Objective-C method.
-func (x *CaptionConversionAdjustment) AdjustmentType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentType"))
+func (cca *CaptionConversionAdjustment) AdjustmentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cca), objc.RegisterName("adjustmentType"))
 	return obj.Wrap(_r)
 }
-
-// CaptionConversionAdjustmentable is the interface implemented by [CaptionConversionAdjustment], for mocking and DI.
-type CaptionConversionAdjustmentable interface {
-	obj.Object
-	AdjustmentType() obj.Object
-}
-
-var _ CaptionConversionAdjustmentable = (*CaptionConversionAdjustment)(nil)
 
 // isCaptionConversionAdjustment marks CaptionConversionAdjustment — and, by embedding promotion, its
 // subclasses — as a member of the CaptionConversionAdjustment hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CaptionConversionAdjustment) isCaptionConversionAdjustment() {}
+func (cca *CaptionConversionAdjustment) isCaptionConversionAdjustment() {}
 
 var _ CaptionConversionAdjustmentProvider = (*CaptionConversionAdjustment)(nil)

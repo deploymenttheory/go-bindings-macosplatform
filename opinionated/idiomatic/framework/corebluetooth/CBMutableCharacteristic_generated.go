@@ -53,81 +53,44 @@ func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *UUID, prop
 	return mutableCharacteristicAdopt(_id)
 }
 
-// WithPermissions the permissions of the characteristic value.
-func (x *MutableCharacteristic) WithPermissions(permissions AttributePermissions) *MutableCharacteristic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermissions:"), permissions)
-	return x
+// WithPermissions sets the permissions of the characteristic value.
+func (mc *MutableCharacteristic) WithPermissions(permissions AttributePermissions) *MutableCharacteristic {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setPermissions:"), permissions)
+	return mc
 }
 
-// WithProperties the properties of the characteristic.
-func (x *MutableCharacteristic) WithProperties(properties CharacteristicProperties) *MutableCharacteristic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), properties)
-	return x
+// WithProperties sets the properties of the characteristic.
+func (mc *MutableCharacteristic) WithProperties(properties CharacteristicProperties) *MutableCharacteristic {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setProperties:"), properties)
+	return mc
 }
 
-// WithValue the value of the characteristic.
-func (x *MutableCharacteristic) WithValue(value obj.Object) *MutableCharacteristic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+// WithValue sets the value of the characteristic.
+func (mc *MutableCharacteristic) WithValue(value obj.Object) *MutableCharacteristic {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mc
 }
 
-// WithDescriptors an array of the characteristic’s descriptors.
-func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic {
+// WithDescriptors sets an array of the characteristic’s descriptors.
+func (mc *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic {
 	_arr := purego.SliceToNSArray(items, func(_v DescriptorProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptors:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setDescriptors:"), _arr)
+	return mc
 }
 
-// Permissions the permissions of the characteristic value.
-func (x *MutableCharacteristic) Permissions() AttributePermissions {
-	_r := objc.Send[AttributePermissions](objref.IDOf(x), objc.RegisterName("permissions"))
+// Permissions returns the permissions of the characteristic value.
+func (mc *MutableCharacteristic) Permissions() AttributePermissions {
+	_r := objc.Send[AttributePermissions](objref.IDOf(mc), objc.RegisterName("permissions"))
 	return _r
 }
 
-// SetPermissions wraps the corresponding Objective-C method.
-func (x *MutableCharacteristic) SetPermissions(permissions AttributePermissions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermissions:"), permissions)
-}
-
-// SubscribedCentrals for notifying characteristics, the set of currently subscribed centrals.
+// SubscribedCentrals returns for notifying characteristics, the set of currently subscribed centrals.
 //
 // SubscribedCentrals returns the collection as a Go slice.
-func (x *MutableCharacteristic) SubscribedCentrals() []*Central {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribedCentrals"))
+func (mc *MutableCharacteristic) SubscribedCentrals() []*Central {
+	_arr := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("subscribedCentrals"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Central { return CentralFromID(_id) })
 }
-
-// SetProperties wraps the corresponding Objective-C method.
-func (x *MutableCharacteristic) SetProperties(properties CharacteristicProperties) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), properties)
-}
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MutableCharacteristic) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// SetDescriptors wraps the corresponding Objective-C method.
-func (x *MutableCharacteristic) SetDescriptors(descriptors []*Descriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *Descriptor) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MutableCharacteristicable is the interface implemented by [MutableCharacteristic], for mocking and DI.
-type MutableCharacteristicable interface {
-	obj.Object
-	WithPermissions(permissions AttributePermissions) *MutableCharacteristic
-	WithProperties(properties CharacteristicProperties) *MutableCharacteristic
-	WithValue(value obj.Object) *MutableCharacteristic
-	WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic
-	Permissions() AttributePermissions
-	SetPermissions(permissions AttributePermissions)
-	SubscribedCentrals() []*Central
-	SetProperties(properties CharacteristicProperties)
-	SetValue(value obj.Object)
-	SetDescriptors(descriptors []*Descriptor)
-}
-
-var _ MutableCharacteristicable = (*MutableCharacteristic)(nil)
 
 var _ CharacteristicProvider = (*MutableCharacteristic)(nil)
 

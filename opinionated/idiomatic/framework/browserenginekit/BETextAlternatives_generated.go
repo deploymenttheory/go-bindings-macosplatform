@@ -46,24 +46,24 @@ func textAlternativesAdopt(id objc.ID) *TextAlternatives {
 }
 
 // Description returns the object's -description text.
-func (x *TextAlternatives) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ta *TextAlternatives) Description() string {
+	return rt.Description(objref.IDOf(ta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextAlternatives) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ta *TextAlternatives) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextAlternatives) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ta *TextAlternatives) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextAlternatives) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ta *TextAlternatives) String() string {
+	return rt.Description(objref.IDOf(ta))
 }
 
 // NewTextAlternatives creates a new TextAlternatives.
@@ -72,28 +72,19 @@ func NewTextAlternatives() *TextAlternatives {
 	return textAlternativesAdopt(_id)
 }
 
-// PrimaryString original text for which alternative strings are provided
-func (x *TextAlternatives) PrimaryString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryString"))
+// PrimaryString returns original text for which alternative strings are provided
+func (ta *TextAlternatives) PrimaryString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("primaryString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AlternativeStrings array of available aternative strings
+// AlternativeStrings returns array of available aternative strings
 //
 // AlternativeStrings returns the collection as a Go slice.
-func (x *TextAlternatives) AlternativeStrings() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeStrings"))
+func (ta *TextAlternatives) AlternativeStrings() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("alternativeStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// TextAlternativesable is the interface implemented by [TextAlternatives], for mocking and DI.
-type TextAlternativesable interface {
-	obj.Object
-	PrimaryString() string
-	AlternativeStrings() []string
-}
-
-var _ TextAlternativesable = (*TextAlternatives)(nil)

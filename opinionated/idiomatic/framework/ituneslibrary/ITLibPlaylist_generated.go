@@ -52,79 +52,63 @@ func NewLibPlaylist() *LibPlaylist {
 	return libPlaylistAdopt(_id)
 }
 
-// Name the name or title of this playlist.
-func (x *LibPlaylist) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name or title of this playlist.
+func (lp *LibPlaylist) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsPrimary whether this playlist is the primary playlist.
-func (x *LibPlaylist) IsPrimary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPrimary"))
+// IsPrimary reports whether this playlist is the primary playlist.
+func (lp *LibPlaylist) IsPrimary() bool {
+	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isPrimary"))
 	return _r
 }
 
-// ParentID the unique identifier of this playlist' parent.
-func (x *LibPlaylist) ParentID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentID"))
+// ParentID returns the unique identifier of this playlist' parent.
+func (lp *LibPlaylist) ParentID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("parentID"))
 	return obj.Wrap(_r)
 }
 
-// IsVisible whether this playlist is visible.
-func (x *LibPlaylist) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+// IsVisible reports whether this playlist is visible.
+func (lp *LibPlaylist) IsVisible() bool {
+	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isVisible"))
 	return _r
 }
 
-// IsAllItemsPlaylist whether or not every item in this playlist is exposed via this API.  Generally true but not that useful.
-func (x *LibPlaylist) IsAllItemsPlaylist() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllItemsPlaylist"))
+// IsAllItemsPlaylist reports whether every item in this playlist is exposed via this API. Generally true but not that useful.
+func (lp *LibPlaylist) IsAllItemsPlaylist() bool {
+	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isAllItemsPlaylist"))
 	return _r
 }
 
-// Items the media items contained within this playlist.
+// Items returns the media items contained within this playlist.
 //
 // Items returns the collection as a Go slice.
-func (x *LibPlaylist) Items() []*LibMediaItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+func (lp *LibPlaylist) Items() []*LibMediaItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LibMediaItem { return LibMediaItemFromID(_id) })
 }
 
-// DistinguishedKind the distinguished kind of this playlist.
-func (x *LibPlaylist) DistinguishedKind() LibDistinguishedPlaylistKind {
-	_r := objc.Send[LibDistinguishedPlaylistKind](objref.IDOf(x), objc.RegisterName("distinguishedKind"))
+// DistinguishedKind returns the distinguished kind of this playlist.
+func (lp *LibPlaylist) DistinguishedKind() LibDistinguishedPlaylistKind {
+	_r := objc.Send[LibDistinguishedPlaylistKind](objref.IDOf(lp), objc.RegisterName("distinguishedKind"))
 	return _r
 }
 
-// Kind the kind of this playlist.
-func (x *LibPlaylist) Kind() LibPlaylistKind {
-	_r := objc.Send[LibPlaylistKind](objref.IDOf(x), objc.RegisterName("kind"))
+// Kind returns the kind of this playlist.
+func (lp *LibPlaylist) Kind() LibPlaylistKind {
+	_r := objc.Send[LibPlaylistKind](objref.IDOf(lp), objc.RegisterName("kind"))
 	return _r
 }
 
-// IsMaster whether this playlist is the primary playlist.
-func (x *LibPlaylist) IsMaster() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMaster"))
+// IsMaster reports whether this playlist is the primary playlist.
+func (lp *LibPlaylist) IsMaster() bool {
+	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isMaster"))
 	return _r
 }
-
-// LibPlaylistable is the interface implemented by [LibPlaylist], for mocking and DI.
-type LibPlaylistable interface {
-	obj.Object
-	Name() string
-	IsPrimary() bool
-	ParentID() obj.Object
-	IsVisible() bool
-	IsAllItemsPlaylist() bool
-	Items() []*LibMediaItem
-	DistinguishedKind() LibDistinguishedPlaylistKind
-	Kind() LibPlaylistKind
-	IsMaster() bool
-}
-
-var _ LibPlaylistable = (*LibPlaylist)(nil)
 
 var _ LibMediaEntityProvider = (*LibPlaylist)(nil)

@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,61 +51,37 @@ func NewCaptureAudioPreviewOutput() *CaptureAudioPreviewOutput {
 	return captureAudioPreviewOutputAdopt(_id)
 }
 
-// WithOutputDeviceUniqueID the unique identifier of the Core Audio output device to use for audio preview.
-func (x *CaptureAudioPreviewOutput) WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputDeviceUniqueID:"), purego.NSString(outputDeviceUniqueID))
-	return x
+// WithOutputDeviceUniqueID sets the unique identifier of the Core Audio output device to use for audio preview.
+func (capo *CaptureAudioPreviewOutput) WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput {
+	objc.Send[objc.ID](objref.IDOf(capo), objc.RegisterName("setOutputDeviceUniqueID:"), purego.NSString(outputDeviceUniqueID))
+	return capo
 }
 
-// WithVolume the output volume of the audio preview.
-func (x *CaptureAudioPreviewOutput) WithVolume(volume float32) *CaptureAudioPreviewOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the output volume of the audio preview.
+func (capo *CaptureAudioPreviewOutput) WithVolume(volume float32) *CaptureAudioPreviewOutput {
+	objc.Send[objc.ID](objref.IDOf(capo), objc.RegisterName("setVolume:"), volume)
+	return capo
 }
 
-// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
-func (x *CaptureAudioPreviewOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
-	return x
+// WithDeferredStartEnabled sets a Boolean value that indicates whether to defer starting this capture output.
+func (capo *CaptureAudioPreviewOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput {
+	objc.Send[objc.ID](objref.IDOf(capo), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
+	return capo
 }
 
 // OutputDeviceUniqueID specifies the unique ID of the Core Audio output device being used to play preview audio. The value of this property is an NSString containing the unique ID of the Core Audio device to be used for output, or nil if the default system output should be used.
-func (x *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputDeviceUniqueID"))
+func (capo *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(capo), objc.RegisterName("outputDeviceUniqueID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetOutputDeviceUniqueID wraps the corresponding Objective-C method.
-func (x *CaptureAudioPreviewOutput) SetOutputDeviceUniqueID(outputDeviceUniqueID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputDeviceUniqueID:"), purego.NSString(outputDeviceUniqueID))
-}
-
 // Volume specifies the preview volume of the output. The value of this property is the preview volume of the receiver, where 1.0 is the maximum volume and 0.0 is muted.
-func (x *CaptureAudioPreviewOutput) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+func (capo *CaptureAudioPreviewOutput) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(capo), objc.RegisterName("volume"))
 	return _r
 }
-
-// SetVolume wraps the corresponding Objective-C method.
-func (x *CaptureAudioPreviewOutput) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-}
-
-// CaptureAudioPreviewOutputable is the interface implemented by [CaptureAudioPreviewOutput], for mocking and DI.
-type CaptureAudioPreviewOutputable interface {
-	obj.Object
-	WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput
-	WithVolume(volume float32) *CaptureAudioPreviewOutput
-	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput
-	OutputDeviceUniqueID() string
-	SetOutputDeviceUniqueID(outputDeviceUniqueID string)
-	Volume() float32
-	SetVolume(volume float32)
-}
-
-var _ CaptureAudioPreviewOutputable = (*CaptureAudioPreviewOutput)(nil)
 
 var _ CaptureOutputProvider = (*CaptureAudioPreviewOutput)(nil)

@@ -46,24 +46,24 @@ func sampleBufferAudioRendererAdopt(id objc.ID) *SampleBufferAudioRenderer {
 }
 
 // Description returns the object's -description text.
-func (x *SampleBufferAudioRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sbar *SampleBufferAudioRenderer) Description() string {
+	return rt.Description(objref.IDOf(sbar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleBufferAudioRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sbar *SampleBufferAudioRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sbar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleBufferAudioRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sbar *SampleBufferAudioRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sbar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SampleBufferAudioRenderer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sbar *SampleBufferAudioRenderer) String() string {
+	return rt.Description(objref.IDOf(sbar))
 }
 
 // NewSampleBufferAudioRenderer creates a new SampleBufferAudioRenderer.
@@ -72,119 +72,71 @@ func NewSampleBufferAudioRenderer() *SampleBufferAudioRenderer {
 	return sampleBufferAudioRendererAdopt(_id)
 }
 
-// WithAudioOutputDeviceUniqueID the unique identifier of the output device used to play audio.
-func (x *SampleBufferAudioRenderer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
-	return x
+// WithAudioOutputDeviceUniqueID sets the unique identifier of the output device used to play audio.
+func (sbar *SampleBufferAudioRenderer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer {
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
+	return sbar
 }
 
-// WithAudioTimePitchAlgorithm the processing algorithm used to manage audio pitch at different rates.
-func (x *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *SampleBufferAudioRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
-	return x
+// WithAudioTimePitchAlgorithm sets the processing algorithm used to manage audio pitch at different rates.
+func (sbar *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *SampleBufferAudioRenderer {
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
+	return sbar
 }
 
-// WithAllowedAudioSpatializationFormats the source audio channel layouts the audio renderer supports for spatialization.
-func (x *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) *SampleBufferAudioRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedAudioSpatializationFormats:"), allowedAudioSpatializationFormats)
-	return x
+// WithAllowedAudioSpatializationFormats sets the source audio channel layouts the audio renderer supports for spatialization.
+func (sbar *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) *SampleBufferAudioRenderer {
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("setAllowedAudioSpatializationFormats:"), allowedAudioSpatializationFormats)
+	return sbar
 }
 
-// WithVolume the current audio volume for the audio renderer.
-func (x *SampleBufferAudioRenderer) WithVolume(volume float32) *SampleBufferAudioRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the current audio volume for the audio renderer.
+func (sbar *SampleBufferAudioRenderer) WithVolume(volume float32) *SampleBufferAudioRenderer {
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("setVolume:"), volume)
+	return sbar
 }
 
-// WithMuted a Boolean value that indicates whether audio for the renderer is in a muted state.
-func (x *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
-	return x
+// WithMuted sets a Boolean value that indicates whether audio for the renderer is in a muted state.
+func (sbar *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioRenderer {
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("setMuted:"), muted)
+	return sbar
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) Status() QueuedSampleBufferRenderingStatus {
-	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(x), objc.RegisterName("status"))
+func (sbar *SampleBufferAudioRenderer) Status() QueuedSampleBufferRenderingStatus {
+	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(sbar), objc.RegisterName("status"))
 	return _r
 }
 
 // AudioOutputDeviceUniqueID specifies the unique ID of the Core Audio output device used to play audio. By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks.  If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
-func (x *SampleBufferAudioRenderer) AudioOutputDeviceUniqueID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioOutputDeviceUniqueID"))
+func (sbar *SampleBufferAudioRenderer) AudioOutputDeviceUniqueID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("audioOutputDeviceUniqueID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetAudioOutputDeviceUniqueID wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
-}
-
 // AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch at varying rates. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral. If the timebase's rate is not supported by the audioTimePitchAlgorithm, audio will be muted. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0.
-func (x *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
+func (sbar *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("audioTimePitchAlgorithm"))
 	return obj.Wrap(_r)
 }
 
-// SetAudioTimePitchAlgorithm wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
-}
-
 // AllowedAudioSpatializationFormats indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the  AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the  AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the  AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
-func (x *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() AudioSpatializationFormats {
-	_r := objc.Send[AudioSpatializationFormats](objref.IDOf(x), objc.RegisterName("allowedAudioSpatializationFormats"))
+func (sbar *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() AudioSpatializationFormats {
+	_r := objc.Send[AudioSpatializationFormats](objref.IDOf(sbar), objc.RegisterName("allowedAudioSpatializationFormats"))
 	return _r
-}
-
-// SetAllowedAudioSpatializationFormats wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedAudioSpatializationFormats:"), allowedAudioSpatializationFormats)
 }
 
 // Volume wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+func (sbar *SampleBufferAudioRenderer) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(sbar), objc.RegisterName("volume"))
 	return _r
-}
-
-// SetVolume wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
 // IsMuted wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) IsMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMuted"))
+func (sbar *SampleBufferAudioRenderer) IsMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(sbar), objc.RegisterName("isMuted"))
 	return _r
 }
-
-// SetMuted wraps the corresponding Objective-C method.
-func (x *SampleBufferAudioRenderer) SetMuted(muted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
-}
-
-// SampleBufferAudioRendererable is the interface implemented by [SampleBufferAudioRenderer], for mocking and DI.
-type SampleBufferAudioRendererable interface {
-	obj.Object
-	WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer
-	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *SampleBufferAudioRenderer
-	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) *SampleBufferAudioRenderer
-	WithVolume(volume float32) *SampleBufferAudioRenderer
-	WithMuted(muted bool) *SampleBufferAudioRenderer
-	Status() QueuedSampleBufferRenderingStatus
-	AudioOutputDeviceUniqueID() string
-	SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string)
-	AudioTimePitchAlgorithm() obj.Object
-	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object)
-	AllowedAudioSpatializationFormats() AudioSpatializationFormats
-	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats)
-	Volume() float32
-	SetVolume(volume float32)
-	IsMuted() bool
-	SetMuted(muted bool)
-}
-
-var _ SampleBufferAudioRendererable = (*SampleBufferAudioRenderer)(nil)

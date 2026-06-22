@@ -46,24 +46,24 @@ func cIDiscoveredNodeAdopt(id objc.ID) *CIDiscoveredNode {
 }
 
 // Description returns the object's -description text.
-func (x *CIDiscoveredNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdn *CIDiscoveredNode) Description() string {
+	return rt.Description(objref.IDOf(cdn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CIDiscoveredNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdn *CIDiscoveredNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CIDiscoveredNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdn *CIDiscoveredNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CIDiscoveredNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdn *CIDiscoveredNode) String() string {
+	return rt.Description(objref.IDOf(cdn))
 }
 
 // NewCIDiscoveredNode creates a new CIDiscoveredNode.
@@ -73,43 +73,31 @@ func NewCIDiscoveredNode() *CIDiscoveredNode {
 }
 
 // Destination wraps the corresponding Objective-C method.
-func (x *CIDiscoveredNode) Destination() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("destination"))
+func (cdn *CIDiscoveredNode) Destination() int {
+	_r := objc.Send[int](objref.IDOf(cdn), objc.RegisterName("destination"))
 	return _r
 }
 
 // DeviceInfo wraps the corresponding Objective-C method.
-func (x *CIDiscoveredNode) DeviceInfo() *CIDeviceInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
+func (cdn *CIDiscoveredNode) DeviceInfo() *CIDeviceInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(cdn), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }
 
 // SupportsProfiles wraps the corresponding Objective-C method.
-func (x *CIDiscoveredNode) SupportsProfiles() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfiles"))
+func (cdn *CIDiscoveredNode) SupportsProfiles() bool {
+	_r := objc.Send[bool](objref.IDOf(cdn), objc.RegisterName("supportsProfiles"))
 	return _r
 }
 
 // SupportsProperties wraps the corresponding Objective-C method.
-func (x *CIDiscoveredNode) SupportsProperties() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProperties"))
+func (cdn *CIDiscoveredNode) SupportsProperties() bool {
+	_r := objc.Send[bool](objref.IDOf(cdn), objc.RegisterName("supportsProperties"))
 	return _r
 }
 
 // MaximumSysExSize wraps the corresponding Objective-C method.
-func (x *CIDiscoveredNode) MaximumSysExSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumSysExSize"))
+func (cdn *CIDiscoveredNode) MaximumSysExSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdn), objc.RegisterName("maximumSysExSize"))
 	return obj.Wrap(_r)
 }
-
-// CIDiscoveredNodeable is the interface implemented by [CIDiscoveredNode], for mocking and DI.
-type CIDiscoveredNodeable interface {
-	obj.Object
-	Destination() int
-	DeviceInfo() *CIDeviceInfo
-	SupportsProfiles() bool
-	SupportsProperties() bool
-	MaximumSysExSize() obj.Object
-}
-
-var _ CIDiscoveredNodeable = (*CIDiscoveredNode)(nil)

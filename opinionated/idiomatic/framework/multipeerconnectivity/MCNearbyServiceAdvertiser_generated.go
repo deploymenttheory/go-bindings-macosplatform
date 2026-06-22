@@ -46,24 +46,24 @@ func nearbyServiceAdvertiserAdopt(id objc.ID) *NearbyServiceAdvertiser {
 }
 
 // Description returns the object's -description text.
-func (x *NearbyServiceAdvertiser) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nsa *NearbyServiceAdvertiser) Description() string {
+	return rt.Description(objref.IDOf(nsa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NearbyServiceAdvertiser) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nsa *NearbyServiceAdvertiser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nsa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NearbyServiceAdvertiser) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nsa *NearbyServiceAdvertiser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nsa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NearbyServiceAdvertiser) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nsa *NearbyServiceAdvertiser) String() string {
+	return rt.Description(objref.IDOf(nsa))
 }
 
 // NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType initializes an advertiser object.
@@ -74,44 +74,32 @@ func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *PeerID
 }
 
 // StartAdvertisingPeer begins advertising the service provided by a local peer.
-func (x *NearbyServiceAdvertiser) StartAdvertisingPeer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAdvertisingPeer"))
+func (nsa *NearbyServiceAdvertiser) StartAdvertisingPeer() {
+	objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("startAdvertisingPeer"))
 }
 
 // StopAdvertisingPeer stops advertising the service provided by a local peer.
-func (x *NearbyServiceAdvertiser) StopAdvertisingPeer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAdvertisingPeer"))
+func (nsa *NearbyServiceAdvertiser) StopAdvertisingPeer() {
+	objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("stopAdvertisingPeer"))
 }
 
 // MyPeerID wraps the corresponding Objective-C method.
-func (x *NearbyServiceAdvertiser) MyPeerID() *PeerID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("myPeerID"))
+func (nsa *NearbyServiceAdvertiser) MyPeerID() *PeerID {
+	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
 // DiscoveryInfo wraps the corresponding Objective-C method.
-func (x *NearbyServiceAdvertiser) DiscoveryInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveryInfo"))
+func (nsa *NearbyServiceAdvertiser) DiscoveryInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("discoveryInfo"))
 	return obj.Wrap(_r)
 }
 
 // ServiceType wraps the corresponding Objective-C method.
-func (x *NearbyServiceAdvertiser) ServiceType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
+func (nsa *NearbyServiceAdvertiser) ServiceType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("serviceType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// NearbyServiceAdvertiserable is the interface implemented by [NearbyServiceAdvertiser], for mocking and DI.
-type NearbyServiceAdvertiserable interface {
-	obj.Object
-	StartAdvertisingPeer()
-	StopAdvertisingPeer()
-	MyPeerID() *PeerID
-	DiscoveryInfo() obj.Object
-	ServiceType() string
-}
-
-var _ NearbyServiceAdvertiserable = (*NearbyServiceAdvertiser)(nil)

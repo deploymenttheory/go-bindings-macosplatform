@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Array is an idiomatic wrapper over the Objective-C class NSArray.
@@ -50,24 +51,24 @@ func arrayAdopt(id objc.ID) *Array {
 }
 
 // Description returns the object's -description text.
-func (x *Array) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Array) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Array) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Array) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Array) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Array) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Array) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Array) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewArrayWithCoder creates a new Array.
@@ -124,39 +125,39 @@ func NewArrayWithContentsOfURL(url string) *Array {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Array) WithScriptingProperties(scriptingProperties obj.Object) *Array {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (a *Array) WithScriptingProperties(scriptingProperties obj.Object) *Array {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return a
 }
 
 // ObjectAtIndex returns the object located at the specified index.
-func (x *Array) ObjectAtIndex(index int) obj.Object {
-	errkit.CheckIndex(index, x.Count())
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), index)
+func (a *Array) ObjectAtIndex(index int) obj.Object {
+	errkit.CheckIndex(index, a.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *Array) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (a *Array) Count() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("count"))
 	return _r
 }
 
 // ArrayByAddingObject returns a new array that is a copy of the receiving array with a given object added to the end.
-func (x *Array) ArrayByAddingObject(anObject obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByAddingObject:"), objref.IDOf(anObject))
+func (a *Array) ArrayByAddingObject(anObject obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("arrayByAddingObject:"), objref.IDOf(anObject))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ArrayByAddingObjectsFromArray returns a new array that is a copy of the receiving array with the objects contained in another array added to the end.
-func (x *Array) ArrayByAddingObjectsFromArray(otherArray []obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByAddingObjectsFromArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (a *Array) ArrayByAddingObjectsFromArray(otherArray []obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("arrayByAddingObjectsFromArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ComponentsJoinedByString constructs and returns an NSString object that is the result of interposing a given separator between the elements of the array.
-func (x *Array) ComponentsJoinedByString(separator string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsJoinedByString:"), purego.NSString(separator))
+func (a *Array) ComponentsJoinedByString(separator string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("componentsJoinedByString:"), purego.NSString(separator))
 	if _r == 0 {
 		return ""
 	}
@@ -164,14 +165,14 @@ func (x *Array) ComponentsJoinedByString(separator string) string {
 }
 
 // ContainsObject returns a Boolean value that indicates whether a given object is present in the array.
-func (x *Array) ContainsObject(anObject obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
+func (a *Array) ContainsObject(anObject obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
 	return _r
 }
 
 // DescriptionWithLocale returns a string that represents the contents of the array, formatted as a property list.
-func (x *Array) DescriptionWithLocale(locale obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
+func (a *Array) DescriptionWithLocale(locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
 	}
@@ -179,8 +180,8 @@ func (x *Array) DescriptionWithLocale(locale obj.Object) string {
 }
 
 // DescriptionWithLocaleIndent returns a string that represents the contents of the array, formatted as a property list.
-func (x *Array) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
+func (a *Array) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
 	if _r == 0 {
 		return ""
 	}
@@ -188,45 +189,45 @@ func (x *Array) DescriptionWithLocaleIndent(locale obj.Object, level int) string
 }
 
 // FirstObjectCommonWithArray returns the first object contained in the receiving array that’s equal to an object in another given array.
-func (x *Array) FirstObjectCommonWithArray(otherArray []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObjectCommonWithArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (a *Array) FirstObjectCommonWithArray(otherArray []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("firstObjectCommonWithArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // IndexOfObject returns the lowest index whose corresponding array value is equal to a given object.
-func (x *Array) IndexOfObject(anObject obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:"), objref.IDOf(anObject))
+func (a *Array) IndexOfObject(anObject obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObject:"), objref.IDOf(anObject))
 	return _r
 }
 
 // IndexOfObjectIdenticalTo returns the lowest index whose corresponding array value is identical to a given object.
-func (x *Array) IndexOfObjectIdenticalTo(anObject obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectIdenticalTo:"), objref.IDOf(anObject))
+func (a *Array) IndexOfObjectIdenticalTo(anObject obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObjectIdenticalTo:"), objref.IDOf(anObject))
 	return _r
 }
 
 // IsEqualToArray compares the receiving array to another array.
-func (x *Array) IsEqualToArray(otherArray []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (a *Array) IsEqualToArray(otherArray []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isEqualToArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // ObjectEnumerator returns an enumerator object that lets you access each object in the array.
-func (x *Array) ObjectEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
+func (a *Array) ObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // ReverseObjectEnumerator returns an enumerator object that lets you access each object in the array, in reverse order.
-func (x *Array) ReverseObjectEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseObjectEnumerator"))
+func (a *Array) ReverseObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reverseObjectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // WriteToURL wraps the corresponding Objective-C method.
-func (x *Array) WriteToURL(url string) error {
+func (a *Array) WriteToURL(url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(a), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -234,208 +235,161 @@ func (x *Array) WriteToURL(url string) error {
 }
 
 // ObjectsAtIndexes returns an array containing the objects in the array at the indexes specified by a given index set.
-func (x *Array) ObjectsAtIndexes(indexes *IndexSet) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
+func (a *Array) ObjectsAtIndexes(indexes *IndexSet) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ObjectAtIndexedSubscript returns the object at the specified index.
-func (x *Array) ObjectAtIndexedSubscript(idx int) obj.Object {
-	errkit.CheckIndex(idx, x.Count())
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+func (a *Array) ObjectAtIndexedSubscript(idx int) obj.Object {
+	errkit.CheckIndex(idx, a.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
 }
 
 // EnumerateObjectsUsing executes a given closure or block using each object in the array, starting with the first object and continuing through the array to the last object.
-func (x *Array) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+func (a *Array) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // EnumerateObjectsWithOptionsUsing executes a given closure or block using each object in the array with the specified options.
-func (x *Array) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+func (a *Array) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // EnumerateObjectsAtIndexesOptionsUsing executes a given block using the objects in the array at the specified indexes.
-func (x *Array) EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+func (a *Array) EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // IndexOfObjectPassingTest returns the index of the first object in the array that passes a test in a given block.
-func (x *Array) IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+func (a *Array) IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObjectPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 	return _r
 }
 
 // IndexOfObjectWithOptionsPassingTest returns the index of an object in the array that passes a test in a given block for a given set of enumeration options.
-func (x *Array) IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+func (a *Array) IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObjectWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 	return _r
 }
 
 // IndexOfObjectAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the first object in the array that passes a test in a given block for a given set of enumeration options.
-func (x *Array) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+func (a *Array) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 	return _r
 }
 
 // IndexesOfObjectsPassingTest returns the indexes of objects in the array that pass a test in a given block.
-func (x *Array) IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+func (a *Array) IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("indexesOfObjectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 	return IndexSetFromID(_r)
 }
 
 // IndexesOfObjectsWithOptionsPassingTest returns the indexes of objects in the array that pass a test in a given block for a given set of enumeration options.
-func (x *Array) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+func (a *Array) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("indexesOfObjectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 	return IndexSetFromID(_r)
 }
 
 // IndexesOfObjectsAtIndexesOptionsPassingTest returns the indexes, from a given set of indexes, of objects in the array that pass a test in a given block for a given set of enumeration options.
-func (x *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+func (a *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 	return IndexSetFromID(_r)
 }
 
 // FirstObject wraps the corresponding Objective-C method.
-func (x *Array) FirstObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObject"))
+func (a *Array) FirstObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
 // LastObject wraps the corresponding Objective-C method.
-func (x *Array) LastObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastObject"))
+func (a *Array) LastObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }
 
 // SortedArrayHint wraps the corresponding Objective-C method.
-func (x *Array) SortedArrayHint() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedArrayHint"))
+func (a *Array) SortedArrayHint() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayHint"))
 	return DataFromID(_r)
 }
 
 // DifferenceFromArrayWithOptionsUsingEquivalenceTest compares two arrays, using the provided block and with options, to create a difference object that represents the changes between them.
-func (x *Array) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromArray:withOptions:usingEquivalenceTest:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) bool { return block(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+func (a *Array) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("differenceFromArray:withOptions:usingEquivalenceTest:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) bool { return block(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return obj.Wrap(_r)
 }
 
 // DifferenceFromArrayWithOptions compares two arrays, with options, to create a difference object that represents the changes between them.
-func (x *Array) DifferenceFromArrayWithOptions(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromArray:withOptions:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), options)
+func (a *Array) DifferenceFromArrayWithOptions(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("differenceFromArray:withOptions:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), options)
 	return obj.Wrap(_r)
 }
 
 // DifferenceFromArray compares two arrays to create a difference object that represents the changes between them.
-func (x *Array) DifferenceFromArray(other []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromArray:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (a *Array) DifferenceFromArray(other []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("differenceFromArray:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // ArrayByApplyingDifference creates a new array by applying a difference object to an existing array.
-func (x *Array) ArrayByApplyingDifference(difference obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByApplyingDifference:"), objref.IDOf(difference))
+func (a *Array) ArrayByApplyingDifference(difference obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("arrayByApplyingDifference:"), objref.IDOf(difference))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteToFileAtomically writes the contents of the array to a file at a given path.
-func (x *Array) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
+func (a *Array) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
 	return _r
 }
 
 // WriteToURLAtomically writes the contents of the array to the location specified by a given URL.
-func (x *Array) WriteToURLAtomically(url string, atomically bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
+func (a *Array) WriteToURLAtomically(url string, atomically bool) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
 	return _r
 }
 
 // PathsMatchingExtensions returns an array containing all the pathname elements in the receiving array that have filename extensions from a given array.
-func (x *Array) PathsMatchingExtensions(filterTypes []string) []string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathsMatchingExtensions:"), purego.SliceToNSArray(filterTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (a *Array) PathsMatchingExtensions(filterTypes []string) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("pathsMatchingExtensions:"), purego.SliceToNSArray(filterTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // RemoveObserverFromObjectsAtIndexesForKeyPath removes anObserver from all key value observer notifications associated with the specified keyPath relative to the array’s objects at indexes.
-func (x *Array) RemoveObserverFromObjectsAtIndexesForKeyPath(observer *Object, indexes *IndexSet, keyPath string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:"), objref.IDOf(observer), objref.IDOf(indexes), purego.NSString(keyPath))
+func (a *Array) RemoveObserverFromObjectsAtIndexesForKeyPath(observer *Object, indexes *IndexSet, keyPath string) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:"), objref.IDOf(observer), objref.IDOf(indexes), purego.NSString(keyPath))
 }
 
 // SortedArrayUsingDescriptors returns a copy of the receiving array sorted as specified by a given array of sort descriptors.
-func (x *Array) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
+func (a *Array) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FilteredArrayUsingPredicate evaluates a given predicate against each object in the receiving array and returns a new array containing the objects for which the predicate returns true.
-func (x *Array) FilteredArrayUsingPredicate(predicate *Predicate) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filteredArrayUsingPredicate:"), objref.IDOf(predicate))
+func (a *Array) FilteredArrayUsingPredicate(predicate *Predicate) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("filteredArrayUsingPredicate:"), objref.IDOf(predicate))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// Arrayable is the interface implemented by [Array], for mocking and DI.
-type Arrayable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Array
-	ObjectAtIndex(index int) obj.Object
-	Count() int
-	ArrayByAddingObject(anObject obj.Object) []obj.Object
-	ArrayByAddingObjectsFromArray(otherArray []obj.Object) []obj.Object
-	ComponentsJoinedByString(separator string) string
-	ContainsObject(anObject obj.Object) bool
-	DescriptionWithLocale(locale obj.Object) string
-	DescriptionWithLocaleIndent(locale obj.Object, level int) string
-	FirstObjectCommonWithArray(otherArray []obj.Object) obj.Object
-	IndexOfObject(anObject obj.Object) int
-	IndexOfObjectIdenticalTo(anObject obj.Object) int
-	IsEqualToArray(otherArray []obj.Object) bool
-	ObjectEnumerator() obj.Object
-	ReverseObjectEnumerator() obj.Object
-	WriteToURL(url string) error
-	ObjectsAtIndexes(indexes *IndexSet) []obj.Object
-	ObjectAtIndexedSubscript(idx int) obj.Object
-	EnumerateObjectsUsing(block func(obj.Object, int, *bool))
-	EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool))
-	EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool))
-	IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int
-	IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int
-	IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int
-	IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet
-	IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet
-	IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet
-	FirstObject() obj.Object
-	LastObject() obj.Object
-	SortedArrayHint() *Data
-	DifferenceFromArrayWithOptionsUsingEquivalenceTest(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object
-	DifferenceFromArrayWithOptions(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object
-	DifferenceFromArray(other []obj.Object) obj.Object
-	ArrayByApplyingDifference(difference obj.Object) []obj.Object
-	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
-	WriteToURLAtomically(url string, atomically bool) bool
-	PathsMatchingExtensions(filterTypes []string) []string
-	RemoveObserverFromObjectsAtIndexesForKeyPath(observer *Object, indexes *IndexSet, keyPath string)
-	SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object
-	FilteredArrayUsingPredicate(predicate *Predicate) []obj.Object
-}
-
-var _ Arrayable = (*Array)(nil)
 
 // isArray marks Array — and, by embedding promotion, its
 // subclasses — as a member of the Array hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Array) isArray() {}
+func (a *Array) isArray() {}
 
 var _ ArrayProvider = (*Array)(nil)

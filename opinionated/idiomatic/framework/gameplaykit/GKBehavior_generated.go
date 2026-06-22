@@ -48,88 +48,73 @@ func behaviorAdopt(id objc.ID) *Behavior {
 }
 
 // Description returns the object's -description text.
-func (x *Behavior) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (b *Behavior) Description() string {
+	return rt.Description(objref.IDOf(b))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Behavior) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (b *Behavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(b), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Behavior) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (b *Behavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(b), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Behavior) String() string {
-	return rt.Description(objref.IDOf(x))
+func (b *Behavior) String() string {
+	return rt.Description(objref.IDOf(b))
 }
 
 // SetWeightForGoal sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.
-func (x *Behavior) SetWeightForGoal(weight float32, goal *Goal) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forGoal:"), weight, objref.IDOf(goal))
+func (b *Behavior) SetWeightForGoal(weight float32, goal *Goal) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWeight:forGoal:"), weight, objref.IDOf(goal))
 }
 
 // WeightForGoal returns the weight for the specified goal’s influence on agents.
-func (x *Behavior) WeightForGoal(goal *Goal) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weightForGoal:"), objref.IDOf(goal))
+func (b *Behavior) WeightForGoal(goal *Goal) float32 {
+	_r := objc.Send[float32](objref.IDOf(b), objc.RegisterName("weightForGoal:"), objref.IDOf(goal))
 	return _r
 }
 
 // RemoveGoal removes the specified goal from the behavior.
-func (x *Behavior) RemoveGoal(goal *Goal) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGoal:"), objref.IDOf(goal))
+func (b *Behavior) RemoveGoal(goal *Goal) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("removeGoal:"), objref.IDOf(goal))
 }
 
 // RemoveAllGoals removes all goals from the behavior.
-func (x *Behavior) RemoveAllGoals() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllGoals"))
+func (b *Behavior) RemoveAllGoals() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("removeAllGoals"))
 }
 
 // ObjectAtIndexedSubscript returns the goal at the specified index in the behavior’s list of goals.
-func (x *Behavior) ObjectAtIndexedSubscript(idx int) *Goal {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+func (b *Behavior) ObjectAtIndexedSubscript(idx int) *Goal {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return GoalFromID(_r)
 }
 
 // SetObjectForKeyedSubscript sets the weight for the goal specified by subscript syntax.
-func (x *Behavior) SetObjectForKeyedSubscript(weight obj.Object, goal *Goal) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(weight), objref.IDOf(goal))
+func (b *Behavior) SetObjectForKeyedSubscript(weight obj.Object, goal *Goal) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(weight), objref.IDOf(goal))
 }
 
 // ObjectForKeyedSubscript returns the weight associated with the goal specified by subscript syntax.
-func (x *Behavior) ObjectForKeyedSubscript(goal *Goal) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(goal))
+func (b *Behavior) ObjectForKeyedSubscript(goal *Goal) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(goal))
 	return obj.Wrap(_r)
 }
 
 // GoalCount wraps the corresponding Objective-C method.
-func (x *Behavior) GoalCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("goalCount"))
+func (b *Behavior) GoalCount() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("goalCount"))
 	return _r
 }
-
-// Behaviorable is the interface implemented by [Behavior], for mocking and DI.
-type Behaviorable interface {
-	obj.Object
-	SetWeightForGoal(weight float32, goal *Goal)
-	WeightForGoal(goal *Goal) float32
-	RemoveGoal(goal *Goal)
-	RemoveAllGoals()
-	ObjectAtIndexedSubscript(idx int) *Goal
-	SetObjectForKeyedSubscript(weight obj.Object, goal *Goal)
-	ObjectForKeyedSubscript(goal *Goal) obj.Object
-	GoalCount() int
-}
-
-var _ Behaviorable = (*Behavior)(nil)
 
 // isBehavior marks Behavior — and, by embedding promotion, its
 // subclasses — as a member of the Behavior hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Behavior) isBehavior() {}
+func (b *Behavior) isBehavior() {}
 
 var _ BehaviorProvider = (*Behavior)(nil)

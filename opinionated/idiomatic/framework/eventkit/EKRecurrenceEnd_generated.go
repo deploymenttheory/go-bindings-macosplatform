@@ -46,24 +46,24 @@ func recurrenceEndAdopt(id objc.ID) *RecurrenceEnd {
 }
 
 // Description returns the object's -description text.
-func (x *RecurrenceEnd) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (re *RecurrenceEnd) Description() string {
+	return rt.Description(objref.IDOf(re))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecurrenceEnd) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (re *RecurrenceEnd) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(re), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecurrenceEnd) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (re *RecurrenceEnd) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(re), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecurrenceEnd) String() string {
-	return rt.Description(objref.IDOf(x))
+func (re *RecurrenceEnd) String() string {
+	return rt.Description(objref.IDOf(re))
 }
 
 // NewRecurrenceEnd creates a new RecurrenceEnd.
@@ -72,23 +72,14 @@ func NewRecurrenceEnd() *RecurrenceEnd {
 	return recurrenceEndAdopt(_id)
 }
 
-// EndDate the end date of this recurrence, or nil if it's count-based.
-func (x *RecurrenceEnd) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+// EndDate returns the end date of this recurrence, or nil if it's count-based.
+func (re *RecurrenceEnd) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// OccurrenceCount the maximum occurrence count, or 0 if it's date-based.
-func (x *RecurrenceEnd) OccurrenceCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occurrenceCount"))
+// OccurrenceCount returns the maximum occurrence count, or 0 if it's date-based.
+func (re *RecurrenceEnd) OccurrenceCount() int {
+	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("occurrenceCount"))
 	return _r
 }
-
-// RecurrenceEndable is the interface implemented by [RecurrenceEnd], for mocking and DI.
-type RecurrenceEndable interface {
-	obj.Object
-	EndDate() obj.Object
-	OccurrenceCount() int
-}
-
-var _ RecurrenceEndable = (*RecurrenceEnd)(nil)

@@ -5,13 +5,14 @@
 package gamecontroller
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RacingWheel is an idiomatic wrapper over the Objective-C class GCRacingWheel.
@@ -48,24 +49,24 @@ func racingWheelAdopt(id objc.ID) *RacingWheel {
 }
 
 // Description returns the object's -description text.
-func (x *RacingWheel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rw *RacingWheel) Description() string {
+	return rt.Description(objref.IDOf(rw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RacingWheel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rw *RacingWheel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RacingWheel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rw *RacingWheel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RacingWheel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rw *RacingWheel) String() string {
+	return rt.Description(objref.IDOf(rw))
 }
 
 // NewRacingWheel creates a new RacingWheel.
@@ -77,9 +78,9 @@ func NewRacingWheel() *RacingWheel {
 // AcquireDevice starts receiving events from the racing wheel.
 //
 // AcquireDevice returns an error if the operation did not succeed.
-func (x *RacingWheel) AcquireDevice() error {
+func (rw *RacingWheel) AcquireDevice() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("acquireDeviceWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(rw), objc.RegisterName("acquireDeviceWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -87,43 +88,30 @@ func (x *RacingWheel) AcquireDevice() error {
 }
 
 // RelinquishDevice stops receiving events from the racing wheel.
-func (x *RacingWheel) RelinquishDevice() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relinquishDevice"))
+func (rw *RacingWheel) RelinquishDevice() {
+	objc.Send[objc.ID](objref.IDOf(rw), objc.RegisterName("relinquishDevice"))
 }
 
 // Capture returns a snapshot of the racing wheel with its current element values.
-func (x *RacingWheel) Capture() *RacingWheel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
+func (rw *RacingWheel) Capture() *RacingWheel {
+	_r := objc.Send[objc.ID](objref.IDOf(rw), objc.RegisterName("capture"))
 	return RacingWheelFromID(_r)
 }
 
-// IsAcquired checks if the racing wheel has been acquired by the application. This property is observable.
-func (x *RacingWheel) IsAcquired() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAcquired"))
+// IsAcquired reports whether checks if the racing wheel has been acquired by the application. This property is observable.
+func (rw *RacingWheel) IsAcquired() bool {
+	_r := objc.Send[bool](objref.IDOf(rw), objc.RegisterName("isAcquired"))
 	return _r
 }
 
 // WheelInput get the physical input profile for the racing wheel.
-func (x *RacingWheel) WheelInput() *RacingWheelInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheelInput"))
+func (rw *RacingWheel) WheelInput() *RacingWheelInput {
+	_r := objc.Send[objc.ID](objref.IDOf(rw), objc.RegisterName("wheelInput"))
 	return RacingWheelInputFromID(_r)
 }
 
-// IsSnapshot a GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer.
-func (x *RacingWheel) IsSnapshot() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSnapshot"))
+// IsSnapshot reports whether a GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer.
+func (rw *RacingWheel) IsSnapshot() bool {
+	_r := objc.Send[bool](objref.IDOf(rw), objc.RegisterName("isSnapshot"))
 	return _r
 }
-
-// RacingWheelable is the interface implemented by [RacingWheel], for mocking and DI.
-type RacingWheelable interface {
-	obj.Object
-	AcquireDevice() error
-	RelinquishDevice()
-	Capture() *RacingWheel
-	IsAcquired() bool
-	WheelInput() *RacingWheelInput
-	IsSnapshot() bool
-}
-
-var _ RacingWheelable = (*RacingWheel)(nil)

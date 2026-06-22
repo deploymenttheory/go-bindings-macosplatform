@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewHeartbeatSeriesSample() *HeartbeatSeriesSample {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesSample")), objc.RegisterName("new"))
 	return heartbeatSeriesSampleAdopt(_id)
 }
-
-// HeartbeatSeriesSampleable is the interface implemented by [HeartbeatSeriesSample], for mocking and DI.
-type HeartbeatSeriesSampleable interface {
-	obj.Object
-}
-
-var _ HeartbeatSeriesSampleable = (*HeartbeatSeriesSample)(nil)
 
 var _ SeriesSampleProvider = (*HeartbeatSeriesSample)(nil)
 

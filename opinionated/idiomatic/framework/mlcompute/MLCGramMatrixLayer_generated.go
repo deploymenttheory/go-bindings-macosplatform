@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewGramMatrixLayer() *GramMatrixLayer {
 	return gramMatrixLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *GramMatrixLayer) WithLabel(label string) *GramMatrixLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (gml *GramMatrixLayer) WithLabel(label string) *GramMatrixLayer {
+	objc.Send[objc.ID](objref.IDOf(gml), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return gml
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *GramMatrixLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (gml *GramMatrixLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer {
+	objc.Send[objc.ID](objref.IDOf(gml), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return gml
 }
 
-// Scale the scale factor
-func (x *GramMatrixLayer) Scale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scale"))
+// Scale returns the scale factor
+func (gml *GramMatrixLayer) Scale() float32 {
+	_r := objc.Send[float32](objref.IDOf(gml), objc.RegisterName("scale"))
 	return _r
 }
-
-// GramMatrixLayerable is the interface implemented by [GramMatrixLayer], for mocking and DI.
-type GramMatrixLayerable interface {
-	obj.Object
-	WithLabel(label string) *GramMatrixLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer
-	Scale() float32
-}
-
-var _ GramMatrixLayerable = (*GramMatrixLayer)(nil)
 
 var _ LayerProvider = (*GramMatrixLayer)(nil)

@@ -53,26 +53,17 @@ func NewCNNCrossChannelNormalizationGradientNodeWithSourceGradientSourceImageGra
 	return cNNCrossChannelNormalizationGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNCrossChannelNormalizationGradientNode) WithLabel(label string) *CNNCrossChannelNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cccngn *CNNCrossChannelNormalizationGradientNode) WithLabel(label string) *CNNCrossChannelNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cccngn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cccngn
 }
 
 // KernelSize wraps the corresponding Objective-C method.
-func (x *CNNCrossChannelNormalizationGradientNode) KernelSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelSize"))
+func (cccngn *CNNCrossChannelNormalizationGradientNode) KernelSize() int {
+	_r := objc.Send[int](objref.IDOf(cccngn), objc.RegisterName("kernelSize"))
 	return _r
 }
-
-// CNNCrossChannelNormalizationGradientNodeable is the interface implemented by [CNNCrossChannelNormalizationGradientNode], for mocking and DI.
-type CNNCrossChannelNormalizationGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNCrossChannelNormalizationGradientNode
-	KernelSize() int
-}
-
-var _ CNNCrossChannelNormalizationGradientNodeable = (*CNNCrossChannelNormalizationGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNCrossChannelNormalizationGradientNode)(nil)
 

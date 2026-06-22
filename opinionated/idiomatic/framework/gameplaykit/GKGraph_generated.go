@@ -48,24 +48,24 @@ func graphAdopt(id objc.ID) *Graph {
 }
 
 // Description returns the object's -description text.
-func (x *Graph) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Graph) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Graph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Graph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Graph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Graph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Graph) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Graph) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // NewGraphWithNodes initializes a graph with the specified list of nodes.
@@ -76,49 +76,37 @@ func NewGraphWithNodes(nodes []*GraphNode) *Graph {
 }
 
 // ConnectNodeToLowestCostNodeBidirectional adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.
-func (x *Graph) ConnectNodeToLowestCostNodeBidirectional(node *GraphNode, bidirectional bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeToLowestCostNode:bidirectional:"), objref.IDOf(node), bidirectional)
+func (g *Graph) ConnectNodeToLowestCostNodeBidirectional(node *GraphNode, bidirectional bool) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("connectNodeToLowestCostNode:bidirectional:"), objref.IDOf(node), bidirectional)
 }
 
 // RemoveNodes removes the specified nodes from the graph.
-func (x *Graph) RemoveNodes(nodes []*GraphNode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
+func (g *Graph) RemoveNodes(nodes []*GraphNode) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("removeNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddNodes adds the specified nodes to the graph.
-func (x *Graph) AddNodes(nodes []*GraphNode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
+func (g *Graph) AddNodes(nodes []*GraphNode) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("addNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FindPathFromNodeToNode computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.
-func (x *Graph) FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode) []*GraphNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
+func (g *Graph) FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode) []*GraphNode {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("findPathFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
 
-// Nodes the list of nodes in this graph
+// Nodes returns the list of nodes in this graph
 //
 // Nodes returns the collection as a Go slice.
-func (x *Graph) Nodes() []*GraphNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodes"))
+func (g *Graph) Nodes() []*GraphNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("nodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
-
-// Graphable is the interface implemented by [Graph], for mocking and DI.
-type Graphable interface {
-	obj.Object
-	ConnectNodeToLowestCostNodeBidirectional(node *GraphNode, bidirectional bool)
-	RemoveNodes(nodes []*GraphNode)
-	AddNodes(nodes []*GraphNode)
-	FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode) []*GraphNode
-	Nodes() []*GraphNode
-}
-
-var _ Graphable = (*Graph)(nil)
 
 // isGraph marks Graph — and, by embedding promotion, its
 // subclasses — as a member of the Graph hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Graph) isGraph() {}
+func (g *Graph) isGraph() {}
 
 var _ GraphProvider = (*Graph)(nil)

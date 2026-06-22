@@ -44,24 +44,24 @@ func bundleAssetResolverAdopt(id objc.ID) *BundleAssetResolver {
 }
 
 // Description returns the object's -description text.
-func (x *BundleAssetResolver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bar *BundleAssetResolver) Description() string {
+	return rt.Description(objref.IDOf(bar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BundleAssetResolver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bar *BundleAssetResolver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BundleAssetResolver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bar *BundleAssetResolver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BundleAssetResolver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bar *BundleAssetResolver) String() string {
+	return rt.Description(objref.IDOf(bar))
 }
 
 // NewBundleAssetResolverWithBundle creates a new BundleAssetResolver.
@@ -72,31 +72,16 @@ func NewBundleAssetResolverWithBundle(path string) *BundleAssetResolver {
 }
 
 // WithPath sets the property and returns the receiver so calls can be chained.
-func (x *BundleAssetResolver) WithPath(path string) *BundleAssetResolver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
-	return x
+func (bar *BundleAssetResolver) WithPath(path string) *BundleAssetResolver {
+	objc.Send[objc.ID](objref.IDOf(bar), objc.RegisterName("setPath:"), purego.NSString(path))
+	return bar
 }
 
 // Path wraps the corresponding Objective-C method.
-func (x *BundleAssetResolver) Path() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+func (bar *BundleAssetResolver) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bar), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetPath wraps the corresponding Objective-C method.
-func (x *BundleAssetResolver) SetPath(path string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
-}
-
-// BundleAssetResolverable is the interface implemented by [BundleAssetResolver], for mocking and DI.
-type BundleAssetResolverable interface {
-	obj.Object
-	WithPath(path string) *BundleAssetResolver
-	Path() string
-	SetPath(path string)
-}
-
-var _ BundleAssetResolverable = (*BundleAssetResolver)(nil)

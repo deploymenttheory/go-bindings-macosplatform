@@ -51,31 +51,21 @@ func NewMTRThermostatClusterThermostatScheduleTransition() *MTRThermostatCluster
 }
 
 // WithTransitionTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterThermostatScheduleTransition) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
-	return x
+func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
+	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
+	return mtctst
 }
 
 // WithHeatSetpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterThermostatScheduleTransition) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
-	return x
+func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
+	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
+	return mtctst
 }
 
 // WithCoolSetpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterThermostatScheduleTransition) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
-	return x
+func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
+	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
+	return mtctst
 }
-
-// MTRThermostatClusterThermostatScheduleTransitionable is the interface implemented by [MTRThermostatClusterThermostatScheduleTransition], for mocking and DI.
-type MTRThermostatClusterThermostatScheduleTransitionable interface {
-	obj.Object
-	WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterThermostatScheduleTransition
-	WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition
-	WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition
-}
-
-var _ MTRThermostatClusterThermostatScheduleTransitionable = (*MTRThermostatClusterThermostatScheduleTransition)(nil)
 
 var _ MTRThermostatClusterWeeklyScheduleTransitionStructProvider = (*MTRThermostatClusterThermostatScheduleTransition)(nil)

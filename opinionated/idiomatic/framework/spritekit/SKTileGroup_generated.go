@@ -46,24 +46,24 @@ func tileGroupAdopt(id objc.ID) *TileGroup {
 }
 
 // Description returns the object's -description text.
-func (x *TileGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tg *TileGroup) Description() string {
+	return rt.Description(objref.IDOf(tg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TileGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tg *TileGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TileGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tg *TileGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TileGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tg *TileGroup) String() string {
+	return rt.Description(objref.IDOf(tg))
 }
 
 // NewTileGroupWithTileDefinition creates and initializes a simple tile group with a single tile definition.
@@ -80,55 +80,32 @@ func NewTileGroupWithRules(rules []*TileGroupRule) *TileGroup {
 	return tileGroupAdopt(_id)
 }
 
-// WithRules an array of SKTileGroupRule objects that the tile group uses to determine tile placement.
-func (x *TileGroup) WithRules(items ...*TileGroupRule) *TileGroup {
+// WithRules sets an array of SKTileGroupRule objects that the tile group uses to determine tile placement.
+func (tg *TileGroup) WithRules(items ...*TileGroupRule) *TileGroup {
 	_arr := purego.SliceToNSArray(items, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRules:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("setRules:"), _arr)
+	return tg
 }
 
-// WithName the receiver’s name.
-func (x *TileGroup) WithName(name string) *TileGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the receiver’s name.
+func (tg *TileGroup) WithName(name string) *TileGroup {
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("setName:"), purego.NSString(name))
+	return tg
 }
 
-// Rules the rules that govern which tiles are placed when this group is used, and where in the map they'll be placed.
+// Rules returns the rules that govern which tiles are placed when this group is used, and where in the map they'll be placed.
 //
 // Rules returns the collection as a Go slice.
-func (x *TileGroup) Rules() []*TileGroupRule {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
+func (tg *TileGroup) Rules() []*TileGroupRule {
+	_arr := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("rules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileGroupRule { return TileGroupRuleFromID(_id) })
 }
 
-// SetRules wraps the corresponding Objective-C method.
-func (x *TileGroup) SetRules(rules []*TileGroupRule) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRules:"), purego.SliceToNSArray(rules, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Name client-assignable name for the tile group. Defaults to nil.
-func (x *TileGroup) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns client-assignable name for the tile group. Defaults to nil.
+func (tg *TileGroup) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *TileGroup) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// TileGroupable is the interface implemented by [TileGroup], for mocking and DI.
-type TileGroupable interface {
-	obj.Object
-	WithRules(items ...*TileGroupRule) *TileGroup
-	WithName(name string) *TileGroup
-	Rules() []*TileGroupRule
-	SetRules(rules []*TileGroupRule)
-	Name() string
-	SetName(name string)
-}
-
-var _ TileGroupable = (*TileGroup)(nil)

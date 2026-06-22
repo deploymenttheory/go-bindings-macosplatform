@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,52 +66,40 @@ func NewCNNPoolingNodeWithSourceFilterSize(sourceNode *NNImageNode, size int) *C
 	return cNNPoolingNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingNode) WithLabel(label string) *CNNPoolingNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cpn *CNNPoolingNode) WithLabel(label string) *CNNPoolingNode {
+	objc.Send[objc.ID](objref.IDOf(cpn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cpn
 }
 
 // KernelWidth wraps the corresponding Objective-C method.
-func (x *CNNPoolingNode) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+func (cpn *CNNPoolingNode) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight wraps the corresponding Objective-C method.
-func (x *CNNPoolingNode) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+func (cpn *CNNPoolingNode) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // StrideInPixelsX wraps the corresponding Objective-C method.
-func (x *CNNPoolingNode) StrideInPixelsX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsX"))
+func (cpn *CNNPoolingNode) StrideInPixelsX() int {
+	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("strideInPixelsX"))
 	return _r
 }
 
 // StrideInPixelsY wraps the corresponding Objective-C method.
-func (x *CNNPoolingNode) StrideInPixelsY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsY"))
+func (cpn *CNNPoolingNode) StrideInPixelsY() int {
+	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("strideInPixelsY"))
 	return _r
 }
-
-// CNNPoolingNodeable is the interface implemented by [CNNPoolingNode], for mocking and DI.
-type CNNPoolingNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingNode
-	KernelWidth() int
-	KernelHeight() int
-	StrideInPixelsX() int
-	StrideInPixelsY() int
-}
-
-var _ CNNPoolingNodeable = (*CNNPoolingNode)(nil)
 
 // isCNNPoolingNode marks CNNPoolingNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNPoolingNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNPoolingNode) isCNNPoolingNode() {}
+func (cpn *CNNPoolingNode) isCNNPoolingNode() {}
 
 var _ CNNPoolingNodeProvider = (*CNNPoolingNode)(nil)
 

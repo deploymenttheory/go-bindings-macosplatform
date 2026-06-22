@@ -50,16 +50,42 @@ func cleanDoc(doc string) string {
 	return strings.TrimSpace(strings.Join(out, " "))
 }
 
-// commentBlock renders documentation prose as a Go // comment block, one
-// "// "-prefixed line per source line, with blank lines preserved as "//".
-// Returns "" for empty docs. The result ends in a newline when non-empty, so a
-// template can follow it with a "//" separator before the generated summary.
-// docLead renders a name-first doc comment block (E2): the exported symbol name
-// followed by its cleaned Apple prose, with the prose's first letter lower-cased
-// so the sentence reads naturally ("Count" + "returns the count." → "Count
-// returns the count."). When there is no Apple documentation it falls back to a
-// short generated phrase. An acronym-leading word (URL, NSData) is left as-is.
+// docKind classifies the construct a doc comment is attached to, so docLeadKind
+// can pick a verb that makes the first sentence read as proper Go documentation
+// ("Name verb …"). Apple's header prose for a property is a bare noun phrase
+// ("the URL of the kernel"), which is not a sentence on its own; the verb the
+// kind implies ("returns"/"sets"/"reports whether") turns it into one.
+type docKind int
+
+const (
+	// docMethod is an action method (or constructor); Apple's prose is normally
+	// already verb-led ("Starts the VM…"), so no verb is injected.
+	docMethod docKind = iota
+	// docGetter is a value accessor; the prose is a noun phrase, so "returns" is
+	// injected unless the prose already begins with its own verb.
+	docGetter
+	// docBoolGetter is a boolean accessor; the lead becomes "reports whether" and
+	// any "true if …"/"indicates whether …" preamble in the prose is stripped.
+	docBoolGetter
+	// docSetter is a fluent With* setter; the lead becomes "sets".
+	docSetter
+)
+
+// docLead renders a name-first doc comment block for an action method or
+// constructor (docMethod): the exported symbol name followed by its cleaned
+// Apple prose, lower-cased so the sentence reads naturally. It is the historical
+// entry point; docLeadKind handles accessors and setters.
 func docLead(goName, apple, fallback string) string {
+	return docLeadKind(goName, apple, fallback, docMethod)
+}
+
+// docLeadKind renders a name-first doc comment block (E2) whose first sentence
+// starts with the exported symbol name followed by a kind-appropriate verb and
+// the cleaned Apple prose. When there is no Apple documentation it falls back to
+// a short generated phrase (already verb-led by its caller). Verb selection is
+// driven entirely by kind (resolved data), never by pattern-matching the prose,
+// and uses only token/prefix string operations — no regular expressions.
+func docLeadKind(goName, apple, fallback string, kind docKind) string {
 	apple = cleanDoc(strings.TrimSpace(apple))
 	var sb strings.Builder
 	if apple == "" {
@@ -71,11 +97,8 @@ func docLead(goName, apple, fallback string) string {
 		return sb.String()
 	}
 	lines := strings.Split(apple, "\n")
-	lines[0] = lowerLead(lines[0])
 	sb.WriteString("// ")
-	sb.WriteString(goName)
-	sb.WriteString(" ")
-	sb.WriteString(strings.TrimRight(lines[0], " "))
+	sb.WriteString(strings.TrimRight(composeLead(goName, lines[0], kind), " "))
 	sb.WriteString("\n")
 	for _, l := range lines[1:] {
 		if strings.TrimSpace(l) == "" {
@@ -87,6 +110,134 @@ func docLead(goName, apple, fallback string) string {
 		sb.WriteString("\n")
 	}
 	return sb.String()
+}
+
+// composeLead builds the first doc-comment sentence "Name verb prose" for the
+// given kind. prose is Apple's cleaned first line.
+func composeLead(goName, prose string, kind docKind) string {
+	switch kind {
+	case docSetter:
+		return goName + " sets " + lowerLead(prose)
+	case docBoolGetter:
+		return goName + " reports whether " + boolClause(prose)
+	case docGetter:
+		// When Apple's prose already opens with "return(s)", normalise it to the
+		// third-person "returns" ("return the list of …" → "Name returns the list
+		// of …").
+		if w := firstWord(prose); w == "return" || w == "returns" {
+			return goName + " returns " + lowerLead(stripFirstWord(prose))
+		}
+		// Apple sometimes phrases an accessor's prose with another leading verb
+		// ("define the command-line parameters"); injecting "returns" there would
+		// read as "returns define …", so the prose is left as-is in that case.
+		if startsWithLeadingVerb(prose) {
+			return goName + " " + lowerLead(prose)
+		}
+		return goName + " returns " + lowerLead(prose)
+	default:
+		return goName + " " + lowerLead(prose)
+	}
+}
+
+// firstWord returns the first whitespace-delimited word of s, lower-cased and
+// stripped of trailing punctuation, for set membership tests.
+func firstWord(s string) string {
+	fields := strings.Fields(s)
+	if len(fields) == 0 {
+		return ""
+	}
+	return strings.ToLower(strings.TrimRight(fields[0], ".,;:"))
+}
+
+// stripFirstWord returns s with its first whitespace-delimited word removed and
+// surrounding whitespace trimmed.
+func stripFirstWord(s string) string {
+	s = strings.TrimLeft(s, " \t")
+	if i := strings.IndexAny(s, " \t"); i >= 0 {
+		return strings.TrimSpace(s[i:])
+	}
+	return ""
+}
+
+// getterLeadingVerbs are verbs Apple uses to open an accessor's prose; when the
+// prose already starts with one, docGetter does not prepend "returns".
+var getterLeadingVerbs = map[string]bool{
+	"define": true, "defines": true, "indicate": true, "indicates": true,
+	"specify": true, "specifies": true, "return": true, "returns": true,
+	"get": true, "gets": true, "determine": true, "determines": true,
+	"contain": true, "contains": true, "represent": true, "represents": true,
+	"describe": true, "describes": true, "hold": true, "holds": true,
+	"provide": true, "provides": true, "create": true, "creates": true,
+	"enable": true, "enables": true, "set": true, "sets": true,
+}
+
+func startsWithLeadingVerb(prose string) bool {
+	return getterLeadingVerbs[firstWord(prose)]
+}
+
+// boolClause turns Apple's boolean-property prose into the predicate that follows
+// "reports whether". It maps the Objective-C literals YES/NO to true/false, then
+// strips a leading "true if …"/"indicates whether …"-style preamble and a
+// trailing ", false otherwise"-style coda so the clause reads as a single
+// condition. All matching is exact-token/prefix based, never a regular
+// expression.
+func boolClause(prose string) string {
+	prose = replaceYesNo(prose)
+	lower := strings.ToLower(prose)
+	for _, lead := range []string{
+		"a boolean value that indicates whether ", "a boolean value indicating whether ",
+		"a value that indicates whether ", "a value indicating whether ",
+		"return true if ", "returns true if ", "true if ",
+		"return true when ", "returns true when ", "true when ",
+		"indicates whether or not ", "indicate whether or not ",
+		"indicates whether ", "indicate whether ", "indicating whether ",
+		"represents whether ", "reflects whether ", "specifies whether ", "specifying whether ",
+		"determines whether ", "describes whether ",
+		"returns whether or not ", "return whether or not ",
+		"returns whether ", "return whether ",
+		"that indicates whether ", "that indicate whether ",
+		"whether or not ", "whether ",
+	} {
+		if strings.HasPrefix(lower, lead) {
+			prose = prose[len(lead):]
+			break
+		}
+	}
+	for _, coda := range []string{
+		", false otherwise.", ", false otherwise", ", otherwise false.", ", otherwise false",
+		", no otherwise.", ", no otherwise",
+	} {
+		if strings.HasSuffix(strings.ToLower(prose), coda) {
+			prose = prose[:len(prose)-len(coda)]
+			if !strings.HasSuffix(prose, ".") {
+				prose += "."
+			}
+			break
+		}
+	}
+	return lowerLead(strings.TrimSpace(prose))
+}
+
+// replaceYesNo replaces the standalone Objective-C boolean literals YES and NO
+// with Go's true and false, leaving words that merely contain those letters
+// untouched (it operates on whitespace-split tokens, not substrings).
+func replaceYesNo(s string) string {
+	fields := strings.Fields(s)
+	for i, f := range fields {
+		trail := ""
+		core := f
+		for len(core) > 0 && strings.ContainsRune(".,;:)", rune(core[len(core)-1])) {
+			trail = string(core[len(core)-1]) + trail
+			core = core[:len(core)-1]
+		}
+		switch core {
+		case "YES":
+			fields[i] = "true" + trail
+		case "NO":
+			fields[i] = "false" + trail
+		}
+	}
+	return strings.Join(fields, " ")
 }
 
 // lowerLead lower-cases the first letter of s unless its first word is an acronym

@@ -5,12 +5,13 @@
 package contacts
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // LocalizedStringForKey returns a string containing the localized contact property name.
@@ -120,7 +121,7 @@ func ContactsWithDataError(data obj.Object) (result []*Contact, err error) {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Contact { return ContactFromID(_id) }), nil
 }
 
-// SharedDefaults the singleton contacts user defaults object.
+// SharedDefaults returns the singleton contacts user defaults object.
 func SharedDefaults() *ContactsUserDefaults {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContactsUserDefaults")), objc.RegisterName("sharedDefaults"))
 	return ContactsUserDefaultsFromID(_r)

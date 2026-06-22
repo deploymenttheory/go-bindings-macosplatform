@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func gameActivityAdopt(id objc.ID) *GameActivity {
 }
 
 // Description returns the object's -description text.
-func (x *GameActivity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ga *GameActivity) Description() string {
+	return rt.Description(objref.IDOf(ga))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GameActivity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ga *GameActivity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ga), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GameActivity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ga *GameActivity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ga), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GameActivity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ga *GameActivity) String() string {
+	return rt.Description(objref.IDOf(ga))
 }
 
 // NewGameActivityWithDefinition creates a game activity with definition.
@@ -75,173 +76,168 @@ func NewGameActivityWithDefinition(activityDefinition *GameActivityDefinition) *
 	return gameActivityAdopt(_id)
 }
 
-// WithProperties properties that contain additional information about the activity.
-func (x *GameActivity) WithProperties(properties obj.Object) *GameActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
-	return x
+// WithProperties sets properties that contain additional information about the activity.
+func (ga *GameActivity) WithProperties(properties obj.Object) *GameActivity {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setProperties:"), objref.IDOf(properties))
+	return ga
 }
 
 // Start starts the game activity if it’s not already started.
-func (x *GameActivity) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (ga *GameActivity) Start() {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("start"))
 }
 
 // Pause pauses the game activity if it’s not already paused.
-func (x *GameActivity) Pause() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+func (ga *GameActivity) Pause() {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("pause"))
 }
 
 // Resume resumes the game activity if it was paused.
-func (x *GameActivity) Resume() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
+func (ga *GameActivity) Resume() {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("resume"))
 }
 
 // End ends the game activity if it’s not already ended.
-func (x *GameActivity) End() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+func (ga *GameActivity) End() {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("end"))
 }
 
 // SetScoreOnLeaderboardToScoreContext set a score of a leaderboard with a context for a player.
-func (x *GameActivity) SetScoreOnLeaderboardToScoreContext(leaderboard *Leaderboard, score int, context_ int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScoreOnLeaderboard:toScore:context:"), objref.IDOf(leaderboard), score, context_)
+func (ga *GameActivity) SetScoreOnLeaderboardToScoreContext(leaderboard *Leaderboard, score int, context_ int) {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setScoreOnLeaderboard:toScore:context:"), objref.IDOf(leaderboard), score, context_)
 }
 
 // SetScoreOnLeaderboardToScore set a score of a leaderboard for a player.
-func (x *GameActivity) SetScoreOnLeaderboardToScore(leaderboard *Leaderboard, score int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScoreOnLeaderboard:toScore:"), objref.IDOf(leaderboard), score)
+func (ga *GameActivity) SetScoreOnLeaderboardToScore(leaderboard *Leaderboard, score int) {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setScoreOnLeaderboard:toScore:"), objref.IDOf(leaderboard), score)
 }
 
 // GetScoreOnLeaderboard get the leaderboard score from a specific leaderboard of the local player if previously set.
-func (x *GameActivity) GetScoreOnLeaderboard(leaderboard *Leaderboard) *LeaderboardScore {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getScoreOnLeaderboard:"), objref.IDOf(leaderboard))
+func (ga *GameActivity) GetScoreOnLeaderboard(leaderboard *Leaderboard) *LeaderboardScore {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("getScoreOnLeaderboard:"), objref.IDOf(leaderboard))
 	return LeaderboardScoreFromID(_r)
 }
 
 // RemoveScoresFromLeaderboards removes all scores from leaderboards for a player if exist.
-func (x *GameActivity) RemoveScoresFromLeaderboards(leaderboards []*Leaderboard) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeScoresFromLeaderboards:"), purego.SliceToNSArray(leaderboards, func(_v *Leaderboard) objc.ID { return objref.IDOf(_v) }))
+func (ga *GameActivity) RemoveScoresFromLeaderboards(leaderboards []*Leaderboard) {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("removeScoresFromLeaderboards:"), purego.SliceToNSArray(leaderboards, func(_v *Leaderboard) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetProgressOnAchievementToPercentComplete set a progress for an achievement for a player.
-func (x *GameActivity) SetProgressOnAchievementToPercentComplete(achievement *Achievement, percentComplete float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressOnAchievement:toPercentComplete:"), objref.IDOf(achievement), percentComplete)
+func (ga *GameActivity) SetProgressOnAchievementToPercentComplete(achievement *Achievement, percentComplete float64) {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setProgressOnAchievement:toPercentComplete:"), objref.IDOf(achievement), percentComplete)
 }
 
 // SetAchievementCompleted set progress to 100% for an achievement for a player.
-func (x *GameActivity) SetAchievementCompleted(achievement *Achievement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAchievementCompleted:"), objref.IDOf(achievement))
+func (ga *GameActivity) SetAchievementCompleted(achievement *Achievement) {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setAchievementCompleted:"), objref.IDOf(achievement))
 }
 
 // GetProgressOnAchievement get the achievement progress from a specific achievement of the local player if previously set.
-func (x *GameActivity) GetProgressOnAchievement(achievement *Achievement) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("getProgressOnAchievement:"), objref.IDOf(achievement))
+func (ga *GameActivity) GetProgressOnAchievement(achievement *Achievement) float64 {
+	_r := objc.Send[float64](objref.IDOf(ga), objc.RegisterName("getProgressOnAchievement:"), objref.IDOf(achievement))
 	return _r
 }
 
 // RemoveAchievements removes all achievements if they exist.
-func (x *GameActivity) RemoveAchievements(achievements []*Achievement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAchievements:"), purego.SliceToNSArray(achievements, func(_v *Achievement) objc.ID { return objref.IDOf(_v) }))
+func (ga *GameActivity) RemoveAchievements(achievements []*Achievement) {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("removeAchievements:"), purego.SliceToNSArray(achievements, func(_v *Achievement) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Identifier the identifier of this activity instance.
-func (x *GameActivity) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier of this activity instance.
+func (ga *GameActivity) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ActivityDefinition the activity definition that this activity instance is based on.
-func (x *GameActivity) ActivityDefinition() *GameActivityDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityDefinition"))
+// ActivityDefinition returns the activity definition that this activity instance is based on.
+func (ga *GameActivity) ActivityDefinition() *GameActivityDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("activityDefinition"))
 	return GameActivityDefinitionFromID(_r)
 }
 
-// Properties properties that contain additional information about the activity. This takes precedence over “GKGameActivityDefinition/defaultProperties“ on the activity definition. 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any. 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value. 3. You can update the properties at runtime.
-func (x *GameActivity) Properties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+// Properties returns properties that contain additional information about the activity. This takes precedence over “GKGameActivityDefinition/defaultProperties“ on the activity definition. 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any. 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value. 3. You can update the properties at runtime.
+func (ga *GameActivity) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// SetProperties wraps the corresponding Objective-C method.
-func (x *GameActivity) SetProperties(properties obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
-}
-
-// State the state of the game activity.
-func (x *GameActivity) State() GameActivityState {
-	_r := objc.Send[GameActivityState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the state of the game activity.
+func (ga *GameActivity) State() GameActivityState {
+	_r := objc.Send[GameActivityState](objref.IDOf(ga), objc.RegisterName("state"))
 	return _r
 }
 
-// PartyCode if the game supports party code, this is the party code that can be shared among players to join the party. If the game doesn't support party code, this value will be `nil`. Use “GKGameActivity/start(definition:partyCode:)“ to create a game activity with a custom party code.
-func (x *GameActivity) PartyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partyCode"))
+// PartyCode returns if the game supports party code, this is the party code that can be shared among players to join the party. If the game doesn't support party code, this value will be `nil`. Use “GKGameActivity/start(definition:partyCode:)“ to create a game activity with a custom party code.
+func (ga *GameActivity) PartyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("partyCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PartyURL if the game supports party code, this is the URL that can be shared among players to join the party.
-func (x *GameActivity) PartyURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partyURL"))
+// PartyURL returns if the game supports party code, this is the URL that can be shared among players to join the party.
+func (ga *GameActivity) PartyURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("partyURL"))
 	return obj.Wrap(_r)
 }
 
-// CreationDate the date when the activity was created.
-func (x *GameActivity) CreationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+// CreationDate returns the date when the activity was created.
+func (ga *GameActivity) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// StartDate the date when the activity was initially started.
-func (x *GameActivity) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+// StartDate returns the date when the activity was initially started.
+func (ga *GameActivity) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// LastResumeDate the date when the activity was last resumed. - If the activity was first started, this will be the same as the start date. - If the activity was paused and resumed, this will be the date when the activity was resumed.
-func (x *GameActivity) LastResumeDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastResumeDate"))
+// LastResumeDate returns the date when the activity was last resumed. - If the activity was first started, this will be the same as the start date. - If the activity was paused and resumed, this will be the date when the activity was resumed.
+func (ga *GameActivity) LastResumeDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("lastResumeDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate the date when the activity was officially ended.
-func (x *GameActivity) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+// EndDate returns the date when the activity was officially ended.
+func (ga *GameActivity) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// Duration the total time elapsed while in active state.
-func (x *GameActivity) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns the total time elapsed while in active state.
+func (ga *GameActivity) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(ga), objc.RegisterName("duration"))
 	return _r
 }
 
-// Achievements all achievements that have been associated with this activity. Progress of each achievement will be reported when the activity ends.
-func (x *GameActivity) Achievements() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("achievements"))
+// Achievements returns all achievements that have been associated with this activity. Progress of each achievement will be reported when the activity ends.
+func (ga *GameActivity) Achievements() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("achievements"))
 	return obj.Wrap(_r)
 }
 
-// LeaderboardScores all leaderboard scores that have been associated with this activity. Scores will be submitted to the leaderboards when the activity ends.
-func (x *GameActivity) LeaderboardScores() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardScores"))
+// LeaderboardScores returns all leaderboard scores that have been associated with this activity. Scores will be submitted to the leaderboards when the activity ends.
+func (ga *GameActivity) LeaderboardScores() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("leaderboardScores"))
 	return obj.Wrap(_r)
 }
 
-// MakeMatchRequest makes a match request object with information from the activity, which you can use to find matches for the local player.
-func (x *GameActivity) MakeMatchRequest() *MatchRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeMatchRequest"))
+// MakeMatchRequest returns makes a match request object with information from the activity, which you can use to find matches for the local player.
+func (ga *GameActivity) MakeMatchRequest() *MatchRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("makeMatchRequest"))
 	return MatchRequestFromID(_r)
 }
 
 // FindMatch use information from the activity to find matches for the local player.
 //
 // FindMatch blocks until the operation completes or ctx is cancelled.
-func (x *GameActivity) FindMatch(ctx context.Context) (result *Match, err error) {
+func (ga *GameActivity) FindMatch(ctx context.Context) (result *Match, err error) {
 	type _result struct {
 		val *Match
 		err error
@@ -253,7 +249,7 @@ func (x *GameActivity) FindMatch(ctx context.Context) (result *Match, err error)
 		_o.val = MatchFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findMatchWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("findMatchWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -266,7 +262,7 @@ func (x *GameActivity) FindMatch(ctx context.Context) (result *Match, err error)
 // FindPlayersForHostedMatch use information from the activity to find server hosted players for the local player.
 //
 // FindPlayersForHostedMatch blocks until the operation completes or ctx is cancelled.
-func (x *GameActivity) FindPlayersForHostedMatch(ctx context.Context) (result obj.Object, err error) {
+func (ga *GameActivity) FindPlayersForHostedMatch(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -278,7 +274,7 @@ func (x *GameActivity) FindPlayersForHostedMatch(ctx context.Context) (result ob
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPlayersForHostedMatchWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("findPlayersForHostedMatchWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -287,40 +283,3 @@ func (x *GameActivity) FindPlayersForHostedMatch(ctx context.Context) (result ob
 		return _zero, ctx.Err()
 	}
 }
-
-// GameActivityable is the interface implemented by [GameActivity], for mocking and DI.
-type GameActivityable interface {
-	obj.Object
-	WithProperties(properties obj.Object) *GameActivity
-	Start()
-	Pause()
-	Resume()
-	End()
-	SetScoreOnLeaderboardToScoreContext(leaderboard *Leaderboard, score int, context_ int)
-	SetScoreOnLeaderboardToScore(leaderboard *Leaderboard, score int)
-	GetScoreOnLeaderboard(leaderboard *Leaderboard) *LeaderboardScore
-	RemoveScoresFromLeaderboards(leaderboards []*Leaderboard)
-	SetProgressOnAchievementToPercentComplete(achievement *Achievement, percentComplete float64)
-	SetAchievementCompleted(achievement *Achievement)
-	GetProgressOnAchievement(achievement *Achievement) float64
-	RemoveAchievements(achievements []*Achievement)
-	Identifier() string
-	ActivityDefinition() *GameActivityDefinition
-	Properties() obj.Object
-	SetProperties(properties obj.Object)
-	State() GameActivityState
-	PartyCode() string
-	PartyURL() obj.Object
-	CreationDate() obj.Object
-	StartDate() obj.Object
-	LastResumeDate() obj.Object
-	EndDate() obj.Object
-	Duration() float64
-	Achievements() obj.Object
-	LeaderboardScores() obj.Object
-	MakeMatchRequest() *MatchRequest
-	FindMatch(ctx context.Context) (*Match, error)
-	FindPlayersForHostedMatch(ctx context.Context) (obj.Object, error)
-}
-
-var _ GameActivityable = (*GameActivity)(nil)

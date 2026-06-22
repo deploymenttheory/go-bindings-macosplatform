@@ -48,69 +48,52 @@ func ruleAdopt(id objc.ID) *Rule {
 }
 
 // Description returns the object's -description text.
-func (x *Rule) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Rule) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Rule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Rule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Rule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Rule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Rule) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Rule) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
-// WithSalience the importance of the rule relative to others in a rule system’s agenda.
-func (x *Rule) WithSalience(salience int) *Rule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
-	return x
+// WithSalience sets the importance of the rule relative to others in a rule system’s agenda.
+func (r *Rule) WithSalience(salience int) *Rule {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setSalience:"), salience)
+	return r
 }
 
 // EvaluatePredicateWithSystem returns a Boolean value indicating whether the rule has been satisfied in the context of the specified rule system.
-func (x *Rule) EvaluatePredicateWithSystem(system *RuleSystem) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluatePredicateWithSystem:"), objref.IDOf(system))
+func (r *Rule) EvaluatePredicateWithSystem(system *RuleSystem) bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("evaluatePredicateWithSystem:"), objref.IDOf(system))
 	return _r
 }
 
 // PerformActionWithSystem performs actions that should result when the rule is satisfied in the context of the specified rule system.
-func (x *Rule) PerformActionWithSystem(system *RuleSystem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performActionWithSystem:"), objref.IDOf(system))
+func (r *Rule) PerformActionWithSystem(system *RuleSystem) {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("performActionWithSystem:"), objref.IDOf(system))
 }
 
-// Salience salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0.
-func (x *Rule) Salience() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("salience"))
+// Salience returns salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0.
+func (r *Rule) Salience() int {
+	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("salience"))
 	return _r
 }
-
-// SetSalience wraps the corresponding Objective-C method.
-func (x *Rule) SetSalience(salience int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
-}
-
-// Ruleable is the interface implemented by [Rule], for mocking and DI.
-type Ruleable interface {
-	obj.Object
-	WithSalience(salience int) *Rule
-	EvaluatePredicateWithSystem(system *RuleSystem) bool
-	PerformActionWithSystem(system *RuleSystem)
-	Salience() int
-	SetSalience(salience int)
-}
-
-var _ Ruleable = (*Rule)(nil)
 
 // isRule marks Rule — and, by embedding promotion, its
 // subclasses — as a member of the Rule hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Rule) isRule() {}
+func (r *Rule) isRule() {}
 
 var _ RuleProvider = (*Rule)(nil)

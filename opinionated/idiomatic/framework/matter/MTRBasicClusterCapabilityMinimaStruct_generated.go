@@ -51,24 +51,15 @@ func NewMTRBasicClusterCapabilityMinimaStruct() *MTRBasicClusterCapabilityMinima
 }
 
 // WithCaseSessionsPerFabric sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
-	return x
+func (mbccms *MTRBasicClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
+	objc.Send[objc.ID](objref.IDOf(mbccms), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
+	return mbccms
 }
 
 // WithSubscriptionsPerFabric sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
-	return x
+func (mbccms *MTRBasicClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
+	objc.Send[objc.ID](objref.IDOf(mbccms), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
+	return mbccms
 }
-
-// MTRBasicClusterCapabilityMinimaStructable is the interface implemented by [MTRBasicClusterCapabilityMinimaStruct], for mocking and DI.
-type MTRBasicClusterCapabilityMinimaStructable interface {
-	obj.Object
-	WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct
-	WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct
-}
-
-var _ MTRBasicClusterCapabilityMinimaStructable = (*MTRBasicClusterCapabilityMinimaStruct)(nil)
 
 var _ MTRBasicInformationClusterCapabilityMinimaStructProvider = (*MTRBasicClusterCapabilityMinimaStruct)(nil)

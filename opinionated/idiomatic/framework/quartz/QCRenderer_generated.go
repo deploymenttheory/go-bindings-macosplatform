@@ -47,24 +47,24 @@ func qCRendererAdopt(id objc.ID) *QCRenderer {
 }
 
 // Description returns the object's -description text.
-func (x *QCRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qr *QCRenderer) Description() string {
+	return rt.Description(objref.IDOf(qr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QCRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qr *QCRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QCRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qr *QCRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QCRenderer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qr *QCRenderer) String() string {
+	return rt.Description(objref.IDOf(qr))
 }
 
 // NewQCRendererWithCompositionColorSpace creates a renderer object with a composition object and a color space.
@@ -96,43 +96,31 @@ func NewQCRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format o
 }
 
 // RenderAtTimeArguments renders a frame of a composition at the specified time.
-func (x *QCRenderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
+func (qr *QCRenderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(qr), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
 // RenderingTimeForTimeArguments wraps the corresponding Objective-C method.
-func (x *QCRenderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
+func (qr *QCRenderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(qr), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
 // Composition returns the composition object associated with the renderer.
-func (x *QCRenderer) Composition() *QCComposition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
+func (qr *QCRenderer) Composition() *QCComposition {
+	_r := objc.Send[objc.ID](objref.IDOf(qr), objc.RegisterName("composition"))
 	return QCCompositionFromID(_r)
 }
 
 // SnapshotImage returns an NSImage object of the current image in the OpenGL context associated with the renderer.
-func (x *QCRenderer) SnapshotImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
+func (qr *QCRenderer) SnapshotImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qr), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
 // CreateSnapshotImageOfType returns the current image in the OpenGL context associated with the renderer, as an image object of the provided image type.
-func (x *QCRenderer) CreateSnapshotImageOfType(type_ string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
+func (qr *QCRenderer) CreateSnapshotImageOfType(type_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qr), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }
-
-// QCRendererable is the interface implemented by [QCRenderer], for mocking and DI.
-type QCRendererable interface {
-	obj.Object
-	RenderAtTimeArguments(time_ float64, arguments obj.Object) bool
-	RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64
-	Composition() *QCComposition
-	SnapshotImage() obj.Object
-	CreateSnapshotImageOfType(type_ string) obj.Object
-}
-
-var _ QCRendererable = (*QCRenderer)(nil)

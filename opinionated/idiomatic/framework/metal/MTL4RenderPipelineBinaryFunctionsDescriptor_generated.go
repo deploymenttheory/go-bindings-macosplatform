@@ -46,24 +46,24 @@ func mTL4RenderPipelineBinaryFunctionsDescriptorAdopt(id objc.ID) *MTL4RenderPip
 }
 
 // Description returns the object's -description text.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mrpbfd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mrpbfd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mrpbfd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) String() string {
+	return rt.Description(objref.IDOf(mrpbfd))
 }
 
 // NewMTL4RenderPipelineBinaryFunctionsDescriptor creates a new MTL4RenderPipelineBinaryFunctionsDescriptor.
@@ -73,79 +73,61 @@ func NewMTL4RenderPipelineBinaryFunctionsDescriptor() *MTL4RenderPipelineBinaryF
 }
 
 // Reset resets this descriptor to its default state.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) Reset() {
+	objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("reset"))
 }
 
 // VertexAdditionalBinaryFunctions provides an array of binary functions representing additional binary vertex shader functions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) VertexAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexAdditionalBinaryFunctions"))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) VertexAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("vertexAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetVertexAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexAdditionalBinaryFunctions:"), purego.SliceToNSArray(vertexAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("setVertexAdditionalBinaryFunctions:"), purego.SliceToNSArray(vertexAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FragmentAdditionalBinaryFunctions provides an array of binary functions representing additional binary fragment shader functions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) FragmentAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentAdditionalBinaryFunctions"))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) FragmentAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("fragmentAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetFragmentAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentAdditionalBinaryFunctions:"), purego.SliceToNSArray(fragmentAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("setFragmentAdditionalBinaryFunctions:"), purego.SliceToNSArray(fragmentAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // TileAdditionalBinaryFunctions provides an array of binary functions representing additional binary tile shader functions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) TileAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileAdditionalBinaryFunctions"))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) TileAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("tileAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetTileAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileAdditionalBinaryFunctions:"), purego.SliceToNSArray(tileAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("setTileAdditionalBinaryFunctions:"), purego.SliceToNSArray(tileAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ObjectAdditionalBinaryFunctions provides an array of binary functions representing additional binary object shader functions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) ObjectAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAdditionalBinaryFunctions"))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) ObjectAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("objectAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetObjectAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectAdditionalBinaryFunctions:"), purego.SliceToNSArray(objectAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("setObjectAdditionalBinaryFunctions:"), purego.SliceToNSArray(objectAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MeshAdditionalBinaryFunctions provides an array of binary functions representing additional binary mesh shader functions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) MeshAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meshAdditionalBinaryFunctions"))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) MeshAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("meshAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetMeshAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeshAdditionalBinaryFunctions:"), purego.SliceToNSArray(meshAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mrpbfd *MTL4RenderPipelineBinaryFunctionsDescriptor) SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mrpbfd), objc.RegisterName("setMeshAdditionalBinaryFunctions:"), purego.SliceToNSArray(meshAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// MTL4RenderPipelineBinaryFunctionsDescriptorable is the interface implemented by [MTL4RenderPipelineBinaryFunctionsDescriptor], for mocking and DI.
-type MTL4RenderPipelineBinaryFunctionsDescriptorable interface {
-	obj.Object
-	Reset()
-	VertexAdditionalBinaryFunctions() []obj.Object
-	SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions []obj.Object)
-	FragmentAdditionalBinaryFunctions() []obj.Object
-	SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions []obj.Object)
-	TileAdditionalBinaryFunctions() []obj.Object
-	SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions []obj.Object)
-	ObjectAdditionalBinaryFunctions() []obj.Object
-	SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions []obj.Object)
-	MeshAdditionalBinaryFunctions() []obj.Object
-	SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions []obj.Object)
-}
-
-var _ MTL4RenderPipelineBinaryFunctionsDescriptorable = (*MTL4RenderPipelineBinaryFunctionsDescriptor)(nil)

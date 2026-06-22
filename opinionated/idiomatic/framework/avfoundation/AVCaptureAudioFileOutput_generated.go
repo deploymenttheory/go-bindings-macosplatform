@@ -52,76 +52,50 @@ func NewCaptureAudioFileOutput() *CaptureAudioFileOutput {
 	return captureAudioFileOutputAdopt(_id)
 }
 
-// WithMetadata a collection of metadata to be written to the receiver’s output files.
-func (x *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput {
+// WithMetadata sets a collection of metadata to be written to the receiver’s output files.
+func (cafo *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setMetadata:"), _arr)
+	return cafo
 }
 
-// WithAudioSettings the settings used to decode or re-encode audio before it is output by the receiver.
-func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
-	return x
+// WithAudioSettings sets the settings used to decode or re-encode audio before it is output by the receiver.
+func (cafo *CaptureAudioFileOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
+	return cafo
 }
 
-// WithMaxRecordedFileSize the maximum size, in bytes, of the data that should be recorded by the receiver.
-func (x *CaptureAudioFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
-	return x
+// WithMaxRecordedFileSize sets the maximum size, in bytes, of the data that should be recorded by the receiver.
+func (cafo *CaptureAudioFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
+	return cafo
 }
 
-// WithMinFreeDiskSpaceLimit the minimum amount of free space, in bytes, required for recording to continue on a given volume.
-func (x *CaptureAudioFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
-	return x
+// WithMinFreeDiskSpaceLimit sets the minimum amount of free space, in bytes, required for recording to continue on a given volume.
+func (cafo *CaptureAudioFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
+	return cafo
 }
 
-// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
-func (x *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
-	return x
+// WithDeferredStartEnabled sets a Boolean value that indicates whether to defer starting this capture output.
+func (cafo *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
+	return cafo
 }
 
-// Metadata a collection of metadata to be written to the receiver's output files. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
+// Metadata returns a collection of metadata to be written to the receiver's output files. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
 //
 // Metadata returns the collection as a Go slice.
-func (x *CaptureAudioFileOutput) Metadata() []*MetadataItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+func (cafo *CaptureAudioFileOutput) Metadata() []*MetadataItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("metadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// SetMetadata wraps the corresponding Objective-C method.
-func (x *CaptureAudioFileOutput) SetMetadata(metadata []*MetadataItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
-}
-
 // AudioSettings specifies the options the receiver uses to re-encode audio as it is being recorded. The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
-func (x *CaptureAudioFileOutput) AudioSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
+func (cafo *CaptureAudioFileOutput) AudioSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("audioSettings"))
 	return obj.Wrap(_r)
 }
-
-// SetAudioSettings wraps the corresponding Objective-C method.
-func (x *CaptureAudioFileOutput) SetAudioSettings(audioSettings obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
-}
-
-// CaptureAudioFileOutputable is the interface implemented by [CaptureAudioFileOutput], for mocking and DI.
-type CaptureAudioFileOutputable interface {
-	obj.Object
-	WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput
-	WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput
-	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput
-	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput
-	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput
-	Metadata() []*MetadataItem
-	SetMetadata(metadata []*MetadataItem)
-	AudioSettings() obj.Object
-	SetAudioSettings(audioSettings obj.Object)
-}
-
-var _ CaptureAudioFileOutputable = (*CaptureAudioFileOutput)(nil)
 
 var _ CaptureFileOutputProvider = (*CaptureAudioFileOutput)(nil)
 

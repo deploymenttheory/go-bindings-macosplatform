@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,59 +47,46 @@ func cNNPoolingAdopt(id objc.ID) *CNNPooling {
 	return x
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *CNNPooling) WithOffset(offset mpscore.MPSOffset) *CNNPooling {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (cp *CNNPooling) WithOffset(offset mpscore.MPSOffset) *CNNPooling {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOffset:"), offset)
+	return cp
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *CNNPooling) WithClipRect(clipRect metal.MTLRegion) *CNNPooling {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (cp *CNNPooling) WithClipRect(clipRect metal.MTLRegion) *CNNPooling {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setClipRect:"), clipRect)
+	return cp
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *CNNPooling) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPooling {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (cp *CNNPooling) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPooling {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cp
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNPooling) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNPooling {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cp *CNNPooling) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNPooling {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cp
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNPooling) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNPooling {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cp *CNNPooling) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNPooling {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cp
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNPooling) WithLabel(label string) *CNNPooling {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cp *CNNPooling) WithLabel(label string) *CNNPooling {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cp
 }
-
-// CNNPoolingable is the interface implemented by [CNNPooling], for mocking and DI.
-type CNNPoolingable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *CNNPooling
-	WithClipRect(clipRect metal.MTLRegion) *CNNPooling
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPooling
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNPooling
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNPooling
-	WithLabel(label string) *CNNPooling
-}
-
-var _ CNNPoolingable = (*CNNPooling)(nil)
 
 // isCNNPooling marks CNNPooling — and, by embedding promotion, its
 // subclasses — as a member of the CNNPooling hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNPooling) isCNNPooling() {}
+func (cp *CNNPooling) isCNNPooling() {}
 
 var _ CNNPoolingProvider = (*CNNPooling)(nil)
 

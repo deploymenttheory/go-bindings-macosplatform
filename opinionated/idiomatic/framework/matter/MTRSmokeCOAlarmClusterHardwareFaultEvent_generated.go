@@ -44,24 +44,24 @@ func mTRSmokeCOAlarmClusterHardwareFaultEventAdopt(id objc.ID) *MTRSmokeCOAlarmC
 }
 
 // Description returns the object's -description text.
-func (x *MTRSmokeCOAlarmClusterHardwareFaultEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscachfe *MTRSmokeCOAlarmClusterHardwareFaultEvent) Description() string {
+	return rt.Description(objref.IDOf(mscachfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSmokeCOAlarmClusterHardwareFaultEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscachfe *MTRSmokeCOAlarmClusterHardwareFaultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscachfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSmokeCOAlarmClusterHardwareFaultEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscachfe *MTRSmokeCOAlarmClusterHardwareFaultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscachfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSmokeCOAlarmClusterHardwareFaultEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscachfe *MTRSmokeCOAlarmClusterHardwareFaultEvent) String() string {
+	return rt.Description(objref.IDOf(mscachfe))
 }
 
 // NewMTRSmokeCOAlarmClusterHardwareFaultEvent creates a new MTRSmokeCOAlarmClusterHardwareFaultEvent.
@@ -69,10 +69,3 @@ func NewMTRSmokeCOAlarmClusterHardwareFaultEvent() *MTRSmokeCOAlarmClusterHardwa
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterHardwareFaultEvent")), objc.RegisterName("new"))
 	return mTRSmokeCOAlarmClusterHardwareFaultEventAdopt(_id)
 }
-
-// MTRSmokeCOAlarmClusterHardwareFaultEventable is the interface implemented by [MTRSmokeCOAlarmClusterHardwareFaultEvent], for mocking and DI.
-type MTRSmokeCOAlarmClusterHardwareFaultEventable interface {
-	obj.Object
-}
-
-var _ MTRSmokeCOAlarmClusterHardwareFaultEventable = (*MTRSmokeCOAlarmClusterHardwareFaultEvent)(nil)

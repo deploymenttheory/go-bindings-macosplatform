@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewQuantityType() *QuantityType {
 }
 
 // IsCompatibleWithUnit returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
-func (x *QuantityType) IsCompatibleWithUnit(unit *Unit) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
+func (qt *QuantityType) IsCompatibleWithUnit(unit *Unit) bool {
+	_r := objc.Send[bool](objref.IDOf(qt), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
 	return _r
 }
 
 // AggregationStyle wraps the corresponding Objective-C method.
-func (x *QuantityType) AggregationStyle() QuantityAggregationStyle {
-	_r := objc.Send[QuantityAggregationStyle](objref.IDOf(x), objc.RegisterName("aggregationStyle"))
+func (qt *QuantityType) AggregationStyle() QuantityAggregationStyle {
+	_r := objc.Send[QuantityAggregationStyle](objref.IDOf(qt), objc.RegisterName("aggregationStyle"))
 	return _r
 }
-
-// QuantityTypeable is the interface implemented by [QuantityType], for mocking and DI.
-type QuantityTypeable interface {
-	obj.Object
-	IsCompatibleWithUnit(unit *Unit) bool
-	AggregationStyle() QuantityAggregationStyle
-}
-
-var _ QuantityTypeable = (*QuantityType)(nil)
 
 var _ SampleTypeProvider = (*QuantityType)(nil)
 

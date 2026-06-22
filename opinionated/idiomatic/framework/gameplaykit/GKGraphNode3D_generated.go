@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewGraphNode3D() *GraphNode3D {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKGraphNode3D")), objc.RegisterName("new"))
 	return graphNode3DAdopt(_id)
 }
-
-// GraphNode3Dable is the interface implemented by [GraphNode3D], for mocking and DI.
-type GraphNode3Dable interface {
-	obj.Object
-}
-
-var _ GraphNode3Dable = (*GraphNode3D)(nil)
 
 var _ GraphNodeProvider = (*GraphNode3D)(nil)

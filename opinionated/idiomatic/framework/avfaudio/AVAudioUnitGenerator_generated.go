@@ -53,32 +53,17 @@ func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescriptio
 	return audioUnitGeneratorAdopt(_id)
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitGenerator) WithBypass(bypass bool) *AudioUnitGenerator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (aug *AudioUnitGenerator) WithBypass(bypass bool) *AudioUnitGenerator {
+	objc.Send[objc.ID](objref.IDOf(aug), objc.RegisterName("setBypass:"), bypass)
+	return aug
 }
 
 // Bypass wraps the corresponding Objective-C method.
-func (x *AudioUnitGenerator) Bypass() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypass"))
+func (aug *AudioUnitGenerator) Bypass() bool {
+	_r := objc.Send[bool](objref.IDOf(aug), objc.RegisterName("bypass"))
 	return _r
 }
-
-// SetBypass wraps the corresponding Objective-C method.
-func (x *AudioUnitGenerator) SetBypass(bypass bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-}
-
-// AudioUnitGeneratorable is the interface implemented by [AudioUnitGenerator], for mocking and DI.
-type AudioUnitGeneratorable interface {
-	obj.Object
-	WithBypass(bypass bool) *AudioUnitGenerator
-	Bypass() bool
-	SetBypass(bypass bool)
-}
-
-var _ AudioUnitGeneratorable = (*AudioUnitGenerator)(nil)
 
 var _ AudioUnitProvider = (*AudioUnitGenerator)(nil)
 

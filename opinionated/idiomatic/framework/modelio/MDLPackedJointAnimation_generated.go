@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,62 +50,48 @@ func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths []string)
 	return packedJointAnimationAdopt(_id)
 }
 
-// WithParent the parent object that contains this object.
-func (x *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (pja *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAnimation {
+	objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return pja
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJointAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (pja *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJointAnimation {
+	objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return pja
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (pja *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
+	objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("setHidden:"), hidden)
+	return pja
 }
 
 // JointPaths wraps the corresponding Objective-C method.
 //
 // JointPaths returns the collection as a Go slice.
-func (x *PackedJointAnimation) JointPaths() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
+func (pja *PackedJointAnimation) JointPaths() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Translations wraps the corresponding Objective-C method.
-func (x *PackedJointAnimation) Translations() *AnimatedVector3Array {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translations"))
+func (pja *PackedJointAnimation) Translations() *AnimatedVector3Array {
+	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("translations"))
 	return AnimatedVector3ArrayFromID(_r)
 }
 
 // Rotations wraps the corresponding Objective-C method.
-func (x *PackedJointAnimation) Rotations() *AnimatedQuaternionArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotations"))
+func (pja *PackedJointAnimation) Rotations() *AnimatedQuaternionArray {
+	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("rotations"))
 	return AnimatedQuaternionArrayFromID(_r)
 }
 
 // Scales wraps the corresponding Objective-C method.
-func (x *PackedJointAnimation) Scales() *AnimatedVector3Array {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scales"))
+func (pja *PackedJointAnimation) Scales() *AnimatedVector3Array {
+	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("scales"))
 	return AnimatedVector3ArrayFromID(_r)
 }
-
-// PackedJointAnimationable is the interface implemented by [PackedJointAnimation], for mocking and DI.
-type PackedJointAnimationable interface {
-	obj.Object
-	WithParent(parent ObjectProvider) *PackedJointAnimation
-	WithInstance(instance ObjectProvider) *PackedJointAnimation
-	WithHidden(hidden bool) *PackedJointAnimation
-	JointPaths() []string
-	Translations() *AnimatedVector3Array
-	Rotations() *AnimatedQuaternionArray
-	Scales() *AnimatedVector3Array
-}
-
-var _ PackedJointAnimationable = (*PackedJointAnimation)(nil)
 
 var _ ObjectProvider = (*PackedJointAnimation)(nil)

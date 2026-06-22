@@ -46,24 +46,24 @@ func serverChangeTokenAdopt(id objc.ID) *ServerChangeToken {
 }
 
 // Description returns the object's -description text.
-func (x *ServerChangeToken) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sct *ServerChangeToken) Description() string {
+	return rt.Description(objref.IDOf(sct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ServerChangeToken) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sct *ServerChangeToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ServerChangeToken) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sct *ServerChangeToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ServerChangeToken) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sct *ServerChangeToken) String() string {
+	return rt.Description(objref.IDOf(sct))
 }
 
 // NewServerChangeToken creates a new ServerChangeToken.
@@ -71,10 +71,3 @@ func NewServerChangeToken() *ServerChangeToken {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKServerChangeToken")), objc.RegisterName("new"))
 	return serverChangeTokenAdopt(_id)
 }
-
-// ServerChangeTokenable is the interface implemented by [ServerChangeToken], for mocking and DI.
-type ServerChangeTokenable interface {
-	obj.Object
-}
-
-var _ ServerChangeTokenable = (*ServerChangeToken)(nil)

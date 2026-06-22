@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,23 +50,14 @@ func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 }
 
 // Reset reset any accumulated state data to its initial values.
-func (x *CNNBatchNormalizationState) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (cbns *CNNBatchNormalizationState) Reset() {
+	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("reset"))
 }
 
 // BatchNormalization wraps the corresponding Objective-C method.
-func (x *CNNBatchNormalizationState) BatchNormalization() *CNNBatchNormalization {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchNormalization"))
+func (cbns *CNNBatchNormalizationState) BatchNormalization() *CNNBatchNormalization {
+	_r := objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("batchNormalization"))
 	return CNNBatchNormalizationFromID(_r)
 }
-
-// CNNBatchNormalizationStateable is the interface implemented by [CNNBatchNormalizationState], for mocking and DI.
-type CNNBatchNormalizationStateable interface {
-	obj.Object
-	Reset()
-	BatchNormalization() *CNNBatchNormalization
-}
-
-var _ CNNBatchNormalizationStateable = (*CNNBatchNormalizationState)(nil)
 
 var _ NNGradientStateProvider = (*CNNBatchNormalizationState)(nil)

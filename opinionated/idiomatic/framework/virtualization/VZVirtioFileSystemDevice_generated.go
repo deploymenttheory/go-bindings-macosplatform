@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,41 +51,25 @@ func NewVirtioFileSystemDevice() *VirtioFileSystemDevice {
 	return virtioFileSystemDeviceAdopt(_id)
 }
 
-// WithShare a value that defines the directory share the host exposes to the guest VM.
-func (x *VirtioFileSystemDevice) WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
-	return x
+// WithShare sets a value that defines the directory share the host exposes to the guest VM.
+func (vfsd *VirtioFileSystemDevice) WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice {
+	objc.Send[objc.ID](objref.IDOf(vfsd), objc.RegisterName("setShare:"), objref.IDOf(share))
+	return vfsd
 }
 
-// Tag the tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting.
-func (x *VirtioFileSystemDevice) Tag() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tag"))
+// Tag returns the tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting.
+func (vfsd *VirtioFileSystemDevice) Tag() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vfsd), objc.RegisterName("tag"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Share directory share. Defines how host resources are exposed to the guest virtual machine. Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised.
-func (x *VirtioFileSystemDevice) Share() *DirectoryShare {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("share"))
+// Share returns directory share. Defines how host resources are exposed to the guest virtual machine. Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised.
+func (vfsd *VirtioFileSystemDevice) Share() *DirectoryShare {
+	_r := objc.Send[objc.ID](objref.IDOf(vfsd), objc.RegisterName("share"))
 	return DirectoryShareFromID(_r)
 }
-
-// SetShare wraps the corresponding Objective-C method.
-func (x *VirtioFileSystemDevice) SetShare(share *DirectoryShare) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
-}
-
-// VirtioFileSystemDeviceable is the interface implemented by [VirtioFileSystemDevice], for mocking and DI.
-type VirtioFileSystemDeviceable interface {
-	obj.Object
-	WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice
-	Tag() string
-	Share() *DirectoryShare
-	SetShare(share *DirectoryShare)
-}
-
-var _ VirtioFileSystemDeviceable = (*VirtioFileSystemDevice)(nil)
 
 var _ DirectorySharingDeviceProvider = (*VirtioFileSystemDevice)(nil)

@@ -46,24 +46,24 @@ func categoricalDataAxisDescriptorAdopt(id objc.ID) *CategoricalDataAxisDescript
 }
 
 // Description returns the object's -description text.
-func (x *CategoricalDataAxisDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdad *CategoricalDataAxisDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cdad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CategoricalDataAxisDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdad *CategoricalDataAxisDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CategoricalDataAxisDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdad *CategoricalDataAxisDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CategoricalDataAxisDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdad *CategoricalDataAxisDescriptor) String() string {
+	return rt.Description(objref.IDOf(cdad))
 }
 
 // NewCategoricalDataAxisDescriptorWithTitleCategoryOrder creates a categorical data axis with the specified title and an array of categories in the specified order.
@@ -80,32 +80,17 @@ func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributed
 	return categoricalDataAxisDescriptorAdopt(_id)
 }
 
-// WithCategoryOrder a list of every category value for the axis in the order they appear visually in the graph or legend.
-func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...obj.Object) *CategoricalDataAxisDescriptor {
+// WithCategoryOrder sets a list of every category value for the axis in the order they appear visually in the graph or legend.
+func (cdad *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...obj.Object) *CategoricalDataAxisDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryOrder:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cdad), objc.RegisterName("setCategoryOrder:"), _arr)
+	return cdad
 }
 
-// CategoryOrder the order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
+// CategoryOrder returns the order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
 //
 // CategoryOrder returns the collection as a Go slice.
-func (x *CategoricalDataAxisDescriptor) CategoryOrder() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categoryOrder"))
+func (cdad *CategoricalDataAxisDescriptor) CategoryOrder() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(cdad), objc.RegisterName("categoryOrder"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SetCategoryOrder wraps the corresponding Objective-C method.
-func (x *CategoricalDataAxisDescriptor) SetCategoryOrder(categoryOrder []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryOrder:"), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// CategoricalDataAxisDescriptorable is the interface implemented by [CategoricalDataAxisDescriptor], for mocking and DI.
-type CategoricalDataAxisDescriptorable interface {
-	obj.Object
-	WithCategoryOrder(items ...obj.Object) *CategoricalDataAxisDescriptor
-	CategoryOrder() []string
-	SetCategoryOrder(categoryOrder []string)
-}
-
-var _ CategoricalDataAxisDescriptorable = (*CategoricalDataAxisDescriptor)(nil)

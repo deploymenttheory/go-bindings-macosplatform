@@ -46,24 +46,24 @@ func authorizationControllerAdopt(id objc.ID) *AuthorizationController {
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AuthorizationController) Description() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ac *AuthorizationController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ac *AuthorizationController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AuthorizationController) String() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // NewAuthorizationControllerWithAuthorizationRequests creates a controller from a collection of authorization requests.
@@ -74,35 +74,24 @@ func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests [
 }
 
 // PerformRequests starts the specified authorization flows during controller initialization.
-func (x *AuthorizationController) PerformRequests() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performRequests"))
+func (ac *AuthorizationController) PerformRequests() {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("performRequests"))
 }
 
 // PerformRequestsWithOptions starts the specified authorization flows during controller initialization.
-func (x *AuthorizationController) PerformRequestsWithOptions(options AuthorizationControllerRequestOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performRequestsWithOptions:"), options)
+func (ac *AuthorizationController) PerformRequestsWithOptions(options AuthorizationControllerRequestOptions) {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("performRequestsWithOptions:"), options)
 }
 
 // Cancel cancels any active authorization requests.
-func (x *AuthorizationController) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (ac *AuthorizationController) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("cancel"))
 }
 
-// AuthorizationRequests authorization requests that are being serviced by this controller
+// AuthorizationRequests returns authorization requests that are being serviced by this controller
 //
 // AuthorizationRequests returns the collection as a Go slice.
-func (x *AuthorizationController) AuthorizationRequests() []*AuthorizationRequest {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationRequests"))
+func (ac *AuthorizationController) AuthorizationRequests() []*AuthorizationRequest {
+	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("authorizationRequests"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationRequest { return AuthorizationRequestFromID(_id) })
 }
-
-// AuthorizationControllerable is the interface implemented by [AuthorizationController], for mocking and DI.
-type AuthorizationControllerable interface {
-	obj.Object
-	PerformRequests()
-	PerformRequestsWithOptions(options AuthorizationControllerRequestOptions)
-	Cancel()
-	AuthorizationRequests() []*AuthorizationRequest
-}
-
-var _ AuthorizationControllerable = (*AuthorizationController)(nil)

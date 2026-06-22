@@ -48,110 +48,88 @@ func nNFilterNodeAdopt(id objc.ID) *NNFilterNode {
 }
 
 // Description returns the object's -description text.
-func (x *NNFilterNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfn *NNFilterNode) Description() string {
+	return rt.Description(objref.IDOf(nfn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNFilterNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfn *NNFilterNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNFilterNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfn *NNFilterNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNFilterNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfn *NNFilterNode) String() string {
+	return rt.Description(objref.IDOf(nfn))
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNFilterNode) WithLabel(label string) *NNFilterNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nfn *NNFilterNode) WithLabel(label string) *NNFilterNode {
+	objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nfn
 }
 
 // GradientFilterWithSource return the gradient (backwards) version of this filter. The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target.
-func (x *NNFilterNode) GradientFilterWithSource(gradientImage obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSource:"), objref.IDOf(gradientImage))
+func (nfn *NNFilterNode) GradientFilterWithSource(gradientImage obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFilterWithSource:"), objref.IDOf(gradientImage))
 	return obj.Wrap(_r)
 }
 
 // GradientFilterWithSources return the gradient (backwards) version of this filter. The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target.
-func (x *NNFilterNode) GradientFilterWithSources(gradientImages []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSources:"), purego.SliceToNSArray(gradientImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (nfn *NNFilterNode) GradientFilterWithSources(gradientImages []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFilterWithSources:"), purego.SliceToNSArray(gradientImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // GradientFiltersWithSources return multiple gradient versions of the filter MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
-func (x *NNFilterNode) GradientFiltersWithSources(gradientImages []obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(gradientImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (nfn *NNFilterNode) GradientFiltersWithSources(gradientImages []obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(gradientImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // GradientFiltersWithSource return multiple gradient versions of the filter MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
-func (x *NNFilterNode) GradientFiltersWithSource(gradientImage obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSource:"), objref.IDOf(gradientImage))
+func (nfn *NNFilterNode) GradientFiltersWithSource(gradientImage obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFiltersWithSource:"), objref.IDOf(gradientImage))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ResultImage get the node representing the image result of the filter Except where otherwise noted, the precision used for the result image (see format property) is copied from the precision from the first input image node.
-func (x *NNFilterNode) ResultImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultImage"))
+func (nfn *NNFilterNode) ResultImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("resultImage"))
 	return obj.Wrap(_r)
 }
 
-// ResultState convenience method for resultStates[0] If resultStates is nil, returns nil
-func (x *NNFilterNode) ResultState() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultState"))
+// ResultState returns convenience method for resultStates[0] If resultStates is nil, returns nil
+func (nfn *NNFilterNode) ResultState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("resultState"))
 	return obj.Wrap(_r)
 }
 
 // ResultStates get the node representing the state result of the filter If more than one, see description of subclass for ordering.
 //
 // ResultStates returns the collection as a Go slice.
-func (x *NNFilterNode) ResultStates() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStates"))
+func (nfn *NNFilterNode) ResultStates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("resultStates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Label a string to help identify this object.
-func (x *NNFilterNode) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a string to help identify this object.
+func (nfn *NNFilterNode) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *NNFilterNode) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// NNFilterNodeable is the interface implemented by [NNFilterNode], for mocking and DI.
-type NNFilterNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNFilterNode
-	GradientFilterWithSource(gradientImage obj.Object) obj.Object
-	GradientFilterWithSources(gradientImages []obj.Object) obj.Object
-	GradientFiltersWithSources(gradientImages []obj.Object) []obj.Object
-	GradientFiltersWithSource(gradientImage obj.Object) []obj.Object
-	ResultImage() obj.Object
-	ResultState() obj.Object
-	ResultStates() []obj.Object
-	Label() string
-	SetLabel(label string)
-}
-
-var _ NNFilterNodeable = (*NNFilterNode)(nil)
-
 // isNNFilterNode marks NNFilterNode — and, by embedding promotion, its
 // subclasses — as a member of the NNFilterNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNFilterNode) isNNFilterNode() {}
+func (nfn *NNFilterNode) isNNFilterNode() {}
 
 var _ NNFilterNodeProvider = (*NNFilterNode)(nil)

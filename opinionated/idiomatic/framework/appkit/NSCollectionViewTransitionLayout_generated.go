@@ -53,58 +53,39 @@ func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout 
 	return collectionViewTransitionLayoutAdopt(_id)
 }
 
-// WithTransitionProgress the completion percentage of the transition.
-func (x *CollectionViewTransitionLayout) WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionProgress:"), transitionProgress)
-	return x
+// WithTransitionProgress sets the completion percentage of the transition.
+func (cvtl *CollectionViewTransitionLayout) WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout {
+	objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("setTransitionProgress:"), transitionProgress)
+	return cvtl
 }
 
 // UpdateValueForAnimatedKey sets the value of a key whose value you use during the animation.
-func (x *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateValue:forAnimatedKey:"), value, objref.IDOf(key))
+func (cvtl *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("updateValue:forAnimatedKey:"), value, objref.IDOf(key))
 }
 
 // ValueForAnimatedKey returns the most recently set value for the specified key.
-func (x *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueForAnimatedKey:"), objref.IDOf(key))
+func (cvtl *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(cvtl), objc.RegisterName("valueForAnimatedKey:"), objref.IDOf(key))
 	return _r
 }
 
 // TransitionProgress wraps the corresponding Objective-C method.
-func (x *CollectionViewTransitionLayout) TransitionProgress() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("transitionProgress"))
+func (cvtl *CollectionViewTransitionLayout) TransitionProgress() float64 {
+	_r := objc.Send[float64](objref.IDOf(cvtl), objc.RegisterName("transitionProgress"))
 	return _r
 }
 
-// SetTransitionProgress wraps the corresponding Objective-C method.
-func (x *CollectionViewTransitionLayout) SetTransitionProgress(transitionProgress float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionProgress:"), transitionProgress)
-}
-
 // CurrentLayout wraps the corresponding Objective-C method.
-func (x *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentLayout"))
+func (cvtl *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
+	_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("currentLayout"))
 	return CollectionViewLayoutFromID(_r)
 }
 
 // NextLayout wraps the corresponding Objective-C method.
-func (x *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextLayout"))
+func (cvtl *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
+	_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("nextLayout"))
 	return CollectionViewLayoutFromID(_r)
 }
-
-// CollectionViewTransitionLayoutable is the interface implemented by [CollectionViewTransitionLayout], for mocking and DI.
-type CollectionViewTransitionLayoutable interface {
-	obj.Object
-	WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout
-	UpdateValueForAnimatedKey(value float64, key obj.Object)
-	ValueForAnimatedKey(key obj.Object) float64
-	TransitionProgress() float64
-	SetTransitionProgress(transitionProgress float64)
-	CurrentLayout() *CollectionViewLayout
-	NextLayout() *CollectionViewLayout
-}
-
-var _ CollectionViewTransitionLayoutable = (*CollectionViewTransitionLayout)(nil)
 
 var _ CollectionViewLayoutProvider = (*CollectionViewTransitionLayout)(nil)

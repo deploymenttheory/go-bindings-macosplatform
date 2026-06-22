@@ -44,24 +44,24 @@ func compositionLayerAdopt(id objc.ID) *CompositionLayer {
 }
 
 // Description returns the object's -description text.
-func (x *CompositionLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cl *CompositionLayer) Description() string {
+	return rt.Description(objref.IDOf(cl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cl *CompositionLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cl *CompositionLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CompositionLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cl *CompositionLayer) String() string {
+	return rt.Description(objref.IDOf(cl))
 }
 
 // NewCompositionLayerWithFile creates a new CompositionLayer.
@@ -79,15 +79,7 @@ func NewCompositionLayerWithComposition(composition obj.Object) *CompositionLaye
 }
 
 // Composition wraps the corresponding Objective-C method.
-func (x *CompositionLayer) Composition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
+func (cl *CompositionLayer) Composition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("composition"))
 	return obj.Wrap(_r)
 }
-
-// CompositionLayerable is the interface implemented by [CompositionLayer], for mocking and DI.
-type CompositionLayerable interface {
-	obj.Object
-	Composition() obj.Object
-}
-
-var _ CompositionLayerable = (*CompositionLayer)(nil)

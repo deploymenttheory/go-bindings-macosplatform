@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRContentAppObserverClusterContentAppMessageResponseParams is an idiomatic wrapper over the Objective-C class MTRContentAppObserverClusterContentAppMessageResponseParams.
@@ -46,24 +47,24 @@ func mTRContentAppObserverClusterContentAppMessageResponseParamsAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mcaoccamrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcaoccamrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcaoccamrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) String() string {
+	return rt.Description(objref.IDOf(mcaoccamrp))
 }
 
 // NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseValueError initialize an MTRContentAppObserverClusterContentAppMessageResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,74 +79,43 @@ func NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseV
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) WithStatus(status obj.Object) *MTRContentAppObserverClusterContentAppMessageResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) WithStatus(status obj.Object) *MTRContentAppObserverClusterContentAppMessageResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return mcaoccamrp
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-	return x
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("setData:"), purego.NSString(data))
+	return mcaoccamrp
 }
 
 // WithEncodingHint sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
-	return x
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
+	return mcaoccamrp
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-}
-
 // Data wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) Data() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Data() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetData wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) SetData(data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
 // EncodingHint wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) EncodingHint() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodingHint"))
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) EncodingHint() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("encodingHint"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetEncodingHint wraps the corresponding Objective-C method.
-func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) SetEncodingHint(encodingHint string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
-}
-
-// MTRContentAppObserverClusterContentAppMessageResponseParamsable is the interface implemented by [MTRContentAppObserverClusterContentAppMessageResponseParams], for mocking and DI.
-type MTRContentAppObserverClusterContentAppMessageResponseParamsable interface {
-	obj.Object
-	WithStatus(status obj.Object) *MTRContentAppObserverClusterContentAppMessageResponseParams
-	WithData(data string) *MTRContentAppObserverClusterContentAppMessageResponseParams
-	WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageResponseParams
-	Status() obj.Object
-	SetStatus(status obj.Object)
-	Data() string
-	SetData(data string)
-	EncodingHint() string
-	SetEncodingHint(encodingHint string)
-}
-
-var _ MTRContentAppObserverClusterContentAppMessageResponseParamsable = (*MTRContentAppObserverClusterContentAppMessageResponseParams)(nil)

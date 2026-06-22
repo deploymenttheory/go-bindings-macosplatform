@@ -7,7 +7,6 @@ package pdfkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewActionGoToWithDestination(destination *Destination) *ActionGoTo {
 	return actionGoToAdopt(_id)
 }
 
-// WithDestination returns the destination associated with the action.
-func (x *ActionGoTo) WithDestination(destination *Destination) *ActionGoTo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
-	return x
+// WithDestination sets returns the destination associated with the action.
+func (agt *ActionGoTo) WithDestination(destination *Destination) *ActionGoTo {
+	objc.Send[objc.ID](objref.IDOf(agt), objc.RegisterName("setDestination:"), objref.IDOf(destination))
+	return agt
 }
 
 // Destination wraps the corresponding Objective-C method.
-func (x *ActionGoTo) Destination() *Destination {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+func (agt *ActionGoTo) Destination() *Destination {
+	_r := objc.Send[objc.ID](objref.IDOf(agt), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
 }
-
-// SetDestination wraps the corresponding Objective-C method.
-func (x *ActionGoTo) SetDestination(destination *Destination) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
-}
-
-// ActionGoToable is the interface implemented by [ActionGoTo], for mocking and DI.
-type ActionGoToable interface {
-	obj.Object
-	WithDestination(destination *Destination) *ActionGoTo
-	Destination() *Destination
-	SetDestination(destination *Destination)
-}
-
-var _ ActionGoToable = (*ActionGoTo)(nil)
 
 var _ ActionProvider = (*ActionGoTo)(nil)

@@ -46,24 +46,24 @@ func textSuggestionAdopt(id objc.ID) *TextSuggestion {
 }
 
 // Description returns the object's -description text.
-func (x *TextSuggestion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextSuggestion) Description() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextSuggestion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ts *TextSuggestion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextSuggestion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ts *TextSuggestion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextSuggestion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextSuggestion) String() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTextSuggestionWithInputText initializes a new text suggestion with the given input text.
@@ -73,19 +73,11 @@ func NewTextSuggestionWithInputText(inputText string) *TextSuggestion {
 	return textSuggestionAdopt(_id)
 }
 
-// InputText text that will be inserted into the document when the user chooses the suggestion.
-func (x *TextSuggestion) InputText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputText"))
+// InputText returns text that will be inserted into the document when the user chooses the suggestion.
+func (ts *TextSuggestion) InputText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("inputText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// TextSuggestionable is the interface implemented by [TextSuggestion], for mocking and DI.
-type TextSuggestionable interface {
-	obj.Object
-	InputText() string
-}
-
-var _ TextSuggestionable = (*TextSuggestion)(nil)

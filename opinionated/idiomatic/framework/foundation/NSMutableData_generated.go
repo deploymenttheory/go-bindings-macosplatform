@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MutableData is an idiomatic wrapper over the Objective-C class NSMutableData.
@@ -62,42 +63,37 @@ func NewMutableDataWithLength(length int) *MutableData {
 	return mutableDataAdopt(_id)
 }
 
-// WithLength the number of bytes contained in the mutable data object.
-func (x *MutableData) WithLength(length int) *MutableData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-	return x
+// WithLength sets the number of bytes contained in the mutable data object.
+func (md *MutableData) WithLength(length int) *MutableData {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setLength:"), length)
+	return md
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableData) WithScriptingProperties(scriptingProperties obj.Object) *MutableData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
-}
-
-// SetLength wraps the corresponding Objective-C method.
-func (x *MutableData) SetLength(length int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
+func (md *MutableData) WithScriptingProperties(scriptingProperties obj.Object) *MutableData {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return md
 }
 
 // AppendData appends the content of another data object to the receiver.
-func (x *MutableData) AppendData(other *Data) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendData:"), objref.IDOf(other))
+func (md *MutableData) AppendData(other *Data) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("appendData:"), objref.IDOf(other))
 }
 
 // IncreaseLengthBy increases the length of the receiver by a given number of bytes.
-func (x *MutableData) IncreaseLengthBy(extraLength int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("increaseLengthBy:"), extraLength)
+func (md *MutableData) IncreaseLengthBy(extraLength int) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("increaseLengthBy:"), extraLength)
 }
 
 // SetData replaces the entire contents of the receiver with the contents of another data object.
-func (x *MutableData) SetData(data *Data) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
+func (md *MutableData) SetData(data *Data) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
 // DecompressUsingAlgorithm decompresses the data object’s bytes.
-func (x *MutableData) DecompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
+func (md *MutableData) DecompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("decompressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(md), objc.RegisterName("decompressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -105,34 +101,19 @@ func (x *MutableData) DecompressUsingAlgorithm(algorithm DataCompressionAlgorith
 }
 
 // CompressUsingAlgorithm compresses the data object’s bytes using an algorithm that you specify.
-func (x *MutableData) CompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
+func (md *MutableData) CompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("compressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(md), objc.RegisterName("compressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// MutableDataable is the interface implemented by [MutableData], for mocking and DI.
-type MutableDataable interface {
-	obj.Object
-	WithLength(length int) *MutableData
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableData
-	SetLength(length int)
-	AppendData(other *Data)
-	IncreaseLengthBy(extraLength int)
-	SetData(data *Data)
-	DecompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error
-	CompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error
-}
-
-var _ MutableDataable = (*MutableData)(nil)
-
 // isMutableData marks MutableData — and, by embedding promotion, its
 // subclasses — as a member of the MutableData hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MutableData) isMutableData() {}
+func (md *MutableData) isMutableData() {}
 
 var _ MutableDataProvider = (*MutableData)(nil)
 

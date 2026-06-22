@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,49 +52,31 @@ func NewCachingImageManager() *CachingImageManager {
 	return cachingImageManagerAdopt(_id)
 }
 
-// WithAllowsCachingHighQualityImages a Boolean value that determines whether the image manager prepares high-quality images.
-func (x *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCachingHighQualityImages:"), allowsCachingHighQualityImages)
-	return x
+// WithAllowsCachingHighQualityImages sets a Boolean value that determines whether the image manager prepares high-quality images.
+func (cim *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager {
+	objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("setAllowsCachingHighQualityImages:"), allowsCachingHighQualityImages)
+	return cim
 }
 
 // StartCachingImagesForAssetsTargetSizeContentModeOptions prepares image representations of the specified assets for later use.
-func (x *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
+func (cim *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+	objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("startCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
 }
 
 // StopCachingImagesForAssetsTargetSizeContentModeOptions cancels image preparation for the specified assets and options.
-func (x *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
+func (cim *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+	objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("stopCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
 }
 
 // StopCachingImagesForAllAssets cancels all image preparation that is currently in progress.
-func (x *CachingImageManager) StopCachingImagesForAllAssets() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCachingImagesForAllAssets"))
+func (cim *CachingImageManager) StopCachingImagesForAllAssets() {
+	objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("stopCachingImagesForAllAssets"))
 }
 
 // AllowsCachingHighQualityImages wraps the corresponding Objective-C method.
-func (x *CachingImageManager) AllowsCachingHighQualityImages() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCachingHighQualityImages"))
+func (cim *CachingImageManager) AllowsCachingHighQualityImages() bool {
+	_r := objc.Send[bool](objref.IDOf(cim), objc.RegisterName("allowsCachingHighQualityImages"))
 	return _r
 }
-
-// SetAllowsCachingHighQualityImages wraps the corresponding Objective-C method.
-func (x *CachingImageManager) SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCachingHighQualityImages:"), allowsCachingHighQualityImages)
-}
-
-// CachingImageManagerable is the interface implemented by [CachingImageManager], for mocking and DI.
-type CachingImageManagerable interface {
-	obj.Object
-	WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager
-	StartCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions)
-	StopCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions)
-	StopCachingImagesForAllAssets()
-	AllowsCachingHighQualityImages() bool
-	SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool)
-}
-
-var _ CachingImageManagerable = (*CachingImageManager)(nil)
 
 var _ ImageManagerProvider = (*CachingImageManager)(nil)

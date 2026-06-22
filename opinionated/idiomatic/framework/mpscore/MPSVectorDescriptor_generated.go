@@ -44,24 +44,24 @@ func vectorDescriptorAdopt(id objc.ID) *VectorDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *VectorDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vd *VectorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VectorDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vd *VectorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VectorDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vd *VectorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VectorDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vd *VectorDescriptor) String() string {
+	return rt.Description(objref.IDOf(vd))
 }
 
 // NewVectorDescriptor creates a new VectorDescriptor.
@@ -70,63 +70,38 @@ func NewVectorDescriptor() *VectorDescriptor {
 	return vectorDescriptorAdopt(_id)
 }
 
-// WithLength the number of elements in the vector.
-func (x *VectorDescriptor) WithLength(length int) *VectorDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-	return x
+// WithLength sets the number of elements in the vector.
+func (vd *VectorDescriptor) WithLength(length int) *VectorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("setLength:"), length)
+	return vd
 }
 
-// WithDataType the type of the data which makes up the values of the vector.
-func (x *VectorDescriptor) WithDataType(dataType DataType) *VectorDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
-	return x
+// WithDataType sets the type of the data which makes up the values of the vector.
+func (vd *VectorDescriptor) WithDataType(dataType DataType) *VectorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("setDataType:"), dataType)
+	return vd
 }
 
-// Length the number of elements in the vector.
-func (x *VectorDescriptor) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+// Length returns the number of elements in the vector.
+func (vd *VectorDescriptor) Length() int {
+	_r := objc.Send[int](objref.IDOf(vd), objc.RegisterName("length"))
 	return _r
 }
 
-// SetLength wraps the corresponding Objective-C method.
-func (x *VectorDescriptor) SetLength(length int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-}
-
-// Vectors the number of vectors.
-func (x *VectorDescriptor) Vectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectors"))
+// Vectors returns the number of vectors.
+func (vd *VectorDescriptor) Vectors() int {
+	_r := objc.Send[int](objref.IDOf(vd), objc.RegisterName("vectors"))
 	return _r
 }
 
-// DataType the type of the data which makes up the values of the vector.
-func (x *VectorDescriptor) DataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+// DataType returns the type of the data which makes up the values of the vector.
+func (vd *VectorDescriptor) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(vd), objc.RegisterName("dataType"))
 	return _r
 }
 
-// SetDataType wraps the corresponding Objective-C method.
-func (x *VectorDescriptor) SetDataType(dataType DataType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
-}
-
-// VectorBytes the stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
-func (x *VectorDescriptor) VectorBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorBytes"))
+// VectorBytes returns the stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
+func (vd *VectorDescriptor) VectorBytes() int {
+	_r := objc.Send[int](objref.IDOf(vd), objc.RegisterName("vectorBytes"))
 	return _r
 }
-
-// VectorDescriptorable is the interface implemented by [VectorDescriptor], for mocking and DI.
-type VectorDescriptorable interface {
-	obj.Object
-	WithLength(length int) *VectorDescriptor
-	WithDataType(dataType DataType) *VectorDescriptor
-	Length() int
-	SetLength(length int)
-	Vectors() int
-	DataType() DataType
-	SetDataType(dataType DataType)
-	VectorBytes() int
-}
-
-var _ VectorDescriptorable = (*VectorDescriptor)(nil)

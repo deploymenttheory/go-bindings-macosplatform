@@ -52,78 +52,46 @@ func NewUserUnixTask() *UserUnixTask {
 	return userUnixTaskAdopt(_id)
 }
 
-// WithStandardInput the standard input stream.
-func (x *UserUnixTask) WithStandardInput(standardInput *FileHandle) *UserUnixTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
-	return x
+// WithStandardInput sets the standard input stream.
+func (uut *UserUnixTask) WithStandardInput(standardInput *FileHandle) *UserUnixTask {
+	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
+	return uut
 }
 
-// WithStandardOutput the standard output stream.
-func (x *UserUnixTask) WithStandardOutput(standardOutput *FileHandle) *UserUnixTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
-	return x
+// WithStandardOutput sets the standard output stream.
+func (uut *UserUnixTask) WithStandardOutput(standardOutput *FileHandle) *UserUnixTask {
+	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
+	return uut
 }
 
-// WithStandardError the standard error stream.
-func (x *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
-	return x
+// WithStandardError sets the standard error stream.
+func (uut *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixTask {
+	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
+	return uut
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UserUnixTask) WithScriptingProperties(scriptingProperties obj.Object) *UserUnixTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uut *UserUnixTask) WithScriptingProperties(scriptingProperties obj.Object) *UserUnixTask {
+	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uut
 }
 
 // StandardInput wraps the corresponding Objective-C method.
-func (x *UserUnixTask) StandardInput() *FileHandle {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardInput"))
+func (uut *UserUnixTask) StandardInput() *FileHandle {
+	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardInput"))
 	return FileHandleFromID(_r)
-}
-
-// SetStandardInput wraps the corresponding Objective-C method.
-func (x *UserUnixTask) SetStandardInput(standardInput *FileHandle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 }
 
 // StandardOutput wraps the corresponding Objective-C method.
-func (x *UserUnixTask) StandardOutput() *FileHandle {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardOutput"))
+func (uut *UserUnixTask) StandardOutput() *FileHandle {
+	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardOutput"))
 	return FileHandleFromID(_r)
-}
-
-// SetStandardOutput wraps the corresponding Objective-C method.
-func (x *UserUnixTask) SetStandardOutput(standardOutput *FileHandle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 }
 
 // StandardError wraps the corresponding Objective-C method.
-func (x *UserUnixTask) StandardError() *FileHandle {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardError"))
+func (uut *UserUnixTask) StandardError() *FileHandle {
+	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardError"))
 	return FileHandleFromID(_r)
 }
-
-// SetStandardError wraps the corresponding Objective-C method.
-func (x *UserUnixTask) SetStandardError(standardError *FileHandle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
-}
-
-// UserUnixTaskable is the interface implemented by [UserUnixTask], for mocking and DI.
-type UserUnixTaskable interface {
-	obj.Object
-	WithStandardInput(standardInput *FileHandle) *UserUnixTask
-	WithStandardOutput(standardOutput *FileHandle) *UserUnixTask
-	WithStandardError(standardError *FileHandle) *UserUnixTask
-	WithScriptingProperties(scriptingProperties obj.Object) *UserUnixTask
-	StandardInput() *FileHandle
-	SetStandardInput(standardInput *FileHandle)
-	StandardOutput() *FileHandle
-	SetStandardOutput(standardOutput *FileHandle)
-	StandardError() *FileHandle
-	SetStandardError(standardError *FileHandle)
-}
-
-var _ UserUnixTaskable = (*UserUnixTask)(nil)
 
 var _ UserScriptTaskProvider = (*UserUnixTask)(nil)

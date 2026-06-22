@@ -46,24 +46,24 @@ func removeParticipantAlertAdopt(id objc.ID) *RemoveParticipantAlert {
 }
 
 // Description returns the object's -description text.
-func (x *RemoveParticipantAlert) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpa *RemoveParticipantAlert) Description() string {
+	return rt.Description(objref.IDOf(rpa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RemoveParticipantAlert) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpa *RemoveParticipantAlert) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RemoveParticipantAlert) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpa *RemoveParticipantAlert) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RemoveParticipantAlert) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpa *RemoveParticipantAlert) String() string {
+	return rt.Description(objref.IDOf(rpa))
 }
 
 // NewRemoveParticipantAlert creates a new RemoveParticipantAlert.
@@ -71,10 +71,3 @@ func NewRemoveParticipantAlert() *RemoveParticipantAlert {
 	_id := objc.Send[objc.ID](objc.ID(_class("SWRemoveParticipantAlert")), objc.RegisterName("new"))
 	return removeParticipantAlertAdopt(_id)
 }
-
-// RemoveParticipantAlertable is the interface implemented by [RemoveParticipantAlert], for mocking and DI.
-type RemoveParticipantAlertable interface {
-	obj.Object
-}
-
-var _ RemoveParticipantAlertable = (*RemoveParticipantAlert)(nil)

@@ -47,24 +47,24 @@ func regionAdopt(id objc.ID) *Region {
 }
 
 // Description returns the object's -description text.
-func (x *Region) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Region) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Region) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Region) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Region) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Region) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Region) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Region) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRegionWithRadius initializes a new region with a circular area.
@@ -89,50 +89,37 @@ func NewRegionWithPath(path obj.Object) *Region {
 }
 
 // InverseRegion returns a new region that is the mathematical inverse of an existing region.
-func (x *Region) InverseRegion() *Region {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseRegion"))
+func (r *Region) InverseRegion() *Region {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("inverseRegion"))
 	return RegionFromID(_r)
 }
 
 // RegionByUnionWithRegion returns a new region created by combining the contents of this region with another region.
-func (x *Region) RegionByUnionWithRegion(region *Region) *Region {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionByUnionWithRegion:"), objref.IDOf(region))
+func (r *Region) RegionByUnionWithRegion(region *Region) *Region {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("regionByUnionWithRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
 // RegionByDifferenceFromRegion returns a new region created by subtracting the contents of another region from this region.
-func (x *Region) RegionByDifferenceFromRegion(region *Region) *Region {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionByDifferenceFromRegion:"), objref.IDOf(region))
+func (r *Region) RegionByDifferenceFromRegion(region *Region) *Region {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("regionByDifferenceFromRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
 // RegionByIntersectionWithRegion returns a new region created by intersecting the contents of this region with another region.
-func (x *Region) RegionByIntersectionWithRegion(region *Region) *Region {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionByIntersectionWithRegion:"), objref.IDOf(region))
+func (r *Region) RegionByIntersectionWithRegion(region *Region) *Region {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("regionByIntersectionWithRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
 // ContainsPoint returns a Boolean value that indicates whether a particular point is contained in the region.
-func (x *Region) ContainsPoint(point corefoundation.CGPoint) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:"), point)
+func (r *Region) ContainsPoint(point corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("containsPoint:"), point)
 	return _r
 }
 
 // Path wraps the corresponding Objective-C method.
-func (x *Region) Path() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+func (r *Region) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
-
-// Regionable is the interface implemented by [Region], for mocking and DI.
-type Regionable interface {
-	obj.Object
-	InverseRegion() *Region
-	RegionByUnionWithRegion(region *Region) *Region
-	RegionByDifferenceFromRegion(region *Region) *Region
-	RegionByIntersectionWithRegion(region *Region) *Region
-	ContainsPoint(point corefoundation.CGPoint) bool
-	Path() obj.Object
-}
-
-var _ Regionable = (*Region)(nil)

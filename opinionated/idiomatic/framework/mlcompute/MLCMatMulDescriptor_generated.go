@@ -46,24 +46,24 @@ func matMulDescriptorAdopt(id objc.ID) *MatMulDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *MatMulDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmd *MatMulDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mmd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatMulDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmd *MatMulDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatMulDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmd *MatMulDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatMulDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmd *MatMulDescriptor) String() string {
+	return rt.Description(objref.IDOf(mmd))
 }
 
 // NewMatMulDescriptor creates a new MatMulDescriptor.
@@ -72,30 +72,20 @@ func NewMatMulDescriptor() *MatMulDescriptor {
 	return matMulDescriptorAdopt(_id)
 }
 
-// Alpha a scalar to scale the result in C=alpha x X x Y. Default = 1.0
-func (x *MatMulDescriptor) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns a scalar to scale the result in C=alpha x X x Y. Default = 1.0
+func (mmd *MatMulDescriptor) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(mmd), objc.RegisterName("alpha"))
 	return _r
 }
 
-// TransposesX if true, transposes the last two dimensions of X. Default = False
-func (x *MatMulDescriptor) TransposesX() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transposesX"))
+// TransposesX reports whether if true, transposes the last two dimensions of X. Default = False
+func (mmd *MatMulDescriptor) TransposesX() bool {
+	_r := objc.Send[bool](objref.IDOf(mmd), objc.RegisterName("transposesX"))
 	return _r
 }
 
-// TransposesY if true, transposes the last two dimensions of Y. Default = False
-func (x *MatMulDescriptor) TransposesY() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transposesY"))
+// TransposesY reports whether if true, transposes the last two dimensions of Y. Default = False
+func (mmd *MatMulDescriptor) TransposesY() bool {
+	_r := objc.Send[bool](objref.IDOf(mmd), objc.RegisterName("transposesY"))
 	return _r
 }
-
-// MatMulDescriptorable is the interface implemented by [MatMulDescriptor], for mocking and DI.
-type MatMulDescriptorable interface {
-	obj.Object
-	Alpha() float32
-	TransposesX() bool
-	TransposesY() bool
-}
-
-var _ MatMulDescriptorable = (*MatMulDescriptor)(nil)

@@ -46,24 +46,24 @@ func incrementalStoreNodeAdopt(id objc.ID) *IncrementalStoreNode {
 }
 
 // Description returns the object's -description text.
-func (x *IncrementalStoreNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (isn *IncrementalStoreNode) Description() string {
+	return rt.Description(objref.IDOf(isn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IncrementalStoreNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (isn *IncrementalStoreNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(isn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IncrementalStoreNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (isn *IncrementalStoreNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(isn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IncrementalStoreNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (isn *IncrementalStoreNode) String() string {
+	return rt.Description(objref.IDOf(isn))
 }
 
 // NewIncrementalStoreNodeWithObjectIDWithValuesVersion returns an object initialized with the given values.
@@ -74,28 +74,18 @@ func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *ManagedObjec
 }
 
 // UpdateWithValuesVersion update the values and version to reflect new data being saved to or loaded from the external store.
-func (x *IncrementalStoreNode) UpdateWithValuesVersion(values obj.Object, version uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithValues:version:"), objref.IDOf(values), version)
+func (isn *IncrementalStoreNode) UpdateWithValuesVersion(values obj.Object, version uint64) {
+	objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("updateWithValues:version:"), objref.IDOf(values), version)
 }
 
 // ValueForPropertyDescription returns the value for the given property.
-func (x *IncrementalStoreNode) ValueForPropertyDescription(prop *PropertyDescription) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForPropertyDescription:"), objref.IDOf(prop))
+func (isn *IncrementalStoreNode) ValueForPropertyDescription(prop *PropertyDescription) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("valueForPropertyDescription:"), objref.IDOf(prop))
 	return obj.Wrap(_r)
 }
 
 // ObjectID wraps the corresponding Objective-C method.
-func (x *IncrementalStoreNode) ObjectID() *ManagedObjectID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
+func (isn *IncrementalStoreNode) ObjectID() *ManagedObjectID {
+	_r := objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }
-
-// IncrementalStoreNodeable is the interface implemented by [IncrementalStoreNode], for mocking and DI.
-type IncrementalStoreNodeable interface {
-	obj.Object
-	UpdateWithValuesVersion(values obj.Object, version uint64)
-	ValueForPropertyDescription(prop *PropertyDescription) obj.Object
-	ObjectID() *ManagedObjectID
-}
-
-var _ IncrementalStoreNodeable = (*IncrementalStoreNode)(nil)

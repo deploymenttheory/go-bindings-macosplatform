@@ -46,24 +46,24 @@ func nEVPNIKEv2SecurityAssociationParametersAdopt(id objc.ID) *NEVPNIKEv2Securit
 }
 
 // Description returns the object's -description text.
-func (x *NEVPNIKEv2SecurityAssociationParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) Description() string {
+	return rt.Description(objref.IDOf(nesap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEVPNIKEv2SecurityAssociationParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nesap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEVPNIKEv2SecurityAssociationParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nesap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEVPNIKEv2SecurityAssociationParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) String() string {
+	return rt.Description(objref.IDOf(nesap))
 }
 
 // NewNEVPNIKEv2SecurityAssociationParameters creates a new NEVPNIKEv2SecurityAssociationParameters.
@@ -72,112 +72,65 @@ func NewNEVPNIKEv2SecurityAssociationParameters() *NEVPNIKEv2SecurityAssociation
 	return nEVPNIKEv2SecurityAssociationParametersAdopt(_id)
 }
 
-// WithEncryptionAlgorithm the algorithm used by the Security Association to encrypt and decrypt data.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionAlgorithm:"), encryptionAlgorithm)
-	return x
+// WithEncryptionAlgorithm sets the algorithm used by the Security Association to encrypt and decrypt data.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
+	objc.Send[objc.ID](objref.IDOf(nesap), objc.RegisterName("setEncryptionAlgorithm:"), encryptionAlgorithm)
+	return nesap
 }
 
-// WithIntegrityAlgorithm the algorithm used by the Security Association to verify the integrity of data.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegrityAlgorithm:"), integrityAlgorithm)
-	return x
+// WithIntegrityAlgorithm sets the algorithm used by the Security Association to verify the integrity of data.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
+	objc.Send[objc.ID](objref.IDOf(nesap), objc.RegisterName("setIntegrityAlgorithm:"), integrityAlgorithm)
+	return nesap
 }
 
-// WithDiffieHellmanGroup the Diffie Hellman group used by the Security Association.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiffieHellmanGroup:"), diffieHellmanGroup)
-	return x
+// WithDiffieHellmanGroup sets the Diffie Hellman group used by the Security Association.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters {
+	objc.Send[objc.ID](objref.IDOf(nesap), objc.RegisterName("setDiffieHellmanGroup:"), diffieHellmanGroup)
+	return nesap
 }
 
-// WithPostQuantumKeyExchangeMethods a list of the quantum-secure key exchange methods the Security Association uses.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMethods(items ...obj.Object) *NEVPNIKEv2SecurityAssociationParameters {
+// WithPostQuantumKeyExchangeMethods sets a list of the quantum-secure key exchange methods the Security Association uses.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMethods(items ...obj.Object) *NEVPNIKEv2SecurityAssociationParameters {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostQuantumKeyExchangeMethods:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nesap), objc.RegisterName("setPostQuantumKeyExchangeMethods:"), _arr)
+	return nesap
 }
 
-// WithLifetimeMinutes the duration of the lifetime of the Security Association, in minutes.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithLifetimeMinutes(lifetimeMinutes int32) *NEVPNIKEv2SecurityAssociationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetimeMinutes:"), lifetimeMinutes)
-	return x
+// WithLifetimeMinutes sets the duration of the lifetime of the Security Association, in minutes.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) WithLifetimeMinutes(lifetimeMinutes int32) *NEVPNIKEv2SecurityAssociationParameters {
+	objc.Send[objc.ID](objref.IDOf(nesap), objc.RegisterName("setLifetimeMinutes:"), lifetimeMinutes)
+	return nesap
 }
 
-// EncryptionAlgorithm the algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
-func (x *NEVPNIKEv2SecurityAssociationParameters) EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm {
-	_r := objc.Send[NEVPNIKEv2EncryptionAlgorithm](objref.IDOf(x), objc.RegisterName("encryptionAlgorithm"))
+// EncryptionAlgorithm returns the algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm {
+	_r := objc.Send[NEVPNIKEv2EncryptionAlgorithm](objref.IDOf(nesap), objc.RegisterName("encryptionAlgorithm"))
 	return _r
 }
 
-// SetEncryptionAlgorithm wraps the corresponding Objective-C method.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionAlgorithm:"), encryptionAlgorithm)
-}
-
-// IntegrityAlgorithm the algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
-func (x *NEVPNIKEv2SecurityAssociationParameters) IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm {
-	_r := objc.Send[NEVPNIKEv2IntegrityAlgorithm](objref.IDOf(x), objc.RegisterName("integrityAlgorithm"))
+// IntegrityAlgorithm returns the algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm {
+	_r := objc.Send[NEVPNIKEv2IntegrityAlgorithm](objref.IDOf(nesap), objc.RegisterName("integrityAlgorithm"))
 	return _r
 }
 
-// SetIntegrityAlgorithm wraps the corresponding Objective-C method.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegrityAlgorithm:"), integrityAlgorithm)
-}
-
-// DiffieHellmanGroup the Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
-func (x *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup {
-	_r := objc.Send[NEVPNIKEv2DiffieHellmanGroup](objref.IDOf(x), objc.RegisterName("diffieHellmanGroup"))
+// DiffieHellmanGroup returns the Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup {
+	_r := objc.Send[NEVPNIKEv2DiffieHellmanGroup](objref.IDOf(nesap), objc.RegisterName("diffieHellmanGroup"))
 	return _r
 }
 
-// SetDiffieHellmanGroup wraps the corresponding Objective-C method.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiffieHellmanGroup:"), diffieHellmanGroup)
-}
-
-// PostQuantumKeyExchangeMethods the post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
+// PostQuantumKeyExchangeMethods returns the post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
 //
 // PostQuantumKeyExchangeMethods returns the collection as a Go slice.
-func (x *NEVPNIKEv2SecurityAssociationParameters) PostQuantumKeyExchangeMethods() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postQuantumKeyExchangeMethods"))
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) PostQuantumKeyExchangeMethods() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(nesap), objc.RegisterName("postQuantumKeyExchangeMethods"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPostQuantumKeyExchangeMethods wraps the corresponding Objective-C method.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetPostQuantumKeyExchangeMethods(postQuantumKeyExchangeMethods []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostQuantumKeyExchangeMethods:"), purego.SliceToNSArray(postQuantumKeyExchangeMethods, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// LifetimeMinutes the life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
-func (x *NEVPNIKEv2SecurityAssociationParameters) LifetimeMinutes() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("lifetimeMinutes"))
+// LifetimeMinutes returns the life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
+func (nesap *NEVPNIKEv2SecurityAssociationParameters) LifetimeMinutes() int32 {
+	_r := objc.Send[int32](objref.IDOf(nesap), objc.RegisterName("lifetimeMinutes"))
 	return _r
 }
-
-// SetLifetimeMinutes wraps the corresponding Objective-C method.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetLifetimeMinutes(lifetimeMinutes int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetimeMinutes:"), lifetimeMinutes)
-}
-
-// NEVPNIKEv2SecurityAssociationParametersable is the interface implemented by [NEVPNIKEv2SecurityAssociationParameters], for mocking and DI.
-type NEVPNIKEv2SecurityAssociationParametersable interface {
-	obj.Object
-	WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters
-	WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters
-	WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters
-	WithPostQuantumKeyExchangeMethods(items ...obj.Object) *NEVPNIKEv2SecurityAssociationParameters
-	WithLifetimeMinutes(lifetimeMinutes int32) *NEVPNIKEv2SecurityAssociationParameters
-	EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm
-	SetEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm)
-	IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm
-	SetIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm)
-	DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup
-	SetDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup)
-	PostQuantumKeyExchangeMethods() []obj.Object
-	SetPostQuantumKeyExchangeMethods(postQuantumKeyExchangeMethods []obj.Object)
-	LifetimeMinutes() int32
-	SetLifetimeMinutes(lifetimeMinutes int32)
-}
-
-var _ NEVPNIKEv2SecurityAssociationParametersable = (*NEVPNIKEv2SecurityAssociationParameters)(nil)

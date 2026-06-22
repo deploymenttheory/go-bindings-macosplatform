@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -55,58 +56,58 @@ func NewURLSessionStreamTask() *URLSessionStreamTask {
 }
 
 // WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionStreamTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
-	return x
+func (usst *URLSessionStreamTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
+	return usst
 }
 
 // WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionStreamTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
-	return x
+func (usst *URLSessionStreamTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
+	return usst
 }
 
 // WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionStreamTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
-	return x
+func (usst *URLSessionStreamTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
+	return usst
 }
 
 // WithTaskDescription sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionStreamTask) WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
-	return x
+func (usst *URLSessionStreamTask) WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
+	return usst
 }
 
 // WithPriority sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionStreamTask) WithPriority(priority float32) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-	return x
+func (usst *URLSessionStreamTask) WithPriority(priority float32) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setPriority:"), priority)
+	return usst
 }
 
 // WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionStreamTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
-	return x
+func (usst *URLSessionStreamTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
+	return usst
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionStreamTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (usst *URLSessionStreamTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return usst
 }
 
 // WriteDataTimeout wraps the corresponding Objective-C method.
 //
 // WriteDataTimeout blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *Data, timeout float64) error {
+func (usst *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *Data, timeout float64) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeData:timeout:completionHandler:"), objref.IDOf(data), timeout, _block)
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("writeData:timeout:completionHandler:"), objref.IDOf(data), timeout, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -116,48 +117,28 @@ func (x *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *Data,
 }
 
 // CaptureStreams wraps the corresponding Objective-C method.
-func (x *URLSessionStreamTask) CaptureStreams() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureStreams"))
+func (usst *URLSessionStreamTask) CaptureStreams() {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("captureStreams"))
 }
 
 // CloseWrite wraps the corresponding Objective-C method.
-func (x *URLSessionStreamTask) CloseWrite() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeWrite"))
+func (usst *URLSessionStreamTask) CloseWrite() {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeWrite"))
 }
 
 // CloseRead wraps the corresponding Objective-C method.
-func (x *URLSessionStreamTask) CloseRead() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeRead"))
+func (usst *URLSessionStreamTask) CloseRead() {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeRead"))
 }
 
 // StartSecureConnection wraps the corresponding Objective-C method.
-func (x *URLSessionStreamTask) StartSecureConnection() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSecureConnection"))
+func (usst *URLSessionStreamTask) StartSecureConnection() {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("startSecureConnection"))
 }
 
 // StopSecureConnection wraps the corresponding Objective-C method.
-func (x *URLSessionStreamTask) StopSecureConnection() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSecureConnection"))
+func (usst *URLSessionStreamTask) StopSecureConnection() {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("stopSecureConnection"))
 }
-
-// URLSessionStreamTaskable is the interface implemented by [URLSessionStreamTask], for mocking and DI.
-type URLSessionStreamTaskable interface {
-	obj.Object
-	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask
-	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask
-	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask
-	WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask
-	WithPriority(priority float32) *URLSessionStreamTask
-	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionStreamTask
-	WriteDataTimeout(ctx context.Context, data *Data, timeout float64) error
-	CaptureStreams()
-	CloseWrite()
-	CloseRead()
-	StartSecureConnection()
-	StopSecureConnection()
-}
-
-var _ URLSessionStreamTaskable = (*URLSessionStreamTask)(nil)
 
 var _ URLSessionTaskProvider = (*URLSessionStreamTask)(nil)

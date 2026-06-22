@@ -62,31 +62,21 @@ func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReserv
 }
 
 // ReservationDuration wraps the corresponding Objective-C method.
-func (x *RestaurantReservation) ReservationDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationDuration"))
+func (rr *RestaurantReservation) ReservationDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // PartySize wraps the corresponding Objective-C method.
-func (x *RestaurantReservation) PartySize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partySize"))
+func (rr *RestaurantReservation) PartySize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("partySize"))
 	return obj.Wrap(_r)
 }
 
 // RestaurantLocation wraps the corresponding Objective-C method.
-func (x *RestaurantReservation) RestaurantLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restaurantLocation"))
+func (rr *RestaurantReservation) RestaurantLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("restaurantLocation"))
 	return obj.Wrap(_r)
 }
-
-// RestaurantReservationable is the interface implemented by [RestaurantReservation], for mocking and DI.
-type RestaurantReservationable interface {
-	obj.Object
-	ReservationDuration() *DateComponentsRange
-	PartySize() obj.Object
-	RestaurantLocation() obj.Object
-}
-
-var _ RestaurantReservationable = (*RestaurantReservation)(nil)
 
 var _ ReservationProvider = (*RestaurantReservation)(nil)

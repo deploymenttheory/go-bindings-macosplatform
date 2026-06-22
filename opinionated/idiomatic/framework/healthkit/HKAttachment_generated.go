@@ -46,24 +46,24 @@ func attachmentAdopt(id objc.ID) *Attachment {
 }
 
 // Description returns the object's -description text.
-func (x *Attachment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Attachment) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Attachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Attachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Attachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Attachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Attachment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Attachment) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAttachment creates a new Attachment.
@@ -72,54 +72,41 @@ func NewAttachment() *Attachment {
 	return attachmentAdopt(_id)
 }
 
-// Identifier a unique identifier of the receiver in the HealthKit database.
-func (x *Attachment) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a unique identifier of the receiver in the HealthKit database.
+func (a *Attachment) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // Name represents the name of the file.
-func (x *Attachment) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (a *Attachment) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ContentType the Uniform Type of the file.
-func (x *Attachment) ContentType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+// ContentType returns the Uniform Type of the file.
+func (a *Attachment) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
-// Size the size in bytes of the file.
-func (x *Attachment) Size() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("size"))
+// Size returns the size in bytes of the file.
+func (a *Attachment) Size() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("size"))
 	return _r
 }
 
-// CreationDate the date the receiver was created.
-func (x *Attachment) CreationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+// CreationDate returns the date the receiver was created.
+func (a *Attachment) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// Metadata extra information describing the attachment. Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
-func (x *Attachment) Metadata() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns extra information describing the attachment. Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
+func (a *Attachment) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
-
-// Attachmentable is the interface implemented by [Attachment], for mocking and DI.
-type Attachmentable interface {
-	obj.Object
-	Identifier() obj.Object
-	Name() string
-	ContentType() obj.Object
-	Size() int
-	CreationDate() obj.Object
-	Metadata() obj.Object
-}
-
-var _ Attachmentable = (*Attachment)(nil)

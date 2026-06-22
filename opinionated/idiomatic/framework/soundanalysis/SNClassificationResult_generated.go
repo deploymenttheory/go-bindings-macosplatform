@@ -46,24 +46,24 @@ func classificationResultAdopt(id objc.ID) *ClassificationResult {
 }
 
 // Description returns the object's -description text.
-func (x *ClassificationResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *ClassificationResult) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClassificationResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *ClassificationResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClassificationResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *ClassificationResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ClassificationResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *ClassificationResult) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // NewClassificationResult creates a new ClassificationResult.
@@ -73,24 +73,15 @@ func NewClassificationResult() *ClassificationResult {
 }
 
 // ClassificationForIdentifier returns the classification for an identifier.
-func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classificationForIdentifier:"), purego.NSString(identifier))
+func (cr *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("classificationForIdentifier:"), purego.NSString(identifier))
 	return ClassificationFromID(_r)
 }
 
-// Classifications all classification candidates, sorted with highest confidence first.
+// Classifications returns all classification candidates, sorted with highest confidence first.
 //
 // Classifications returns the collection as a Go slice.
-func (x *ClassificationResult) Classifications() []*Classification {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classifications"))
+func (cr *ClassificationResult) Classifications() []*Classification {
+	_arr := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("classifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Classification { return ClassificationFromID(_id) })
 }
-
-// ClassificationResultable is the interface implemented by [ClassificationResult], for mocking and DI.
-type ClassificationResultable interface {
-	obj.Object
-	ClassificationForIdentifier(identifier string) *Classification
-	Classifications() []*Classification
-}
-
-var _ ClassificationResultable = (*ClassificationResult)(nil)

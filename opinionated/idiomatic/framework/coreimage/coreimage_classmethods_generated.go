@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -12,7 +14,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DescriptorWithPayloadIsCompactLayerCountDataCodewordCount creates an Aztec code descriptor for the given payload and parameters.
@@ -784,19 +785,19 @@ func ApplyWithExtentInputsArgumentsError(extent corefoundation.CGRect, inputs []
 	return ImageFromID(_r), nil
 }
 
-// OutputFormat override this class property if you want your processor's output to be in a specific pixel format. The format must be one of `kCIFormatBGRA8`, `kCIFormatRGBAh`, `kCIFormatRGBAf` or `kCIFormatR8`. On iOS 12 and macOS 10.14, the formats `kCIFormatRh` and `kCIFormatRf` are also supported. If the outputFormat is `0`, then the output will be a supported format that best matches the rendering context's “/CIContext/workingFormat“. If a processor returns data in a color space other than the context working color space, then call “/CIImage/imageByColorMatchingColorSpaceToWorkingSpace:“ on the processor output. If a processor returns data as alpha-unpremultiplied RGBA data, then call, “/CIImage/imageByPremultiplyingAlpha“ on the processor output.
+// OutputFormat returns override this class property if you want your processor's output to be in a specific pixel format. The format must be one of `kCIFormatBGRA8`, `kCIFormatRGBAh`, `kCIFormatRGBAf` or `kCIFormatR8`. On iOS 12 and macOS 10.14, the formats `kCIFormatRh` and `kCIFormatRf` are also supported. If the outputFormat is `0`, then the output will be a supported format that best matches the rendering context's “/CIContext/workingFormat“. If a processor returns data in a color space other than the context working color space, then call “/CIImage/imageByColorMatchingColorSpaceToWorkingSpace:“ on the processor output. If a processor returns data as alpha-unpremultiplied RGBA data, then call, “/CIImage/imageByPremultiplyingAlpha“ on the processor output.
 func OutputFormat() int {
 	_r := objc.Send[int](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("outputFormat"))
 	return _r
 }
 
-// OutputIsOpaque override this class property if your processor's output stores 1.0 into the alpha channel of all pixels within the output extent. If not overridden, false is returned.
+// OutputIsOpaque reports whether override this class property if your processor's output stores 1.0 into the alpha channel of all pixels within the output extent. If not overridden, false is returned.
 func OutputIsOpaque() bool {
 	_r := objc.Send[bool](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("outputIsOpaque"))
 	return _r
 }
 
-// SynchronizeInputs override this class property to return false if you want your processor to be given input objects that have not been synchronized for CPU access. Generally, if your subclass uses the GPU your should override this method to return false. If not overridden, true is returned.
+// SynchronizeInputs reports whether override this class property to return false if you want your processor to be given input objects that have not been synchronized for CPU access. Generally, if your subclass uses the GPU your should override this method to return false. If not overridden, true is returned.
 func SynchronizeInputs() bool {
 	_r := objc.Send[bool](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("synchronizeInputs"))
 	return _r

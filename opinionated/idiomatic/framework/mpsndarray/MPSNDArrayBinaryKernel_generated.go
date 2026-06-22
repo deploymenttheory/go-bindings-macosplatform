@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,17 +43,10 @@ func arrayBinaryKernelAdopt(id objc.ID) *ArrayBinaryKernel {
 	return x
 }
 
-// ArrayBinaryKernelable is the interface implemented by [ArrayBinaryKernel], for mocking and DI.
-type ArrayBinaryKernelable interface {
-	obj.Object
-}
-
-var _ ArrayBinaryKernelable = (*ArrayBinaryKernel)(nil)
-
 // isArrayBinaryKernel marks ArrayBinaryKernel — and, by embedding promotion, its
 // subclasses — as a member of the ArrayBinaryKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayBinaryKernel) isArrayBinaryKernel() {}
+func (abk *ArrayBinaryKernel) isArrayBinaryKernel() {}
 
 var _ ArrayBinaryKernelProvider = (*ArrayBinaryKernel)(nil)
 

@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewArithmeticLayer() *ArithmeticLayer {
 	return arithmeticLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ArithmeticLayer) WithLabel(label string) *ArithmeticLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (al *ArithmeticLayer) WithLabel(label string) *ArithmeticLayer {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return al
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ArithmeticLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (al *ArithmeticLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return al
 }
 
-// Operation the arithmetic operation.
-func (x *ArithmeticLayer) Operation() ArithmeticOperation {
-	_r := objc.Send[ArithmeticOperation](objref.IDOf(x), objc.RegisterName("operation"))
+// Operation returns the arithmetic operation.
+func (al *ArithmeticLayer) Operation() ArithmeticOperation {
+	_r := objc.Send[ArithmeticOperation](objref.IDOf(al), objc.RegisterName("operation"))
 	return _r
 }
-
-// ArithmeticLayerable is the interface implemented by [ArithmeticLayer], for mocking and DI.
-type ArithmeticLayerable interface {
-	obj.Object
-	WithLabel(label string) *ArithmeticLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer
-	Operation() ArithmeticOperation
-}
-
-var _ ArithmeticLayerable = (*ArithmeticLayer)(nil)
 
 var _ LayerProvider = (*ArithmeticLayer)(nil)

@@ -7,7 +7,6 @@ package authenticationservices
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,79 +51,48 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest() *Authoriza
 	return authorizationSecurityKeyPublicKeyCredentialAssertionRequestAdopt(_id)
 }
 
-// WithAllowedCredentials an array of allowed credentials.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*AuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+// WithAllowedCredentials sets an array of allowed credentials.
+func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*AuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	_arr := purego.SliceToNSArray(items, func(_v *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedCredentials:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("setAllowedCredentials:"), _arr)
+	return askpkcar
 }
 
-// WithAppID use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAppID(appID string) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppID:"), purego.NSString(appID))
-	return x
+// WithAppID sets use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
+func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAppID(appID string) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("setAppID:"), purego.NSString(appID))
+	return askpkcar
 }
 
 // WithPrf sets the property and returns the receiver so calls can be chained.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
-	return x
+func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("setPrf:"), objref.IDOf(prf))
+	return askpkcar
 }
 
-// AllowedCredentials a list of descriptors indicating credentials that may be used to sign in. If this is non-empty, only credentials matching the provided descriptors can be used when authenticating.
+// AllowedCredentials returns a list of descriptors indicating credentials that may be used to sign in. If this is non-empty, only credentials matching the provided descriptors can be used when authenticating.
 //
 // AllowedCredentials returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedCredentials"))
+func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("allowedCredentials"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 		return AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(_id)
 	})
 }
 
-// SetAllowedCredentials wraps the corresponding Objective-C method.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetAllowedCredentials(allowedCredentials []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedCredentials:"), purego.SliceToNSArray(allowedCredentials, func(_v *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) objc.ID { return objref.IDOf(_v) }))
-}
-
-// AppID use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AppID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appID"))
+// AppID returns use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
+func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AppID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("appID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetAppID wraps the corresponding Objective-C method.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetAppID(appID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppID:"), purego.NSString(appID))
-}
-
 // Prf wraps the corresponding Objective-C method.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputFromID(_r)
 }
-
-// SetPrf wraps the corresponding Objective-C method.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
-}
-
-// AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest], for mocking and DI.
-type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable interface {
-	obj.Object
-	WithAllowedCredentials(items ...*AuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
-	WithAppID(appID string) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
-	WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
-	AllowedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor
-	SetAllowedCredentials(allowedCredentials []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor)
-	AppID() string
-	SetAppID(appID string)
-	Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput
-	SetPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput)
-}
-
-var _ AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable = (*AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest)(nil)
 
 var _ AuthorizationRequestProvider = (*AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest)(nil)

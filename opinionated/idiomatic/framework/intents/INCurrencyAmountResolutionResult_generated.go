@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewCurrencyAmountResolutionResult() *CurrencyAmountResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INCurrencyAmountResolutionResult")), objc.RegisterName("new"))
 	return currencyAmountResolutionResultAdopt(_id)
 }
-
-// CurrencyAmountResolutionResultable is the interface implemented by [CurrencyAmountResolutionResult], for mocking and DI.
-type CurrencyAmountResolutionResultable interface {
-	obj.Object
-}
-
-var _ CurrencyAmountResolutionResultable = (*CurrencyAmountResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*CurrencyAmountResolutionResult)(nil)

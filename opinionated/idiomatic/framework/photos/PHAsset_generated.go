@@ -53,92 +53,92 @@ func NewAsset() *Asset {
 }
 
 // CanPerformEditOperation returns whether the asset supports the specified editing operation.
-func (x *Asset) CanPerformEditOperation(editOperation AssetEditOperation) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformEditOperation:"), editOperation)
+func (a *Asset) CanPerformEditOperation(editOperation AssetEditOperation) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("canPerformEditOperation:"), editOperation)
 	return _r
 }
 
 // PlaybackStyle wraps the corresponding Objective-C method.
-func (x *Asset) PlaybackStyle() AssetPlaybackStyle {
-	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(x), objc.RegisterName("playbackStyle"))
+func (a *Asset) PlaybackStyle() AssetPlaybackStyle {
+	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(a), objc.RegisterName("playbackStyle"))
 	return _r
 }
 
 // MediaType wraps the corresponding Objective-C method.
-func (x *Asset) MediaType() AssetMediaType {
-	_r := objc.Send[AssetMediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
+func (a *Asset) MediaType() AssetMediaType {
+	_r := objc.Send[AssetMediaType](objref.IDOf(a), objc.RegisterName("mediaType"))
 	return _r
 }
 
 // MediaSubtypes wraps the corresponding Objective-C method.
-func (x *Asset) MediaSubtypes() AssetMediaSubtype {
-	_r := objc.Send[AssetMediaSubtype](objref.IDOf(x), objc.RegisterName("mediaSubtypes"))
+func (a *Asset) MediaSubtypes() AssetMediaSubtype {
+	_r := objc.Send[AssetMediaSubtype](objref.IDOf(a), objc.RegisterName("mediaSubtypes"))
 	return _r
 }
 
-// ContentType the type of image or video data that is presented for the asset
-func (x *Asset) ContentType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+// ContentType returns the type of image or video data that is presented for the asset
+func (a *Asset) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
 // PixelWidth wraps the corresponding Objective-C method.
-func (x *Asset) PixelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelWidth"))
+func (a *Asset) PixelWidth() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("pixelWidth"))
 	return _r
 }
 
 // PixelHeight wraps the corresponding Objective-C method.
-func (x *Asset) PixelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelHeight"))
+func (a *Asset) PixelHeight() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("pixelHeight"))
 	return _r
 }
 
-// CreationDate the date and time of this asset's creation (can be updated by the user)
-func (x *Asset) CreationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+// CreationDate returns the date and time of this asset's creation (can be updated by the user)
+func (a *Asset) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// ModificationDate the date and time of the last modification to this asset or one of its properties
-func (x *Asset) ModificationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+// ModificationDate returns the date and time of the last modification to this asset or one of its properties
+func (a *Asset) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
 
-// AddedDate the date and time this asset was added to the photo library (from the device that was used to add this asset)
-func (x *Asset) AddedDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedDate"))
+// AddedDate returns the date and time this asset was added to the photo library (from the device that was used to add this asset)
+func (a *Asset) AddedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addedDate"))
 	return obj.Wrap(_r)
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *Asset) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (a *Asset) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
 // IsHidden wraps the corresponding Objective-C method.
-func (x *Asset) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+func (a *Asset) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // IsFavorite wraps the corresponding Objective-C method.
-func (x *Asset) IsFavorite() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFavorite"))
+func (a *Asset) IsFavorite() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isFavorite"))
 	return _r
 }
 
 // IsSyncFailureHidden wraps the corresponding Objective-C method.
-func (x *Asset) IsSyncFailureHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSyncFailureHidden"))
+func (a *Asset) IsSyncFailureHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isSyncFailureHidden"))
 	return _r
 }
 
 // BurstIdentifier wraps the corresponding Objective-C method.
-func (x *Asset) BurstIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("burstIdentifier"))
+func (a *Asset) BurstIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("burstIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -146,32 +146,32 @@ func (x *Asset) BurstIdentifier() string {
 }
 
 // BurstSelectionTypes wraps the corresponding Objective-C method.
-func (x *Asset) BurstSelectionTypes() AssetBurstSelectionType {
-	_r := objc.Send[AssetBurstSelectionType](objref.IDOf(x), objc.RegisterName("burstSelectionTypes"))
+func (a *Asset) BurstSelectionTypes() AssetBurstSelectionType {
+	_r := objc.Send[AssetBurstSelectionType](objref.IDOf(a), objc.RegisterName("burstSelectionTypes"))
 	return _r
 }
 
 // RepresentsBurst wraps the corresponding Objective-C method.
-func (x *Asset) RepresentsBurst() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("representsBurst"))
+func (a *Asset) RepresentsBurst() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("representsBurst"))
 	return _r
 }
 
 // SourceType wraps the corresponding Objective-C method.
-func (x *Asset) SourceType() AssetSourceType {
-	_r := objc.Send[AssetSourceType](objref.IDOf(x), objc.RegisterName("sourceType"))
+func (a *Asset) SourceType() AssetSourceType {
+	_r := objc.Send[AssetSourceType](objref.IDOf(a), objc.RegisterName("sourceType"))
 	return _r
 }
 
 // HasAdjustments wraps the corresponding Objective-C method.
-func (x *Asset) HasAdjustments() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAdjustments"))
+func (a *Asset) HasAdjustments() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasAdjustments"))
 	return _r
 }
 
 // AdjustmentFormatIdentifier wraps the corresponding Objective-C method.
-func (x *Asset) AdjustmentFormatIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentFormatIdentifier"))
+func (a *Asset) AdjustmentFormatIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("adjustmentFormatIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -179,43 +179,14 @@ func (x *Asset) AdjustmentFormatIdentifier() string {
 }
 
 // RequestContentEditingInputWithOptionsCompletionHandler requests asset information for beginning a content editing session.
-func (x *Asset) RequestContentEditingInputWithOptionsCompletionHandler(options *ContentEditingInputRequestOptions, completionHandler func(obj.Object, obj.Object)) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestContentEditingInputWithOptions:completionHandler:"), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { completionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+func (a *Asset) RequestContentEditingInputWithOptionsCompletionHandler(options *ContentEditingInputRequestOptions, completionHandler func(obj.Object, obj.Object)) int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("requestContentEditingInputWithOptions:completionHandler:"), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { completionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
 // CancelContentEditingInputRequest cancels a request for editing the asset’s content.
-func (x *Asset) CancelContentEditingInputRequest(requestID int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelContentEditingInputRequest:"), requestID)
+func (a *Asset) CancelContentEditingInputRequest(requestID int) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("cancelContentEditingInputRequest:"), requestID)
 }
-
-// Assetable is the interface implemented by [Asset], for mocking and DI.
-type Assetable interface {
-	obj.Object
-	CanPerformEditOperation(editOperation AssetEditOperation) bool
-	PlaybackStyle() AssetPlaybackStyle
-	MediaType() AssetMediaType
-	MediaSubtypes() AssetMediaSubtype
-	ContentType() obj.Object
-	PixelWidth() int
-	PixelHeight() int
-	CreationDate() obj.Object
-	ModificationDate() obj.Object
-	AddedDate() obj.Object
-	Duration() float64
-	IsHidden() bool
-	IsFavorite() bool
-	IsSyncFailureHidden() bool
-	BurstIdentifier() string
-	BurstSelectionTypes() AssetBurstSelectionType
-	RepresentsBurst() bool
-	SourceType() AssetSourceType
-	HasAdjustments() bool
-	AdjustmentFormatIdentifier() string
-	RequestContentEditingInputWithOptionsCompletionHandler(options *ContentEditingInputRequestOptions, completionHandler func(obj.Object, obj.Object)) int
-	CancelContentEditingInputRequest(requestID int)
-}
-
-var _ Assetable = (*Asset)(nil)
 
 var _ ObjectProvider = (*Asset)(nil)

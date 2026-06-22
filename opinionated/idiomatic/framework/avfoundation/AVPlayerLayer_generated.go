@@ -47,24 +47,24 @@ func playerLayerAdopt(id objc.ID) *PlayerLayer {
 }
 
 // Description returns the object's -description text.
-func (x *PlayerLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pl *PlayerLayer) Description() string {
+	return rt.Description(objref.IDOf(pl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pl *PlayerLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pl *PlayerLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pl *PlayerLayer) String() string {
+	return rt.Description(objref.IDOf(pl))
 }
 
 // NewPlayerLayer creates a new PlayerLayer.
@@ -73,95 +73,60 @@ func NewPlayerLayer() *PlayerLayer {
 	return playerLayerAdopt(_id)
 }
 
-// WithPlayer the player whose visual content the layer displays.
-func (x *PlayerLayer) WithPlayer(player PlayerProvider) *PlayerLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-	return x
+// WithPlayer sets the player whose visual content the layer displays.
+func (pl *PlayerLayer) WithPlayer(player PlayerProvider) *PlayerLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	return pl
 }
 
-// WithVideoGravity a value that specifies how the layer displays the player’s visual content within the layer’s bounds.
-func (x *PlayerLayer) WithVideoGravity(videoGravity obj.Object) *PlayerLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-	return x
+// WithVideoGravity sets a value that specifies how the layer displays the player’s visual content within the layer’s bounds.
+func (pl *PlayerLayer) WithVideoGravity(videoGravity obj.Object) *PlayerLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
+	return pl
 }
 
-// WithPixelBufferAttributes the attributes of the visual output that displays in the player layer during playback.
-func (x *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *PlayerLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
-	return x
+// WithPixelBufferAttributes sets the attributes of the visual output that displays in the player layer during playback.
+func (pl *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *PlayerLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+	return pl
 }
 
 // SetCaptionPreviewProfileIDPositionText starts displaying a caption preview with the specified accessibility profile.
-func (x *PlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptionPreviewProfileID:position:text:"), purego.NSString(profileID), position, purego.NSString(text))
+func (pl *PlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setCaptionPreviewProfileID:position:text:"), purego.NSString(profileID), position, purego.NSString(text))
 }
 
 // StopShowingCaptionPreview stops showing the caption preview.
-func (x *PlayerLayer) StopShowingCaptionPreview() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopShowingCaptionPreview"))
+func (pl *PlayerLayer) StopShowingCaptionPreview() {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("stopShowingCaptionPreview"))
 }
 
 // Player indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
-func (x *PlayerLayer) Player() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+func (pl *PlayerLayer) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
-// SetPlayer wraps the corresponding Objective-C method.
-func (x *PlayerLayer) SetPlayer(player *Player) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-}
-
-// VideoGravity a string defining how the video is displayed within an AVPlayerLayer bounds rect.
-func (x *PlayerLayer) VideoGravity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoGravity"))
+// VideoGravity returns a string defining how the video is displayed within an AVPlayerLayer bounds rect.
+func (pl *PlayerLayer) VideoGravity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("videoGravity"))
 	return obj.Wrap(_r)
 }
 
-// SetVideoGravity wraps the corresponding Objective-C method.
-func (x *PlayerLayer) SetVideoGravity(videoGravity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-}
-
-// IsReadyForDisplay boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
-func (x *PlayerLayer) IsReadyForDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyForDisplay"))
+// IsReadyForDisplay reports whether boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
+func (pl *PlayerLayer) IsReadyForDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("isReadyForDisplay"))
 	return _r
 }
 
-// VideoRect the current size and position of the video image as displayed within the receiver's bounds.
-func (x *PlayerLayer) VideoRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("videoRect"))
+// VideoRect returns the current size and position of the video image as displayed within the receiver's bounds.
+func (pl *PlayerLayer) VideoRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pl), objc.RegisterName("videoRect"))
 	return _r
 }
 
-// PixelBufferAttributes the client requirements for the visual output displayed in AVPlayerLayer during playback. Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
-func (x *PlayerLayer) PixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBufferAttributes"))
+// PixelBufferAttributes returns the client requirements for the visual output displayed in AVPlayerLayer during playback. Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
+func (pl *PlayerLayer) PixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("pixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
-
-// SetPixelBufferAttributes wraps the corresponding Objective-C method.
-func (x *PlayerLayer) SetPixelBufferAttributes(pixelBufferAttributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
-}
-
-// PlayerLayerable is the interface implemented by [PlayerLayer], for mocking and DI.
-type PlayerLayerable interface {
-	obj.Object
-	WithPlayer(player PlayerProvider) *PlayerLayer
-	WithVideoGravity(videoGravity obj.Object) *PlayerLayer
-	WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *PlayerLayer
-	SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string)
-	StopShowingCaptionPreview()
-	Player() *Player
-	SetPlayer(player *Player)
-	VideoGravity() obj.Object
-	SetVideoGravity(videoGravity obj.Object)
-	IsReadyForDisplay() bool
-	VideoRect() corefoundation.CGRect
-	PixelBufferAttributes() obj.Object
-	SetPixelBufferAttributes(pixelBufferAttributes obj.Object)
-}
-
-var _ PlayerLayerable = (*PlayerLayer)(nil)

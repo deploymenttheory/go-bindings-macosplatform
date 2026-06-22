@@ -46,24 +46,24 @@ func signpostIntervalDataAdopt(id objc.ID) *SignpostIntervalData {
 }
 
 // Description returns the object's -description text.
-func (x *SignpostIntervalData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sid *SignpostIntervalData) Description() string {
+	return rt.Description(objref.IDOf(sid))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SignpostIntervalData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sid *SignpostIntervalData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sid), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SignpostIntervalData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sid *SignpostIntervalData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sid), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SignpostIntervalData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sid *SignpostIntervalData) String() string {
+	return rt.Description(objref.IDOf(sid))
 }
 
 // NewSignpostIntervalData creates a new SignpostIntervalData.
@@ -72,44 +72,32 @@ func NewSignpostIntervalData() *SignpostIntervalData {
 	return signpostIntervalDataAdopt(_id)
 }
 
-// HistogrammedSignpostDuration a histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
-func (x *SignpostIntervalData) HistogrammedSignpostDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedSignpostDuration"))
+// HistogrammedSignpostDuration returns a histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
+func (sid *SignpostIntervalData) HistogrammedSignpostDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("histogrammedSignpostDuration"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeCPUTime cumulative CPU time aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-func (x *SignpostIntervalData) CumulativeCPUTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUTime"))
+// CumulativeCPUTime returns cumulative CPU time aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (sid *SignpostIntervalData) CumulativeCPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("cumulativeCPUTime"))
 	return obj.Wrap(_r)
 }
 
-// AverageMemory average value of memory snapshots taken at beginning and end of MXSignpost intervals This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-func (x *SignpostIntervalData) AverageMemory() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageMemory"))
+// AverageMemory returns average value of memory snapshots taken at beginning and end of MXSignpost intervals This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (sid *SignpostIntervalData) AverageMemory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("averageMemory"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeLogicalWrites cumulative logical writes aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-func (x *SignpostIntervalData) CumulativeLogicalWrites() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeLogicalWrites"))
+// CumulativeLogicalWrites returns cumulative logical writes aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (sid *SignpostIntervalData) CumulativeLogicalWrites() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("cumulativeLogicalWrites"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeHitchTimeRatio cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-func (x *SignpostIntervalData) CumulativeHitchTimeRatio() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeHitchTimeRatio"))
+// CumulativeHitchTimeRatio returns cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (sid *SignpostIntervalData) CumulativeHitchTimeRatio() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("cumulativeHitchTimeRatio"))
 	return obj.Wrap(_r)
 }
-
-// SignpostIntervalDataable is the interface implemented by [SignpostIntervalData], for mocking and DI.
-type SignpostIntervalDataable interface {
-	obj.Object
-	HistogrammedSignpostDuration() obj.Object
-	CumulativeCPUTime() obj.Object
-	AverageMemory() obj.Object
-	CumulativeLogicalWrites() obj.Object
-	CumulativeHitchTimeRatio() obj.Object
-}
-
-var _ SignpostIntervalDataable = (*SignpostIntervalData)(nil)

@@ -47,24 +47,24 @@ func sampleLocationAdopt(id objc.ID) *SampleLocation {
 }
 
 // Description returns the object's -description text.
-func (x *SampleLocation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sl *SampleLocation) Description() string {
+	return rt.Description(objref.IDOf(sl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleLocation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sl *SampleLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleLocation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sl *SampleLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SampleLocation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sl *SampleLocation) String() string {
+	return rt.Description(objref.IDOf(sl))
 }
 
 // NewSampleLocationWithByteSourceSampleLocation creates a sample location object with the byte source and sample location that you specify.
@@ -74,23 +74,14 @@ func NewSampleLocationWithByteSourceSampleLocation(byteSource *ByteSource, sampl
 	return sampleLocationAdopt(_id)
 }
 
-// SampleLocation the starting file offset and size in bytes of the sample.
-func (x *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
-	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("sampleLocation"))
+// SampleLocation returns the starting file offset and size in bytes of the sample.
+func (sl *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(sl), objc.RegisterName("sampleLocation"))
 	return _r
 }
 
-// ByteSource the MEByteSource to be used to read the data for the sample.
-func (x *SampleLocation) ByteSource() *ByteSource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
+// ByteSource returns the MEByteSource to be used to read the data for the sample.
+func (sl *SampleLocation) ByteSource() *ByteSource {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("byteSource"))
 	return ByteSourceFromID(_r)
 }
-
-// SampleLocationable is the interface implemented by [SampleLocation], for mocking and DI.
-type SampleLocationable interface {
-	obj.Object
-	SampleLocation() avfoundation.AVSampleCursorStorageRange
-	ByteSource() *ByteSource
-}
-
-var _ SampleLocationable = (*SampleLocation)(nil)

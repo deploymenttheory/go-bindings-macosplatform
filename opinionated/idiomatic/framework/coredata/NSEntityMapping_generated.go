@@ -46,24 +46,24 @@ func entityMappingAdopt(id objc.ID) *EntityMapping {
 }
 
 // Description returns the object's -description text.
-func (x *EntityMapping) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (em *EntityMapping) Description() string {
+	return rt.Description(objref.IDOf(em))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EntityMapping) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (em *EntityMapping) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(em), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EntityMapping) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (em *EntityMapping) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(em), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EntityMapping) String() string {
-	return rt.Description(objref.IDOf(x))
+func (em *EntityMapping) String() string {
+	return rt.Description(objref.IDOf(em))
 }
 
 // NewEntityMapping creates a new EntityMapping.
@@ -72,247 +72,152 @@ func NewEntityMapping() *EntityMapping {
 	return entityMappingAdopt(_id)
 }
 
-// WithName the name of the entity mapping.
-func (x *EntityMapping) WithName(name string) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the entity mapping.
+func (em *EntityMapping) WithName(name string) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setName:"), purego.NSString(name))
+	return em
 }
 
-// WithMappingType the mapping type for the entity mapping.
-func (x *EntityMapping) WithMappingType(mappingType EntityMappingType) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMappingType:"), mappingType)
-	return x
+// WithMappingType sets the mapping type for the entity mapping.
+func (em *EntityMapping) WithMappingType(mappingType EntityMappingType) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setMappingType:"), mappingType)
+	return em
 }
 
-// WithSourceEntityName the source entity name for the entity mapping.
-func (x *EntityMapping) WithSourceEntityName(sourceEntityName string) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceEntityName:"), purego.NSString(sourceEntityName))
-	return x
+// WithSourceEntityName sets the source entity name for the entity mapping.
+func (em *EntityMapping) WithSourceEntityName(sourceEntityName string) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setSourceEntityName:"), purego.NSString(sourceEntityName))
+	return em
 }
 
-// WithSourceEntityVersionHash the version hash of the source entity for the entity mapping.
-func (x *EntityMapping) WithSourceEntityVersionHash(sourceEntityVersionHash obj.Object) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceEntityVersionHash:"), objref.IDOf(sourceEntityVersionHash))
-	return x
+// WithSourceEntityVersionHash sets the version hash of the source entity for the entity mapping.
+func (em *EntityMapping) WithSourceEntityVersionHash(sourceEntityVersionHash obj.Object) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setSourceEntityVersionHash:"), objref.IDOf(sourceEntityVersionHash))
+	return em
 }
 
-// WithDestinationEntityName the destination entity name for the entity mapping.
-func (x *EntityMapping) WithDestinationEntityName(destinationEntityName string) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationEntityName:"), purego.NSString(destinationEntityName))
-	return x
+// WithDestinationEntityName sets the destination entity name for the entity mapping.
+func (em *EntityMapping) WithDestinationEntityName(destinationEntityName string) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setDestinationEntityName:"), purego.NSString(destinationEntityName))
+	return em
 }
 
-// WithDestinationEntityVersionHash the version hash for the destination entity for the entity mapping.
-func (x *EntityMapping) WithDestinationEntityVersionHash(destinationEntityVersionHash obj.Object) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationEntityVersionHash:"), objref.IDOf(destinationEntityVersionHash))
-	return x
+// WithDestinationEntityVersionHash sets the version hash for the destination entity for the entity mapping.
+func (em *EntityMapping) WithDestinationEntityVersionHash(destinationEntityVersionHash obj.Object) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setDestinationEntityVersionHash:"), objref.IDOf(destinationEntityVersionHash))
+	return em
 }
 
-// WithAttributeMappings the array of attribute mappings for the entity mapping.
-func (x *EntityMapping) WithAttributeMappings(items ...*PropertyMapping) *EntityMapping {
+// WithAttributeMappings sets the array of attribute mappings for the entity mapping.
+func (em *EntityMapping) WithAttributeMappings(items ...*PropertyMapping) *EntityMapping {
 	_arr := purego.SliceToNSArray(items, func(_v *PropertyMapping) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeMappings:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setAttributeMappings:"), _arr)
+	return em
 }
 
-// WithRelationshipMappings the array of relationship mappings for the entity mapping.
-func (x *EntityMapping) WithRelationshipMappings(items ...*PropertyMapping) *EntityMapping {
+// WithRelationshipMappings sets the array of relationship mappings for the entity mapping.
+func (em *EntityMapping) WithRelationshipMappings(items ...*PropertyMapping) *EntityMapping {
 	_arr := purego.SliceToNSArray(items, func(_v *PropertyMapping) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelationshipMappings:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setRelationshipMappings:"), _arr)
+	return em
 }
 
-// WithSourceExpression the source expression for the entity mapping.
-func (x *EntityMapping) WithSourceExpression(sourceExpression obj.Object) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceExpression:"), objref.IDOf(sourceExpression))
-	return x
+// WithSourceExpression sets the source expression for the entity mapping.
+func (em *EntityMapping) WithSourceExpression(sourceExpression obj.Object) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setSourceExpression:"), objref.IDOf(sourceExpression))
+	return em
 }
 
-// WithUserInfo the user info dictionary for the entity mapping.
-func (x *EntityMapping) WithUserInfo(userInfo obj.Object) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info dictionary for the entity mapping.
+func (em *EntityMapping) WithUserInfo(userInfo obj.Object) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return em
 }
 
-// WithEntityMigrationPolicyClassName the class name of the migration policy for the entity mapping.
-func (x *EntityMapping) WithEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityMigrationPolicyClassName:"), purego.NSString(entityMigrationPolicyClassName))
-	return x
+// WithEntityMigrationPolicyClassName sets the class name of the migration policy for the entity mapping.
+func (em *EntityMapping) WithEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setEntityMigrationPolicyClassName:"), purego.NSString(entityMigrationPolicyClassName))
+	return em
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *EntityMapping) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (em *EntityMapping) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // MappingType wraps the corresponding Objective-C method.
-func (x *EntityMapping) MappingType() EntityMappingType {
-	_r := objc.Send[EntityMappingType](objref.IDOf(x), objc.RegisterName("mappingType"))
+func (em *EntityMapping) MappingType() EntityMappingType {
+	_r := objc.Send[EntityMappingType](objref.IDOf(em), objc.RegisterName("mappingType"))
 	return _r
 }
 
-// SetMappingType wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetMappingType(mappingType EntityMappingType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMappingType:"), mappingType)
-}
-
 // SourceEntityName wraps the corresponding Objective-C method.
-func (x *EntityMapping) SourceEntityName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceEntityName"))
+func (em *EntityMapping) SourceEntityName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceEntityName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetSourceEntityName wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetSourceEntityName(sourceEntityName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceEntityName:"), purego.NSString(sourceEntityName))
 }
 
 // SourceEntityVersionHash wraps the corresponding Objective-C method.
-func (x *EntityMapping) SourceEntityVersionHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceEntityVersionHash"))
+func (em *EntityMapping) SourceEntityVersionHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceEntityVersionHash"))
 	return obj.Wrap(_r)
 }
 
-// SetSourceEntityVersionHash wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetSourceEntityVersionHash(sourceEntityVersionHash obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceEntityVersionHash:"), objref.IDOf(sourceEntityVersionHash))
-}
-
 // DestinationEntityName wraps the corresponding Objective-C method.
-func (x *EntityMapping) DestinationEntityName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationEntityName"))
+func (em *EntityMapping) DestinationEntityName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("destinationEntityName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDestinationEntityName wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetDestinationEntityName(destinationEntityName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationEntityName:"), purego.NSString(destinationEntityName))
-}
-
 // DestinationEntityVersionHash wraps the corresponding Objective-C method.
-func (x *EntityMapping) DestinationEntityVersionHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationEntityVersionHash"))
+func (em *EntityMapping) DestinationEntityVersionHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("destinationEntityVersionHash"))
 	return obj.Wrap(_r)
-}
-
-// SetDestinationEntityVersionHash wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetDestinationEntityVersionHash(destinationEntityVersionHash obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationEntityVersionHash:"), objref.IDOf(destinationEntityVersionHash))
 }
 
 // AttributeMappings wraps the corresponding Objective-C method.
 //
 // AttributeMappings returns the collection as a Go slice.
-func (x *EntityMapping) AttributeMappings() []*PropertyMapping {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeMappings"))
+func (em *EntityMapping) AttributeMappings() []*PropertyMapping {
+	_arr := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("attributeMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyMapping { return PropertyMappingFromID(_id) })
-}
-
-// SetAttributeMappings wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetAttributeMappings(attributeMappings []*PropertyMapping) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeMappings:"), purego.SliceToNSArray(attributeMappings, func(_v *PropertyMapping) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RelationshipMappings wraps the corresponding Objective-C method.
 //
 // RelationshipMappings returns the collection as a Go slice.
-func (x *EntityMapping) RelationshipMappings() []*PropertyMapping {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relationshipMappings"))
+func (em *EntityMapping) RelationshipMappings() []*PropertyMapping {
+	_arr := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("relationshipMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyMapping { return PropertyMappingFromID(_id) })
 }
 
-// SetRelationshipMappings wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetRelationshipMappings(relationshipMappings []*PropertyMapping) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelationshipMappings:"), purego.SliceToNSArray(relationshipMappings, func(_v *PropertyMapping) objc.ID { return objref.IDOf(_v) }))
-}
-
 // SourceExpression wraps the corresponding Objective-C method.
-func (x *EntityMapping) SourceExpression() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceExpression"))
+func (em *EntityMapping) SourceExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceExpression"))
 	return obj.Wrap(_r)
-}
-
-// SetSourceExpression wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetSourceExpression(sourceExpression obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceExpression:"), objref.IDOf(sourceExpression))
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *EntityMapping) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (em *EntityMapping) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// SetUserInfo wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetUserInfo(userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-}
-
 // EntityMigrationPolicyClassName wraps the corresponding Objective-C method.
-func (x *EntityMapping) EntityMigrationPolicyClassName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityMigrationPolicyClassName"))
+func (em *EntityMapping) EntityMigrationPolicyClassName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("entityMigrationPolicyClassName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetEntityMigrationPolicyClassName wraps the corresponding Objective-C method.
-func (x *EntityMapping) SetEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityMigrationPolicyClassName:"), purego.NSString(entityMigrationPolicyClassName))
-}
-
-// EntityMappingable is the interface implemented by [EntityMapping], for mocking and DI.
-type EntityMappingable interface {
-	obj.Object
-	WithName(name string) *EntityMapping
-	WithMappingType(mappingType EntityMappingType) *EntityMapping
-	WithSourceEntityName(sourceEntityName string) *EntityMapping
-	WithSourceEntityVersionHash(sourceEntityVersionHash obj.Object) *EntityMapping
-	WithDestinationEntityName(destinationEntityName string) *EntityMapping
-	WithDestinationEntityVersionHash(destinationEntityVersionHash obj.Object) *EntityMapping
-	WithAttributeMappings(items ...*PropertyMapping) *EntityMapping
-	WithRelationshipMappings(items ...*PropertyMapping) *EntityMapping
-	WithSourceExpression(sourceExpression obj.Object) *EntityMapping
-	WithUserInfo(userInfo obj.Object) *EntityMapping
-	WithEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) *EntityMapping
-	Name() string
-	SetName(name string)
-	MappingType() EntityMappingType
-	SetMappingType(mappingType EntityMappingType)
-	SourceEntityName() string
-	SetSourceEntityName(sourceEntityName string)
-	SourceEntityVersionHash() obj.Object
-	SetSourceEntityVersionHash(sourceEntityVersionHash obj.Object)
-	DestinationEntityName() string
-	SetDestinationEntityName(destinationEntityName string)
-	DestinationEntityVersionHash() obj.Object
-	SetDestinationEntityVersionHash(destinationEntityVersionHash obj.Object)
-	AttributeMappings() []*PropertyMapping
-	SetAttributeMappings(attributeMappings []*PropertyMapping)
-	RelationshipMappings() []*PropertyMapping
-	SetRelationshipMappings(relationshipMappings []*PropertyMapping)
-	SourceExpression() obj.Object
-	SetSourceExpression(sourceExpression obj.Object)
-	UserInfo() obj.Object
-	SetUserInfo(userInfo obj.Object)
-	EntityMigrationPolicyClassName() string
-	SetEntityMigrationPolicyClassName(entityMigrationPolicyClassName string)
-}
-
-var _ EntityMappingable = (*EntityMapping)(nil)

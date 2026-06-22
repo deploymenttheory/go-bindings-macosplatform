@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,17 +53,9 @@ func NewVideoProcessorFrameRateCadenceWithFrameRate(frameRate int) *VideoProcess
 }
 
 // FrameRate wraps the corresponding Objective-C method.
-func (x *VideoProcessorFrameRateCadence) FrameRate() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameRate"))
+func (vpfrc *VideoProcessorFrameRateCadence) FrameRate() int {
+	_r := objc.Send[int](objref.IDOf(vpfrc), objc.RegisterName("frameRate"))
 	return _r
 }
-
-// VideoProcessorFrameRateCadenceable is the interface implemented by [VideoProcessorFrameRateCadence], for mocking and DI.
-type VideoProcessorFrameRateCadenceable interface {
-	obj.Object
-	FrameRate() int
-}
-
-var _ VideoProcessorFrameRateCadenceable = (*VideoProcessorFrameRateCadence)(nil)
 
 var _ VideoProcessorCadenceProvider = (*VideoProcessorFrameRateCadence)(nil)

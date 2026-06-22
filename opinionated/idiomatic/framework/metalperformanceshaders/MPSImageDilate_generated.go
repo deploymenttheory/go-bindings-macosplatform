@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,52 +47,40 @@ func imageDilateAdopt(id objc.ID) *ImageDilate {
 	return x
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (id_ *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setOffset:"), offset)
+	return id_
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (id_ *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setClipRect:"), clipRect)
+	return id_
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageDilate) WithLabel(label string) *ImageDilate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (id_ *ImageDilate) WithLabel(label string) *ImageDilate {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return id_
 }
 
-// KernelHeight the height of the filter window. Must be an odd number.
-func (x *ImageDilate) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+// KernelHeight returns the height of the filter window. Must be an odd number.
+func (id_ *ImageDilate) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// KernelWidth the width of the filter window. Must be an odd number.
-func (x *ImageDilate) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+// KernelWidth returns the width of the filter window. Must be an odd number.
+func (id_ *ImageDilate) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("kernelWidth"))
 	return _r
 }
-
-// ImageDilateable is the interface implemented by [ImageDilate], for mocking and DI.
-type ImageDilateable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageDilate
-	WithClipRect(clipRect metal.MTLRegion) *ImageDilate
-	WithLabel(label string) *ImageDilate
-	KernelHeight() int
-	KernelWidth() int
-}
-
-var _ ImageDilateable = (*ImageDilate)(nil)
 
 // isImageDilate marks ImageDilate — and, by embedding promotion, its
 // subclasses — as a member of the ImageDilate hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageDilate) isImageDilate() {}
+func (id_ *ImageDilate) isImageDilate() {}
 
 var _ ImageDilateProvider = (*ImageDilate)(nil)
 

@@ -46,24 +46,24 @@ func tensorDescriptorAdopt(id objc.ID) *TensorDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *TensorDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (td *TensorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(td))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TensorDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (td *TensorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(td), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TensorDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (td *TensorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(td), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TensorDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (td *TensorDescriptor) String() string {
+	return rt.Description(objref.IDOf(td))
 }
 
 // NewTensorDescriptor creates a new TensorDescriptor.
@@ -72,73 +72,58 @@ func NewTensorDescriptor() *TensorDescriptor {
 	return tensorDescriptorAdopt(_id)
 }
 
-// DataType the tensor data type.  The default is MLCDataTypeFloat32.
-func (x *TensorDescriptor) DataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+// DataType returns the tensor data type.  The default is MLCDataTypeFloat32.
+func (td *TensorDescriptor) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(td), objc.RegisterName("dataType"))
 	return _r
 }
 
-// DimensionCount the number of dimensions in the tensor
-func (x *TensorDescriptor) DimensionCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimensionCount"))
+// DimensionCount returns the number of dimensions in the tensor
+func (td *TensorDescriptor) DimensionCount() int {
+	_r := objc.Send[int](objref.IDOf(td), objc.RegisterName("dimensionCount"))
 	return _r
 }
 
-// Shape the size in each dimension
+// Shape returns the size in each dimension
 //
 // Shape returns the collection as a Go slice.
-func (x *TensorDescriptor) Shape() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+func (td *TensorDescriptor) Shape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Stride the stride in bytes in each dimension
+// Stride returns the stride in bytes in each dimension
 //
 // Stride returns the collection as a Go slice.
-func (x *TensorDescriptor) Stride() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stride"))
+func (td *TensorDescriptor) Stride() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("stride"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// TensorAllocationSizeInBytes the allocation size in bytes for a tensor.
-func (x *TensorDescriptor) TensorAllocationSizeInBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tensorAllocationSizeInBytes"))
+// TensorAllocationSizeInBytes returns the allocation size in bytes for a tensor.
+func (td *TensorDescriptor) TensorAllocationSizeInBytes() int {
+	_r := objc.Send[int](objref.IDOf(td), objc.RegisterName("tensorAllocationSizeInBytes"))
 	return _r
 }
 
-// SequenceLengths TODO
+// SequenceLengths returns TODO
 //
 // SequenceLengths returns the collection as a Go slice.
-func (x *TensorDescriptor) SequenceLengths() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sequenceLengths"))
+func (td *TensorDescriptor) SequenceLengths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("sequenceLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SortedSequences specifies whether the sequences are sorted or not.
-func (x *TensorDescriptor) SortedSequences() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sortedSequences"))
+// SortedSequences reports whether the sequences are sorted or not.
+func (td *TensorDescriptor) SortedSequences() bool {
+	_r := objc.Send[bool](objref.IDOf(td), objc.RegisterName("sortedSequences"))
 	return _r
 }
 
-// BatchSizePerSequenceStep the batch size for each sequence We populate this only when sequenceLengths is valid. The length of this array should be the maximum sequence length in sequenceLengths (i.e sequenceLengths[0]).
+// BatchSizePerSequenceStep returns the batch size for each sequence We populate this only when sequenceLengths is valid. The length of this array should be the maximum sequence length in sequenceLengths (i.e sequenceLengths[0]).
 //
 // BatchSizePerSequenceStep returns the collection as a Go slice.
-func (x *TensorDescriptor) BatchSizePerSequenceStep() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchSizePerSequenceStep"))
+func (td *TensorDescriptor) BatchSizePerSequenceStep() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("batchSizePerSequenceStep"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// TensorDescriptorable is the interface implemented by [TensorDescriptor], for mocking and DI.
-type TensorDescriptorable interface {
-	obj.Object
-	DataType() DataType
-	DimensionCount() int
-	Shape() []obj.Object
-	Stride() []obj.Object
-	TensorAllocationSizeInBytes() int
-	SequenceLengths() []obj.Object
-	SortedSequences() bool
-	BatchSizePerSequenceStep() []obj.Object
-}
-
-var _ TensorDescriptorable = (*TensorDescriptor)(nil)

@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,60 +52,46 @@ func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table 
 	return textTableBlockAdopt(_id)
 }
 
-// WithVerticalAlignment the vertical alignment of the text block.
-func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTableBlock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
-	return x
+// WithVerticalAlignment sets the vertical alignment of the text block.
+func (ttb *TextTableBlock) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTableBlock {
+	objc.Send[objc.ID](objref.IDOf(ttb), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
+	return ttb
 }
 
-// WithBackgroundColor the background color of the text block.
-func (x *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the text block.
+func (ttb *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
+	objc.Send[objc.ID](objref.IDOf(ttb), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return ttb
 }
 
 // Table wraps the corresponding Objective-C method.
-func (x *TextTableBlock) Table() *TextTable {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("table"))
+func (ttb *TextTableBlock) Table() *TextTable {
+	_r := objc.Send[objc.ID](objref.IDOf(ttb), objc.RegisterName("table"))
 	return TextTableFromID(_r)
 }
 
 // StartingRow wraps the corresponding Objective-C method.
-func (x *TextTableBlock) StartingRow() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingRow"))
+func (ttb *TextTableBlock) StartingRow() int {
+	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("startingRow"))
 	return _r
 }
 
 // RowSpan wraps the corresponding Objective-C method.
-func (x *TextTableBlock) RowSpan() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowSpan"))
+func (ttb *TextTableBlock) RowSpan() int {
+	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("rowSpan"))
 	return _r
 }
 
 // StartingColumn wraps the corresponding Objective-C method.
-func (x *TextTableBlock) StartingColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingColumn"))
+func (ttb *TextTableBlock) StartingColumn() int {
+	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("startingColumn"))
 	return _r
 }
 
 // ColumnSpan wraps the corresponding Objective-C method.
-func (x *TextTableBlock) ColumnSpan() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnSpan"))
+func (ttb *TextTableBlock) ColumnSpan() int {
+	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("columnSpan"))
 	return _r
 }
-
-// TextTableBlockable is the interface implemented by [TextTableBlock], for mocking and DI.
-type TextTableBlockable interface {
-	obj.Object
-	WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTableBlock
-	WithBackgroundColor(backgroundColor *Color) *TextTableBlock
-	Table() *TextTable
-	StartingRow() int
-	RowSpan() int
-	StartingColumn() int
-	ColumnSpan() int
-}
-
-var _ TextTableBlockable = (*TextTableBlock)(nil)
 
 var _ TextBlockProvider = (*TextTableBlock)(nil)

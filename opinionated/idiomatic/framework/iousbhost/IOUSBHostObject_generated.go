@@ -5,13 +5,14 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostObject is an idiomatic wrapper over the Objective-C class IOUSBHostObject.
@@ -50,40 +51,40 @@ func hostObjectAdopt(id objc.ID) *HostObject {
 }
 
 // Description returns the object's -description text.
-func (x *HostObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ho *HostObject) Description() string {
+	return rt.Description(objref.IDOf(ho))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ho *HostObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ho), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ho *HostObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ho), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HostObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ho *HostObject) String() string {
+	return rt.Description(objref.IDOf(ho))
 }
 
 // Destroy removes underlying allocations and connections from the USB host object.
-func (x *HostObject) Destroy() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destroy"))
+func (ho *HostObject) Destroy() {
+	objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("destroy"))
 }
 
 // DestroyWithOptions removes underlying allocations of the IOUSBHostObject object along with user client Extends <code>destroy</code> to take an options to modify the destroy behavior.  Currently only the <code>IOUSBHostObjectDestroyOptionsDeviceSurrender</code> is defined to support surrendering ownersip of the kernel service.  To be used when accepting the <code>kUSBHostMessageDeviceIsRequestingClose</code> message.
-func (x *HostObject) DestroyWithOptions(options HostObjectDestroyOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destroyWithOptions:"), options)
+func (ho *HostObject) DestroyWithOptions(options HostObjectDestroyOptions) {
+	objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("destroyWithOptions:"), options)
 }
 
 // AbortDeviceRequestsWithOption aborts device requests.
-func (x *HostObject) AbortDeviceRequestsWithOption(option HostAbortOption) error {
+func (ho *HostObject) AbortDeviceRequestsWithOption(option HostAbortOption) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortDeviceRequestsWithOption:error:"), option, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ho), objc.RegisterName("abortDeviceRequestsWithOption:error:"), option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -93,9 +94,9 @@ func (x *HostObject) AbortDeviceRequestsWithOption(option HostAbortOption) error
 // AbortDeviceRequests aborts device requests synchronously.
 //
 // AbortDeviceRequests returns an error if the operation did not succeed.
-func (x *HostObject) AbortDeviceRequests() error {
+func (ho *HostObject) AbortDeviceRequests() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortDeviceRequestsWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("abortDeviceRequestsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -103,9 +104,9 @@ func (x *HostObject) AbortDeviceRequests() error {
 }
 
 // StringWithIndexLanguageIDError retrieves a string from a string descriptor.
-func (x *HostObject) StringWithIndexLanguageIDError(index int, languageID int) (result obj.Object, err error) {
+func (ho *HostObject) StringWithIndexLanguageIDError(index int, languageID int) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringWithIndex:languageID:error:"), index, languageID, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("stringWithIndex:languageID:error:"), index, languageID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -113,9 +114,9 @@ func (x *HostObject) StringWithIndexLanguageIDError(index int, languageID int) (
 }
 
 // StringWithIndexError retrieves an English-language string from a string descriptor.
-func (x *HostObject) StringWithIndexError(index int) (result obj.Object, err error) {
+func (ho *HostObject) StringWithIndexError(index int) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringWithIndex:error:"), index, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("stringWithIndex:error:"), index, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -123,17 +124,17 @@ func (x *HostObject) StringWithIndexError(index int) (result obj.Object, err err
 }
 
 // FrameNumberWithTime returns the current frame number of the USB controller.
-func (x *HostObject) FrameNumberWithTime() (result uint64, time_ uint64) {
+func (ho *HostObject) FrameNumberWithTime() (result uint64, time_ uint64) {
 	var _out0 uint64
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("frameNumberWithTime:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[uint64](objref.IDOf(ho), objc.RegisterName("frameNumberWithTime:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // CurrentMicroframeWithTimeError return the current microframe number of the USB controller This method will return the current microframe number of the USB controller. This is most useful for scheduling future isochronous requests.
-func (x *HostObject) CurrentMicroframeWithTimeError() (result uint64, time_ uint64, err error) {
+func (ho *HostObject) CurrentMicroframeWithTimeError() (result uint64, time_ uint64, err error) {
 	var _out0 uint64
 	var _nsErr uintptr
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("currentMicroframeWithTime:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[uint64](objref.IDOf(ho), objc.RegisterName("currentMicroframeWithTime:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -141,67 +142,47 @@ func (x *HostObject) CurrentMicroframeWithTimeError() (result uint64, time_ uint
 }
 
 // ReferenceMicroframeWithTimeError return a recent microframe number of the USB controller This method will return a recent microframe number of the USB controller. This is most useful for scheduling future isochronous requests.
-func (x *HostObject) ReferenceMicroframeWithTimeError() (result uint64, time_ uint64, err error) {
+func (ho *HostObject) ReferenceMicroframeWithTimeError() (result uint64, time_ uint64, err error) {
 	var _out0 uint64
 	var _nsErr uintptr
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("referenceMicroframeWithTime:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[uint64](objref.IDOf(ho), objc.RegisterName("referenceMicroframeWithTime:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return _r, _out0, nil
 }
 
-// IoDataWithCapacityError allocates a buffer for input/output requests.
-func (x *HostObject) IoDataWithCapacityError(capacity int) (result obj.Object, err error) {
+// IODataWithCapacityError allocates a buffer for input/output requests.
+func (ho *HostObject) IODataWithCapacityError(capacity int) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ioDataWithCapacity:error:"), capacity, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("ioDataWithCapacity:error:"), capacity, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// IoService retrieve the IOUSBHostObject's io_service_t.
-func (x *HostObject) IoService() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("ioService"))
+// IOService returns retrieve the IOUSBHostObject's io_service_t.
+func (ho *HostObject) IOService() int {
+	_r := objc.Send[int](objref.IDOf(ho), objc.RegisterName("ioService"))
 	return _r
 }
 
-// Queue the dispatch queue that all asynchronous io will be serviced.
-func (x *HostObject) Queue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+// Queue returns the dispatch queue that all asynchronous io will be serviced.
+func (ho *HostObject) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("queue"))
 	return obj.Wrap(_r)
 }
 
-// DeviceAddress retrieve the current address of the device.
-func (x *HostObject) DeviceAddress() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
+// DeviceAddress returns retrieve the current address of the device.
+func (ho *HostObject) DeviceAddress() int {
+	_r := objc.Send[int](objref.IDOf(ho), objc.RegisterName("deviceAddress"))
 	return _r
 }
-
-// HostObjectable is the interface implemented by [HostObject], for mocking and DI.
-type HostObjectable interface {
-	obj.Object
-	Destroy()
-	DestroyWithOptions(options HostObjectDestroyOptions)
-	AbortDeviceRequestsWithOption(option HostAbortOption) error
-	AbortDeviceRequests() error
-	StringWithIndexLanguageIDError(index int, languageID int) (result obj.Object, err error)
-	StringWithIndexError(index int) (result obj.Object, err error)
-	FrameNumberWithTime() (result uint64, time_ uint64)
-	CurrentMicroframeWithTimeError() (result uint64, time_ uint64, err error)
-	ReferenceMicroframeWithTimeError() (result uint64, time_ uint64, err error)
-	IoDataWithCapacityError(capacity int) (result obj.Object, err error)
-	IoService() int
-	Queue() obj.Object
-	DeviceAddress() int
-}
-
-var _ HostObjectable = (*HostObject)(nil)
 
 // isHostObject marks HostObject — and, by embedding promotion, its
 // subclasses — as a member of the HostObject hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *HostObject) isHostObject() {}
+func (ho *HostObject) isHostObject() {}
 
 var _ HostObjectProvider = (*HostObject)(nil)

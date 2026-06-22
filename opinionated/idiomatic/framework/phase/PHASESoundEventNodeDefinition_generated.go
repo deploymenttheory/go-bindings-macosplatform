@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,23 +48,15 @@ func soundEventNodeDefinitionAdopt(id objc.ID) *SoundEventNodeDefinition {
 // Children wraps the corresponding Objective-C method.
 //
 // Children returns the collection as a Go slice.
-func (x *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+func (send *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {
+	_arr := objc.Send[objc.ID](objref.IDOf(send), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SoundEventNodeDefinition { return SoundEventNodeDefinitionFromID(_id) })
 }
-
-// SoundEventNodeDefinitionable is the interface implemented by [SoundEventNodeDefinition], for mocking and DI.
-type SoundEventNodeDefinitionable interface {
-	obj.Object
-	Children() []*SoundEventNodeDefinition
-}
-
-var _ SoundEventNodeDefinitionable = (*SoundEventNodeDefinition)(nil)
 
 // isSoundEventNodeDefinition marks SoundEventNodeDefinition — and, by embedding promotion, its
 // subclasses — as a member of the SoundEventNodeDefinition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SoundEventNodeDefinition) isSoundEventNodeDefinition() {}
+func (send *SoundEventNodeDefinition) isSoundEventNodeDefinition() {}
 
 var _ SoundEventNodeDefinitionProvider = (*SoundEventNodeDefinition)(nil)
 

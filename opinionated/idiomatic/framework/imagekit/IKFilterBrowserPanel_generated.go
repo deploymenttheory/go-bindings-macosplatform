@@ -46,24 +46,24 @@ func filterBrowserPanelAdopt(id objc.ID) *FilterBrowserPanel {
 }
 
 // Description returns the object's -description text.
-func (x *FilterBrowserPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fbp *FilterBrowserPanel) Description() string {
+	return rt.Description(objref.IDOf(fbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FilterBrowserPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fbp *FilterBrowserPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FilterBrowserPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fbp *FilterBrowserPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FilterBrowserPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fbp *FilterBrowserPanel) String() string {
+	return rt.Description(objref.IDOf(fbp))
 }
 
 // NewFilterBrowserPanel creates a new FilterBrowserPanel.
@@ -73,8 +73,8 @@ func NewFilterBrowserPanel() *FilterBrowserPanel {
 }
 
 // FilterName returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
-func (x *FilterBrowserPanel) FilterName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
+func (fbp *FilterBrowserPanel) FilterName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("filterName"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,29 +82,18 @@ func (x *FilterBrowserPanel) FilterName() string {
 }
 
 // RunModalWithOptions displays the FilterBrowser in a modal dialog. Use this method to run the IKFilterBrowser in a modal dialog. The value passed as returnCode will be either NSCancelButton or NSOKButton.
-func (x *FilterBrowserPanel) RunModalWithOptions(inOptions obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalWithOptions:"), objref.IDOf(inOptions))
+func (fbp *FilterBrowserPanel) RunModalWithOptions(inOptions obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(fbp), objc.RegisterName("runModalWithOptions:"), objref.IDOf(inOptions))
 	return _r
 }
 
 // FilterBrowserViewWithOptions returns a view containing the FilterBrowser. Use this method to run the IKFilterBrowser in your own UI. To dismiss it, invoke the finish action as described below.
-func (x *FilterBrowserPanel) FilterBrowserViewWithOptions(inOptions obj.Object) *FilterBrowserView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterBrowserViewWithOptions:"), objref.IDOf(inOptions))
+func (fbp *FilterBrowserPanel) FilterBrowserViewWithOptions(inOptions obj.Object) *FilterBrowserView {
+	_r := objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("filterBrowserViewWithOptions:"), objref.IDOf(inOptions))
 	return FilterBrowserViewFromID(_r)
 }
 
 // Finish closes the IKFilterBrowser. Invoke this action for instance from your OK or Cancel button when you are running the IKFilterBrowserView modal in your own UI.
-func (x *FilterBrowserPanel) Finish(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finish:"), objref.IDOf(sender))
+func (fbp *FilterBrowserPanel) Finish(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("finish:"), objref.IDOf(sender))
 }
-
-// FilterBrowserPanelable is the interface implemented by [FilterBrowserPanel], for mocking and DI.
-type FilterBrowserPanelable interface {
-	obj.Object
-	FilterName() string
-	RunModalWithOptions(inOptions obj.Object) int
-	FilterBrowserViewWithOptions(inOptions obj.Object) *FilterBrowserView
-	Finish(sender obj.Object)
-}
-
-var _ FilterBrowserPanelable = (*FilterBrowserPanel)(nil)

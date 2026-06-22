@@ -46,24 +46,24 @@ func recursiveLockAdopt(id objc.ID) *RecursiveLock {
 }
 
 // Description returns the object's -description text.
-func (x *RecursiveLock) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rl *RecursiveLock) Description() string {
+	return rt.Description(objref.IDOf(rl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecursiveLock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rl *RecursiveLock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecursiveLock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rl *RecursiveLock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecursiveLock) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rl *RecursiveLock) String() string {
+	return rt.Description(objref.IDOf(rl))
 }
 
 // NewRecursiveLock creates a new RecursiveLock.
@@ -72,53 +72,35 @@ func NewRecursiveLock() *RecursiveLock {
 	return recursiveLockAdopt(_id)
 }
 
-// WithName the name associated with the receiver.
-func (x *RecursiveLock) WithName(name StringProvider) *RecursiveLock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+// WithName sets the name associated with the receiver.
+func (rl *RecursiveLock) WithName(name StringProvider) *RecursiveLock {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setName:"), objref.IDOf(name))
+	return rl
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *RecursiveLock) WithScriptingProperties(scriptingProperties obj.Object) *RecursiveLock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (rl *RecursiveLock) WithScriptingProperties(scriptingProperties obj.Object) *RecursiveLock {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return rl
 }
 
-// TryLock attempts to acquire a lock, and immediately returns a Boolean value that indicates whether the attempt was successful.
-func (x *RecursiveLock) TryLock() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
+// TryLock reports whether attempts to acquire a lock, and immediately returns a Boolean value that indicates whether the attempt was successful.
+func (rl *RecursiveLock) TryLock() bool {
+	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("tryLock"))
 	return _r
 }
 
 // LockBeforeDate attempts to acquire a lock before a given date.
-func (x *RecursiveLock) LockBeforeDate(limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
+func (rl *RecursiveLock) LockBeforeDate(limit *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
 	return _r
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *RecursiveLock) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (rl *RecursiveLock) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *RecursiveLock) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// RecursiveLockable is the interface implemented by [RecursiveLock], for mocking and DI.
-type RecursiveLockable interface {
-	obj.Object
-	WithName(name StringProvider) *RecursiveLock
-	WithScriptingProperties(scriptingProperties obj.Object) *RecursiveLock
-	TryLock() bool
-	LockBeforeDate(limit *Date) bool
-	Name() string
-	SetName(name string)
-}
-
-var _ RecursiveLockable = (*RecursiveLock)(nil)

@@ -46,24 +46,24 @@ func actionExtensionContextAdopt(id objc.ID) *ActionExtensionContext {
 }
 
 // Description returns the object's -description text.
-func (x *ActionExtensionContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aec *ActionExtensionContext) Description() string {
+	return rt.Description(objref.IDOf(aec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActionExtensionContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aec *ActionExtensionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActionExtensionContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aec *ActionExtensionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ActionExtensionContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aec *ActionExtensionContext) String() string {
+	return rt.Description(objref.IDOf(aec))
 }
 
 // NewActionExtensionContext creates a new ActionExtensionContext.
@@ -73,21 +73,12 @@ func NewActionExtensionContext() *ActionExtensionContext {
 }
 
 // CompleteRequest marks the action as complete.
-func (x *ActionExtensionContext) CompleteRequest() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRequest"))
+func (aec *ActionExtensionContext) CompleteRequest() {
+	objc.Send[objc.ID](objref.IDOf(aec), objc.RegisterName("completeRequest"))
 }
 
-// DomainIdentifier the identifier for the domain managed by the current file provider.
-func (x *ActionExtensionContext) DomainIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainIdentifier"))
+// DomainIdentifier returns the identifier for the domain managed by the current file provider.
+func (aec *ActionExtensionContext) DomainIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aec), objc.RegisterName("domainIdentifier"))
 	return obj.Wrap(_r)
 }
-
-// ActionExtensionContextable is the interface implemented by [ActionExtensionContext], for mocking and DI.
-type ActionExtensionContextable interface {
-	obj.Object
-	CompleteRequest()
-	DomainIdentifier() obj.Object
-}
-
-var _ ActionExtensionContextable = (*ActionExtensionContext)(nil)

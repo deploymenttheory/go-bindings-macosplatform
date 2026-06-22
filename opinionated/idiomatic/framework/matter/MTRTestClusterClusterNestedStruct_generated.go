@@ -51,31 +51,21 @@ func NewMTRTestClusterClusterNestedStruct() *MTRTestClusterClusterNestedStruct {
 }
 
 // WithA sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterNestedStruct) WithA(a obj.Object) *MTRTestClusterClusterNestedStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), objref.IDOf(a))
-	return x
+func (mtccns *MTRTestClusterClusterNestedStruct) WithA(a obj.Object) *MTRTestClusterClusterNestedStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setA:"), objref.IDOf(a))
+	return mtccns
 }
 
 // WithB sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterNestedStruct) WithB(b obj.Object) *MTRTestClusterClusterNestedStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), objref.IDOf(b))
-	return x
+func (mtccns *MTRTestClusterClusterNestedStruct) WithB(b obj.Object) *MTRTestClusterClusterNestedStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setB:"), objref.IDOf(b))
+	return mtccns
 }
 
 // WithC sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterNestedStruct) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), objref.IDOf(c))
-	return x
+func (mtccns *MTRTestClusterClusterNestedStruct) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setC:"), objref.IDOf(c))
+	return mtccns
 }
-
-// MTRTestClusterClusterNestedStructable is the interface implemented by [MTRTestClusterClusterNestedStruct], for mocking and DI.
-type MTRTestClusterClusterNestedStructable interface {
-	obj.Object
-	WithA(a obj.Object) *MTRTestClusterClusterNestedStruct
-	WithB(b obj.Object) *MTRTestClusterClusterNestedStruct
-	WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStruct
-}
-
-var _ MTRTestClusterClusterNestedStructable = (*MTRTestClusterClusterNestedStruct)(nil)
 
 var _ MTRUnitTestingClusterNestedStructProvider = (*MTRTestClusterClusterNestedStruct)(nil)

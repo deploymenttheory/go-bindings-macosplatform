@@ -44,24 +44,24 @@ func materialPropertyConnectionAdopt(id objc.ID) *MaterialPropertyConnection {
 }
 
 // Description returns the object's -description text.
-func (x *MaterialPropertyConnection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpc *MaterialPropertyConnection) Description() string {
+	return rt.Description(objref.IDOf(mpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MaterialPropertyConnection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpc *MaterialPropertyConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MaterialPropertyConnection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpc *MaterialPropertyConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MaterialPropertyConnection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpc *MaterialPropertyConnection) String() string {
+	return rt.Description(objref.IDOf(mpc))
 }
 
 // NewMaterialPropertyConnectionWithOutputInput connects the output to the input
@@ -72,22 +72,13 @@ func NewMaterialPropertyConnectionWithOutputInput(output *MaterialProperty, inpu
 }
 
 // Output wraps the corresponding Objective-C method.
-func (x *MaterialPropertyConnection) Output() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("output"))
+func (mpc *MaterialPropertyConnection) Output() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("output"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Input wraps the corresponding Objective-C method.
-func (x *MaterialPropertyConnection) Input() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("input"))
+func (mpc *MaterialPropertyConnection) Input() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("input"))
 	return MaterialPropertyFromID(_r)
 }
-
-// MaterialPropertyConnectionable is the interface implemented by [MaterialPropertyConnection], for mocking and DI.
-type MaterialPropertyConnectionable interface {
-	obj.Object
-	Output() *MaterialProperty
-	Input() *MaterialProperty
-}
-
-var _ MaterialPropertyConnectionable = (*MaterialPropertyConnection)(nil)

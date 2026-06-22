@@ -46,24 +46,24 @@ func authorizationSingleSignOnCredentialAdopt(id objc.ID) *AuthorizationSingleSi
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationSingleSignOnCredential) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (assoc *AuthorizationSingleSignOnCredential) Description() string {
+	return rt.Description(objref.IDOf(assoc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationSingleSignOnCredential) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (assoc *AuthorizationSingleSignOnCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(assoc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationSingleSignOnCredential) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (assoc *AuthorizationSingleSignOnCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(assoc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationSingleSignOnCredential) String() string {
-	return rt.Description(objref.IDOf(x))
+func (assoc *AuthorizationSingleSignOnCredential) String() string {
+	return rt.Description(objref.IDOf(assoc))
 }
 
 // NewAuthorizationSingleSignOnCredential creates a new AuthorizationSingleSignOnCredential.
@@ -72,56 +72,43 @@ func NewAuthorizationSingleSignOnCredential() *AuthorizationSingleSignOnCredenti
 	return authorizationSingleSignOnCredentialAdopt(_id)
 }
 
-// State a state returned from the AuthenticationServices extension.
-func (x *AuthorizationSingleSignOnCredential) State() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+// State returns a state returned from the AuthenticationServices extension.
+func (assoc *AuthorizationSingleSignOnCredential) State() string {
+	_r := objc.Send[objc.ID](objref.IDOf(assoc), objc.RegisterName("state"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AccessToken an access token used to access other systems with the authorized scopes.
-func (x *AuthorizationSingleSignOnCredential) AccessToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessToken"))
+// AccessToken returns an access token used to access other systems with the authorized scopes.
+func (assoc *AuthorizationSingleSignOnCredential) AccessToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(assoc), objc.RegisterName("accessToken"))
 	return obj.Wrap(_r)
 }
 
-// IdentityToken a JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app.
-func (x *AuthorizationSingleSignOnCredential) IdentityToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityToken"))
+// IdentityToken returns a JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app.
+func (assoc *AuthorizationSingleSignOnCredential) IdentityToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(assoc), objc.RegisterName("identityToken"))
 	return obj.Wrap(_r)
 }
 
-// AuthorizedScopes this value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
+// AuthorizedScopes returns this value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
 //
 // AuthorizedScopes returns the collection as a Go slice.
-func (x *AuthorizationSingleSignOnCredential) AuthorizedScopes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizedScopes"))
+func (assoc *AuthorizationSingleSignOnCredential) AuthorizedScopes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(assoc), objc.RegisterName("authorizedScopes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AuthenticatedResponse the complete AuthenticationServices extension response with the additional outputs used by the specific technology used by the Authorization Server instance and AuthenticationServices Extension.
-func (x *AuthorizationSingleSignOnCredential) AuthenticatedResponse() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticatedResponse"))
+// AuthenticatedResponse returns the complete AuthenticationServices extension response with the additional outputs used by the specific technology used by the Authorization Server instance and AuthenticationServices Extension.
+func (assoc *AuthorizationSingleSignOnCredential) AuthenticatedResponse() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(assoc), objc.RegisterName("authenticatedResponse"))
 	return obj.Wrap(_r)
 }
 
-// PrivateKeys private SecKeys returned from the AuthenticationServices extension.
-func (x *AuthorizationSingleSignOnCredential) PrivateKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateKeys"))
+// PrivateKeys returns private SecKeys returned from the AuthenticationServices extension.
+func (assoc *AuthorizationSingleSignOnCredential) PrivateKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(assoc), objc.RegisterName("privateKeys"))
 	return obj.Wrap(_r)
 }
-
-// AuthorizationSingleSignOnCredentialable is the interface implemented by [AuthorizationSingleSignOnCredential], for mocking and DI.
-type AuthorizationSingleSignOnCredentialable interface {
-	obj.Object
-	State() string
-	AccessToken() obj.Object
-	IdentityToken() obj.Object
-	AuthorizedScopes() []obj.Object
-	AuthenticatedResponse() obj.Object
-	PrivateKeys() obj.Object
-}
-
-var _ AuthorizationSingleSignOnCredentialable = (*AuthorizationSingleSignOnCredential)(nil)

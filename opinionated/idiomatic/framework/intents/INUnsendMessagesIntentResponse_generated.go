@@ -51,25 +51,16 @@ func NewUnsendMessagesIntentResponseWithCodeUserActivity(code UnsendMessagesInte
 	return unsendMessagesIntentResponseAdopt(_id)
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *UnsendMessagesIntentResponse) WithUserActivity(userActivity obj.Object) *UnsendMessagesIntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (umir *UnsendMessagesIntentResponse) WithUserActivity(userActivity obj.Object) *UnsendMessagesIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(umir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return umir
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *UnsendMessagesIntentResponse) Code() UnsendMessagesIntentResponseCode {
-	_r := objc.Send[UnsendMessagesIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+func (umir *UnsendMessagesIntentResponse) Code() UnsendMessagesIntentResponseCode {
+	_r := objc.Send[UnsendMessagesIntentResponseCode](objref.IDOf(umir), objc.RegisterName("code"))
 	return _r
 }
-
-// UnsendMessagesIntentResponseable is the interface implemented by [UnsendMessagesIntentResponse], for mocking and DI.
-type UnsendMessagesIntentResponseable interface {
-	obj.Object
-	WithUserActivity(userActivity obj.Object) *UnsendMessagesIntentResponse
-	Code() UnsendMessagesIntentResponseCode
-}
-
-var _ UnsendMessagesIntentResponseable = (*UnsendMessagesIntentResponse)(nil)
 
 var _ IntentResponseProvider = (*UnsendMessagesIntentResponse)(nil)

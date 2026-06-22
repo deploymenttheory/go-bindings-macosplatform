@@ -52,55 +52,42 @@ func NewMouseInput() *MouseInput {
 	return mouseInputAdopt(_id)
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MouseInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (mi *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MouseInput {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return mi
 }
 
-// Scroll scroll is a dpad with undefined range.
-func (x *MouseInput) Scroll() *DeviceCursor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scroll"))
+// Scroll returns scroll is a dpad with undefined range.
+func (mi *MouseInput) Scroll() *DeviceCursor {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("scroll"))
 	return DeviceCursorFromID(_r)
 }
 
-// LeftButton mouse buttons that can be used only as digital inputs
-func (x *MouseInput) LeftButton() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftButton"))
+// LeftButton returns mouse buttons that can be used only as digital inputs
+func (mi *MouseInput) LeftButton() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("leftButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightButton wraps the corresponding Objective-C method.
-func (x *MouseInput) RightButton() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightButton"))
+func (mi *MouseInput) RightButton() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("rightButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // MiddleButton wraps the corresponding Objective-C method.
-func (x *MouseInput) MiddleButton() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("middleButton"))
+func (mi *MouseInput) MiddleButton() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("middleButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // AuxiliaryButtons wraps the corresponding Objective-C method.
 //
 // AuxiliaryButtons returns the collection as a Go slice.
-func (x *MouseInput) AuxiliaryButtons() []*ControllerButtonInput {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auxiliaryButtons"))
+func (mi *MouseInput) AuxiliaryButtons() []*ControllerButtonInput {
+	_arr := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("auxiliaryButtons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ControllerButtonInput { return ControllerButtonInputFromID(_id) })
 }
-
-// MouseInputable is the interface implemented by [MouseInput], for mocking and DI.
-type MouseInputable interface {
-	obj.Object
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MouseInput
-	Scroll() *DeviceCursor
-	LeftButton() *ControllerButtonInput
-	RightButton() *ControllerButtonInput
-	MiddleButton() *ControllerButtonInput
-	AuxiliaryButtons() []*ControllerButtonInput
-}
-
-var _ MouseInputable = (*MouseInput)(nil)
 
 var _ PhysicalInputProfileProvider = (*MouseInput)(nil)

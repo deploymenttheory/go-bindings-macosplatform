@@ -44,24 +44,24 @@ func chatActionAdopt(id objc.ID) *ChatAction {
 }
 
 // Description returns the object's -description text.
-func (x *ChatAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *ChatAction) Description() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChatAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ca *ChatAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChatAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ca *ChatAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ChatAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *ChatAction) String() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // NewChatAction creates a new ChatAction.
@@ -69,10 +69,3 @@ func NewChatAction() *ChatAction {
 	_id := objc.Send[objc.ID](objc.ID(_class("BCChatAction")), objc.RegisterName("new"))
 	return chatActionAdopt(_id)
 }
-
-// ChatActionable is the interface implemented by [ChatAction], for mocking and DI.
-type ChatActionable interface {
-	obj.Object
-}
-
-var _ ChatActionable = (*ChatAction)(nil)

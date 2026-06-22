@@ -50,28 +50,19 @@ func NewGAD7Assessment() *GAD7Assessment {
 	return gAD7AssessmentAdopt(_id)
 }
 
-// Answers answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
+// Answers returns answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
 //
 // Answers returns the collection as a Go slice.
-func (x *GAD7Assessment) Answers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("answers"))
+func (ga *GAD7Assessment) Answers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("answers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Risk the risk determined by the score on a GAD-7 assessment.
-func (x *GAD7Assessment) Risk() GAD7AssessmentRisk {
-	_r := objc.Send[GAD7AssessmentRisk](objref.IDOf(x), objc.RegisterName("risk"))
+// Risk returns the risk determined by the score on a GAD-7 assessment.
+func (ga *GAD7Assessment) Risk() GAD7AssessmentRisk {
+	_r := objc.Send[GAD7AssessmentRisk](objref.IDOf(ga), objc.RegisterName("risk"))
 	return _r
 }
-
-// GAD7Assessmentable is the interface implemented by [GAD7Assessment], for mocking and DI.
-type GAD7Assessmentable interface {
-	obj.Object
-	Answers() []obj.Object
-	Risk() GAD7AssessmentRisk
-}
-
-var _ GAD7Assessmentable = (*GAD7Assessment)(nil)
 
 var _ ScoredAssessmentProvider = (*GAD7Assessment)(nil)
 

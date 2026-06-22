@@ -46,24 +46,24 @@ func eTAResponseAdopt(id objc.ID) *ETAResponse {
 }
 
 // Description returns the object's -description text.
-func (x *ETAResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (er *ETAResponse) Description() string {
+	return rt.Description(objref.IDOf(er))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ETAResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (er *ETAResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(er), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ETAResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (er *ETAResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(er), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ETAResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (er *ETAResponse) String() string {
+	return rt.Description(objref.IDOf(er))
 }
 
 // NewETAResponse creates a new ETAResponse.
@@ -73,50 +73,37 @@ func NewETAResponse() *ETAResponse {
 }
 
 // Source wraps the corresponding Objective-C method.
-func (x *ETAResponse) Source() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+func (er *ETAResponse) Source() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
 // Destination wraps the corresponding Objective-C method.
-func (x *ETAResponse) Destination() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+func (er *ETAResponse) Destination() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
 // ExpectedTravelTime wraps the corresponding Objective-C method.
-func (x *ETAResponse) ExpectedTravelTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("expectedTravelTime"))
+func (er *ETAResponse) ExpectedTravelTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(er), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
 // ExpectedArrivalDate wraps the corresponding Objective-C method.
-func (x *ETAResponse) ExpectedArrivalDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedArrivalDate"))
+func (er *ETAResponse) ExpectedArrivalDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("expectedArrivalDate"))
 	return obj.Wrap(_r)
 }
 
 // ExpectedDepartureDate wraps the corresponding Objective-C method.
-func (x *ETAResponse) ExpectedDepartureDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedDepartureDate"))
+func (er *ETAResponse) ExpectedDepartureDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("expectedDepartureDate"))
 	return obj.Wrap(_r)
 }
 
 // TransportType wraps the corresponding Objective-C method.
-func (x *ETAResponse) TransportType() DirectionsTransportType {
-	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
+func (er *ETAResponse) TransportType() DirectionsTransportType {
+	_r := objc.Send[DirectionsTransportType](objref.IDOf(er), objc.RegisterName("transportType"))
 	return _r
 }
-
-// ETAResponseable is the interface implemented by [ETAResponse], for mocking and DI.
-type ETAResponseable interface {
-	obj.Object
-	Source() *MapItem
-	Destination() *MapItem
-	ExpectedTravelTime() float64
-	ExpectedArrivalDate() obj.Object
-	ExpectedDepartureDate() obj.Object
-	TransportType() DirectionsTransportType
-}
-
-var _ ETAResponseable = (*ETAResponse)(nil)

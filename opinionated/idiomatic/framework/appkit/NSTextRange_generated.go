@@ -46,24 +46,24 @@ func textRangeAdopt(id objc.ID) *TextRange {
 }
 
 // Description returns the object's -description text.
-func (x *TextRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *TextRange) Description() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tr *TextRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tr *TextRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *TextRange) String() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
 // NewTextRange creates a new TextRange.
@@ -73,50 +73,37 @@ func NewTextRange() *TextRange {
 }
 
 // IsEqualToTextRange compares two text ranges.
-func (x *TextRange) IsEqualToTextRange(textRange *TextRange) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToTextRange:"), objref.IDOf(textRange))
+func (tr *TextRange) IsEqualToTextRange(textRange *TextRange) bool {
+	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("isEqualToTextRange:"), objref.IDOf(textRange))
 	return _r
 }
 
 // ContainsRange determines if the text range you specify is in the current text range.
-func (x *TextRange) ContainsRange(textRange *TextRange) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsRange:"), objref.IDOf(textRange))
+func (tr *TextRange) ContainsRange(textRange *TextRange) bool {
+	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("containsRange:"), objref.IDOf(textRange))
 	return _r
 }
 
 // IntersectsWithTextRange determines if two ranges intersect.
-func (x *TextRange) IntersectsWithTextRange(textRange *TextRange) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsWithTextRange:"), objref.IDOf(textRange))
+func (tr *TextRange) IntersectsWithTextRange(textRange *TextRange) bool {
+	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("intersectsWithTextRange:"), objref.IDOf(textRange))
 	return _r
 }
 
 // TextRangeByIntersectingWithTextRange returns the range, if any, where two text ranges intersect.
-func (x *TextRange) TextRangeByIntersectingWithTextRange(textRange *TextRange) *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRangeByIntersectingWithTextRange:"), objref.IDOf(textRange))
+func (tr *TextRange) TextRangeByIntersectingWithTextRange(textRange *TextRange) *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("textRangeByIntersectingWithTextRange:"), objref.IDOf(textRange))
 	return TextRangeFromID(_r)
 }
 
 // TextRangeByFormingUnionWithTextRange returns a new text range by forming the union with the text range you provide.
-func (x *TextRange) TextRangeByFormingUnionWithTextRange(textRange *TextRange) *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRangeByFormingUnionWithTextRange:"), objref.IDOf(textRange))
+func (tr *TextRange) TextRangeByFormingUnionWithTextRange(textRange *TextRange) *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("textRangeByFormingUnionWithTextRange:"), objref.IDOf(textRange))
 	return TextRangeFromID(_r)
 }
 
-// IsEmpty returns whether the text range is empty.
-func (x *TextRange) IsEmpty() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
+// IsEmpty reports whether the text range is empty.
+func (tr *TextRange) IsEmpty() bool {
+	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("isEmpty"))
 	return _r
 }
-
-// TextRangeable is the interface implemented by [TextRange], for mocking and DI.
-type TextRangeable interface {
-	obj.Object
-	IsEqualToTextRange(textRange *TextRange) bool
-	ContainsRange(textRange *TextRange) bool
-	IntersectsWithTextRange(textRange *TextRange) bool
-	TextRangeByIntersectingWithTextRange(textRange *TextRange) *TextRange
-	TextRangeByFormingUnionWithTextRange(textRange *TextRange) *TextRange
-	IsEmpty() bool
-}
-
-var _ TextRangeable = (*TextRange)(nil)

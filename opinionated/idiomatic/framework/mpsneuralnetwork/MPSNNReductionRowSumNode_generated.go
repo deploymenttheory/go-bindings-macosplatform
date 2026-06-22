@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionRowSumNode() *NNReductionRowSumNode {
 	return nNReductionRowSumNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionRowSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowSumNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrrsn *NNReductionRowSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowSumNode {
+	objc.Send[objc.ID](objref.IDOf(nrrsn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrrsn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionRowSumNode) WithLabel(label string) *NNReductionRowSumNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrrsn *NNReductionRowSumNode) WithLabel(label string) *NNReductionRowSumNode {
+	objc.Send[objc.ID](objref.IDOf(nrrsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrrsn
 }
-
-// NNReductionRowSumNodeable is the interface implemented by [NNReductionRowSumNode], for mocking and DI.
-type NNReductionRowSumNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowSumNode
-	WithLabel(label string) *NNReductionRowSumNode
-}
-
-var _ NNReductionRowSumNodeable = (*NNReductionRowSumNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionRowSumNode)(nil)
 

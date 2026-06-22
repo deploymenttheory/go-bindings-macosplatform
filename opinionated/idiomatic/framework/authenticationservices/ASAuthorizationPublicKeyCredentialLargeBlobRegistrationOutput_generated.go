@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialLargeBlobRegistrationOutputAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) Description() string {
+	return rt.Description(objref.IDOf(apkclbro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkclbro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkclbro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) String() string {
+	return rt.Description(objref.IDOf(apkclbro))
 }
 
 // NewAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput creates a new AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput.
@@ -73,15 +73,7 @@ func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput() *Authoriza
 }
 
 // IsSupported wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(apkclbro), objc.RegisterName("isSupported"))
 	return _r
 }
-
-// AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput], for mocking and DI.
-type AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputable interface {
-	obj.Object
-	IsSupported() bool
-}
-
-var _ AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputable = (*AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput)(nil)

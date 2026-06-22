@@ -46,24 +46,24 @@ func workspaceOpenConfigurationAdopt(id objc.ID) *WorkspaceOpenConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *WorkspaceOpenConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (woc *WorkspaceOpenConfiguration) Description() string {
+	return rt.Description(objref.IDOf(woc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkspaceOpenConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (woc *WorkspaceOpenConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(woc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkspaceOpenConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (woc *WorkspaceOpenConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(woc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkspaceOpenConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (woc *WorkspaceOpenConfiguration) String() string {
+	return rt.Description(objref.IDOf(woc))
 }
 
 // NewWorkspaceOpenConfiguration creates a new WorkspaceOpenConfiguration.
@@ -73,271 +73,160 @@ func NewWorkspaceOpenConfiguration() *WorkspaceOpenConfiguration {
 }
 
 // WithPromptsUserIfNeeded sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithPromptsUserIfNeeded(promptsUserIfNeeded bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromptsUserIfNeeded:"), promptsUserIfNeeded)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithPromptsUserIfNeeded(promptsUserIfNeeded bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setPromptsUserIfNeeded:"), promptsUserIfNeeded)
+	return woc
 }
 
 // WithAddsToRecentItems sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithAddsToRecentItems(addsToRecentItems bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddsToRecentItems:"), addsToRecentItems)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithAddsToRecentItems(addsToRecentItems bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setAddsToRecentItems:"), addsToRecentItems)
+	return woc
 }
 
 // WithActivates sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithActivates(activates bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivates:"), activates)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithActivates(activates bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setActivates:"), activates)
+	return woc
 }
 
 // WithHides sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithHides(hides bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHides:"), hides)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithHides(hides bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setHides:"), hides)
+	return woc
 }
 
 // WithHidesOthers sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithHidesOthers(hidesOthers bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOthers:"), hidesOthers)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithHidesOthers(hidesOthers bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setHidesOthers:"), hidesOthers)
+	return woc
 }
 
 // WithForPrinting sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithForPrinting(forPrinting bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForPrinting:"), forPrinting)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithForPrinting(forPrinting bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setForPrinting:"), forPrinting)
+	return woc
 }
 
 // WithCreatesNewApplicationInstance sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithCreatesNewApplicationInstance(createsNewApplicationInstance bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreatesNewApplicationInstance:"), createsNewApplicationInstance)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithCreatesNewApplicationInstance(createsNewApplicationInstance bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setCreatesNewApplicationInstance:"), createsNewApplicationInstance)
+	return woc
 }
 
 // WithAllowsRunningApplicationSubstitution sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRunningApplicationSubstitution:"), allowsRunningApplicationSubstitution)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setAllowsRunningApplicationSubstitution:"), allowsRunningApplicationSubstitution)
+	return woc
 }
 
 // WithArguments sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithArguments(items ...obj.Object) *WorkspaceOpenConfiguration {
+func (woc *WorkspaceOpenConfiguration) WithArguments(items ...obj.Object) *WorkspaceOpenConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setArguments:"), _arr)
+	return woc
 }
 
 // WithEnvironment sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithEnvironment(environment obj.Object) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
-	return x
+func (woc *WorkspaceOpenConfiguration) WithEnvironment(environment obj.Object) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
+	return woc
 }
 
 // WithAppleEvent sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithAppleEvent(appleEvent obj.Object) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleEvent:"), objref.IDOf(appleEvent))
-	return x
+func (woc *WorkspaceOpenConfiguration) WithAppleEvent(appleEvent obj.Object) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setAppleEvent:"), objref.IDOf(appleEvent))
+	return woc
 }
 
 // WithArchitecture sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithArchitecture(architecture int) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArchitecture:"), architecture)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithArchitecture(architecture int) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setArchitecture:"), architecture)
+	return woc
 }
 
 // WithRequiresUniversalLinks sets the property and returns the receiver so calls can be chained.
-func (x *WorkspaceOpenConfiguration) WithRequiresUniversalLinks(requiresUniversalLinks bool) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresUniversalLinks:"), requiresUniversalLinks)
-	return x
+func (woc *WorkspaceOpenConfiguration) WithRequiresUniversalLinks(requiresUniversalLinks bool) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setRequiresUniversalLinks:"), requiresUniversalLinks)
+	return woc
 }
 
 // PromptsUserIfNeeded wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) PromptsUserIfNeeded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("promptsUserIfNeeded"))
+func (woc *WorkspaceOpenConfiguration) PromptsUserIfNeeded() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("promptsUserIfNeeded"))
 	return _r
-}
-
-// SetPromptsUserIfNeeded wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetPromptsUserIfNeeded(promptsUserIfNeeded bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromptsUserIfNeeded:"), promptsUserIfNeeded)
 }
 
 // AddsToRecentItems wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) AddsToRecentItems() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addsToRecentItems"))
+func (woc *WorkspaceOpenConfiguration) AddsToRecentItems() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("addsToRecentItems"))
 	return _r
-}
-
-// SetAddsToRecentItems wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetAddsToRecentItems(addsToRecentItems bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddsToRecentItems:"), addsToRecentItems)
 }
 
 // Activates wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) Activates() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("activates"))
+func (woc *WorkspaceOpenConfiguration) Activates() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("activates"))
 	return _r
-}
-
-// SetActivates wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetActivates(activates bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivates:"), activates)
 }
 
 // Hides wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) Hides() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hides"))
+func (woc *WorkspaceOpenConfiguration) Hides() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("hides"))
 	return _r
-}
-
-// SetHides wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetHides(hides bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHides:"), hides)
 }
 
 // HidesOthers wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) HidesOthers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hidesOthers"))
+func (woc *WorkspaceOpenConfiguration) HidesOthers() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("hidesOthers"))
 	return _r
-}
-
-// SetHidesOthers wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetHidesOthers(hidesOthers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOthers:"), hidesOthers)
 }
 
 // IsForPrinting wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) IsForPrinting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForPrinting"))
+func (woc *WorkspaceOpenConfiguration) IsForPrinting() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("isForPrinting"))
 	return _r
-}
-
-// SetForPrinting wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetForPrinting(forPrinting bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForPrinting:"), forPrinting)
 }
 
 // CreatesNewApplicationInstance wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) CreatesNewApplicationInstance() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("createsNewApplicationInstance"))
+func (woc *WorkspaceOpenConfiguration) CreatesNewApplicationInstance() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("createsNewApplicationInstance"))
 	return _r
-}
-
-// SetCreatesNewApplicationInstance wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetCreatesNewApplicationInstance(createsNewApplicationInstance bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreatesNewApplicationInstance:"), createsNewApplicationInstance)
 }
 
 // AllowsRunningApplicationSubstitution wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) AllowsRunningApplicationSubstitution() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsRunningApplicationSubstitution"))
+func (woc *WorkspaceOpenConfiguration) AllowsRunningApplicationSubstitution() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("allowsRunningApplicationSubstitution"))
 	return _r
-}
-
-// SetAllowsRunningApplicationSubstitution wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRunningApplicationSubstitution:"), allowsRunningApplicationSubstitution)
 }
 
 // Arguments wraps the corresponding Objective-C method.
 //
 // Arguments returns the collection as a Go slice.
-func (x *WorkspaceOpenConfiguration) Arguments() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+func (woc *WorkspaceOpenConfiguration) Arguments() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetArguments wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetArguments(arguments []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
 // Environment wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) Environment() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("environment"))
+func (woc *WorkspaceOpenConfiguration) Environment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("environment"))
 	return obj.Wrap(_r)
-}
-
-// SetEnvironment wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetEnvironment(environment obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
 }
 
 // AppleEvent wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) AppleEvent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleEvent"))
+func (woc *WorkspaceOpenConfiguration) AppleEvent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("appleEvent"))
 	return obj.Wrap(_r)
 }
 
-// SetAppleEvent wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetAppleEvent(appleEvent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleEvent:"), objref.IDOf(appleEvent))
-}
-
 // Architecture wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) Architecture() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("architecture"))
+func (woc *WorkspaceOpenConfiguration) Architecture() int {
+	_r := objc.Send[int](objref.IDOf(woc), objc.RegisterName("architecture"))
 	return _r
-}
-
-// SetArchitecture wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetArchitecture(architecture int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArchitecture:"), architecture)
 }
 
 // RequiresUniversalLinks wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) RequiresUniversalLinks() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresUniversalLinks"))
+func (woc *WorkspaceOpenConfiguration) RequiresUniversalLinks() bool {
+	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("requiresUniversalLinks"))
 	return _r
 }
-
-// SetRequiresUniversalLinks wraps the corresponding Objective-C method.
-func (x *WorkspaceOpenConfiguration) SetRequiresUniversalLinks(requiresUniversalLinks bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresUniversalLinks:"), requiresUniversalLinks)
-}
-
-// WorkspaceOpenConfigurationable is the interface implemented by [WorkspaceOpenConfiguration], for mocking and DI.
-type WorkspaceOpenConfigurationable interface {
-	obj.Object
-	WithPromptsUserIfNeeded(promptsUserIfNeeded bool) *WorkspaceOpenConfiguration
-	WithAddsToRecentItems(addsToRecentItems bool) *WorkspaceOpenConfiguration
-	WithActivates(activates bool) *WorkspaceOpenConfiguration
-	WithHides(hides bool) *WorkspaceOpenConfiguration
-	WithHidesOthers(hidesOthers bool) *WorkspaceOpenConfiguration
-	WithForPrinting(forPrinting bool) *WorkspaceOpenConfiguration
-	WithCreatesNewApplicationInstance(createsNewApplicationInstance bool) *WorkspaceOpenConfiguration
-	WithAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool) *WorkspaceOpenConfiguration
-	WithArguments(items ...obj.Object) *WorkspaceOpenConfiguration
-	WithEnvironment(environment obj.Object) *WorkspaceOpenConfiguration
-	WithAppleEvent(appleEvent obj.Object) *WorkspaceOpenConfiguration
-	WithArchitecture(architecture int) *WorkspaceOpenConfiguration
-	WithRequiresUniversalLinks(requiresUniversalLinks bool) *WorkspaceOpenConfiguration
-	PromptsUserIfNeeded() bool
-	SetPromptsUserIfNeeded(promptsUserIfNeeded bool)
-	AddsToRecentItems() bool
-	SetAddsToRecentItems(addsToRecentItems bool)
-	Activates() bool
-	SetActivates(activates bool)
-	Hides() bool
-	SetHides(hides bool)
-	HidesOthers() bool
-	SetHidesOthers(hidesOthers bool)
-	IsForPrinting() bool
-	SetForPrinting(forPrinting bool)
-	CreatesNewApplicationInstance() bool
-	SetCreatesNewApplicationInstance(createsNewApplicationInstance bool)
-	AllowsRunningApplicationSubstitution() bool
-	SetAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool)
-	Arguments() []string
-	SetArguments(arguments []string)
-	Environment() obj.Object
-	SetEnvironment(environment obj.Object)
-	AppleEvent() obj.Object
-	SetAppleEvent(appleEvent obj.Object)
-	Architecture() int
-	SetArchitecture(architecture int)
-	RequiresUniversalLinks() bool
-	SetRequiresUniversalLinks(requiresUniversalLinks bool)
-}
-
-var _ WorkspaceOpenConfigurationable = (*WorkspaceOpenConfiguration)(nil)

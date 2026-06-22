@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,24 +50,15 @@ func NewNNMultiaryGradientState() *NNMultiaryGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiaryGradientState) WithReadCount(readCount int) *NNMultiaryGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (nmgs *NNMultiaryGradientState) WithReadCount(readCount int) *NNMultiaryGradientState {
+	objc.Send[objc.ID](objref.IDOf(nmgs), objc.RegisterName("setReadCount:"), readCount)
+	return nmgs
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNMultiaryGradientState) WithLabel(label string) *NNMultiaryGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nmgs *NNMultiaryGradientState) WithLabel(label string) *NNMultiaryGradientState {
+	objc.Send[objc.ID](objref.IDOf(nmgs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nmgs
 }
-
-// NNMultiaryGradientStateable is the interface implemented by [NNMultiaryGradientState], for mocking and DI.
-type NNMultiaryGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *NNMultiaryGradientState
-	WithLabel(label string) *NNMultiaryGradientState
-}
-
-var _ NNMultiaryGradientStateable = (*NNMultiaryGradientState)(nil)
 
 var _ StateProvider = (*NNMultiaryGradientState)(nil)

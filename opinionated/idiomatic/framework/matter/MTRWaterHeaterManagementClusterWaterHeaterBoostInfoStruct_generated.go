@@ -44,24 +44,24 @@ func mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructAdopt(id objc.ID) 
 }
 
 // Description returns the object's -description text.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(mwhmcwhbis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwhmcwhbis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwhmcwhbis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) String() string {
+	return rt.Description(objref.IDOf(mwhmcwhbis))
 }
 
 // NewMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct creates a new MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct.
@@ -71,128 +71,73 @@ func NewMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct() *MTRWaterHea
 }
 
 // WithDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithDuration(duration obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-	return x
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithDuration(duration obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setDuration:"), objref.IDOf(duration))
+	return mwhmcwhbis
 }
 
 // WithOneShot sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithOneShot(oneShot obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), objref.IDOf(oneShot))
-	return x
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithOneShot(oneShot obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setOneShot:"), objref.IDOf(oneShot))
+	return mwhmcwhbis
 }
 
 // WithEmergencyBoost sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithEmergencyBoost(emergencyBoost obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmergencyBoost:"), objref.IDOf(emergencyBoost))
-	return x
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithEmergencyBoost(emergencyBoost obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setEmergencyBoost:"), objref.IDOf(emergencyBoost))
+	return mwhmcwhbis
 }
 
 // WithTemporarySetpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTemporarySetpoint(temporarySetpoint obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporarySetpoint:"), objref.IDOf(temporarySetpoint))
-	return x
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTemporarySetpoint(temporarySetpoint obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTemporarySetpoint:"), objref.IDOf(temporarySetpoint))
+	return mwhmcwhbis
 }
 
 // WithTargetPercentage sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetPercentage(targetPercentage obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetPercentage:"), objref.IDOf(targetPercentage))
-	return x
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetPercentage(targetPercentage obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTargetPercentage:"), objref.IDOf(targetPercentage))
+	return mwhmcwhbis
 }
 
 // WithTargetReheat sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetReheat(targetReheat obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetReheat:"), objref.IDOf(targetReheat))
-	return x
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetReheat(targetReheat obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTargetReheat:"), objref.IDOf(targetReheat))
+	return mwhmcwhbis
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Duration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
-}
-
-// SetDuration wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetDuration(duration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
 // OneShot wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) OneShot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oneShot"))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) OneShot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("oneShot"))
 	return obj.Wrap(_r)
-}
-
-// SetOneShot wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetOneShot(oneShot obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), objref.IDOf(oneShot))
 }
 
 // EmergencyBoost wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) EmergencyBoost() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emergencyBoost"))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) EmergencyBoost() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("emergencyBoost"))
 	return obj.Wrap(_r)
-}
-
-// SetEmergencyBoost wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetEmergencyBoost(emergencyBoost obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmergencyBoost:"), objref.IDOf(emergencyBoost))
 }
 
 // TemporarySetpoint wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TemporarySetpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("temporarySetpoint"))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TemporarySetpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("temporarySetpoint"))
 	return obj.Wrap(_r)
-}
-
-// SetTemporarySetpoint wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTemporarySetpoint(temporarySetpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporarySetpoint:"), objref.IDOf(temporarySetpoint))
 }
 
 // TargetPercentage wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetPercentage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetPercentage"))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetPercentage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("targetPercentage"))
 	return obj.Wrap(_r)
-}
-
-// SetTargetPercentage wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTargetPercentage(targetPercentage obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetPercentage:"), objref.IDOf(targetPercentage))
 }
 
 // TargetReheat wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetReheat() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetReheat"))
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetReheat() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("targetReheat"))
 	return obj.Wrap(_r)
 }
-
-// SetTargetReheat wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTargetReheat(targetReheat obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetReheat:"), objref.IDOf(targetReheat))
-}
-
-// MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable is the interface implemented by [MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct], for mocking and DI.
-type MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable interface {
-	obj.Object
-	WithDuration(duration obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	WithOneShot(oneShot obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	WithEmergencyBoost(emergencyBoost obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	WithTemporarySetpoint(temporarySetpoint obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	WithTargetPercentage(targetPercentage obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	WithTargetReheat(targetReheat obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	Duration() obj.Object
-	SetDuration(duration obj.Object)
-	OneShot() obj.Object
-	SetOneShot(oneShot obj.Object)
-	EmergencyBoost() obj.Object
-	SetEmergencyBoost(emergencyBoost obj.Object)
-	TemporarySetpoint() obj.Object
-	SetTemporarySetpoint(temporarySetpoint obj.Object)
-	TargetPercentage() obj.Object
-	SetTargetPercentage(targetPercentage obj.Object)
-	TargetReheat() obj.Object
-	SetTargetReheat(targetReheat obj.Object)
-}
-
-var _ MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable = (*MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)(nil)

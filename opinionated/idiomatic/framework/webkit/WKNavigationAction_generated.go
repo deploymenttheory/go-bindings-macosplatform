@@ -46,24 +46,24 @@ func wKNavigationActionAdopt(id objc.ID) *WKNavigationAction {
 }
 
 // Description returns the object's -description text.
-func (x *WKNavigationAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wna *WKNavigationAction) Description() string {
+	return rt.Description(objref.IDOf(wna))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKNavigationAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wna *WKNavigationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wna), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKNavigationAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wna *WKNavigationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wna), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKNavigationAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wna *WKNavigationAction) String() string {
+	return rt.Description(objref.IDOf(wna))
 }
 
 // NewWKNavigationAction creates a new WKNavigationAction.
@@ -72,58 +72,44 @@ func NewWKNavigationAction() *WKNavigationAction {
 	return wKNavigationActionAdopt(_id)
 }
 
-// SourceFrame the frame requesting the navigation.
-func (x *WKNavigationAction) SourceFrame() *WKFrameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+// SourceFrame returns the frame requesting the navigation.
+func (wna *WKNavigationAction) SourceFrame() *WKFrameInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("sourceFrame"))
 	return WKFrameInfoFromID(_r)
 }
 
-// TargetFrame the target frame, or nil if this is a new window navigation.
-func (x *WKNavigationAction) TargetFrame() *WKFrameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetFrame"))
+// TargetFrame returns the target frame, or nil if this is a new window navigation.
+func (wna *WKNavigationAction) TargetFrame() *WKFrameInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("targetFrame"))
 	return WKFrameInfoFromID(_r)
 }
 
-// NavigationType the type of action that triggered the navigation. The value is one of the constants of the enumerated type WKNavigationType.
-func (x *WKNavigationAction) NavigationType() WKNavigationType {
-	_r := objc.Send[WKNavigationType](objref.IDOf(x), objc.RegisterName("navigationType"))
+// NavigationType returns the type of action that triggered the navigation. The value is one of the constants of the enumerated type WKNavigationType.
+func (wna *WKNavigationAction) NavigationType() WKNavigationType {
+	_r := objc.Send[WKNavigationType](objref.IDOf(wna), objc.RegisterName("navigationType"))
 	return _r
 }
 
-// Request the navigation's request.
-func (x *WKNavigationAction) Request() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+// Request returns the navigation's request.
+func (wna *WKNavigationAction) Request() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("request"))
 	return obj.Wrap(_r)
 }
 
-// ShouldPerformDownload a value indicating whether the web content used a download attribute to indicate that this should be downloaded.
-func (x *WKNavigationAction) ShouldPerformDownload() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPerformDownload"))
+// ShouldPerformDownload reports whether the web content used a download attribute to indicate that this should be downloaded.
+func (wna *WKNavigationAction) ShouldPerformDownload() bool {
+	_r := objc.Send[bool](objref.IDOf(wna), objc.RegisterName("shouldPerformDownload"))
 	return _r
 }
 
-// IsContentRuleListRedirect whether or not the navigation is a redirect from a content rule list.
-func (x *WKNavigationAction) IsContentRuleListRedirect() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContentRuleListRedirect"))
+// IsContentRuleListRedirect reports whether the navigation is a redirect from a content rule list.
+func (wna *WKNavigationAction) IsContentRuleListRedirect() bool {
+	_r := objc.Send[bool](objref.IDOf(wna), objc.RegisterName("isContentRuleListRedirect"))
 	return _r
 }
 
-// ButtonNumber the number of the mouse button causing the navigation to be requested.
-func (x *WKNavigationAction) ButtonNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonNumber"))
+// ButtonNumber returns the number of the mouse button causing the navigation to be requested.
+func (wna *WKNavigationAction) ButtonNumber() int {
+	_r := objc.Send[int](objref.IDOf(wna), objc.RegisterName("buttonNumber"))
 	return _r
 }
-
-// WKNavigationActionable is the interface implemented by [WKNavigationAction], for mocking and DI.
-type WKNavigationActionable interface {
-	obj.Object
-	SourceFrame() *WKFrameInfo
-	TargetFrame() *WKFrameInfo
-	NavigationType() WKNavigationType
-	Request() obj.Object
-	ShouldPerformDownload() bool
-	IsContentRuleListRedirect() bool
-	ButtonNumber() int
-}
-
-var _ WKNavigationActionable = (*WKNavigationAction)(nil)

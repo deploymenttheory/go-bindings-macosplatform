@@ -7,7 +7,6 @@ package corebluetooth
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,19 @@ func NewMutableServiceWithTypePrimary(uUID *UUID, isPrimary bool) *MutableServic
 	return mutableServiceAdopt(_id)
 }
 
-// WithIncludedServices a list of included services.
-func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *MutableService {
+// WithIncludedServices sets a list of included services.
+func (ms *MutableService) WithIncludedServices(items ...ServiceProvider) *MutableService {
 	_arr := purego.SliceToNSArray(items, func(_v ServiceProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedServices:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setIncludedServices:"), _arr)
+	return ms
 }
 
-// WithCharacteristics a list of characteristics of a service.
-func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *MutableService {
+// WithCharacteristics sets a list of characteristics of a service.
+func (ms *MutableService) WithCharacteristics(items ...CharacteristicProvider) *MutableService {
 	_arr := purego.SliceToNSArray(items, func(_v CharacteristicProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacteristics:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setCharacteristics:"), _arr)
+	return ms
 }
-
-// SetIncludedServices wraps the corresponding Objective-C method.
-func (x *MutableService) SetIncludedServices(includedServices []*Service) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedServices:"), purego.SliceToNSArray(includedServices, func(_v *Service) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetCharacteristics wraps the corresponding Objective-C method.
-func (x *MutableService) SetCharacteristics(characteristics []*Characteristic) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacteristics:"), purego.SliceToNSArray(characteristics, func(_v *Characteristic) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MutableServiceable is the interface implemented by [MutableService], for mocking and DI.
-type MutableServiceable interface {
-	obj.Object
-	WithIncludedServices(items ...ServiceProvider) *MutableService
-	WithCharacteristics(items ...CharacteristicProvider) *MutableService
-	SetIncludedServices(includedServices []*Service)
-	SetCharacteristics(characteristics []*Characteristic)
-}
-
-var _ MutableServiceable = (*MutableService)(nil)
 
 var _ ServiceProvider = (*MutableService)(nil)
 

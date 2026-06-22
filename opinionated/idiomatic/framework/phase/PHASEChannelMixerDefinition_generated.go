@@ -60,33 +60,23 @@ func NewChannelMixerDefinitionWithChannelLayout(layout obj.Object) *ChannelMixer
 	return channelMixerDefinitionAdopt(_id)
 }
 
-// WithGain the mixer’s volume.
-func (x *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-	return x
+// WithGain sets the mixer’s volume.
+func (cmd *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(cmd), objc.RegisterName("setGain:"), gain)
+	return cmd
 }
 
-// WithGainMetaParameterDefinition a template for a parameter that changes the mixer’s volume gradually over a period of time.
-func (x *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
-	return x
+// WithGainMetaParameterDefinition sets a template for a parameter that changes the mixer’s volume gradually over a period of time.
+func (cmd *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(cmd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
+	return cmd
 }
 
 // InputChannelLayout wraps the corresponding Objective-C method.
-func (x *ChannelMixerDefinition) InputChannelLayout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputChannelLayout"))
+func (cmd *ChannelMixerDefinition) InputChannelLayout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cmd), objc.RegisterName("inputChannelLayout"))
 	return obj.Wrap(_r)
 }
-
-// ChannelMixerDefinitionable is the interface implemented by [ChannelMixerDefinition], for mocking and DI.
-type ChannelMixerDefinitionable interface {
-	obj.Object
-	WithGain(gain float64) *ChannelMixerDefinition
-	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition
-	InputChannelLayout() obj.Object
-}
-
-var _ ChannelMixerDefinitionable = (*ChannelMixerDefinition)(nil)
 
 var _ MixerDefinitionProvider = (*ChannelMixerDefinition)(nil)
 

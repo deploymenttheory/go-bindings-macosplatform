@@ -46,24 +46,24 @@ func wKWindowFeaturesAdopt(id objc.ID) *WKWindowFeatures {
 }
 
 // Description returns the object's -description text.
-func (x *WKWindowFeatures) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wwf *WKWindowFeatures) Description() string {
+	return rt.Description(objref.IDOf(wwf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKWindowFeatures) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wwf *WKWindowFeatures) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wwf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKWindowFeatures) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wwf *WKWindowFeatures) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wwf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKWindowFeatures) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wwf *WKWindowFeatures) String() string {
+	return rt.Description(objref.IDOf(wwf))
 }
 
 // NewWKWindowFeatures creates a new WKWindowFeatures.
@@ -72,65 +72,50 @@ func NewWKWindowFeatures() *WKWindowFeatures {
 	return wKWindowFeaturesAdopt(_id)
 }
 
-// MenuBarVisibility BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
-func (x *WKWindowFeatures) MenuBarVisibility() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuBarVisibility"))
+// MenuBarVisibility returns BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
+func (wwf *WKWindowFeatures) MenuBarVisibility() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("menuBarVisibility"))
 	return obj.Wrap(_r)
 }
 
-// StatusBarVisibility BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
-func (x *WKWindowFeatures) StatusBarVisibility() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusBarVisibility"))
+// StatusBarVisibility returns BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
+func (wwf *WKWindowFeatures) StatusBarVisibility() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("statusBarVisibility"))
 	return obj.Wrap(_r)
 }
 
-// ToolbarsVisibility BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
-func (x *WKWindowFeatures) ToolbarsVisibility() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbarsVisibility"))
+// ToolbarsVisibility returns BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
+func (wwf *WKWindowFeatures) ToolbarsVisibility() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("toolbarsVisibility"))
 	return obj.Wrap(_r)
 }
 
-// AllowsResizing BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
-func (x *WKWindowFeatures) AllowsResizing() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowsResizing"))
+// AllowsResizing returns BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
+func (wwf *WKWindowFeatures) AllowsResizing() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("allowsResizing"))
 	return obj.Wrap(_r)
 }
 
-// X CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
-func (x *WKWindowFeatures) X() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("x"))
+// X returns CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
+func (wwf *WKWindowFeatures) X() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("x"))
 	return obj.Wrap(_r)
 }
 
-// Y CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
-func (x *WKWindowFeatures) Y() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("y"))
+// Y returns CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
+func (wwf *WKWindowFeatures) Y() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("y"))
 	return obj.Wrap(_r)
 }
 
-// Width CGFloat. The width coordinate of the containing window. nil if the width was not specified.
-func (x *WKWindowFeatures) Width() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
+// Width returns CGFloat. The width coordinate of the containing window. nil if the width was not specified.
+func (wwf *WKWindowFeatures) Width() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("width"))
 	return obj.Wrap(_r)
 }
 
-// Height CGFloat. The height coordinate of the containing window. nil if the height was not specified.
-func (x *WKWindowFeatures) Height() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
+// Height returns CGFloat. The height coordinate of the containing window. nil if the height was not specified.
+func (wwf *WKWindowFeatures) Height() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("height"))
 	return obj.Wrap(_r)
 }
-
-// WKWindowFeaturesable is the interface implemented by [WKWindowFeatures], for mocking and DI.
-type WKWindowFeaturesable interface {
-	obj.Object
-	MenuBarVisibility() obj.Object
-	StatusBarVisibility() obj.Object
-	ToolbarsVisibility() obj.Object
-	AllowsResizing() obj.Object
-	X() obj.Object
-	Y() obj.Object
-	Width() obj.Object
-	Height() obj.Object
-}
-
-var _ WKWindowFeaturesable = (*WKWindowFeatures)(nil)

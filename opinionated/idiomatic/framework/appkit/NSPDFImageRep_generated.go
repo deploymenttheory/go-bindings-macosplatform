@@ -54,108 +54,82 @@ func NewPDFImageRepWithData(pdfData obj.Object) *PDFImageRep {
 	return pDFImageRepAdopt(_id)
 }
 
-// WithCurrentPage the page currently displayed by the image representation.
-func (x *PDFImageRep) WithCurrentPage(currentPage int) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPage:"), currentPage)
-	return x
+// WithCurrentPage sets the page currently displayed by the image representation.
+func (pir *PDFImageRep) WithCurrentPage(currentPage int) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setCurrentPage:"), currentPage)
+	return pir
 }
 
-// WithSize the size of the image representation, measured in points in the user coordinate space.
-func (x *PDFImageRep) WithSize(size corefoundation.CGSize) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the size of the image representation, measured in points in the user coordinate space.
+func (pir *PDFImageRep) WithSize(size corefoundation.CGSize) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setSize:"), size)
+	return pir
 }
 
-// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
-func (x *PDFImageRep) WithAlpha(alpha bool) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets a Boolean value that indicates whether the image data has an alpha channel.
+func (pir *PDFImageRep) WithAlpha(alpha bool) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setAlpha:"), alpha)
+	return pir
 }
 
-// WithOpaque a Boolean value that indicates whether the image is opaque.
-func (x *PDFImageRep) WithOpaque(opaque bool) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that indicates whether the image is opaque.
+func (pir *PDFImageRep) WithOpaque(opaque bool) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setOpaque:"), opaque)
+	return pir
 }
 
-// WithColorSpaceName the name of the color space used by the image data.
-func (x *PDFImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-	return x
+// WithColorSpaceName sets the name of the color space used by the image data.
+func (pir *PDFImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return pir
 }
 
-// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-func (x *PDFImageRep) WithBitsPerSample(bitsPerSample int) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
-	return x
+// WithBitsPerSample sets the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+func (pir *PDFImageRep) WithBitsPerSample(bitsPerSample int) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
+	return pir
 }
 
-// WithPixelsWide the width of the image, measured in pixels.
-func (x *PDFImageRep) WithPixelsWide(pixelsWide int) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
-	return x
+// WithPixelsWide sets the width of the image, measured in pixels.
+func (pir *PDFImageRep) WithPixelsWide(pixelsWide int) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setPixelsWide:"), pixelsWide)
+	return pir
 }
 
-// WithPixelsHigh the height of the image, measured in pixels.
-func (x *PDFImageRep) WithPixelsHigh(pixelsHigh int) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
-	return x
+// WithPixelsHigh sets the height of the image, measured in pixels.
+func (pir *PDFImageRep) WithPixelsHigh(pixelsHigh int) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
+	return pir
 }
 
-// WithLayoutDirection the layout direction for the image.
-func (x *PDFImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *PDFImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
-	return x
+// WithLayoutDirection sets the layout direction for the image.
+func (pir *PDFImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setLayoutDirection:"), layoutDirection)
+	return pir
 }
 
 // PDFRepresentation wraps the corresponding Objective-C method.
-func (x *PDFImageRep) PDFRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PDFRepresentation"))
+func (pir *PDFImageRep) PDFRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("PDFRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // Bounds wraps the corresponding Objective-C method.
-func (x *PDFImageRep) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+func (pir *PDFImageRep) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pir), objc.RegisterName("bounds"))
 	return _r
 }
 
 // CurrentPage wraps the corresponding Objective-C method.
-func (x *PDFImageRep) CurrentPage() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentPage"))
+func (pir *PDFImageRep) CurrentPage() int {
+	_r := objc.Send[int](objref.IDOf(pir), objc.RegisterName("currentPage"))
 	return _r
-}
-
-// SetCurrentPage wraps the corresponding Objective-C method.
-func (x *PDFImageRep) SetCurrentPage(currentPage int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPage:"), currentPage)
 }
 
 // PageCount wraps the corresponding Objective-C method.
-func (x *PDFImageRep) PageCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageCount"))
+func (pir *PDFImageRep) PageCount() int {
+	_r := objc.Send[int](objref.IDOf(pir), objc.RegisterName("pageCount"))
 	return _r
 }
-
-// PDFImageRepable is the interface implemented by [PDFImageRep], for mocking and DI.
-type PDFImageRepable interface {
-	obj.Object
-	WithCurrentPage(currentPage int) *PDFImageRep
-	WithSize(size corefoundation.CGSize) *PDFImageRep
-	WithAlpha(alpha bool) *PDFImageRep
-	WithOpaque(opaque bool) *PDFImageRep
-	WithColorSpaceName(colorSpaceName obj.Object) *PDFImageRep
-	WithBitsPerSample(bitsPerSample int) *PDFImageRep
-	WithPixelsWide(pixelsWide int) *PDFImageRep
-	WithPixelsHigh(pixelsHigh int) *PDFImageRep
-	WithLayoutDirection(layoutDirection ImageLayoutDirection) *PDFImageRep
-	PDFRepresentation() obj.Object
-	Bounds() corefoundation.CGRect
-	CurrentPage() int
-	SetCurrentPage(currentPage int)
-	PageCount() int
-}
-
-var _ PDFImageRepable = (*PDFImageRep)(nil)
 
 var _ ImageRepProvider = (*PDFImageRep)(nil)

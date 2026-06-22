@@ -46,24 +46,24 @@ func logPositionAdopt(id objc.ID) *LogPosition {
 }
 
 // Description returns the object's -description text.
-func (x *LogPosition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lp *LogPosition) Description() string {
+	return rt.Description(objref.IDOf(lp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogPosition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lp *LogPosition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogPosition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lp *LogPosition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LogPosition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lp *LogPosition) String() string {
+	return rt.Description(objref.IDOf(lp))
 }
 
 // NewLogPosition creates a new LogPosition.
@@ -71,10 +71,3 @@ func NewLogPosition() *LogPosition {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSLogPosition")), objc.RegisterName("new"))
 	return logPositionAdopt(_id)
 }
-
-// LogPositionable is the interface implemented by [LogPosition], for mocking and DI.
-type LogPositionable interface {
-	obj.Object
-}
-
-var _ LogPositionable = (*LogPosition)(nil)

@@ -46,24 +46,24 @@ func notificationActionIconAdopt(id objc.ID) *NotificationActionIcon {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationActionIcon) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nai *NotificationActionIcon) Description() string {
+	return rt.Description(objref.IDOf(nai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationActionIcon) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nai *NotificationActionIcon) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationActionIcon) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nai *NotificationActionIcon) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationActionIcon) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nai *NotificationActionIcon) String() string {
+	return rt.Description(objref.IDOf(nai))
 }
 
 // NewNotificationActionIcon creates a new NotificationActionIcon.
@@ -71,10 +71,3 @@ func NewNotificationActionIcon() *NotificationActionIcon {
 	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationActionIcon")), objc.RegisterName("new"))
 	return notificationActionIconAdopt(_id)
 }
-
-// NotificationActionIconable is the interface implemented by [NotificationActionIcon], for mocking and DI.
-type NotificationActionIconable interface {
-	obj.Object
-}
-
-var _ NotificationActionIconable = (*NotificationActionIcon)(nil)

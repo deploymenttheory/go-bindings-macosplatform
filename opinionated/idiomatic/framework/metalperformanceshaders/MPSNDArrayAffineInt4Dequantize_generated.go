@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNDArrayAffineInt4Dequantize() *NDArrayAffineInt4Dequantize {
 	return nDArrayAffineInt4DequantizeAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayAffineInt4Dequantize) WithLabel(label string) *NDArrayAffineInt4Dequantize {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (naaid *NDArrayAffineInt4Dequantize) WithLabel(label string) *NDArrayAffineInt4Dequantize {
+	objc.Send[objc.ID](objref.IDOf(naaid), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return naaid
 }
-
-// NDArrayAffineInt4Dequantizeable is the interface implemented by [NDArrayAffineInt4Dequantize], for mocking and DI.
-type NDArrayAffineInt4Dequantizeable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayAffineInt4Dequantize
-}
-
-var _ NDArrayAffineInt4Dequantizeable = (*NDArrayAffineInt4Dequantize)(nil)
 
 var _ NDArrayMultiaryKernelProvider = (*NDArrayAffineInt4Dequantize)(nil)
 

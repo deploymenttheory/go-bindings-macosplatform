@@ -46,38 +46,28 @@ func visionPrescriptionAdopt(id objc.ID) *VisionPrescription {
 	return x
 }
 
-// PrescriptionType a vision prescription type (glasses or contacts)
-func (x *VisionPrescription) PrescriptionType() VisionPrescriptionType {
-	_r := objc.Send[VisionPrescriptionType](objref.IDOf(x), objc.RegisterName("prescriptionType"))
+// PrescriptionType returns a vision prescription type (glasses or contacts)
+func (vp *VisionPrescription) PrescriptionType() VisionPrescriptionType {
+	_r := objc.Send[VisionPrescriptionType](objref.IDOf(vp), objc.RegisterName("prescriptionType"))
 	return _r
 }
 
-// DateIssued the date the prescription was issued
-func (x *VisionPrescription) DateIssued() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateIssued"))
+// DateIssued returns the date the prescription was issued
+func (vp *VisionPrescription) DateIssued() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("dateIssued"))
 	return obj.Wrap(_r)
 }
 
-// ExpirationDate the date the prescription will expire
-func (x *VisionPrescription) ExpirationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+// ExpirationDate returns the date the prescription will expire
+func (vp *VisionPrescription) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
-
-// VisionPrescriptionable is the interface implemented by [VisionPrescription], for mocking and DI.
-type VisionPrescriptionable interface {
-	obj.Object
-	PrescriptionType() VisionPrescriptionType
-	DateIssued() obj.Object
-	ExpirationDate() obj.Object
-}
-
-var _ VisionPrescriptionable = (*VisionPrescription)(nil)
 
 // isVisionPrescription marks VisionPrescription — and, by embedding promotion, its
 // subclasses — as a member of the VisionPrescription hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *VisionPrescription) isVisionPrescription() {}
+func (vp *VisionPrescription) isVisionPrescription() {}
 
 var _ VisionPrescriptionProvider = (*VisionPrescription)(nil)
 

@@ -48,70 +48,53 @@ func subscriptionAdopt(id objc.ID) *Subscription {
 }
 
 // Description returns the object's -description text.
-func (x *Subscription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Subscription) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Subscription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Subscription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Subscription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Subscription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Subscription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Subscription) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
-// WithNotificationInfo the configuration for a subscription’s push notifications.
-func (x *Subscription) WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
-	return x
+// WithNotificationInfo sets the configuration for a subscription’s push notifications.
+func (s *Subscription) WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
+	return s
 }
 
-// SubscriptionID the subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
-func (x *Subscription) SubscriptionID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionID"))
+// SubscriptionID returns the subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
+func (s *Subscription) SubscriptionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("subscriptionID"))
 	return obj.Wrap(_r)
 }
 
-// SubscriptionType the behavior that a subscription provides.
-func (x *Subscription) SubscriptionType() SubscriptionType {
-	_r := objc.Send[SubscriptionType](objref.IDOf(x), objc.RegisterName("subscriptionType"))
+// SubscriptionType returns the behavior that a subscription provides.
+func (s *Subscription) SubscriptionType() SubscriptionType {
+	_r := objc.Send[SubscriptionType](objref.IDOf(s), objc.RegisterName("subscriptionType"))
 	return _r
 }
 
-// NotificationInfo the configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
-func (x *Subscription) NotificationInfo() *NotificationInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notificationInfo"))
+// NotificationInfo returns the configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+func (s *Subscription) NotificationInfo() *NotificationInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("notificationInfo"))
 	return NotificationInfoFromID(_r)
 }
-
-// SetNotificationInfo wraps the corresponding Objective-C method.
-func (x *Subscription) SetNotificationInfo(notificationInfo *NotificationInfo) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
-}
-
-// Subscriptionable is the interface implemented by [Subscription], for mocking and DI.
-type Subscriptionable interface {
-	obj.Object
-	WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription
-	SubscriptionID() obj.Object
-	SubscriptionType() SubscriptionType
-	NotificationInfo() *NotificationInfo
-	SetNotificationInfo(notificationInfo *NotificationInfo)
-}
-
-var _ Subscriptionable = (*Subscription)(nil)
 
 // isSubscription marks Subscription — and, by embedding promotion, its
 // subclasses — as a member of the Subscription hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Subscription) isSubscription() {}
+func (s *Subscription) isSubscription() {}
 
 var _ SubscriptionProvider = (*Subscription)(nil)

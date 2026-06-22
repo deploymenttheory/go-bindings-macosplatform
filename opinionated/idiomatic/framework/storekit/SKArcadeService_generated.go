@@ -44,24 +44,24 @@ func arcadeServiceAdopt(id objc.ID) *ArcadeService {
 }
 
 // Description returns the object's -description text.
-func (x *ArcadeService) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *ArcadeService) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArcadeService) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *ArcadeService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArcadeService) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *ArcadeService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ArcadeService) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *ArcadeService) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewArcadeService creates a new ArcadeService.
@@ -69,10 +69,3 @@ func NewArcadeService() *ArcadeService {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKArcadeService")), objc.RegisterName("new"))
 	return arcadeServiceAdopt(_id)
 }
-
-// ArcadeServiceable is the interface implemented by [ArcadeService], for mocking and DI.
-type ArcadeServiceable interface {
-	obj.Object
-}
-
-var _ ArcadeServiceable = (*ArcadeService)(nil)

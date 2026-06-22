@@ -46,24 +46,24 @@ func distanceModelFadeOutParametersAdopt(id objc.ID) *DistanceModelFadeOutParame
 }
 
 // Description returns the object's -description text.
-func (x *DistanceModelFadeOutParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dmfop *DistanceModelFadeOutParameters) Description() string {
+	return rt.Description(objref.IDOf(dmfop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistanceModelFadeOutParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dmfop *DistanceModelFadeOutParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dmfop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistanceModelFadeOutParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dmfop *DistanceModelFadeOutParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dmfop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DistanceModelFadeOutParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dmfop *DistanceModelFadeOutParameters) String() string {
+	return rt.Description(objref.IDOf(dmfop))
 }
 
 // NewDistanceModelFadeOutParametersWithCullDistance creates a distance beyond which sound sources stop playing.
@@ -74,15 +74,7 @@ func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *Di
 }
 
 // CullDistance wraps the corresponding Objective-C method.
-func (x *DistanceModelFadeOutParameters) CullDistance() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cullDistance"))
+func (dmfop *DistanceModelFadeOutParameters) CullDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(dmfop), objc.RegisterName("cullDistance"))
 	return _r
 }
-
-// DistanceModelFadeOutParametersable is the interface implemented by [DistanceModelFadeOutParameters], for mocking and DI.
-type DistanceModelFadeOutParametersable interface {
-	obj.Object
-	CullDistance() float64
-}
-
-var _ DistanceModelFadeOutParametersable = (*DistanceModelFadeOutParameters)(nil)

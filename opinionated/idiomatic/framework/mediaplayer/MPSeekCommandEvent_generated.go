@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewSeekCommandEvent() *SeekCommandEvent {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *SeekCommandEvent) Type() SeekCommandEventType {
-	_r := objc.Send[SeekCommandEventType](objref.IDOf(x), objc.RegisterName("type"))
+func (sce *SeekCommandEvent) Type() SeekCommandEventType {
+	_r := objc.Send[SeekCommandEventType](objref.IDOf(sce), objc.RegisterName("type"))
 	return _r
 }
-
-// SeekCommandEventable is the interface implemented by [SeekCommandEvent], for mocking and DI.
-type SeekCommandEventable interface {
-	obj.Object
-	Type() SeekCommandEventType
-}
-
-var _ SeekCommandEventable = (*SeekCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*SeekCommandEvent)(nil)

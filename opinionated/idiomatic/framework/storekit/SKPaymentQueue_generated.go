@@ -46,24 +46,24 @@ func paymentQueueAdopt(id objc.ID) *PaymentQueue {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentQueue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pq *PaymentQueue) Description() string {
+	return rt.Description(objref.IDOf(pq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentQueue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pq *PaymentQueue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentQueue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pq *PaymentQueue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentQueue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pq *PaymentQueue) String() string {
+	return rt.Description(objref.IDOf(pq))
 }
 
 // NewPaymentQueue creates a new PaymentQueue.
@@ -73,79 +73,61 @@ func NewPaymentQueue() *PaymentQueue {
 }
 
 // AddPayment adds a payment request to the queue.
-func (x *PaymentQueue) AddPayment(payment *Payment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPayment:"), objref.IDOf(payment))
+func (pq *PaymentQueue) AddPayment(payment *Payment) {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("addPayment:"), objref.IDOf(payment))
 }
 
 // RestoreCompletedTransactions asks the payment queue to restore previously completed purchases.
-func (x *PaymentQueue) RestoreCompletedTransactions() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreCompletedTransactions"))
+func (pq *PaymentQueue) RestoreCompletedTransactions() {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("restoreCompletedTransactions"))
 }
 
 // RestoreCompletedTransactionsWithApplicationUsername asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.
-func (x *PaymentQueue) RestoreCompletedTransactionsWithApplicationUsername(username string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreCompletedTransactionsWithApplicationUsername:"), purego.NSString(username))
+func (pq *PaymentQueue) RestoreCompletedTransactionsWithApplicationUsername(username string) {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("restoreCompletedTransactionsWithApplicationUsername:"), purego.NSString(username))
 }
 
 // FinishTransaction notifies the App Store that the app finished processing the transaction.
-func (x *PaymentQueue) FinishTransaction(transaction *PaymentTransaction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishTransaction:"), objref.IDOf(transaction))
+func (pq *PaymentQueue) FinishTransaction(transaction *PaymentTransaction) {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("finishTransaction:"), objref.IDOf(transaction))
 }
 
 // StartDownloads adds a set of downloads to the download list.
-func (x *PaymentQueue) StartDownloads(downloads []*Download) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+func (pq *PaymentQueue) StartDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("startDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PauseDownloads pauses a set of downloads.
-func (x *PaymentQueue) PauseDownloads(downloads []*Download) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+func (pq *PaymentQueue) PauseDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("pauseDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ResumeDownloads resumes a set of downloads.
-func (x *PaymentQueue) ResumeDownloads(downloads []*Download) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+func (pq *PaymentQueue) ResumeDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("resumeDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CancelDownloads removes a set of downloads from the download list.
-func (x *PaymentQueue) CancelDownloads(downloads []*Download) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+func (pq *PaymentQueue) CancelDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("cancelDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Storefront wraps the corresponding Objective-C method.
-func (x *PaymentQueue) Storefront() *Storefront {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storefront"))
+func (pq *PaymentQueue) Storefront() *Storefront {
+	_r := objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("storefront"))
 	return StorefrontFromID(_r)
 }
 
 // TransactionObservers wraps the corresponding Objective-C method.
-func (x *PaymentQueue) TransactionObservers() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionObservers"))
+func (pq *PaymentQueue) TransactionObservers() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("transactionObservers"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Transactions wraps the corresponding Objective-C method.
 //
 // Transactions returns the collection as a Go slice.
-func (x *PaymentQueue) Transactions() []*PaymentTransaction {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactions"))
+func (pq *PaymentQueue) Transactions() []*PaymentTransaction {
+	_arr := objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("transactions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentTransaction { return PaymentTransactionFromID(_id) })
 }
-
-// PaymentQueueable is the interface implemented by [PaymentQueue], for mocking and DI.
-type PaymentQueueable interface {
-	obj.Object
-	AddPayment(payment *Payment)
-	RestoreCompletedTransactions()
-	RestoreCompletedTransactionsWithApplicationUsername(username string)
-	FinishTransaction(transaction *PaymentTransaction)
-	StartDownloads(downloads []*Download)
-	PauseDownloads(downloads []*Download)
-	ResumeDownloads(downloads []*Download)
-	CancelDownloads(downloads []*Download)
-	Storefront() *Storefront
-	TransactionObservers() []obj.Object
-	Transactions() []*PaymentTransaction
-}
-
-var _ PaymentQueueable = (*PaymentQueue)(nil)

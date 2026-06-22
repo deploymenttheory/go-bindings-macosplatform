@@ -5,13 +5,14 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // EFIVariableStore is an idiomatic wrapper over the Objective-C class VZEFIVariableStore.
@@ -48,24 +49,24 @@ func eFIVariableStoreAdopt(id objc.ID) *EFIVariableStore {
 }
 
 // Description returns the object's -description text.
-func (x *EFIVariableStore) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (evs *EFIVariableStore) Description() string {
+	return rt.Description(objref.IDOf(evs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EFIVariableStore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (evs *EFIVariableStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(evs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EFIVariableStore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (evs *EFIVariableStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(evs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EFIVariableStore) String() string {
-	return rt.Description(objref.IDOf(x))
+func (evs *EFIVariableStore) String() string {
+	return rt.Description(objref.IDOf(evs))
 }
 
 // NewEFIVariableStoreWithURL initialize the variable store from the URL of an existing file.
@@ -87,15 +88,7 @@ func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, optio
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *EFIVariableStore) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (evs *EFIVariableStore) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(evs), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// EFIVariableStoreable is the interface implemented by [EFIVariableStore], for mocking and DI.
-type EFIVariableStoreable interface {
-	obj.Object
-	URL() obj.Object
-}
-
-var _ EFIVariableStoreable = (*EFIVariableStore)(nil)

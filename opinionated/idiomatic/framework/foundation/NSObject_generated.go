@@ -46,302 +46,302 @@ func objectAdopt(id objc.ID) *Object {
 }
 
 // Description returns the object's -description text.
-func (x *Object) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Object) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Object) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Object) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Object) WithScriptingProperties(scriptingProperties obj.Object) *Object {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (o *Object) WithScriptingProperties(scriptingProperties obj.Object) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return o
 }
 
 // Dealloc wraps the corresponding Objective-C method.
-func (x *Object) Dealloc() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dealloc"))
+func (o *Object) Dealloc() {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dealloc"))
 }
 
 // Finalize wraps the corresponding Objective-C method.
-func (x *Object) Finalize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalize"))
+func (o *Object) Finalize() {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("finalize"))
 }
 
 // Copy wraps the corresponding Objective-C method.
-func (x *Object) Copy() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copy"))
+func (o *Object) Copy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("copy"))
 	return obj.Wrap(_r)
 }
 
 // MutableCopy wraps the corresponding Objective-C method.
-func (x *Object) MutableCopy() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableCopy"))
+func (o *Object) MutableCopy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableCopy"))
 	return obj.Wrap(_r)
 }
 
 // ForwardInvocation wraps the corresponding Objective-C method.
-func (x *Object) ForwardInvocation(anInvocation *Invocation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardInvocation:"), objref.IDOf(anInvocation))
+func (o *Object) ForwardInvocation(anInvocation *Invocation) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("forwardInvocation:"), objref.IDOf(anInvocation))
 }
 
 // ReplacementObjectForCoder wraps the corresponding Objective-C method.
-func (x *Object) ReplacementObjectForCoder(coder *Coder) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementObjectForCoder:"), objref.IDOf(coder))
+func (o *Object) ReplacementObjectForCoder(coder *Coder) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForCoder:"), objref.IDOf(coder))
 	return obj.Wrap(_r)
 }
 
 // AwakeAfterUsingCoder wraps the corresponding Objective-C method.
-func (x *Object) AwakeAfterUsingCoder(coder *Coder) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeAfterUsingCoder:"), objref.IDOf(coder))
+func (o *Object) AwakeAfterUsingCoder(coder *Coder) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("awakeAfterUsingCoder:"), objref.IDOf(coder))
 	return obj.Wrap(_r)
 }
 
 // AutoContentAccessingProxy wraps the corresponding Objective-C method.
-func (x *Object) AutoContentAccessingProxy() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("autoContentAccessingProxy"))
+func (o *Object) AutoContentAccessingProxy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("autoContentAccessingProxy"))
 	return obj.Wrap(_r)
 }
 
 // URLResourceDataDidBecomeAvailable wraps the corresponding Objective-C method.
-func (x *Object) URLResourceDataDidBecomeAvailable(sender string, newBytes *Data) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL:resourceDataDidBecomeAvailable:"), rt.FileURL(sender), objref.IDOf(newBytes))
+func (o *Object) URLResourceDataDidBecomeAvailable(sender string, newBytes *Data) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URL:resourceDataDidBecomeAvailable:"), rt.FileURL(sender), objref.IDOf(newBytes))
 }
 
 // URLResourceDidFinishLoading wraps the corresponding Objective-C method.
-func (x *Object) URLResourceDidFinishLoading(sender string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLResourceDidFinishLoading:"), rt.FileURL(sender))
+func (o *Object) URLResourceDidFinishLoading(sender string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URLResourceDidFinishLoading:"), rt.FileURL(sender))
 }
 
 // URLResourceDidCancelLoading wraps the corresponding Objective-C method.
-func (x *Object) URLResourceDidCancelLoading(sender string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLResourceDidCancelLoading:"), rt.FileURL(sender))
+func (o *Object) URLResourceDidCancelLoading(sender string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URLResourceDidCancelLoading:"), rt.FileURL(sender))
 }
 
 // URLResourceDidFailLoadingWithReason wraps the corresponding Objective-C method.
-func (x *Object) URLResourceDidFailLoadingWithReason(sender string, reason string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL:resourceDidFailLoadingWithReason:"), rt.FileURL(sender), purego.NSString(reason))
+func (o *Object) URLResourceDidFailLoadingWithReason(sender string, reason string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URL:resourceDidFailLoadingWithReason:"), rt.FileURL(sender), purego.NSString(reason))
 }
 
 // FileManagerShouldProceedAfterError wraps the corresponding Objective-C method.
-func (x *Object) FileManagerShouldProceedAfterError(fm *FileManager, errorInfo obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fileManager:shouldProceedAfterError:"), objref.IDOf(fm), objref.IDOf(errorInfo))
+func (o *Object) FileManagerShouldProceedAfterError(fm *FileManager, errorInfo obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("fileManager:shouldProceedAfterError:"), objref.IDOf(fm), objref.IDOf(errorInfo))
 	return _r
 }
 
 // FileManagerWillProcessPath wraps the corresponding Objective-C method.
-func (x *Object) FileManagerWillProcessPath(fm *FileManager, path string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileManager:willProcessPath:"), objref.IDOf(fm), purego.NSString(path))
+func (o *Object) FileManagerWillProcessPath(fm *FileManager, path string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("fileManager:willProcessPath:"), objref.IDOf(fm), purego.NSString(path))
 }
 
 // ValueForKey wraps the corresponding Objective-C method.
-func (x *Object) ValueForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForKey:"), purego.NSString(key))
+func (o *Object) ValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetValueForKey wraps the corresponding Objective-C method.
-func (x *Object) SetValueForKey(value obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forKey:"), objref.IDOf(value), purego.NSString(key))
+func (o *Object) SetValueForKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // MutableArrayValueForKey wraps the corresponding Objective-C method.
-func (x *Object) MutableArrayValueForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableArrayValueForKey:"), purego.NSString(key))
+func (o *Object) MutableArrayValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableArrayValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // MutableOrderedSetValueForKey wraps the corresponding Objective-C method.
-func (x *Object) MutableOrderedSetValueForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableOrderedSetValueForKey:"), purego.NSString(key))
+func (o *Object) MutableOrderedSetValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableOrderedSetValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // MutableSetValueForKey wraps the corresponding Objective-C method.
-func (x *Object) MutableSetValueForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableSetValueForKey:"), purego.NSString(key))
+func (o *Object) MutableSetValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableSetValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValueForKeyPath wraps the corresponding Objective-C method.
-func (x *Object) ValueForKeyPath(keyPath string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForKeyPath:"), purego.NSString(keyPath))
+func (o *Object) ValueForKeyPath(keyPath string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // SetValueForKeyPath wraps the corresponding Objective-C method.
-func (x *Object) SetValueForKeyPath(value obj.Object, keyPath string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forKeyPath:"), objref.IDOf(value), purego.NSString(keyPath))
+func (o *Object) SetValueForKeyPath(value obj.Object, keyPath string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValue:forKeyPath:"), objref.IDOf(value), purego.NSString(keyPath))
 }
 
 // MutableArrayValueForKeyPath wraps the corresponding Objective-C method.
-func (x *Object) MutableArrayValueForKeyPath(keyPath string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableArrayValueForKeyPath:"), purego.NSString(keyPath))
+func (o *Object) MutableArrayValueForKeyPath(keyPath string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableArrayValueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // MutableOrderedSetValueForKeyPath wraps the corresponding Objective-C method.
-func (x *Object) MutableOrderedSetValueForKeyPath(keyPath string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableOrderedSetValueForKeyPath:"), purego.NSString(keyPath))
+func (o *Object) MutableOrderedSetValueForKeyPath(keyPath string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableOrderedSetValueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // MutableSetValueForKeyPath wraps the corresponding Objective-C method.
-func (x *Object) MutableSetValueForKeyPath(keyPath string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableSetValueForKeyPath:"), purego.NSString(keyPath))
+func (o *Object) MutableSetValueForKeyPath(keyPath string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableSetValueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // ValueForUndefinedKey wraps the corresponding Objective-C method.
-func (x *Object) ValueForUndefinedKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForUndefinedKey:"), purego.NSString(key))
+func (o *Object) ValueForUndefinedKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueForUndefinedKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetValueForUndefinedKey wraps the corresponding Objective-C method.
-func (x *Object) SetValueForUndefinedKey(value obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forUndefinedKey:"), objref.IDOf(value), purego.NSString(key))
+func (o *Object) SetValueForUndefinedKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValue:forUndefinedKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // SetNilValueForKey wraps the corresponding Objective-C method.
-func (x *Object) SetNilValueForKey(key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNilValueForKey:"), purego.NSString(key))
+func (o *Object) SetNilValueForKey(key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setNilValueForKey:"), purego.NSString(key))
 }
 
 // DictionaryWithValuesForKeys wraps the corresponding Objective-C method.
-func (x *Object) DictionaryWithValuesForKeys(keys []string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryWithValuesForKeys:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (o *Object) DictionaryWithValuesForKeys(keys []string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dictionaryWithValuesForKeys:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
 // SetValuesForKeysWithDictionary wraps the corresponding Objective-C method.
-func (x *Object) SetValuesForKeysWithDictionary(keyedValues obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValuesForKeysWithDictionary:"), objref.IDOf(keyedValues))
+func (o *Object) SetValuesForKeysWithDictionary(keyedValues obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValuesForKeysWithDictionary:"), objref.IDOf(keyedValues))
 }
 
 // StoredValueForKey wraps the corresponding Objective-C method.
-func (x *Object) StoredValueForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storedValueForKey:"), purego.NSString(key))
+func (o *Object) StoredValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("storedValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // TakeStoredValueForKey wraps the corresponding Objective-C method.
-func (x *Object) TakeStoredValueForKey(value obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeStoredValue:forKey:"), objref.IDOf(value), purego.NSString(key))
+func (o *Object) TakeStoredValueForKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeStoredValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // TakeValueForKey wraps the corresponding Objective-C method.
-func (x *Object) TakeValueForKey(value obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeValue:forKey:"), objref.IDOf(value), purego.NSString(key))
+func (o *Object) TakeValueForKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // TakeValueForKeyPath wraps the corresponding Objective-C method.
-func (x *Object) TakeValueForKeyPath(value obj.Object, keyPath string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeValue:forKeyPath:"), objref.IDOf(value), purego.NSString(keyPath))
+func (o *Object) TakeValueForKeyPath(value obj.Object, keyPath string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValue:forKeyPath:"), objref.IDOf(value), purego.NSString(keyPath))
 }
 
 // HandleQueryWithUnboundKey wraps the corresponding Objective-C method.
-func (x *Object) HandleQueryWithUnboundKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleQueryWithUnboundKey:"), purego.NSString(key))
+func (o *Object) HandleQueryWithUnboundKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("handleQueryWithUnboundKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // HandleTakeValueForUnboundKey wraps the corresponding Objective-C method.
-func (x *Object) HandleTakeValueForUnboundKey(value obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleTakeValue:forUnboundKey:"), objref.IDOf(value), purego.NSString(key))
+func (o *Object) HandleTakeValueForUnboundKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("handleTakeValue:forUnboundKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // UnableToSetNilForKey wraps the corresponding Objective-C method.
-func (x *Object) UnableToSetNilForKey(key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unableToSetNilForKey:"), purego.NSString(key))
+func (o *Object) UnableToSetNilForKey(key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("unableToSetNilForKey:"), purego.NSString(key))
 }
 
 // ValuesForKeys wraps the corresponding Objective-C method.
-func (x *Object) ValuesForKeys(keys obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valuesForKeys:"), objref.IDOf(keys))
+func (o *Object) ValuesForKeys(keys obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valuesForKeys:"), objref.IDOf(keys))
 	return obj.Wrap(_r)
 }
 
 // TakeValuesFromDictionary wraps the corresponding Objective-C method.
-func (x *Object) TakeValuesFromDictionary(properties obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeValuesFromDictionary:"), objref.IDOf(properties))
+func (o *Object) TakeValuesFromDictionary(properties obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValuesFromDictionary:"), objref.IDOf(properties))
 }
 
 // RemoveObserverForKeyPath wraps the corresponding Objective-C method.
-func (x *Object) RemoveObserverForKeyPath(observer *Object, keyPath string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:forKeyPath:"), objref.IDOf(observer), purego.NSString(keyPath))
+func (o *Object) RemoveObserverForKeyPath(observer *Object, keyPath string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeObserver:forKeyPath:"), objref.IDOf(observer), purego.NSString(keyPath))
 }
 
 // WillChangeValueForKey wraps the corresponding Objective-C method.
-func (x *Object) WillChangeValueForKey(key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willChangeValueForKey:"), purego.NSString(key))
+func (o *Object) WillChangeValueForKey(key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("willChangeValueForKey:"), purego.NSString(key))
 }
 
 // DidChangeValueForKey wraps the corresponding Objective-C method.
-func (x *Object) DidChangeValueForKey(key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeValueForKey:"), purego.NSString(key))
+func (o *Object) DidChangeValueForKey(key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("didChangeValueForKey:"), purego.NSString(key))
 }
 
 // WillChangeValuesAtIndexesForKey wraps the corresponding Objective-C method.
-func (x *Object) WillChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willChange:valuesAtIndexes:forKey:"), changeKind, objref.IDOf(indexes), purego.NSString(key))
+func (o *Object) WillChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("willChange:valuesAtIndexes:forKey:"), changeKind, objref.IDOf(indexes), purego.NSString(key))
 }
 
 // DidChangeValuesAtIndexesForKey wraps the corresponding Objective-C method.
-func (x *Object) DidChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChange:valuesAtIndexes:forKey:"), changeKind, objref.IDOf(indexes), purego.NSString(key))
+func (o *Object) DidChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("didChange:valuesAtIndexes:forKey:"), changeKind, objref.IDOf(indexes), purego.NSString(key))
 }
 
 // WillChangeValueForKeyWithSetMutationUsingObjects wraps the corresponding Objective-C method.
-func (x *Object) WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willChangeValueForKey:withSetMutation:usingObjects:"), purego.NSString(key), mutationKind, objref.IDOf(objects))
+func (o *Object) WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("willChangeValueForKey:withSetMutation:usingObjects:"), purego.NSString(key), mutationKind, objref.IDOf(objects))
 }
 
 // DidChangeValueForKeyWithSetMutationUsingObjects wraps the corresponding Objective-C method.
-func (x *Object) DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeValueForKey:withSetMutation:usingObjects:"), purego.NSString(key), mutationKind, objref.IDOf(objects))
+func (o *Object) DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("didChangeValueForKey:withSetMutation:usingObjects:"), purego.NSString(key), mutationKind, objref.IDOf(objects))
 }
 
 // SetSharedObservers register shared observations. A shared observation collection might be shared between multiple observables to minimise registration work. Shared observers remain registered throughout the object's lifetime and do not need to be removed using `removeObserver:`. An observable may only have one set of shared observations. Subsequent calls to this method will replace existing shared observations. - Parameter sharedObservers: shared observer collection that was initialized with the class of this object - Invariant: `sharedObserers` was initialized with the class of this object - Throws: Exception if the class of the receiving observable object does not match the class with which `sharedObserers` was initialized.
-func (x *Object) SetSharedObservers(sharedObservers *KeyValueSharedObserversSnapshot) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharedObservers:"), objref.IDOf(sharedObservers))
+func (o *Object) SetSharedObservers(sharedObservers *KeyValueSharedObserversSnapshot) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setSharedObservers:"), objref.IDOf(sharedObservers))
 }
 
 // ReplacementObjectForKeyedArchiver wraps the corresponding Objective-C method.
-func (x *Object) ReplacementObjectForKeyedArchiver(archiver *KeyedArchiver) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementObjectForKeyedArchiver:"), objref.IDOf(archiver))
+func (o *Object) ReplacementObjectForKeyedArchiver(archiver *KeyedArchiver) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForKeyedArchiver:"), objref.IDOf(archiver))
 	return obj.Wrap(_r)
 }
 
 // ReplacementObjectForArchiver wraps the corresponding Objective-C method.
-func (x *Object) ReplacementObjectForArchiver(archiver *Archiver) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementObjectForArchiver:"), objref.IDOf(archiver))
+func (o *Object) ReplacementObjectForArchiver(archiver *Archiver) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForArchiver:"), objref.IDOf(archiver))
 	return obj.Wrap(_r)
 }
 
 // ReplacementObjectForPortCoder wraps the corresponding Objective-C method.
-func (x *Object) ReplacementObjectForPortCoder(coder *PortCoder) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementObjectForPortCoder:"), objref.IDOf(coder))
+func (o *Object) ReplacementObjectForPortCoder(coder *PortCoder) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForPortCoder:"), objref.IDOf(coder))
 	return obj.Wrap(_r)
 }
 
 // InverseForRelationshipKey wraps the corresponding Objective-C method.
-func (x *Object) InverseForRelationshipKey(relationshipKey string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseForRelationshipKey:"), purego.NSString(relationshipKey))
+func (o *Object) InverseForRelationshipKey(relationshipKey string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("inverseForRelationshipKey:"), purego.NSString(relationshipKey))
 	if _r == 0 {
 		return ""
 	}
@@ -349,67 +349,62 @@ func (x *Object) InverseForRelationshipKey(relationshipKey string) string {
 }
 
 // ClassDescription wraps the corresponding Objective-C method.
-func (x *Object) ClassDescription() *ClassDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classDescription"))
+func (o *Object) ClassDescription() *ClassDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("classDescription"))
 	return ClassDescriptionFromID(_r)
 }
 
 // AttributeKeys wraps the corresponding Objective-C method.
 //
 // AttributeKeys returns the collection as a Go slice.
-func (x *Object) AttributeKeys() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeKeys"))
+func (o *Object) AttributeKeys() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("attributeKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ToOneRelationshipKeys wraps the corresponding Objective-C method.
 //
 // ToOneRelationshipKeys returns the collection as a Go slice.
-func (x *Object) ToOneRelationshipKeys() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toOneRelationshipKeys"))
+func (o *Object) ToOneRelationshipKeys() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("toOneRelationshipKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ToManyRelationshipKeys wraps the corresponding Objective-C method.
 //
 // ToManyRelationshipKeys returns the collection as a Go slice.
-func (x *Object) ToManyRelationshipKeys() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toManyRelationshipKeys"))
+func (o *Object) ToManyRelationshipKeys() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("toManyRelationshipKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ScriptingValueForSpecifier wraps the corresponding Objective-C method.
-func (x *Object) ScriptingValueForSpecifier(objectSpecifier *ScriptObjectSpecifier) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptingValueForSpecifier:"), objref.IDOf(objectSpecifier))
+func (o *Object) ScriptingValueForSpecifier(objectSpecifier *ScriptObjectSpecifier) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("scriptingValueForSpecifier:"), objref.IDOf(objectSpecifier))
 	return obj.Wrap(_r)
 }
 
 // CopyScriptingValueForKeyWithProperties wraps the corresponding Objective-C method.
-func (x *Object) CopyScriptingValueForKeyWithProperties(value obj.Object, key string, properties obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyScriptingValue:forKey:withProperties:"), objref.IDOf(value), purego.NSString(key), objref.IDOf(properties))
+func (o *Object) CopyScriptingValueForKeyWithProperties(value obj.Object, key string, properties obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("copyScriptingValue:forKey:withProperties:"), objref.IDOf(value), purego.NSString(key), objref.IDOf(properties))
 	return obj.Wrap(_r)
 }
 
 // ScriptingProperties wraps the corresponding Objective-C method.
-func (x *Object) ScriptingProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptingProperties"))
+func (o *Object) ScriptingProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("scriptingProperties"))
 	return obj.Wrap(_r)
 }
 
-// SetScriptingProperties wraps the corresponding Objective-C method.
-func (x *Object) SetScriptingProperties(scriptingProperties obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-}
-
 // ClassCode wraps the corresponding Objective-C method.
-func (x *Object) ClassCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("classCode"))
+func (o *Object) ClassCode() int {
+	_r := objc.Send[int](objref.IDOf(o), objc.RegisterName("classCode"))
 	return _r
 }
 
 // ClassName wraps the corresponding Objective-C method.
-func (x *Object) ClassName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("className"))
+func (o *Object) ClassName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("className"))
 	if _r == 0 {
 		return ""
 	}
@@ -417,261 +412,166 @@ func (x *Object) ClassName() string {
 }
 
 // ValueAtIndexInPropertyWithKey wraps the corresponding Objective-C method.
-func (x *Object) ValueAtIndexInPropertyWithKey(index int, key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueAtIndex:inPropertyWithKey:"), index, purego.NSString(key))
+func (o *Object) ValueAtIndexInPropertyWithKey(index int, key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueAtIndex:inPropertyWithKey:"), index, purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValueWithNameInPropertyWithKey wraps the corresponding Objective-C method.
-func (x *Object) ValueWithNameInPropertyWithKey(name string, key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueWithName:inPropertyWithKey:"), purego.NSString(name), purego.NSString(key))
+func (o *Object) ValueWithNameInPropertyWithKey(name string, key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueWithName:inPropertyWithKey:"), purego.NSString(name), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValueWithUniqueIDInPropertyWithKey wraps the corresponding Objective-C method.
-func (x *Object) ValueWithUniqueIDInPropertyWithKey(uniqueID obj.Object, key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueWithUniqueID:inPropertyWithKey:"), objref.IDOf(uniqueID), purego.NSString(key))
+func (o *Object) ValueWithUniqueIDInPropertyWithKey(uniqueID obj.Object, key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueWithUniqueID:inPropertyWithKey:"), objref.IDOf(uniqueID), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // InsertValueAtIndexInPropertyWithKey wraps the corresponding Objective-C method.
-func (x *Object) InsertValueAtIndexInPropertyWithKey(value obj.Object, index int, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertValue:atIndex:inPropertyWithKey:"), objref.IDOf(value), index, purego.NSString(key))
+func (o *Object) InsertValueAtIndexInPropertyWithKey(value obj.Object, index int, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("insertValue:atIndex:inPropertyWithKey:"), objref.IDOf(value), index, purego.NSString(key))
 }
 
 // RemoveValueAtIndexFromPropertyWithKey wraps the corresponding Objective-C method.
-func (x *Object) RemoveValueAtIndexFromPropertyWithKey(index int, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeValueAtIndex:fromPropertyWithKey:"), index, purego.NSString(key))
+func (o *Object) RemoveValueAtIndexFromPropertyWithKey(index int, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeValueAtIndex:fromPropertyWithKey:"), index, purego.NSString(key))
 }
 
 // ReplaceValueAtIndexInPropertyWithKeyWithValue wraps the corresponding Objective-C method.
-func (x *Object) ReplaceValueAtIndexInPropertyWithKeyWithValue(index int, key string, value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceValueAtIndex:inPropertyWithKey:withValue:"), index, purego.NSString(key), objref.IDOf(value))
+func (o *Object) ReplaceValueAtIndexInPropertyWithKeyWithValue(index int, key string, value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replaceValueAtIndex:inPropertyWithKey:withValue:"), index, purego.NSString(key), objref.IDOf(value))
 }
 
 // InsertValueInPropertyWithKey wraps the corresponding Objective-C method.
-func (x *Object) InsertValueInPropertyWithKey(value obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertValue:inPropertyWithKey:"), objref.IDOf(value), purego.NSString(key))
+func (o *Object) InsertValueInPropertyWithKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("insertValue:inPropertyWithKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // CoerceValueForKey wraps the corresponding Objective-C method.
-func (x *Object) CoerceValueForKey(value obj.Object, key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coerceValue:forKey:"), objref.IDOf(value), purego.NSString(key))
+func (o *Object) CoerceValueForKey(value obj.Object, key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("coerceValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // IndicesOfObjectsByEvaluatingObjectSpecifier wraps the corresponding Objective-C method.
-func (x *Object) IndicesOfObjectsByEvaluatingObjectSpecifier(specifier *ScriptObjectSpecifier) []*Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indicesOfObjectsByEvaluatingObjectSpecifier:"), objref.IDOf(specifier))
+func (o *Object) IndicesOfObjectsByEvaluatingObjectSpecifier(specifier *ScriptObjectSpecifier) []*Number {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("indicesOfObjectsByEvaluatingObjectSpecifier:"), objref.IDOf(specifier))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
 // ObjectSpecifier wraps the corresponding Objective-C method.
-func (x *Object) ObjectSpecifier() *ScriptObjectSpecifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectSpecifier"))
+func (o *Object) ObjectSpecifier() *ScriptObjectSpecifier {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("objectSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
 // IsEqualTo wraps the corresponding Objective-C method.
-func (x *Object) IsEqualTo(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualTo:"), objref.IDOf(object))
+func (o *Object) IsEqualTo(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // IsLessThanOrEqualTo wraps the corresponding Objective-C method.
-func (x *Object) IsLessThanOrEqualTo(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLessThanOrEqualTo:"), objref.IDOf(object))
+func (o *Object) IsLessThanOrEqualTo(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isLessThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // IsLessThan wraps the corresponding Objective-C method.
-func (x *Object) IsLessThan(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLessThan:"), objref.IDOf(object))
+func (o *Object) IsLessThan(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isLessThan:"), objref.IDOf(object))
 	return _r
 }
 
 // IsGreaterThanOrEqualTo wraps the corresponding Objective-C method.
-func (x *Object) IsGreaterThanOrEqualTo(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGreaterThanOrEqualTo:"), objref.IDOf(object))
+func (o *Object) IsGreaterThanOrEqualTo(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isGreaterThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // IsGreaterThan wraps the corresponding Objective-C method.
-func (x *Object) IsGreaterThan(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGreaterThan:"), objref.IDOf(object))
+func (o *Object) IsGreaterThan(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isGreaterThan:"), objref.IDOf(object))
 	return _r
 }
 
 // IsNotEqualTo wraps the corresponding Objective-C method.
-func (x *Object) IsNotEqualTo(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNotEqualTo:"), objref.IDOf(object))
+func (o *Object) IsNotEqualTo(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isNotEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // DoesContain wraps the corresponding Objective-C method.
-func (x *Object) DoesContain(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doesContain:"), objref.IDOf(object))
+func (o *Object) DoesContain(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("doesContain:"), objref.IDOf(object))
 	return _r
 }
 
 // IsLike wraps the corresponding Objective-C method.
-func (x *Object) IsLike(object string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLike:"), purego.NSString(object))
+func (o *Object) IsLike(object string) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isLike:"), purego.NSString(object))
 	return _r
 }
 
 // IsCaseInsensitiveLike wraps the corresponding Objective-C method.
-func (x *Object) IsCaseInsensitiveLike(object string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCaseInsensitiveLike:"), purego.NSString(object))
+func (o *Object) IsCaseInsensitiveLike(object string) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isCaseInsensitiveLike:"), purego.NSString(object))
 	return _r
 }
 
 // ScriptingIsEqualTo wraps the corresponding Objective-C method.
-func (x *Object) ScriptingIsEqualTo(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingIsEqualTo:"), objref.IDOf(object))
+func (o *Object) ScriptingIsEqualTo(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsLessThanOrEqualTo wraps the corresponding Objective-C method.
-func (x *Object) ScriptingIsLessThanOrEqualTo(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingIsLessThanOrEqualTo:"), objref.IDOf(object))
+func (o *Object) ScriptingIsLessThanOrEqualTo(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsLessThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsLessThan wraps the corresponding Objective-C method.
-func (x *Object) ScriptingIsLessThan(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingIsLessThan:"), objref.IDOf(object))
+func (o *Object) ScriptingIsLessThan(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsLessThan:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsGreaterThanOrEqualTo wraps the corresponding Objective-C method.
-func (x *Object) ScriptingIsGreaterThanOrEqualTo(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingIsGreaterThanOrEqualTo:"), objref.IDOf(object))
+func (o *Object) ScriptingIsGreaterThanOrEqualTo(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsGreaterThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsGreaterThan wraps the corresponding Objective-C method.
-func (x *Object) ScriptingIsGreaterThan(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingIsGreaterThan:"), objref.IDOf(object))
+func (o *Object) ScriptingIsGreaterThan(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsGreaterThan:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingBeginsWith wraps the corresponding Objective-C method.
-func (x *Object) ScriptingBeginsWith(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingBeginsWith:"), objref.IDOf(object))
+func (o *Object) ScriptingBeginsWith(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingBeginsWith:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingEndsWith wraps the corresponding Objective-C method.
-func (x *Object) ScriptingEndsWith(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingEndsWith:"), objref.IDOf(object))
+func (o *Object) ScriptingEndsWith(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingEndsWith:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingContains wraps the corresponding Objective-C method.
-func (x *Object) ScriptingContains(object obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scriptingContains:"), objref.IDOf(object))
+func (o *Object) ScriptingContains(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingContains:"), objref.IDOf(object))
 	return _r
 }
-
-// Objectable is the interface implemented by [Object], for mocking and DI.
-type Objectable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Object
-	Dealloc()
-	Finalize()
-	Copy() obj.Object
-	MutableCopy() obj.Object
-	ForwardInvocation(anInvocation *Invocation)
-	ReplacementObjectForCoder(coder *Coder) obj.Object
-	AwakeAfterUsingCoder(coder *Coder) obj.Object
-	AutoContentAccessingProxy() obj.Object
-	URLResourceDataDidBecomeAvailable(sender string, newBytes *Data)
-	URLResourceDidFinishLoading(sender string)
-	URLResourceDidCancelLoading(sender string)
-	URLResourceDidFailLoadingWithReason(sender string, reason string)
-	FileManagerShouldProceedAfterError(fm *FileManager, errorInfo obj.Object) bool
-	FileManagerWillProcessPath(fm *FileManager, path string)
-	ValueForKey(key string) obj.Object
-	SetValueForKey(value obj.Object, key string)
-	MutableArrayValueForKey(key string) obj.Object
-	MutableOrderedSetValueForKey(key string) obj.Object
-	MutableSetValueForKey(key string) obj.Object
-	ValueForKeyPath(keyPath string) obj.Object
-	SetValueForKeyPath(value obj.Object, keyPath string)
-	MutableArrayValueForKeyPath(keyPath string) obj.Object
-	MutableOrderedSetValueForKeyPath(keyPath string) obj.Object
-	MutableSetValueForKeyPath(keyPath string) obj.Object
-	ValueForUndefinedKey(key string) obj.Object
-	SetValueForUndefinedKey(value obj.Object, key string)
-	SetNilValueForKey(key string)
-	DictionaryWithValuesForKeys(keys []string) obj.Object
-	SetValuesForKeysWithDictionary(keyedValues obj.Object)
-	StoredValueForKey(key string) obj.Object
-	TakeStoredValueForKey(value obj.Object, key string)
-	TakeValueForKey(value obj.Object, key string)
-	TakeValueForKeyPath(value obj.Object, keyPath string)
-	HandleQueryWithUnboundKey(key string) obj.Object
-	HandleTakeValueForUnboundKey(value obj.Object, key string)
-	UnableToSetNilForKey(key string)
-	ValuesForKeys(keys obj.Object) obj.Object
-	TakeValuesFromDictionary(properties obj.Object)
-	RemoveObserverForKeyPath(observer *Object, keyPath string)
-	WillChangeValueForKey(key string)
-	DidChangeValueForKey(key string)
-	WillChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string)
-	DidChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string)
-	WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object)
-	DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object)
-	SetSharedObservers(sharedObservers *KeyValueSharedObserversSnapshot)
-	ReplacementObjectForKeyedArchiver(archiver *KeyedArchiver) obj.Object
-	ReplacementObjectForArchiver(archiver *Archiver) obj.Object
-	ReplacementObjectForPortCoder(coder *PortCoder) obj.Object
-	InverseForRelationshipKey(relationshipKey string) string
-	ClassDescription() *ClassDescription
-	AttributeKeys() []string
-	ToOneRelationshipKeys() []string
-	ToManyRelationshipKeys() []string
-	ScriptingValueForSpecifier(objectSpecifier *ScriptObjectSpecifier) obj.Object
-	CopyScriptingValueForKeyWithProperties(value obj.Object, key string, properties obj.Object) obj.Object
-	ScriptingProperties() obj.Object
-	SetScriptingProperties(scriptingProperties obj.Object)
-	ClassCode() int
-	ClassName() string
-	ValueAtIndexInPropertyWithKey(index int, key string) obj.Object
-	ValueWithNameInPropertyWithKey(name string, key string) obj.Object
-	ValueWithUniqueIDInPropertyWithKey(uniqueID obj.Object, key string) obj.Object
-	InsertValueAtIndexInPropertyWithKey(value obj.Object, index int, key string)
-	RemoveValueAtIndexFromPropertyWithKey(index int, key string)
-	ReplaceValueAtIndexInPropertyWithKeyWithValue(index int, key string, value obj.Object)
-	InsertValueInPropertyWithKey(value obj.Object, key string)
-	CoerceValueForKey(value obj.Object, key string) obj.Object
-	IndicesOfObjectsByEvaluatingObjectSpecifier(specifier *ScriptObjectSpecifier) []*Number
-	ObjectSpecifier() *ScriptObjectSpecifier
-	IsEqualTo(object obj.Object) bool
-	IsLessThanOrEqualTo(object obj.Object) bool
-	IsLessThan(object obj.Object) bool
-	IsGreaterThanOrEqualTo(object obj.Object) bool
-	IsGreaterThan(object obj.Object) bool
-	IsNotEqualTo(object obj.Object) bool
-	DoesContain(object obj.Object) bool
-	IsLike(object string) bool
-	IsCaseInsensitiveLike(object string) bool
-	ScriptingIsEqualTo(object obj.Object) bool
-	ScriptingIsLessThanOrEqualTo(object obj.Object) bool
-	ScriptingIsLessThan(object obj.Object) bool
-	ScriptingIsGreaterThanOrEqualTo(object obj.Object) bool
-	ScriptingIsGreaterThan(object obj.Object) bool
-	ScriptingBeginsWith(object obj.Object) bool
-	ScriptingEndsWith(object obj.Object) bool
-	ScriptingContains(object obj.Object) bool
-}
-
-var _ Objectable = (*Object)(nil)
 
 // isObject marks Object — and, by embedding promotion, its
 // subclasses — as a member of the Object hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Object) isObject() {}
+func (o *Object) isObject() {}
 
 var _ ObjectProvider = (*Object)(nil)

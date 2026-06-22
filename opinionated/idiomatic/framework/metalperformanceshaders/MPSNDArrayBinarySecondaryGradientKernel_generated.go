@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNDArrayBinarySecondaryGradientKernel() *NDArrayBinarySecondaryGradientKe
 	return nDArrayBinarySecondaryGradientKernelAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayBinarySecondaryGradientKernel) WithLabel(label string) *NDArrayBinarySecondaryGradientKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nabsgk *NDArrayBinarySecondaryGradientKernel) WithLabel(label string) *NDArrayBinarySecondaryGradientKernel {
+	objc.Send[objc.ID](objref.IDOf(nabsgk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nabsgk
 }
-
-// NDArrayBinarySecondaryGradientKernelable is the interface implemented by [NDArrayBinarySecondaryGradientKernel], for mocking and DI.
-type NDArrayBinarySecondaryGradientKernelable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayBinarySecondaryGradientKernel
-}
-
-var _ NDArrayBinarySecondaryGradientKernelable = (*NDArrayBinarySecondaryGradientKernel)(nil)
 
 var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayBinarySecondaryGradientKernel)(nil)
 

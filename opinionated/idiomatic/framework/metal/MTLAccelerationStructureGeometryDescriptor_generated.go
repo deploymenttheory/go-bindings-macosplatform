@@ -48,179 +48,116 @@ func accelerationStructureGeometryDescriptorAdopt(id objc.ID) *AccelerationStruc
 }
 
 // Description returns the object's -description text.
-func (x *AccelerationStructureGeometryDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asgd *AccelerationStructureGeometryDescriptor) Description() string {
+	return rt.Description(objref.IDOf(asgd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationStructureGeometryDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asgd *AccelerationStructureGeometryDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asgd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationStructureGeometryDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asgd *AccelerationStructureGeometryDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asgd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccelerationStructureGeometryDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asgd *AccelerationStructureGeometryDescriptor) String() string {
+	return rt.Description(objref.IDOf(asgd))
 }
 
-// WithIntersectionFunctionTableOffset an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
-func (x *AccelerationStructureGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-	return x
+// WithIntersectionFunctionTableOffset sets an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+func (asgd *AccelerationStructureGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return asgd
 }
 
-// WithOpaque a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
-func (x *AccelerationStructureGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
+func (asgd *AccelerationStructureGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("setOpaque:"), opaque)
+	return asgd
 }
 
-// WithAllowDuplicateIntersectionFunctionInvocation a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
-func (x *AccelerationStructureGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-	return x
+// WithAllowDuplicateIntersectionFunctionInvocation sets a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
+func (asgd *AccelerationStructureGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
+	return asgd
 }
 
-// WithLabel a label for the geometry structure, suitable for debugging.
-func (x *AccelerationStructureGeometryDescriptor) WithLabel(label string) *AccelerationStructureGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a label for the geometry structure, suitable for debugging.
+func (asgd *AccelerationStructureGeometryDescriptor) WithLabel(label string) *AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return asgd
 }
 
-// WithPrimitiveDataBufferOffset primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
-func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
-	return x
+// WithPrimitiveDataBufferOffset sets primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+func (asgd *AccelerationStructureGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
+	return asgd
 }
 
-// WithPrimitiveDataStride stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
-func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-	return x
+// WithPrimitiveDataStride sets stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+func (asgd *AccelerationStructureGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
+	return asgd
 }
 
-// WithPrimitiveDataElementSize size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
-func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-	return x
+// WithPrimitiveDataElementSize sets size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+func (asgd *AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
+	return asgd
 }
 
 // IntersectionFunctionTableOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intersectionFunctionTableOffset"))
+func (asgd *AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() int {
+	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("intersectionFunctionTableOffset"))
 	return _r
 }
 
-// SetIntersectionFunctionTableOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-}
-
-// Opaque whether the geometry is opaque
-func (x *AccelerationStructureGeometryDescriptor) Opaque() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("opaque"))
+// Opaque reports whether the geometry is opaque
+func (asgd *AccelerationStructureGeometryDescriptor) Opaque() bool {
+	_r := objc.Send[bool](objref.IDOf(asgd), objc.RegisterName("opaque"))
 	return _r
 }
 
-// SetOpaque wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) SetOpaque(opaque bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-}
-
-// AllowDuplicateIntersectionFunctionInvocation whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
-func (x *AccelerationStructureGeometryDescriptor) AllowDuplicateIntersectionFunctionInvocation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowDuplicateIntersectionFunctionInvocation"))
+// AllowDuplicateIntersectionFunctionInvocation reports whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to true.
+func (asgd *AccelerationStructureGeometryDescriptor) AllowDuplicateIntersectionFunctionInvocation() bool {
+	_r := objc.Send[bool](objref.IDOf(asgd), objc.RegisterName("allowDuplicateIntersectionFunctionInvocation"))
 	return _r
 }
 
-// SetAllowDuplicateIntersectionFunctionInvocation wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-}
-
-// Label label
-func (x *AccelerationStructureGeometryDescriptor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns label
+func (asgd *AccelerationStructureGeometryDescriptor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// PrimitiveDataBufferOffset primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
-func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primitiveDataBufferOffset"))
+// PrimitiveDataBufferOffset returns primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+func (asgd *AccelerationStructureGeometryDescriptor) PrimitiveDataBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("primitiveDataBufferOffset"))
 	return _r
 }
 
-// SetPrimitiveDataBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataBufferOffset(primitiveDataBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
-}
-
-// PrimitiveDataStride stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
-func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primitiveDataStride"))
+// PrimitiveDataStride returns stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+func (asgd *AccelerationStructureGeometryDescriptor) PrimitiveDataStride() int {
+	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("primitiveDataStride"))
 	return _r
 }
 
-// SetPrimitiveDataStride wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataStride(primitiveDataStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-}
-
-// PrimitiveDataElementSize size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
-func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primitiveDataElementSize"))
+// PrimitiveDataElementSize returns size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+func (asgd *AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() int {
+	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("primitiveDataElementSize"))
 	return _r
 }
-
-// SetPrimitiveDataElementSize wraps the corresponding Objective-C method.
-func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataElementSize(primitiveDataElementSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-}
-
-// AccelerationStructureGeometryDescriptorable is the interface implemented by [AccelerationStructureGeometryDescriptor], for mocking and DI.
-type AccelerationStructureGeometryDescriptorable interface {
-	obj.Object
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureGeometryDescriptor
-	WithOpaque(opaque bool) *AccelerationStructureGeometryDescriptor
-	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureGeometryDescriptor
-	WithLabel(label string) *AccelerationStructureGeometryDescriptor
-	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureGeometryDescriptor
-	IntersectionFunctionTableOffset() int
-	SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset int)
-	Opaque() bool
-	SetOpaque(opaque bool)
-	AllowDuplicateIntersectionFunctionInvocation() bool
-	SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool)
-	Label() string
-	SetLabel(label string)
-	PrimitiveDataBufferOffset() int
-	SetPrimitiveDataBufferOffset(primitiveDataBufferOffset int)
-	PrimitiveDataStride() int
-	SetPrimitiveDataStride(primitiveDataStride int)
-	PrimitiveDataElementSize() int
-	SetPrimitiveDataElementSize(primitiveDataElementSize int)
-}
-
-var _ AccelerationStructureGeometryDescriptorable = (*AccelerationStructureGeometryDescriptor)(nil)
 
 // isAccelerationStructureGeometryDescriptor marks AccelerationStructureGeometryDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the AccelerationStructureGeometryDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AccelerationStructureGeometryDescriptor) isAccelerationStructureGeometryDescriptor() {}
+func (asgd *AccelerationStructureGeometryDescriptor) isAccelerationStructureGeometryDescriptor() {}
 
 var _ AccelerationStructureGeometryDescriptorProvider = (*AccelerationStructureGeometryDescriptor)(nil)

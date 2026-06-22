@@ -53,17 +53,9 @@ func NewMessagePort() *MessagePort {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MessagePort) WithScriptingProperties(scriptingProperties obj.Object) *MessagePort {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mp *MessagePort) WithScriptingProperties(scriptingProperties obj.Object) *MessagePort {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mp
 }
-
-// MessagePortable is the interface implemented by [MessagePort], for mocking and DI.
-type MessagePortable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MessagePort
-}
-
-var _ MessagePortable = (*MessagePort)(nil)
 
 var _ PortProvider = (*MessagePort)(nil)

@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewSGDOptimizer() *SGDOptimizer {
 	return sGDOptimizerAdopt(_id)
 }
 
-// WithLearningRate the learning rate.
-func (x *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learning rate.
+func (so *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setLearningRate:"), learningRate)
+	return so
 }
 
-// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
-func (x *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
-	return x
+// WithAppliesGradientClipping sets a Boolean value that indicates whether you apply gradient clipping.
+func (so *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
+	return so
 }
 
-// MomentumScale the momentum factor.  A hyper-parameter. The default is 0.0.
-func (x *SGDOptimizer) MomentumScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
+// MomentumScale returns the momentum factor.  A hyper-parameter. The default is 0.0.
+func (so *SGDOptimizer) MomentumScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(so), objc.RegisterName("momentumScale"))
 	return _r
 }
 
-// UsesNesterovMomentum a boolean that specifies whether to apply nesterov momentum or not. The default is false.
-func (x *SGDOptimizer) UsesNesterovMomentum() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesNesterovMomentum"))
+// UsesNesterovMomentum reports whether a boolean that specifies whether to apply nesterov momentum or not. The default is false.
+func (so *SGDOptimizer) UsesNesterovMomentum() bool {
+	_r := objc.Send[bool](objref.IDOf(so), objc.RegisterName("usesNesterovMomentum"))
 	return _r
 }
-
-// SGDOptimizerable is the interface implemented by [SGDOptimizer], for mocking and DI.
-type SGDOptimizerable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *SGDOptimizer
-	WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer
-	MomentumScale() float32
-	UsesNesterovMomentum() bool
-}
-
-var _ SGDOptimizerable = (*SGDOptimizer)(nil)
 
 var _ OptimizerProvider = (*SGDOptimizer)(nil)

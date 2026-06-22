@@ -53,87 +53,64 @@ func NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex(cl
 	return indexSpecifierAdopt(_id)
 }
 
-// WithIndex sets the value of the receiver’s index property.
-func (x *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
-	return x
+// WithIndex sets sets the value of the receiver’s index property.
+func (is *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setIndex:"), index)
+	return is
 }
 
-// WithChildSpecifier sets the receiver’s child reference.
-func (x *IndexSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
-	return x
+// WithChildSpecifier sets sets the receiver’s child reference.
+func (is *IndexSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
+	return is
 }
 
-// WithContainerSpecifier sets the container specifier of the receiver.
-func (x *IndexSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
-	return x
+// WithContainerSpecifier sets sets the container specifier of the receiver.
+func (is *IndexSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
+	return is
 }
 
-// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-func (x *IndexSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
-	return x
+// WithContainerIsObjectBeingTested sets sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+func (is *IndexSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
+	return is
 }
 
-// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-func (x *IndexSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
-	return x
+// WithContainerIsRangeContainerObject sets sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+func (is *IndexSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
+	return is
 }
 
-// WithKey sets the key of the receiver.
-func (x *IndexSpecifier) WithKey(key StringProvider) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
-	return x
+// WithKey sets sets the key of the receiver.
+func (is *IndexSpecifier) WithKey(key StringProvider) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setKey:"), objref.IDOf(key))
+	return is
 }
 
-// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
-func (x *IndexSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
-	return x
+// WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
+func (is *IndexSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
+	return is
 }
 
-// WithEvaluationErrorNumber sets the value of the evaluation error.
-func (x *IndexSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
-	return x
+// WithEvaluationErrorNumber sets sets the value of the evaluation error.
+func (is *IndexSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
+	return is
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *IndexSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (is *IndexSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return is
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *IndexSpecifier) Index() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+func (is *IndexSpecifier) Index() int {
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("index"))
 	return _r
 }
-
-// SetIndex wraps the corresponding Objective-C method.
-func (x *IndexSpecifier) SetIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
-}
-
-// IndexSpecifierable is the interface implemented by [IndexSpecifier], for mocking and DI.
-type IndexSpecifierable interface {
-	obj.Object
-	WithIndex(index int) *IndexSpecifier
-	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier
-	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier
-	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier
-	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier
-	WithKey(key StringProvider) *IndexSpecifier
-	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier
-	WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier
-	WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier
-	Index() int
-	SetIndex(index int)
-}
-
-var _ IndexSpecifierable = (*IndexSpecifier)(nil)
 
 var _ ScriptObjectSpecifierProvider = (*IndexSpecifier)(nil)

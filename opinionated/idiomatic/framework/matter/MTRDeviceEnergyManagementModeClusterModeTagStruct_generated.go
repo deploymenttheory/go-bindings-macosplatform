@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementModeClusterModeTagStructAdopt(id objc.ID) *MTRDevi
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(mdemmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(mdemmcmts))
 }
 
 // NewMTRDeviceEnergyManagementModeClusterModeTagStruct creates a new MTRDeviceEnergyManagementModeClusterModeTagStruct.
@@ -71,48 +71,25 @@ func NewMTRDeviceEnergyManagementModeClusterModeTagStruct() *MTRDeviceEnergyMana
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mdemmcmts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mdemmcmts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mdemmcmts *MTRDeviceEnergyManagementModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTRDeviceEnergyManagementModeClusterModeTagStructable is the interface implemented by [MTRDeviceEnergyManagementModeClusterModeTagStruct], for mocking and DI.
-type MTRDeviceEnergyManagementModeClusterModeTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct
-	WithValue(value obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementModeClusterModeTagStructable = (*MTRDeviceEnergyManagementModeClusterModeTagStruct)(nil)

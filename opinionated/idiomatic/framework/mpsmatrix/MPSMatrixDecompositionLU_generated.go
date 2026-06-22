@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,39 +50,28 @@ func NewMatrixDecompositionLU() *MatrixDecompositionLU {
 	return matrixDecompositionLUAdopt(_id)
 }
 
-// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixDecompositionLU) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
-	return x
+// WithSourceMatrixOrigin sets the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mdl *MatrixDecompositionLU) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return mdl
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixDecompositionLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mdl *MatrixDecompositionLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return mdl
 }
 
-// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-func (x *MatrixDecompositionLU) WithBatchStart(batchStart int) *MatrixDecompositionLU {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (mdl *MatrixDecompositionLU) WithBatchStart(batchStart int) *MatrixDecompositionLU {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setBatchStart:"), batchStart)
+	return mdl
 }
 
-// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-func (x *MatrixDecompositionLU) WithBatchSize(batchSize int) *MatrixDecompositionLU {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (mdl *MatrixDecompositionLU) WithBatchSize(batchSize int) *MatrixDecompositionLU {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setBatchSize:"), batchSize)
+	return mdl
 }
-
-// MatrixDecompositionLUable is the interface implemented by [MatrixDecompositionLU], for mocking and DI.
-type MatrixDecompositionLUable interface {
-	obj.Object
-	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
-	WithBatchStart(batchStart int) *MatrixDecompositionLU
-	WithBatchSize(batchSize int) *MatrixDecompositionLU
-}
-
-var _ MatrixDecompositionLUable = (*MatrixDecompositionLU)(nil)
 
 var _ MatrixUnaryKernelProvider = (*MatrixDecompositionLU)(nil)

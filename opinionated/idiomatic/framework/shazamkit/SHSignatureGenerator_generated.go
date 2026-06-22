@@ -5,13 +5,14 @@
 package shazamkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // SignatureGenerator is an idiomatic wrapper over the Objective-C class SHSignatureGenerator.
@@ -48,24 +49,24 @@ func signatureGeneratorAdopt(id objc.ID) *SignatureGenerator {
 }
 
 // Description returns the object's -description text.
-func (x *SignatureGenerator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sg *SignatureGenerator) Description() string {
+	return rt.Description(objref.IDOf(sg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SignatureGenerator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sg *SignatureGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SignatureGenerator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sg *SignatureGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SignatureGenerator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sg *SignatureGenerator) String() string {
+	return rt.Description(objref.IDOf(sg))
 }
 
 // NewSignatureGenerator creates a new SignatureGenerator.
@@ -75,26 +76,17 @@ func NewSignatureGenerator() *SignatureGenerator {
 }
 
 // AppendBufferAtTime adds audio to the generator.
-func (x *SignatureGenerator) AppendBufferAtTime(buffer obj.Object, time_ obj.Object) error {
+func (sg *SignatureGenerator) AppendBufferAtTime(buffer obj.Object, time_ obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendBuffer:atTime:error:"), objref.IDOf(buffer), objref.IDOf(time_), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(sg), objc.RegisterName("appendBuffer:atTime:error:"), objref.IDOf(buffer), objref.IDOf(time_), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// Signature converts the audio buffer into a signature.
-func (x *SignatureGenerator) Signature() *Signature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signature"))
+// Signature returns converts the audio buffer into a signature.
+func (sg *SignatureGenerator) Signature() *Signature {
+	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("signature"))
 	return SignatureFromID(_r)
 }
-
-// SignatureGeneratorable is the interface implemented by [SignatureGenerator], for mocking and DI.
-type SignatureGeneratorable interface {
-	obj.Object
-	AppendBufferAtTime(buffer obj.Object, time_ obj.Object) error
-	Signature() *Signature
-}
-
-var _ SignatureGeneratorable = (*SignatureGenerator)(nil)

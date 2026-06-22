@@ -49,24 +49,24 @@ func collectionViewLayoutAdopt(id objc.ID) *CollectionViewLayout {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionViewLayout) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvl *CollectionViewLayout) Description() string {
+	return rt.Description(objref.IDOf(cvl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewLayout) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvl *CollectionViewLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewLayout) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvl *CollectionViewLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionViewLayout) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvl *CollectionViewLayout) String() string {
+	return rt.Description(objref.IDOf(cvl))
 }
 
 // NewCollectionViewLayoutialLayoutAttributesForAppearingItemAtIndexPath returns the starting layout information for an item being inserted into the collection view.
@@ -91,228 +91,189 @@ func NewCollectionViewLayoutialLayoutAttributesForAppearingDecorationElementOfKi
 }
 
 // InvalidateLayout invalidates all layout information and triggers a layout update.
-func (x *CollectionViewLayout) InvalidateLayout() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayout"))
+func (cvl *CollectionViewLayout) InvalidateLayout() {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayout"))
 }
 
 // InvalidateLayoutWithContext invalidates specific parts of the layout using the specified context object.
-func (x *CollectionViewLayout) InvalidateLayoutWithContext(context_ *CollectionViewLayoutInvalidationContext) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayoutWithContext:"), objref.IDOf(context_))
+func (cvl *CollectionViewLayout) InvalidateLayoutWithContext(context_ *CollectionViewLayoutInvalidationContext) {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayoutWithContext:"), objref.IDOf(context_))
 }
 
 // RegisterNibForDecorationViewOfKind registers a nib file to use when creating the layout’s decoration views.
-func (x *CollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *Nib, elementKind obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerNib:forDecorationViewOfKind:"), objref.IDOf(nib), objref.IDOf(elementKind))
+func (cvl *CollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *Nib, elementKind obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("registerNib:forDecorationViewOfKind:"), objref.IDOf(nib), objref.IDOf(elementKind))
 }
 
 // CollectionView wraps the corresponding Objective-C method.
-func (x *CollectionViewLayout) CollectionView() *CollectionView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collectionView"))
+func (cvl *CollectionViewLayout) CollectionView() *CollectionView {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("collectionView"))
 	return CollectionViewFromID(_r)
 }
 
 // PrepareLayout prepares the layout object to begin laying out content.
-func (x *CollectionViewLayout) PrepareLayout() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareLayout"))
+func (cvl *CollectionViewLayout) PrepareLayout() {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareLayout"))
 }
 
 // LayoutAttributesForElementsInRect returns the layout attribute objects for all items and views in the specified rectangle.
-func (x *CollectionViewLayout) LayoutAttributesForElementsInRect(rect corefoundation.CGRect) []*CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForElementsInRect:"), rect)
+func (cvl *CollectionViewLayout) LayoutAttributesForElementsInRect(rect corefoundation.CGRect) []*CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForElementsInRect:"), rect)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CollectionViewLayoutAttributes { return CollectionViewLayoutAttributesFromID(_id) })
 }
 
 // LayoutAttributesForItemAtIndexPath returns the layout attributes for the item at the specified index path.
-func (x *CollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForItemAtIndexPath:"), objref.IDOf(indexPath))
+func (cvl *CollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForItemAtIndexPath:"), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // LayoutAttributesForSupplementaryViewOfKindAtIndexPath returns the layout attributes of the supplementary view at the specified location in your layout.
-func (x *CollectionViewLayout) LayoutAttributesForSupplementaryViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
+func (cvl *CollectionViewLayout) LayoutAttributesForSupplementaryViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // LayoutAttributesForDecorationViewOfKindAtIndexPath returns the layout attributes of the decoration view at the specified location in your layout.
-func (x *CollectionViewLayout) LayoutAttributesForDecorationViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForDecorationViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
+func (cvl *CollectionViewLayout) LayoutAttributesForDecorationViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForDecorationViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // LayoutAttributesForDropTargetAtPoint returns layout attributes for the drop target at the specified point.
-func (x *CollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView corefoundation.CGPoint) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForDropTargetAtPoint:"), pointInCollectionView)
+func (cvl *CollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView corefoundation.CGPoint) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForDropTargetAtPoint:"), pointInCollectionView)
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // LayoutAttributesForInterItemGapBeforeIndexPath returns layout attributes for the inter-item gap at the specified location in your layout.
-func (x *CollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:"), objref.IDOf(indexPath))
+func (cvl *CollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:"), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // ShouldInvalidateLayoutForBoundsChange returns a Boolean indicating whether a bounds change triggers a layout update.
-func (x *CollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds corefoundation.CGRect) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldInvalidateLayoutForBoundsChange:"), newBounds)
+func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds corefoundation.CGRect) bool {
+	_r := objc.Send[bool](objref.IDOf(cvl), objc.RegisterName("shouldInvalidateLayoutForBoundsChange:"), newBounds)
 	return _r
 }
 
 // InvalidationContextForBoundsChange returns an invalidation context object that defines the portions of the layout that need to be updated.
-func (x *CollectionViewLayout) InvalidationContextForBoundsChange(newBounds corefoundation.CGRect) *CollectionViewLayoutInvalidationContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidationContextForBoundsChange:"), newBounds)
+func (cvl *CollectionViewLayout) InvalidationContextForBoundsChange(newBounds corefoundation.CGRect) *CollectionViewLayoutInvalidationContext {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidationContextForBoundsChange:"), newBounds)
 	return CollectionViewLayoutInvalidationContextFromID(_r)
 }
 
 // ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes returns a Boolean indicating whether changes to a cell’s layout attributes trigger a larger layout update.
-func (x *CollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldInvalidateLayoutForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
+func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) bool {
+	_r := objc.Send[bool](objref.IDOf(cvl), objc.RegisterName("shouldInvalidateLayoutForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
 	return _r
 }
 
 // InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes returns an invalidation context object that defines the portions of the layout that need to be updated.
-func (x *CollectionViewLayout) InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) *CollectionViewLayoutInvalidationContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidationContextForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
+func (cvl *CollectionViewLayout) InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) *CollectionViewLayoutInvalidationContext {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidationContextForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
 	return CollectionViewLayoutInvalidationContextFromID(_r)
 }
 
 // TargetContentOffsetForProposedContentOffsetWithScrollingVelocity returns the offset value to use for the collection view’s content at the end of scrolling.
-func (x *CollectionViewLayout) TargetContentOffsetForProposedContentOffsetWithScrollingVelocity(proposedContentOffset corefoundation.CGPoint, velocity corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("targetContentOffsetForProposedContentOffset:withScrollingVelocity:"), proposedContentOffset, velocity)
+func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffsetWithScrollingVelocity(proposedContentOffset corefoundation.CGPoint, velocity corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvl), objc.RegisterName("targetContentOffsetForProposedContentOffset:withScrollingVelocity:"), proposedContentOffset, velocity)
 	return _r
 }
 
 // TargetContentOffsetForProposedContentOffset returns the offset value to use after an animated layout update or change.
-func (x *CollectionViewLayout) TargetContentOffsetForProposedContentOffset(proposedContentOffset corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("targetContentOffsetForProposedContentOffset:"), proposedContentOffset)
+func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffset(proposedContentOffset corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvl), objc.RegisterName("targetContentOffsetForProposedContentOffset:"), proposedContentOffset)
 	return _r
 }
 
 // CollectionViewContentSize wraps the corresponding Objective-C method.
-func (x *CollectionViewLayout) CollectionViewContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("collectionViewContentSize"))
+func (cvl *CollectionViewLayout) CollectionViewContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvl), objc.RegisterName("collectionViewContentSize"))
 	return _r
 }
 
 // PrepareForCollectionViewUpdates performs needed tasks before items are inserted, deleted, or moved within the collection view.
-func (x *CollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []*CollectionViewUpdateItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForCollectionViewUpdates:"), purego.SliceToNSArray(updateItems, func(_v *CollectionViewUpdateItem) objc.ID { return objref.IDOf(_v) }))
+func (cvl *CollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []*CollectionViewUpdateItem) {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForCollectionViewUpdates:"), purego.SliceToNSArray(updateItems, func(_v *CollectionViewUpdateItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FinalizeCollectionViewUpdates performs needed steps after items are inserted, deleted, or moved within a collection view.
-func (x *CollectionViewLayout) FinalizeCollectionViewUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalizeCollectionViewUpdates"))
+func (cvl *CollectionViewLayout) FinalizeCollectionViewUpdates() {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeCollectionViewUpdates"))
 }
 
 // PrepareForAnimatedBoundsChange prepares the layout object for animated changes to the collection view’s bounds or for the insertion or deletion of items.
-func (x *CollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForAnimatedBoundsChange:"), oldBounds)
+func (cvl *CollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForAnimatedBoundsChange:"), oldBounds)
 }
 
 // FinalizeAnimatedBoundsChange cleans up after any animated changes to the collection view’s bounds or after the insertion or deletion of items.
-func (x *CollectionViewLayout) FinalizeAnimatedBoundsChange() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalizeAnimatedBoundsChange"))
+func (cvl *CollectionViewLayout) FinalizeAnimatedBoundsChange() {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeAnimatedBoundsChange"))
 }
 
 // PrepareForTransitionToLayout prepares the layout object to be uninstalled from the collection view.
-func (x *CollectionViewLayout) PrepareForTransitionToLayout(newLayout *CollectionViewLayout) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForTransitionToLayout:"), objref.IDOf(newLayout))
+func (cvl *CollectionViewLayout) PrepareForTransitionToLayout(newLayout *CollectionViewLayout) {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionToLayout:"), objref.IDOf(newLayout))
 }
 
 // PrepareForTransitionFromLayout prepares the layout object to be installed in the collection view.
-func (x *CollectionViewLayout) PrepareForTransitionFromLayout(oldLayout *CollectionViewLayout) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForTransitionFromLayout:"), objref.IDOf(oldLayout))
+func (cvl *CollectionViewLayout) PrepareForTransitionFromLayout(oldLayout *CollectionViewLayout) {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionFromLayout:"), objref.IDOf(oldLayout))
 }
 
 // FinalizeLayoutTransition performs any final steps related to a layout transition before the transition animations actually occur.
-func (x *CollectionViewLayout) FinalizeLayoutTransition() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalizeLayoutTransition"))
+func (cvl *CollectionViewLayout) FinalizeLayoutTransition() {
+	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeLayoutTransition"))
 }
 
 // FinalLayoutAttributesForDisappearingItemAtIndexPath returns the ending layout information for an item being removed from the collection view.
-func (x *CollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalLayoutAttributesForDisappearingItemAtIndexPath:"), objref.IDOf(itemIndexPath))
+func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath obj.Object) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingItemAtIndexPath:"), objref.IDOf(itemIndexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath returns the ending layout information for a supplementary view being removed from the collection view.
-func (x *CollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath(elementKind obj.Object, elementIndexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalLayoutAttributesForDisappearingSupplementaryElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(elementIndexPath))
+func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath(elementKind obj.Object, elementIndexPath obj.Object) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingSupplementaryElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(elementIndexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath returns the ending layout information for a decoration view being removed from the collection view.
-func (x *CollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath(elementKind obj.Object, decorationIndexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalLayoutAttributesForDisappearingDecorationElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(decorationIndexPath))
+func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath(elementKind obj.Object, decorationIndexPath obj.Object) *CollectionViewLayoutAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingDecorationElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(decorationIndexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // IndexPathsToDeleteForSupplementaryViewOfKind returns the index paths for any supplementary views that the layout object wants to remove from the collection view.
-func (x *CollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathsToDeleteForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
+func (cvl *CollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
 	return obj.Wrap(_r)
 }
 
 // IndexPathsToDeleteForDecorationViewOfKind returns index paths for any decoration views that the layout object wants to remove from the collection view.
-func (x *CollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathsToDeleteForDecorationViewOfKind:"), objref.IDOf(elementKind))
+func (cvl *CollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForDecorationViewOfKind:"), objref.IDOf(elementKind))
 	return obj.Wrap(_r)
 }
 
 // IndexPathsToInsertForSupplementaryViewOfKind returns the index paths for any supplementary views that the layout object wants to add to the collection view.
-func (x *CollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathsToInsertForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
+func (cvl *CollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
 	return obj.Wrap(_r)
 }
 
 // IndexPathsToInsertForDecorationViewOfKind returns the index paths for any decoration views that the layout object wants to add to the collection view.
-func (x *CollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathsToInsertForDecorationViewOfKind:"), objref.IDOf(elementKind))
+func (cvl *CollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForDecorationViewOfKind:"), objref.IDOf(elementKind))
 	return obj.Wrap(_r)
 }
-
-// CollectionViewLayoutable is the interface implemented by [CollectionViewLayout], for mocking and DI.
-type CollectionViewLayoutable interface {
-	obj.Object
-	InvalidateLayout()
-	InvalidateLayoutWithContext(context_ *CollectionViewLayoutInvalidationContext)
-	RegisterNibForDecorationViewOfKind(nib *Nib, elementKind obj.Object)
-	CollectionView() *CollectionView
-	PrepareLayout()
-	LayoutAttributesForElementsInRect(rect corefoundation.CGRect) []*CollectionViewLayoutAttributes
-	LayoutAttributesForItemAtIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes
-	LayoutAttributesForSupplementaryViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes
-	LayoutAttributesForDecorationViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes
-	LayoutAttributesForDropTargetAtPoint(pointInCollectionView corefoundation.CGPoint) *CollectionViewLayoutAttributes
-	LayoutAttributesForInterItemGapBeforeIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes
-	ShouldInvalidateLayoutForBoundsChange(newBounds corefoundation.CGRect) bool
-	InvalidationContextForBoundsChange(newBounds corefoundation.CGRect) *CollectionViewLayoutInvalidationContext
-	ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) bool
-	InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) *CollectionViewLayoutInvalidationContext
-	TargetContentOffsetForProposedContentOffsetWithScrollingVelocity(proposedContentOffset corefoundation.CGPoint, velocity corefoundation.CGPoint) corefoundation.CGPoint
-	TargetContentOffsetForProposedContentOffset(proposedContentOffset corefoundation.CGPoint) corefoundation.CGPoint
-	CollectionViewContentSize() corefoundation.CGSize
-	PrepareForCollectionViewUpdates(updateItems []*CollectionViewUpdateItem)
-	FinalizeCollectionViewUpdates()
-	PrepareForAnimatedBoundsChange(oldBounds corefoundation.CGRect)
-	FinalizeAnimatedBoundsChange()
-	PrepareForTransitionToLayout(newLayout *CollectionViewLayout)
-	PrepareForTransitionFromLayout(oldLayout *CollectionViewLayout)
-	FinalizeLayoutTransition()
-	FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath obj.Object) *CollectionViewLayoutAttributes
-	FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath(elementKind obj.Object, elementIndexPath obj.Object) *CollectionViewLayoutAttributes
-	FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath(elementKind obj.Object, decorationIndexPath obj.Object) *CollectionViewLayoutAttributes
-	IndexPathsToDeleteForSupplementaryViewOfKind(elementKind obj.Object) obj.Object
-	IndexPathsToDeleteForDecorationViewOfKind(elementKind obj.Object) obj.Object
-	IndexPathsToInsertForSupplementaryViewOfKind(elementKind obj.Object) obj.Object
-	IndexPathsToInsertForDecorationViewOfKind(elementKind obj.Object) obj.Object
-}
-
-var _ CollectionViewLayoutable = (*CollectionViewLayout)(nil)
 
 // isCollectionViewLayout marks CollectionViewLayout — and, by embedding promotion, its
 // subclasses — as a member of the CollectionViewLayout hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CollectionViewLayout) isCollectionViewLayout() {}
+func (cvl *CollectionViewLayout) isCollectionViewLayout() {}
 
 var _ CollectionViewLayoutProvider = (*CollectionViewLayout)(nil)

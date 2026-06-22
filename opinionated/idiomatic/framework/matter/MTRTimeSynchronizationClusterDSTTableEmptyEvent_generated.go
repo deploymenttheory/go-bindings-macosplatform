@@ -44,24 +44,24 @@ func mTRTimeSynchronizationClusterDSTTableEmptyEventAdopt(id objc.ID) *MTRTimeSy
 }
 
 // Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) Description() string {
+	return rt.Description(objref.IDOf(mtscdtee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtscdtee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtscdtee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) String() string {
+	return rt.Description(objref.IDOf(mtscdtee))
 }
 
 // NewMTRTimeSynchronizationClusterDSTTableEmptyEvent creates a new MTRTimeSynchronizationClusterDSTTableEmptyEvent.
@@ -69,10 +69,3 @@ func NewMTRTimeSynchronizationClusterDSTTableEmptyEvent() *MTRTimeSynchronizatio
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterDSTTableEmptyEvent")), objc.RegisterName("new"))
 	return mTRTimeSynchronizationClusterDSTTableEmptyEventAdopt(_id)
 }
-
-// MTRTimeSynchronizationClusterDSTTableEmptyEventable is the interface implemented by [MTRTimeSynchronizationClusterDSTTableEmptyEvent], for mocking and DI.
-type MTRTimeSynchronizationClusterDSTTableEmptyEventable interface {
-	obj.Object
-}
-
-var _ MTRTimeSynchronizationClusterDSTTableEmptyEventable = (*MTRTimeSynchronizationClusterDSTTableEmptyEvent)(nil)

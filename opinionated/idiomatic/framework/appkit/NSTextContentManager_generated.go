@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,24 +51,24 @@ func textContentManagerAdopt(id objc.ID) *TextContentManager {
 }
 
 // Description returns the object's -description text.
-func (x *TextContentManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tcm *TextContentManager) Description() string {
+	return rt.Description(objref.IDOf(tcm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextContentManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tcm *TextContentManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tcm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextContentManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tcm *TextContentManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tcm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextContentManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tcm *TextContentManager) String() string {
+	return rt.Description(objref.IDOf(tcm))
 }
 
 // NewTextContentManagerWithCoder creates a new content manager object from data in an unarchiver.
@@ -77,45 +78,45 @@ func NewTextContentManagerWithCoder(coder obj.Object) *TextContentManager {
 	return textContentManagerAdopt(_id)
 }
 
-// WithPrimaryTextLayoutManager the primary text layout manager for this content.
-func (x *TextContentManager) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
-	return x
+// WithPrimaryTextLayoutManager sets the primary text layout manager for this content.
+func (tcm *TextContentManager) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentManager {
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
+	return tcm
 }
 
-// WithAutomaticallySynchronizesTextLayoutManagers determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
-func (x *TextContentManager) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesTextLayoutManagers:"), automaticallySynchronizesTextLayoutManagers)
-	return x
+// WithAutomaticallySynchronizesTextLayoutManagers sets determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
+func (tcm *TextContentManager) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentManager {
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("setAutomaticallySynchronizesTextLayoutManagers:"), automaticallySynchronizesTextLayoutManagers)
+	return tcm
 }
 
-// WithAutomaticallySynchronizesToBackingStore determines whether to automatically synchronize with the backing store when an editing transaction finishes.
-func (x *TextContentManager) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesToBackingStore:"), automaticallySynchronizesToBackingStore)
-	return x
+// WithAutomaticallySynchronizesToBackingStore sets determines whether to automatically synchronize with the backing store when an editing transaction finishes.
+func (tcm *TextContentManager) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentManager {
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("setAutomaticallySynchronizesToBackingStore:"), automaticallySynchronizesToBackingStore)
+	return tcm
 }
 
 // AddTextLayoutManager adds the layout manager you provide to the list of layout managers.
-func (x *TextContentManager) AddTextLayoutManager(textLayoutManager *TextLayoutManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTextLayoutManager:"), objref.IDOf(textLayoutManager))
+func (tcm *TextContentManager) AddTextLayoutManager(textLayoutManager *TextLayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("addTextLayoutManager:"), objref.IDOf(textLayoutManager))
 }
 
 // RemoveTextLayoutManager removes the layout manager you specifiy from the list of layout managers.
-func (x *TextContentManager) RemoveTextLayoutManager(textLayoutManager *TextLayoutManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTextLayoutManager:"), objref.IDOf(textLayoutManager))
+func (tcm *TextContentManager) RemoveTextLayoutManager(textLayoutManager *TextLayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("removeTextLayoutManager:"), objref.IDOf(textLayoutManager))
 }
 
 // SynchronizeTextLayoutManagers synchronizes changes to all nonprimary text layout managers.
 //
 // SynchronizeTextLayoutManagers blocks until the operation completes or ctx is cancelled.
-func (x *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) error {
+func (tcm *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizeTextLayoutManagers:"), _block)
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("synchronizeTextLayoutManagers:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -125,20 +126,20 @@ func (x *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) 
 }
 
 // TextElementsForRange returns an array of text elements that intersect with the range you specify.
-func (x *TextContentManager) TextElementsForRange(range_ *TextRange) []*TextElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElementsForRange:"), objref.IDOf(range_))
+func (tcm *TextContentManager) TextElementsForRange(range_ *TextRange) []*TextElement {
+	_r := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("textElementsForRange:"), objref.IDOf(range_))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextElement { return TextElementFromID(_id) })
 }
 
 // PerformEditingTransactionUsing performs an editing transaction and invokes a block upon completion.
 //
 // PerformEditingTransactionUsing blocks until the operation completes or ctx is cancelled.
-func (x *TextContentManager) PerformEditingTransactionUsing(ctx context.Context) error {
+func (tcm *TextContentManager) PerformEditingTransactionUsing(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performEditingTransactionUsingBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("performEditingTransactionUsingBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -148,84 +149,45 @@ func (x *TextContentManager) PerformEditingTransactionUsing(ctx context.Context)
 }
 
 // RecordEditActionInRangeNewTextRange records information about an edit action to the transaction.
-func (x *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextRange *TextRange, newTextRange *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordEditActionInRange:newTextRange:"), objref.IDOf(originalTextRange), objref.IDOf(newTextRange))
+func (tcm *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextRange *TextRange, newTextRange *TextRange) {
+	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("recordEditActionInRange:newTextRange:"), objref.IDOf(originalTextRange), objref.IDOf(newTextRange))
 }
 
 // TextLayoutManagers wraps the corresponding Objective-C method.
 //
 // TextLayoutManagers returns the collection as a Go slice.
-func (x *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManagers"))
+func (tcm *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
+	_arr := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("textLayoutManagers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLayoutManager { return TextLayoutManagerFromID(_id) })
 }
 
 // PrimaryTextLayoutManager wraps the corresponding Objective-C method.
-func (x *TextContentManager) PrimaryTextLayoutManager() *TextLayoutManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryTextLayoutManager"))
+func (tcm *TextContentManager) PrimaryTextLayoutManager() *TextLayoutManager {
+	_r := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("primaryTextLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// SetPrimaryTextLayoutManager wraps the corresponding Objective-C method.
-func (x *TextContentManager) SetPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
-}
-
 // HasEditingTransaction wraps the corresponding Objective-C method.
-func (x *TextContentManager) HasEditingTransaction() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasEditingTransaction"))
+func (tcm *TextContentManager) HasEditingTransaction() bool {
+	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("hasEditingTransaction"))
 	return _r
 }
 
 // AutomaticallySynchronizesTextLayoutManagers wraps the corresponding Objective-C method.
-func (x *TextContentManager) AutomaticallySynchronizesTextLayoutManagers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallySynchronizesTextLayoutManagers"))
+func (tcm *TextContentManager) AutomaticallySynchronizesTextLayoutManagers() bool {
+	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("automaticallySynchronizesTextLayoutManagers"))
 	return _r
-}
-
-// SetAutomaticallySynchronizesTextLayoutManagers wraps the corresponding Objective-C method.
-func (x *TextContentManager) SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesTextLayoutManagers:"), automaticallySynchronizesTextLayoutManagers)
 }
 
 // AutomaticallySynchronizesToBackingStore wraps the corresponding Objective-C method.
-func (x *TextContentManager) AutomaticallySynchronizesToBackingStore() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallySynchronizesToBackingStore"))
+func (tcm *TextContentManager) AutomaticallySynchronizesToBackingStore() bool {
+	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("automaticallySynchronizesToBackingStore"))
 	return _r
 }
-
-// SetAutomaticallySynchronizesToBackingStore wraps the corresponding Objective-C method.
-func (x *TextContentManager) SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesToBackingStore:"), automaticallySynchronizesToBackingStore)
-}
-
-// TextContentManagerable is the interface implemented by [TextContentManager], for mocking and DI.
-type TextContentManagerable interface {
-	obj.Object
-	WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentManager
-	WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentManager
-	WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentManager
-	AddTextLayoutManager(textLayoutManager *TextLayoutManager)
-	RemoveTextLayoutManager(textLayoutManager *TextLayoutManager)
-	SynchronizeTextLayoutManagers(ctx context.Context) error
-	TextElementsForRange(range_ *TextRange) []*TextElement
-	PerformEditingTransactionUsing(ctx context.Context) error
-	RecordEditActionInRangeNewTextRange(originalTextRange *TextRange, newTextRange *TextRange)
-	TextLayoutManagers() []*TextLayoutManager
-	PrimaryTextLayoutManager() *TextLayoutManager
-	SetPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager)
-	HasEditingTransaction() bool
-	AutomaticallySynchronizesTextLayoutManagers() bool
-	SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool)
-	AutomaticallySynchronizesToBackingStore() bool
-	SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool)
-}
-
-var _ TextContentManagerable = (*TextContentManager)(nil)
 
 // isTextContentManager marks TextContentManager — and, by embedding promotion, its
 // subclasses — as a member of the TextContentManager hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TextContentManager) isTextContentManager() {}
+func (tcm *TextContentManager) isTextContentManager() {}
 
 var _ TextContentManagerProvider = (*TextContentManager)(nil)

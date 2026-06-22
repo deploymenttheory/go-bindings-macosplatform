@@ -48,57 +48,47 @@ func tLVRecordAdopt(id objc.ID) *TLVRecord {
 }
 
 // Description returns the object's -description text.
-func (x *TLVRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *TLVRecord) Description() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TLVRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tr *TLVRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TLVRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tr *TLVRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TLVRecord) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *TLVRecord) String() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
-// Tag tag value of the record.
-func (x *TLVRecord) Tag() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("tag"))
+// Tag returns tag value of the record.
+func (tr *TLVRecord) Tag() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(tr), objc.RegisterName("tag"))
 	return _r
 }
 
-// Value value field of the record.
-func (x *TLVRecord) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns value field of the record.
+func (tr *TLVRecord) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Data data object containing whole encoded record, including tag, length and value.
-func (x *TLVRecord) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns data object containing whole encoded record, including tag, length and value.
+func (tr *TLVRecord) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// TLVRecordable is the interface implemented by [TLVRecord], for mocking and DI.
-type TLVRecordable interface {
-	obj.Object
-	Tag() uint64
-	Value() obj.Object
-	Data() obj.Object
-}
-
-var _ TLVRecordable = (*TLVRecord)(nil)
 
 // isTLVRecord marks TLVRecord — and, by embedding promotion, its
 // subclasses — as a member of the TLVRecord hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TLVRecord) isTLVRecord() {}
+func (tr *TLVRecord) isTLVRecord() {}
 
 var _ TLVRecordProvider = (*TLVRecord)(nil)

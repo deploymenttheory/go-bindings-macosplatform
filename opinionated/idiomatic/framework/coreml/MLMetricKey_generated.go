@@ -7,7 +7,6 @@ package coreml
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMetricKey() *MetricKey {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("new"))
 	return metricKeyAdopt(_id)
 }
-
-// MetricKeyable is the interface implemented by [MetricKey], for mocking and DI.
-type MetricKeyable interface {
-	obj.Object
-}
-
-var _ MetricKeyable = (*MetricKey)(nil)
 
 var _ KeyProvider = (*MetricKey)(nil)

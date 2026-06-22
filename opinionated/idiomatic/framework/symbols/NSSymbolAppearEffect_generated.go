@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewSymbolAppearEffect() *SymbolAppearEffect {
 	return symbolAppearEffectAdopt(_id)
 }
 
-// EffectWithByLayer an effect that makes each layer appear separately.
-func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+// EffectWithByLayer returns an effect that makes each layer appear separately.
+func (sae *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sae), objc.RegisterName("effectWithByLayer"))
 	return SymbolAppearEffectFromID(_r)
 }
 
-// EffectWithWholeSymbol an effect that makes all layers appear simultaneously.
-func (x *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+// EffectWithWholeSymbol returns an effect that makes all layers appear simultaneously.
+func (sae *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sae), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolAppearEffectFromID(_r)
 }
-
-// SymbolAppearEffectable is the interface implemented by [SymbolAppearEffect], for mocking and DI.
-type SymbolAppearEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolAppearEffect
-	EffectWithWholeSymbol() *SymbolAppearEffect
-}
-
-var _ SymbolAppearEffectable = (*SymbolAppearEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolAppearEffect)(nil)

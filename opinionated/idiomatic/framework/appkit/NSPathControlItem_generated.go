@@ -44,24 +44,24 @@ func pathControlItemAdopt(id objc.ID) *PathControlItem {
 }
 
 // Description returns the object's -description text.
-func (x *PathControlItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pci *PathControlItem) Description() string {
+	return rt.Description(objref.IDOf(pci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PathControlItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pci *PathControlItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PathControlItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pci *PathControlItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PathControlItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pci *PathControlItem) String() string {
+	return rt.Description(objref.IDOf(pci))
 }
 
 // NewPathControlItem creates a new PathControlItem.
@@ -71,78 +71,46 @@ func NewPathControlItem() *PathControlItem {
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *PathControlItem) WithTitle(title string) *PathControlItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (pci *PathControlItem) WithTitle(title string) *PathControlItem {
+	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return pci
 }
 
 // WithAttributedTitle sets the property and returns the receiver so calls can be chained.
-func (x *PathControlItem) WithAttributedTitle(attributedTitle obj.Object) *PathControlItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-	return x
+func (pci *PathControlItem) WithAttributedTitle(attributedTitle obj.Object) *PathControlItem {
+	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	return pci
 }
 
 // WithImage sets the property and returns the receiver so calls can be chained.
-func (x *PathControlItem) WithImage(image *Image) *PathControlItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+func (pci *PathControlItem) WithImage(image *Image) *PathControlItem {
+	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return pci
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *PathControlItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (pci *PathControlItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *PathControlItem) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
 // AttributedTitle wraps the corresponding Objective-C method.
-func (x *PathControlItem) AttributedTitle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+func (pci *PathControlItem) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
-}
-
-// SetAttributedTitle wraps the corresponding Objective-C method.
-func (x *PathControlItem) SetAttributedTitle(attributedTitle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
 
 // Image wraps the corresponding Objective-C method.
-func (x *PathControlItem) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (pci *PathControlItem) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// SetImage wraps the corresponding Objective-C method.
-func (x *PathControlItem) SetImage(image *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-}
-
 // URL wraps the corresponding Objective-C method.
-func (x *PathControlItem) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (pci *PathControlItem) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// PathControlItemable is the interface implemented by [PathControlItem], for mocking and DI.
-type PathControlItemable interface {
-	obj.Object
-	WithTitle(title string) *PathControlItem
-	WithAttributedTitle(attributedTitle obj.Object) *PathControlItem
-	WithImage(image *Image) *PathControlItem
-	Title() string
-	SetTitle(title string)
-	AttributedTitle() obj.Object
-	SetAttributedTitle(attributedTitle obj.Object)
-	Image() *Image
-	SetImage(image *Image)
-	URL() obj.Object
-}
-
-var _ PathControlItemable = (*PathControlItem)(nil)

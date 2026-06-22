@@ -53,18 +53,10 @@ func NewUnitFrequency() *UnitFrequency {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitFrequency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFrequency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uf *UnitFrequency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFrequency {
+	objc.Send[objc.ID](objref.IDOf(uf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uf
 }
-
-// UnitFrequencyable is the interface implemented by [UnitFrequency], for mocking and DI.
-type UnitFrequencyable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitFrequency
-}
-
-var _ UnitFrequencyable = (*UnitFrequency)(nil)
 
 var _ DimensionProvider = (*UnitFrequency)(nil)
 

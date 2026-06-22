@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,17 +43,10 @@ func arrayUnaryKernelAdopt(id objc.ID) *ArrayUnaryKernel {
 	return x
 }
 
-// ArrayUnaryKernelable is the interface implemented by [ArrayUnaryKernel], for mocking and DI.
-type ArrayUnaryKernelable interface {
-	obj.Object
-}
-
-var _ ArrayUnaryKernelable = (*ArrayUnaryKernel)(nil)
-
 // isArrayUnaryKernel marks ArrayUnaryKernel — and, by embedding promotion, its
 // subclasses — as a member of the ArrayUnaryKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayUnaryKernel) isArrayUnaryKernel() {}
+func (auk *ArrayUnaryKernel) isArrayUnaryKernel() {}
 
 var _ ArrayUnaryKernelProvider = (*ArrayUnaryKernel)(nil)
 

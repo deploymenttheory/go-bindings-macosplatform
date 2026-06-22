@@ -47,24 +47,24 @@ func livePhotoAdopt(id objc.ID) *LivePhoto {
 }
 
 // Description returns the object's -description text.
-func (x *LivePhoto) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lp *LivePhoto) Description() string {
+	return rt.Description(objref.IDOf(lp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LivePhoto) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lp *LivePhoto) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LivePhoto) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lp *LivePhoto) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LivePhoto) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lp *LivePhoto) String() string {
+	return rt.Description(objref.IDOf(lp))
 }
 
 // NewLivePhoto creates a new LivePhoto.
@@ -73,16 +73,8 @@ func NewLivePhoto() *LivePhoto {
 	return livePhotoAdopt(_id)
 }
 
-// Size the dimensions of the live photo measured in pixels.
-func (x *LivePhoto) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+// Size returns the dimensions of the live photo measured in pixels.
+func (lp *LivePhoto) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(lp), objc.RegisterName("size"))
 	return _r
 }
-
-// LivePhotoable is the interface implemented by [LivePhoto], for mocking and DI.
-type LivePhotoable interface {
-	obj.Object
-	Size() corefoundation.CGSize
-}
-
-var _ LivePhotoable = (*LivePhoto)(nil)

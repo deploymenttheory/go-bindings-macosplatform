@@ -46,24 +46,24 @@ func stagedMigrationManagerAdopt(id objc.ID) *StagedMigrationManager {
 }
 
 // Description returns the object's -description text.
-func (x *StagedMigrationManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (smm *StagedMigrationManager) Description() string {
+	return rt.Description(objref.IDOf(smm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StagedMigrationManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (smm *StagedMigrationManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(smm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StagedMigrationManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (smm *StagedMigrationManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(smm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StagedMigrationManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (smm *StagedMigrationManager) String() string {
+	return rt.Description(objref.IDOf(smm))
 }
 
 // NewStagedMigrationManagerWithMigrationStages creates a migration manager with the specified stages.
@@ -76,22 +76,13 @@ func NewStagedMigrationManagerWithMigrationStages(stages []*MigrationStage) *Sta
 // Stages wraps the corresponding Objective-C method.
 //
 // Stages returns the collection as a Go slice.
-func (x *StagedMigrationManager) Stages() []*MigrationStage {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stages"))
+func (smm *StagedMigrationManager) Stages() []*MigrationStage {
+	_arr := objc.Send[objc.ID](objref.IDOf(smm), objc.RegisterName("stages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MigrationStage { return MigrationStageFromID(_id) })
 }
 
 // Container wraps the corresponding Objective-C method.
-func (x *StagedMigrationManager) Container() *PersistentContainer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("container"))
+func (smm *StagedMigrationManager) Container() *PersistentContainer {
+	_r := objc.Send[objc.ID](objref.IDOf(smm), objc.RegisterName("container"))
 	return PersistentContainerFromID(_r)
 }
-
-// StagedMigrationManagerable is the interface implemented by [StagedMigrationManager], for mocking and DI.
-type StagedMigrationManagerable interface {
-	obj.Object
-	Stages() []*MigrationStage
-	Container() *PersistentContainer
-}
-
-var _ StagedMigrationManagerable = (*StagedMigrationManager)(nil)

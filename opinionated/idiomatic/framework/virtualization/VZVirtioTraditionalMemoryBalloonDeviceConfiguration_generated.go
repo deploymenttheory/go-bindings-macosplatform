@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewVirtioTraditionalMemoryBalloonDeviceConfiguration() *VirtioTraditionalMe
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioTraditionalMemoryBalloonDeviceConfiguration")), objc.RegisterName("new"))
 	return virtioTraditionalMemoryBalloonDeviceConfigurationAdopt(_id)
 }
-
-// VirtioTraditionalMemoryBalloonDeviceConfigurationable is the interface implemented by [VirtioTraditionalMemoryBalloonDeviceConfiguration], for mocking and DI.
-type VirtioTraditionalMemoryBalloonDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ VirtioTraditionalMemoryBalloonDeviceConfigurationable = (*VirtioTraditionalMemoryBalloonDeviceConfiguration)(nil)
 
 var _ MemoryBalloonDeviceConfigurationProvider = (*VirtioTraditionalMemoryBalloonDeviceConfiguration)(nil)

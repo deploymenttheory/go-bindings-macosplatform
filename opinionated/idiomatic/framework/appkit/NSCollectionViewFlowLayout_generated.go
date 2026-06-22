@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,230 +53,140 @@ func NewCollectionViewFlowLayout() *CollectionViewFlowLayout {
 	return collectionViewFlowLayoutAdopt(_id)
 }
 
-// WithMinimumLineSpacing the minimum spacing (in points) to use between rows or columns.
-func (x *CollectionViewFlowLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
-	return x
+// WithMinimumLineSpacing sets the minimum spacing (in points) to use between rows or columns.
+func (cvfl *CollectionViewFlowLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
+	return cvfl
 }
 
-// WithMinimumInteritemSpacing the minimum spacing (in points) to use between items in the same row or column.
-func (x *CollectionViewFlowLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
-	return x
+// WithMinimumInteritemSpacing sets the minimum spacing (in points) to use between items in the same row or column.
+func (cvfl *CollectionViewFlowLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
+	return cvfl
 }
 
-// WithItemSize the default size to use for items.
-func (x *CollectionViewFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSize:"), itemSize)
-	return x
+// WithItemSize sets the default size to use for items.
+func (cvfl *CollectionViewFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setItemSize:"), itemSize)
+	return cvfl
 }
 
-// WithEstimatedItemSize the estimated size of items in the collection view.
-func (x *CollectionViewFlowLayout) WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedItemSize:"), estimatedItemSize)
-	return x
+// WithEstimatedItemSize sets the estimated size of items in the collection view.
+func (cvfl *CollectionViewFlowLayout) WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setEstimatedItemSize:"), estimatedItemSize)
+	return cvfl
 }
 
-// WithScrollDirection the scroll direction of the layout.
-func (x *CollectionViewFlowLayout) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
-	return x
+// WithScrollDirection sets the scroll direction of the layout.
+func (cvfl *CollectionViewFlowLayout) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setScrollDirection:"), scrollDirection)
+	return cvfl
 }
 
-// WithHeaderReferenceSize the default size to use for section headers.
-func (x *CollectionViewFlowLayout) WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderReferenceSize:"), headerReferenceSize)
-	return x
+// WithHeaderReferenceSize sets the default size to use for section headers.
+func (cvfl *CollectionViewFlowLayout) WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setHeaderReferenceSize:"), headerReferenceSize)
+	return cvfl
 }
 
-// WithFooterReferenceSize the default size to use for section footers.
-func (x *CollectionViewFlowLayout) WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooterReferenceSize:"), footerReferenceSize)
-	return x
+// WithFooterReferenceSize sets the default size to use for section footers.
+func (cvfl *CollectionViewFlowLayout) WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setFooterReferenceSize:"), footerReferenceSize)
+	return cvfl
 }
 
-// WithSectionInset the margins used to lay out content in a section.
-func (x *CollectionViewFlowLayout) WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionInset:"), sectionInset)
-	return x
+// WithSectionInset sets the margins used to lay out content in a section.
+func (cvfl *CollectionViewFlowLayout) WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionInset:"), sectionInset)
+	return cvfl
 }
 
 // WithSectionHeadersPinToVisibleBounds sets the property and returns the receiver so calls can be chained.
-func (x *CollectionViewFlowLayout) WithSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionHeadersPinToVisibleBounds:"), sectionHeadersPinToVisibleBounds)
-	return x
+func (cvfl *CollectionViewFlowLayout) WithSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionHeadersPinToVisibleBounds:"), sectionHeadersPinToVisibleBounds)
+	return cvfl
 }
 
 // WithSectionFootersPinToVisibleBounds sets the property and returns the receiver so calls can be chained.
-func (x *CollectionViewFlowLayout) WithSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionFootersPinToVisibleBounds:"), sectionFootersPinToVisibleBounds)
-	return x
+func (cvfl *CollectionViewFlowLayout) WithSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionFootersPinToVisibleBounds:"), sectionFootersPinToVisibleBounds)
+	return cvfl
 }
 
 // SectionAtIndexIsCollapsed wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sectionAtIndexIsCollapsed:"), sectionIndex)
+func (cvfl *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex int) bool {
+	_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionAtIndexIsCollapsed:"), sectionIndex)
 	return _r
 }
 
 // CollapseSectionAtIndex wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapseSectionAtIndex:"), sectionIndex)
+func (cvfl *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex int) {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("collapseSectionAtIndex:"), sectionIndex)
 }
 
 // ExpandSectionAtIndex wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandSectionAtIndex:"), sectionIndex)
+func (cvfl *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex int) {
+	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("expandSectionAtIndex:"), sectionIndex)
 }
 
 // MinimumLineSpacing wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) MinimumLineSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumLineSpacing"))
+func (cvfl *CollectionViewFlowLayout) MinimumLineSpacing() float64 {
+	_r := objc.Send[float64](objref.IDOf(cvfl), objc.RegisterName("minimumLineSpacing"))
 	return _r
-}
-
-// SetMinimumLineSpacing wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
 }
 
 // MinimumInteritemSpacing wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumInteritemSpacing"))
+func (cvfl *CollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
+	_r := objc.Send[float64](objref.IDOf(cvfl), objc.RegisterName("minimumInteritemSpacing"))
 	return _r
-}
-
-// SetMinimumInteritemSpacing wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
 }
 
 // ItemSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("itemSize"))
+func (cvfl *CollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("itemSize"))
 	return _r
-}
-
-// SetItemSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSize:"), itemSize)
 }
 
 // EstimatedItemSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("estimatedItemSize"))
+func (cvfl *CollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("estimatedItemSize"))
 	return _r
-}
-
-// SetEstimatedItemSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedItemSize:"), estimatedItemSize)
 }
 
 // ScrollDirection wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) ScrollDirection() CollectionViewScrollDirection {
-	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(x), objc.RegisterName("scrollDirection"))
+func (cvfl *CollectionViewFlowLayout) ScrollDirection() CollectionViewScrollDirection {
+	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(cvfl), objc.RegisterName("scrollDirection"))
 	return _r
-}
-
-// SetScrollDirection wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetScrollDirection(scrollDirection CollectionViewScrollDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
 }
 
 // HeaderReferenceSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("headerReferenceSize"))
+func (cvfl *CollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("headerReferenceSize"))
 	return _r
-}
-
-// SetHeaderReferenceSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderReferenceSize:"), headerReferenceSize)
 }
 
 // FooterReferenceSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("footerReferenceSize"))
+func (cvfl *CollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("footerReferenceSize"))
 	return _r
-}
-
-// SetFooterReferenceSize wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetFooterReferenceSize(footerReferenceSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooterReferenceSize:"), footerReferenceSize)
 }
 
 // SectionInset wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("sectionInset"))
+func (cvfl *CollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cvfl), objc.RegisterName("sectionInset"))
 	return _r
-}
-
-// SetSectionInset wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetSectionInset(sectionInset foundation.NSEdgeInsets) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionInset:"), sectionInset)
 }
 
 // SectionHeadersPinToVisibleBounds wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sectionHeadersPinToVisibleBounds"))
+func (cvfl *CollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
+	_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionHeadersPinToVisibleBounds"))
 	return _r
-}
-
-// SetSectionHeadersPinToVisibleBounds wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionHeadersPinToVisibleBounds:"), sectionHeadersPinToVisibleBounds)
 }
 
 // SectionFootersPinToVisibleBounds wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SectionFootersPinToVisibleBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sectionFootersPinToVisibleBounds"))
+func (cvfl *CollectionViewFlowLayout) SectionFootersPinToVisibleBounds() bool {
+	_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionFootersPinToVisibleBounds"))
 	return _r
 }
-
-// SetSectionFootersPinToVisibleBounds wraps the corresponding Objective-C method.
-func (x *CollectionViewFlowLayout) SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionFootersPinToVisibleBounds:"), sectionFootersPinToVisibleBounds)
-}
-
-// CollectionViewFlowLayoutable is the interface implemented by [CollectionViewFlowLayout], for mocking and DI.
-type CollectionViewFlowLayoutable interface {
-	obj.Object
-	WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout
-	WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout
-	WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewFlowLayout
-	WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout
-	WithSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) *CollectionViewFlowLayout
-	WithSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) *CollectionViewFlowLayout
-	SectionAtIndexIsCollapsed(sectionIndex int) bool
-	CollapseSectionAtIndex(sectionIndex int)
-	ExpandSectionAtIndex(sectionIndex int)
-	MinimumLineSpacing() float64
-	SetMinimumLineSpacing(minimumLineSpacing float64)
-	MinimumInteritemSpacing() float64
-	SetMinimumInteritemSpacing(minimumInteritemSpacing float64)
-	ItemSize() corefoundation.CGSize
-	SetItemSize(itemSize corefoundation.CGSize)
-	EstimatedItemSize() corefoundation.CGSize
-	SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize)
-	ScrollDirection() CollectionViewScrollDirection
-	SetScrollDirection(scrollDirection CollectionViewScrollDirection)
-	HeaderReferenceSize() corefoundation.CGSize
-	SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize)
-	FooterReferenceSize() corefoundation.CGSize
-	SetFooterReferenceSize(footerReferenceSize corefoundation.CGSize)
-	SectionInset() foundation.NSEdgeInsets
-	SetSectionInset(sectionInset foundation.NSEdgeInsets)
-	SectionHeadersPinToVisibleBounds() bool
-	SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool)
-	SectionFootersPinToVisibleBounds() bool
-	SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool)
-}
-
-var _ CollectionViewFlowLayoutable = (*CollectionViewFlowLayout)(nil)
 
 var _ CollectionViewLayoutProvider = (*CollectionViewFlowLayout)(nil)

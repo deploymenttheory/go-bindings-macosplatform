@@ -46,24 +46,24 @@ func assetVariantAdopt(id objc.ID) *AssetVariant {
 }
 
 // Description returns the object's -description text.
-func (x *AssetVariant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (av *AssetVariant) Description() string {
+	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetVariant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (av *AssetVariant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetVariant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (av *AssetVariant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetVariant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (av *AssetVariant) String() string {
+	return rt.Description(objref.IDOf(av))
 }
 
 // NewAssetVariant creates a new AssetVariant.
@@ -72,44 +72,32 @@ func NewAssetVariant() *AssetVariant {
 	return assetVariantAdopt(_id)
 }
 
-// PeakBitRate if it is not declared, the value will be negative.
-func (x *AssetVariant) PeakBitRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("peakBitRate"))
+// PeakBitRate returns if it is not declared, the value will be negative.
+func (av *AssetVariant) PeakBitRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("peakBitRate"))
 	return _r
 }
 
-// AverageBitRate if it is not declared, the value will be negative.
-func (x *AssetVariant) AverageBitRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averageBitRate"))
+// AverageBitRate returns if it is not declared, the value will be negative.
+func (av *AssetVariant) AverageBitRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("averageBitRate"))
 	return _r
 }
 
 // VideoAttributes provides variant's video rendition attributes. If no video attributes are declared, it will be nil.
-func (x *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoAttributes"))
+func (av *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("videoAttributes"))
 	return AssetVariantVideoAttributesFromID(_r)
 }
 
 // AudioAttributes provides variant's audio rendition attributes. If no audio attributes are declared, it will be nil.
-func (x *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioAttributes"))
+func (av *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("audioAttributes"))
 	return AssetVariantAudioAttributesFromID(_r)
 }
 
 // URL provides URL to media playlist corresponding to variant
-func (x *AssetVariant) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (av *AssetVariant) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// AssetVariantable is the interface implemented by [AssetVariant], for mocking and DI.
-type AssetVariantable interface {
-	obj.Object
-	PeakBitRate() float64
-	AverageBitRate() float64
-	VideoAttributes() *AssetVariantVideoAttributes
-	AudioAttributes() *AssetVariantAudioAttributes
-	URL() obj.Object
-}
-
-var _ AssetVariantable = (*AssetVariant)(nil)

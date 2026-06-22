@@ -46,24 +46,24 @@ func modelStructureProgramBlockAdopt(id objc.ID) *ModelStructureProgramBlock {
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureProgramBlock) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mspb *ModelStructureProgramBlock) Description() string {
+	return rt.Description(objref.IDOf(mspb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureProgramBlock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mspb *ModelStructureProgramBlock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mspb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureProgramBlock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mspb *ModelStructureProgramBlock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mspb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureProgramBlock) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mspb *ModelStructureProgramBlock) String() string {
+	return rt.Description(objref.IDOf(mspb))
 }
 
 // NewModelStructureProgramBlock creates a new ModelStructureProgramBlock.
@@ -72,38 +72,28 @@ func NewModelStructureProgramBlock() *ModelStructureProgramBlock {
 	return modelStructureProgramBlockAdopt(_id)
 }
 
-// Inputs the named inputs to the block.
+// Inputs returns the named inputs to the block.
 //
 // Inputs returns the collection as a Go slice.
-func (x *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValueType {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+func (mspb *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValueType {
+	_arr := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
 		return ModelStructureProgramNamedValueTypeFromID(_id)
 	})
 }
 
-// OutputNames the output names.
+// OutputNames returns the output names.
 //
 // OutputNames returns the collection as a Go slice.
-func (x *ModelStructureProgramBlock) OutputNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputNames"))
+func (mspb *ModelStructureProgramBlock) OutputNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("outputNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Operations the list of topologically sorted operations in the block.
+// Operations returns the list of topologically sorted operations in the block.
 //
 // Operations returns the collection as a Go slice.
-func (x *ModelStructureProgramBlock) Operations() []*ModelStructureProgramOperation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operations"))
+func (mspb *ModelStructureProgramBlock) Operations() []*ModelStructureProgramOperation {
+	_arr := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("operations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramOperation { return ModelStructureProgramOperationFromID(_id) })
 }
-
-// ModelStructureProgramBlockable is the interface implemented by [ModelStructureProgramBlock], for mocking and DI.
-type ModelStructureProgramBlockable interface {
-	obj.Object
-	Inputs() []*ModelStructureProgramNamedValueType
-	OutputNames() []string
-	Operations() []*ModelStructureProgramOperation
-}
-
-var _ ModelStructureProgramBlockable = (*ModelStructureProgramBlock)(nil)

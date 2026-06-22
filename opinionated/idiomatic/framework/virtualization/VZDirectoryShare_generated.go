@@ -48,36 +48,29 @@ func directoryShareAdopt(id objc.ID) *DirectoryShare {
 }
 
 // Description returns the object's -description text.
-func (x *DirectoryShare) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ds *DirectoryShare) Description() string {
+	return rt.Description(objref.IDOf(ds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectoryShare) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ds *DirectoryShare) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectoryShare) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ds *DirectoryShare) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DirectoryShare) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ds *DirectoryShare) String() string {
+	return rt.Description(objref.IDOf(ds))
 }
-
-// DirectoryShareable is the interface implemented by [DirectoryShare], for mocking and DI.
-type DirectoryShareable interface {
-	obj.Object
-}
-
-var _ DirectoryShareable = (*DirectoryShare)(nil)
 
 // isDirectoryShare marks DirectoryShare — and, by embedding promotion, its
 // subclasses — as a member of the DirectoryShare hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DirectoryShare) isDirectoryShare() {}
+func (ds *DirectoryShare) isDirectoryShare() {}
 
 var _ DirectoryShareProvider = (*DirectoryShare)(nil)

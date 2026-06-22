@@ -46,24 +46,24 @@ func resourceStatePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *Re
 }
 
 // Description returns the object's -description text.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(rspsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rspsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rspsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(rspsbada))
 }
 
 // NewResourceStatePassSampleBufferAttachmentDescriptorArray creates a new ResourceStatePassSampleBufferAttachmentDescriptorArray.
@@ -73,21 +73,12 @@ func NewResourceStatePassSampleBufferAttachmentDescriptorArray() *ResourceStateP
 }
 
 // ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(rspsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return ResourceStatePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(rspsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// ResourceStatePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [ResourceStatePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
-type ResourceStatePassSampleBufferAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *ResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ ResourceStatePassSampleBufferAttachmentDescriptorArrayable = (*ResourceStatePassSampleBufferAttachmentDescriptorArray)(nil)

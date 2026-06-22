@@ -46,24 +46,24 @@ func audioStreamAnalyzerAdopt(id objc.ID) *AudioStreamAnalyzer {
 }
 
 // Description returns the object's -description text.
-func (x *AudioStreamAnalyzer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asa *AudioStreamAnalyzer) Description() string {
+	return rt.Description(objref.IDOf(asa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioStreamAnalyzer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asa *AudioStreamAnalyzer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioStreamAnalyzer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asa *AudioStreamAnalyzer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioStreamAnalyzer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asa *AudioStreamAnalyzer) String() string {
+	return rt.Description(objref.IDOf(asa))
 }
 
 // NewAudioStreamAnalyzerWithFormat creates a new audio stream analyzer.
@@ -74,26 +74,16 @@ func NewAudioStreamAnalyzerWithFormat(format obj.Object) *AudioStreamAnalyzer {
 }
 
 // RemoveAllRequests removes all the sound analysis requests from the audio stream analyzer.
-func (x *AudioStreamAnalyzer) RemoveAllRequests() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRequests"))
+func (asa *AudioStreamAnalyzer) RemoveAllRequests() {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("removeAllRequests"))
 }
 
 // AnalyzeAudioBufferAtAudioFramePosition adds a new audio buffer to the analyzer’s larger stream buffer.
-func (x *AudioStreamAnalyzer) AnalyzeAudioBufferAtAudioFramePosition(audioBuffer obj.Object, audioFramePosition int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeAudioBuffer:atAudioFramePosition:"), objref.IDOf(audioBuffer), audioFramePosition)
+func (asa *AudioStreamAnalyzer) AnalyzeAudioBufferAtAudioFramePosition(audioBuffer obj.Object, audioFramePosition int64) {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("analyzeAudioBuffer:atAudioFramePosition:"), objref.IDOf(audioBuffer), audioFramePosition)
 }
 
 // CompleteAnalysis notifies the analyzer when it receives the final audio buffer.
-func (x *AudioStreamAnalyzer) CompleteAnalysis() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeAnalysis"))
+func (asa *AudioStreamAnalyzer) CompleteAnalysis() {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("completeAnalysis"))
 }
-
-// AudioStreamAnalyzerable is the interface implemented by [AudioStreamAnalyzer], for mocking and DI.
-type AudioStreamAnalyzerable interface {
-	obj.Object
-	RemoveAllRequests()
-	AnalyzeAudioBufferAtAudioFramePosition(audioBuffer obj.Object, audioFramePosition int64)
-	CompleteAnalysis()
-}
-
-var _ AudioStreamAnalyzerable = (*AudioStreamAnalyzer)(nil)

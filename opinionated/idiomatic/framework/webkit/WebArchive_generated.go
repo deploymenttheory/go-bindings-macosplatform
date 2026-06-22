@@ -46,24 +46,24 @@ func webArchiveAdopt(id objc.ID) *WebArchive {
 }
 
 // Description returns the object's -description text.
-func (x *WebArchive) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wa *WebArchive) Description() string {
+	return rt.Description(objref.IDOf(wa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebArchive) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wa *WebArchive) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebArchive) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wa *WebArchive) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebArchive) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wa *WebArchive) String() string {
+	return rt.Description(objref.IDOf(wa))
 }
 
 // NewWebArchiveWithMainResourceSubresourcesSubframeArchives initializes the receiver with a resource and optional subresources and subframe archives..
@@ -80,37 +80,26 @@ func NewWebArchiveWithData(data obj.Object) *WebArchive {
 	return webArchiveAdopt(_id)
 }
 
-// MainResource the main resource of the archive.
-func (x *WebArchive) MainResource() *WebResource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainResource"))
+// MainResource returns the main resource of the archive.
+func (wa *WebArchive) MainResource() *WebResource {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("mainResource"))
 	return WebResourceFromID(_r)
 }
 
-// Subresources the subresource of the archive (can be nil).
-func (x *WebArchive) Subresources() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subresources"))
+// Subresources returns the subresource of the archive (can be nil).
+func (wa *WebArchive) Subresources() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("subresources"))
 	return obj.Wrap(_r)
 }
 
-// SubframeArchives the archives representing the subframes of the archive (can be nil).
-func (x *WebArchive) SubframeArchives() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subframeArchives"))
+// SubframeArchives returns the archives representing the subframes of the archive (can be nil).
+func (wa *WebArchive) SubframeArchives() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("subframeArchives"))
 	return obj.Wrap(_r)
 }
 
-// Data the data representation of the archive. The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
-func (x *WebArchive) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the data representation of the archive. The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
+func (wa *WebArchive) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// WebArchiveable is the interface implemented by [WebArchive], for mocking and DI.
-type WebArchiveable interface {
-	obj.Object
-	MainResource() *WebResource
-	Subresources() obj.Object
-	SubframeArchives() obj.Object
-	Data() obj.Object
-}
-
-var _ WebArchiveable = (*WebArchive)(nil)

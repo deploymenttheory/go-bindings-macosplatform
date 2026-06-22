@@ -47,24 +47,24 @@ func videoCompositionRenderContextAdopt(id objc.ID) *VideoCompositionRenderConte
 }
 
 // Description returns the object's -description text.
-func (x *VideoCompositionRenderContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcrc *VideoCompositionRenderContext) Description() string {
+	return rt.Description(objref.IDOf(vcrc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoCompositionRenderContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcrc *VideoCompositionRenderContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcrc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoCompositionRenderContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcrc *VideoCompositionRenderContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcrc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoCompositionRenderContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcrc *VideoCompositionRenderContext) String() string {
+	return rt.Description(objref.IDOf(vcrc))
 }
 
 // NewVideoCompositionRenderContext creates a new VideoCompositionRenderContext.
@@ -74,43 +74,31 @@ func NewVideoCompositionRenderContext() *VideoCompositionRenderContext {
 }
 
 // Size indicates the width and height for rendering frames.
-func (x *VideoCompositionRenderContext) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+func (vcrc *VideoCompositionRenderContext) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vcrc), objc.RegisterName("size"))
 	return _r
 }
 
-// RenderTransform transform to apply to the source image to incorporate renderScale, pixelAspectRatio, edgeWidths. The coordinate system origin is the top left corner of the buffer.
-func (x *VideoCompositionRenderContext) RenderTransform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("renderTransform"))
+// RenderTransform returns transform to apply to the source image to incorporate renderScale, pixelAspectRatio, edgeWidths. The coordinate system origin is the top left corner of the buffer.
+func (vcrc *VideoCompositionRenderContext) RenderTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(vcrc), objc.RegisterName("renderTransform"))
 	return _r
 }
 
 // RenderScale indicates a scaling ratio that should be applied when rendering frames.
-func (x *VideoCompositionRenderContext) RenderScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("renderScale"))
+func (vcrc *VideoCompositionRenderContext) RenderScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(vcrc), objc.RegisterName("renderScale"))
 	return _r
 }
 
-// HighQualityRendering hints the custom compositor that it may use higher quality, potentially slower algorithms. Generally true for non real time use cases.
-func (x *VideoCompositionRenderContext) HighQualityRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("highQualityRendering"))
+// HighQualityRendering reports whether hints the custom compositor that it may use higher quality, potentially slower algorithms. Generally true for non real time use cases.
+func (vcrc *VideoCompositionRenderContext) HighQualityRendering() bool {
+	_r := objc.Send[bool](objref.IDOf(vcrc), objc.RegisterName("highQualityRendering"))
 	return _r
 }
 
-// VideoComposition the AVVideoComposition being rendered.
-func (x *VideoCompositionRenderContext) VideoComposition() *VideoComposition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
+// VideoComposition returns the AVVideoComposition being rendered.
+func (vcrc *VideoCompositionRenderContext) VideoComposition() *VideoComposition {
+	_r := objc.Send[objc.ID](objref.IDOf(vcrc), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }
-
-// VideoCompositionRenderContextable is the interface implemented by [VideoCompositionRenderContext], for mocking and DI.
-type VideoCompositionRenderContextable interface {
-	obj.Object
-	Size() corefoundation.CGSize
-	RenderTransform() corefoundation.CGAffineTransform
-	RenderScale() float32
-	HighQualityRendering() bool
-	VideoComposition() *VideoComposition
-}
-
-var _ VideoCompositionRenderContextable = (*VideoCompositionRenderContext)(nil)

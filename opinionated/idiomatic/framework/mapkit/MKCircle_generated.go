@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewCircle() *Circle {
 	return circleAdopt(_id)
 }
 
-// WithTitle the title of the shape annotation.
-func (x *Circle) WithTitle(title string) *Circle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (c *Circle) WithTitle(title string) *Circle {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return c
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *Circle) WithSubtitle(subtitle string) *Circle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (c *Circle) WithSubtitle(subtitle string) *Circle {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return c
 }
-
-// Circleable is the interface implemented by [Circle], for mocking and DI.
-type Circleable interface {
-	obj.Object
-	WithTitle(title string) *Circle
-	WithSubtitle(subtitle string) *Circle
-}
-
-var _ Circleable = (*Circle)(nil)
 
 var _ ShapeProvider = (*Circle)(nil)

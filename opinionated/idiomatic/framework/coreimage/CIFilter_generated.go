@@ -48,124 +48,95 @@ func filterAdopt(id objc.ID) *Filter {
 }
 
 // Description returns the object's -description text.
-func (x *Filter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Filter) Description() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Filter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (f *Filter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Filter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (f *Filter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Filter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Filter) String() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *Filter) WithName(name string) *Filter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (f *Filter) WithName(name string) *Filter {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setName:"), purego.NSString(name))
+	return f
 }
 
 // WithEnabled sets the property and returns the receiver so calls can be chained.
-func (x *Filter) WithEnabled(enabled bool) *Filter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+func (f *Filter) WithEnabled(enabled bool) *Filter {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setEnabled:"), enabled)
+	return f
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Filter) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (f *Filter) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *Filter) SetName(aString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(aString))
-}
-
 // SetDefaults sets all inputs to their default values (where default values are defined, other inputs are left as-is).
-func (x *Filter) SetDefaults() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaults"))
+func (f *Filter) SetDefaults() {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setDefaults"))
 }
 
 // ApplyArgumentsOptions used by CIFilter subclasses to apply the array of argument values 'args' to the kernel function 'k'. The supplied arguments must be type-compatible with the function signature of the kernel. The key-value pairs defined by 'dict' (if non-nil) are used to control exactly how the kernel is evaluated. Valid keys include: kCIApplyOptionExtent: the size of the produced image. Value is a four element NSArray [X Y WIDTH HEIGHT]. kCIApplyOptionDefinition: the Domain of Definition of the produced image. Value is either a CIFilterShape object, or a four element NSArray defining a rectangle.
-func (x *Filter) ApplyArgumentsOptions(k *Kernel, args obj.Object, dict obj.Object) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("apply:arguments:options:"), objref.IDOf(k), objref.IDOf(args), objref.IDOf(dict))
+func (f *Filter) ApplyArgumentsOptions(k *Kernel, args obj.Object, dict obj.Object) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("apply:arguments:options:"), objref.IDOf(k), objref.IDOf(args), objref.IDOf(dict))
 	return ImageFromID(_r)
 }
 
 // OutputImage wraps the corresponding Objective-C method.
-func (x *Filter) OutputImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputImage"))
+func (f *Filter) OutputImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("outputImage"))
 	return ImageFromID(_r)
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *Filter) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (f *Filter) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isEnabled"))
 	return _r
-}
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *Filter) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // InputKeys returns an array containing the names of all inputs in the filter.
 //
 // InputKeys returns the collection as a Go slice.
-func (x *Filter) InputKeys() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputKeys"))
+func (f *Filter) InputKeys() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("inputKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // OutputKeys returns an array containing the names of all outputs in the filter.
 //
 // OutputKeys returns the collection as a Go slice.
-func (x *Filter) OutputKeys() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputKeys"))
+func (f *Filter) OutputKeys() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("outputKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Attributes returns a dictionary containing key/value pairs describing the filter. (see description of keys below)
-func (x *Filter) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (f *Filter) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
-
-// Filterable is the interface implemented by [Filter], for mocking and DI.
-type Filterable interface {
-	obj.Object
-	WithName(name string) *Filter
-	WithEnabled(enabled bool) *Filter
-	Name() string
-	SetName(aString string)
-	SetDefaults()
-	ApplyArgumentsOptions(k *Kernel, args obj.Object, dict obj.Object) *Image
-	OutputImage() *Image
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	InputKeys() []string
-	OutputKeys() []string
-	Attributes() obj.Object
-}
-
-var _ Filterable = (*Filter)(nil)
 
 // isFilter marks Filter — and, by embedding promotion, its
 // subclasses — as a member of the Filter hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Filter) isFilter() {}
+func (f *Filter) isFilter() {}
 
 var _ FilterProvider = (*Filter)(nil)

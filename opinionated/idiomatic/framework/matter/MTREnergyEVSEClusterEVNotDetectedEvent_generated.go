@@ -44,24 +44,24 @@ func mTREnergyEVSEClusterEVNotDetectedEventAdopt(id objc.ID) *MTREnergyEVSEClust
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) Description() string {
+	return rt.Description(objref.IDOf(meecende))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meecende), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meecende), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) String() string {
+	return rt.Description(objref.IDOf(meecende))
 }
 
 // NewMTREnergyEVSEClusterEVNotDetectedEvent creates a new MTREnergyEVSEClusterEVNotDetectedEvent.
@@ -71,88 +71,49 @@ func NewMTREnergyEVSEClusterEVNotDetectedEvent() *MTREnergyEVSEClusterEVNotDetec
 }
 
 // WithSessionID sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
-	return x
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
+	return meecende
 }
 
 // WithState sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
-	return x
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setState:"), objref.IDOf(state))
+	return meecende
 }
 
 // WithSessionDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionDuration(sessionDuration obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionDuration:"), objref.IDOf(sessionDuration))
-	return x
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionDuration(sessionDuration obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionDuration:"), objref.IDOf(sessionDuration))
+	return meecende
 }
 
 // WithSessionEnergyCharged sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionEnergyCharged(sessionEnergyCharged obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionEnergyCharged:"), objref.IDOf(sessionEnergyCharged))
-	return x
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionEnergyCharged(sessionEnergyCharged obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionEnergyCharged:"), objref.IDOf(sessionEnergyCharged))
+	return meecende
 }
 
 // SessionID wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SessionID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
-}
-
-// SetSessionID wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetSessionID(sessionID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 }
 
 // State wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) State() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) State() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("state"))
 	return obj.Wrap(_r)
-}
-
-// SetState wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetState(state obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 }
 
 // SessionDuration wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SessionDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionDuration"))
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionDuration"))
 	return obj.Wrap(_r)
-}
-
-// SetSessionDuration wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetSessionDuration(sessionDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionDuration:"), objref.IDOf(sessionDuration))
 }
 
 // SessionEnergyCharged wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SessionEnergyCharged() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionEnergyCharged"))
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionEnergyCharged() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionEnergyCharged"))
 	return obj.Wrap(_r)
 }
-
-// SetSessionEnergyCharged wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetSessionEnergyCharged(sessionEnergyCharged obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionEnergyCharged:"), objref.IDOf(sessionEnergyCharged))
-}
-
-// MTREnergyEVSEClusterEVNotDetectedEventable is the interface implemented by [MTREnergyEVSEClusterEVNotDetectedEvent], for mocking and DI.
-type MTREnergyEVSEClusterEVNotDetectedEventable interface {
-	obj.Object
-	WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent
-	WithState(state obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent
-	WithSessionDuration(sessionDuration obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent
-	WithSessionEnergyCharged(sessionEnergyCharged obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent
-	SessionID() obj.Object
-	SetSessionID(sessionID obj.Object)
-	State() obj.Object
-	SetState(state obj.Object)
-	SessionDuration() obj.Object
-	SetSessionDuration(sessionDuration obj.Object)
-	SessionEnergyCharged() obj.Object
-	SetSessionEnergyCharged(sessionEnergyCharged obj.Object)
-}
-
-var _ MTREnergyEVSEClusterEVNotDetectedEventable = (*MTREnergyEVSEClusterEVNotDetectedEvent)(nil)

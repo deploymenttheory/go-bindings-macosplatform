@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,33 +51,23 @@ func NewImageReduceColumnMean() *ImageReduceColumnMean {
 	return imageReduceColumnMeanAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-func (x *ImageReduceColumnMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (ircm *ImageReduceColumnMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMean {
+	objc.Send[objc.ID](objref.IDOf(ircm), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return ircm
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageReduceColumnMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (ircm *ImageReduceColumnMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMean {
+	objc.Send[objc.ID](objref.IDOf(ircm), objc.RegisterName("setOffset:"), offset)
+	return ircm
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageReduceColumnMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ircm *ImageReduceColumnMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMean {
+	objc.Send[objc.ID](objref.IDOf(ircm), objc.RegisterName("setClipRect:"), clipRect)
+	return ircm
 }
-
-// ImageReduceColumnMeanable is the interface implemented by [ImageReduceColumnMean], for mocking and DI.
-type ImageReduceColumnMeanable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMean
-	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMean
-	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMean
-}
-
-var _ ImageReduceColumnMeanable = (*ImageReduceColumnMean)(nil)
 
 var _ ImageReduceUnaryProvider = (*ImageReduceColumnMean)(nil)
 

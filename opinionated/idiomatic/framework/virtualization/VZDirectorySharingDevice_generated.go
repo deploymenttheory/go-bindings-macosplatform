@@ -48,36 +48,29 @@ func directorySharingDeviceAdopt(id objc.ID) *DirectorySharingDevice {
 }
 
 // Description returns the object's -description text.
-func (x *DirectorySharingDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dsd *DirectorySharingDevice) Description() string {
+	return rt.Description(objref.IDOf(dsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectorySharingDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dsd *DirectorySharingDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectorySharingDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dsd *DirectorySharingDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DirectorySharingDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dsd *DirectorySharingDevice) String() string {
+	return rt.Description(objref.IDOf(dsd))
 }
-
-// DirectorySharingDeviceable is the interface implemented by [DirectorySharingDevice], for mocking and DI.
-type DirectorySharingDeviceable interface {
-	obj.Object
-}
-
-var _ DirectorySharingDeviceable = (*DirectorySharingDevice)(nil)
 
 // isDirectorySharingDevice marks DirectorySharingDevice — and, by embedding promotion, its
 // subclasses — as a member of the DirectorySharingDevice hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DirectorySharingDevice) isDirectorySharingDevice() {}
+func (dsd *DirectorySharingDevice) isDirectorySharingDevice() {}
 
 var _ DirectorySharingDeviceProvider = (*DirectorySharingDevice)(nil)

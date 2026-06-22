@@ -53,18 +53,10 @@ func NewUnitAngle() *UnitAngle {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitAngle) WithScriptingProperties(scriptingProperties obj.Object) *UnitAngle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ua *UnitAngle) WithScriptingProperties(scriptingProperties obj.Object) *UnitAngle {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ua
 }
-
-// UnitAngleable is the interface implemented by [UnitAngle], for mocking and DI.
-type UnitAngleable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitAngle
-}
-
-var _ UnitAngleable = (*UnitAngle)(nil)
 
 var _ DimensionProvider = (*UnitAngle)(nil)
 

@@ -46,24 +46,24 @@ func qCCompositionAdopt(id objc.ID) *QCComposition {
 }
 
 // Description returns the object's -description text.
-func (x *QCComposition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qc *QCComposition) Description() string {
+	return rt.Description(objref.IDOf(qc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QCComposition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qc *QCComposition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QCComposition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qc *QCComposition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QCComposition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qc *QCComposition) String() string {
+	return rt.Description(objref.IDOf(qc))
 }
 
 // NewQCComposition creates a new QCComposition.
@@ -73,36 +73,25 @@ func NewQCComposition() *QCComposition {
 }
 
 // Protocols returns the list of protocols to which the composition conforms.
-func (x *QCComposition) Protocols() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocols"))
+func (qc *QCComposition) Protocols() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("protocols"))
 	return obj.Wrap(_r)
 }
 
 // Attributes returns the attributes of the composition.
-func (x *QCComposition) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (qc *QCComposition) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // InputKeys returns an array listing the keys that identify the input ports of the root patch of the composition.
-func (x *QCComposition) InputKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputKeys"))
+func (qc *QCComposition) InputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("inputKeys"))
 	return obj.Wrap(_r)
 }
 
 // OutputKeys returns an array listing the keys that identify the output ports of the root patch of the composition.
-func (x *QCComposition) OutputKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputKeys"))
+func (qc *QCComposition) OutputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("outputKeys"))
 	return obj.Wrap(_r)
 }
-
-// QCCompositionable is the interface implemented by [QCComposition], for mocking and DI.
-type QCCompositionable interface {
-	obj.Object
-	Protocols() obj.Object
-	Attributes() obj.Object
-	InputKeys() obj.Object
-	OutputKeys() obj.Object
-}
-
-var _ QCCompositionable = (*QCComposition)(nil)

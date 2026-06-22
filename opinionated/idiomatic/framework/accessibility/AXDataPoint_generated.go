@@ -46,24 +46,24 @@ func dataPointAdopt(id objc.ID) *DataPoint {
 }
 
 // Description returns the object's -description text.
-func (x *DataPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dp *DataPoint) Description() string {
+	return rt.Description(objref.IDOf(dp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DataPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dp *DataPoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DataPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dp *DataPoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DataPoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dp *DataPoint) String() string {
+	return rt.Description(objref.IDOf(dp))
 }
 
 // NewDataPointWithXY creates a data point with the specified x- and y-values.
@@ -87,115 +87,68 @@ func NewDataPointWithXYAdditionalValuesLabel(xValue *DataPointValue, yValue *Dat
 	return dataPointAdopt(_id)
 }
 
-// WithXValue the value of the x-axis for the data point.
-func (x *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXValue:"), objref.IDOf(xValue))
-	return x
+// WithXValue sets the value of the x-axis for the data point.
+func (dp *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setXValue:"), objref.IDOf(xValue))
+	return dp
 }
 
-// WithYValue the value of the y-axis for the data point.
-func (x *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYValue:"), objref.IDOf(yValue))
-	return x
+// WithYValue sets the value of the y-axis for the data point.
+func (dp *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setYValue:"), objref.IDOf(yValue))
+	return dp
 }
 
-// WithAdditionalValues an array of values for additional axes for the data point.
-func (x *DataPoint) WithAdditionalValues(items ...*DataPointValue) *DataPoint {
+// WithAdditionalValues sets an array of values for additional axes for the data point.
+func (dp *DataPoint) WithAdditionalValues(items ...*DataPointValue) *DataPoint {
 	_arr := purego.SliceToNSArray(items, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAdditionalValues:"), _arr)
+	return dp
 }
 
-// WithLabel the label for the data point.
-func (x *DataPoint) WithLabel(label string) *DataPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the label for the data point.
+func (dp *DataPoint) WithLabel(label string) *DataPoint {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return dp
 }
 
-// WithAttributedLabel an attributed version of the label for the data point.
-func (x *DataPoint) WithAttributedLabel(attributedLabel obj.Object) *DataPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedLabel:"), objref.IDOf(attributedLabel))
-	return x
+// WithAttributedLabel sets an attributed version of the label for the data point.
+func (dp *DataPoint) WithAttributedLabel(attributedLabel obj.Object) *DataPoint {
+	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAttributedLabel:"), objref.IDOf(attributedLabel))
+	return dp
 }
 
-// XValue the x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
-func (x *DataPoint) XValue() *DataPointValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xValue"))
+// XValue returns the x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
+func (dp *DataPoint) XValue() *DataPointValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("xValue"))
 	return DataPointValueFromID(_r)
 }
 
-// SetXValue wraps the corresponding Objective-C method.
-func (x *DataPoint) SetXValue(xValue *DataPointValue) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXValue:"), objref.IDOf(xValue))
-}
-
-// YValue the y-axis value for this data point.
-func (x *DataPoint) YValue() *DataPointValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yValue"))
+// YValue returns the y-axis value for this data point.
+func (dp *DataPoint) YValue() *DataPointValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("yValue"))
 	return DataPointValueFromID(_r)
 }
 
-// SetYValue wraps the corresponding Objective-C method.
-func (x *DataPoint) SetYValue(yValue *DataPointValue) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYValue:"), objref.IDOf(yValue))
-}
-
-// AdditionalValues any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
+// AdditionalValues returns any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
 //
 // AdditionalValues returns the collection as a Go slice.
-func (x *DataPoint) AdditionalValues() []*DataPointValue {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalValues"))
+func (dp *DataPoint) AdditionalValues() []*DataPointValue {
+	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("additionalValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DataPointValue { return DataPointValueFromID(_id) })
 }
 
-// SetAdditionalValues wraps the corresponding Objective-C method.
-func (x *DataPoint) SetAdditionalValues(additionalValues []*DataPointValue) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalValues:"), purego.SliceToNSArray(additionalValues, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Label a name or label for this data point.
-func (x *DataPoint) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a name or label for this data point.
+func (dp *DataPoint) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *DataPoint) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// AttributedLabel an attributed version of the name or label for this data point.
-func (x *DataPoint) AttributedLabel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedLabel"))
+// AttributedLabel returns an attributed version of the name or label for this data point.
+func (dp *DataPoint) AttributedLabel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("attributedLabel"))
 	return obj.Wrap(_r)
 }
-
-// SetAttributedLabel wraps the corresponding Objective-C method.
-func (x *DataPoint) SetAttributedLabel(attributedLabel obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedLabel:"), objref.IDOf(attributedLabel))
-}
-
-// DataPointable is the interface implemented by [DataPoint], for mocking and DI.
-type DataPointable interface {
-	obj.Object
-	WithXValue(xValue *DataPointValue) *DataPoint
-	WithYValue(yValue *DataPointValue) *DataPoint
-	WithAdditionalValues(items ...*DataPointValue) *DataPoint
-	WithLabel(label string) *DataPoint
-	WithAttributedLabel(attributedLabel obj.Object) *DataPoint
-	XValue() *DataPointValue
-	SetXValue(xValue *DataPointValue)
-	YValue() *DataPointValue
-	SetYValue(yValue *DataPointValue)
-	AdditionalValues() []*DataPointValue
-	SetAdditionalValues(additionalValues []*DataPointValue)
-	Label() string
-	SetLabel(label string)
-	AttributedLabel() obj.Object
-	SetAttributedLabel(attributedLabel obj.Object)
-}
-
-var _ DataPointable = (*DataPoint)(nil)

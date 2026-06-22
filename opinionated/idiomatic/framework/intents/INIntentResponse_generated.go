@@ -48,56 +48,41 @@ func intentResponseAdopt(id objc.ID) *IntentResponse {
 }
 
 // Description returns the object's -description text.
-func (x *IntentResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ir *IntentResponse) Description() string {
+	return rt.Description(objref.IDOf(ir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IntentResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ir *IntentResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IntentResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ir *IntentResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IntentResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ir *IntentResponse) String() string {
+	return rt.Description(objref.IDOf(ir))
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *IntentResponse) WithUserActivity(userActivity obj.Object) *IntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (ir *IntentResponse) WithUserActivity(userActivity obj.Object) *IntentResponse {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return ir
 }
 
 // UserActivity wraps the corresponding Objective-C method.
-func (x *IntentResponse) UserActivity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
+func (ir *IntentResponse) UserActivity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)
 }
-
-// SetUserActivity wraps the corresponding Objective-C method.
-func (x *IntentResponse) SetUserActivity(userActivity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-}
-
-// IntentResponseable is the interface implemented by [IntentResponse], for mocking and DI.
-type IntentResponseable interface {
-	obj.Object
-	WithUserActivity(userActivity obj.Object) *IntentResponse
-	UserActivity() obj.Object
-	SetUserActivity(userActivity obj.Object)
-}
-
-var _ IntentResponseable = (*IntentResponse)(nil)
 
 // isIntentResponse marks IntentResponse — and, by embedding promotion, its
 // subclasses — as a member of the IntentResponse hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *IntentResponse) isIntentResponse() {}
+func (ir *IntentResponse) isIntentResponse() {}
 
 var _ IntentResponseProvider = (*IntentResponse)(nil)

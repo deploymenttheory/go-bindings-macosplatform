@@ -47,24 +47,24 @@ func fileThumbnailRequestAdopt(id objc.ID) *FileThumbnailRequest {
 }
 
 // Description returns the object's -description text.
-func (x *FileThumbnailRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ftr *FileThumbnailRequest) Description() string {
+	return rt.Description(objref.IDOf(ftr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileThumbnailRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ftr *FileThumbnailRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ftr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileThumbnailRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ftr *FileThumbnailRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ftr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileThumbnailRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ftr *FileThumbnailRequest) String() string {
+	return rt.Description(objref.IDOf(ftr))
 }
 
 // NewFileThumbnailRequest creates a new FileThumbnailRequest.
@@ -73,37 +73,26 @@ func NewFileThumbnailRequest() *FileThumbnailRequest {
 	return fileThumbnailRequestAdopt(_id)
 }
 
-// MaximumSize the maximum size of the generated thumbnail that will be accepted. This is also the preferred size, ideally either the width or the height will match the maximumSize's width or height respectively.
-func (x *FileThumbnailRequest) MaximumSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maximumSize"))
+// MaximumSize returns the maximum size of the generated thumbnail that will be accepted. This is also the preferred size, ideally either the width or the height will match the maximumSize's width or height respectively.
+func (ftr *FileThumbnailRequest) MaximumSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ftr), objc.RegisterName("maximumSize"))
 	return _r
 }
 
-// MinimumSize the minimum size of the generated thumbnail that will be accepted.
-func (x *FileThumbnailRequest) MinimumSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minimumSize"))
+// MinimumSize returns the minimum size of the generated thumbnail that will be accepted.
+func (ftr *FileThumbnailRequest) MinimumSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ftr), objc.RegisterName("minimumSize"))
 	return _r
 }
 
-// Scale the scale of the requested thumbnail.
-func (x *FileThumbnailRequest) Scale() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
+// Scale returns the scale of the requested thumbnail.
+func (ftr *FileThumbnailRequest) Scale() float64 {
+	_r := objc.Send[float64](objref.IDOf(ftr), objc.RegisterName("scale"))
 	return _r
 }
 
-// FileURL the url of the file for which a thumbnail is being requested.
-func (x *FileThumbnailRequest) FileURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+// FileURL returns the url of the file for which a thumbnail is being requested.
+func (ftr *FileThumbnailRequest) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ftr), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
-
-// FileThumbnailRequestable is the interface implemented by [FileThumbnailRequest], for mocking and DI.
-type FileThumbnailRequestable interface {
-	obj.Object
-	MaximumSize() corefoundation.CGSize
-	MinimumSize() corefoundation.CGSize
-	Scale() float64
-	FileURL() obj.Object
-}
-
-var _ FileThumbnailRequestable = (*FileThumbnailRequest)(nil)

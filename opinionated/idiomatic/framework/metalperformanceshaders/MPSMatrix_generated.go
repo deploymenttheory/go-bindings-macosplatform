@@ -48,85 +48,71 @@ func matrixAdopt(id objc.ID) *Matrix {
 }
 
 // Description returns the object's -description text.
-func (x *Matrix) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Matrix) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Matrix) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Matrix) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Matrix) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Matrix) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Matrix) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Matrix) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSMatrix instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the matrix data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:. In such cases, 0 will be returned.
-func (x *Matrix) ResourceSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
+func (m *Matrix) ResourceSize() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("resourceSize"))
 	return _r
 }
 
-// Rows the number of rows in a matrix in the MPSMatrix.
-func (x *Matrix) Rows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
+// Rows returns the number of rows in a matrix in the MPSMatrix.
+func (m *Matrix) Rows() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("rows"))
 	return _r
 }
 
-// Columns the number of columns in a matrix in the MPSMatrix.
-func (x *Matrix) Columns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
+// Columns returns the number of columns in a matrix in the MPSMatrix.
+func (m *Matrix) Columns() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("columns"))
 	return _r
 }
 
-// Matrices the number of matrices in the MPSMatrix.
-func (x *Matrix) Matrices() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrices"))
+// Matrices returns the number of matrices in the MPSMatrix.
+func (m *Matrix) Matrices() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("matrices"))
 	return _r
 }
 
-// RowBytes the stride, in bytes, between corresponding elements of consecutive rows.
-func (x *Matrix) RowBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowBytes"))
+// RowBytes returns the stride, in bytes, between corresponding elements of consecutive rows.
+func (m *Matrix) RowBytes() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("rowBytes"))
 	return _r
 }
 
-// MatrixBytes the stride, in bytes, between corresponding elements of consecutive matrices.
-func (x *Matrix) MatrixBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrixBytes"))
+// MatrixBytes returns the stride, in bytes, between corresponding elements of consecutive matrices.
+func (m *Matrix) MatrixBytes() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("matrixBytes"))
 	return _r
 }
 
-// Offset byte-offset to the buffer where the matrix data begins - see
-func (x *Matrix) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+// Offset returns byte-offset to the buffer where the matrix data begins - see
+func (m *Matrix) Offset() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("offset"))
 	return _r
 }
-
-// Matrixable is the interface implemented by [Matrix], for mocking and DI.
-type Matrixable interface {
-	obj.Object
-	ResourceSize() int
-	Rows() int
-	Columns() int
-	Matrices() int
-	RowBytes() int
-	MatrixBytes() int
-	Offset() int
-}
-
-var _ Matrixable = (*Matrix)(nil)
 
 // isMatrix marks Matrix — and, by embedding promotion, its
 // subclasses — as a member of the Matrix hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Matrix) isMatrix() {}
+func (m *Matrix) isMatrix() {}
 
 var _ MatrixProvider = (*Matrix)(nil)

@@ -48,50 +48,41 @@ func assetDownloadStorageManagementPolicyAdopt(id objc.ID) *AssetDownloadStorage
 }
 
 // Description returns the object's -description text.
-func (x *AssetDownloadStorageManagementPolicy) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (adsmp *AssetDownloadStorageManagementPolicy) Description() string {
+	return rt.Description(objref.IDOf(adsmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetDownloadStorageManagementPolicy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (adsmp *AssetDownloadStorageManagementPolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(adsmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetDownloadStorageManagementPolicy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (adsmp *AssetDownloadStorageManagementPolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(adsmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetDownloadStorageManagementPolicy) String() string {
-	return rt.Description(objref.IDOf(x))
+func (adsmp *AssetDownloadStorageManagementPolicy) String() string {
+	return rt.Description(objref.IDOf(adsmp))
 }
 
 // Priority indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
-func (x *AssetDownloadStorageManagementPolicy) Priority() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priority"))
+func (adsmp *AssetDownloadStorageManagementPolicy) Priority() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(adsmp), objc.RegisterName("priority"))
 	return obj.Wrap(_r)
 }
 
 // ExpirationDate returns the expiration date of asset.
-func (x *AssetDownloadStorageManagementPolicy) ExpirationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+func (adsmp *AssetDownloadStorageManagementPolicy) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(adsmp), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
-
-// AssetDownloadStorageManagementPolicyable is the interface implemented by [AssetDownloadStorageManagementPolicy], for mocking and DI.
-type AssetDownloadStorageManagementPolicyable interface {
-	obj.Object
-	Priority() obj.Object
-	ExpirationDate() obj.Object
-}
-
-var _ AssetDownloadStorageManagementPolicyable = (*AssetDownloadStorageManagementPolicy)(nil)
 
 // isAssetDownloadStorageManagementPolicy marks AssetDownloadStorageManagementPolicy — and, by embedding promotion, its
 // subclasses — as a member of the AssetDownloadStorageManagementPolicy hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AssetDownloadStorageManagementPolicy) isAssetDownloadStorageManagementPolicy() {}
+func (adsmp *AssetDownloadStorageManagementPolicy) isAssetDownloadStorageManagementPolicy() {}
 
 var _ AssetDownloadStorageManagementPolicyProvider = (*AssetDownloadStorageManagementPolicy)(nil)

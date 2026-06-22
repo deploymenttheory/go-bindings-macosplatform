@@ -48,41 +48,41 @@ func multiValueAdopt(id objc.ID) *MultiValue {
 }
 
 // Description returns the object's -description text.
-func (x *MultiValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mv *MultiValue) Description() string {
+	return rt.Description(objref.IDOf(mv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mv *MultiValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mv *MultiValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MultiValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mv *MultiValue) String() string {
+	return rt.Description(objref.IDOf(mv))
 }
 
 // Count returns the number of entries in a multivalue list.
-func (x *MultiValue) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (mv *MultiValue) Count() int {
+	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("count"))
 	return _r
 }
 
 // ValueAtIndex returns the value for the given index.
-func (x *MultiValue) ValueAtIndex(index int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueAtIndex:"), index)
+func (mv *MultiValue) ValueAtIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("valueAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
 // LabelAtIndex returns the label for the given index.
-func (x *MultiValue) LabelAtIndex(index int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelAtIndex:"), index)
+func (mv *MultiValue) LabelAtIndex(index int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("labelAtIndex:"), index)
 	if _r == 0 {
 		return ""
 	}
@@ -90,8 +90,8 @@ func (x *MultiValue) LabelAtIndex(index int) string {
 }
 
 // IdentifierAtIndex returns the identifier for the given index.
-func (x *MultiValue) IdentifierAtIndex(index int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifierAtIndex:"), index)
+func (mv *MultiValue) IdentifierAtIndex(index int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("identifierAtIndex:"), index)
 	if _r == 0 {
 		return ""
 	}
@@ -99,14 +99,14 @@ func (x *MultiValue) IdentifierAtIndex(index int) string {
 }
 
 // IndexForIdentifier returns the index for the given identifier.
-func (x *MultiValue) IndexForIdentifier(identifier string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexForIdentifier:"), purego.NSString(identifier))
+func (mv *MultiValue) IndexForIdentifier(identifier string) int {
+	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("indexForIdentifier:"), purego.NSString(identifier))
 	return _r
 }
 
 // PrimaryIdentifier returns the identifier for the primary value.
-func (x *MultiValue) PrimaryIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryIdentifier"))
+func (mv *MultiValue) PrimaryIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("primaryIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -114,42 +114,26 @@ func (x *MultiValue) PrimaryIdentifier() string {
 }
 
 // PropertyType returns the type for the values in a multivalue list.
-func (x *MultiValue) PropertyType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("propertyType"))
+func (mv *MultiValue) PropertyType() int {
+	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("propertyType"))
 	return _r
 }
 
 // ValueForIdentifier returns the value for the given identifier.
-func (x *MultiValue) ValueForIdentifier(identifier string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForIdentifier:"), purego.NSString(identifier))
+func (mv *MultiValue) ValueForIdentifier(identifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("valueForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
 // LabelForIdentifier returns the label for the given identifier.
-func (x *MultiValue) LabelForIdentifier(identifier string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForIdentifier:"), purego.NSString(identifier))
+func (mv *MultiValue) LabelForIdentifier(identifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("labelForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
-
-// MultiValueable is the interface implemented by [MultiValue], for mocking and DI.
-type MultiValueable interface {
-	obj.Object
-	Count() int
-	ValueAtIndex(index int) obj.Object
-	LabelAtIndex(index int) string
-	IdentifierAtIndex(index int) string
-	IndexForIdentifier(identifier string) int
-	PrimaryIdentifier() string
-	PropertyType() int
-	ValueForIdentifier(identifier string) obj.Object
-	LabelForIdentifier(identifier string) obj.Object
-}
-
-var _ MultiValueable = (*MultiValue)(nil)
 
 // isMultiValue marks MultiValue — and, by embedding promotion, its
 // subclasses — as a member of the MultiValue hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MultiValue) isMultiValue() {}
+func (mv *MultiValue) isMultiValue() {}
 
 var _ MultiValueProvider = (*MultiValue)(nil)

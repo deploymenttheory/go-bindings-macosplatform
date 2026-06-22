@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,39 +50,28 @@ func NewDOMCDATASection() *DOMCDATASection {
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *DOMCDATASection) WithData(data string) *DOMCDATASection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-	return x
+func (ds *DOMCDATASection) WithData(data string) *DOMCDATASection {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setData:"), purego.NSString(data))
+	return ds
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMCDATASection) WithNodeValue(nodeValue string) *DOMCDATASection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (ds *DOMCDATASection) WithNodeValue(nodeValue string) *DOMCDATASection {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return ds
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMCDATASection) WithPrefix(prefix string) *DOMCDATASection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (ds *DOMCDATASection) WithPrefix(prefix string) *DOMCDATASection {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return ds
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMCDATASection) WithTextContent(textContent string) *DOMCDATASection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (ds *DOMCDATASection) WithTextContent(textContent string) *DOMCDATASection {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return ds
 }
-
-// DOMCDATASectionable is the interface implemented by [DOMCDATASection], for mocking and DI.
-type DOMCDATASectionable interface {
-	obj.Object
-	WithData(data string) *DOMCDATASection
-	WithNodeValue(nodeValue string) *DOMCDATASection
-	WithPrefix(prefix string) *DOMCDATASection
-	WithTextContent(textContent string) *DOMCDATASection
-}
-
-var _ DOMCDATASectionable = (*DOMCDATASection)(nil)
 
 var _ DOMTextProvider = (*DOMCDATASection)(nil)
 

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,45 +51,28 @@ func NewImageEuclideanDistanceTransform() *ImageEuclideanDistanceTransform {
 	return imageEuclideanDistanceTransformAdopt(_id)
 }
 
-// WithSearchLimitRadius defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
-func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchLimitRadius:"), searchLimitRadius)
-	return x
+// WithSearchLimitRadius sets defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
+func (iedt *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform {
+	objc.Send[objc.ID](objref.IDOf(iedt), objc.RegisterName("setSearchLimitRadius:"), searchLimitRadius)
+	return iedt
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (iedt *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform {
+	objc.Send[objc.ID](objref.IDOf(iedt), objc.RegisterName("setOffset:"), offset)
+	return iedt
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (iedt *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform {
+	objc.Send[objc.ID](objref.IDOf(iedt), objc.RegisterName("setClipRect:"), clipRect)
+	return iedt
 }
 
 // SearchLimitRadius defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
-func (x *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("searchLimitRadius"))
+func (iedt *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
+	_r := objc.Send[float32](objref.IDOf(iedt), objc.RegisterName("searchLimitRadius"))
 	return _r
 }
-
-// SetSearchLimitRadius wraps the corresponding Objective-C method.
-func (x *ImageEuclideanDistanceTransform) SetSearchLimitRadius(searchLimitRadius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchLimitRadius:"), searchLimitRadius)
-}
-
-// ImageEuclideanDistanceTransformable is the interface implemented by [ImageEuclideanDistanceTransform], for mocking and DI.
-type ImageEuclideanDistanceTransformable interface {
-	obj.Object
-	WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform
-	WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform
-	WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform
-	SearchLimitRadius() float32
-	SetSearchLimitRadius(searchLimitRadius float32)
-}
-
-var _ ImageEuclideanDistanceTransformable = (*ImageEuclideanDistanceTransform)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageEuclideanDistanceTransform)(nil)

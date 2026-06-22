@@ -53,19 +53,11 @@ func NewCNNNeuronSoftSignNodeWithSource(sourceNode obj.Object) *CNNNeuronSoftSig
 	return cNNNeuronSoftSignNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronSoftSignNode) WithLabel(label string) *CNNNeuronSoftSignNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnssn *CNNNeuronSoftSignNode) WithLabel(label string) *CNNNeuronSoftSignNode {
+	objc.Send[objc.ID](objref.IDOf(cnssn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnssn
 }
-
-// CNNNeuronSoftSignNodeable is the interface implemented by [CNNNeuronSoftSignNode], for mocking and DI.
-type CNNNeuronSoftSignNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronSoftSignNode
-}
-
-var _ CNNNeuronSoftSignNodeable = (*CNNNeuronSoftSignNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronSoftSignNode)(nil)
 

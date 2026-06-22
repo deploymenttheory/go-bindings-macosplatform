@@ -46,24 +46,24 @@ func collaborationCoordinatorAdopt(id objc.ID) *CollaborationCoordinator {
 }
 
 // Description returns the object's -description text.
-func (x *CollaborationCoordinator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *CollaborationCoordinator) Description() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollaborationCoordinator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cc *CollaborationCoordinator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollaborationCoordinator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cc *CollaborationCoordinator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollaborationCoordinator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *CollaborationCoordinator) String() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // NewCollaborationCoordinator creates a new CollaborationCoordinator.
@@ -71,10 +71,3 @@ func NewCollaborationCoordinator() *CollaborationCoordinator {
 	_id := objc.Send[objc.ID](objc.ID(_class("SWCollaborationCoordinator")), objc.RegisterName("new"))
 	return collaborationCoordinatorAdopt(_id)
 }
-
-// CollaborationCoordinatorable is the interface implemented by [CollaborationCoordinator], for mocking and DI.
-type CollaborationCoordinatorable interface {
-	obj.Object
-}
-
-var _ CollaborationCoordinatorable = (*CollaborationCoordinator)(nil)

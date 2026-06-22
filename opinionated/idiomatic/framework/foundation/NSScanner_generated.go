@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Scanner is an idiomatic wrapper over the Objective-C class NSScanner.
@@ -47,24 +48,24 @@ func scannerAdopt(id objc.ID) *Scanner {
 }
 
 // Description returns the object's -description text.
-func (x *Scanner) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Scanner) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Scanner) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Scanner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Scanner) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Scanner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Scanner) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Scanner) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewScannerWithString creates a new Scanner.
@@ -75,210 +76,155 @@ func NewScannerWithString(string_ string) *Scanner {
 }
 
 // WithScanLocation sets the property and returns the receiver so calls can be chained.
-func (x *Scanner) WithScanLocation(scanLocation int) *Scanner {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanLocation:"), scanLocation)
-	return x
+func (s *Scanner) WithScanLocation(scanLocation int) *Scanner {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScanLocation:"), scanLocation)
+	return s
 }
 
 // WithCharactersToBeSkipped sets the property and returns the receiver so calls can be chained.
-func (x *Scanner) WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersToBeSkipped:"), objref.IDOf(charactersToBeSkipped))
-	return x
+func (s *Scanner) WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCharactersToBeSkipped:"), objref.IDOf(charactersToBeSkipped))
+	return s
 }
 
 // WithCaseSensitive sets the property and returns the receiver so calls can be chained.
-func (x *Scanner) WithCaseSensitive(caseSensitive bool) *Scanner {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
-	return x
+func (s *Scanner) WithCaseSensitive(caseSensitive bool) *Scanner {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCaseSensitive:"), caseSensitive)
+	return s
 }
 
 // WithLocale sets the property and returns the receiver so calls can be chained.
-func (x *Scanner) WithLocale(locale obj.Object) *Scanner {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+func (s *Scanner) WithLocale(locale obj.Object) *Scanner {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return s
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Scanner) WithScriptingProperties(scriptingProperties obj.Object) *Scanner {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (s *Scanner) WithScriptingProperties(scriptingProperties obj.Object) *Scanner {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return s
 }
 
 // ScanLocation wraps the corresponding Objective-C method.
-func (x *Scanner) ScanLocation() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scanLocation"))
+func (s *Scanner) ScanLocation() int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("scanLocation"))
 	return _r
-}
-
-// SetScanLocation wraps the corresponding Objective-C method.
-func (x *Scanner) SetScanLocation(scanLocation int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanLocation:"), scanLocation)
 }
 
 // CharactersToBeSkipped wraps the corresponding Objective-C method.
-func (x *Scanner) CharactersToBeSkipped() *CharacterSet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersToBeSkipped"))
+func (s *Scanner) CharactersToBeSkipped() *CharacterSet {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("charactersToBeSkipped"))
 	return CharacterSetFromID(_r)
 }
 
-// SetCharactersToBeSkipped wraps the corresponding Objective-C method.
-func (x *Scanner) SetCharactersToBeSkipped(charactersToBeSkipped *CharacterSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersToBeSkipped:"), objref.IDOf(charactersToBeSkipped))
-}
-
 // CaseSensitive wraps the corresponding Objective-C method.
-func (x *Scanner) CaseSensitive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("caseSensitive"))
+func (s *Scanner) CaseSensitive() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("caseSensitive"))
 	return _r
 }
 
-// SetCaseSensitive wraps the corresponding Objective-C method.
-func (x *Scanner) SetCaseSensitive(caseSensitive bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
-}
-
 // Locale wraps the corresponding Objective-C method.
-func (x *Scanner) Locale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+func (s *Scanner) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// SetLocale wraps the corresponding Objective-C method.
-func (x *Scanner) SetLocale(locale obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-}
-
 // ScanInt wraps the corresponding Objective-C method.
-func (x *Scanner) ScanInt() (ok bool, result int32) {
+func (s *Scanner) ScanInt() (ok bool, result int32) {
 	var _out0 int32
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanInt:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanInt:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanInteger wraps the corresponding Objective-C method.
-func (x *Scanner) ScanInteger() (ok bool, result int64) {
+func (s *Scanner) ScanInteger() (ok bool, result int64) {
 	var _out0 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanInteger:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanInteger:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanLongLong wraps the corresponding Objective-C method.
-func (x *Scanner) ScanLongLong() (ok bool, result int64) {
+func (s *Scanner) ScanLongLong() (ok bool, result int64) {
 	var _out0 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanLongLong:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanLongLong:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanUnsignedLongLong wraps the corresponding Objective-C method.
-func (x *Scanner) ScanUnsignedLongLong() (ok bool, result uint64) {
+func (s *Scanner) ScanUnsignedLongLong() (ok bool, result uint64) {
 	var _out0 uint64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanUnsignedLongLong:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUnsignedLongLong:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanFloat wraps the corresponding Objective-C method.
-func (x *Scanner) ScanFloat() (ok bool, result float32) {
+func (s *Scanner) ScanFloat() (ok bool, result float32) {
 	var _out0 float32
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanFloat:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanFloat:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanDouble wraps the corresponding Objective-C method.
-func (x *Scanner) ScanDouble() (ok bool, result float64) {
+func (s *Scanner) ScanDouble() (ok bool, result float64) {
 	var _out0 float64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanDouble:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanDouble:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanHexInt wraps the corresponding Objective-C method.
-func (x *Scanner) ScanHexInt() (ok bool, result uint32) {
+func (s *Scanner) ScanHexInt() (ok bool, result uint32) {
 	var _out0 uint32
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanHexInt:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexInt:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanHexLongLong wraps the corresponding Objective-C method.
-func (x *Scanner) ScanHexLongLong() (ok bool, result uint64) {
+func (s *Scanner) ScanHexLongLong() (ok bool, result uint64) {
 	var _out0 uint64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanHexLongLong:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexLongLong:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanHexFloat wraps the corresponding Objective-C method.
-func (x *Scanner) ScanHexFloat() (ok bool, result float32) {
+func (s *Scanner) ScanHexFloat() (ok bool, result float32) {
 	var _out0 float32
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanHexFloat:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexFloat:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanHexDouble wraps the corresponding Objective-C method.
-func (x *Scanner) ScanHexDouble() (ok bool, result float64) {
+func (s *Scanner) ScanHexDouble() (ok bool, result float64) {
 	var _out0 float64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanHexDouble:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexDouble:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanStringIntoString wraps the corresponding Objective-C method.
-func (x *Scanner) ScanStringIntoString(string_ string, result string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanString:intoString:"), purego.NSString(string_), purego.NSString(result))
+func (s *Scanner) ScanStringIntoString(string_ string, result string) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanString:intoString:"), purego.NSString(string_), purego.NSString(result))
 	return _r
 }
 
 // ScanCharactersFromSetIntoString wraps the corresponding Objective-C method.
-func (x *Scanner) ScanCharactersFromSetIntoString(set *CharacterSet, result string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanCharactersFromSet:intoString:"), objref.IDOf(set), purego.NSString(result))
+func (s *Scanner) ScanCharactersFromSetIntoString(set *CharacterSet, result string) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanCharactersFromSet:intoString:"), objref.IDOf(set), purego.NSString(result))
 	return _r
 }
 
 // ScanUpToStringIntoString wraps the corresponding Objective-C method.
-func (x *Scanner) ScanUpToStringIntoString(string_ string, result string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanUpToString:intoString:"), purego.NSString(string_), purego.NSString(result))
+func (s *Scanner) ScanUpToStringIntoString(string_ string, result string) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUpToString:intoString:"), purego.NSString(string_), purego.NSString(result))
 	return _r
 }
 
 // ScanUpToCharactersFromSetIntoString wraps the corresponding Objective-C method.
-func (x *Scanner) ScanUpToCharactersFromSetIntoString(set *CharacterSet, result string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanUpToCharactersFromSet:intoString:"), objref.IDOf(set), purego.NSString(result))
+func (s *Scanner) ScanUpToCharactersFromSetIntoString(set *CharacterSet, result string) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUpToCharactersFromSet:intoString:"), objref.IDOf(set), purego.NSString(result))
 	return _r
 }
 
 // IsAtEnd wraps the corresponding Objective-C method.
-func (x *Scanner) IsAtEnd() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAtEnd"))
+func (s *Scanner) IsAtEnd() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isAtEnd"))
 	return _r
 }
-
-// Scannerable is the interface implemented by [Scanner], for mocking and DI.
-type Scannerable interface {
-	obj.Object
-	WithScanLocation(scanLocation int) *Scanner
-	WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner
-	WithCaseSensitive(caseSensitive bool) *Scanner
-	WithLocale(locale obj.Object) *Scanner
-	WithScriptingProperties(scriptingProperties obj.Object) *Scanner
-	ScanLocation() int
-	SetScanLocation(scanLocation int)
-	CharactersToBeSkipped() *CharacterSet
-	SetCharactersToBeSkipped(charactersToBeSkipped *CharacterSet)
-	CaseSensitive() bool
-	SetCaseSensitive(caseSensitive bool)
-	Locale() obj.Object
-	SetLocale(locale obj.Object)
-	ScanInt() (ok bool, result int32)
-	ScanInteger() (ok bool, result int64)
-	ScanLongLong() (ok bool, result int64)
-	ScanUnsignedLongLong() (ok bool, result uint64)
-	ScanFloat() (ok bool, result float32)
-	ScanDouble() (ok bool, result float64)
-	ScanHexInt() (ok bool, result uint32)
-	ScanHexLongLong() (ok bool, result uint64)
-	ScanHexFloat() (ok bool, result float32)
-	ScanHexDouble() (ok bool, result float64)
-	ScanStringIntoString(string_ string, result string) bool
-	ScanCharactersFromSetIntoString(set *CharacterSet, result string) bool
-	ScanUpToStringIntoString(string_ string, result string) bool
-	ScanUpToCharactersFromSetIntoString(set *CharacterSet, result string) bool
-	IsAtEnd() bool
-}
-
-var _ Scannerable = (*Scanner)(nil)

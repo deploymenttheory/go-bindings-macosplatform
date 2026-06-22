@@ -44,24 +44,24 @@ func objectSectionAdopt(id objc.ID) *ObjectSection {
 }
 
 // Description returns the object's -description text.
-func (x *ObjectSection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (os *ObjectSection) Description() string {
+	return rt.Description(objref.IDOf(os))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectSection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (os *ObjectSection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(os), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectSection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (os *ObjectSection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(os), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ObjectSection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (os *ObjectSection) String() string {
+	return rt.Description(objref.IDOf(os))
 }
 
 // NewObjectSectionWithTitleItems creates a new ObjectSection.
@@ -72,8 +72,8 @@ func NewObjectSectionWithTitleItems(title string, items []obj.Object) *ObjectSec
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *ObjectSection) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (os *ObjectSection) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -81,16 +81,7 @@ func (x *ObjectSection) Title() string {
 }
 
 // Items wraps the corresponding Objective-C method.
-func (x *ObjectSection) Items() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+func (os *ObjectSection) Items() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ObjectSectionable is the interface implemented by [ObjectSection], for mocking and DI.
-type ObjectSectionable interface {
-	obj.Object
-	Title() string
-	Items() []obj.Object
-}
-
-var _ ObjectSectionable = (*ObjectSection)(nil)

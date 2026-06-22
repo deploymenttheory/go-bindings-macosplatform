@@ -46,24 +46,24 @@ func runningApplicationAdopt(id objc.ID) *RunningApplication {
 }
 
 // Description returns the object's -description text.
-func (x *RunningApplication) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ra *RunningApplication) Description() string {
+	return rt.Description(objref.IDOf(ra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RunningApplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ra *RunningApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RunningApplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ra *RunningApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RunningApplication) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ra *RunningApplication) String() string {
+	return rt.Description(objref.IDOf(ra))
 }
 
 // NewRunningApplication creates a new RunningApplication.
@@ -72,36 +72,26 @@ func NewRunningApplication() *RunningApplication {
 	return runningApplicationAdopt(_id)
 }
 
-// BundleIdentifier bundleIdentifier the bundleIdentifier for the SCRunningApplication
-func (x *RunningApplication) BundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+// BundleIdentifier returns bundleIdentifier the bundleIdentifier for the SCRunningApplication
+func (ra *RunningApplication) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ApplicationName applicationName the application name for the SCRunningApplication
-func (x *RunningApplication) ApplicationName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationName"))
+// ApplicationName returns applicationName the application name for the SCRunningApplication
+func (ra *RunningApplication) ApplicationName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("applicationName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ProcessID processID the SCRunningApplication
-func (x *RunningApplication) ProcessID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processID"))
+// ProcessID returns processID the SCRunningApplication
+func (ra *RunningApplication) ProcessID() int {
+	_r := objc.Send[int](objref.IDOf(ra), objc.RegisterName("processID"))
 	return _r
 }
-
-// RunningApplicationable is the interface implemented by [RunningApplication], for mocking and DI.
-type RunningApplicationable interface {
-	obj.Object
-	BundleIdentifier() string
-	ApplicationName() string
-	ProcessID() int
-}
-
-var _ RunningApplicationable = (*RunningApplication)(nil)

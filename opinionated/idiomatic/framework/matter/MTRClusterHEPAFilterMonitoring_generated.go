@@ -52,100 +52,80 @@ func NewMTRClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *MTRDevic
 }
 
 // ReadAttributeConditionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConditionWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeConditionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDegradationDirectionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDegradationDirectionWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeDegradationDirectionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeChangeIndicationWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChangeIndicationWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeChangeIndicationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeInPlaceIndicatorWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInPlaceIndicatorWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeInPlaceIndicatorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLastChangedTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLastChangedTimeWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeLastChangedTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeLastChangedTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mchfm *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeReplacementProductListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReplacementProductListWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeReplacementProductListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mchfm *MTRClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mchfm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterHEPAFilterMonitoringable is the interface implemented by [MTRClusterHEPAFilterMonitoring], for mocking and DI.
-type MTRClusterHEPAFilterMonitoringable interface {
-	obj.Object
-	ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterHEPAFilterMonitoringable = (*MTRClusterHEPAFilterMonitoring)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterHEPAFilterMonitoring)(nil)
 

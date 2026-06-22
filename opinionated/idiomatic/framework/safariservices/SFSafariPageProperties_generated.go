@@ -46,24 +46,24 @@ func safariPagePropertiesAdopt(id objc.ID) *SafariPageProperties {
 }
 
 // Description returns the object's -description text.
-func (x *SafariPageProperties) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (spp *SafariPageProperties) Description() string {
+	return rt.Description(objref.IDOf(spp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariPageProperties) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (spp *SafariPageProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(spp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariPageProperties) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (spp *SafariPageProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(spp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariPageProperties) String() string {
-	return rt.Description(objref.IDOf(x))
+func (spp *SafariPageProperties) String() string {
+	return rt.Description(objref.IDOf(spp))
 }
 
 // NewSafariPageProperties creates a new SafariPageProperties.
@@ -72,15 +72,15 @@ func NewSafariPageProperties() *SafariPageProperties {
 	return safariPagePropertiesAdopt(_id)
 }
 
-// Url wraps the corresponding Objective-C method.
-func (x *SafariPageProperties) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL wraps the corresponding Objective-C method.
+func (spp *SafariPageProperties) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(spp), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *SafariPageProperties) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (spp *SafariPageProperties) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spp), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,24 +88,13 @@ func (x *SafariPageProperties) Title() string {
 }
 
 // UsesPrivateBrowsing wraps the corresponding Objective-C method.
-func (x *SafariPageProperties) UsesPrivateBrowsing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesPrivateBrowsing"))
+func (spp *SafariPageProperties) UsesPrivateBrowsing() bool {
+	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("usesPrivateBrowsing"))
 	return _r
 }
 
 // IsActive wraps the corresponding Objective-C method.
-func (x *SafariPageProperties) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+func (spp *SafariPageProperties) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isActive"))
 	return _r
 }
-
-// SafariPagePropertiesable is the interface implemented by [SafariPageProperties], for mocking and DI.
-type SafariPagePropertiesable interface {
-	obj.Object
-	Url() obj.Object
-	Title() string
-	UsesPrivateBrowsing() bool
-	IsActive() bool
-}
-
-var _ SafariPagePropertiesable = (*SafariPageProperties)(nil)

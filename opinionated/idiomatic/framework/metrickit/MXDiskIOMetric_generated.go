@@ -53,17 +53,9 @@ func NewDiskIOMetric() *DiskIOMetric {
 }
 
 // CumulativeLogicalWrites wraps the corresponding Objective-C method.
-func (x *DiskIOMetric) CumulativeLogicalWrites() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeLogicalWrites"))
+func (dim *DiskIOMetric) CumulativeLogicalWrites() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dim), objc.RegisterName("cumulativeLogicalWrites"))
 	return obj.Wrap(_r)
 }
-
-// DiskIOMetricable is the interface implemented by [DiskIOMetric], for mocking and DI.
-type DiskIOMetricable interface {
-	obj.Object
-	CumulativeLogicalWrites() obj.Object
-}
-
-var _ DiskIOMetricable = (*DiskIOMetric)(nil)
 
 var _ MetricProvider = (*DiskIOMetric)(nil)

@@ -46,77 +46,54 @@ func mTRMediaPlaybackClusterPlaybackPositionStructAdopt(id objc.ID) *MTRMediaPla
 }
 
 // Description returns the object's -description text.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) Description() string {
+	return rt.Description(objref.IDOf(mmpcpps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmpcpps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmpcpps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) String() string {
+	return rt.Description(objref.IDOf(mmpcpps))
 }
 
 // WithUpdatedAt sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
-	return x
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
+	return mmpcpps
 }
 
 // WithPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
-	return x
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("setPosition:"), objref.IDOf(position))
+	return mmpcpps
 }
 
 // UpdatedAt wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedAt"))
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("updatedAt"))
 	return obj.Wrap(_r)
-}
-
-// SetUpdatedAt wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) SetUpdatedAt(updatedAt obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 }
 
 // Position wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("position"))
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("position"))
 	return obj.Wrap(_r)
 }
-
-// SetPosition wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) SetPosition(position obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
-}
-
-// MTRMediaPlaybackClusterPlaybackPositionStructable is the interface implemented by [MTRMediaPlaybackClusterPlaybackPositionStruct], for mocking and DI.
-type MTRMediaPlaybackClusterPlaybackPositionStructable interface {
-	obj.Object
-	WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct
-	WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct
-	UpdatedAt() obj.Object
-	SetUpdatedAt(updatedAt obj.Object)
-	Position() obj.Object
-	SetPosition(position obj.Object)
-}
-
-var _ MTRMediaPlaybackClusterPlaybackPositionStructable = (*MTRMediaPlaybackClusterPlaybackPositionStruct)(nil)
 
 // isMTRMediaPlaybackClusterPlaybackPositionStruct marks MTRMediaPlaybackClusterPlaybackPositionStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRMediaPlaybackClusterPlaybackPositionStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) isMTRMediaPlaybackClusterPlaybackPositionStruct() {
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) isMTRMediaPlaybackClusterPlaybackPositionStruct() {
 }
 
 var _ MTRMediaPlaybackClusterPlaybackPositionStructProvider = (*MTRMediaPlaybackClusterPlaybackPositionStruct)(nil)

@@ -6,6 +6,7 @@ package cinematic
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -73,7 +74,7 @@ func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset obj.Object)
 	}
 }
 
-// IsSupported indicates whether the current device supports Audio Mix.
+// IsSupported reports whether the current device supports Audio Mix.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("isSupported"))
 	return _r
@@ -100,13 +101,13 @@ func AccessibilityLabelForDetectionType(detectionType DetectionType) string {
 	return purego.GoString(_r)
 }
 
-// CNObjectTrackerIsSupported indicates whether the current device supports object detection and tracking.
+// CNObjectTrackerIsSupported reports whether the current device supports object detection and tracking.
 func CNObjectTrackerIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("CNObjectTracker")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// SourcePixelFormatTypes the pixel format types supported for the input source. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's sourcePixelBufferAttributes dictionary when implementing AVVideoCompositing.
+// SourcePixelFormatTypes returns the pixel format types supported for the input source. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's sourcePixelBufferAttributes dictionary when implementing AVVideoCompositing.
 //
 // SourcePixelFormatTypes returns the collection as a Go slice.
 func SourcePixelFormatTypes() []obj.Object {
@@ -114,7 +115,7 @@ func SourcePixelFormatTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DestinationPixelFormatTypes the pixel format types supported for the output destination. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's requiredPixelBufferAttributesForRenderContext dictionary when implementing AVVideoCompositing.
+// DestinationPixelFormatTypes returns the pixel format types supported for the output destination. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's requiredPixelBufferAttributesForRenderContext dictionary when implementing AVVideoCompositing.
 //
 // DestinationPixelFormatTypes returns the collection as a Go slice.
 func DestinationPixelFormatTypes() []obj.Object {

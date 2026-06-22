@@ -44,24 +44,24 @@ func chatButtonAdopt(id objc.ID) *ChatButton {
 }
 
 // Description returns the object's -description text.
-func (x *ChatButton) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cb *ChatButton) Description() string {
+	return rt.Description(objref.IDOf(cb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChatButton) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cb *ChatButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChatButton) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cb *ChatButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ChatButton) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cb *ChatButton) String() string {
+	return rt.Description(objref.IDOf(cb))
 }
 
 // NewChatButtonWithStyle creates and returns a BCChatButton configured for a given style.
@@ -77,10 +77,3 @@ func NewChatButtonWithCoder(coder obj.Object) *ChatButton {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return chatButtonAdopt(_id)
 }
-
-// ChatButtonable is the interface implemented by [ChatButton], for mocking and DI.
-type ChatButtonable interface {
-	obj.Object
-}
-
-var _ ChatButtonable = (*ChatButton)(nil)

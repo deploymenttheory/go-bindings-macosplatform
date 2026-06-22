@@ -46,24 +46,24 @@ func frameInterpolatorDescriptorAdopt(id objc.ID) *FrameInterpolatorDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *FrameInterpolatorDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fid *FrameInterpolatorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(fid))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FrameInterpolatorDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fid *FrameInterpolatorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fid), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FrameInterpolatorDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fid *FrameInterpolatorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fid), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FrameInterpolatorDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fid *FrameInterpolatorDescriptor) String() string {
+	return rt.Description(objref.IDOf(fid))
 }
 
 // NewFrameInterpolatorDescriptor creates a new FrameInterpolatorDescriptor.
@@ -72,89 +72,50 @@ func NewFrameInterpolatorDescriptor() *FrameInterpolatorDescriptor {
 	return frameInterpolatorDescriptorAdopt(_id)
 }
 
-// WithInputWidth the width, in pixels, of the input motion and depth texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) WithInputWidth(inputWidth int) *FrameInterpolatorDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
-	return x
+// WithInputWidth sets the width, in pixels, of the input motion and depth texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) WithInputWidth(inputWidth int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("setInputWidth:"), inputWidth)
+	return fid
 }
 
-// WithInputHeight the height, in pixels, of the input motion and depth texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) WithInputHeight(inputHeight int) *FrameInterpolatorDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
-	return x
+// WithInputHeight sets the height, in pixels, of the input motion and depth texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) WithInputHeight(inputHeight int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("setInputHeight:"), inputHeight)
+	return fid
 }
 
-// WithOutputWidth the width, in pixels, of the output color texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) WithOutputWidth(outputWidth int) *FrameInterpolatorDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
-	return x
+// WithOutputWidth sets the width, in pixels, of the output color texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) WithOutputWidth(outputWidth int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("setOutputWidth:"), outputWidth)
+	return fid
 }
 
-// WithOutputHeight the height, in pixels, of the output color texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight int) *FrameInterpolatorDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
-	return x
+// WithOutputHeight sets the height, in pixels, of the output color texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("setOutputHeight:"), outputHeight)
+	return fid
 }
 
-// InputWidth the width, in pixels, of the input motion and depth texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) InputWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputWidth"))
+// InputWidth returns the width, in pixels, of the input motion and depth texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) InputWidth() int {
+	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("inputWidth"))
 	return _r
 }
 
-// SetInputWidth wraps the corresponding Objective-C method.
-func (x *FrameInterpolatorDescriptor) SetInputWidth(inputWidth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
-}
-
-// InputHeight the height, in pixels, of the input motion and depth texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) InputHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputHeight"))
+// InputHeight returns the height, in pixels, of the input motion and depth texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) InputHeight() int {
+	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("inputHeight"))
 	return _r
 }
 
-// SetInputHeight wraps the corresponding Objective-C method.
-func (x *FrameInterpolatorDescriptor) SetInputHeight(inputHeight int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
-}
-
-// OutputWidth the width, in pixels, of the output color texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) OutputWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputWidth"))
+// OutputWidth returns the width, in pixels, of the output color texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) OutputWidth() int {
+	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("outputWidth"))
 	return _r
 }
 
-// SetOutputWidth wraps the corresponding Objective-C method.
-func (x *FrameInterpolatorDescriptor) SetOutputWidth(outputWidth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
-}
-
-// OutputHeight the height, in pixels, of the output color texture for the frame interpolator.
-func (x *FrameInterpolatorDescriptor) OutputHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputHeight"))
+// OutputHeight returns the height, in pixels, of the output color texture for the frame interpolator.
+func (fid *FrameInterpolatorDescriptor) OutputHeight() int {
+	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("outputHeight"))
 	return _r
 }
-
-// SetOutputHeight wraps the corresponding Objective-C method.
-func (x *FrameInterpolatorDescriptor) SetOutputHeight(outputHeight int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
-}
-
-// FrameInterpolatorDescriptorable is the interface implemented by [FrameInterpolatorDescriptor], for mocking and DI.
-type FrameInterpolatorDescriptorable interface {
-	obj.Object
-	WithInputWidth(inputWidth int) *FrameInterpolatorDescriptor
-	WithInputHeight(inputHeight int) *FrameInterpolatorDescriptor
-	WithOutputWidth(outputWidth int) *FrameInterpolatorDescriptor
-	WithOutputHeight(outputHeight int) *FrameInterpolatorDescriptor
-	InputWidth() int
-	SetInputWidth(inputWidth int)
-	InputHeight() int
-	SetInputHeight(inputHeight int)
-	OutputWidth() int
-	SetOutputWidth(outputWidth int)
-	OutputHeight() int
-	SetOutputHeight(outputHeight int)
-}
-
-var _ FrameInterpolatorDescriptorable = (*FrameInterpolatorDescriptor)(nil)

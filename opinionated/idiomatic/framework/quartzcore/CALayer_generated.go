@@ -49,24 +49,24 @@ func layerAdopt(id objc.ID) *Layer {
 }
 
 // Description returns the object's -description text.
-func (x *Layer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Layer) Description() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Layer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (l *Layer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Layer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (l *Layer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Layer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Layer) String() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // NewLayerWithLayer override to copy or initialize custom fields of the specified layer.
@@ -76,1357 +76,894 @@ func NewLayerWithLayer(layer obj.Object) *Layer {
 	return layerAdopt(_id)
 }
 
-// WithBounds the layer’s bounds rectangle. Animatable.
-func (x *Layer) WithBounds(bounds corefoundation.CGRect) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the layer’s bounds rectangle. Animatable.
+func (l *Layer) WithBounds(bounds corefoundation.CGRect) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBounds:"), bounds)
+	return l
 }
 
-// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
-func (x *Layer) WithPosition(position corefoundation.CGPoint) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the layer’s position in its superlayer’s coordinate space. Animatable.
+func (l *Layer) WithPosition(position corefoundation.CGPoint) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setPosition:"), position)
+	return l
 }
 
-// WithZPosition the layer’s position on the z axis. Animatable.
-func (x *Layer) WithZPosition(zPosition float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the layer’s position on the z axis. Animatable.
+func (l *Layer) WithZPosition(zPosition float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setZPosition:"), zPosition)
+	return l
 }
 
-// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
-func (x *Layer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (l *Layer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return l
 }
 
-// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
-func (x *Layer) WithAnchorPointZ(anchorPointZ float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
-	return x
+// WithAnchorPointZ sets the anchor point for the layer’s position along the z axis. Animatable.
+func (l *Layer) WithAnchorPointZ(anchorPointZ float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return l
 }
 
-// WithFrame the layer’s frame rectangle.
-func (x *Layer) WithFrame(frame corefoundation.CGRect) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the layer’s frame rectangle.
+func (l *Layer) WithFrame(frame corefoundation.CGRect) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setFrame:"), frame)
+	return l
 }
 
-// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
-func (x *Layer) WithHidden(hidden bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean indicating whether the layer is displayed. Animatable.
+func (l *Layer) WithHidden(hidden bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setHidden:"), hidden)
+	return l
 }
 
-// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-func (x *Layer) WithDoubleSided(doubleSided bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
-	return x
+// WithDoubleSided sets a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (l *Layer) WithDoubleSided(doubleSided bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return l
 }
 
-// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-func (x *Layer) WithGeometryFlipped(geometryFlipped bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
-	return x
+// WithGeometryFlipped sets a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (l *Layer) WithGeometryFlipped(geometryFlipped bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return l
 }
 
-// WithSublayers an array containing the layer’s sublayers.
-func (x *Layer) WithSublayers(items ...LayerProvider) *Layer {
+// WithSublayers sets an array containing the layer’s sublayers.
+func (l *Layer) WithSublayers(items ...LayerProvider) *Layer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setSublayers:"), _arr)
+	return l
 }
 
-// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
-func (x *Layer) WithMask(mask LayerProvider) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-	return x
+// WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
+func (l *Layer) WithMask(mask LayerProvider) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return l
 }
 
-// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-func (x *Layer) WithMasksToBounds(masksToBounds bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
-	return x
+// WithMasksToBounds sets a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (l *Layer) WithMasksToBounds(masksToBounds bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return l
 }
 
-// WithContents an object that provides the contents of the layer. Animatable.
-func (x *Layer) WithContents(contents obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
-	return x
+// WithContents sets an object that provides the contents of the layer. Animatable.
+func (l *Layer) WithContents(contents obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return l
 }
 
-// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-func (x *Layer) WithContentsRect(contentsRect corefoundation.CGRect) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-	return x
+// WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (l *Layer) WithContentsRect(contentsRect corefoundation.CGRect) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setContentsRect:"), contentsRect)
+	return l
 }
 
-// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-func (x *Layer) WithContentsGravity(contentsGravity obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
-	return x
+// WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (l *Layer) WithContentsGravity(contentsGravity obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return l
 }
 
-// WithContentsScale the scale factor applied to the layer.
-func (x *Layer) WithContentsScale(contentsScale float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
-	return x
+// WithContentsScale sets the scale factor applied to the layer.
+func (l *Layer) WithContentsScale(contentsScale float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setContentsScale:"), contentsScale)
+	return l
 }
 
-// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-func (x *Layer) WithContentsCenter(contentsCenter corefoundation.CGRect) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
-	return x
+// WithContentsCenter sets the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (l *Layer) WithContentsCenter(contentsCenter corefoundation.CGRect) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return l
 }
 
-// WithContentsFormat a hint for the desired storage format of the layer contents.
-func (x *Layer) WithContentsFormat(contentsFormat obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
-	return x
+// WithContentsFormat sets a hint for the desired storage format of the layer contents.
+func (l *Layer) WithContentsFormat(contentsFormat obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return l
 }
 
 // WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
-func (x *Layer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
-	return x
+func (l *Layer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return l
 }
 
 // WithToneMapMode sets the property and returns the receiver so calls can be chained.
-func (x *Layer) WithToneMapMode(toneMapMode obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
-	return x
+func (l *Layer) WithToneMapMode(toneMapMode obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return l
 }
 
 // WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
-func (x *Layer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
-	return x
+func (l *Layer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return l
 }
 
 // WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
-func (x *Layer) WithContentsHeadroom(contentsHeadroom float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
-	return x
+func (l *Layer) WithContentsHeadroom(contentsHeadroom float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return l
 }
 
-// WithMinificationFilter the filter used when reducing the size of the content.
-func (x *Layer) WithMinificationFilter(minificationFilter obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
-	return x
+// WithMinificationFilter sets the filter used when reducing the size of the content.
+func (l *Layer) WithMinificationFilter(minificationFilter obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return l
 }
 
-// WithMagnificationFilter the filter used when increasing the size of the content.
-func (x *Layer) WithMagnificationFilter(magnificationFilter obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
-	return x
+// WithMagnificationFilter sets the filter used when increasing the size of the content.
+func (l *Layer) WithMagnificationFilter(magnificationFilter obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return l
 }
 
-// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
-func (x *Layer) WithMinificationFilterBias(minificationFilterBias float32) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
-	return x
+// WithMinificationFilterBias sets the bias factor used by the minification filter to determine the levels of detail.
+func (l *Layer) WithMinificationFilterBias(minificationFilterBias float32) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return l
 }
 
-// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
-func (x *Layer) WithOpaque(opaque bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value indicating whether the layer contains completely opaque content.
+func (l *Layer) WithOpaque(opaque bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setOpaque:"), opaque)
+	return l
 }
 
-// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-func (x *Layer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
-	return x
+// WithNeedsDisplayOnBoundsChange sets a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (l *Layer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return l
 }
 
-// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-func (x *Layer) WithDrawsAsynchronously(drawsAsynchronously bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
-	return x
+// WithDrawsAsynchronously sets a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (l *Layer) WithDrawsAsynchronously(drawsAsynchronously bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return l
 }
 
-// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
-func (x *Layer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
-	return x
+// WithEdgeAntialiasingMask sets a bitmask defining how the edges of the receiver are rasterized.
+func (l *Layer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return l
 }
 
-// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
-func (x *Layer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
-	return x
+// WithAllowsEdgeAntialiasing sets a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (l *Layer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return l
 }
 
-// WithBackgroundColor the background color of the receiver. Animatable.
-func (x *Layer) WithBackgroundColor(backgroundColor obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the receiver. Animatable.
+func (l *Layer) WithBackgroundColor(backgroundColor obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return l
 }
 
-// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
-func (x *Layer) WithCornerRadius(cornerRadius float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (l *Layer) WithCornerRadius(cornerRadius float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return l
 }
 
 // WithMaskedCorners sets the property and returns the receiver so calls can be chained.
-func (x *Layer) WithMaskedCorners(maskedCorners CornerMask) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
-	return x
+func (l *Layer) WithMaskedCorners(maskedCorners CornerMask) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return l
 }
 
 // WithCornerCurve sets the property and returns the receiver so calls can be chained.
-func (x *Layer) WithCornerCurve(cornerCurve obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
-	return x
+func (l *Layer) WithCornerCurve(cornerCurve obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return l
 }
 
-// WithBorderWidth the width of the layer’s border. Animatable.
-func (x *Layer) WithBorderWidth(borderWidth float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
-	return x
+// WithBorderWidth sets the width of the layer’s border. Animatable.
+func (l *Layer) WithBorderWidth(borderWidth float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return l
 }
 
-// WithBorderColor the color of the layer’s border. Animatable.
-func (x *Layer) WithBorderColor(borderColor obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the color of the layer’s border. Animatable.
+func (l *Layer) WithBorderColor(borderColor obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return l
 }
 
-// WithOpacity the opacity of the receiver. Animatable.
-func (x *Layer) WithOpacity(opacity float32) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
-	return x
+// WithOpacity sets the opacity of the receiver. Animatable.
+func (l *Layer) WithOpacity(opacity float32) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setOpacity:"), opacity)
+	return l
 }
 
-// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-func (x *Layer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
-	return x
+// WithAllowsGroupOpacity sets a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (l *Layer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return l
 }
 
-// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
-func (x *Layer) WithCompositingFilter(compositingFilter obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+// WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (l *Layer) WithCompositingFilter(compositingFilter obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return l
 }
 
-// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-func (x *Layer) WithShouldRasterize(shouldRasterize bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (l *Layer) WithShouldRasterize(shouldRasterize bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return l
 }
 
-// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-func (x *Layer) WithRasterizationScale(rasterizationScale float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
-	return x
+// WithRasterizationScale sets the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (l *Layer) WithRasterizationScale(rasterizationScale float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return l
 }
 
-// WithShadowColor the color of the layer’s shadow. Animatable.
-func (x *Layer) WithShadowColor(shadowColor obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
-	return x
+// WithShadowColor sets the color of the layer’s shadow. Animatable.
+func (l *Layer) WithShadowColor(shadowColor obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return l
 }
 
-// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
-func (x *Layer) WithShadowOpacity(shadowOpacity float32) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
-	return x
+// WithShadowOpacity sets the opacity of the layer’s shadow. Animatable.
+func (l *Layer) WithShadowOpacity(shadowOpacity float32) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return l
 }
 
-// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
-func (x *Layer) WithShadowOffset(shadowOffset corefoundation.CGSize) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
-	return x
+// WithShadowOffset sets the offset (in points) of the layer’s shadow. Animatable.
+func (l *Layer) WithShadowOffset(shadowOffset corefoundation.CGSize) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return l
 }
 
-// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
-func (x *Layer) WithShadowRadius(shadowRadius float64) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
-	return x
+// WithShadowRadius sets the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (l *Layer) WithShadowRadius(shadowRadius float64) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return l
 }
 
-// WithShadowPath the shape of the layer’s shadow. Animatable.
-func (x *Layer) WithShadowPath(shadowPath obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
-	return x
+// WithShadowPath sets the shape of the layer’s shadow. Animatable.
+func (l *Layer) WithShadowPath(shadowPath obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return l
 }
 
-// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
-func (x *Layer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+// WithAutoresizingMask sets a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (l *Layer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return l
 }
 
-// WithActions a dictionary containing layer actions.
-func (x *Layer) WithActions(actions obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
-	return x
+// WithActions sets a dictionary containing layer actions.
+func (l *Layer) WithActions(actions obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return l
 }
 
-// WithName the name of the receiver.
-func (x *Layer) WithName(name string) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (l *Layer) WithName(name string) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setName:"), purego.NSString(name))
+	return l
 }
 
-// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
-func (x *Layer) WithStyle(style obj.Object) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
-	return x
+// WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (l *Layer) WithStyle(style obj.Object) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return l
 }
 
-// WithConstraints the constraints used to position current layer’s sublayers.
-func (x *Layer) WithConstraints(items ...*Constraint) *Layer {
+// WithConstraints sets the constraints used to position current layer’s sublayers.
+func (l *Layer) WithConstraints(items ...*Constraint) *Layer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setConstraints:"), _arr)
+	return l
 }
 
 // PresentationLayer returns a copy of the presentation layer object that represents the state of the layer as it currently appears onscreen.
-func (x *Layer) PresentationLayer() *Layer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentationLayer"))
+func (l *Layer) PresentationLayer() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("presentationLayer"))
 	return LayerFromID(_r)
 }
 
 // ModelLayer returns the model layer object associated with the receiver, if any.
-func (x *Layer) ModelLayer() *Layer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelLayer"))
+func (l *Layer) ModelLayer() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("modelLayer"))
 	return LayerFromID(_r)
 }
 
 // ShouldArchiveValueForKey returns a Boolean indicating whether the value of the specified key should be archived.
-func (x *Layer) ShouldArchiveValueForKey(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
+func (l *Layer) ShouldArchiveValueForKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
 	return _r
 }
 
 // AffineTransform returns an affine version of the layer’s transform.
-func (x *Layer) AffineTransform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("affineTransform"))
+func (l *Layer) AffineTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(l), objc.RegisterName("affineTransform"))
 	return _r
 }
 
 // SetAffineTransform sets the layer’s transform to the specified affine transform.
-func (x *Layer) SetAffineTransform(m corefoundation.CGAffineTransform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffineTransform:"), m)
+func (l *Layer) SetAffineTransform(m corefoundation.CGAffineTransform) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAffineTransform:"), m)
 }
 
-// ContentsAreFlipped returns a Boolean indicating whether the layer content is implicitly flipped when rendered.
-func (x *Layer) ContentsAreFlipped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("contentsAreFlipped"))
+// ContentsAreFlipped reports whether returns a Boolean indicating whether the layer content is implicitly flipped when rendered.
+func (l *Layer) ContentsAreFlipped() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("contentsAreFlipped"))
 	return _r
 }
 
 // RemoveFromSuperlayer detaches the layer from its parent layer.
-func (x *Layer) RemoveFromSuperlayer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromSuperlayer"))
+func (l *Layer) RemoveFromSuperlayer() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("removeFromSuperlayer"))
 }
 
 // AddSublayer appends the layer to the layer’s list of sublayers.
-func (x *Layer) AddSublayer(layer *Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSublayer:"), objref.IDOf(layer))
+func (l *Layer) AddSublayer(layer *Layer) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("addSublayer:"), objref.IDOf(layer))
 }
 
 // InsertSublayerAtIndex inserts the specified layer into the receiver’s list of sublayers at the specified index.
-func (x *Layer) InsertSublayerAtIndex(layer *Layer, idx int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertSublayer:atIndex:"), objref.IDOf(layer), idx)
+func (l *Layer) InsertSublayerAtIndex(layer *Layer, idx int) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("insertSublayer:atIndex:"), objref.IDOf(layer), idx)
 }
 
 // InsertSublayerBelow inserts the specified sublayer below a different sublayer that already belongs to the receiver.
-func (x *Layer) InsertSublayerBelow(layer *Layer, sibling *Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertSublayer:below:"), objref.IDOf(layer), objref.IDOf(sibling))
+func (l *Layer) InsertSublayerBelow(layer *Layer, sibling *Layer) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("insertSublayer:below:"), objref.IDOf(layer), objref.IDOf(sibling))
 }
 
 // InsertSublayerAbove inserts the specified sublayer above a different sublayer that already belongs to the receiver.
-func (x *Layer) InsertSublayerAbove(layer *Layer, sibling *Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertSublayer:above:"), objref.IDOf(layer), objref.IDOf(sibling))
+func (l *Layer) InsertSublayerAbove(layer *Layer, sibling *Layer) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("insertSublayer:above:"), objref.IDOf(layer), objref.IDOf(sibling))
 }
 
 // ReplaceSublayerWith replaces the specified sublayer with a different layer object.
-func (x *Layer) ReplaceSublayerWith(oldLayer *Layer, newLayer *Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceSublayer:with:"), objref.IDOf(oldLayer), objref.IDOf(newLayer))
+func (l *Layer) ReplaceSublayerWith(oldLayer *Layer, newLayer *Layer) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("replaceSublayer:with:"), objref.IDOf(oldLayer), objref.IDOf(newLayer))
 }
 
 // ConvertPointFromLayer converts the point from the specified layer’s coordinate system to the receiver’s coordinate system.
-func (x *Layer) ConvertPointFromLayer(p corefoundation.CGPoint, l *Layer) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:fromLayer:"), p, objref.IDOf(l))
+func (l_ *Layer) ConvertPointFromLayer(p corefoundation.CGPoint, l *Layer) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(l_), objc.RegisterName("convertPoint:fromLayer:"), p, objref.IDOf(l))
 	return _r
 }
 
 // ConvertPointToLayer converts the point from the receiver’s coordinate system to the specified layer’s coordinate system.
-func (x *Layer) ConvertPointToLayer(p corefoundation.CGPoint, l *Layer) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:toLayer:"), p, objref.IDOf(l))
+func (l_ *Layer) ConvertPointToLayer(p corefoundation.CGPoint, l *Layer) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(l_), objc.RegisterName("convertPoint:toLayer:"), p, objref.IDOf(l))
 	return _r
 }
 
 // ConvertRectFromLayer converts the rectangle from the specified layer’s coordinate system to the receiver’s coordinate system.
-func (x *Layer) ConvertRectFromLayer(r corefoundation.CGRect, l *Layer) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRect:fromLayer:"), r, objref.IDOf(l))
+func (l_ *Layer) ConvertRectFromLayer(r corefoundation.CGRect, l *Layer) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(l_), objc.RegisterName("convertRect:fromLayer:"), r, objref.IDOf(l))
 	return _r
 }
 
 // ConvertRectToLayer converts the rectangle from the receiver’s coordinate system to the specified layer’s coordinate system.
-func (x *Layer) ConvertRectToLayer(r corefoundation.CGRect, l *Layer) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRect:toLayer:"), r, objref.IDOf(l))
+func (l_ *Layer) ConvertRectToLayer(r corefoundation.CGRect, l *Layer) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(l_), objc.RegisterName("convertRect:toLayer:"), r, objref.IDOf(l))
 	return _r
 }
 
 // ConvertTimeFromLayer converts the time interval from the specified layer’s time space to the receiver’s time space.
-func (x *Layer) ConvertTimeFromLayer(t float64, l *Layer) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("convertTime:fromLayer:"), t, objref.IDOf(l))
+func (l_ *Layer) ConvertTimeFromLayer(t float64, l *Layer) float64 {
+	_r := objc.Send[float64](objref.IDOf(l_), objc.RegisterName("convertTime:fromLayer:"), t, objref.IDOf(l))
 	return _r
 }
 
 // ConvertTimeToLayer converts the time interval from the receiver’s time space to the specified layer’s time space
-func (x *Layer) ConvertTimeToLayer(t float64, l *Layer) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("convertTime:toLayer:"), t, objref.IDOf(l))
+func (l_ *Layer) ConvertTimeToLayer(t float64, l *Layer) float64 {
+	_r := objc.Send[float64](objref.IDOf(l_), objc.RegisterName("convertTime:toLayer:"), t, objref.IDOf(l))
 	return _r
 }
 
 // HitTest returns the farthest descendant of the receiver in the layer hierarchy (including itself) that contains the specified point.
-func (x *Layer) HitTest(p corefoundation.CGPoint) *Layer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hitTest:"), p)
+func (l *Layer) HitTest(p corefoundation.CGPoint) *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("hitTest:"), p)
 	return LayerFromID(_r)
 }
 
 // ContainsPoint returns whether the receiver contains a specified point.
-func (x *Layer) ContainsPoint(p corefoundation.CGPoint) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:"), p)
+func (l *Layer) ContainsPoint(p corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("containsPoint:"), p)
 	return _r
 }
 
 // Display reloads the content of this layer.
-func (x *Layer) Display() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("display"))
+func (l *Layer) Display() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("display"))
 }
 
 // SetNeedsDisplay marks the layer’s contents as needing to be updated.
-func (x *Layer) SetNeedsDisplay() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay"))
+func (l *Layer) SetNeedsDisplay() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setNeedsDisplay"))
 }
 
 // SetNeedsDisplayInRect marks the region within the specified rectangle as needing to be updated.
-func (x *Layer) SetNeedsDisplayInRect(r corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayInRect:"), r)
+func (l *Layer) SetNeedsDisplayInRect(r corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setNeedsDisplayInRect:"), r)
 }
 
-// NeedsDisplay returns a Boolean indicating whether the layer has been marked as needing an update.
-func (x *Layer) NeedsDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsDisplay"))
+// NeedsDisplay reports whether returns a Boolean indicating whether the layer has been marked as needing an update.
+func (l *Layer) NeedsDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("needsDisplay"))
 	return _r
 }
 
 // DisplayIfNeeded initiates the update process for a layer if it is currently marked as needing an update.
-func (x *Layer) DisplayIfNeeded() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayIfNeeded"))
+func (l *Layer) DisplayIfNeeded() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("displayIfNeeded"))
 }
 
 // DrawInContext draws the layer’s content using the specified graphics context.
-func (x *Layer) DrawInContext(ctx obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInContext:"), objref.IDOf(ctx))
+func (l *Layer) DrawInContext(ctx obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("drawInContext:"), objref.IDOf(ctx))
 }
 
 // RenderInContext renders the layer and its sublayers into the specified context.
-func (x *Layer) RenderInContext(ctx obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderInContext:"), objref.IDOf(ctx))
+func (l *Layer) RenderInContext(ctx obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("renderInContext:"), objref.IDOf(ctx))
 }
 
 // PreferredFrameSize returns the preferred size of the layer in the coordinate space of its superlayer.
-func (x *Layer) PreferredFrameSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredFrameSize"))
+func (l *Layer) PreferredFrameSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(l), objc.RegisterName("preferredFrameSize"))
 	return _r
 }
 
 // SetNeedsLayout invalidates the layer’s layout and marks it as needing an update.
-func (x *Layer) SetNeedsLayout() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout"))
+func (l *Layer) SetNeedsLayout() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setNeedsLayout"))
 }
 
-// NeedsLayout returns a Boolean indicating whether the layer has been marked as needing a layout update.
-func (x *Layer) NeedsLayout() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsLayout"))
+// NeedsLayout reports whether returns a Boolean indicating whether the layer has been marked as needing a layout update.
+func (l *Layer) NeedsLayout() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("needsLayout"))
 	return _r
 }
 
 // LayoutIfNeeded recalculate the receiver’s layout, if required.
-func (x *Layer) LayoutIfNeeded() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutIfNeeded"))
+func (l *Layer) LayoutIfNeeded() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("layoutIfNeeded"))
 }
 
 // LayoutSublayers tells the layer to update its layout.
-func (x *Layer) LayoutSublayers() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutSublayers"))
+func (l *Layer) LayoutSublayers() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("layoutSublayers"))
 }
 
 // ResizeSublayersWithOldSize informs the receiver’s sublayers that the receiver’s size has changed.
-func (x *Layer) ResizeSublayersWithOldSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeSublayersWithOldSize:"), size)
+func (l *Layer) ResizeSublayersWithOldSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("resizeSublayersWithOldSize:"), size)
 }
 
 // ResizeWithOldSuperlayerSize informs the receiver that the size of its superlayer changed.
-func (x *Layer) ResizeWithOldSuperlayerSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithOldSuperlayerSize:"), size)
+func (l *Layer) ResizeWithOldSuperlayerSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("resizeWithOldSuperlayerSize:"), size)
 }
 
 // AddAnimationForKey add the specified animation object to the layer’s render tree.
-func (x *Layer) AddAnimationForKey(anim *Animation, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAnimation:forKey:"), objref.IDOf(anim), purego.NSString(key))
+func (l *Layer) AddAnimationForKey(anim *Animation, key string) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("addAnimation:forKey:"), objref.IDOf(anim), purego.NSString(key))
 }
 
 // RemoveAllAnimations remove all animations attached to the layer.
-func (x *Layer) RemoveAllAnimations() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllAnimations"))
+func (l *Layer) RemoveAllAnimations() {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("removeAllAnimations"))
 }
 
 // RemoveAnimationForKey remove the animation object with the specified key.
-func (x *Layer) RemoveAnimationForKey(key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAnimationForKey:"), purego.NSString(key))
+func (l *Layer) RemoveAnimationForKey(key string) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("removeAnimationForKey:"), purego.NSString(key))
 }
 
 // AnimationKeys returns an array of strings that identify the animations currently attached to the layer.
 //
 // AnimationKeys returns the collection as a Go slice.
-func (x *Layer) AnimationKeys() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animationKeys"))
+func (l *Layer) AnimationKeys() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("animationKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AnimationForKey returns the animation object with the specified identifier.
-func (x *Layer) AnimationForKey(key string) *Animation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animationForKey:"), purego.NSString(key))
+func (l *Layer) AnimationForKey(key string) *Animation {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("animationForKey:"), purego.NSString(key))
 	return AnimationFromID(_r)
 }
 
 // Bounds wraps the corresponding Objective-C method.
-func (x *Layer) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+func (l *Layer) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(l), objc.RegisterName("bounds"))
 	return _r
-}
-
-// SetBounds wraps the corresponding Objective-C method.
-func (x *Layer) SetBounds(bounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 }
 
 // Position wraps the corresponding Objective-C method.
-func (x *Layer) Position() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("position"))
+func (l *Layer) Position() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(l), objc.RegisterName("position"))
 	return _r
-}
-
-// SetPosition wraps the corresponding Objective-C method.
-func (x *Layer) SetPosition(position corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
 }
 
 // ZPosition wraps the corresponding Objective-C method.
-func (x *Layer) ZPosition() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zPosition"))
+func (l *Layer) ZPosition() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("zPosition"))
 	return _r
-}
-
-// SetZPosition wraps the corresponding Objective-C method.
-func (x *Layer) SetZPosition(zPosition float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 }
 
 // AnchorPoint wraps the corresponding Objective-C method.
-func (x *Layer) AnchorPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("anchorPoint"))
+func (l *Layer) AnchorPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(l), objc.RegisterName("anchorPoint"))
 	return _r
-}
-
-// SetAnchorPoint wraps the corresponding Objective-C method.
-func (x *Layer) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
 }
 
 // AnchorPointZ wraps the corresponding Objective-C method.
-func (x *Layer) AnchorPointZ() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("anchorPointZ"))
+func (l *Layer) AnchorPointZ() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("anchorPointZ"))
 	return _r
-}
-
-// SetAnchorPointZ wraps the corresponding Objective-C method.
-func (x *Layer) SetAnchorPointZ(anchorPointZ float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
 }
 
 // Frame wraps the corresponding Objective-C method.
-func (x *Layer) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+func (l *Layer) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(l), objc.RegisterName("frame"))
 	return _r
-}
-
-// SetFrame wraps the corresponding Objective-C method.
-func (x *Layer) SetFrame(frame corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 }
 
 // IsHidden wraps the corresponding Objective-C method.
-func (x *Layer) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+func (l *Layer) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isHidden"))
 	return _r
-}
-
-// SetHidden wraps the corresponding Objective-C method.
-func (x *Layer) SetHidden(hidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
 // IsDoubleSided wraps the corresponding Objective-C method.
-func (x *Layer) IsDoubleSided() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDoubleSided"))
+func (l *Layer) IsDoubleSided() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isDoubleSided"))
 	return _r
-}
-
-// SetDoubleSided wraps the corresponding Objective-C method.
-func (x *Layer) SetDoubleSided(doubleSided bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 }
 
 // IsGeometryFlipped wraps the corresponding Objective-C method.
-func (x *Layer) IsGeometryFlipped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGeometryFlipped"))
+func (l *Layer) IsGeometryFlipped() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isGeometryFlipped"))
 	return _r
 }
 
-// SetGeometryFlipped wraps the corresponding Objective-C method.
-func (x *Layer) SetGeometryFlipped(geometryFlipped bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
-}
-
 // Superlayer wraps the corresponding Objective-C method.
-func (x *Layer) Superlayer() *Layer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superlayer"))
+func (l *Layer) Superlayer() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("superlayer"))
 	return LayerFromID(_r)
 }
 
 // Sublayers wraps the corresponding Objective-C method.
 //
 // Sublayers returns the collection as a Go slice.
-func (x *Layer) Sublayers() []*Layer {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sublayers"))
+func (l *Layer) Sublayers() []*Layer {
+	_arr := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("sublayers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Layer { return LayerFromID(_id) })
 }
 
-// SetSublayers wraps the corresponding Objective-C method.
-func (x *Layer) SetSublayers(sublayers []*Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), purego.SliceToNSArray(sublayers, func(_v *Layer) objc.ID { return objref.IDOf(_v) }))
-}
-
 // Mask wraps the corresponding Objective-C method.
-func (x *Layer) Mask() *Layer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mask"))
+func (l *Layer) Mask() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("mask"))
 	return LayerFromID(_r)
 }
 
-// SetMask wraps the corresponding Objective-C method.
-func (x *Layer) SetMask(mask *Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-}
-
 // MasksToBounds wraps the corresponding Objective-C method.
-func (x *Layer) MasksToBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("masksToBounds"))
+func (l *Layer) MasksToBounds() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("masksToBounds"))
 	return _r
-}
-
-// SetMasksToBounds wraps the corresponding Objective-C method.
-func (x *Layer) SetMasksToBounds(masksToBounds bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
 }
 
 // Contents wraps the corresponding Objective-C method.
-func (x *Layer) Contents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+func (l *Layer) Contents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
-}
-
-// SetContents wraps the corresponding Objective-C method.
-func (x *Layer) SetContents(contents obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 }
 
 // ContentsRect wraps the corresponding Objective-C method.
-func (x *Layer) ContentsRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentsRect"))
+func (l *Layer) ContentsRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(l), objc.RegisterName("contentsRect"))
 	return _r
-}
-
-// SetContentsRect wraps the corresponding Objective-C method.
-func (x *Layer) SetContentsRect(contentsRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
 }
 
 // ContentsGravity wraps the corresponding Objective-C method.
-func (x *Layer) ContentsGravity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentsGravity"))
+func (l *Layer) ContentsGravity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("contentsGravity"))
 	return obj.Wrap(_r)
-}
-
-// SetContentsGravity wraps the corresponding Objective-C method.
-func (x *Layer) SetContentsGravity(contentsGravity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 }
 
 // ContentsScale wraps the corresponding Objective-C method.
-func (x *Layer) ContentsScale() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contentsScale"))
+func (l *Layer) ContentsScale() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("contentsScale"))
 	return _r
-}
-
-// SetContentsScale wraps the corresponding Objective-C method.
-func (x *Layer) SetContentsScale(contentsScale float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
 }
 
 // ContentsCenter wraps the corresponding Objective-C method.
-func (x *Layer) ContentsCenter() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentsCenter"))
+func (l *Layer) ContentsCenter() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(l), objc.RegisterName("contentsCenter"))
 	return _r
-}
-
-// SetContentsCenter wraps the corresponding Objective-C method.
-func (x *Layer) SetContentsCenter(contentsCenter corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
 }
 
 // ContentsFormat wraps the corresponding Objective-C method.
-func (x *Layer) ContentsFormat() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentsFormat"))
+func (l *Layer) ContentsFormat() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("contentsFormat"))
 	return obj.Wrap(_r)
-}
-
-// SetContentsFormat wraps the corresponding Objective-C method.
-func (x *Layer) SetContentsFormat(contentsFormat obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 }
 
 // WantsExtendedDynamicRangeContent wraps the corresponding Objective-C method.
-func (x *Layer) WantsExtendedDynamicRangeContent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsExtendedDynamicRangeContent"))
+func (l *Layer) WantsExtendedDynamicRangeContent() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("wantsExtendedDynamicRangeContent"))
 	return _r
-}
-
-// SetWantsExtendedDynamicRangeContent wraps the corresponding Objective-C method.
-func (x *Layer) SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 }
 
 // ToneMapMode wraps the corresponding Objective-C method.
-func (x *Layer) ToneMapMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toneMapMode"))
+func (l *Layer) ToneMapMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("toneMapMode"))
 	return obj.Wrap(_r)
-}
-
-// SetToneMapMode wraps the corresponding Objective-C method.
-func (x *Layer) SetToneMapMode(toneMapMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 }
 
 // PreferredDynamicRange wraps the corresponding Objective-C method.
-func (x *Layer) PreferredDynamicRange() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredDynamicRange"))
+func (l *Layer) PreferredDynamicRange() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("preferredDynamicRange"))
 	return obj.Wrap(_r)
-}
-
-// SetPreferredDynamicRange wraps the corresponding Objective-C method.
-func (x *Layer) SetPreferredDynamicRange(preferredDynamicRange obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 }
 
 // ContentsHeadroom wraps the corresponding Objective-C method.
-func (x *Layer) ContentsHeadroom() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contentsHeadroom"))
+func (l *Layer) ContentsHeadroom() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("contentsHeadroom"))
 	return _r
-}
-
-// SetContentsHeadroom wraps the corresponding Objective-C method.
-func (x *Layer) SetContentsHeadroom(contentsHeadroom float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 }
 
 // MinificationFilter wraps the corresponding Objective-C method.
-func (x *Layer) MinificationFilter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minificationFilter"))
+func (l *Layer) MinificationFilter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("minificationFilter"))
 	return obj.Wrap(_r)
-}
-
-// SetMinificationFilter wraps the corresponding Objective-C method.
-func (x *Layer) SetMinificationFilter(minificationFilter obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 }
 
 // MagnificationFilter wraps the corresponding Objective-C method.
-func (x *Layer) MagnificationFilter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magnificationFilter"))
+func (l *Layer) MagnificationFilter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("magnificationFilter"))
 	return obj.Wrap(_r)
-}
-
-// SetMagnificationFilter wraps the corresponding Objective-C method.
-func (x *Layer) SetMagnificationFilter(magnificationFilter obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 }
 
 // MinificationFilterBias wraps the corresponding Objective-C method.
-func (x *Layer) MinificationFilterBias() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minificationFilterBias"))
+func (l *Layer) MinificationFilterBias() float32 {
+	_r := objc.Send[float32](objref.IDOf(l), objc.RegisterName("minificationFilterBias"))
 	return _r
-}
-
-// SetMinificationFilterBias wraps the corresponding Objective-C method.
-func (x *Layer) SetMinificationFilterBias(minificationFilterBias float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
 }
 
 // IsOpaque wraps the corresponding Objective-C method.
-func (x *Layer) IsOpaque() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpaque"))
+func (l *Layer) IsOpaque() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isOpaque"))
 	return _r
-}
-
-// SetOpaque wraps the corresponding Objective-C method.
-func (x *Layer) SetOpaque(opaque bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 }
 
 // NeedsDisplayOnBoundsChange wraps the corresponding Objective-C method.
-func (x *Layer) NeedsDisplayOnBoundsChange() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsDisplayOnBoundsChange"))
+func (l *Layer) NeedsDisplayOnBoundsChange() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("needsDisplayOnBoundsChange"))
 	return _r
-}
-
-// SetNeedsDisplayOnBoundsChange wraps the corresponding Objective-C method.
-func (x *Layer) SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
 }
 
 // DrawsAsynchronously wraps the corresponding Objective-C method.
-func (x *Layer) DrawsAsynchronously() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsAsynchronously"))
+func (l *Layer) DrawsAsynchronously() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("drawsAsynchronously"))
 	return _r
-}
-
-// SetDrawsAsynchronously wraps the corresponding Objective-C method.
-func (x *Layer) SetDrawsAsynchronously(drawsAsynchronously bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
 }
 
 // EdgeAntialiasingMask wraps the corresponding Objective-C method.
-func (x *Layer) EdgeAntialiasingMask() EdgeAntialiasingMask {
-	_r := objc.Send[EdgeAntialiasingMask](objref.IDOf(x), objc.RegisterName("edgeAntialiasingMask"))
+func (l *Layer) EdgeAntialiasingMask() EdgeAntialiasingMask {
+	_r := objc.Send[EdgeAntialiasingMask](objref.IDOf(l), objc.RegisterName("edgeAntialiasingMask"))
 	return _r
-}
-
-// SetEdgeAntialiasingMask wraps the corresponding Objective-C method.
-func (x *Layer) SetEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
 }
 
 // AllowsEdgeAntialiasing wraps the corresponding Objective-C method.
-func (x *Layer) AllowsEdgeAntialiasing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEdgeAntialiasing"))
+func (l *Layer) AllowsEdgeAntialiasing() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("allowsEdgeAntialiasing"))
 	return _r
-}
-
-// SetAllowsEdgeAntialiasing wraps the corresponding Objective-C method.
-func (x *Layer) SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *Layer) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (l *Layer) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
-}
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *Layer) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
 // CornerRadius wraps the corresponding Objective-C method.
-func (x *Layer) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+func (l *Layer) CornerRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("cornerRadius"))
 	return _r
-}
-
-// SetCornerRadius wraps the corresponding Objective-C method.
-func (x *Layer) SetCornerRadius(cornerRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }
 
 // MaskedCorners wraps the corresponding Objective-C method.
-func (x *Layer) MaskedCorners() CornerMask {
-	_r := objc.Send[CornerMask](objref.IDOf(x), objc.RegisterName("maskedCorners"))
+func (l *Layer) MaskedCorners() CornerMask {
+	_r := objc.Send[CornerMask](objref.IDOf(l), objc.RegisterName("maskedCorners"))
 	return _r
-}
-
-// SetMaskedCorners wraps the corresponding Objective-C method.
-func (x *Layer) SetMaskedCorners(maskedCorners CornerMask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 }
 
 // CornerCurve wraps the corresponding Objective-C method.
-func (x *Layer) CornerCurve() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cornerCurve"))
+func (l *Layer) CornerCurve() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("cornerCurve"))
 	return obj.Wrap(_r)
-}
-
-// SetCornerCurve wraps the corresponding Objective-C method.
-func (x *Layer) SetCornerCurve(cornerCurve obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 }
 
 // BorderWidth wraps the corresponding Objective-C method.
-func (x *Layer) BorderWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("borderWidth"))
+func (l *Layer) BorderWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("borderWidth"))
 	return _r
-}
-
-// SetBorderWidth wraps the corresponding Objective-C method.
-func (x *Layer) SetBorderWidth(borderWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
 }
 
 // BorderColor wraps the corresponding Objective-C method.
-func (x *Layer) BorderColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
+func (l *Layer) BorderColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("borderColor"))
 	return obj.Wrap(_r)
-}
-
-// SetBorderColor wraps the corresponding Objective-C method.
-func (x *Layer) SetBorderColor(borderColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 }
 
 // Opacity wraps the corresponding Objective-C method.
-func (x *Layer) Opacity() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("opacity"))
+func (l *Layer) Opacity() float32 {
+	_r := objc.Send[float32](objref.IDOf(l), objc.RegisterName("opacity"))
 	return _r
-}
-
-// SetOpacity wraps the corresponding Objective-C method.
-func (x *Layer) SetOpacity(opacity float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 }
 
 // AllowsGroupOpacity wraps the corresponding Objective-C method.
-func (x *Layer) AllowsGroupOpacity() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsGroupOpacity"))
+func (l *Layer) AllowsGroupOpacity() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("allowsGroupOpacity"))
 	return _r
 }
 
-// SetAllowsGroupOpacity wraps the corresponding Objective-C method.
-func (x *Layer) SetAllowsGroupOpacity(allowsGroupOpacity bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
-}
-
 // CompositingFilter wraps the corresponding Objective-C method.
-func (x *Layer) CompositingFilter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositingFilter"))
+func (l *Layer) CompositingFilter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("compositingFilter"))
 	return obj.Wrap(_r)
 }
 
-// SetCompositingFilter wraps the corresponding Objective-C method.
-func (x *Layer) SetCompositingFilter(compositingFilter obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-}
-
 // Filters wraps the corresponding Objective-C method.
-func (x *Layer) Filters() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filters"))
+func (l *Layer) Filters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("filters"))
 	return obj.Wrap(_r)
 }
 
 // SetFilters wraps the corresponding Objective-C method.
-func (x *Layer) SetFilters(filters obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), objref.IDOf(filters))
+func (l *Layer) SetFilters(filters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setFilters:"), objref.IDOf(filters))
 }
 
 // BackgroundFilters wraps the corresponding Objective-C method.
-func (x *Layer) BackgroundFilters() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundFilters"))
+func (l *Layer) BackgroundFilters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("backgroundFilters"))
 	return obj.Wrap(_r)
 }
 
 // SetBackgroundFilters wraps the corresponding Objective-C method.
-func (x *Layer) SetBackgroundFilters(backgroundFilters obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), objref.IDOf(backgroundFilters))
+func (l *Layer) SetBackgroundFilters(backgroundFilters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBackgroundFilters:"), objref.IDOf(backgroundFilters))
 }
 
 // ShouldRasterize wraps the corresponding Objective-C method.
-func (x *Layer) ShouldRasterize() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRasterize"))
+func (l *Layer) ShouldRasterize() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("shouldRasterize"))
 	return _r
-}
-
-// SetShouldRasterize wraps the corresponding Objective-C method.
-func (x *Layer) SetShouldRasterize(shouldRasterize bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 }
 
 // RasterizationScale wraps the corresponding Objective-C method.
-func (x *Layer) RasterizationScale() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rasterizationScale"))
+func (l *Layer) RasterizationScale() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("rasterizationScale"))
 	return _r
-}
-
-// SetRasterizationScale wraps the corresponding Objective-C method.
-func (x *Layer) SetRasterizationScale(rasterizationScale float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
 }
 
 // ShadowColor wraps the corresponding Objective-C method.
-func (x *Layer) ShadowColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadowColor"))
+func (l *Layer) ShadowColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("shadowColor"))
 	return obj.Wrap(_r)
-}
-
-// SetShadowColor wraps the corresponding Objective-C method.
-func (x *Layer) SetShadowColor(shadowColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 }
 
 // ShadowOpacity wraps the corresponding Objective-C method.
-func (x *Layer) ShadowOpacity() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shadowOpacity"))
+func (l *Layer) ShadowOpacity() float32 {
+	_r := objc.Send[float32](objref.IDOf(l), objc.RegisterName("shadowOpacity"))
 	return _r
-}
-
-// SetShadowOpacity wraps the corresponding Objective-C method.
-func (x *Layer) SetShadowOpacity(shadowOpacity float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
 }
 
 // ShadowOffset wraps the corresponding Objective-C method.
-func (x *Layer) ShadowOffset() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("shadowOffset"))
+func (l *Layer) ShadowOffset() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(l), objc.RegisterName("shadowOffset"))
 	return _r
-}
-
-// SetShadowOffset wraps the corresponding Objective-C method.
-func (x *Layer) SetShadowOffset(shadowOffset corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
 }
 
 // ShadowRadius wraps the corresponding Objective-C method.
-func (x *Layer) ShadowRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shadowRadius"))
+func (l *Layer) ShadowRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("shadowRadius"))
 	return _r
-}
-
-// SetShadowRadius wraps the corresponding Objective-C method.
-func (x *Layer) SetShadowRadius(shadowRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
 }
 
 // ShadowPath wraps the corresponding Objective-C method.
-func (x *Layer) ShadowPath() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadowPath"))
+func (l *Layer) ShadowPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("shadowPath"))
 	return obj.Wrap(_r)
-}
-
-// SetShadowPath wraps the corresponding Objective-C method.
-func (x *Layer) SetShadowPath(shadowPath obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 }
 
 // AutoresizingMask wraps the corresponding Objective-C method.
-func (x *Layer) AutoresizingMask() AutoresizingMask {
-	_r := objc.Send[AutoresizingMask](objref.IDOf(x), objc.RegisterName("autoresizingMask"))
+func (l *Layer) AutoresizingMask() AutoresizingMask {
+	_r := objc.Send[AutoresizingMask](objref.IDOf(l), objc.RegisterName("autoresizingMask"))
 	return _r
 }
 
-// SetAutoresizingMask wraps the corresponding Objective-C method.
-func (x *Layer) SetAutoresizingMask(autoresizingMask AutoresizingMask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-}
-
 // Actions wraps the corresponding Objective-C method.
-func (x *Layer) Actions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actions"))
+func (l *Layer) Actions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("actions"))
 	return obj.Wrap(_r)
 }
 
-// SetActions wraps the corresponding Objective-C method.
-func (x *Layer) SetActions(actions obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *Layer) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (l *Layer) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *Layer) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // Style wraps the corresponding Objective-C method.
-func (x *Layer) Style() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
+func (l *Layer) Style() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("style"))
 	return obj.Wrap(_r)
 }
 
-// SetStyle wraps the corresponding Objective-C method.
-func (x *Layer) SetStyle(style obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
-}
-
 // AddConstraint adds the specified constraint to the layer.
-func (x *Layer) AddConstraint(c *Constraint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConstraint:"), objref.IDOf(c))
+func (l *Layer) AddConstraint(c *Constraint) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("addConstraint:"), objref.IDOf(c))
 }
 
 // Constraints wraps the corresponding Objective-C method.
 //
 // Constraints returns the collection as a Go slice.
-func (x *Layer) Constraints() []*Constraint {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraints"))
+func (l *Layer) Constraints() []*Constraint {
+	_arr := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("constraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Constraint { return ConstraintFromID(_id) })
 }
 
-// SetConstraints wraps the corresponding Objective-C method.
-func (x *Layer) SetConstraints(constraints []*Constraint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), purego.SliceToNSArray(constraints, func(_v *Constraint) objc.ID { return objref.IDOf(_v) }))
-}
-
 // ScrollPoint initiates a scroll in the layer’s closest ancestor scroll layer so that the specified point lies at the origin of the scroll layer.
-func (x *Layer) ScrollPoint(p corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollPoint:"), p)
+func (l *Layer) ScrollPoint(p corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scrollPoint:"), p)
 }
 
 // ScrollRectToVisible initiates a scroll in the layer’s closest ancestor scroll layer so that the specified rectangle becomes visible.
-func (x *Layer) ScrollRectToVisible(r corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollRectToVisible:"), r)
+func (l *Layer) ScrollRectToVisible(r corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scrollRectToVisible:"), r)
 }
 
 // VisibleRect wraps the corresponding Objective-C method.
-func (x *Layer) VisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("visibleRect"))
+func (l *Layer) VisibleRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(l), objc.RegisterName("visibleRect"))
 	return _r
 }
-
-// Layerable is the interface implemented by [Layer], for mocking and DI.
-type Layerable interface {
-	obj.Object
-	WithBounds(bounds corefoundation.CGRect) *Layer
-	WithPosition(position corefoundation.CGPoint) *Layer
-	WithZPosition(zPosition float64) *Layer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Layer
-	WithAnchorPointZ(anchorPointZ float64) *Layer
-	WithFrame(frame corefoundation.CGRect) *Layer
-	WithHidden(hidden bool) *Layer
-	WithDoubleSided(doubleSided bool) *Layer
-	WithGeometryFlipped(geometryFlipped bool) *Layer
-	WithSublayers(items ...LayerProvider) *Layer
-	WithMask(mask LayerProvider) *Layer
-	WithMasksToBounds(masksToBounds bool) *Layer
-	WithContents(contents obj.Object) *Layer
-	WithContentsRect(contentsRect corefoundation.CGRect) *Layer
-	WithContentsGravity(contentsGravity obj.Object) *Layer
-	WithContentsScale(contentsScale float64) *Layer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *Layer
-	WithContentsFormat(contentsFormat obj.Object) *Layer
-	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *Layer
-	WithToneMapMode(toneMapMode obj.Object) *Layer
-	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *Layer
-	WithContentsHeadroom(contentsHeadroom float64) *Layer
-	WithMinificationFilter(minificationFilter obj.Object) *Layer
-	WithMagnificationFilter(magnificationFilter obj.Object) *Layer
-	WithMinificationFilterBias(minificationFilterBias float32) *Layer
-	WithOpaque(opaque bool) *Layer
-	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *Layer
-	WithDrawsAsynchronously(drawsAsynchronously bool) *Layer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *Layer
-	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Layer
-	WithBackgroundColor(backgroundColor obj.Object) *Layer
-	WithCornerRadius(cornerRadius float64) *Layer
-	WithMaskedCorners(maskedCorners CornerMask) *Layer
-	WithCornerCurve(cornerCurve obj.Object) *Layer
-	WithBorderWidth(borderWidth float64) *Layer
-	WithBorderColor(borderColor obj.Object) *Layer
-	WithOpacity(opacity float32) *Layer
-	WithAllowsGroupOpacity(allowsGroupOpacity bool) *Layer
-	WithCompositingFilter(compositingFilter obj.Object) *Layer
-	WithShouldRasterize(shouldRasterize bool) *Layer
-	WithRasterizationScale(rasterizationScale float64) *Layer
-	WithShadowColor(shadowColor obj.Object) *Layer
-	WithShadowOpacity(shadowOpacity float32) *Layer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *Layer
-	WithShadowRadius(shadowRadius float64) *Layer
-	WithShadowPath(shadowPath obj.Object) *Layer
-	WithAutoresizingMask(autoresizingMask AutoresizingMask) *Layer
-	WithActions(actions obj.Object) *Layer
-	WithName(name string) *Layer
-	WithStyle(style obj.Object) *Layer
-	WithConstraints(items ...*Constraint) *Layer
-	PresentationLayer() *Layer
-	ModelLayer() *Layer
-	ShouldArchiveValueForKey(key string) bool
-	AffineTransform() corefoundation.CGAffineTransform
-	SetAffineTransform(m corefoundation.CGAffineTransform)
-	ContentsAreFlipped() bool
-	RemoveFromSuperlayer()
-	AddSublayer(layer *Layer)
-	InsertSublayerAtIndex(layer *Layer, idx int)
-	InsertSublayerBelow(layer *Layer, sibling *Layer)
-	InsertSublayerAbove(layer *Layer, sibling *Layer)
-	ReplaceSublayerWith(oldLayer *Layer, newLayer *Layer)
-	ConvertPointFromLayer(p corefoundation.CGPoint, l *Layer) corefoundation.CGPoint
-	ConvertPointToLayer(p corefoundation.CGPoint, l *Layer) corefoundation.CGPoint
-	ConvertRectFromLayer(r corefoundation.CGRect, l *Layer) corefoundation.CGRect
-	ConvertRectToLayer(r corefoundation.CGRect, l *Layer) corefoundation.CGRect
-	ConvertTimeFromLayer(t float64, l *Layer) float64
-	ConvertTimeToLayer(t float64, l *Layer) float64
-	HitTest(p corefoundation.CGPoint) *Layer
-	ContainsPoint(p corefoundation.CGPoint) bool
-	Display()
-	SetNeedsDisplay()
-	SetNeedsDisplayInRect(r corefoundation.CGRect)
-	NeedsDisplay() bool
-	DisplayIfNeeded()
-	DrawInContext(ctx obj.Object)
-	RenderInContext(ctx obj.Object)
-	PreferredFrameSize() corefoundation.CGSize
-	SetNeedsLayout()
-	NeedsLayout() bool
-	LayoutIfNeeded()
-	LayoutSublayers()
-	ResizeSublayersWithOldSize(size corefoundation.CGSize)
-	ResizeWithOldSuperlayerSize(size corefoundation.CGSize)
-	AddAnimationForKey(anim *Animation, key string)
-	RemoveAllAnimations()
-	RemoveAnimationForKey(key string)
-	AnimationKeys() []string
-	AnimationForKey(key string) *Animation
-	Bounds() corefoundation.CGRect
-	SetBounds(bounds corefoundation.CGRect)
-	Position() corefoundation.CGPoint
-	SetPosition(position corefoundation.CGPoint)
-	ZPosition() float64
-	SetZPosition(zPosition float64)
-	AnchorPoint() corefoundation.CGPoint
-	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
-	AnchorPointZ() float64
-	SetAnchorPointZ(anchorPointZ float64)
-	Frame() corefoundation.CGRect
-	SetFrame(frame corefoundation.CGRect)
-	IsHidden() bool
-	SetHidden(hidden bool)
-	IsDoubleSided() bool
-	SetDoubleSided(doubleSided bool)
-	IsGeometryFlipped() bool
-	SetGeometryFlipped(geometryFlipped bool)
-	Superlayer() *Layer
-	Sublayers() []*Layer
-	SetSublayers(sublayers []*Layer)
-	Mask() *Layer
-	SetMask(mask *Layer)
-	MasksToBounds() bool
-	SetMasksToBounds(masksToBounds bool)
-	Contents() obj.Object
-	SetContents(contents obj.Object)
-	ContentsRect() corefoundation.CGRect
-	SetContentsRect(contentsRect corefoundation.CGRect)
-	ContentsGravity() obj.Object
-	SetContentsGravity(contentsGravity obj.Object)
-	ContentsScale() float64
-	SetContentsScale(contentsScale float64)
-	ContentsCenter() corefoundation.CGRect
-	SetContentsCenter(contentsCenter corefoundation.CGRect)
-	ContentsFormat() obj.Object
-	SetContentsFormat(contentsFormat obj.Object)
-	WantsExtendedDynamicRangeContent() bool
-	SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool)
-	ToneMapMode() obj.Object
-	SetToneMapMode(toneMapMode obj.Object)
-	PreferredDynamicRange() obj.Object
-	SetPreferredDynamicRange(preferredDynamicRange obj.Object)
-	ContentsHeadroom() float64
-	SetContentsHeadroom(contentsHeadroom float64)
-	MinificationFilter() obj.Object
-	SetMinificationFilter(minificationFilter obj.Object)
-	MagnificationFilter() obj.Object
-	SetMagnificationFilter(magnificationFilter obj.Object)
-	MinificationFilterBias() float32
-	SetMinificationFilterBias(minificationFilterBias float32)
-	IsOpaque() bool
-	SetOpaque(opaque bool)
-	NeedsDisplayOnBoundsChange() bool
-	SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool)
-	DrawsAsynchronously() bool
-	SetDrawsAsynchronously(drawsAsynchronously bool)
-	EdgeAntialiasingMask() EdgeAntialiasingMask
-	SetEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask)
-	AllowsEdgeAntialiasing() bool
-	SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool)
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-	CornerRadius() float64
-	SetCornerRadius(cornerRadius float64)
-	MaskedCorners() CornerMask
-	SetMaskedCorners(maskedCorners CornerMask)
-	CornerCurve() obj.Object
-	SetCornerCurve(cornerCurve obj.Object)
-	BorderWidth() float64
-	SetBorderWidth(borderWidth float64)
-	BorderColor() obj.Object
-	SetBorderColor(borderColor obj.Object)
-	Opacity() float32
-	SetOpacity(opacity float32)
-	AllowsGroupOpacity() bool
-	SetAllowsGroupOpacity(allowsGroupOpacity bool)
-	CompositingFilter() obj.Object
-	SetCompositingFilter(compositingFilter obj.Object)
-	Filters() obj.Object
-	SetFilters(filters obj.Object)
-	BackgroundFilters() obj.Object
-	SetBackgroundFilters(backgroundFilters obj.Object)
-	ShouldRasterize() bool
-	SetShouldRasterize(shouldRasterize bool)
-	RasterizationScale() float64
-	SetRasterizationScale(rasterizationScale float64)
-	ShadowColor() obj.Object
-	SetShadowColor(shadowColor obj.Object)
-	ShadowOpacity() float32
-	SetShadowOpacity(shadowOpacity float32)
-	ShadowOffset() corefoundation.CGSize
-	SetShadowOffset(shadowOffset corefoundation.CGSize)
-	ShadowRadius() float64
-	SetShadowRadius(shadowRadius float64)
-	ShadowPath() obj.Object
-	SetShadowPath(shadowPath obj.Object)
-	AutoresizingMask() AutoresizingMask
-	SetAutoresizingMask(autoresizingMask AutoresizingMask)
-	Actions() obj.Object
-	SetActions(actions obj.Object)
-	Name() string
-	SetName(name string)
-	Style() obj.Object
-	SetStyle(style obj.Object)
-	AddConstraint(c *Constraint)
-	Constraints() []*Constraint
-	SetConstraints(constraints []*Constraint)
-	ScrollPoint(p corefoundation.CGPoint)
-	ScrollRectToVisible(r corefoundation.CGRect)
-	VisibleRect() corefoundation.CGRect
-}
-
-var _ Layerable = (*Layer)(nil)
 
 // isLayer marks Layer — and, by embedding promotion, its
 // subclasses — as a member of the Layer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Layer) isLayer() {}
+func (l *Layer) isLayer() {}
 
 var _ LayerProvider = (*Layer)(nil)

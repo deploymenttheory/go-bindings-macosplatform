@@ -6,6 +6,8 @@ package appkit
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -13,7 +15,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Workspace is an idiomatic wrapper over the Objective-C class NSWorkspace.
@@ -50,24 +51,24 @@ func workspaceAdopt(id objc.ID) *Workspace {
 }
 
 // Description returns the object's -description text.
-func (x *Workspace) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (w *Workspace) Description() string {
+	return rt.Description(objref.IDOf(w))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Workspace) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (w *Workspace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(w), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Workspace) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (w *Workspace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(w), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Workspace) String() string {
-	return rt.Description(objref.IDOf(x))
+func (w *Workspace) String() string {
+	return rt.Description(objref.IDOf(w))
 }
 
 // NewWorkspace creates a new Workspace.
@@ -77,15 +78,15 @@ func NewWorkspace() *Workspace {
 }
 
 // OpenURL opens the location at the specified URL.
-func (x *Workspace) OpenURL(url string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openURL:"), rt.FileURL(url))
+func (w *Workspace) OpenURL(url string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openURL:"), rt.FileURL(url))
 	return _r
 }
 
 // OpenURLConfiguration opens a URL asynchronously using the provided options.
 //
 // OpenURLConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
+func (w *Workspace) OpenURLConfiguration(ctx context.Context, url string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
 	type _result struct {
 		val *RunningApplication
 		err error
@@ -97,7 +98,7 @@ func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, config
 		_o.val = RunningApplicationFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURL:configuration:completionHandler:"), rt.FileURL(url), objref.IDOf(configuration), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURL:configuration:completionHandler:"), rt.FileURL(url), objref.IDOf(configuration), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -110,7 +111,7 @@ func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, config
 // OpenURLsWithApplicationAtURLConfiguration opens one or more URLs asynchronously in the specified app using the provided options.
 //
 // OpenURLsWithApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls []obj.Object, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
+func (w *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls []obj.Object, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
 	type _result struct {
 		val *RunningApplication
 		err error
@@ -122,7 +123,7 @@ func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Contex
 		_o.val = RunningApplicationFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURLs:withApplicationAtURL:configuration:completionHandler:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURLs:withApplicationAtURL:configuration:completionHandler:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -135,7 +136,7 @@ func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Contex
 // OpenApplicationAtURLConfiguration launches the app at the specified URL and asynchronously reports back on the app’s status.
 //
 // OpenApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
+func (w *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
 	type _result struct {
 		val *RunningApplication
 		err error
@@ -147,7 +148,7 @@ func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, appli
 		_o.val = RunningApplicationFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openApplicationAtURL:configuration:completionHandler:"), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openApplicationAtURL:configuration:completionHandler:"), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -158,76 +159,76 @@ func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, appli
 }
 
 // SelectFileInFileViewerRootedAtPath selects the file at the specified path.
-func (x *Workspace) SelectFileInFileViewerRootedAtPath(fullPath string, rootFullPath string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectFile:inFileViewerRootedAtPath:"), purego.NSString(fullPath), purego.NSString(rootFullPath))
+func (w *Workspace) SelectFileInFileViewerRootedAtPath(fullPath string, rootFullPath string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("selectFile:inFileViewerRootedAtPath:"), purego.NSString(fullPath), purego.NSString(rootFullPath))
 	return _r
 }
 
 // ActivateFileViewerSelectingURLs activates the Finder, and opens one or more windows selecting the specified files.
-func (x *Workspace) ActivateFileViewerSelectingURLs(fileURLs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateFileViewerSelectingURLs:"), purego.SliceToNSArray(fileURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (w *Workspace) ActivateFileViewerSelectingURLs(fileURLs []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("activateFileViewerSelectingURLs:"), purego.SliceToNSArray(fileURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ShowSearchResultsForQueryString displays a Spotlight search results window in Finder for the specified query string.
-func (x *Workspace) ShowSearchResultsForQueryString(queryString string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showSearchResultsForQueryString:"), purego.NSString(queryString))
+func (w *Workspace) ShowSearchResultsForQueryString(queryString string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("showSearchResultsForQueryString:"), purego.NSString(queryString))
 	return _r
 }
 
 // NoteFileSystemChanged informs the workspace object that the file system changed at the specified path.
-func (x *Workspace) NoteFileSystemChanged(path string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteFileSystemChanged:"), purego.NSString(path))
+func (w *Workspace) NoteFileSystemChanged(path string) {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("noteFileSystemChanged:"), purego.NSString(path))
 }
 
 // IsFilePackageAtPath determines whether the specified path is a file package.
-func (x *Workspace) IsFilePackageAtPath(fullPath string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFilePackageAtPath:"), purego.NSString(fullPath))
+func (w *Workspace) IsFilePackageAtPath(fullPath string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isFilePackageAtPath:"), purego.NSString(fullPath))
 	return _r
 }
 
 // IconForFile returns an image containing the icon for the specified file.
-func (x *Workspace) IconForFile(fullPath string) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForFile:"), purego.NSString(fullPath))
+func (w *Workspace) IconForFile(fullPath string) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForFile:"), purego.NSString(fullPath))
 	return ImageFromID(_r)
 }
 
 // IconForFiles returns an image containing the icon for the specified files.
-func (x *Workspace) IconForFiles(fullPaths []string) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForFiles:"), purego.SliceToNSArray(fullPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (w *Workspace) IconForFiles(fullPaths []string) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForFiles:"), purego.SliceToNSArray(fullPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return ImageFromID(_r)
 }
 
 // IconForContentType returns an image containing the icon for the specified content type.
-func (x *Workspace) IconForContentType(contentType obj.Object) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForContentType:"), objref.IDOf(contentType))
+func (w *Workspace) IconForContentType(contentType obj.Object) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForContentType:"), objref.IDOf(contentType))
 	return ImageFromID(_r)
 }
 
 // SetIconForFileOptions sets the icon for the file or directory at the specified path.
-func (x *Workspace) SetIconForFileOptions(image *Image, fullPath string, options WorkspaceIconCreationOptions) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setIcon:forFile:options:"), objref.IDOf(image), purego.NSString(fullPath), options)
+func (w *Workspace) SetIconForFileOptions(image *Image, fullPath string, options WorkspaceIconCreationOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("setIcon:forFile:options:"), objref.IDOf(image), purego.NSString(fullPath), options)
 	return _r
 }
 
 // GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType returns information about the file system at the specified path.
-func (x *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, description string, fileSystemType string) (ok bool, removableFlag bool, writableFlag bool, unmountableFlag bool) {
+func (w *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, description string, fileSystemType string) (ok bool, removableFlag bool, writableFlag bool, unmountableFlag bool) {
 	var _out0 bool
 	var _out1 bool
 	var _out2 bool
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getFileSystemInfoForPath:isRemovable:isWritable:isUnmountable:description:type:"), purego.NSString(fullPath), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), purego.NSString(description), purego.NSString(fileSystemType))
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("getFileSystemInfoForPath:isRemovable:isWritable:isUnmountable:description:type:"), purego.NSString(fullPath), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), purego.NSString(description), purego.NSString(fileSystemType))
 	return _r, _out0, _out1, _out2
 }
 
 // UnmountAndEjectDeviceAtPath unmounts and ejects the device at the specified path.
-func (x *Workspace) UnmountAndEjectDeviceAtPath(path string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unmountAndEjectDeviceAtPath:"), purego.NSString(path))
+func (w *Workspace) UnmountAndEjectDeviceAtPath(path string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("unmountAndEjectDeviceAtPath:"), purego.NSString(path))
 	return _r
 }
 
 // UnmountAndEjectDeviceAtURL attempts to eject the volume mounted at the given path.
-func (x *Workspace) UnmountAndEjectDeviceAtURL(url string) error {
+func (w *Workspace) UnmountAndEjectDeviceAtURL(url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("unmountAndEjectDeviceAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(w), objc.RegisterName("unmountAndEjectDeviceAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -235,51 +236,51 @@ func (x *Workspace) UnmountAndEjectDeviceAtURL(url string) error {
 }
 
 // ExtendPowerOffBy requests the system wait for the specified amount of time before turning off the power or logging out the user.
-func (x *Workspace) ExtendPowerOffBy(requested int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extendPowerOffBy:"), requested)
+func (w *Workspace) ExtendPowerOffBy(requested int) int {
+	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("extendPowerOffBy:"), requested)
 	return _r
 }
 
 // HideOtherApplications hides all applications other than the sender.
-func (x *Workspace) HideOtherApplications() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideOtherApplications"))
+func (w *Workspace) HideOtherApplications() {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("hideOtherApplications"))
 }
 
 // URLForApplicationWithBundleIdentifier returns the URL to the default app with the specified bundle identifier.
-func (x *Workspace) URLForApplicationWithBundleIdentifier(bundleIdentifier string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+func (w *Workspace) URLForApplicationWithBundleIdentifier(bundleIdentifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLForApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
 	return obj.Wrap(_r)
 }
 
 // URLsForApplicationsWithBundleIdentifier returns an array of URLs to all available applications that can open the specified bundle identifier.
-func (x *Workspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForApplicationsWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+func (w *Workspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLsForApplicationsWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // URLForApplicationToOpenURL returns the URL to the default app to open the specified URL.
-func (x *Workspace) URLForApplicationToOpenURL(url string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForApplicationToOpenURL:"), rt.FileURL(url))
+func (w *Workspace) URLForApplicationToOpenURL(url string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLForApplicationToOpenURL:"), rt.FileURL(url))
 	return obj.Wrap(_r)
 }
 
 // URLsForApplicationsToOpenURL returns an array of URLs to all available applications that can open the URL.
-func (x *Workspace) URLsForApplicationsToOpenURL(url string) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForApplicationsToOpenURL:"), rt.FileURL(url))
+func (w *Workspace) URLsForApplicationsToOpenURL(url string) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLsForApplicationsToOpenURL:"), rt.FileURL(url))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL sets the default app to use when opening files of a specific content type defined by a file URL.
 //
 // SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx context.Context, applicationURL string, url string) error {
+func (w *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx context.Context, applicationURL string, url string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenContentTypeOfFileAtURL:completionHandler:"), rt.FileURL(applicationURL), rt.FileURL(url), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setDefaultApplicationAtURL:toOpenContentTypeOfFileAtURL:completionHandler:"), rt.FileURL(applicationURL), rt.FileURL(url), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -291,14 +292,14 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx c
 // SetDefaultApplicationAtURLToOpenURLsWithScheme sets the default app to use when opening files of a specific scheme.
 //
 // SetDefaultApplicationAtURLToOpenURLsWithScheme blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.Context, applicationURL string, urlScheme string) error {
+func (w *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.Context, applicationURL string, urlScheme string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:"), rt.FileURL(applicationURL), purego.NSString(urlScheme), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:"), rt.FileURL(applicationURL), purego.NSString(urlScheme), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -310,14 +311,14 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.C
 // SetDefaultApplicationAtURLToOpenFileAtURL sets the default app to use when opening a specific file.
 //
 // SetDefaultApplicationAtURLToOpenFileAtURL blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Context, applicationURL string, url string) error {
+func (w *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Context, applicationURL string, url string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenFileAtURL:completionHandler:"), rt.FileURL(applicationURL), rt.FileURL(url), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setDefaultApplicationAtURL:toOpenFileAtURL:completionHandler:"), rt.FileURL(applicationURL), rt.FileURL(url), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -327,28 +328,28 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Contex
 }
 
 // URLForApplicationToOpenContentType returns the URL to the default app to open the specified content type.
-func (x *Workspace) URLForApplicationToOpenContentType(contentType obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForApplicationToOpenContentType:"), objref.IDOf(contentType))
+func (w *Workspace) URLForApplicationToOpenContentType(contentType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLForApplicationToOpenContentType:"), objref.IDOf(contentType))
 	return obj.Wrap(_r)
 }
 
 // URLsForApplicationsToOpenContentType returns an array of URLs to all available applications that can open the specified content type.
-func (x *Workspace) URLsForApplicationsToOpenContentType(contentType obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForApplicationsToOpenContentType:"), objref.IDOf(contentType))
+func (w *Workspace) URLsForApplicationsToOpenContentType(contentType obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLsForApplicationsToOpenContentType:"), objref.IDOf(contentType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetDefaultApplicationAtURLToOpenContentType sets the default app to use when opening files of a specific content type.
 //
 // SetDefaultApplicationAtURLToOpenContentType blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType obj.Object) error {
+func (w *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenContentType:completionHandler:"), rt.FileURL(applicationURL), objref.IDOf(contentType), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setDefaultApplicationAtURL:toOpenContentType:completionHandler:"), rt.FileURL(applicationURL), objref.IDOf(contentType), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -358,43 +359,43 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Cont
 }
 
 // NotificationCenter wraps the corresponding Objective-C method.
-func (x *Workspace) NotificationCenter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notificationCenter"))
+func (w *Workspace) NotificationCenter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("notificationCenter"))
 	return obj.Wrap(_r)
 }
 
 // FileLabels wraps the corresponding Objective-C method.
 //
 // FileLabels returns the collection as a Go slice.
-func (x *Workspace) FileLabels() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileLabels"))
+func (w *Workspace) FileLabels() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fileLabels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // FileLabelColors wraps the corresponding Objective-C method.
 //
 // FileLabelColors returns the collection as a Go slice.
-func (x *Workspace) FileLabelColors() []*Color {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileLabelColors"))
+func (w *Workspace) FileLabelColors() []*Color {
+	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fileLabelColors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
 }
 
 // FrontmostApplication wraps the corresponding Objective-C method.
-func (x *Workspace) FrontmostApplication() *RunningApplication {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frontmostApplication"))
+func (w *Workspace) FrontmostApplication() *RunningApplication {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("frontmostApplication"))
 	return RunningApplicationFromID(_r)
 }
 
 // MenuBarOwningApplication wraps the corresponding Objective-C method.
-func (x *Workspace) MenuBarOwningApplication() *RunningApplication {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuBarOwningApplication"))
+func (w *Workspace) MenuBarOwningApplication() *RunningApplication {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("menuBarOwningApplication"))
 	return RunningApplicationFromID(_r)
 }
 
 // SetDesktopImageURLForScreenOptions sets the desktop image for the given screen to the image at the specified URL.
-func (x *Workspace) SetDesktopImageURLForScreenOptions(url string, screen *Screen, options obj.Object) error {
+func (w *Workspace) SetDesktopImageURLForScreenOptions(url string, screen *Screen, options obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setDesktopImageURL:forScreen:options:error:"), rt.FileURL(url), objref.IDOf(screen), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(w), objc.RegisterName("setDesktopImageURL:forScreen:options:error:"), rt.FileURL(url), objref.IDOf(screen), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -402,21 +403,21 @@ func (x *Workspace) SetDesktopImageURLForScreenOptions(url string, screen *Scree
 }
 
 // DesktopImageURLForScreen returns the URL for the desktop image for the given screen.
-func (x *Workspace) DesktopImageURLForScreen(screen *Screen) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desktopImageURLForScreen:"), objref.IDOf(screen))
+func (w *Workspace) DesktopImageURLForScreen(screen *Screen) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("desktopImageURLForScreen:"), objref.IDOf(screen))
 	return obj.Wrap(_r)
 }
 
 // DesktopImageOptionsForScreen returns the desktop image options for the given screen.
-func (x *Workspace) DesktopImageOptionsForScreen(screen *Screen) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desktopImageOptionsForScreen:"), objref.IDOf(screen))
+func (w *Workspace) DesktopImageOptionsForScreen(screen *Screen) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("desktopImageOptionsForScreen:"), objref.IDOf(screen))
 	return obj.Wrap(_r)
 }
 
 // RequestAuthorizationOfType requests authorization to perform a privileged file operation.
 //
 // RequestAuthorizationOfType blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ WorkspaceAuthorizationType) (result *WorkspaceAuthorization, err error) {
+func (w *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ WorkspaceAuthorizationType) (result *WorkspaceAuthorization, err error) {
 	type _result struct {
 		val *WorkspaceAuthorization
 		err error
@@ -428,7 +429,7 @@ func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ Worksp
 		_o.val = WorkspaceAuthorizationFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestAuthorizationOfType:completionHandler:"), type_, _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("requestAuthorizationOfType:completionHandler:"), type_, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -439,33 +440,33 @@ func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ Worksp
 }
 
 // OpenFile wraps the corresponding Objective-C method.
-func (x *Workspace) OpenFile(fullPath string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:"), purego.NSString(fullPath))
+func (w *Workspace) OpenFile(fullPath string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:"), purego.NSString(fullPath))
 	return _r
 }
 
 // OpenFileWithApplication wraps the corresponding Objective-C method.
-func (x *Workspace) OpenFileWithApplication(fullPath string, appName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:withApplication:"), purego.NSString(fullPath), purego.NSString(appName))
+func (w *Workspace) OpenFileWithApplication(fullPath string, appName string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:withApplication:"), purego.NSString(fullPath), purego.NSString(appName))
 	return _r
 }
 
 // OpenFileWithApplicationAndDeactivate wraps the corresponding Objective-C method.
-func (x *Workspace) OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:withApplication:andDeactivate:"), purego.NSString(fullPath), purego.NSString(appName), flag)
+func (w *Workspace) OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:withApplication:andDeactivate:"), purego.NSString(fullPath), purego.NSString(appName), flag)
 	return _r
 }
 
 // LaunchApplication wraps the corresponding Objective-C method.
-func (x *Workspace) LaunchApplication(appName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("launchApplication:"), purego.NSString(appName))
+func (w *Workspace) LaunchApplication(appName string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("launchApplication:"), purego.NSString(appName))
 	return _r
 }
 
 // LaunchApplicationAtURLOptionsConfigurationError wraps the corresponding Objective-C method.
-func (x *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+func (w *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchApplicationAtURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("launchApplicationAtURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -473,9 +474,9 @@ func (x *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, 
 }
 
 // OpenURLOptionsConfigurationError wraps the corresponding Objective-C method.
-func (x *Workspace) OpenURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+func (w *Workspace) OpenURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -483,9 +484,9 @@ func (x *Workspace) OpenURLOptionsConfigurationError(url string, options Workspa
 }
 
 // OpenURLsWithApplicationAtURLOptionsConfigurationError wraps the corresponding Objective-C method.
-func (x *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls []obj.Object, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+func (w *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls []obj.Object, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -493,14 +494,14 @@ func (x *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls [
 }
 
 // LaunchApplicationShowIconAutolaunch wraps the corresponding Objective-C method.
-func (x *Workspace) LaunchApplicationShowIconAutolaunch(appName string, showIcon bool, autolaunch bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("launchApplication:showIcon:autolaunch:"), purego.NSString(appName), showIcon, autolaunch)
+func (w *Workspace) LaunchApplicationShowIconAutolaunch(appName string, showIcon bool, autolaunch bool) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("launchApplication:showIcon:autolaunch:"), purego.NSString(appName), showIcon, autolaunch)
 	return _r
 }
 
 // FullPathForApplication wraps the corresponding Objective-C method.
-func (x *Workspace) FullPathForApplication(appName string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullPathForApplication:"), purego.NSString(appName))
+func (w *Workspace) FullPathForApplication(appName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fullPathForApplication:"), purego.NSString(appName))
 	if _r == 0 {
 		return ""
 	}
@@ -508,8 +509,8 @@ func (x *Workspace) FullPathForApplication(appName string) string {
 }
 
 // AbsolutePathForAppBundleWithIdentifier wraps the corresponding Objective-C method.
-func (x *Workspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absolutePathForAppBundleWithIdentifier:"), purego.NSString(bundleIdentifier))
+func (w *Workspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("absolutePathForAppBundleWithIdentifier:"), purego.NSString(bundleIdentifier))
 	if _r == 0 {
 		return ""
 	}
@@ -517,119 +518,119 @@ func (x *Workspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier stri
 }
 
 // LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier wraps the corresponding Objective-C method.
-func (x *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifier obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("launchAppWithBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:"), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), objref.IDOf(identifier))
+func (w *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifier obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("launchAppWithBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:"), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), objref.IDOf(identifier))
 	return _r
 }
 
 // OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers wraps the corresponding Objective-C method.
-func (x *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []obj.Object, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openURLs:withAppBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifiers:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (w *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []obj.Object, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openURLs:withAppBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifiers:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // OpenTempFile wraps the corresponding Objective-C method.
-func (x *Workspace) OpenTempFile(fullPath string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openTempFile:"), purego.NSString(fullPath))
+func (w *Workspace) OpenTempFile(fullPath string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openTempFile:"), purego.NSString(fullPath))
 	return _r
 }
 
 // FindApplications wraps the corresponding Objective-C method.
-func (x *Workspace) FindApplications() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findApplications"))
+func (w *Workspace) FindApplications() {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("findApplications"))
 }
 
 // NoteUserDefaultsChanged wraps the corresponding Objective-C method.
-func (x *Workspace) NoteUserDefaultsChanged() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteUserDefaultsChanged"))
+func (w *Workspace) NoteUserDefaultsChanged() {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("noteUserDefaultsChanged"))
 }
 
 // SlideImageFromTo wraps the corresponding Objective-C method.
-func (x *Workspace) SlideImageFromTo(image *Image, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slideImage:from:to:"), objref.IDOf(image), fromPoint, toPoint)
+func (w *Workspace) SlideImageFromTo(image *Image, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("slideImage:from:to:"), objref.IDOf(image), fromPoint, toPoint)
 }
 
 // CheckForRemovableMedia wraps the corresponding Objective-C method.
-func (x *Workspace) CheckForRemovableMedia() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkForRemovableMedia"))
+func (w *Workspace) CheckForRemovableMedia() {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("checkForRemovableMedia"))
 }
 
 // NoteFileSystemChanged2 wraps the corresponding Objective-C method.
-func (x *Workspace) NoteFileSystemChanged2() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteFileSystemChanged"))
+func (w *Workspace) NoteFileSystemChanged2() {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("noteFileSystemChanged"))
 }
 
 // FileSystemChanged wraps the corresponding Objective-C method.
-func (x *Workspace) FileSystemChanged() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fileSystemChanged"))
+func (w *Workspace) FileSystemChanged() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("fileSystemChanged"))
 	return _r
 }
 
 // UserDefaultsChanged wraps the corresponding Objective-C method.
-func (x *Workspace) UserDefaultsChanged() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("userDefaultsChanged"))
+func (w *Workspace) UserDefaultsChanged() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("userDefaultsChanged"))
 	return _r
 }
 
 // MountNewRemovableMedia wraps the corresponding Objective-C method.
-func (x *Workspace) MountNewRemovableMedia() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mountNewRemovableMedia"))
+func (w *Workspace) MountNewRemovableMedia() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountNewRemovableMedia"))
 	return obj.Wrap(_r)
 }
 
 // ActiveApplication wraps the corresponding Objective-C method.
-func (x *Workspace) ActiveApplication() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeApplication"))
+func (w *Workspace) ActiveApplication() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("activeApplication"))
 	return obj.Wrap(_r)
 }
 
 // MountedLocalVolumePaths wraps the corresponding Objective-C method.
-func (x *Workspace) MountedLocalVolumePaths() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mountedLocalVolumePaths"))
+func (w *Workspace) MountedLocalVolumePaths() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountedLocalVolumePaths"))
 	return obj.Wrap(_r)
 }
 
 // MountedRemovableMedia wraps the corresponding Objective-C method.
-func (x *Workspace) MountedRemovableMedia() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mountedRemovableMedia"))
+func (w *Workspace) MountedRemovableMedia() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountedRemovableMedia"))
 	return obj.Wrap(_r)
 }
 
 // LaunchedApplications wraps the corresponding Objective-C method.
-func (x *Workspace) LaunchedApplications() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchedApplications"))
+func (w *Workspace) LaunchedApplications() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("launchedApplications"))
 	return obj.Wrap(_r)
 }
 
 // OpenFileFromImageAtInView wraps the corresponding Objective-C method.
-func (x *Workspace) OpenFileFromImageAtInView(fullPath string, image *Image, point corefoundation.CGPoint, view *View) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:fromImage:at:inView:"), purego.NSString(fullPath), objref.IDOf(image), point, objref.IDOf(view))
+func (w *Workspace) OpenFileFromImageAtInView(fullPath string, image *Image, point corefoundation.CGPoint, view *View) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:fromImage:at:inView:"), purego.NSString(fullPath), objref.IDOf(image), point, objref.IDOf(view))
 	return _r
 }
 
 // PerformFileOperationSourceDestinationFilesTag wraps the corresponding Objective-C method.
-func (x *Workspace) PerformFileOperationSourceDestinationFilesTag(operation obj.Object, source string, destination string, files obj.Object) (ok bool, tag int64) {
+func (w *Workspace) PerformFileOperationSourceDestinationFilesTag(operation obj.Object, source string, destination string, files obj.Object) (ok bool, tag int64) {
 	var _out0 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performFileOperation:source:destination:files:tag:"), objref.IDOf(operation), purego.NSString(source), purego.NSString(destination), objref.IDOf(files), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("performFileOperation:source:destination:files:tag:"), objref.IDOf(operation), purego.NSString(source), purego.NSString(destination), objref.IDOf(files), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // GetInfoForFileApplicationType retrieves information about the specified file.
-func (x *Workspace) GetInfoForFileApplicationType(fullPath string, appName string, type_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getInfoForFile:application:type:"), purego.NSString(fullPath), purego.NSString(appName), purego.NSString(type_))
+func (w *Workspace) GetInfoForFileApplicationType(fullPath string, appName string, type_ string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("getInfoForFile:application:type:"), purego.NSString(fullPath), purego.NSString(appName), purego.NSString(type_))
 	return _r
 }
 
 // IconForFileType wraps the corresponding Objective-C method.
-func (x *Workspace) IconForFileType(fileType string) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForFileType:"), purego.NSString(fileType))
+func (w *Workspace) IconForFileType(fileType string) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForFileType:"), purego.NSString(fileType))
 	return ImageFromID(_r)
 }
 
 // TypeOfFileError returns the uniform type identifier of the specified file, if it can be determined.
-func (x *Workspace) TypeOfFileError(absoluteFilePath string) (result string, err error) {
+func (w *Workspace) TypeOfFileError(absoluteFilePath string) (result string, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeOfFile:error:"), purego.NSString(absoluteFilePath), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("typeOfFile:error:"), purego.NSString(absoluteFilePath), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -640,8 +641,8 @@ func (x *Workspace) TypeOfFileError(absoluteFilePath string) (result string, err
 }
 
 // LocalizedDescriptionForType returns the localized description for the specified Uniform Type Identifier (UTI).
-func (x *Workspace) LocalizedDescriptionForType(typeName string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescriptionForType:"), purego.NSString(typeName))
+func (w *Workspace) LocalizedDescriptionForType(typeName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("localizedDescriptionForType:"), purego.NSString(typeName))
 	if _r == 0 {
 		return ""
 	}
@@ -649,8 +650,8 @@ func (x *Workspace) LocalizedDescriptionForType(typeName string) string {
 }
 
 // PreferredFilenameExtensionForType returns the preferred filename extension for the specified Uniform Type Identifier (UTI).
-func (x *Workspace) PreferredFilenameExtensionForType(typeName string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredFilenameExtensionForType:"), purego.NSString(typeName))
+func (w *Workspace) PreferredFilenameExtensionForType(typeName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("preferredFilenameExtensionForType:"), purego.NSString(typeName))
 	if _r == 0 {
 		return ""
 	}
@@ -658,149 +659,63 @@ func (x *Workspace) PreferredFilenameExtensionForType(typeName string) string {
 }
 
 // FilenameExtensionIsValidForType returns whether the specified filename extension is appropriate for the Uniform Type Identifier (UTI).
-func (x *Workspace) FilenameExtensionIsValidForType(filenameExtension string, typeName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("filenameExtension:isValidForType:"), purego.NSString(filenameExtension), purego.NSString(typeName))
+func (w *Workspace) FilenameExtensionIsValidForType(filenameExtension string, typeName string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("filenameExtension:isValidForType:"), purego.NSString(filenameExtension), purego.NSString(typeName))
 	return _r
 }
 
 // TypeConformsToType returns a Boolean indicating that the first Uniform Type Identifier (UTI) conforms to the second UTI.
-func (x *Workspace) TypeConformsToType(firstTypeName string, secondTypeName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("type:conformsToType:"), purego.NSString(firstTypeName), purego.NSString(secondTypeName))
+func (w *Workspace) TypeConformsToType(firstTypeName string, secondTypeName string) bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("type:conformsToType:"), purego.NSString(firstTypeName), purego.NSString(secondTypeName))
 	return _r
 }
 
 // AccessibilityDisplayShouldIncreaseContrast wraps the corresponding Objective-C method.
-func (x *Workspace) AccessibilityDisplayShouldIncreaseContrast() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldIncreaseContrast"))
+func (w *Workspace) AccessibilityDisplayShouldIncreaseContrast() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldIncreaseContrast"))
 	return _r
 }
 
 // AccessibilityDisplayShouldDifferentiateWithoutColor wraps the corresponding Objective-C method.
-func (x *Workspace) AccessibilityDisplayShouldDifferentiateWithoutColor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldDifferentiateWithoutColor"))
+func (w *Workspace) AccessibilityDisplayShouldDifferentiateWithoutColor() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldDifferentiateWithoutColor"))
 	return _r
 }
 
 // AccessibilityDisplayShouldReduceTransparency wraps the corresponding Objective-C method.
-func (x *Workspace) AccessibilityDisplayShouldReduceTransparency() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldReduceTransparency"))
+func (w *Workspace) AccessibilityDisplayShouldReduceTransparency() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldReduceTransparency"))
 	return _r
 }
 
 // AccessibilityDisplayShouldReduceMotion wraps the corresponding Objective-C method.
-func (x *Workspace) AccessibilityDisplayShouldReduceMotion() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldReduceMotion"))
+func (w *Workspace) AccessibilityDisplayShouldReduceMotion() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldReduceMotion"))
 	return _r
 }
 
 // AccessibilityDisplayShouldInvertColors wraps the corresponding Objective-C method.
-func (x *Workspace) AccessibilityDisplayShouldInvertColors() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldInvertColors"))
+func (w *Workspace) AccessibilityDisplayShouldInvertColors() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldInvertColors"))
 	return _r
 }
 
 // IsVoiceOverEnabled wraps the corresponding Objective-C method.
-func (x *Workspace) IsVoiceOverEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceOverEnabled"))
+func (w *Workspace) IsVoiceOverEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isVoiceOverEnabled"))
 	return _r
 }
 
 // IsSwitchControlEnabled wraps the corresponding Objective-C method.
-func (x *Workspace) IsSwitchControlEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSwitchControlEnabled"))
+func (w *Workspace) IsSwitchControlEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isSwitchControlEnabled"))
 	return _r
 }
 
 // RunningApplications wraps the corresponding Objective-C method.
 //
 // RunningApplications returns the collection as a Go slice.
-func (x *Workspace) RunningApplications() []*RunningApplication {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runningApplications"))
+func (w *Workspace) RunningApplications() []*RunningApplication {
+	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("runningApplications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }
-
-// Workspaceable is the interface implemented by [Workspace], for mocking and DI.
-type Workspaceable interface {
-	obj.Object
-	OpenURL(url string) bool
-	OpenURLConfiguration(ctx context.Context, url string, configuration *WorkspaceOpenConfiguration) (*RunningApplication, error)
-	OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls []obj.Object, applicationURL string, configuration *WorkspaceOpenConfiguration) (*RunningApplication, error)
-	OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *WorkspaceOpenConfiguration) (*RunningApplication, error)
-	SelectFileInFileViewerRootedAtPath(fullPath string, rootFullPath string) bool
-	ActivateFileViewerSelectingURLs(fileURLs []obj.Object)
-	ShowSearchResultsForQueryString(queryString string) bool
-	NoteFileSystemChanged(path string)
-	IsFilePackageAtPath(fullPath string) bool
-	IconForFile(fullPath string) *Image
-	IconForFiles(fullPaths []string) *Image
-	IconForContentType(contentType obj.Object) *Image
-	SetIconForFileOptions(image *Image, fullPath string, options WorkspaceIconCreationOptions) bool
-	GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, description string, fileSystemType string) (ok bool, removableFlag bool, writableFlag bool, unmountableFlag bool)
-	UnmountAndEjectDeviceAtPath(path string) bool
-	UnmountAndEjectDeviceAtURL(url string) error
-	ExtendPowerOffBy(requested int) int
-	HideOtherApplications()
-	URLForApplicationWithBundleIdentifier(bundleIdentifier string) obj.Object
-	URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) []obj.Object
-	URLForApplicationToOpenURL(url string) obj.Object
-	URLsForApplicationsToOpenURL(url string) []obj.Object
-	SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx context.Context, applicationURL string, url string) error
-	SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.Context, applicationURL string, urlScheme string) error
-	SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Context, applicationURL string, url string) error
-	URLForApplicationToOpenContentType(contentType obj.Object) obj.Object
-	URLsForApplicationsToOpenContentType(contentType obj.Object) []obj.Object
-	SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType obj.Object) error
-	NotificationCenter() obj.Object
-	FileLabels() []string
-	FileLabelColors() []*Color
-	FrontmostApplication() *RunningApplication
-	MenuBarOwningApplication() *RunningApplication
-	SetDesktopImageURLForScreenOptions(url string, screen *Screen, options obj.Object) error
-	DesktopImageURLForScreen(screen *Screen) obj.Object
-	DesktopImageOptionsForScreen(screen *Screen) obj.Object
-	RequestAuthorizationOfType(ctx context.Context, type_ WorkspaceAuthorizationType) (*WorkspaceAuthorization, error)
-	OpenFile(fullPath string) bool
-	OpenFileWithApplication(fullPath string, appName string) bool
-	OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool
-	LaunchApplication(appName string) bool
-	LaunchApplicationAtURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error)
-	OpenURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error)
-	OpenURLsWithApplicationAtURLOptionsConfigurationError(urls []obj.Object, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error)
-	LaunchApplicationShowIconAutolaunch(appName string, showIcon bool, autolaunch bool) bool
-	FullPathForApplication(appName string) string
-	AbsolutePathForAppBundleWithIdentifier(bundleIdentifier string) string
-	LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifier obj.Object) bool
-	OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []obj.Object, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []obj.Object) bool
-	OpenTempFile(fullPath string) bool
-	FindApplications()
-	NoteUserDefaultsChanged()
-	SlideImageFromTo(image *Image, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint)
-	CheckForRemovableMedia()
-	NoteFileSystemChanged2()
-	FileSystemChanged() bool
-	UserDefaultsChanged() bool
-	MountNewRemovableMedia() obj.Object
-	ActiveApplication() obj.Object
-	MountedLocalVolumePaths() obj.Object
-	MountedRemovableMedia() obj.Object
-	LaunchedApplications() obj.Object
-	OpenFileFromImageAtInView(fullPath string, image *Image, point corefoundation.CGPoint, view *View) bool
-	PerformFileOperationSourceDestinationFilesTag(operation obj.Object, source string, destination string, files obj.Object) (ok bool, tag int64)
-	GetInfoForFileApplicationType(fullPath string, appName string, type_ string) bool
-	IconForFileType(fileType string) *Image
-	TypeOfFileError(absoluteFilePath string) (result string, err error)
-	LocalizedDescriptionForType(typeName string) string
-	PreferredFilenameExtensionForType(typeName string) string
-	FilenameExtensionIsValidForType(filenameExtension string, typeName string) bool
-	TypeConformsToType(firstTypeName string, secondTypeName string) bool
-	AccessibilityDisplayShouldIncreaseContrast() bool
-	AccessibilityDisplayShouldDifferentiateWithoutColor() bool
-	AccessibilityDisplayShouldReduceTransparency() bool
-	AccessibilityDisplayShouldReduceMotion() bool
-	AccessibilityDisplayShouldInvertColors() bool
-	IsVoiceOverEnabled() bool
-	IsSwitchControlEnabled() bool
-	RunningApplications() []*RunningApplication
-}
-
-var _ Workspaceable = (*Workspace)(nil)

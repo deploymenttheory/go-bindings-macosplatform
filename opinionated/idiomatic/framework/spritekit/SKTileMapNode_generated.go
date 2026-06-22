@@ -68,467 +68,338 @@ func NewTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *TileSe
 	return tileMapNodeAdopt(_id)
 }
 
-// WithNumberOfColumns the number of columns in the tile map
-func (x *TileMapNode) WithNumberOfColumns(numberOfColumns int) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfColumns:"), numberOfColumns)
-	return x
+// WithNumberOfColumns sets the number of columns in the tile map
+func (tmn *TileMapNode) WithNumberOfColumns(numberOfColumns int) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setNumberOfColumns:"), numberOfColumns)
+	return tmn
 }
 
-// WithNumberOfRows the number of rows in the tile map.
-func (x *TileMapNode) WithNumberOfRows(numberOfRows int) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfRows:"), numberOfRows)
-	return x
+// WithNumberOfRows sets the number of rows in the tile map.
+func (tmn *TileMapNode) WithNumberOfRows(numberOfRows int) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setNumberOfRows:"), numberOfRows)
+	return tmn
 }
 
-// WithTileSize the size of each tile in points.
-func (x *TileMapNode) WithTileSize(tileSize corefoundation.CGSize) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileSize:"), tileSize)
-	return x
+// WithTileSize sets the size of each tile in points.
+func (tmn *TileMapNode) WithTileSize(tileSize corefoundation.CGSize) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileSize:"), tileSize)
+	return tmn
 }
 
-// WithTileSet the tile set being used by this tile map. The tile map object can only display tiles that exist in this set.
-func (x *TileMapNode) WithTileSet(tileSet *TileSet) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileSet:"), objref.IDOf(tileSet))
-	return x
+// WithTileSet sets the tile set being used by this tile map. The tile map object can only display tiles that exist in this set.
+func (tmn *TileMapNode) WithTileSet(tileSet *TileSet) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileSet:"), objref.IDOf(tileSet))
+	return tmn
 }
 
-// WithColorBlendFactor controls the blending between the texture and the tile map object’s color. Values are clamped between zero and one where zero has no color blending and one has the maximum color blending.
-func (x *TileMapNode) WithColorBlendFactor(colorBlendFactor float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
-	return x
+// WithColorBlendFactor sets controls the blending between the texture and the tile map object’s color. Values are clamped between zero and one where zero has no color blending and one has the maximum color blending.
+func (tmn *TileMapNode) WithColorBlendFactor(colorBlendFactor float64) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	return tmn
 }
 
-// WithColor the base color for the tile map. The influence of the color over the tile map node’s textures is controlled by colorBlendFactor.
-func (x *TileMapNode) WithColor(color obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-	return x
+// WithColor sets the base color for the tile map. The influence of the color over the tile map node’s textures is controlled by colorBlendFactor.
+func (tmn *TileMapNode) WithColor(color obj.Object) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return tmn
 }
 
-// WithBlendMode defines the blend mode to use when compositing the tile map over other nodes.
-func (x *TileMapNode) WithBlendMode(blendMode BlendMode) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
-	return x
+// WithBlendMode sets defines the blend mode to use when compositing the tile map over other nodes.
+func (tmn *TileMapNode) WithBlendMode(blendMode BlendMode) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setBlendMode:"), blendMode)
+	return tmn
 }
 
-// WithAnchorPoint defines the point in the tile map that corresponds to its position.
-func (x *TileMapNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets defines the point in the tile map that corresponds to its position.
+func (tmn *TileMapNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return tmn
 }
 
-// WithShader defines a shader which is applied to each tile of the tile map.
-func (x *TileMapNode) WithShader(shader *Shader) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
-	return x
+// WithShader sets defines a shader which is applied to each tile of the tile map.
+func (tmn *TileMapNode) WithShader(shader *Shader) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	return tmn
 }
 
-// WithLightingBitMask a mask that defines how the tile map is lit by light nodes in the scene.
-func (x *TileMapNode) WithLightingBitMask(lightingBitMask uint32) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
-	return x
+// WithLightingBitMask sets a mask that defines how the tile map is lit by light nodes in the scene.
+func (tmn *TileMapNode) WithLightingBitMask(lightingBitMask uint32) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
+	return tmn
 }
 
 // WithEnableAutomapping sets the property and returns the receiver so calls can be chained.
-func (x *TileMapNode) WithEnableAutomapping(enableAutomapping bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableAutomapping:"), enableAutomapping)
-	return x
+func (tmn *TileMapNode) WithEnableAutomapping(enableAutomapping bool) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setEnableAutomapping:"), enableAutomapping)
+	return tmn
 }
 
-// WithPosition the position of the node in its parent’s coordinate system.
-func (x *TileMapNode) WithPosition(position corefoundation.CGPoint) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the position of the node in its parent’s coordinate system.
+func (tmn *TileMapNode) WithPosition(position corefoundation.CGPoint) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPosition:"), position)
+	return tmn
 }
 
-// WithZPosition the height of the node relative to its parent.
-func (x *TileMapNode) WithZPosition(zPosition float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the height of the node relative to its parent.
+func (tmn *TileMapNode) WithZPosition(zPosition float64) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setZPosition:"), zPosition)
+	return tmn
 }
 
-// WithZRotation the Euler rotation about the z axis (in radians).
-func (x *TileMapNode) WithZRotation(zRotation float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
-	return x
+// WithZRotation sets the Euler rotation about the z axis (in radians).
+func (tmn *TileMapNode) WithZRotation(zRotation float64) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setZRotation:"), zRotation)
+	return tmn
 }
 
-// WithXScale a scaling factor that multiplies the width of a node and its children.
-func (x *TileMapNode) WithXScale(xScale float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
-	return x
+// WithXScale sets a scaling factor that multiplies the width of a node and its children.
+func (tmn *TileMapNode) WithXScale(xScale float64) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setXScale:"), xScale)
+	return tmn
 }
 
-// WithYScale a scaling factor that multiplies the height of a node and its children.
-func (x *TileMapNode) WithYScale(yScale float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
-	return x
+// WithYScale sets a scaling factor that multiplies the height of a node and its children.
+func (tmn *TileMapNode) WithYScale(yScale float64) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setYScale:"), yScale)
+	return tmn
 }
 
-// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
-func (x *TileMapNode) WithSpeed(speed float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
+func (tmn *TileMapNode) WithSpeed(speed float64) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setSpeed:"), speed)
+	return tmn
 }
 
-// WithAlpha the transparency value applied to the node’s contents.
-func (x *TileMapNode) WithAlpha(alpha float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the transparency value applied to the node’s contents.
+func (tmn *TileMapNode) WithAlpha(alpha float64) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAlpha:"), alpha)
+	return tmn
 }
 
-// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
-func (x *TileMapNode) WithPaused(paused bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
+func (tmn *TileMapNode) WithPaused(paused bool) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPaused:"), paused)
+	return tmn
 }
 
-// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
-func (x *TileMapNode) WithHidden(hidden bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
+func (tmn *TileMapNode) WithHidden(hidden bool) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setHidden:"), hidden)
+	return tmn
 }
 
-// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
-func (x *TileMapNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
-	return x
+// WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
+func (tmn *TileMapNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	return tmn
 }
 
-// WithName the node’s assignable name.
-func (x *TileMapNode) WithName(name string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the node’s assignable name.
+func (tmn *TileMapNode) WithName(name string) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setName:"), purego.NSString(name))
+	return tmn
 }
 
-// WithPhysicsBody the physics body associated with the node.
-func (x *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
-	return x
+// WithPhysicsBody sets the physics body associated with the node.
+func (tmn *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	return tmn
 }
 
-// WithUserData a dictionary containing arbitrary data.
-func (x *TileMapNode) WithUserData(userData obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
-	return x
+// WithUserData sets a dictionary containing arbitrary data.
+func (tmn *TileMapNode) WithUserData(userData obj.Object) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	return tmn
 }
 
-// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
-func (x *TileMapNode) WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
-	return x
+// WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
+func (tmn *TileMapNode) WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	return tmn
 }
 
-// WithConstraints a list of constraints to apply to the node.
-func (x *TileMapNode) WithConstraints(items ...*Constraint) *TileMapNode {
+// WithConstraints sets a list of constraints to apply to the node.
+func (tmn *TileMapNode) WithConstraints(items ...*Constraint) *TileMapNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setConstraints:"), _arr)
+	return tmn
 }
 
-// WithAttributeValues the values of each attribute associated with the node’s attached shader.
-func (x *TileMapNode) WithAttributeValues(attributeValues obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
-	return x
+// WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
+func (tmn *TileMapNode) WithAttributeValues(attributeValues obj.Object) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	return tmn
 }
 
-// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-func (x *TileMapNode) WithAccessibilityElement(accessibilityElement bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
-	return x
+// WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+func (tmn *TileMapNode) WithAccessibilityElement(accessibilityElement bool) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	return tmn
 }
 
-// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
-func (x *TileMapNode) WithAccessibilityRole(accessibilityRole string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
-	return x
+// WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
+func (tmn *TileMapNode) WithAccessibilityRole(accessibilityRole string) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	return tmn
 }
 
-// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
-func (x *TileMapNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
-	return x
+// WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
+func (tmn *TileMapNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	return tmn
 }
 
-// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
-func (x *TileMapNode) WithAccessibilitySubrole(accessibilitySubrole string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
-	return x
+// WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
+func (tmn *TileMapNode) WithAccessibilitySubrole(accessibilitySubrole string) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	return tmn
 }
 
-// WithAccessibilityFrame the size of this user interface element, in screen points.
-func (x *TileMapNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
-	return x
+// WithAccessibilityFrame sets the size of this user interface element, in screen points.
+func (tmn *TileMapNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return tmn
 }
 
-// WithAccessibilityParent the user interface element that contains this element.
-func (x *TileMapNode) WithAccessibilityParent(accessibilityParent obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
-	return x
+// WithAccessibilityParent sets the user interface element that contains this element.
+func (tmn *TileMapNode) WithAccessibilityParent(accessibilityParent obj.Object) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	return tmn
 }
 
-// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
-func (x *TileMapNode) WithAccessibilityHelp(accessibilityHelp string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
-	return x
+// WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
+func (tmn *TileMapNode) WithAccessibilityHelp(accessibilityHelp string) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	return tmn
 }
 
-// WithAccessibilityLabel a short description of this user interface element.
-func (x *TileMapNode) WithAccessibilityLabel(accessibilityLabel string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
-	return x
+// WithAccessibilityLabel sets a short description of this user interface element.
+func (tmn *TileMapNode) WithAccessibilityLabel(accessibilityLabel string) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	return tmn
 }
 
-// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
-func (x *TileMapNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
-	return x
+// WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
+func (tmn *TileMapNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TileMapNode {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	return tmn
 }
 
 // FillWithTileGroup when creating a tile map node programmatically, this function performs a fill operation with the specified tile group.
-func (x *TileMapNode) FillWithTileGroup(tileGroup *TileGroup) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillWithTileGroup:"), objref.IDOf(tileGroup))
+func (tmn *TileMapNode) FillWithTileGroup(tileGroup *TileGroup) {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("fillWithTileGroup:"), objref.IDOf(tileGroup))
 }
 
 // TileDefinitionAtColumnRow look up the tile definition at the specified tile index.
-func (x *TileMapNode) TileDefinitionAtColumnRow(column int, row int) *TileDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileDefinitionAtColumn:row:"), column, row)
+func (tmn *TileMapNode) TileDefinitionAtColumnRow(column int, row int) *TileDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileDefinitionAtColumn:row:"), column, row)
 	return TileDefinitionFromID(_r)
 }
 
 // TileGroupAtColumnRow look up the tile group at the specified tile index.
-func (x *TileMapNode) TileGroupAtColumnRow(column int, row int) *TileGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileGroupAtColumn:row:"), column, row)
+func (tmn *TileMapNode) TileGroupAtColumnRow(column int, row int) *TileGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileGroupAtColumn:row:"), column, row)
 	return TileGroupFromID(_r)
 }
 
 // SetTileGroupForColumnRow set the tile group at the specified tile index. When automapping is enabled, the appropriate tile definitions will automatically be selected and placed, possibly modifying neighboring tiles. When automapping is disabled, it will simply place the default center tile definition for the group, and will not modify any of the neihboring tiles.
-func (x *TileMapNode) SetTileGroupForColumnRow(tileGroup *TileGroup, column int, row int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileGroup:forColumn:row:"), objref.IDOf(tileGroup), column, row)
+func (tmn *TileMapNode) SetTileGroupForColumnRow(tileGroup *TileGroup, column int, row int) {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:forColumn:row:"), objref.IDOf(tileGroup), column, row)
 }
 
 // SetTileGroupAndTileDefinitionForColumnRow set the tile group and tile definition at the specified tile index.
-func (x *TileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *TileGroup, tileDefinition *TileDefinition, column int, row int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileGroup:andTileDefinition:forColumn:row:"), objref.IDOf(tileGroup), objref.IDOf(tileDefinition), column, row)
+func (tmn *TileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *TileGroup, tileDefinition *TileDefinition, column int, row int) {
+	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:andTileDefinition:forColumn:row:"), objref.IDOf(tileGroup), objref.IDOf(tileDefinition), column, row)
 }
 
 // TileColumnIndexFromPosition returns the column index of the tile that lies under the specified position. Returns NSUIntegerMax if the position does not fall within the tile map.
-func (x *TileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tileColumnIndexFromPosition:"), position)
+func (tmn *TileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPoint) int {
+	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("tileColumnIndexFromPosition:"), position)
 	return _r
 }
 
 // TileRowIndexFromPosition returns the tile map node object’s tile row index for the specified position in points.
-func (x *TileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tileRowIndexFromPosition:"), position)
+func (tmn *TileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) int {
+	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("tileRowIndexFromPosition:"), position)
 	return _r
 }
 
 // CenterOfTileAtColumnRow returns the position of the center of the tile at the specified column and row.
-func (x *TileMapNode) CenterOfTileAtColumnRow(column int, row int) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("centerOfTileAtColumn:row:"), column, row)
+func (tmn *TileMapNode) CenterOfTileAtColumnRow(column int, row int) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tmn), objc.RegisterName("centerOfTileAtColumn:row:"), column, row)
 	return _r
 }
 
-// NumberOfColumns the number of columns in the tile map.
-func (x *TileMapNode) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
+// NumberOfColumns returns the number of columns in the tile map.
+func (tmn *TileMapNode) NumberOfColumns() int {
+	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
-// SetNumberOfColumns wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetNumberOfColumns(numberOfColumns int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfColumns:"), numberOfColumns)
-}
-
-// NumberOfRows the number of rows in the tile map.
-func (x *TileMapNode) NumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
+// NumberOfRows returns the number of rows in the tile map.
+func (tmn *TileMapNode) NumberOfRows() int {
+	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
-// SetNumberOfRows wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetNumberOfRows(numberOfRows int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfRows:"), numberOfRows)
-}
-
-// TileSize the size of each tile in the map.
-func (x *TileMapNode) TileSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("tileSize"))
+// TileSize returns the size of each tile in the map.
+func (tmn *TileMapNode) TileSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tmn), objc.RegisterName("tileSize"))
 	return _r
 }
 
-// SetTileSize wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetTileSize(tileSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileSize:"), tileSize)
-}
-
-// MapSize the size of the tile map. This is dependent on the tileSize, the number of columns and rows in the map, and the tile set type.
-func (x *TileMapNode) MapSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("mapSize"))
+// MapSize returns the size of the tile map. This is dependent on the tileSize, the number of columns and rows in the map, and the tile set type.
+func (tmn *TileMapNode) MapSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tmn), objc.RegisterName("mapSize"))
 	return _r
 }
 
-// TileSet the tile set being used by this tile map.
-func (x *TileMapNode) TileSet() *TileSet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileSet"))
+// TileSet returns the tile set being used by this tile map.
+func (tmn *TileMapNode) TileSet() *TileSet {
+	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileSet"))
 	return TileSetFromID(_r)
 }
 
-// SetTileSet wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetTileSet(tileSet *TileSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileSet:"), objref.IDOf(tileSet))
-}
-
-// ColorBlendFactor controls the blending between the texture and the tile map color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
-func (x *TileMapNode) ColorBlendFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("colorBlendFactor"))
+// ColorBlendFactor returns controls the blending between the texture and the tile map color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+func (tmn *TileMapNode) ColorBlendFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(tmn), objc.RegisterName("colorBlendFactor"))
 	return _r
 }
 
-// SetColorBlendFactor wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetColorBlendFactor(colorBlendFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
-}
-
-// Color base color for the tile map (If no texture is present, the color still is drawn).
-func (x *TileMapNode) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+// Color returns base color for the tile map (If no texture is present, the color still is drawn).
+func (tmn *TileMapNode) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// SetColor wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-}
-
 // BlendMode sets the blend mode to use when composing the tile map with the final framebuffer.
-func (x *TileMapNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
+func (tmn *TileMapNode) BlendMode() BlendMode {
+	_r := objc.Send[BlendMode](objref.IDOf(tmn), objc.RegisterName("blendMode"))
 	return _r
 }
 
-// SetBlendMode wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetBlendMode(blendMode BlendMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
-}
-
-// AnchorPoint used to choose the location in the tile map that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
-func (x *TileMapNode) AnchorPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("anchorPoint"))
+// AnchorPoint returns used to choose the location in the tile map that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
+func (tmn *TileMapNode) AnchorPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tmn), objc.RegisterName("anchorPoint"))
 	return _r
 }
 
-// SetAnchorPoint wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-}
-
-// Shader a property that determines whether the tile map is rendered using a custom shader.
-func (x *TileMapNode) Shader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shader"))
+// Shader returns a property that determines whether the tile map is rendered using a custom shader.
+func (tmn *TileMapNode) Shader() *Shader {
+	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("shader"))
 	return ShaderFromID(_r)
 }
 
-// SetShader wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetShader(shader *Shader) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
-}
-
-// LightingBitMask bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
-func (x *TileMapNode) LightingBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("lightingBitMask"))
+// LightingBitMask returns bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
+func (tmn *TileMapNode) LightingBitMask() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(tmn), objc.RegisterName("lightingBitMask"))
 	return _r
-}
-
-// SetLightingBitMask wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetLightingBitMask(lightingBitMask uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
 }
 
 // EnableAutomapping wraps the corresponding Objective-C method.
-func (x *TileMapNode) EnableAutomapping() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableAutomapping"))
+func (tmn *TileMapNode) EnableAutomapping() bool {
+	_r := objc.Send[bool](objref.IDOf(tmn), objc.RegisterName("enableAutomapping"))
 	return _r
 }
-
-// SetEnableAutomapping wraps the corresponding Objective-C method.
-func (x *TileMapNode) SetEnableAutomapping(enableAutomapping bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableAutomapping:"), enableAutomapping)
-}
-
-// TileMapNodeable is the interface implemented by [TileMapNode], for mocking and DI.
-type TileMapNodeable interface {
-	obj.Object
-	WithNumberOfColumns(numberOfColumns int) *TileMapNode
-	WithNumberOfRows(numberOfRows int) *TileMapNode
-	WithTileSize(tileSize corefoundation.CGSize) *TileMapNode
-	WithTileSet(tileSet *TileSet) *TileMapNode
-	WithColorBlendFactor(colorBlendFactor float64) *TileMapNode
-	WithColor(color obj.Object) *TileMapNode
-	WithBlendMode(blendMode BlendMode) *TileMapNode
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode
-	WithShader(shader *Shader) *TileMapNode
-	WithLightingBitMask(lightingBitMask uint32) *TileMapNode
-	WithEnableAutomapping(enableAutomapping bool) *TileMapNode
-	WithPosition(position corefoundation.CGPoint) *TileMapNode
-	WithZPosition(zPosition float64) *TileMapNode
-	WithZRotation(zRotation float64) *TileMapNode
-	WithXScale(xScale float64) *TileMapNode
-	WithYScale(yScale float64) *TileMapNode
-	WithSpeed(speed float64) *TileMapNode
-	WithAlpha(alpha float64) *TileMapNode
-	WithPaused(paused bool) *TileMapNode
-	WithHidden(hidden bool) *TileMapNode
-	WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode
-	WithName(name string) *TileMapNode
-	WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode
-	WithUserData(userData obj.Object) *TileMapNode
-	WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode
-	WithConstraints(items ...*Constraint) *TileMapNode
-	WithAttributeValues(attributeValues obj.Object) *TileMapNode
-	WithAccessibilityElement(accessibilityElement bool) *TileMapNode
-	WithAccessibilityRole(accessibilityRole string) *TileMapNode
-	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TileMapNode
-	WithAccessibilitySubrole(accessibilitySubrole string) *TileMapNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TileMapNode
-	WithAccessibilityParent(accessibilityParent obj.Object) *TileMapNode
-	WithAccessibilityHelp(accessibilityHelp string) *TileMapNode
-	WithAccessibilityLabel(accessibilityLabel string) *TileMapNode
-	WithAccessibilityEnabled(accessibilityEnabled bool) *TileMapNode
-	FillWithTileGroup(tileGroup *TileGroup)
-	TileDefinitionAtColumnRow(column int, row int) *TileDefinition
-	TileGroupAtColumnRow(column int, row int) *TileGroup
-	SetTileGroupForColumnRow(tileGroup *TileGroup, column int, row int)
-	SetTileGroupAndTileDefinitionForColumnRow(tileGroup *TileGroup, tileDefinition *TileDefinition, column int, row int)
-	TileColumnIndexFromPosition(position corefoundation.CGPoint) int
-	TileRowIndexFromPosition(position corefoundation.CGPoint) int
-	CenterOfTileAtColumnRow(column int, row int) corefoundation.CGPoint
-	NumberOfColumns() int
-	SetNumberOfColumns(numberOfColumns int)
-	NumberOfRows() int
-	SetNumberOfRows(numberOfRows int)
-	TileSize() corefoundation.CGSize
-	SetTileSize(tileSize corefoundation.CGSize)
-	MapSize() corefoundation.CGSize
-	TileSet() *TileSet
-	SetTileSet(tileSet *TileSet)
-	ColorBlendFactor() float64
-	SetColorBlendFactor(colorBlendFactor float64)
-	Color() obj.Object
-	SetColor(color obj.Object)
-	BlendMode() BlendMode
-	SetBlendMode(blendMode BlendMode)
-	AnchorPoint() corefoundation.CGPoint
-	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
-	Shader() *Shader
-	SetShader(shader *Shader)
-	LightingBitMask() uint32
-	SetLightingBitMask(lightingBitMask uint32)
-	EnableAutomapping() bool
-	SetEnableAutomapping(enableAutomapping bool)
-}
-
-var _ TileMapNodeable = (*TileMapNode)(nil)
 
 var _ NodeProvider = (*TileMapNode)(nil)

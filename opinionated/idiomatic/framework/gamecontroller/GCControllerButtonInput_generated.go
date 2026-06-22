@@ -7,7 +7,6 @@ package gamecontroller
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,86 +45,64 @@ func controllerButtonInputAdopt(id objc.ID) *ControllerButtonInput {
 	return x
 }
 
-// WithValue the level of pressure the user is applying to the button.
-func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the level of pressure the user is applying to the button.
+func (cbi *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setValue:"), value)
+	return cbi
 }
 
-// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
-func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerButtonInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return x
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (cbi *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
+	return cbi
 }
 
-// WithSfSymbolsName a system symbol for the element or the remapped element.
-func (x *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
-	return x
+// WithSfSymbolsName sets a system symbol for the element or the remapped element.
+func (cbi *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
+	return cbi
 }
 
-// WithLocalizedName the localized name for the element or the remapped element.
-func (x *ControllerButtonInput) WithLocalizedName(localizedName string) *ControllerButtonInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
-	return x
+// WithLocalizedName sets the localized name for the element or the remapped element.
+func (cbi *ControllerButtonInput) WithLocalizedName(localizedName string) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
+	return cbi
 }
 
-// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
-func (x *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
-	return x
+// WithUnmappedSfSymbolsName sets the element’s system symbol, not the remapped symbol.
+func (cbi *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
+	return cbi
 }
 
-// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
-func (x *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
-	return x
+// WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
+func (cbi *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return cbi
 }
 
-// SetValue sets the pressure value of a snapshot of a button.
-func (x *ControllerButtonInput) SetValue(value float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// Value a normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1].
-func (x *ControllerButtonInput) Value() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns a normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1].
+func (cbi *ControllerButtonInput) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(cbi), objc.RegisterName("value"))
 	return _r
 }
 
-// IsPressed buttons are mostly used in a digital sense, thus we have a recommended method for checking for pressed state instead of interpreting the value. As a general guideline a button is pressed if the value exceeds 0. However there may be hysterisis applied to counter noisy input values, thus incidental values around the threshold value may not trigger a change in pressed state. Others buttons may support two-stage actuation, where the button reports a value between 0 and 1 but is only considered pressed when its value is greater than some threshold other than 0.
-func (x *ControllerButtonInput) IsPressed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPressed"))
+// IsPressed reports whether buttons are mostly used in a digital sense, thus we have a recommended method for checking for pressed state instead of interpreting the value. As a general guideline a button is pressed if the value exceeds 0. However there may be hysterisis applied to counter noisy input values, thus incidental values around the threshold value may not trigger a change in pressed state. Others buttons may support two-stage actuation, where the button reports a value between 0 and 1 but is only considered pressed when its value is greater than some threshold other than 0.
+func (cbi *ControllerButtonInput) IsPressed() bool {
+	_r := objc.Send[bool](objref.IDOf(cbi), objc.RegisterName("isPressed"))
 	return _r
 }
 
-// IsTouched some buttons feature capacitive touch capabilities where the user can touch the button without pressing it. In such cases, a button will be touched before it is pressed. For buttons without capacitive sensing, the touched state is true if the value exceeds 0.
-func (x *ControllerButtonInput) IsTouched() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTouched"))
+// IsTouched reports whether some buttons feature capacitive touch capabilities where the user can touch the button without pressing it. In such cases, a button will be touched before it is pressed. For buttons without capacitive sensing, the touched state is true if the value exceeds 0.
+func (cbi *ControllerButtonInput) IsTouched() bool {
+	_r := objc.Send[bool](objref.IDOf(cbi), objc.RegisterName("isTouched"))
 	return _r
 }
-
-// ControllerButtonInputable is the interface implemented by [ControllerButtonInput], for mocking and DI.
-type ControllerButtonInputable interface {
-	obj.Object
-	WithValue(value float32) *ControllerButtonInput
-	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerButtonInput
-	WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput
-	WithLocalizedName(localizedName string) *ControllerButtonInput
-	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput
-	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput
-	SetValue(value float32)
-	Value() float32
-	IsPressed() bool
-	IsTouched() bool
-}
-
-var _ ControllerButtonInputable = (*ControllerButtonInput)(nil)
 
 // isControllerButtonInput marks ControllerButtonInput — and, by embedding promotion, its
 // subclasses — as a member of the ControllerButtonInput hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ControllerButtonInput) isControllerButtonInput() {}
+func (cbi *ControllerButtonInput) isControllerButtonInput() {}
 
 var _ ControllerButtonInputProvider = (*ControllerButtonInput)(nil)
 

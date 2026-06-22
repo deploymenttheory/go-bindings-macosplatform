@@ -44,24 +44,24 @@ func mTRGeneralDiagnosticsClusterTimeSnapshotParamsAdopt(id objc.ID) *MTRGeneral
 }
 
 // Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) Description() string {
+	return rt.Description(objref.IDOf(mgdctsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgdctsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgdctsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) String() string {
+	return rt.Description(objref.IDOf(mgdctsp))
 }
 
 // NewMTRGeneralDiagnosticsClusterTimeSnapshotParams creates a new MTRGeneralDiagnosticsClusterTimeSnapshotParams.
@@ -70,49 +70,26 @@ func NewMTRGeneralDiagnosticsClusterTimeSnapshotParams() *MTRGeneralDiagnosticsC
 	return mTRGeneralDiagnosticsClusterTimeSnapshotParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
+	objc.Send[objc.ID](objref.IDOf(mgdctsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mgdctsp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
+	objc.Send[objc.ID](objref.IDOf(mgdctsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mgdctsp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdctsp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mgdctsp *MTRGeneralDiagnosticsClusterTimeSnapshotParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdctsp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRGeneralDiagnosticsClusterTimeSnapshotParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterTimeSnapshotParams], for mocking and DI.
-type MTRGeneralDiagnosticsClusterTimeSnapshotParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRGeneralDiagnosticsClusterTimeSnapshotParamsable = (*MTRGeneralDiagnosticsClusterTimeSnapshotParams)(nil)

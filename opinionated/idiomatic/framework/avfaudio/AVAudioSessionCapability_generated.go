@@ -46,24 +46,24 @@ func audioSessionCapabilityAdopt(id objc.ID) *AudioSessionCapability {
 }
 
 // Description returns the object's -description text.
-func (x *AudioSessionCapability) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asc *AudioSessionCapability) Description() string {
+	return rt.Description(objref.IDOf(asc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioSessionCapability) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asc *AudioSessionCapability) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioSessionCapability) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asc *AudioSessionCapability) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioSessionCapability) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asc *AudioSessionCapability) String() string {
+	return rt.Description(objref.IDOf(asc))
 }
 
 // NewAudioSessionCapability creates a new AudioSessionCapability.
@@ -72,23 +72,14 @@ func NewAudioSessionCapability() *AudioSessionCapability {
 	return audioSessionCapabilityAdopt(_id)
 }
 
-// IsSupported a Boolean value that indicates whether the capability is supported.
-func (x *AudioSessionCapability) IsSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+// IsSupported reports whether the capability is supported.
+func (asc *AudioSessionCapability) IsSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(asc), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// IsEnabled a Boolean value that indicates whether the capability is enabled.
-func (x *AudioSessionCapability) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether the capability is enabled.
+func (asc *AudioSessionCapability) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(asc), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// AudioSessionCapabilityable is the interface implemented by [AudioSessionCapability], for mocking and DI.
-type AudioSessionCapabilityable interface {
-	obj.Object
-	IsSupported() bool
-	IsEnabled() bool
-}
-
-var _ AudioSessionCapabilityable = (*AudioSessionCapability)(nil)

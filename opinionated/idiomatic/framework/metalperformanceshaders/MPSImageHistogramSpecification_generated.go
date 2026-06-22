@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageHistogramSpecification() *ImageHistogramSpecification {
 	return imageHistogramSpecificationAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageHistogramSpecification) WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ihs *ImageHistogramSpecification) WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification {
+	objc.Send[objc.ID](objref.IDOf(ihs), objc.RegisterName("setOffset:"), offset)
+	return ihs
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageHistogramSpecification) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ihs *ImageHistogramSpecification) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification {
+	objc.Send[objc.ID](objref.IDOf(ihs), objc.RegisterName("setClipRect:"), clipRect)
+	return ihs
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageHistogramSpecification) WithLabel(label string) *ImageHistogramSpecification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ihs *ImageHistogramSpecification) WithLabel(label string) *ImageHistogramSpecification {
+	objc.Send[objc.ID](objref.IDOf(ihs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ihs
 }
-
-// ImageHistogramSpecificationable is the interface implemented by [ImageHistogramSpecification], for mocking and DI.
-type ImageHistogramSpecificationable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification
-	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification
-	WithLabel(label string) *ImageHistogramSpecification
-}
-
-var _ ImageHistogramSpecificationable = (*ImageHistogramSpecification)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageHistogramSpecification)(nil)
 

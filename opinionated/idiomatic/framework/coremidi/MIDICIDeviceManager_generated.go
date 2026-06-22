@@ -44,24 +44,24 @@ func cIDeviceManagerAdopt(id objc.ID) *CIDeviceManager {
 }
 
 // Description returns the object's -description text.
-func (x *CIDeviceManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdm *CIDeviceManager) Description() string {
+	return rt.Description(objref.IDOf(cdm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CIDeviceManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdm *CIDeviceManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CIDeviceManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdm *CIDeviceManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CIDeviceManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdm *CIDeviceManager) String() string {
+	return rt.Description(objref.IDOf(cdm))
 }
 
 // NewCIDeviceManager creates a new CIDeviceManager.
@@ -70,18 +70,10 @@ func NewCIDeviceManager() *CIDeviceManager {
 	return cIDeviceManagerAdopt(_id)
 }
 
-// DiscoveredCIDevices a list of MIDICIDevices that responded to the last MIDI-CI discovery request.
+// DiscoveredCIDevices returns a list of MIDICIDevices that responded to the last MIDI-CI discovery request.
 //
 // DiscoveredCIDevices returns the collection as a Go slice.
-func (x *CIDeviceManager) DiscoveredCIDevices() []*CIDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveredCIDevices"))
+func (cdm *CIDeviceManager) DiscoveredCIDevices() []*CIDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(cdm), objc.RegisterName("discoveredCIDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIDevice { return CIDeviceFromID(_id) })
 }
-
-// CIDeviceManagerable is the interface implemented by [CIDeviceManager], for mocking and DI.
-type CIDeviceManagerable interface {
-	obj.Object
-	DiscoveredCIDevices() []*CIDevice
-}
-
-var _ CIDeviceManagerable = (*CIDeviceManager)(nil)

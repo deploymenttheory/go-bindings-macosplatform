@@ -46,24 +46,24 @@ func frameRateRangeAdopt(id objc.ID) *FrameRateRange {
 }
 
 // Description returns the object's -description text.
-func (x *FrameRateRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (frr *FrameRateRange) Description() string {
+	return rt.Description(objref.IDOf(frr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FrameRateRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (frr *FrameRateRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(frr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FrameRateRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (frr *FrameRateRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(frr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FrameRateRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (frr *FrameRateRange) String() string {
+	return rt.Description(objref.IDOf(frr))
 }
 
 // NewFrameRateRange creates a new FrameRateRange.
@@ -72,23 +72,14 @@ func NewFrameRateRange() *FrameRateRange {
 	return frameRateRangeAdopt(_id)
 }
 
-// MinFrameRate a Float64 indicating the minimum frame rate supported by this range. This read-only property indicates the minimum frame rate supported by this range in frames per second.
-func (x *FrameRateRange) MinFrameRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minFrameRate"))
+// MinFrameRate returns a Float64 indicating the minimum frame rate supported by this range. This read-only property indicates the minimum frame rate supported by this range in frames per second.
+func (frr *FrameRateRange) MinFrameRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(frr), objc.RegisterName("minFrameRate"))
 	return _r
 }
 
-// MaxFrameRate a Float64 indicating the maximum frame rate supported by this range. This read-only property indicates the maximum frame rate supported by this range in frames per second.
-func (x *FrameRateRange) MaxFrameRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxFrameRate"))
+// MaxFrameRate returns a Float64 indicating the maximum frame rate supported by this range. This read-only property indicates the maximum frame rate supported by this range in frames per second.
+func (frr *FrameRateRange) MaxFrameRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(frr), objc.RegisterName("maxFrameRate"))
 	return _r
 }
-
-// FrameRateRangeable is the interface implemented by [FrameRateRange], for mocking and DI.
-type FrameRateRangeable interface {
-	obj.Object
-	MinFrameRate() float64
-	MaxFrameRate() float64
-}
-
-var _ FrameRateRangeable = (*FrameRateRange)(nil)

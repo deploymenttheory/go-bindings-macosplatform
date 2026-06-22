@@ -46,24 +46,24 @@ func modelConfigurationAdopt(id objc.ID) *ModelConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *ModelConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *ModelConfiguration) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *ModelConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *ModelConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *ModelConfiguration) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // NewModelConfiguration creates a new ModelConfiguration.
@@ -73,29 +73,19 @@ func NewModelConfiguration() *ModelConfiguration {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *ModelConfiguration) Type() ModelType {
-	_r := objc.Send[ModelType](objref.IDOf(x), objc.RegisterName("type"))
+func (mc *ModelConfiguration) Type() ModelType {
+	_r := objc.Send[ModelType](objref.IDOf(mc), objc.RegisterName("type"))
 	return _r
 }
 
 // Language wraps the corresponding Objective-C method.
-func (x *ModelConfiguration) Language() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (mc *ModelConfiguration) Language() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
 // Revision wraps the corresponding Objective-C method.
-func (x *ModelConfiguration) Revision() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("revision"))
+func (mc *ModelConfiguration) Revision() int {
+	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("revision"))
 	return _r
 }
-
-// ModelConfigurationable is the interface implemented by [ModelConfiguration], for mocking and DI.
-type ModelConfigurationable interface {
-	obj.Object
-	Type() ModelType
-	Language() obj.Object
-	Revision() int
-}
-
-var _ ModelConfigurationable = (*ModelConfiguration)(nil)

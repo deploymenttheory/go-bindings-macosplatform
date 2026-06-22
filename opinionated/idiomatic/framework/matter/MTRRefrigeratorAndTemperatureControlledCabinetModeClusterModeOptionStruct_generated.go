@@ -44,24 +44,24 @@ func mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructAd
 }
 
 // Description returns the object's -description text.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(mratccmcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mratccmcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mratccmcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(mratccmcmos))
 }
 
 // NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct creates a new MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct.
@@ -71,64 +71,39 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruc
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithLabel(label string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithLabel(label string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mratccmcmos
 }
 
 // WithMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-	return x
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	return mratccmcmos
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Mode wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) SetMode(mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-}
-
 // ModeTags wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) ModeTags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) ModeTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
+func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }
-
-// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructable is the interface implemented by [MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct], for mocking and DI.
-type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructable interface {
-	obj.Object
-	WithLabel(label string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct
-	WithMode(mode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct
-	Label() string
-	SetLabel(label string)
-	Mode() obj.Object
-	SetMode(mode obj.Object)
-	ModeTags() obj.Object
-	SetModeTags(modeTags obj.Object)
-}
-
-var _ MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructable = (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct)(nil)

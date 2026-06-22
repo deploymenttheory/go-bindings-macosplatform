@@ -46,24 +46,24 @@ func attributionAdopt(id objc.ID) *Attribution {
 }
 
 // Description returns the object's -description text.
-func (x *Attribution) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Attribution) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Attribution) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Attribution) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Attribution) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Attribution) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Attribution) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Attribution) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAttribution creates a new Attribution.
@@ -71,10 +71,3 @@ func NewAttribution() *Attribution {
 	_id := objc.Send[objc.ID](objc.ID(_class("AAAttribution")), objc.RegisterName("new"))
 	return attributionAdopt(_id)
 }
-
-// Attributionable is the interface implemented by [Attribution], for mocking and DI.
-type Attributionable interface {
-	obj.Object
-}
-
-var _ Attributionable = (*Attribution)(nil)

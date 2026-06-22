@@ -44,24 +44,24 @@ func mTRSmokeCOAlarmClusterAllClearEventAdopt(id objc.ID) *MTRSmokeCOAlarmCluste
 }
 
 // Description returns the object's -description text.
-func (x *MTRSmokeCOAlarmClusterAllClearEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) Description() string {
+	return rt.Description(objref.IDOf(mscacace))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSmokeCOAlarmClusterAllClearEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscacace), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSmokeCOAlarmClusterAllClearEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscacace), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSmokeCOAlarmClusterAllClearEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) String() string {
+	return rt.Description(objref.IDOf(mscacace))
 }
 
 // NewMTRSmokeCOAlarmClusterAllClearEvent creates a new MTRSmokeCOAlarmClusterAllClearEvent.
@@ -69,10 +69,3 @@ func NewMTRSmokeCOAlarmClusterAllClearEvent() *MTRSmokeCOAlarmClusterAllClearEve
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterAllClearEvent")), objc.RegisterName("new"))
 	return mTRSmokeCOAlarmClusterAllClearEventAdopt(_id)
 }
-
-// MTRSmokeCOAlarmClusterAllClearEventable is the interface implemented by [MTRSmokeCOAlarmClusterAllClearEvent], for mocking and DI.
-type MTRSmokeCOAlarmClusterAllClearEventable interface {
-	obj.Object
-}
-
-var _ MTRSmokeCOAlarmClusterAllClearEventable = (*MTRSmokeCOAlarmClusterAllClearEvent)(nil)

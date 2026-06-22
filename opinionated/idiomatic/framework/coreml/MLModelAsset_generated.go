@@ -6,6 +6,7 @@ package coreml
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func modelAssetAdopt(id objc.ID) *ModelAsset {
 }
 
 // Description returns the object's -description text.
-func (x *ModelAsset) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *ModelAsset) Description() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelAsset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ma *ModelAsset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelAsset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ma *ModelAsset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelAsset) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *ModelAsset) String() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // NewModelAsset creates a new ModelAsset.
@@ -77,7 +78,7 @@ func NewModelAsset() *ModelAsset {
 // ModelDescription the default model descripton.
 //
 // ModelDescription blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescription, err error) {
+func (ma *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescription, err error) {
 	type _result struct {
 		val *ModelDescription
 		err error
@@ -89,7 +90,7 @@ func (x *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescrip
 		_o.val = ModelDescriptionFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDescriptionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("modelDescriptionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,7 +103,7 @@ func (x *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescrip
 // ModelDescriptionOfFunctionNamed the model descripton for a specified function.
 //
 // ModelDescriptionOfFunctionNamed blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (result *ModelDescription, err error) {
+func (ma *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (result *ModelDescription, err error) {
 	type _result struct {
 		val *ModelDescription
 		err error
@@ -114,7 +115,7 @@ func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functi
 		_o.val = ModelDescriptionFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDescriptionOfFunctionNamed:completionHandler:"), purego.NSString(functionName), _block)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("modelDescriptionOfFunctionNamed:completionHandler:"), purego.NSString(functionName), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -127,7 +128,7 @@ func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functi
 // FunctionNames the list of function names in the model asset.
 //
 // FunctionNames blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) FunctionNames(ctx context.Context) (result obj.Object, err error) {
+func (ma *ModelAsset) FunctionNames(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -139,7 +140,7 @@ func (x *ModelAsset) FunctionNames(ctx context.Context) (result obj.Object, err 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionNamesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("functionNamesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -148,13 +149,3 @@ func (x *ModelAsset) FunctionNames(ctx context.Context) (result obj.Object, err 
 		return _zero, ctx.Err()
 	}
 }
-
-// ModelAssetable is the interface implemented by [ModelAsset], for mocking and DI.
-type ModelAssetable interface {
-	obj.Object
-	ModelDescription(ctx context.Context) (*ModelDescription, error)
-	ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (*ModelDescription, error)
-	FunctionNames(ctx context.Context) (obj.Object, error)
-}
-
-var _ ModelAssetable = (*ModelAsset)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,177 +46,111 @@ func imageArithmeticAdopt(id objc.ID) *ImageArithmetic {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageArithmetic) WithPrimaryScale(primaryScale float32) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (ia *ImageArithmetic) WithPrimaryScale(primaryScale float32) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return ia
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageArithmetic) WithSecondaryScale(secondaryScale float32) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (ia *ImageArithmetic) WithSecondaryScale(secondaryScale float32) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return ia
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *ImageArithmetic) WithBias(bias float32) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (ia *ImageArithmetic) WithBias(bias float32) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setBias:"), bias)
+	return ia
 }
 
-// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageArithmetic) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
-	return x
+// WithPrimaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (ia *ImageArithmetic) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+	return ia
 }
 
-// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageArithmetic) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
-	return x
+// WithSecondaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (ia *ImageArithmetic) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+	return ia
 }
 
-// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-func (x *ImageArithmetic) WithMinimumValue(minimumValue float32) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+// WithMinimumValue sets minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+func (ia *ImageArithmetic) WithMinimumValue(minimumValue float32) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return ia
 }
 
-// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-func (x *ImageArithmetic) WithMaximumValue(maximumValue float32) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+// WithMaximumValue sets maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+func (ia *ImageArithmetic) WithMaximumValue(maximumValue float32) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return ia
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
-func (x *ImageArithmetic) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
+func (ia *ImageArithmetic) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return ia
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
-func (x *ImageArithmetic) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
+func (ia *ImageArithmetic) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return ia
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageArithmetic) WithClipRect(clipRect metal.MTLRegion) *ImageArithmetic {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ia *ImageArithmetic) WithClipRect(clipRect metal.MTLRegion) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setClipRect:"), clipRect)
+	return ia
 }
 
 // PrimaryScale wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) PrimaryScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("primaryScale"))
+func (ia *ImageArithmetic) PrimaryScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("primaryScale"))
 	return _r
-}
-
-// SetPrimaryScale wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SetPrimaryScale(primaryScale float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 }
 
 // SecondaryScale wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SecondaryScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("secondaryScale"))
+func (ia *ImageArithmetic) SecondaryScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("secondaryScale"))
 	return _r
-}
-
-// SetSecondaryScale wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SetSecondaryScale(secondaryScale float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 }
 
 // Bias wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) Bias() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
+func (ia *ImageArithmetic) Bias() float32 {
+	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("bias"))
 	return _r
 }
 
-// SetBias wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SetBias(bias float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-}
-
-// PrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageArithmetic) PrimaryStrideInPixels() metal.MTLSize {
-	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("primaryStrideInPixels"))
+// PrimaryStrideInPixels returns the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (ia *ImageArithmetic) PrimaryStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(ia), objc.RegisterName("primaryStrideInPixels"))
 	return _r
 }
 
-// SetPrimaryStrideInPixels wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SetPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
-}
-
-// SecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageArithmetic) SecondaryStrideInPixels() metal.MTLSize {
-	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixels"))
+// SecondaryStrideInPixels returns the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (ia *ImageArithmetic) SecondaryStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(ia), objc.RegisterName("secondaryStrideInPixels"))
 	return _r
 }
 
-// SetSecondaryStrideInPixels wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SetSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
-}
-
-// MinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-func (x *ImageArithmetic) MinimumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumValue"))
+// MinimumValue returns minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+func (ia *ImageArithmetic) MinimumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("minimumValue"))
 	return _r
 }
 
-// SetMinimumValue wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SetMinimumValue(minimumValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-}
-
-// MaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-func (x *ImageArithmetic) MaximumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
+// MaximumValue returns maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+func (ia *ImageArithmetic) MaximumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("maximumValue"))
 	return _r
 }
-
-// SetMaximumValue wraps the corresponding Objective-C method.
-func (x *ImageArithmetic) SetMaximumValue(maximumValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-}
-
-// ImageArithmeticable is the interface implemented by [ImageArithmetic], for mocking and DI.
-type ImageArithmeticable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *ImageArithmetic
-	WithSecondaryScale(secondaryScale float32) *ImageArithmetic
-	WithBias(bias float32) *ImageArithmetic
-	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageArithmetic
-	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageArithmetic
-	WithMinimumValue(minimumValue float32) *ImageArithmetic
-	WithMaximumValue(maximumValue float32) *ImageArithmetic
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageArithmetic
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageArithmetic
-	WithClipRect(clipRect metal.MTLRegion) *ImageArithmetic
-	PrimaryScale() float32
-	SetPrimaryScale(primaryScale float32)
-	SecondaryScale() float32
-	SetSecondaryScale(secondaryScale float32)
-	Bias() float32
-	SetBias(bias float32)
-	PrimaryStrideInPixels() metal.MTLSize
-	SetPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize)
-	SecondaryStrideInPixels() metal.MTLSize
-	SetSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize)
-	MinimumValue() float32
-	SetMinimumValue(minimumValue float32)
-	MaximumValue() float32
-	SetMaximumValue(maximumValue float32)
-}
-
-var _ ImageArithmeticable = (*ImageArithmetic)(nil)
 
 // isImageArithmetic marks ImageArithmetic — and, by embedding promotion, its
 // subclasses — as a member of the ImageArithmetic hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageArithmetic) isImageArithmetic() {}
+func (ia *ImageArithmetic) isImageArithmetic() {}
 
 var _ ImageArithmeticProvider = (*ImageArithmetic)(nil)
 

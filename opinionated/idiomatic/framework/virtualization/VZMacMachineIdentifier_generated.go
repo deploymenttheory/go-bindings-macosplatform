@@ -46,24 +46,24 @@ func macMachineIdentifierAdopt(id objc.ID) *MacMachineIdentifier {
 }
 
 // Description returns the object's -description text.
-func (x *MacMachineIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmi *MacMachineIdentifier) Description() string {
+	return rt.Description(objref.IDOf(mmi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MacMachineIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmi *MacMachineIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MacMachineIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmi *MacMachineIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MacMachineIdentifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmi *MacMachineIdentifier) String() string {
+	return rt.Description(objref.IDOf(mmi))
 }
 
 // NewMacMachineIdentifier creates a new MacMachineIdentifier.
@@ -72,23 +72,15 @@ func NewMacMachineIdentifier() *MacMachineIdentifier {
 	return macMachineIdentifierAdopt(_id)
 }
 
-// NewMacMachineIdentifierWithDataRepresentation create a machine identifier described by the specified data representation.
-func NewMacMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object) *MacMachineIdentifier {
+// NewMACMachineIdentifierWithDataRepresentation create a machine identifier described by the specified data representation.
+func NewMACMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object) *MacMachineIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacMachineIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
 	return macMachineIdentifierAdopt(_id)
 }
 
 // DataRepresentation wraps the corresponding Objective-C method.
-func (x *MacMachineIdentifier) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+func (mmi *MacMachineIdentifier) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// MacMachineIdentifierable is the interface implemented by [MacMachineIdentifier], for mocking and DI.
-type MacMachineIdentifierable interface {
-	obj.Object
-	DataRepresentation() obj.Object
-}
-
-var _ MacMachineIdentifierable = (*MacMachineIdentifier)(nil)

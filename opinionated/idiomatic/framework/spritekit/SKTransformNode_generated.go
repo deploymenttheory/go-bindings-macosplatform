@@ -54,226 +54,178 @@ func NewTransformNode() *TransformNode {
 }
 
 // WithXRotation sets the property and returns the receiver so calls can be chained.
-func (x *TransformNode) WithXRotation(xRotation float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXRotation:"), xRotation)
-	return x
+func (tn *TransformNode) WithXRotation(xRotation float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setXRotation:"), xRotation)
+	return tn
 }
 
 // WithYRotation sets the property and returns the receiver so calls can be chained.
-func (x *TransformNode) WithYRotation(yRotation float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYRotation:"), yRotation)
-	return x
+func (tn *TransformNode) WithYRotation(yRotation float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setYRotation:"), yRotation)
+	return tn
 }
 
-// WithPosition the position of the node in its parent’s coordinate system.
-func (x *TransformNode) WithPosition(position corefoundation.CGPoint) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the position of the node in its parent’s coordinate system.
+func (tn *TransformNode) WithPosition(position corefoundation.CGPoint) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPosition:"), position)
+	return tn
 }
 
-// WithZPosition the height of the node relative to its parent.
-func (x *TransformNode) WithZPosition(zPosition float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the height of the node relative to its parent.
+func (tn *TransformNode) WithZPosition(zPosition float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setZPosition:"), zPosition)
+	return tn
 }
 
-// WithZRotation the Euler rotation about the z axis (in radians).
-func (x *TransformNode) WithZRotation(zRotation float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
-	return x
+// WithZRotation sets the Euler rotation about the z axis (in radians).
+func (tn *TransformNode) WithZRotation(zRotation float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setZRotation:"), zRotation)
+	return tn
 }
 
-// WithXScale a scaling factor that multiplies the width of a node and its children.
-func (x *TransformNode) WithXScale(xScale float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
-	return x
+// WithXScale sets a scaling factor that multiplies the width of a node and its children.
+func (tn *TransformNode) WithXScale(xScale float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setXScale:"), xScale)
+	return tn
 }
 
-// WithYScale a scaling factor that multiplies the height of a node and its children.
-func (x *TransformNode) WithYScale(yScale float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
-	return x
+// WithYScale sets a scaling factor that multiplies the height of a node and its children.
+func (tn *TransformNode) WithYScale(yScale float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setYScale:"), yScale)
+	return tn
 }
 
-// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
-func (x *TransformNode) WithSpeed(speed float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
+func (tn *TransformNode) WithSpeed(speed float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setSpeed:"), speed)
+	return tn
 }
 
-// WithAlpha the transparency value applied to the node’s contents.
-func (x *TransformNode) WithAlpha(alpha float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the transparency value applied to the node’s contents.
+func (tn *TransformNode) WithAlpha(alpha float64) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAlpha:"), alpha)
+	return tn
 }
 
-// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
-func (x *TransformNode) WithPaused(paused bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
+func (tn *TransformNode) WithPaused(paused bool) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPaused:"), paused)
+	return tn
 }
 
-// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
-func (x *TransformNode) WithHidden(hidden bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
+func (tn *TransformNode) WithHidden(hidden bool) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setHidden:"), hidden)
+	return tn
 }
 
-// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
-func (x *TransformNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
-	return x
+// WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
+func (tn *TransformNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	return tn
 }
 
-// WithName the node’s assignable name.
-func (x *TransformNode) WithName(name string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the node’s assignable name.
+func (tn *TransformNode) WithName(name string) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setName:"), purego.NSString(name))
+	return tn
 }
 
-// WithPhysicsBody the physics body associated with the node.
-func (x *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
-	return x
+// WithPhysicsBody sets the physics body associated with the node.
+func (tn *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	return tn
 }
 
-// WithUserData a dictionary containing arbitrary data.
-func (x *TransformNode) WithUserData(userData obj.Object) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
-	return x
+// WithUserData sets a dictionary containing arbitrary data.
+func (tn *TransformNode) WithUserData(userData obj.Object) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	return tn
 }
 
-// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
-func (x *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
-	return x
+// WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
+func (tn *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	return tn
 }
 
-// WithConstraints a list of constraints to apply to the node.
-func (x *TransformNode) WithConstraints(items ...*Constraint) *TransformNode {
+// WithConstraints sets a list of constraints to apply to the node.
+func (tn *TransformNode) WithConstraints(items ...*Constraint) *TransformNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setConstraints:"), _arr)
+	return tn
 }
 
-// WithAttributeValues the values of each attribute associated with the node’s attached shader.
-func (x *TransformNode) WithAttributeValues(attributeValues obj.Object) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
-	return x
+// WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
+func (tn *TransformNode) WithAttributeValues(attributeValues obj.Object) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	return tn
 }
 
-// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-func (x *TransformNode) WithAccessibilityElement(accessibilityElement bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
-	return x
+// WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+func (tn *TransformNode) WithAccessibilityElement(accessibilityElement bool) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	return tn
 }
 
-// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
-func (x *TransformNode) WithAccessibilityRole(accessibilityRole string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
-	return x
+// WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
+func (tn *TransformNode) WithAccessibilityRole(accessibilityRole string) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	return tn
 }
 
-// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
-func (x *TransformNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
-	return x
+// WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
+func (tn *TransformNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	return tn
 }
 
-// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
-func (x *TransformNode) WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
-	return x
+// WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
+func (tn *TransformNode) WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	return tn
 }
 
-// WithAccessibilityFrame the size of this user interface element, in screen points.
-func (x *TransformNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
-	return x
+// WithAccessibilityFrame sets the size of this user interface element, in screen points.
+func (tn *TransformNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return tn
 }
 
-// WithAccessibilityParent the user interface element that contains this element.
-func (x *TransformNode) WithAccessibilityParent(accessibilityParent obj.Object) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
-	return x
+// WithAccessibilityParent sets the user interface element that contains this element.
+func (tn *TransformNode) WithAccessibilityParent(accessibilityParent obj.Object) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	return tn
 }
 
-// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
-func (x *TransformNode) WithAccessibilityHelp(accessibilityHelp string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
-	return x
+// WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
+func (tn *TransformNode) WithAccessibilityHelp(accessibilityHelp string) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	return tn
 }
 
-// WithAccessibilityLabel a short description of this user interface element.
-func (x *TransformNode) WithAccessibilityLabel(accessibilityLabel string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
-	return x
+// WithAccessibilityLabel sets a short description of this user interface element.
+func (tn *TransformNode) WithAccessibilityLabel(accessibilityLabel string) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	return tn
 }
 
-// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
-func (x *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
-	return x
+// WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
+func (tn *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	return tn
 }
 
 // XRotation wraps the corresponding Objective-C method.
-func (x *TransformNode) XRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xRotation"))
+func (tn *TransformNode) XRotation() float64 {
+	_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("xRotation"))
 	return _r
-}
-
-// SetXRotation wraps the corresponding Objective-C method.
-func (x *TransformNode) SetXRotation(xRotation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXRotation:"), xRotation)
 }
 
 // YRotation wraps the corresponding Objective-C method.
-func (x *TransformNode) YRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yRotation"))
+func (tn *TransformNode) YRotation() float64 {
+	_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("yRotation"))
 	return _r
 }
-
-// SetYRotation wraps the corresponding Objective-C method.
-func (x *TransformNode) SetYRotation(yRotation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYRotation:"), yRotation)
-}
-
-// TransformNodeable is the interface implemented by [TransformNode], for mocking and DI.
-type TransformNodeable interface {
-	obj.Object
-	WithXRotation(xRotation float64) *TransformNode
-	WithYRotation(yRotation float64) *TransformNode
-	WithPosition(position corefoundation.CGPoint) *TransformNode
-	WithZPosition(zPosition float64) *TransformNode
-	WithZRotation(zRotation float64) *TransformNode
-	WithXScale(xScale float64) *TransformNode
-	WithYScale(yScale float64) *TransformNode
-	WithSpeed(speed float64) *TransformNode
-	WithAlpha(alpha float64) *TransformNode
-	WithPaused(paused bool) *TransformNode
-	WithHidden(hidden bool) *TransformNode
-	WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode
-	WithName(name string) *TransformNode
-	WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode
-	WithUserData(userData obj.Object) *TransformNode
-	WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode
-	WithConstraints(items ...*Constraint) *TransformNode
-	WithAttributeValues(attributeValues obj.Object) *TransformNode
-	WithAccessibilityElement(accessibilityElement bool) *TransformNode
-	WithAccessibilityRole(accessibilityRole string) *TransformNode
-	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode
-	WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode
-	WithAccessibilityParent(accessibilityParent obj.Object) *TransformNode
-	WithAccessibilityHelp(accessibilityHelp string) *TransformNode
-	WithAccessibilityLabel(accessibilityLabel string) *TransformNode
-	WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode
-	XRotation() float64
-	SetXRotation(xRotation float64)
-	YRotation() float64
-	SetYRotation(yRotation float64)
-}
-
-var _ TransformNodeable = (*TransformNode)(nil)
 
 var _ NodeProvider = (*TransformNode)(nil)

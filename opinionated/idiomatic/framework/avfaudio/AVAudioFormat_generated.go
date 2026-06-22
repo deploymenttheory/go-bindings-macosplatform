@@ -46,24 +46,24 @@ func audioFormatAdopt(id objc.ID) *AudioFormat {
 }
 
 // Description returns the object's -description text.
-func (x *AudioFormat) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (af *AudioFormat) Description() string {
+	return rt.Description(objref.IDOf(af))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioFormat) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (af *AudioFormat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(af), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioFormat) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (af *AudioFormat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(af), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioFormat) String() string {
-	return rt.Description(objref.IDOf(x))
+func (af *AudioFormat) String() string {
+	return rt.Description(objref.IDOf(af))
 }
 
 // NewAudioFormatStandardFormatWithSampleRateChannels creates an audio format instance with the specified sample rate and channel count.
@@ -101,78 +101,56 @@ func NewAudioFormatWithSettings(settings obj.Object) *AudioFormat {
 	return audioFormatAdopt(_id)
 }
 
-// WithMagicCookie an object that contains metadata that encoders and decoders require.
-func (x *AudioFormat) WithMagicCookie(magicCookie obj.Object) *AudioFormat {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
-	return x
+// WithMagicCookie sets an object that contains metadata that encoders and decoders require.
+func (af *AudioFormat) WithMagicCookie(magicCookie obj.Object) *AudioFormat {
+	objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
+	return af
 }
 
-// IsStandard describes whether the format is deinterleaved native-endian float.
-func (x *AudioFormat) IsStandard() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStandard"))
+// IsStandard reports whether the format is deinterleaved native-endian float.
+func (af *AudioFormat) IsStandard() bool {
+	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("isStandard"))
 	return _r
 }
 
-// CommonFormat an `AVAudioCommonFormat` identifying the format
-func (x *AudioFormat) CommonFormat() AudioCommonFormat {
-	_r := objc.Send[AudioCommonFormat](objref.IDOf(x), objc.RegisterName("commonFormat"))
+// CommonFormat returns an `AVAudioCommonFormat` identifying the format
+func (af *AudioFormat) CommonFormat() AudioCommonFormat {
+	_r := objc.Send[AudioCommonFormat](objref.IDOf(af), objc.RegisterName("commonFormat"))
 	return _r
 }
 
-// ChannelCount the number of channels of audio data.
-func (x *AudioFormat) ChannelCount() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("channelCount"))
+// ChannelCount returns the number of channels of audio data.
+func (af *AudioFormat) ChannelCount() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(af), objc.RegisterName("channelCount"))
 	return _r
 }
 
-// SampleRate a sampling rate in Hertz.
-func (x *AudioFormat) SampleRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sampleRate"))
+// SampleRate returns a sampling rate in Hertz.
+func (af *AudioFormat) SampleRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(af), objc.RegisterName("sampleRate"))
 	return _r
 }
 
-// IsInterleaved describes whether the samples are interleaved. For non-PCM formats, the value is undefined.
-func (x *AudioFormat) IsInterleaved() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInterleaved"))
+// IsInterleaved reports whether the samples are interleaved. For non-PCM formats, the value is undefined.
+func (af *AudioFormat) IsInterleaved() bool {
+	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("isInterleaved"))
 	return _r
 }
 
-// ChannelLayout the underlying AVAudioChannelLayout, if any. Only formats with more than 2 channels are required to have channel layouts.
-func (x *AudioFormat) ChannelLayout() *AudioChannelLayout {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelLayout"))
+// ChannelLayout returns the underlying AVAudioChannelLayout, if any. Only formats with more than 2 channels are required to have channel layouts.
+func (af *AudioFormat) ChannelLayout() *AudioChannelLayout {
+	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("channelLayout"))
 	return AudioChannelLayoutFromID(_r)
 }
 
-// MagicCookie the underlying magic cookie, if any. A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
-func (x *AudioFormat) MagicCookie() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magicCookie"))
+// MagicCookie returns the underlying magic cookie, if any. A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
+func (af *AudioFormat) MagicCookie() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("magicCookie"))
 	return obj.Wrap(_r)
-}
-
-// SetMagicCookie wraps the corresponding Objective-C method.
-func (x *AudioFormat) SetMagicCookie(magicCookie obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
 }
 
 // Settings returns the format represented as a dictionary with keys from AVAudioSettings.h.
-func (x *AudioFormat) Settings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
+func (af *AudioFormat) Settings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("settings"))
 	return obj.Wrap(_r)
 }
-
-// AudioFormatable is the interface implemented by [AudioFormat], for mocking and DI.
-type AudioFormatable interface {
-	obj.Object
-	WithMagicCookie(magicCookie obj.Object) *AudioFormat
-	IsStandard() bool
-	CommonFormat() AudioCommonFormat
-	ChannelCount() uint32
-	SampleRate() float64
-	IsInterleaved() bool
-	ChannelLayout() *AudioChannelLayout
-	MagicCookie() obj.Object
-	SetMagicCookie(magicCookie obj.Object)
-	Settings() obj.Object
-}
-
-var _ AudioFormatable = (*AudioFormat)(nil)

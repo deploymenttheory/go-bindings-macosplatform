@@ -46,24 +46,24 @@ func nEPacketAdopt(id objc.ID) *NEPacket {
 }
 
 // Description returns the object's -description text.
-func (x *NEPacket) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NEPacket) Description() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEPacket) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (np *NEPacket) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEPacket) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (np *NEPacket) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEPacket) String() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NEPacket) String() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // NewNEPacketWithDataProtocolFamily initializes a new NEPacket object with data and protocol family.
@@ -73,37 +73,26 @@ func NewNEPacketWithDataProtocolFamily(data obj.Object, protocolFamily uint8) *N
 	return nEPacketAdopt(_id)
 }
 
-// Data the data content of the packet.
-func (x *NEPacket) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the data content of the packet.
+func (np *NEPacket) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// ProtocolFamily the protocol family of the packet (such as AF_INET or AF_INET6).
-func (x *NEPacket) ProtocolFamily() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("protocolFamily"))
+// ProtocolFamily returns the protocol family of the packet (such as AF_INET or AF_INET6).
+func (np *NEPacket) ProtocolFamily() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(np), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
-// Direction the direction of the packet.
-func (x *NEPacket) Direction() NETrafficDirection {
-	_r := objc.Send[NETrafficDirection](objref.IDOf(x), objc.RegisterName("direction"))
+// Direction returns the direction of the packet.
+func (np *NEPacket) Direction() NETrafficDirection {
+	_r := objc.Send[NETrafficDirection](objref.IDOf(np), objc.RegisterName("direction"))
 	return _r
 }
 
-// Metadata metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
-func (x *NEPacket) Metadata() *NEFlowMetaData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
+func (np *NEPacket) Metadata() *NEFlowMetaData {
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("metadata"))
 	return NEFlowMetaDataFromID(_r)
 }
-
-// NEPacketable is the interface implemented by [NEPacket], for mocking and DI.
-type NEPacketable interface {
-	obj.Object
-	Data() obj.Object
-	ProtocolFamily() uint8
-	Direction() NETrafficDirection
-	Metadata() *NEFlowMetaData
-}
-
-var _ NEPacketable = (*NEPacket)(nil)

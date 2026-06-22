@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 // ReadAttributeCurrentHueWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -75,7 +76,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHueWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentHueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx c
 // SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -100,7 +101,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubsc
 // ReadAttributeCurrentSaturationWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentSaturationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -125,7 +126,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentSaturationWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentSaturationWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletio
 // SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -150,7 +151,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentSaturationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentSaturationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithPara
 // ReadAttributeRemainingTimeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRemainingTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -175,7 +176,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRemainingTimeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeRemainingTimeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ct
 // SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -200,7 +201,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRemainingTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeRemainingTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -213,7 +214,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSu
 // ReadAttributeCurrentXWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -225,7 +226,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentXWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentXWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -238,7 +239,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx con
 // SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -250,7 +251,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -263,7 +264,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscri
 // ReadAttributeCurrentYWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -275,7 +276,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentYWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentYWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -288,7 +289,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx con
 // SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -300,7 +301,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +314,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscri
 // ReadAttributeDriftCompensationWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDriftCompensationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -325,7 +326,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDriftCompensationWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeDriftCompensationWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -338,7 +339,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletio
 // SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,7 +351,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDriftCompensationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeDriftCompensationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -363,7 +364,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithPara
 // ReadAttributeCompensationTextWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCompensationTextWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion(ctx context.Context) (result string, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -375,7 +376,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCompensationTextWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCompensationTextWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -388,7 +389,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion
 // SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -400,7 +401,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParam
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCompensationTextWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCompensationTextWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -413,7 +414,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParam
 // ReadAttributeColorTemperatureMiredsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -425,7 +426,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithComp
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorTemperatureMiredsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorTemperatureMiredsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -438,7 +439,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithComp
 // SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -450,7 +451,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -463,7 +464,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWit
 // ReadAttributeColorModeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -475,7 +476,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorModeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorModeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -488,7 +489,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx co
 // SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -500,7 +501,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -513,7 +514,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscr
 // ReadAttributeOptionsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOptionsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -525,7 +526,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOptionsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeOptionsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -538,7 +539,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx cont
 // SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,7 +551,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOptionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeOptionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -563,7 +564,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscrip
 // ReadAttributeNumberOfPrimariesWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNumberOfPrimariesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -575,7 +576,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfPrimariesWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeNumberOfPrimariesWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -588,7 +589,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletio
 // SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -600,7 +601,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -613,7 +614,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithPara
 // ReadAttributePrimary1XWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary1XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -625,7 +626,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary1XWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary1XWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -638,7 +639,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx co
 // SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -650,7 +651,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary1XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -663,7 +664,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscr
 // ReadAttributePrimary1YWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary1YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -675,7 +676,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary1YWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary1YWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -688,7 +689,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx co
 // SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -700,7 +701,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary1YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -713,7 +714,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscr
 // ReadAttributePrimary1IntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary1IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -725,7 +726,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary1IntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary1IntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -738,7 +739,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletio
 // SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -750,7 +751,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary1IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -763,7 +764,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithPara
 // ReadAttributePrimary2XWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary2XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -775,7 +776,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary2XWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary2XWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -788,7 +789,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx co
 // SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -800,7 +801,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary2XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -813,7 +814,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscr
 // ReadAttributePrimary2YWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary2YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -825,7 +826,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary2YWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary2YWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -838,7 +839,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx co
 // SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -850,7 +851,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary2YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -863,7 +864,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscr
 // ReadAttributePrimary2IntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary2IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -875,7 +876,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary2IntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary2IntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -888,7 +889,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletio
 // SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -900,7 +901,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary2IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -913,7 +914,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithPara
 // ReadAttributePrimary3XWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary3XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,7 +926,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary3XWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary3XWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -938,7 +939,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx co
 // SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -950,7 +951,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary3XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -963,7 +964,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscr
 // ReadAttributePrimary3YWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary3YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -975,7 +976,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary3YWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary3YWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -988,7 +989,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx co
 // SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1000,7 +1001,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary3YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1013,7 +1014,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscr
 // ReadAttributePrimary3IntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary3IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1025,7 +1026,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary3IntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary3IntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1038,7 +1039,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletio
 // SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1050,7 +1051,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary3IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1063,7 +1064,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithPara
 // ReadAttributePrimary4XWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary4XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1075,7 +1076,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary4XWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary4XWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1088,7 +1089,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx co
 // SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1100,7 +1101,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary4XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1113,7 +1114,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscr
 // ReadAttributePrimary4YWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary4YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1125,7 +1126,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary4YWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary4YWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1138,7 +1139,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx co
 // SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1150,7 +1151,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary4YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1163,7 +1164,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscr
 // ReadAttributePrimary4IntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary4IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1175,7 +1176,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary4IntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary4IntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1188,7 +1189,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletio
 // SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1200,7 +1201,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary4IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1213,7 +1214,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithPara
 // ReadAttributePrimary5XWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary5XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1225,7 +1226,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary5XWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary5XWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1238,7 +1239,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx co
 // SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1250,7 +1251,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary5XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1263,7 +1264,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscr
 // ReadAttributePrimary5YWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary5YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1275,7 +1276,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary5YWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary5YWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1288,7 +1289,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx co
 // SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1300,7 +1301,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary5YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1313,7 +1314,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscr
 // ReadAttributePrimary5IntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary5IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1325,7 +1326,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary5IntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary5IntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1338,7 +1339,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletio
 // SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1350,7 +1351,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary5IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1363,7 +1364,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithPara
 // ReadAttributePrimary6XWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary6XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1375,7 +1376,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary6XWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary6XWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1388,7 +1389,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx co
 // SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1400,7 +1401,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary6XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1413,7 +1414,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscr
 // ReadAttributePrimary6YWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary6YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1425,7 +1426,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary6YWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary6YWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1438,7 +1439,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx co
 // SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1450,7 +1451,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary6YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1463,7 +1464,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscr
 // ReadAttributePrimary6IntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary6IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1475,7 +1476,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary6IntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary6IntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1489,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletio
 // SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,7 +1501,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary6IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1513,7 +1514,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithPara
 // ReadAttributeWhitePointXWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeWhitePointXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1525,7 +1526,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWhitePointXWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeWhitePointXWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1538,7 +1539,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx 
 // SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1550,7 +1551,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWhitePointXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1563,7 +1564,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubs
 // ReadAttributeWhitePointYWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeWhitePointYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1575,7 +1576,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWhitePointYWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeWhitePointYWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1588,7 +1589,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx 
 // SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1600,7 +1601,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWhitePointYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1613,7 +1614,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubs
 // ReadAttributeColorPointRXWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointRXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1625,7 +1626,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointRXWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointRXWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1638,7 +1639,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx
 // SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1650,7 +1651,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointRXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1663,7 +1664,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSub
 // ReadAttributeColorPointRYWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointRYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1675,7 +1676,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointRYWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointRYWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1688,7 +1689,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx
 // SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1700,7 +1701,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointRYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1713,7 +1714,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSub
 // ReadAttributeColorPointRIntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointRIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1725,7 +1726,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointRIntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointRIntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1738,7 +1739,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithComple
 // SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1750,7 +1751,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointRIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1763,7 +1764,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithP
 // ReadAttributeColorPointGXWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointGXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1775,7 +1776,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointGXWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointGXWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1788,7 +1789,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx
 // SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1800,7 +1801,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointGXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1813,7 +1814,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSub
 // ReadAttributeColorPointGYWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointGYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1825,7 +1826,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointGYWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointGYWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1838,7 +1839,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx
 // SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1850,7 +1851,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointGYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1863,7 +1864,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSub
 // ReadAttributeColorPointGIntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointGIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1875,7 +1876,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointGIntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointGIntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1888,7 +1889,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithComple
 // SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1900,7 +1901,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointGIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1913,7 +1914,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithP
 // ReadAttributeColorPointBXWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointBXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1925,7 +1926,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointBXWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointBXWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1938,7 +1939,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx
 // SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1950,7 +1951,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointBXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1963,7 +1964,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSub
 // ReadAttributeColorPointBYWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointBYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1975,7 +1976,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointBYWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointBYWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1988,7 +1989,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx
 // SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2000,7 +2001,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointBYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2013,7 +2014,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSub
 // ReadAttributeColorPointBIntensityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointBIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2025,7 +2026,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointBIntensityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointBIntensityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2038,7 +2039,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithComple
 // SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2050,7 +2051,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointBIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2063,7 +2064,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithP
 // ReadAttributeEnhancedCurrentHueWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnhancedCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2075,7 +2076,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnhancedCurrentHueWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeEnhancedCurrentHueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2088,7 +2089,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompleti
 // SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2100,7 +2101,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2113,7 +2114,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithPar
 // ReadAttributeEnhancedColorModeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnhancedColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2125,7 +2126,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnhancedColorModeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeEnhancedColorModeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2138,7 +2139,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletio
 // SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2150,7 +2151,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnhancedColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2163,7 +2164,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithPara
 // ReadAttributeColorLoopActiveWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopActiveWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2175,7 +2176,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopActiveWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopActiveWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2188,7 +2189,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(
 // SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2200,7 +2201,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopActiveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopActiveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2213,7 +2214,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParams
 // ReadAttributeColorLoopDirectionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2225,7 +2226,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopDirectionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopDirectionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2238,7 +2239,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompleti
 // SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2250,7 +2251,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2263,7 +2264,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithPar
 // ReadAttributeColorLoopTimeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2275,7 +2276,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopTimeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopTimeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2288,7 +2289,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ct
 // SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2300,7 +2301,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2313,7 +2314,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSu
 // ReadAttributeColorLoopStartEnhancedHueWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopStartEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2325,7 +2326,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopStartEnhancedHueWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopStartEnhancedHueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2338,7 +2339,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithC
 // SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2350,7 +2351,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHue
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2363,7 +2364,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHue
 // ReadAttributeColorLoopStoredEnhancedHueWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopStoredEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2375,7 +2376,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopStoredEnhancedHueWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopStoredEnhancedHueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2388,7 +2389,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWith
 // SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2400,7 +2401,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2413,7 +2414,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHu
 // ReadAttributeColorCapabilitiesWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorCapabilitiesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2425,7 +2426,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorCapabilitiesWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorCapabilitiesWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2438,7 +2439,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletio
 // SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2450,7 +2451,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorCapabilitiesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorCapabilitiesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2463,7 +2464,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithPara
 // ReadAttributeColorTempPhysicalMinMiredsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorTempPhysicalMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2475,7 +2476,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorTempPhysicalMinMiredsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorTempPhysicalMinMiredsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2488,7 +2489,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWith
 // SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2500,7 +2501,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2513,7 +2514,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMired
 // ReadAttributeColorTempPhysicalMaxMiredsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorTempPhysicalMaxMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2525,7 +2526,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorTempPhysicalMaxMiredsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorTempPhysicalMaxMiredsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2538,7 +2539,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWith
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2550,7 +2551,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2563,7 +2564,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMired
 // ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2575,7 +2576,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCoupleColorTempToLevelMinMiredsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCoupleColorTempToLevelMinMiredsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2588,7 +2589,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMired
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2600,7 +2601,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2613,7 +2614,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMin
 // ReadAttributeStartUpColorTemperatureMiredsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeStartUpColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2625,7 +2626,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartUpColorTemperatureMiredsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeStartUpColorTemperatureMiredsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2638,7 +2639,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsW
 // SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2650,7 +2651,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2663,7 +2664,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMi
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2675,7 +2676,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2688,7 +2689,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithComple
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2700,7 +2701,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2713,7 +2714,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithP
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2725,7 +2726,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithComplet
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2738,7 +2739,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithComplet
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2750,7 +2751,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2763,7 +2764,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithPa
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2775,7 +2776,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2788,7 +2789,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ct
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2800,7 +2801,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2813,7 +2814,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSu
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2825,7 +2826,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2838,7 +2839,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx c
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2850,7 +2851,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2863,7 +2864,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubsc
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2875,7 +2876,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2888,7 +2889,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2900,7 +2901,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2913,7 +2914,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParams
 // ReadAttributeCurrentHue wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2925,7 +2926,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHueWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentHueWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2938,7 +2939,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context
 // SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2950,7 +2951,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2963,7 +2964,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinInterval
 // ReadAttributeCurrentSaturation wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentSaturation blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2975,7 +2976,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentSaturationWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentSaturationWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2988,7 +2989,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.
 // SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3000,7 +3001,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentSaturationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentSaturationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3013,7 +3014,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinI
 // ReadAttributeRemainingTime wraps the corresponding Objective-C method.
 //
 // ReadAttributeRemainingTime blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3025,7 +3026,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRemainingTimeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeRemainingTimeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3038,7 +3039,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Cont
 // SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3050,7 +3051,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRemainingTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeRemainingTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3063,7 +3064,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinInter
 // ReadAttributeCurrentX wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3075,7 +3076,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentXWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentXWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3088,7 +3089,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) 
 // SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3100,7 +3101,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3113,7 +3114,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMa
 // ReadAttributeCurrentY wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3125,7 +3126,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentYWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCurrentYWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3138,7 +3139,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) 
 // SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3150,7 +3151,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3163,7 +3164,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMa
 // ReadAttributeDriftCompensation wraps the corresponding Objective-C method.
 //
 // ReadAttributeDriftCompensation blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3175,7 +3176,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDriftCompensationWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeDriftCompensationWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3188,7 +3189,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.
 // SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3200,7 +3201,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDriftCompensationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeDriftCompensationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3213,7 +3214,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinI
 // ReadAttributeCompensationText wraps the corresponding Objective-C method.
 //
 // ReadAttributeCompensationText blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.Context) (result string, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -3225,7 +3226,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.C
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCompensationTextWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCompensationTextWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3238,7 +3239,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.C
 // SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -3250,7 +3251,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIn
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCompensationTextWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCompensationTextWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3263,7 +3264,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIn
 // ReadAttributeColorTemperatureMireds wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3275,7 +3276,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorTemperatureMiredsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorTemperatureMiredsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3288,7 +3289,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx con
 // SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3300,7 +3301,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3313,7 +3314,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWit
 // ReadAttributeColorMode wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3325,7 +3326,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorModeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorModeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3338,7 +3339,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context)
 // SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3350,7 +3351,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3363,7 +3364,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalM
 // ReadAttributeOptions wraps the corresponding Objective-C method.
 //
 // ReadAttributeOptions blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3375,7 +3376,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOptionsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeOptionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3388,7 +3389,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (
 // SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3400,7 +3401,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOptionsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeOptionsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3413,7 +3414,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMax
 // ReadAttributeNumberOfPrimaries wraps the corresponding Objective-C method.
 //
 // ReadAttributeNumberOfPrimaries blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3425,7 +3426,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfPrimariesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeNumberOfPrimariesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3438,7 +3439,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.
 // SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3450,7 +3451,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3463,7 +3464,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinI
 // ReadAttributePrimary1X wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary1X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3475,7 +3476,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary1XWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary1XWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3488,7 +3489,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context)
 // SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3500,7 +3501,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary1XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3513,7 +3514,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalM
 // ReadAttributePrimary1Y wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary1Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3525,7 +3526,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary1YWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary1YWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3538,7 +3539,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context)
 // SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3550,7 +3551,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary1YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3563,7 +3564,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalM
 // ReadAttributePrimary1Intensity wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary1Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3575,7 +3576,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary1IntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary1IntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3588,7 +3589,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.
 // SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3600,7 +3601,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary1IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3613,7 +3614,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinI
 // ReadAttributePrimary2X wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary2X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3625,7 +3626,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary2XWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary2XWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3638,7 +3639,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context)
 // SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3650,7 +3651,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary2XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3663,7 +3664,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalM
 // ReadAttributePrimary2Y wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary2Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3675,7 +3676,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary2YWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary2YWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3688,7 +3689,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context)
 // SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3700,7 +3701,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary2YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3713,7 +3714,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalM
 // ReadAttributePrimary2Intensity wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary2Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3725,7 +3726,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary2IntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary2IntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3738,7 +3739,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.
 // SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3750,7 +3751,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary2IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3763,7 +3764,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinI
 // ReadAttributePrimary3X wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary3X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3775,7 +3776,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary3XWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary3XWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3788,7 +3789,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context)
 // SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3800,7 +3801,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary3XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3813,7 +3814,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalM
 // ReadAttributePrimary3Y wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary3Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3825,7 +3826,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary3YWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary3YWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3838,7 +3839,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context)
 // SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3850,7 +3851,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary3YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3863,7 +3864,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalM
 // ReadAttributePrimary3Intensity wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary3Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3875,7 +3876,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary3IntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary3IntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3888,7 +3889,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.
 // SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3900,7 +3901,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary3IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3913,7 +3914,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinI
 // ReadAttributePrimary4X wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary4X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3925,7 +3926,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary4XWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary4XWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3938,7 +3939,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context)
 // SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3950,7 +3951,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary4XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3963,7 +3964,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalM
 // ReadAttributePrimary4Y wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary4Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3975,7 +3976,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary4YWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary4YWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3988,7 +3989,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context)
 // SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4000,7 +4001,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary4YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4013,7 +4014,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalM
 // ReadAttributePrimary4Intensity wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary4Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4025,7 +4026,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary4IntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary4IntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4038,7 +4039,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.
 // SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4050,7 +4051,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary4IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4063,7 +4064,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinI
 // ReadAttributePrimary5X wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary5X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4075,7 +4076,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary5XWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary5XWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4088,7 +4089,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context)
 // SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4100,7 +4101,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary5XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4113,7 +4114,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalM
 // ReadAttributePrimary5Y wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary5Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4125,7 +4126,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary5YWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary5YWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4138,7 +4139,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context)
 // SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4150,7 +4151,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary5YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4163,7 +4164,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalM
 // ReadAttributePrimary5Intensity wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary5Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4175,7 +4176,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary5IntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary5IntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4188,7 +4189,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.
 // SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4200,7 +4201,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary5IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4213,7 +4214,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinI
 // ReadAttributePrimary6X wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary6X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4225,7 +4226,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary6XWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary6XWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4238,7 +4239,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context)
 // SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4250,7 +4251,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary6XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4263,7 +4264,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalM
 // ReadAttributePrimary6Y wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary6Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4275,7 +4276,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary6YWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary6YWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4288,7 +4289,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context)
 // SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4300,7 +4301,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary6YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4313,7 +4314,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalM
 // ReadAttributePrimary6Intensity wraps the corresponding Objective-C method.
 //
 // ReadAttributePrimary6Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4325,7 +4326,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePrimary6IntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributePrimary6IntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4338,7 +4339,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.
 // SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4350,7 +4351,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePrimary6IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4363,7 +4364,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinI
 // ReadAttributeWhitePointX wraps the corresponding Objective-C method.
 //
 // ReadAttributeWhitePointX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4375,7 +4376,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWhitePointXWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeWhitePointXWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4388,7 +4389,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Contex
 // SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4400,7 +4401,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWhitePointXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4413,7 +4414,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinInterva
 // ReadAttributeWhitePointY wraps the corresponding Objective-C method.
 //
 // ReadAttributeWhitePointY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4425,7 +4426,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWhitePointYWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeWhitePointYWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4438,7 +4439,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Contex
 // SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4450,7 +4451,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWhitePointYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4463,7 +4464,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinInterva
 // ReadAttributeColorPointRX wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointRX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4475,7 +4476,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointRXWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointRXWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4488,7 +4489,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Conte
 // SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4500,7 +4501,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointRXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4513,7 +4514,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinInterv
 // ReadAttributeColorPointRY wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointRY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4525,7 +4526,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointRYWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointRYWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4538,7 +4539,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Conte
 // SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4550,7 +4551,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointRYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4563,7 +4564,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinInterv
 // ReadAttributeColorPointRIntensity wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointRIntensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4575,7 +4576,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointRIntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointRIntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4588,7 +4589,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx conte
 // SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4600,7 +4601,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointRIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4613,7 +4614,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithM
 // ReadAttributeColorPointGX wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointGX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4625,7 +4626,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointGXWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointGXWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4638,7 +4639,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Conte
 // SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4650,7 +4651,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointGXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4663,7 +4664,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinInterv
 // ReadAttributeColorPointGY wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointGY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4675,7 +4676,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointGYWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointGYWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4688,7 +4689,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Conte
 // SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4700,7 +4701,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointGYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4713,7 +4714,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinInterv
 // ReadAttributeColorPointGIntensity wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointGIntensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4725,7 +4726,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointGIntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointGIntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4738,7 +4739,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx conte
 // SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4750,7 +4751,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointGIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4763,7 +4764,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithM
 // ReadAttributeColorPointBX wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointBX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4775,7 +4776,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointBXWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointBXWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4788,7 +4789,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Conte
 // SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4800,7 +4801,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointBXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4813,7 +4814,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinInterv
 // ReadAttributeColorPointBY wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointBY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4825,7 +4826,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointBYWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointBYWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4838,7 +4839,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Conte
 // SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4850,7 +4851,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointBYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4863,7 +4864,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinInterv
 // ReadAttributeColorPointBIntensity wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorPointBIntensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4875,7 +4876,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorPointBIntensityWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorPointBIntensityWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4888,7 +4889,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx conte
 // SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4900,7 +4901,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorPointBIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4913,7 +4914,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithM
 // ReadAttributeEnhancedCurrentHue wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnhancedCurrentHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4925,7 +4926,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnhancedCurrentHueWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeEnhancedCurrentHueWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4938,7 +4939,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context
 // SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4950,7 +4951,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4963,7 +4964,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMin
 // ReadAttributeEnhancedColorMode wraps the corresponding Objective-C method.
 //
 // ReadAttributeEnhancedColorMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4975,7 +4976,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnhancedColorModeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeEnhancedColorModeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4988,7 +4989,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.
 // SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5000,7 +5001,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEnhancedColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5013,7 +5014,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinI
 // ReadAttributeColorLoopActive wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopActive blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5025,7 +5026,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopActiveWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopActiveWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5038,7 +5039,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Co
 // SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5050,7 +5051,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopActiveWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopActiveWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5063,7 +5064,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinInt
 // ReadAttributeColorLoopDirection wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopDirection blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5075,7 +5076,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopDirectionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopDirectionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5088,7 +5089,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context
 // SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5100,7 +5101,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopDirectionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopDirectionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5113,7 +5114,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMin
 // ReadAttributeColorLoopTime wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopTime blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5125,7 +5126,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopTimeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopTimeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5138,7 +5139,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Cont
 // SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5150,7 +5151,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5163,7 +5164,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinInter
 // ReadAttributeColorLoopStartEnhancedHue wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopStartEnhancedHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5175,7 +5176,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopStartEnhancedHueWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopStartEnhancedHueWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5188,7 +5189,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx 
 // SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5200,7 +5201,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHue
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5213,7 +5214,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHue
 // ReadAttributeColorLoopStoredEnhancedHue wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorLoopStoredEnhancedHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5225,7 +5226,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorLoopStoredEnhancedHueWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorLoopStoredEnhancedHueWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5238,7 +5239,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx
 // SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5250,7 +5251,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5263,7 +5264,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHu
 // ReadAttributeColorCapabilities wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorCapabilities blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5275,7 +5276,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorCapabilitiesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorCapabilitiesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5288,7 +5289,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.
 // SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5300,7 +5301,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorCapabilitiesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorCapabilitiesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5313,7 +5314,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinI
 // ReadAttributeColorTempPhysicalMinMireds wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorTempPhysicalMinMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5325,7 +5326,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5338,7 +5339,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx
 // SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5350,7 +5351,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5363,7 +5364,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMired
 // ReadAttributeColorTempPhysicalMaxMireds wraps the corresponding Objective-C method.
 //
 // ReadAttributeColorTempPhysicalMaxMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5375,7 +5376,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5388,7 +5389,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5400,7 +5401,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5413,7 +5414,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMired
 // ReadAttributeCoupleColorTempToLevelMinMireds wraps the corresponding Objective-C method.
 //
 // ReadAttributeCoupleColorTempToLevelMinMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMireds(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5425,7 +5426,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCoupleColorTempToLevelMinMiredsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeCoupleColorTempToLevelMinMiredsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5438,7 +5439,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMired
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5450,7 +5451,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5463,7 +5464,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMin
 // ReadAttributeStartUpColorTemperatureMireds wraps the corresponding Objective-C method.
 //
 // ReadAttributeStartUpColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5475,7 +5476,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartUpColorTemperatureMiredsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeStartUpColorTemperatureMiredsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5488,7 +5489,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(
 // SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5500,7 +5501,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5513,7 +5514,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMi
 // ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5525,7 +5526,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5538,7 +5539,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx conte
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5550,7 +5551,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5563,7 +5564,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithM
 // ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5575,7 +5576,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5588,7 +5589,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx contex
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5600,7 +5601,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5613,7 +5614,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMi
 // ReadAttributeAttributeList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5625,7 +5626,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5638,7 +5639,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Cont
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5650,7 +5651,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5663,7 +5664,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinInter
 // ReadAttributeFeatureMap wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5675,7 +5676,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5688,7 +5689,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5700,7 +5701,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5713,7 +5714,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinInterval
 // ReadAttributeClusterRevision wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5725,7 +5726,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5738,7 +5739,7 @@ func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Co
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5750,7 +5751,7 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5759,241 +5760,6 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMinInt
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterColorControlable is the interface implemented by [MTRBaseClusterColorControl], for mocking and DI.
-type MTRBaseClusterColorControlable interface {
-	obj.Object
-	ReadAttributeCurrentHueWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentSaturationWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentXWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentYWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeDriftCompensationWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCompensationTextWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeColorTemperatureMiredsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorModeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOptionsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNumberOfPrimariesWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary1XWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary1YWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary1IntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary2XWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary2YWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary2IntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary3XWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary3YWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary3IntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary4XWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary4YWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary4IntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary5XWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary5YWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary5IntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary6XWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary6YWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePrimary6IntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeWhitePointXWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeWhitePointYWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointRXWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointRYWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointRIntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointGXWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointGYWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointGIntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointBXWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointBYWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorPointBIntensityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeEnhancedCurrentHueWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeEnhancedColorModeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorLoopActiveWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorLoopDirectionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorLoopTimeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorLoopStartEnhancedHueWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorLoopStoredEnhancedHueWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorCapabilitiesWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorTempPhysicalMinMiredsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeColorTempPhysicalMaxMiredsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeStartUpColorTemperatureMiredsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentHue(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentSaturation(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRemainingTime(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentX(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentY(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeDriftCompensation(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCompensationText(ctx context.Context) (string, error)
-	SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
-	ReadAttributeColorTemperatureMireds(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorMode(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeOptions(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNumberOfPrimaries(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary1X(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary1Y(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary1Intensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary2X(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary2Y(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary2Intensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary3X(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary3Y(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary3Intensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary4X(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary4Y(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary4Intensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary5X(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary5Y(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary5Intensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary6X(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary6Y(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePrimary6Intensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeWhitePointX(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeWhitePointY(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointRX(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointRY(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointRIntensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointGX(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointGY(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointGIntensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointBX(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointBY(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorPointBIntensity(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeEnhancedCurrentHue(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeEnhancedColorMode(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorLoopActive(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorLoopDirection(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorLoopTime(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorLoopStartEnhancedHue(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorLoopStoredEnhancedHue(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorCapabilities(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorTempPhysicalMinMireds(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeColorTempPhysicalMaxMireds(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCoupleColorTempToLevelMinMireds(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeStartUpColorTemperatureMireds(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterColorControlable = (*MTRBaseClusterColorControl)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterColorControl)(nil)
 

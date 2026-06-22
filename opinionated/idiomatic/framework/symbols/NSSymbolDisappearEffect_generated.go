@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewSymbolDisappearEffect() *SymbolDisappearEffect {
 	return symbolDisappearEffectAdopt(_id)
 }
 
-// EffectWithByLayer an effect that makes each layer disappear separately.
-func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+// EffectWithByLayer returns an effect that makes each layer disappear separately.
+func (sde *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sde), objc.RegisterName("effectWithByLayer"))
 	return SymbolDisappearEffectFromID(_r)
 }
 
-// EffectWithWholeSymbol an effect that makes all layers disappear simultaneously.
-func (x *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+// EffectWithWholeSymbol returns an effect that makes all layers disappear simultaneously.
+func (sde *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sde), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDisappearEffectFromID(_r)
 }
-
-// SymbolDisappearEffectable is the interface implemented by [SymbolDisappearEffect], for mocking and DI.
-type SymbolDisappearEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolDisappearEffect
-	EffectWithWholeSymbol() *SymbolDisappearEffect
-}
-
-var _ SymbolDisappearEffectable = (*SymbolDisappearEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolDisappearEffect)(nil)

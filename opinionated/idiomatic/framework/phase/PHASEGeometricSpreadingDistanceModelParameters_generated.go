@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,38 +51,22 @@ func NewGeometricSpreadingDistanceModelParameters() *GeometricSpreadingDistanceM
 	return geometricSpreadingDistanceModelParametersAdopt(_id)
 }
 
-// WithRolloffFactor a value that fades specific frequencies over a distance.
-func (x *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
-	return x
+// WithRolloffFactor sets a value that fades specific frequencies over a distance.
+func (gsdmp *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters {
+	objc.Send[objc.ID](objref.IDOf(gsdmp), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
+	return gsdmp
 }
 
-// WithFadeOutParameters a distance over which the framework fades out the mixer’s sound.
-func (x *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
-	return x
+// WithFadeOutParameters sets a distance over which the framework fades out the mixer’s sound.
+func (gsdmp *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {
+	objc.Send[objc.ID](objref.IDOf(gsdmp), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
+	return gsdmp
 }
 
 // RolloffFactor wraps the corresponding Objective-C method.
-func (x *GeometricSpreadingDistanceModelParameters) RolloffFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rolloffFactor"))
+func (gsdmp *GeometricSpreadingDistanceModelParameters) RolloffFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(gsdmp), objc.RegisterName("rolloffFactor"))
 	return _r
 }
-
-// SetRolloffFactor wraps the corresponding Objective-C method.
-func (x *GeometricSpreadingDistanceModelParameters) SetRolloffFactor(rolloffFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
-}
-
-// GeometricSpreadingDistanceModelParametersable is the interface implemented by [GeometricSpreadingDistanceModelParameters], for mocking and DI.
-type GeometricSpreadingDistanceModelParametersable interface {
-	obj.Object
-	WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters
-	WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters
-	RolloffFactor() float64
-	SetRolloffFactor(rolloffFactor float64)
-}
-
-var _ GeometricSpreadingDistanceModelParametersable = (*GeometricSpreadingDistanceModelParameters)(nil)
 
 var _ DistanceModelParametersProvider = (*GeometricSpreadingDistanceModelParameters)(nil)

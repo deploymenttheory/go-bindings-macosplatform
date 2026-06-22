@@ -50,25 +50,16 @@ func NewEnvironmentMechanismCompanion() *EnvironmentMechanismCompanion {
 	return environmentMechanismCompanionAdopt(_id)
 }
 
-// Type type of the companion.
-func (x *EnvironmentMechanismCompanion) Type() CompanionType {
-	_r := objc.Send[CompanionType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns type of the companion.
+func (emc *EnvironmentMechanismCompanion) Type() CompanionType {
+	_r := objc.Send[CompanionType](objref.IDOf(emc), objc.RegisterName("type"))
 	return _r
 }
 
-// StateHash hash of the current companion pairing as returned by If no companion are paired for this companion type,
-func (x *EnvironmentMechanismCompanion) StateHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+// StateHash returns hash of the current companion pairing as returned by If no companion are paired for this companion type,
+func (emc *EnvironmentMechanismCompanion) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(emc), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)
 }
-
-// EnvironmentMechanismCompanionable is the interface implemented by [EnvironmentMechanismCompanion], for mocking and DI.
-type EnvironmentMechanismCompanionable interface {
-	obj.Object
-	Type() CompanionType
-	StateHash() obj.Object
-}
-
-var _ EnvironmentMechanismCompanionable = (*EnvironmentMechanismCompanion)(nil)
 
 var _ EnvironmentMechanismProvider = (*EnvironmentMechanismCompanion)(nil)

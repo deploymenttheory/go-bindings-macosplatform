@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNDArrayStridedSlice() *NDArrayStridedSlice {
 	return nDArrayStridedSliceAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayStridedSlice) WithLabel(label string) *NDArrayStridedSlice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nass *NDArrayStridedSlice) WithLabel(label string) *NDArrayStridedSlice {
+	objc.Send[objc.ID](objref.IDOf(nass), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nass
 }
-
-// NDArrayStridedSliceable is the interface implemented by [NDArrayStridedSlice], for mocking and DI.
-type NDArrayStridedSliceable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayStridedSlice
-}
-
-var _ NDArrayStridedSliceable = (*NDArrayStridedSlice)(nil)
 
 var _ NDArrayUnaryKernelProvider = (*NDArrayStridedSlice)(nil)
 

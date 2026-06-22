@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,77 +51,62 @@ func NewMultiheadAttentionLayer() *MultiheadAttentionLayer {
 	return multiheadAttentionLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *MultiheadAttentionLayer) WithLabel(label string) *MultiheadAttentionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (mal *MultiheadAttentionLayer) WithLabel(label string) *MultiheadAttentionLayer {
+	objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mal
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (mal *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer {
+	objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return mal
 }
 
-// Descriptor the multi-head attention descriptor
-func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the multi-head attention descriptor
+func (mal *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("descriptor"))
 	return MultiheadAttentionDescriptorFromID(_r)
 }
 
-// Weights the weights of query, key, value and output projections
+// Weights returns the weights of query, key, value and output projections
 //
 // Weights returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) Weights() []*Tensor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+func (mal *MultiheadAttentionLayer) Weights() []*Tensor {
+	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("weights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Biases the biases of query, key, value and output projections
+// Biases returns the biases of query, key, value and output projections
 //
 // Biases returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) Biases() []*Tensor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biases"))
+func (mal *MultiheadAttentionLayer) Biases() []*Tensor {
+	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("biases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// AttentionBiases the biases added to key and value
+// AttentionBiases returns the biases added to key and value
 //
 // AttentionBiases returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attentionBiases"))
+func (mal *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
+	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("attentionBiases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// WeightsParameters the weights tensor parameters used for optimizer update
+// WeightsParameters returns the weights tensor parameters used for optimizer update
 //
 // WeightsParameters returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameters"))
+func (mal *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
+	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("weightsParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
 
-// BiasesParameters the biases tensor parameters used for optimizer update
+// BiasesParameters returns the biases tensor parameters used for optimizer update
 //
 // BiasesParameters returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) BiasesParameters() []*TensorParameter {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasesParameters"))
+func (mal *MultiheadAttentionLayer) BiasesParameters() []*TensorParameter {
+	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("biasesParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
-
-// MultiheadAttentionLayerable is the interface implemented by [MultiheadAttentionLayer], for mocking and DI.
-type MultiheadAttentionLayerable interface {
-	obj.Object
-	WithLabel(label string) *MultiheadAttentionLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer
-	Descriptor() *MultiheadAttentionDescriptor
-	Weights() []*Tensor
-	Biases() []*Tensor
-	AttentionBiases() []*Tensor
-	WeightsParameters() []*TensorParameter
-	BiasesParameters() []*TensorParameter
-}
-
-var _ MultiheadAttentionLayerable = (*MultiheadAttentionLayer)(nil)
 
 var _ LayerProvider = (*MultiheadAttentionLayer)(nil)

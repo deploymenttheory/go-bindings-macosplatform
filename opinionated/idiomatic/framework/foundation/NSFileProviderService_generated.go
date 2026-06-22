@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func fileProviderServiceAdopt(id objc.ID) *FileProviderService {
 }
 
 // Description returns the object's -description text.
-func (x *FileProviderService) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fps *FileProviderService) Description() string {
+	return rt.Description(objref.IDOf(fps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileProviderService) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fps *FileProviderService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileProviderService) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fps *FileProviderService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileProviderService) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fps *FileProviderService) String() string {
+	return rt.Description(objref.IDOf(fps))
 }
 
 // NewFileProviderService creates a new FileProviderService.
@@ -75,15 +76,15 @@ func NewFileProviderService() *FileProviderService {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *FileProviderService) WithScriptingProperties(scriptingProperties obj.Object) *FileProviderService {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (fps *FileProviderService) WithScriptingProperties(scriptingProperties obj.Object) *FileProviderService {
+	objc.Send[objc.ID](objref.IDOf(fps), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return fps
 }
 
 // GetFileProviderConnection asynchronously returns the service’s connection object.
 //
 // GetFileProviderConnection blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (result *XPCConnection, err error) {
+func (fps *FileProviderService) GetFileProviderConnection(ctx context.Context) (result *XPCConnection, err error) {
 	type _result struct {
 		val *XPCConnection
 		err error
@@ -95,7 +96,7 @@ func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (re
 		_o.val = XPCConnectionFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getFileProviderConnectionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(fps), objc.RegisterName("getFileProviderConnectionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,17 +107,7 @@ func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (re
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *FileProviderService) Name() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (fps *FileProviderService) Name() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(fps), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
-
-// FileProviderServiceable is the interface implemented by [FileProviderService], for mocking and DI.
-type FileProviderServiceable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *FileProviderService
-	GetFileProviderConnection(ctx context.Context) (*XPCConnection, error)
-	Name() *String
-}
-
-var _ FileProviderServiceable = (*FileProviderService)(nil)

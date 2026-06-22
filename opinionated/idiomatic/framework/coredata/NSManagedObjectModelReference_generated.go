@@ -46,24 +46,24 @@ func managedObjectModelReferenceAdopt(id objc.ID) *ManagedObjectModelReference {
 }
 
 // Description returns the object's -description text.
-func (x *ManagedObjectModelReference) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (momr *ManagedObjectModelReference) Description() string {
+	return rt.Description(objref.IDOf(momr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ManagedObjectModelReference) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (momr *ManagedObjectModelReference) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(momr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ManagedObjectModelReference) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (momr *ManagedObjectModelReference) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(momr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ManagedObjectModelReference) String() string {
-	return rt.Description(objref.IDOf(x))
+func (momr *ManagedObjectModelReference) String() string {
+	return rt.Description(objref.IDOf(momr))
 }
 
 // NewManagedObjectModelReferenceWithModelVersionChecksum creates an object model reference for the specified model.
@@ -95,25 +95,16 @@ func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName str
 }
 
 // ResolvedModel wraps the corresponding Objective-C method.
-func (x *ManagedObjectModelReference) ResolvedModel() *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvedModel"))
+func (momr *ManagedObjectModelReference) ResolvedModel() *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objref.IDOf(momr), objc.RegisterName("resolvedModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // VersionChecksum wraps the corresponding Objective-C method.
-func (x *ManagedObjectModelReference) VersionChecksum() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionChecksum"))
+func (momr *ManagedObjectModelReference) VersionChecksum() string {
+	_r := objc.Send[objc.ID](objref.IDOf(momr), objc.RegisterName("versionChecksum"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ManagedObjectModelReferenceable is the interface implemented by [ManagedObjectModelReference], for mocking and DI.
-type ManagedObjectModelReferenceable interface {
-	obj.Object
-	ResolvedModel() *ManagedObjectModel
-	VersionChecksum() string
-}
-
-var _ ManagedObjectModelReferenceable = (*ManagedObjectModelReference)(nil)

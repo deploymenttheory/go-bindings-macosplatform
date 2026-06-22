@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func systemSharingUIObserverAdopt(id objc.ID) *SystemSharingUIObserver {
 }
 
 // Description returns the object's -description text.
-func (x *SystemSharingUIObserver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ssuo *SystemSharingUIObserver) Description() string {
+	return rt.Description(objref.IDOf(ssuo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SystemSharingUIObserver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ssuo *SystemSharingUIObserver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ssuo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SystemSharingUIObserver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ssuo *SystemSharingUIObserver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ssuo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SystemSharingUIObserver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ssuo *SystemSharingUIObserver) String() string {
+	return rt.Description(objref.IDOf(ssuo))
 }
 
 // NewSystemSharingUIObserverWithContainer creates and initializes an observer using the provided container.
@@ -78,7 +79,7 @@ func NewSystemSharingUIObserverWithContainer(container *Container) *SystemSharin
 // SetSystemSharingUIDidStopSharingBlock wraps the corresponding Objective-C method.
 //
 // SetSystemSharingUIDidStopSharingBlock blocks until the operation completes or ctx is cancelled.
-func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (result *RecordID, err error) {
+func (ssuo *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
@@ -90,7 +91,7 @@ func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx cont
 		_o.val = RecordIDFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemSharingUIDidStopSharingBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ssuo), objc.RegisterName("setSystemSharingUIDidStopSharingBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -99,11 +100,3 @@ func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx cont
 		return _zero, ctx.Err()
 	}
 }
-
-// SystemSharingUIObserverable is the interface implemented by [SystemSharingUIObserver], for mocking and DI.
-type SystemSharingUIObserverable interface {
-	obj.Object
-	SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (*RecordID, error)
-}
-
-var _ SystemSharingUIObserverable = (*SystemSharingUIObserver)(nil)

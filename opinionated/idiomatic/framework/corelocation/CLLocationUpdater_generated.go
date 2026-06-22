@@ -46,24 +46,24 @@ func locationUpdaterAdopt(id objc.ID) *LocationUpdater {
 }
 
 // Description returns the object's -description text.
-func (x *LocationUpdater) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lu *LocationUpdater) Description() string {
+	return rt.Description(objref.IDOf(lu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocationUpdater) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lu *LocationUpdater) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocationUpdater) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lu *LocationUpdater) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocationUpdater) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lu *LocationUpdater) String() string {
+	return rt.Description(objref.IDOf(lu))
 }
 
 // NewLocationUpdater creates a new LocationUpdater.
@@ -73,26 +73,16 @@ func NewLocationUpdater() *LocationUpdater {
 }
 
 // Resume resumes the updater.
-func (x *LocationUpdater) Resume() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
+func (lu *LocationUpdater) Resume() {
+	objc.Send[objc.ID](objref.IDOf(lu), objc.RegisterName("resume"))
 }
 
 // Pause pauses the updater.
-func (x *LocationUpdater) Pause() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+func (lu *LocationUpdater) Pause() {
+	objc.Send[objc.ID](objref.IDOf(lu), objc.RegisterName("pause"))
 }
 
 // Invalidate invalidates the updater.
-func (x *LocationUpdater) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (lu *LocationUpdater) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(lu), objc.RegisterName("invalidate"))
 }
-
-// LocationUpdaterable is the interface implemented by [LocationUpdater], for mocking and DI.
-type LocationUpdaterable interface {
-	obj.Object
-	Resume()
-	Pause()
-	Invalidate()
-}
-
-var _ LocationUpdaterable = (*LocationUpdater)(nil)

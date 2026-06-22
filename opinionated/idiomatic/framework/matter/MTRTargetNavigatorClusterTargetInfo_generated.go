@@ -51,24 +51,15 @@ func NewMTRTargetNavigatorClusterTargetInfo() *MTRTargetNavigatorClusterTargetIn
 }
 
 // WithIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRTargetNavigatorClusterTargetInfo) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
-	return x
+func (mtncti *MTRTargetNavigatorClusterTargetInfo) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfo {
+	objc.Send[objc.ID](objref.IDOf(mtncti), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
+	return mtncti
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRTargetNavigatorClusterTargetInfo) WithName(name string) *MTRTargetNavigatorClusterTargetInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mtncti *MTRTargetNavigatorClusterTargetInfo) WithName(name string) *MTRTargetNavigatorClusterTargetInfo {
+	objc.Send[objc.ID](objref.IDOf(mtncti), objc.RegisterName("setName:"), purego.NSString(name))
+	return mtncti
 }
-
-// MTRTargetNavigatorClusterTargetInfoable is the interface implemented by [MTRTargetNavigatorClusterTargetInfo], for mocking and DI.
-type MTRTargetNavigatorClusterTargetInfoable interface {
-	obj.Object
-	WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfo
-	WithName(name string) *MTRTargetNavigatorClusterTargetInfo
-}
-
-var _ MTRTargetNavigatorClusterTargetInfoable = (*MTRTargetNavigatorClusterTargetInfo)(nil)
 
 var _ MTRTargetNavigatorClusterTargetInfoStructProvider = (*MTRTargetNavigatorClusterTargetInfo)(nil)

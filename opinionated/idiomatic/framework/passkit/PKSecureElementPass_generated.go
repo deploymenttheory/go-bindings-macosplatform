@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,8 +46,8 @@ func secureElementPassAdopt(id objc.ID) *SecureElementPass {
 }
 
 // PrimaryAccountIdentifier wraps the corresponding Objective-C method.
-func (x *SecureElementPass) PrimaryAccountIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryAccountIdentifier"))
+func (sep *SecureElementPass) PrimaryAccountIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("primaryAccountIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -56,8 +55,8 @@ func (x *SecureElementPass) PrimaryAccountIdentifier() string {
 }
 
 // PrimaryAccountNumberSuffix wraps the corresponding Objective-C method.
-func (x *SecureElementPass) PrimaryAccountNumberSuffix() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryAccountNumberSuffix"))
+func (sep *SecureElementPass) PrimaryAccountNumberSuffix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("primaryAccountNumberSuffix"))
 	if _r == 0 {
 		return ""
 	}
@@ -65,8 +64,8 @@ func (x *SecureElementPass) PrimaryAccountNumberSuffix() string {
 }
 
 // DeviceAccountIdentifier wraps the corresponding Objective-C method.
-func (x *SecureElementPass) DeviceAccountIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+func (sep *SecureElementPass) DeviceAccountIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -74,8 +73,8 @@ func (x *SecureElementPass) DeviceAccountIdentifier() string {
 }
 
 // DeviceAccountNumberSuffix wraps the corresponding Objective-C method.
-func (x *SecureElementPass) DeviceAccountNumberSuffix() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountNumberSuffix"))
+func (sep *SecureElementPass) DeviceAccountNumberSuffix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("deviceAccountNumberSuffix"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,14 +82,14 @@ func (x *SecureElementPass) DeviceAccountNumberSuffix() string {
 }
 
 // PassActivationState wraps the corresponding Objective-C method.
-func (x *SecureElementPass) PassActivationState() SecureElementPassActivationState {
-	_r := objc.Send[SecureElementPassActivationState](objref.IDOf(x), objc.RegisterName("passActivationState"))
+func (sep *SecureElementPass) PassActivationState() SecureElementPassActivationState {
+	_r := objc.Send[SecureElementPassActivationState](objref.IDOf(sep), objc.RegisterName("passActivationState"))
 	return _r
 }
 
 // DevicePassIdentifier wraps the corresponding Objective-C method.
-func (x *SecureElementPass) DevicePassIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devicePassIdentifier"))
+func (sep *SecureElementPass) DevicePassIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("devicePassIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -98,32 +97,18 @@ func (x *SecureElementPass) DevicePassIdentifier() string {
 }
 
 // PairedTerminalIdentifier wraps the corresponding Objective-C method.
-func (x *SecureElementPass) PairedTerminalIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pairedTerminalIdentifier"))
+func (sep *SecureElementPass) PairedTerminalIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("pairedTerminalIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SecureElementPassable is the interface implemented by [SecureElementPass], for mocking and DI.
-type SecureElementPassable interface {
-	obj.Object
-	PrimaryAccountIdentifier() string
-	PrimaryAccountNumberSuffix() string
-	DeviceAccountIdentifier() string
-	DeviceAccountNumberSuffix() string
-	PassActivationState() SecureElementPassActivationState
-	DevicePassIdentifier() string
-	PairedTerminalIdentifier() string
-}
-
-var _ SecureElementPassable = (*SecureElementPass)(nil)
-
 // isSecureElementPass marks SecureElementPass — and, by embedding promotion, its
 // subclasses — as a member of the SecureElementPass hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SecureElementPass) isSecureElementPass() {}
+func (sep *SecureElementPass) isSecureElementPass() {}
 
 var _ SecureElementPassProvider = (*SecureElementPass)(nil)
 

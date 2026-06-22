@@ -52,48 +52,36 @@ func NewUpsampleLayer() *UpsampleLayer {
 	return upsampleLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *UpsampleLayer) WithLabel(label string) *UpsampleLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (ul *UpsampleLayer) WithLabel(label string) *UpsampleLayer {
+	objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ul
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (ul *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer {
+	objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return ul
 }
 
-// Shape a NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
+// Shape returns a NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
 //
 // Shape returns the collection as a Go slice.
-func (x *UpsampleLayer) Shape() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+func (ul *UpsampleLayer) Shape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SampleMode the sampling mode to use when performing the upsample.
-func (x *UpsampleLayer) SampleMode() SampleMode {
-	_r := objc.Send[SampleMode](objref.IDOf(x), objc.RegisterName("sampleMode"))
+// SampleMode returns the sampling mode to use when performing the upsample.
+func (ul *UpsampleLayer) SampleMode() SampleMode {
+	_r := objc.Send[SampleMode](objref.IDOf(ul), objc.RegisterName("sampleMode"))
 	return _r
 }
 
-// AlignsCorners a boolean that specifies whether the corner pixels of the source and result tensors are aligned. If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is NO.
-func (x *UpsampleLayer) AlignsCorners() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignsCorners"))
+// AlignsCorners reports whether a boolean that specifies whether the corner pixels of the source and result tensors are aligned. If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is false.
+func (ul *UpsampleLayer) AlignsCorners() bool {
+	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("alignsCorners"))
 	return _r
 }
-
-// UpsampleLayerable is the interface implemented by [UpsampleLayer], for mocking and DI.
-type UpsampleLayerable interface {
-	obj.Object
-	WithLabel(label string) *UpsampleLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer
-	Shape() []obj.Object
-	SampleMode() SampleMode
-	AlignsCorners() bool
-}
-
-var _ UpsampleLayerable = (*UpsampleLayer)(nil)
 
 var _ LayerProvider = (*UpsampleLayer)(nil)

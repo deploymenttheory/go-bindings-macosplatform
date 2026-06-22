@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,121 +53,83 @@ func NewCNNCrossChannelNormalization() *CNNCrossChannelNormalization {
 	return cNNCrossChannelNormalizationAdopt(_id)
 }
 
-// WithAlpha the “alpha” variable of the kernel function.
-func (x *CNNCrossChannelNormalization) WithAlpha(alpha float32) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the “alpha” variable of the kernel function.
+func (cccn *CNNCrossChannelNormalization) WithAlpha(alpha float32) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setAlpha:"), alpha)
+	return cccn
 }
 
-// WithBeta the “beta” variable of the kernel function.
-func (x *CNNCrossChannelNormalization) WithBeta(beta float32) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the “beta” variable of the kernel function.
+func (cccn *CNNCrossChannelNormalization) WithBeta(beta float32) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setBeta:"), beta)
+	return cccn
 }
 
-// WithDelta the “delta” variable of the kernel function.
-func (x *CNNCrossChannelNormalization) WithDelta(delta float32) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+// WithDelta sets the “delta” variable of the kernel function.
+func (cccn *CNNCrossChannelNormalization) WithDelta(delta float32) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setDelta:"), delta)
+	return cccn
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *CNNCrossChannelNormalization) WithOffset(offset mpscore.MPSOffset) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (cccn *CNNCrossChannelNormalization) WithOffset(offset mpscore.MPSOffset) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setOffset:"), offset)
+	return cccn
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *CNNCrossChannelNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (cccn *CNNCrossChannelNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setClipRect:"), clipRect)
+	return cccn
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *CNNCrossChannelNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (cccn *CNNCrossChannelNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cccn
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNCrossChannelNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cccn *CNNCrossChannelNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cccn
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNCrossChannelNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cccn *CNNCrossChannelNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cccn
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNCrossChannelNormalization) WithLabel(label string) *CNNCrossChannelNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cccn *CNNCrossChannelNormalization) WithLabel(label string) *CNNCrossChannelNormalization {
+	objc.Send[objc.ID](objref.IDOf(cccn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cccn
 }
 
-// Alpha the value of alpha.  Default is 1.0. Must be non-negative.
-func (x *CNNCrossChannelNormalization) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
+func (cccn *CNNCrossChannelNormalization) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(cccn), objc.RegisterName("alpha"))
 	return _r
 }
 
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *CNNCrossChannelNormalization) SetAlpha(alpha float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// Beta the value of beta.  Default is 5.0
-func (x *CNNCrossChannelNormalization) Beta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the value of beta.  Default is 5.0
+func (cccn *CNNCrossChannelNormalization) Beta() float32 {
+	_r := objc.Send[float32](objref.IDOf(cccn), objc.RegisterName("beta"))
 	return _r
 }
 
-// SetBeta wraps the corresponding Objective-C method.
-func (x *CNNCrossChannelNormalization) SetBeta(beta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-}
-
-// Delta the value of delta.  Default is 1.0
-func (x *CNNCrossChannelNormalization) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+// Delta returns the value of delta.  Default is 1.0
+func (cccn *CNNCrossChannelNormalization) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(cccn), objc.RegisterName("delta"))
 	return _r
 }
 
-// SetDelta wraps the corresponding Objective-C method.
-func (x *CNNCrossChannelNormalization) SetDelta(delta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-}
-
-// KernelSize the size of the square filter window.  Default is 5
-func (x *CNNCrossChannelNormalization) KernelSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelSize"))
+// KernelSize returns the size of the square filter window.  Default is 5
+func (cccn *CNNCrossChannelNormalization) KernelSize() int {
+	_r := objc.Send[int](objref.IDOf(cccn), objc.RegisterName("kernelSize"))
 	return _r
 }
-
-// CNNCrossChannelNormalizationable is the interface implemented by [CNNCrossChannelNormalization], for mocking and DI.
-type CNNCrossChannelNormalizationable interface {
-	obj.Object
-	WithAlpha(alpha float32) *CNNCrossChannelNormalization
-	WithBeta(beta float32) *CNNCrossChannelNormalization
-	WithDelta(delta float32) *CNNCrossChannelNormalization
-	WithOffset(offset mpscore.MPSOffset) *CNNCrossChannelNormalization
-	WithClipRect(clipRect metal.MTLRegion) *CNNCrossChannelNormalization
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNCrossChannelNormalization
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNCrossChannelNormalization
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNCrossChannelNormalization
-	WithLabel(label string) *CNNCrossChannelNormalization
-	Alpha() float32
-	SetAlpha(alpha float32)
-	Beta() float32
-	SetBeta(beta float32)
-	Delta() float32
-	SetDelta(delta float32)
-	KernelSize() int
-}
-
-var _ CNNCrossChannelNormalizationable = (*CNNCrossChannelNormalization)(nil)
 
 var _ CNNKernelProvider = (*CNNCrossChannelNormalization)(nil)
 

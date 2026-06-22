@@ -53,11 +53,4 @@ func NewSimpleTLVRecordWithTagValue(tag uint8, value obj.Object) *SimpleTLVRecor
 	return simpleTLVRecordAdopt(_id)
 }
 
-// SimpleTLVRecordable is the interface implemented by [SimpleTLVRecord], for mocking and DI.
-type SimpleTLVRecordable interface {
-	obj.Object
-}
-
-var _ SimpleTLVRecordable = (*SimpleTLVRecord)(nil)
-
 var _ TLVRecordProvider = (*SimpleTLVRecord)(nil)

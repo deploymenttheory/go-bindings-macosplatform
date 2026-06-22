@@ -44,24 +44,24 @@ func mTRCommissionerControlClusterCommissionNodeParamsAdopt(id objc.ID) *MTRComm
 }
 
 // Description returns the object's -description text.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) Description() string {
+	return rt.Description(objref.IDOf(mccccnp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mccccnp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mccccnp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) String() string {
+	return rt.Description(objref.IDOf(mccccnp))
 }
 
 // NewMTRCommissionerControlClusterCommissionNodeParams creates a new MTRCommissionerControlClusterCommissionNodeParams.
@@ -71,88 +71,49 @@ func NewMTRCommissionerControlClusterCommissionNodeParams() *MTRCommissionerCont
 }
 
 // WithRequestID sets the property and returns the receiver so calls can be chained.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
-	return x
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
+	return mccccnp
 }
 
 // WithResponseTimeoutSeconds sets the property and returns the receiver so calls can be chained.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) WithResponseTimeoutSeconds(responseTimeoutSeconds obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponseTimeoutSeconds:"), objref.IDOf(responseTimeoutSeconds))
-	return x
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithResponseTimeoutSeconds(responseTimeoutSeconds obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setResponseTimeoutSeconds:"), objref.IDOf(responseTimeoutSeconds))
+	return mccccnp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRCommissionerControlClusterCommissionNodeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mccccnp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mccccnp
 }
 
 // RequestID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) RequestID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestID"))
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) RequestID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("requestID"))
 	return obj.Wrap(_r)
-}
-
-// SetRequestID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) SetRequestID(requestID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 }
 
 // ResponseTimeoutSeconds wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) ResponseTimeoutSeconds() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responseTimeoutSeconds"))
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) ResponseTimeoutSeconds() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("responseTimeoutSeconds"))
 	return obj.Wrap(_r)
 }
 
-// SetResponseTimeoutSeconds wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) SetResponseTimeoutSeconds(responseTimeoutSeconds obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponseTimeoutSeconds:"), objref.IDOf(responseTimeoutSeconds))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterCommissionNodeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRCommissionerControlClusterCommissionNodeParamsable is the interface implemented by [MTRCommissionerControlClusterCommissionNodeParams], for mocking and DI.
-type MTRCommissionerControlClusterCommissionNodeParamsable interface {
-	obj.Object
-	WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissionNodeParams
-	WithResponseTimeoutSeconds(responseTimeoutSeconds obj.Object) *MTRCommissionerControlClusterCommissionNodeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterCommissionNodeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterCommissionNodeParams
-	RequestID() obj.Object
-	SetRequestID(requestID obj.Object)
-	ResponseTimeoutSeconds() obj.Object
-	SetResponseTimeoutSeconds(responseTimeoutSeconds obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRCommissionerControlClusterCommissionNodeParamsable = (*MTRCommissionerControlClusterCommissionNodeParams)(nil)

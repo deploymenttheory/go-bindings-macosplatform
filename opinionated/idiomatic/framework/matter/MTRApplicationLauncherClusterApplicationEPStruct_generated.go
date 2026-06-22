@@ -46,77 +46,54 @@ func mTRApplicationLauncherClusterApplicationEPStructAdopt(id objc.ID) *MTRAppli
 }
 
 // Description returns the object's -description text.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Description() string {
+	return rt.Description(objref.IDOf(malcaes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(malcaes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(malcaes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) String() string {
+	return rt.Description(objref.IDOf(malcaes))
 }
 
 // WithApplication sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEPStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
-	return x
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEPStruct {
+	objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("setApplication:"), objref.IDOf(application))
+	return malcaes
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEPStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEPStruct {
+	objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return malcaes
 }
 
 // Application wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) Application() *MTRApplicationLauncherClusterApplicationStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("application"))
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
-// SetApplication wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) SetApplication(application *MTRApplicationLauncherClusterApplicationStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
-}
-
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
-
-// SetEndpoint wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) SetEndpoint(endpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-}
-
-// MTRApplicationLauncherClusterApplicationEPStructable is the interface implemented by [MTRApplicationLauncherClusterApplicationEPStruct], for mocking and DI.
-type MTRApplicationLauncherClusterApplicationEPStructable interface {
-	obj.Object
-	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEPStruct
-	WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEPStruct
-	Application() *MTRApplicationLauncherClusterApplicationStruct
-	SetApplication(application *MTRApplicationLauncherClusterApplicationStruct)
-	Endpoint() obj.Object
-	SetEndpoint(endpoint obj.Object)
-}
-
-var _ MTRApplicationLauncherClusterApplicationEPStructable = (*MTRApplicationLauncherClusterApplicationEPStruct)(nil)
 
 // isMTRApplicationLauncherClusterApplicationEPStruct marks MTRApplicationLauncherClusterApplicationEPStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRApplicationLauncherClusterApplicationEPStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) isMTRApplicationLauncherClusterApplicationEPStruct() {
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) isMTRApplicationLauncherClusterApplicationEPStruct() {
 }
 
 var _ MTRApplicationLauncherClusterApplicationEPStructProvider = (*MTRApplicationLauncherClusterApplicationEPStruct)(nil)

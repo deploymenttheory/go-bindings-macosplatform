@@ -54,31 +54,21 @@ func NewWarpGeometryGridWithCoder(aDecoder obj.Object) *WarpGeometryGrid {
 }
 
 // NumberOfColumns wraps the corresponding Objective-C method.
-func (x *WarpGeometryGrid) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
+func (wgg *WarpGeometryGrid) NumberOfColumns() int {
+	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
 // NumberOfRows wraps the corresponding Objective-C method.
-func (x *WarpGeometryGrid) NumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
+func (wgg *WarpGeometryGrid) NumberOfRows() int {
+	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
 // VertexCount wraps the corresponding Objective-C method.
-func (x *WarpGeometryGrid) VertexCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
+func (wgg *WarpGeometryGrid) VertexCount() int {
+	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("vertexCount"))
 	return _r
 }
-
-// WarpGeometryGridable is the interface implemented by [WarpGeometryGrid], for mocking and DI.
-type WarpGeometryGridable interface {
-	obj.Object
-	NumberOfColumns() int
-	NumberOfRows() int
-	VertexCount() int
-}
-
-var _ WarpGeometryGridable = (*WarpGeometryGrid)(nil)
 
 var _ WarpGeometryProvider = (*WarpGeometryGrid)(nil)

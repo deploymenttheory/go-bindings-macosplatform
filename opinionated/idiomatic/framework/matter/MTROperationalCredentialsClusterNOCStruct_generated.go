@@ -44,24 +44,24 @@ func mTROperationalCredentialsClusterNOCStructAdopt(id objc.ID) *MTROperationalC
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCredentialsClusterNOCStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) Description() string {
+	return rt.Description(objref.IDOf(moccns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCredentialsClusterNOCStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moccns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCredentialsClusterNOCStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moccns *MTROperationalCredentialsClusterNOCStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moccns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCredentialsClusterNOCStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) String() string {
+	return rt.Description(objref.IDOf(moccns))
 }
 
 // NewMTROperationalCredentialsClusterNOCStruct creates a new MTROperationalCredentialsClusterNOCStruct.
@@ -71,68 +71,37 @@ func NewMTROperationalCredentialsClusterNOCStruct() *MTROperationalCredentialsCl
 }
 
 // WithNoc sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterNOCStruct) WithNoc(noc obj.Object) *MTROperationalCredentialsClusterNOCStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoc:"), objref.IDOf(noc))
-	return x
+func (moccns *MTROperationalCredentialsClusterNOCStruct) WithNoc(noc obj.Object) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setNoc:"), objref.IDOf(noc))
+	return moccns
 }
 
 // WithIcac sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterNOCStruct) WithIcac(icac obj.Object) *MTROperationalCredentialsClusterNOCStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcac:"), objref.IDOf(icac))
-	return x
+func (moccns *MTROperationalCredentialsClusterNOCStruct) WithIcac(icac obj.Object) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setIcac:"), objref.IDOf(icac))
+	return moccns
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterNOCStruct) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (moccns *MTROperationalCredentialsClusterNOCStruct) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return moccns
 }
 
 // Noc wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterNOCStruct) Noc() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noc"))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) Noc() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("noc"))
 	return obj.Wrap(_r)
-}
-
-// SetNoc wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterNOCStruct) SetNoc(noc obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoc:"), objref.IDOf(noc))
 }
 
 // Icac wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterNOCStruct) Icac() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icac"))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) Icac() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("icac"))
 	return obj.Wrap(_r)
-}
-
-// SetIcac wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterNOCStruct) SetIcac(icac obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcac:"), objref.IDOf(icac))
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterNOCStruct) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterNOCStruct) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTROperationalCredentialsClusterNOCStructable is the interface implemented by [MTROperationalCredentialsClusterNOCStruct], for mocking and DI.
-type MTROperationalCredentialsClusterNOCStructable interface {
-	obj.Object
-	WithNoc(noc obj.Object) *MTROperationalCredentialsClusterNOCStruct
-	WithIcac(icac obj.Object) *MTROperationalCredentialsClusterNOCStruct
-	WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCStruct
-	Noc() obj.Object
-	SetNoc(noc obj.Object)
-	Icac() obj.Object
-	SetIcac(icac obj.Object)
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTROperationalCredentialsClusterNOCStructable = (*MTROperationalCredentialsClusterNOCStruct)(nil)

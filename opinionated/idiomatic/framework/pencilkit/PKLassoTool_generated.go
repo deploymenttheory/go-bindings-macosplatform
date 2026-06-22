@@ -7,7 +7,6 @@ package pencilkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewLassoTool() *LassoTool {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKLassoTool")), objc.RegisterName("new"))
 	return lassoToolAdopt(_id)
 }
-
-// LassoToolable is the interface implemented by [LassoTool], for mocking and DI.
-type LassoToolable interface {
-	obj.Object
-}
-
-var _ LassoToolable = (*LassoTool)(nil)
 
 var _ ToolProvider = (*LassoTool)(nil)

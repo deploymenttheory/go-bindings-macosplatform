@@ -5,12 +5,12 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AudioIONode is an idiomatic wrapper over the Objective-C class AVAudioIONode.
@@ -49,41 +49,31 @@ func audioIONodeAdopt(id objc.ID) *AudioIONode {
 }
 
 // SetVoiceProcessingEnabled enables or disables voice processing on the I/O node.
-func (x *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
+func (ain *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setVoiceProcessingEnabled:error:"), enabled, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ain), objc.RegisterName("setVoiceProcessingEnabled:error:"), enabled, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// PresentationLatency the presentation or hardware latency, applicable when the engine is rendering to/from an audio device. This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
-func (x *AudioIONode) PresentationLatency() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("presentationLatency"))
+// PresentationLatency returns the presentation or hardware latency, applicable when the engine is rendering to/from an audio device. This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
+func (ain *AudioIONode) PresentationLatency() float64 {
+	_r := objc.Send[float64](objref.IDOf(ain), objc.RegisterName("presentationLatency"))
 	return _r
 }
 
-// IsVoiceProcessingEnabled indicates whether voice processing is enabled.
-func (x *AudioIONode) IsVoiceProcessingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingEnabled"))
+// IsVoiceProcessingEnabled reports whether voice processing is enabled.
+func (ain *AudioIONode) IsVoiceProcessingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingEnabled"))
 	return _r
 }
-
-// AudioIONodeable is the interface implemented by [AudioIONode], for mocking and DI.
-type AudioIONodeable interface {
-	obj.Object
-	SetVoiceProcessingEnabled(enabled bool) error
-	PresentationLatency() float64
-	IsVoiceProcessingEnabled() bool
-}
-
-var _ AudioIONodeable = (*AudioIONode)(nil)
 
 // isAudioIONode marks AudioIONode — and, by embedding promotion, its
 // subclasses — as a member of the AudioIONode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioIONode) isAudioIONode() {}
+func (ain *AudioIONode) isAudioIONode() {}
 
 var _ AudioIONodeProvider = (*AudioIONode)(nil)
 

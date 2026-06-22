@@ -46,28 +46,28 @@ func callRecordAdopt(id objc.ID) *CallRecord {
 }
 
 // Description returns the object's -description text.
-func (x *CallRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CallRecord) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CallRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *CallRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CallRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *CallRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CallRecord) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CallRecord) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
-// NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked creates a call record with the details about the call.
-func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked(identifier string, dateCreated obj.Object, callRecordType CallRecordType, callCapability CallCapability, callDuration obj.Object, unseen obj.Object, participants []*Person, numberOfCalls obj.Object, isCallerIdBlocked obj.Object) *CallRecord {
+// NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIDBlocked creates a call record with the details about the call.
+func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIDBlocked(identifier string, dateCreated obj.Object, callRecordType CallRecordType, callCapability CallCapability, callDuration obj.Object, unseen obj.Object, participants []*Person, numberOfCalls obj.Object, isCallerIdBlocked obj.Object) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INCallRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked:"), purego.NSString(identifier), objref.IDOf(dateCreated), callRecordType, callCapability, objref.IDOf(callDuration), objref.IDOf(unseen), purego.SliceToNSArray(participants, func(_v *Person) objc.ID { return objref.IDOf(_v) }), objref.IDOf(numberOfCalls), objref.IDOf(isCallerIdBlocked))
 	return callRecordAdopt(_id)
@@ -102,8 +102,8 @@ func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCal
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *CallRecord) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (cr *CallRecord) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -111,74 +111,57 @@ func (x *CallRecord) Identifier() string {
 }
 
 // DateCreated wraps the corresponding Objective-C method.
-func (x *CallRecord) DateCreated() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateCreated"))
+func (cr *CallRecord) DateCreated() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("dateCreated"))
 	return obj.Wrap(_r)
 }
 
 // CallRecordType wraps the corresponding Objective-C method.
-func (x *CallRecord) CallRecordType() CallRecordType {
-	_r := objc.Send[CallRecordType](objref.IDOf(x), objc.RegisterName("callRecordType"))
+func (cr *CallRecord) CallRecordType() CallRecordType {
+	_r := objc.Send[CallRecordType](objref.IDOf(cr), objc.RegisterName("callRecordType"))
 	return _r
 }
 
 // CallDuration wraps the corresponding Objective-C method.
-func (x *CallRecord) CallDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callDuration"))
+func (cr *CallRecord) CallDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("callDuration"))
 	return obj.Wrap(_r)
 }
 
 // Unseen wraps the corresponding Objective-C method.
-func (x *CallRecord) Unseen() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unseen"))
+func (cr *CallRecord) Unseen() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("unseen"))
 	return obj.Wrap(_r)
 }
 
 // CallCapability wraps the corresponding Objective-C method.
-func (x *CallRecord) CallCapability() CallCapability {
-	_r := objc.Send[CallCapability](objref.IDOf(x), objc.RegisterName("callCapability"))
+func (cr *CallRecord) CallCapability() CallCapability {
+	_r := objc.Send[CallCapability](objref.IDOf(cr), objc.RegisterName("callCapability"))
 	return _r
 }
 
 // NumberOfCalls wraps the corresponding Objective-C method.
-func (x *CallRecord) NumberOfCalls() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfCalls"))
+func (cr *CallRecord) NumberOfCalls() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("numberOfCalls"))
 	return obj.Wrap(_r)
 }
 
-// IsCallerIdBlocked wraps the corresponding Objective-C method.
-func (x *CallRecord) IsCallerIdBlocked() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isCallerIdBlocked"))
+// IsCallerIDBlocked wraps the corresponding Objective-C method.
+func (cr *CallRecord) IsCallerIDBlocked() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("isCallerIdBlocked"))
 	return obj.Wrap(_r)
 }
 
 // Participants wraps the corresponding Objective-C method.
 //
 // Participants returns the collection as a Go slice.
-func (x *CallRecord) Participants() []*Person {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participants"))
+func (cr *CallRecord) Participants() []*Person {
+	_arr := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("participants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
 // Caller wraps the corresponding Objective-C method.
-func (x *CallRecord) Caller() *Person {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caller"))
+func (cr *CallRecord) Caller() *Person {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("caller"))
 	return PersonFromID(_r)
 }
-
-// CallRecordable is the interface implemented by [CallRecord], for mocking and DI.
-type CallRecordable interface {
-	obj.Object
-	Identifier() string
-	DateCreated() obj.Object
-	CallRecordType() CallRecordType
-	CallDuration() obj.Object
-	Unseen() obj.Object
-	CallCapability() CallCapability
-	NumberOfCalls() obj.Object
-	IsCallerIdBlocked() obj.Object
-	Participants() []*Person
-	Caller() *Person
-}
-
-var _ CallRecordable = (*CallRecord)(nil)

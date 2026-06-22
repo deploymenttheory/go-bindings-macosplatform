@@ -44,24 +44,24 @@ func matrixBatchNormalizationGradientAdopt(id objc.ID) *MatrixBatchNormalization
 }
 
 // Description returns the object's -description text.
-func (x *MatrixBatchNormalizationGradient) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbng *MatrixBatchNormalizationGradient) Description() string {
+	return rt.Description(objref.IDOf(mbng))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixBatchNormalizationGradient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbng *MatrixBatchNormalizationGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbng), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixBatchNormalizationGradient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbng *MatrixBatchNormalizationGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbng), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixBatchNormalizationGradient) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbng *MatrixBatchNormalizationGradient) String() string {
+	return rt.Description(objref.IDOf(mbng))
 }
 
 // NewMatrixBatchNormalizationGradient creates a new MatrixBatchNormalizationGradient.
@@ -70,103 +70,67 @@ func NewMatrixBatchNormalizationGradient() *MatrixBatchNormalizationGradient {
 	return matrixBatchNormalizationGradientAdopt(_id)
 }
 
-// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.
-func (x *MatrixBatchNormalizationGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-	return x
+// WithSourceNumberOfFeatureVectors sets the number of input vectors which make up the input array.
+func (mbng *MatrixBatchNormalizationGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return mbng
 }
 
-// WithSourceInputFeatureChannels the number of feature channels in the input vectors.
-func (x *MatrixBatchNormalizationGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-	return x
+// WithSourceInputFeatureChannels sets the number of feature channels in the input vectors.
+func (mbng *MatrixBatchNormalizationGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return mbng
 }
 
-// WithEpsilon a small term added to the variance when normalizing the input.
-func (x *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-	return x
+// WithEpsilon sets a small term added to the variance when normalizing the input.
+func (mbng *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setEpsilon:"), epsilon)
+	return mbng
 }
 
 // SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixBatchNormalizationGradient kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
-func (x *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
+func (mbng *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
-// NeuronType getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalizationGradient) NeuronType() CNNNeuronType {
-	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
+// NeuronType returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbng *MatrixBatchNormalizationGradient) NeuronType() CNNNeuronType {
+	_r := objc.Send[CNNNeuronType](objref.IDOf(mbng), objc.RegisterName("neuronType"))
 	return _r
 }
 
-// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+// NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbng *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+// NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbng *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+// NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbng *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.
-func (x *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+// SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.
+func (mbng *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
-// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalizationGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-}
-
-// SourceInputFeatureChannels the number of feature channels in the input vectors.
-func (x *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+// SourceInputFeatureChannels returns the number of feature channels in the input vectors.
+func (mbng *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
-// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalizationGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-}
-
-// Epsilon a small term added to the variance when normalizing the input.
-func (x *MatrixBatchNormalizationGradient) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns a small term added to the variance when normalizing the input.
+func (mbng *MatrixBatchNormalizationGradient) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("epsilon"))
 	return _r
 }
-
-// SetEpsilon wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalizationGradient) SetEpsilon(epsilon float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-}
-
-// MatrixBatchNormalizationGradientable is the interface implemented by [MatrixBatchNormalizationGradient], for mocking and DI.
-type MatrixBatchNormalizationGradientable interface {
-	obj.Object
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient
-	WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient
-	SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() CNNNeuronType
-	NeuronParameterA() float32
-	NeuronParameterB() float32
-	NeuronParameterC() float32
-	SourceNumberOfFeatureVectors() int
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
-	SourceInputFeatureChannels() int
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
-	Epsilon() float32
-	SetEpsilon(epsilon float32)
-}
-
-var _ MatrixBatchNormalizationGradientable = (*MatrixBatchNormalizationGradient)(nil)

@@ -44,24 +44,24 @@ func mTRRVCOperationalStateClusterOperationalErrorEventAdopt(id objc.ID) *MTRRVC
 }
 
 // Description returns the object's -description text.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) Description() string {
+	return rt.Description(objref.IDOf(moscoee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moscoee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moscoee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) String() string {
+	return rt.Description(objref.IDOf(moscoee))
 }
 
 // NewMTRRVCOperationalStateClusterOperationalErrorEvent creates a new MTRRVCOperationalStateClusterOperationalErrorEvent.
@@ -71,28 +71,13 @@ func NewMTRRVCOperationalStateClusterOperationalErrorEvent() *MTRRVCOperationalS
 }
 
 // WithErrorState sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
-	return x
+func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(moscoee), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
+	return moscoee
 }
 
 // ErrorState wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorState"))
+func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(moscoee), objc.RegisterName("errorState"))
 	return MTRRVCOperationalStateClusterErrorStateStructFromID(_r)
 }
-
-// SetErrorState wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
-}
-
-// MTRRVCOperationalStateClusterOperationalErrorEventable is the interface implemented by [MTRRVCOperationalStateClusterOperationalErrorEvent], for mocking and DI.
-type MTRRVCOperationalStateClusterOperationalErrorEventable interface {
-	obj.Object
-	WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent
-	ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct
-	SetErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct)
-}
-
-var _ MTRRVCOperationalStateClusterOperationalErrorEventable = (*MTRRVCOperationalStateClusterOperationalErrorEvent)(nil)

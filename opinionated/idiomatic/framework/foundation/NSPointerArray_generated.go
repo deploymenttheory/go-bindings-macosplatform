@@ -46,24 +46,24 @@ func pointerArrayAdopt(id objc.ID) *PointerArray {
 }
 
 // Description returns the object's -description text.
-func (x *PointerArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pa *PointerArray) Description() string {
+	return rt.Description(objref.IDOf(pa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PointerArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pa *PointerArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PointerArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pa *PointerArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PointerArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pa *PointerArray) String() string {
+	return rt.Description(objref.IDOf(pa))
 }
 
 // NewPointerArrayWithOptions initializes the receiver to use the given options.
@@ -80,62 +80,42 @@ func NewPointerArrayWithPointerFunctions(functions *PointerFunctions) *PointerAr
 	return pointerArrayAdopt(_id)
 }
 
-// WithCount the number of elements in the receiver.
-func (x *PointerArray) WithCount(count int) *PointerArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
-	return x
+// WithCount sets the number of elements in the receiver.
+func (pa *PointerArray) WithCount(count int) *PointerArray {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setCount:"), count)
+	return pa
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PointerArray) WithScriptingProperties(scriptingProperties obj.Object) *PointerArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (pa *PointerArray) WithScriptingProperties(scriptingProperties obj.Object) *PointerArray {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return pa
 }
 
 // RemovePointerAtIndex removes the pointer at a given index.
-func (x *PointerArray) RemovePointerAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePointerAtIndex:"), index)
+func (pa *PointerArray) RemovePointerAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("removePointerAtIndex:"), index)
 }
 
 // Compact removes NULL values from the receiver.
-func (x *PointerArray) Compact() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compact"))
+func (pa *PointerArray) Compact() {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("compact"))
 }
 
 // PointerFunctions wraps the corresponding Objective-C method.
-func (x *PointerArray) PointerFunctions() *PointerFunctions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointerFunctions"))
+func (pa *PointerArray) PointerFunctions() *PointerFunctions {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *PointerArray) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (pa *PointerArray) Count() int {
+	_r := objc.Send[int](objref.IDOf(pa), objc.RegisterName("count"))
 	return _r
 }
 
-// SetCount wraps the corresponding Objective-C method.
-func (x *PointerArray) SetCount(count int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
-}
-
 // AllObjects wraps the corresponding Objective-C method.
-func (x *PointerArray) AllObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
+func (pa *PointerArray) AllObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("allObjects"))
 	return obj.Wrap(_r)
 }
-
-// PointerArrayable is the interface implemented by [PointerArray], for mocking and DI.
-type PointerArrayable interface {
-	obj.Object
-	WithCount(count int) *PointerArray
-	WithScriptingProperties(scriptingProperties obj.Object) *PointerArray
-	RemovePointerAtIndex(index int)
-	Compact()
-	PointerFunctions() *PointerFunctions
-	Count() int
-	SetCount(count int)
-	AllObjects() obj.Object
-}
-
-var _ PointerArrayable = (*PointerArray)(nil)

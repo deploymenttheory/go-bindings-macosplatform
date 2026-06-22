@@ -46,24 +46,24 @@ func vSSubscriptionRegistrationCenterAdopt(id objc.ID) *VSSubscriptionRegistrati
 }
 
 // Description returns the object's -description text.
-func (x *VSSubscriptionRegistrationCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vsrc *VSSubscriptionRegistrationCenter) Description() string {
+	return rt.Description(objref.IDOf(vsrc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSSubscriptionRegistrationCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vsrc *VSSubscriptionRegistrationCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vsrc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSSubscriptionRegistrationCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vsrc *VSSubscriptionRegistrationCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vsrc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSSubscriptionRegistrationCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vsrc *VSSubscriptionRegistrationCenter) String() string {
+	return rt.Description(objref.IDOf(vsrc))
 }
 
 // NewVSSubscriptionRegistrationCenter creates a new VSSubscriptionRegistrationCenter.
@@ -73,14 +73,6 @@ func NewVSSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 }
 
 // SetCurrentSubscription sets the subscription information for the current user.
-func (x *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *VSSubscription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSubscription:"), objref.IDOf(currentSubscription))
+func (vsrc *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *VSSubscription) {
+	objc.Send[objc.ID](objref.IDOf(vsrc), objc.RegisterName("setCurrentSubscription:"), objref.IDOf(currentSubscription))
 }
-
-// VSSubscriptionRegistrationCenterable is the interface implemented by [VSSubscriptionRegistrationCenter], for mocking and DI.
-type VSSubscriptionRegistrationCenterable interface {
-	obj.Object
-	SetCurrentSubscription(currentSubscription *VSSubscription)
-}
-
-var _ VSSubscriptionRegistrationCenterable = (*VSSubscriptionRegistrationCenter)(nil)

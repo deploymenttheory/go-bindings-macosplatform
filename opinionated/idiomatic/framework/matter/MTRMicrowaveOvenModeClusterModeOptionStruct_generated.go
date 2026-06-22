@@ -44,24 +44,24 @@ func mTRMicrowaveOvenModeClusterModeOptionStructAdopt(id objc.ID) *MTRMicrowaveO
 }
 
 // Description returns the object's -description text.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(mmomcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmomcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmomcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(mmomcmos))
 }
 
 // NewMTRMicrowaveOvenModeClusterModeOptionStruct creates a new MTRMicrowaveOvenModeClusterModeOptionStruct.
@@ -71,64 +71,39 @@ func NewMTRMicrowaveOvenModeClusterModeOptionStruct() *MTRMicrowaveOvenModeClust
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) WithLabel(label string) *MTRMicrowaveOvenModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) WithLabel(label string) *MTRMicrowaveOvenModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mmomcmos
 }
 
 // WithMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRMicrowaveOvenModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-	return x
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRMicrowaveOvenModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	return mmomcmos
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Mode wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) SetMode(mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-}
-
 // ModeTags wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) ModeTags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) ModeTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
+func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }
-
-// MTRMicrowaveOvenModeClusterModeOptionStructable is the interface implemented by [MTRMicrowaveOvenModeClusterModeOptionStruct], for mocking and DI.
-type MTRMicrowaveOvenModeClusterModeOptionStructable interface {
-	obj.Object
-	WithLabel(label string) *MTRMicrowaveOvenModeClusterModeOptionStruct
-	WithMode(mode obj.Object) *MTRMicrowaveOvenModeClusterModeOptionStruct
-	Label() string
-	SetLabel(label string)
-	Mode() obj.Object
-	SetMode(mode obj.Object)
-	ModeTags() obj.Object
-	SetModeTags(modeTags obj.Object)
-}
-
-var _ MTRMicrowaveOvenModeClusterModeOptionStructable = (*MTRMicrowaveOvenModeClusterModeOptionStruct)(nil)

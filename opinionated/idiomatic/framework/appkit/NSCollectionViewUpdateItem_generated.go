@@ -46,24 +46,24 @@ func collectionViewUpdateItemAdopt(id objc.ID) *CollectionViewUpdateItem {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionViewUpdateItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvui *CollectionViewUpdateItem) Description() string {
+	return rt.Description(objref.IDOf(cvui))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewUpdateItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvui *CollectionViewUpdateItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvui), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewUpdateItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvui *CollectionViewUpdateItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvui), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionViewUpdateItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvui *CollectionViewUpdateItem) String() string {
+	return rt.Description(objref.IDOf(cvui))
 }
 
 // NewCollectionViewUpdateItem creates a new CollectionViewUpdateItem.
@@ -73,29 +73,19 @@ func NewCollectionViewUpdateItem() *CollectionViewUpdateItem {
 }
 
 // IndexPathBeforeUpdate wraps the corresponding Objective-C method.
-func (x *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathBeforeUpdate"))
+func (cvui *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathBeforeUpdate"))
 	return obj.Wrap(_r)
 }
 
 // IndexPathAfterUpdate wraps the corresponding Objective-C method.
-func (x *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathAfterUpdate"))
+func (cvui *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathAfterUpdate"))
 	return obj.Wrap(_r)
 }
 
 // UpdateAction wraps the corresponding Objective-C method.
-func (x *CollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
-	_r := objc.Send[CollectionUpdateAction](objref.IDOf(x), objc.RegisterName("updateAction"))
+func (cvui *CollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
+	_r := objc.Send[CollectionUpdateAction](objref.IDOf(cvui), objc.RegisterName("updateAction"))
 	return _r
 }
-
-// CollectionViewUpdateItemable is the interface implemented by [CollectionViewUpdateItem], for mocking and DI.
-type CollectionViewUpdateItemable interface {
-	obj.Object
-	IndexPathBeforeUpdate() obj.Object
-	IndexPathAfterUpdate() obj.Object
-	UpdateAction() CollectionUpdateAction
-}
-
-var _ CollectionViewUpdateItemable = (*CollectionViewUpdateItem)(nil)

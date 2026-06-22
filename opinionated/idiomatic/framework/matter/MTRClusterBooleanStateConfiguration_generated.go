@@ -52,114 +52,92 @@ func NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *MTR
 }
 
 // ReadAttributeCurrentSensitivityLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeCurrentSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentSensitivityLevelWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeCurrentSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeCurrentSensitivityLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbsc *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSupportedSensitivityLevelsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeSupportedSensitivityLevelsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedSensitivityLevelsWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeSupportedSensitivityLevelsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeSupportedSensitivityLevelsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDefaultSensitivityLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeDefaultSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultSensitivityLevelWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeDefaultSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeDefaultSensitivityLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAlarmsActiveWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsActiveWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsActiveWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsActiveWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeAlarmsActiveWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAlarmsSuppressedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSuppressedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsSuppressedWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSuppressedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeAlarmsSuppressedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAlarmsEnabledWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsEnabledWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsEnabledWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsEnabledWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeAlarmsEnabledWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAlarmsSupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsSupportedWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeAlarmsSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSensorFaultWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeSensorFaultWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSensorFaultWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeSensorFaultWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeSensorFaultWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcbsc *MTRClusterBooleanStateConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterBooleanStateConfigurationable is the interface implemented by [MTRClusterBooleanStateConfiguration], for mocking and DI.
-type MTRClusterBooleanStateConfigurationable interface {
-	obj.Object
-	ReadAttributeCurrentSensitivityLevelWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeSupportedSensitivityLevelsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDefaultSensitivityLevelWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAlarmsActiveWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAlarmsSuppressedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAlarmsEnabledWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAlarmsSupportedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSensorFaultWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterBooleanStateConfigurationable = (*MTRClusterBooleanStateConfiguration)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterBooleanStateConfiguration)(nil)
 

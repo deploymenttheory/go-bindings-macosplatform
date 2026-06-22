@@ -61,31 +61,21 @@ func NewCompoundPredicateWithCoder(coder *Coder) *CompoundPredicate {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *CompoundPredicate) WithScriptingProperties(scriptingProperties obj.Object) *CompoundPredicate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cp *CompoundPredicate) WithScriptingProperties(scriptingProperties obj.Object) *CompoundPredicate {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cp
 }
 
 // CompoundPredicateType wraps the corresponding Objective-C method.
-func (x *CompoundPredicate) CompoundPredicateType() CompoundPredicateType {
-	_r := objc.Send[CompoundPredicateType](objref.IDOf(x), objc.RegisterName("compoundPredicateType"))
+func (cp *CompoundPredicate) CompoundPredicateType() CompoundPredicateType {
+	_r := objc.Send[CompoundPredicateType](objref.IDOf(cp), objc.RegisterName("compoundPredicateType"))
 	return _r
 }
 
 // Subpredicates wraps the corresponding Objective-C method.
-func (x *CompoundPredicate) Subpredicates() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subpredicates"))
+func (cp *CompoundPredicate) Subpredicates() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("subpredicates"))
 	return obj.Wrap(_r)
 }
-
-// CompoundPredicateable is the interface implemented by [CompoundPredicate], for mocking and DI.
-type CompoundPredicateable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *CompoundPredicate
-	CompoundPredicateType() CompoundPredicateType
-	Subpredicates() obj.Object
-}
-
-var _ CompoundPredicateable = (*CompoundPredicate)(nil)
 
 var _ PredicateProvider = (*CompoundPredicate)(nil)

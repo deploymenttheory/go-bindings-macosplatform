@@ -48,46 +48,38 @@ func definitionAdopt(id objc.ID) *Definition {
 }
 
 // Description returns the object's -description text.
-func (x *Definition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Definition) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Definition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Definition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Definition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Definition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Definition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Definition) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *Definition) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (d *Definition) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Definitionable is the interface implemented by [Definition], for mocking and DI.
-type Definitionable interface {
-	obj.Object
-	Identifier() string
-}
-
-var _ Definitionable = (*Definition)(nil)
-
 // isDefinition marks Definition — and, by embedding promotion, its
 // subclasses — as a member of the Definition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Definition) isDefinition() {}
+func (d *Definition) isDefinition() {}
 
 var _ DefinitionProvider = (*Definition)(nil)

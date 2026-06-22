@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,166 +62,136 @@ func NewModifyRecordsOperationWithRecordsToSaveRecordIDsToDelete(records []*Reco
 	return modifyRecordsOperationAdopt(_id)
 }
 
-// WithRecordsToSave the records to save to the database.
-func (x *ModifyRecordsOperation) WithRecordsToSave(items ...RecordProvider) *ModifyRecordsOperation {
+// WithRecordsToSave sets the records to save to the database.
+func (mro *ModifyRecordsOperation) WithRecordsToSave(items ...RecordProvider) *ModifyRecordsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v RecordProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordsToSave:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setRecordsToSave:"), _arr)
+	return mro
 }
 
-// WithRecordIDsToDelete the IDs of the records to delete permanently from the database.
-func (x *ModifyRecordsOperation) WithRecordIDsToDelete(items ...*RecordID) *ModifyRecordsOperation {
+// WithRecordIDsToDelete sets the IDs of the records to delete permanently from the database.
+func (mro *ModifyRecordsOperation) WithRecordIDsToDelete(items ...*RecordID) *ModifyRecordsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordID) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordIDsToDelete:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setRecordIDsToDelete:"), _arr)
+	return mro
 }
 
-// WithSavePolicy the policy to use when saving changes to records.
-func (x *ModifyRecordsOperation) WithSavePolicy(savePolicy RecordSavePolicy) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSavePolicy:"), savePolicy)
-	return x
+// WithSavePolicy sets the policy to use when saving changes to records.
+func (mro *ModifyRecordsOperation) WithSavePolicy(savePolicy RecordSavePolicy) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setSavePolicy:"), savePolicy)
+	return mro
 }
 
-// WithClientChangeTokenData a token that tracks local changes to records.
-func (x *ModifyRecordsOperation) WithClientChangeTokenData(clientChangeTokenData obj.Object) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientChangeTokenData:"), objref.IDOf(clientChangeTokenData))
-	return x
+// WithClientChangeTokenData sets a token that tracks local changes to records.
+func (mro *ModifyRecordsOperation) WithClientChangeTokenData(clientChangeTokenData obj.Object) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setClientChangeTokenData:"), objref.IDOf(clientChangeTokenData))
+	return mro
 }
 
-// WithAtomic a Boolean value that indicates whether the entire operation fails when CloudKit can’t update one or more records in a record zone.
-func (x *ModifyRecordsOperation) WithAtomic(atomic bool) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAtomic:"), atomic)
-	return x
+// WithAtomic sets a Boolean value that indicates whether the entire operation fails when CloudKit can’t update one or more records in a record zone.
+func (mro *ModifyRecordsOperation) WithAtomic(atomic bool) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setAtomic:"), atomic)
+	return mro
 }
 
-// WithPerRecordProgressBlock the closure to execute with progress information for individual records.
-func (x *ModifyRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
-	return x
+// WithPerRecordProgressBlock sets the closure to execute with progress information for individual records.
+func (mro *ModifyRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
+	return mro
 }
 
-// WithDatabase the database that the operation uses.
-func (x *ModifyRecordsOperation) WithDatabase(database *Database) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (mro *ModifyRecordsOperation) WithDatabase(database *Database) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return mro
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *ModifyRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (mro *ModifyRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return mro
 }
 
-// WithGroup the operation’s group.
-func (x *ModifyRecordsOperation) WithGroup(group *OperationGroup) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (mro *ModifyRecordsOperation) WithGroup(group *OperationGroup) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return mro
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *ModifyRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (mro *ModifyRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return mro
 }
 
-// WithContainer the operation's container.
-func (x *ModifyRecordsOperation) WithContainer(container *Container) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (mro *ModifyRecordsOperation) WithContainer(container *Container) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return mro
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *ModifyRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (mro *ModifyRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return mro
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *ModifyRecordsOperation) WithLongLived(longLived bool) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (mro *ModifyRecordsOperation) WithLongLived(longLived bool) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setLongLived:"), longLived)
+	return mro
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *ModifyRecordsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (mro *ModifyRecordsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return mro
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *ModifyRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (mro *ModifyRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return mro
 }
 
-// RecordsToSave the records to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordsOperation/init(recordsToSave:recordIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The records must all target the same database, but can belong to different record zones. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// RecordsToSave returns the records to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordsOperation/init(recordsToSave:recordIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The records must all target the same database, but can belong to different record zones. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
 //
 // RecordsToSave returns the collection as a Go slice.
-func (x *ModifyRecordsOperation) RecordsToSave() []*Record {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsToSave"))
+func (mro *ModifyRecordsOperation) RecordsToSave() []*Record {
+	_arr := objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("recordsToSave"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
 
-// SetRecordsToSave wraps the corresponding Objective-C method.
-func (x *ModifyRecordsOperation) SetRecordsToSave(recordsToSave []*Record) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordsToSave:"), purego.SliceToNSArray(recordsToSave, func(_v *Record) objc.ID { return objref.IDOf(_v) }))
-}
-
-// RecordIDsToDelete the IDs of the records to delete permanently from the database. An array of “CKRecord/ID“ objects that identifies the records to delete. The initial value of the property is the array of record IDs that you provide to the “CKModifyRecordsOperation/init(recordsToSave:recordIDsToDelete:)“ method. When deleting records, the operation reports progress only on the records with the IDs that you specify in this property. Deleting records can trigger the deletion of related records if there is an owner-owned relationship between the records involving a “CKRecord/Reference“ object. When additional deletions occur, CloudKit doesn't pass them to the progress handler of the operation. For that reason, it's important to understand the implications of the ownership model you use when you relate records to each other through a “CKRecord/Reference“ object. For more information about owner-owned relationships, see “CKRecord/Reference“. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// RecordIDsToDelete returns the IDs of the records to delete permanently from the database. An array of “CKRecord/ID“ objects that identifies the records to delete. The initial value of the property is the array of record IDs that you provide to the “CKModifyRecordsOperation/init(recordsToSave:recordIDsToDelete:)“ method. When deleting records, the operation reports progress only on the records with the IDs that you specify in this property. Deleting records can trigger the deletion of related records if there is an owner-owned relationship between the records involving a “CKRecord/Reference“ object. When additional deletions occur, CloudKit doesn't pass them to the progress handler of the operation. For that reason, it's important to understand the implications of the ownership model you use when you relate records to each other through a “CKRecord/Reference“ object. For more information about owner-owned relationships, see “CKRecord/Reference“. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
 //
 // RecordIDsToDelete returns the collection as a Go slice.
-func (x *ModifyRecordsOperation) RecordIDsToDelete() []*RecordID {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIDsToDelete"))
+func (mro *ModifyRecordsOperation) RecordIDsToDelete() []*RecordID {
+	_arr := objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("recordIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
-// SetRecordIDsToDelete wraps the corresponding Objective-C method.
-func (x *ModifyRecordsOperation) SetRecordIDsToDelete(recordIDsToDelete []*RecordID) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordIDsToDelete:"), purego.SliceToNSArray(recordIDsToDelete, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SavePolicy the policy to use when saving changes to records. The server uses this property to determine how to proceed when saving record changes. The exact behavior depends on the policy you choose: - Use “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“ to only save a record when the change tag of the local copy matches that of the server's copy. If the server record's change tag is more recent, CloudKit discards the save and returns a “CKError/Code/serverRecordChanged“ error. - Use “CKModifyRecordsOperation/RecordSavePolicy/changedKeys“ to save only the fields of the record that contain changes. The server doesn't compare record change tags when using this policy. - Use “CKModifyRecordsOperation/RecordSavePolicy/allKeys“ to save every field of the record, even those without changes. The server doesn't compare record change tags when using this policy. If you change the property's value, do so before you execute the operation or submit the operation to a queue. The default value is “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“.
-func (x *ModifyRecordsOperation) SavePolicy() RecordSavePolicy {
-	_r := objc.Send[RecordSavePolicy](objref.IDOf(x), objc.RegisterName("savePolicy"))
+// SavePolicy returns the policy to use when saving changes to records. The server uses this property to determine how to proceed when saving record changes. The exact behavior depends on the policy you choose: - Use “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“ to only save a record when the change tag of the local copy matches that of the server's copy. If the server record's change tag is more recent, CloudKit discards the save and returns a “CKError/Code/serverRecordChanged“ error. - Use “CKModifyRecordsOperation/RecordSavePolicy/changedKeys“ to save only the fields of the record that contain changes. The server doesn't compare record change tags when using this policy. - Use “CKModifyRecordsOperation/RecordSavePolicy/allKeys“ to save every field of the record, even those without changes. The server doesn't compare record change tags when using this policy. If you change the property's value, do so before you execute the operation or submit the operation to a queue. The default value is “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“.
+func (mro *ModifyRecordsOperation) SavePolicy() RecordSavePolicy {
+	_r := objc.Send[RecordSavePolicy](objref.IDOf(mro), objc.RegisterName("savePolicy"))
 	return _r
 }
 
-// SetSavePolicy wraps the corresponding Objective-C method.
-func (x *ModifyRecordsOperation) SetSavePolicy(savePolicy RecordSavePolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSavePolicy:"), savePolicy)
-}
-
-// ClientChangeTokenData a token that tracks local changes to records. The default value is `nil`. When you modify records from a fetch operation, specify a token using this property to indicate which version of the record you most recently modified. Compare the token you supply to the token in the next record fetch to confirm the server  successfully receives the device's most recent modify request. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
-func (x *ModifyRecordsOperation) ClientChangeTokenData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientChangeTokenData"))
+// ClientChangeTokenData returns a token that tracks local changes to records. The default value is `nil`. When you modify records from a fetch operation, specify a token using this property to indicate which version of the record you most recently modified. Compare the token you supply to the token in the next record fetch to confirm the server  successfully receives the device's most recent modify request. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+func (mro *ModifyRecordsOperation) ClientChangeTokenData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("clientChangeTokenData"))
 	return obj.Wrap(_r)
 }
 
-// SetClientChangeTokenData wraps the corresponding Objective-C method.
-func (x *ModifyRecordsOperation) SetClientChangeTokenData(clientChangeTokenData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientChangeTokenData:"), objref.IDOf(clientChangeTokenData))
-}
-
-// Atomic a Boolean value that indicates whether the entire operation fails when CloudKit can't update one or more records in a record zone. Modifying records atomically prevents you from updating your data in a way that leaves it in an inconsistent state. You use atomic updates when you want to write multiple records to the same record zone. If there's a failure to modify any of the records in a zone, CloudKit doesn't change the other records in that same zone. The record zone must have the “CKRecordZone/Capabilities/atomic“ capability for this behavior to apply. If a record zone doesn't support the atomic capability, setting this property has no effect. The default value of this property is <doc://com.apple.documentation/documentation/swift/true>, which causes all modifications within a single record zone to occur atomically. If your operation contains records in multiple record zones, a failure in one zone doesn't prevent modifications to records in a different zone. Changing the value of this property to <doc://com.apple.documentation/documentation/swift/false> causes CloudKit to modify records individually, regardless of whether the record zone supports atomic modifications.
-func (x *ModifyRecordsOperation) Atomic() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("atomic"))
+// Atomic reports whether the entire operation fails when CloudKit can't update one or more records in a record zone. Modifying records atomically prevents you from updating your data in a way that leaves it in an inconsistent state. You use atomic updates when you want to write multiple records to the same record zone. If there's a failure to modify any of the records in a zone, CloudKit doesn't change the other records in that same zone. The record zone must have the “CKRecordZone/Capabilities/atomic“ capability for this behavior to apply. If a record zone doesn't support the atomic capability, setting this property has no effect. The default value of this property is <doc://com.apple.documentation/documentation/swift/true>, which causes all modifications within a single record zone to occur atomically. If your operation contains records in multiple record zones, a failure in one zone doesn't prevent modifications to records in a different zone. Changing the value of this property to <doc://com.apple.documentation/documentation/swift/false> causes CloudKit to modify records individually, regardless of whether the record zone supports atomic modifications.
+func (mro *ModifyRecordsOperation) Atomic() bool {
+	_r := objc.Send[bool](objref.IDOf(mro), objc.RegisterName("atomic"))
 	return _r
-}
-
-// SetAtomic wraps the corresponding Objective-C method.
-func (x *ModifyRecordsOperation) SetAtomic(atomic bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAtomic:"), atomic)
-}
-
-// SetPerRecordProgressBlock wraps the corresponding Objective-C method.
-func (x *ModifyRecordsOperation) SetPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
 }
 
 // SetPerRecordCompletionBlock wraps the corresponding Objective-C method.
 //
 // SetPerRecordCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Context) (result *Record, err error) {
+func (mro *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Context) (result *Record, err error) {
 	type _result struct {
 		val *Record
 		err error
@@ -232,7 +203,7 @@ func (x *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Context
 		_o.val = RecordFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordCompletionBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordCompletionBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -245,7 +216,7 @@ func (x *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Context
 // SetPerRecordDeleteBlock wraps the corresponding Objective-C method.
 //
 // SetPerRecordDeleteBlock blocks until the operation completes or ctx is cancelled.
-func (x *ModifyRecordsOperation) SetPerRecordDeleteBlock(ctx context.Context) (result *RecordID, err error) {
+func (mro *ModifyRecordsOperation) SetPerRecordDeleteBlock(ctx context.Context) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
@@ -257,7 +228,7 @@ func (x *ModifyRecordsOperation) SetPerRecordDeleteBlock(ctx context.Context) (r
 		_o.val = RecordIDFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordDeleteBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordDeleteBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -266,41 +237,6 @@ func (x *ModifyRecordsOperation) SetPerRecordDeleteBlock(ctx context.Context) (r
 		return _zero, ctx.Err()
 	}
 }
-
-// ModifyRecordsOperationable is the interface implemented by [ModifyRecordsOperation], for mocking and DI.
-type ModifyRecordsOperationable interface {
-	obj.Object
-	WithRecordsToSave(items ...RecordProvider) *ModifyRecordsOperation
-	WithRecordIDsToDelete(items ...*RecordID) *ModifyRecordsOperation
-	WithSavePolicy(savePolicy RecordSavePolicy) *ModifyRecordsOperation
-	WithClientChangeTokenData(clientChangeTokenData obj.Object) *ModifyRecordsOperation
-	WithAtomic(atomic bool) *ModifyRecordsOperation
-	WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *ModifyRecordsOperation
-	WithDatabase(database *Database) *ModifyRecordsOperation
-	WithConfiguration(configuration *OperationConfiguration) *ModifyRecordsOperation
-	WithGroup(group *OperationGroup) *ModifyRecordsOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordsOperation
-	WithContainer(container *Container) *ModifyRecordsOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordsOperation
-	WithLongLived(longLived bool) *ModifyRecordsOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordsOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordsOperation
-	RecordsToSave() []*Record
-	SetRecordsToSave(recordsToSave []*Record)
-	RecordIDsToDelete() []*RecordID
-	SetRecordIDsToDelete(recordIDsToDelete []*RecordID)
-	SavePolicy() RecordSavePolicy
-	SetSavePolicy(savePolicy RecordSavePolicy)
-	ClientChangeTokenData() obj.Object
-	SetClientChangeTokenData(clientChangeTokenData obj.Object)
-	Atomic() bool
-	SetAtomic(atomic bool)
-	SetPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64))
-	SetPerRecordCompletionBlock(ctx context.Context) (*Record, error)
-	SetPerRecordDeleteBlock(ctx context.Context) (*RecordID, error)
-}
-
-var _ ModifyRecordsOperationable = (*ModifyRecordsOperation)(nil)
 
 var _ DatabaseOperationProvider = (*ModifyRecordsOperation)(nil)
 

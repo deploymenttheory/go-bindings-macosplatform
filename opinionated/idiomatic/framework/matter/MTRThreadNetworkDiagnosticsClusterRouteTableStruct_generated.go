@@ -46,237 +46,150 @@ func mTRThreadNetworkDiagnosticsClusterRouteTableStructAdopt(id objc.ID) *MTRThr
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Description() string {
+	return rt.Description(objref.IDOf(mtndcrts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtndcrts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtndcrts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) String() string {
+	return rt.Description(objref.IDOf(mtndcrts))
 }
 
 // WithExtAddress sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithExtAddress(extAddress obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtAddress:"), objref.IDOf(extAddress))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithExtAddress(extAddress obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setExtAddress:"), objref.IDOf(extAddress))
+	return mtndcrts
 }
 
 // WithRloc16 sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithRloc16(rloc16 obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRloc16:"), objref.IDOf(rloc16))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithRloc16(rloc16 obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setRloc16:"), objref.IDOf(rloc16))
+	return mtndcrts
 }
 
-// WithRouterId sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithRouterId(routerId obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouterId:"), objref.IDOf(routerId))
-	return x
+// WithRouterID sets the property and returns the receiver so calls can be chained.
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithRouterID(routerId obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setRouterId:"), objref.IDOf(routerId))
+	return mtndcrts
 }
 
 // WithNextHop sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithNextHop(nextHop obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextHop:"), objref.IDOf(nextHop))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithNextHop(nextHop obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setNextHop:"), objref.IDOf(nextHop))
+	return mtndcrts
 }
 
 // WithPathCost sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithPathCost(pathCost obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathCost:"), objref.IDOf(pathCost))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithPathCost(pathCost obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setPathCost:"), objref.IDOf(pathCost))
+	return mtndcrts
 }
 
 // WithLqiIn sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithLqiIn(lqiIn obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqiIn:"), objref.IDOf(lqiIn))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithLqiIn(lqiIn obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setLqiIn:"), objref.IDOf(lqiIn))
+	return mtndcrts
 }
 
 // WithLqiOut sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithLqiOut(lqiOut obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqiOut:"), objref.IDOf(lqiOut))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithLqiOut(lqiOut obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setLqiOut:"), objref.IDOf(lqiOut))
+	return mtndcrts
 }
 
 // WithAge sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithAge(age obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAge:"), objref.IDOf(age))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithAge(age obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setAge:"), objref.IDOf(age))
+	return mtndcrts
 }
 
 // WithAllocated sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithAllocated(allocated obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocated:"), objref.IDOf(allocated))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithAllocated(allocated obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setAllocated:"), objref.IDOf(allocated))
+	return mtndcrts
 }
 
 // WithLinkEstablished sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithLinkEstablished(linkEstablished obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkEstablished:"), objref.IDOf(linkEstablished))
-	return x
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithLinkEstablished(linkEstablished obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("setLinkEstablished:"), objref.IDOf(linkEstablished))
+	return mtndcrts
 }
 
 // ExtAddress wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) ExtAddress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extAddress"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) ExtAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("extAddress"))
 	return obj.Wrap(_r)
-}
-
-// SetExtAddress wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetExtAddress(extAddress obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtAddress:"), objref.IDOf(extAddress))
 }
 
 // Rloc16 wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Rloc16() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rloc16"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Rloc16() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("rloc16"))
 	return obj.Wrap(_r)
 }
 
-// SetRloc16 wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetRloc16(rloc16 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRloc16:"), objref.IDOf(rloc16))
-}
-
-// RouterId wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) RouterId() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("routerId"))
+// RouterID wraps the corresponding Objective-C method.
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) RouterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("routerId"))
 	return obj.Wrap(_r)
-}
-
-// SetRouterId wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetRouterId(routerId obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouterId:"), objref.IDOf(routerId))
 }
 
 // NextHop wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) NextHop() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextHop"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) NextHop() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("nextHop"))
 	return obj.Wrap(_r)
-}
-
-// SetNextHop wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetNextHop(nextHop obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextHop:"), objref.IDOf(nextHop))
 }
 
 // PathCost wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) PathCost() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathCost"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) PathCost() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("pathCost"))
 	return obj.Wrap(_r)
-}
-
-// SetPathCost wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetPathCost(pathCost obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathCost:"), objref.IDOf(pathCost))
 }
 
 // LqiIn wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiIn() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lqiIn"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiIn() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("lqiIn"))
 	return obj.Wrap(_r)
-}
-
-// SetLqiIn wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLqiIn(lqiIn obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqiIn:"), objref.IDOf(lqiIn))
 }
 
 // LqiOut wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiOut() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lqiOut"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiOut() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("lqiOut"))
 	return obj.Wrap(_r)
-}
-
-// SetLqiOut wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLqiOut(lqiOut obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqiOut:"), objref.IDOf(lqiOut))
 }
 
 // Age wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Age() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("age"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Age() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("age"))
 	return obj.Wrap(_r)
-}
-
-// SetAge wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetAge(age obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAge:"), objref.IDOf(age))
 }
 
 // Allocated wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Allocated() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocated"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Allocated() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("allocated"))
 	return obj.Wrap(_r)
-}
-
-// SetAllocated wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetAllocated(allocated obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocated:"), objref.IDOf(allocated))
 }
 
 // LinkEstablished wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LinkEstablished() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkEstablished"))
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LinkEstablished() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcrts), objc.RegisterName("linkEstablished"))
 	return obj.Wrap(_r)
 }
-
-// SetLinkEstablished wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLinkEstablished(linkEstablished obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkEstablished:"), objref.IDOf(linkEstablished))
-}
-
-// MTRThreadNetworkDiagnosticsClusterRouteTableStructable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterRouteTableStruct], for mocking and DI.
-type MTRThreadNetworkDiagnosticsClusterRouteTableStructable interface {
-	obj.Object
-	WithExtAddress(extAddress obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithRloc16(rloc16 obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithRouterId(routerId obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithNextHop(nextHop obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithPathCost(pathCost obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithLqiIn(lqiIn obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithLqiOut(lqiOut obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithAge(age obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithAllocated(allocated obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	WithLinkEstablished(linkEstablished obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
-	ExtAddress() obj.Object
-	SetExtAddress(extAddress obj.Object)
-	Rloc16() obj.Object
-	SetRloc16(rloc16 obj.Object)
-	RouterId() obj.Object
-	SetRouterId(routerId obj.Object)
-	NextHop() obj.Object
-	SetNextHop(nextHop obj.Object)
-	PathCost() obj.Object
-	SetPathCost(pathCost obj.Object)
-	LqiIn() obj.Object
-	SetLqiIn(lqiIn obj.Object)
-	LqiOut() obj.Object
-	SetLqiOut(lqiOut obj.Object)
-	Age() obj.Object
-	SetAge(age obj.Object)
-	Allocated() obj.Object
-	SetAllocated(allocated obj.Object)
-	LinkEstablished() obj.Object
-	SetLinkEstablished(linkEstablished obj.Object)
-}
-
-var _ MTRThreadNetworkDiagnosticsClusterRouteTableStructable = (*MTRThreadNetworkDiagnosticsClusterRouteTableStruct)(nil)
 
 // isMTRThreadNetworkDiagnosticsClusterRouteTableStruct marks MTRThreadNetworkDiagnosticsClusterRouteTableStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRThreadNetworkDiagnosticsClusterRouteTableStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) isMTRThreadNetworkDiagnosticsClusterRouteTableStruct() {
+func (mtndcrts *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) isMTRThreadNetworkDiagnosticsClusterRouteTableStruct() {
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterRouteTableStructProvider = (*MTRThreadNetworkDiagnosticsClusterRouteTableStruct)(nil)

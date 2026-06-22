@@ -46,24 +46,24 @@ func distanceFormatterAdopt(id objc.ID) *DistanceFormatter {
 }
 
 // Description returns the object's -description text.
-func (x *DistanceFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (df *DistanceFormatter) Description() string {
+	return rt.Description(objref.IDOf(df))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistanceFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (df *DistanceFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(df), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistanceFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (df *DistanceFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(df), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DistanceFormatter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (df *DistanceFormatter) String() string {
+	return rt.Description(objref.IDOf(df))
 }
 
 // NewDistanceFormatter creates a new DistanceFormatter.
@@ -72,69 +72,38 @@ func NewDistanceFormatter() *DistanceFormatter {
 	return distanceFormatterAdopt(_id)
 }
 
-// WithLocale the locale to use when formatting strings.
-func (x *DistanceFormatter) WithLocale(locale obj.Object) *DistanceFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+// WithLocale sets the locale to use when formatting strings.
+func (df *DistanceFormatter) WithLocale(locale obj.Object) *DistanceFormatter {
+	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return df
 }
 
-// WithUnits the measuring system — imperial or metric — to use for units.
-func (x *DistanceFormatter) WithUnits(units DistanceFormatterUnits) *DistanceFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnits:"), units)
-	return x
+// WithUnits sets the measuring system — imperial or metric — to use for units.
+func (df *DistanceFormatter) WithUnits(units DistanceFormatterUnits) *DistanceFormatter {
+	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setUnits:"), units)
+	return df
 }
 
-// WithUnitStyle the preferred style for units.
-func (x *DistanceFormatter) WithUnitStyle(unitStyle DistanceFormatterUnitStyle) *DistanceFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
-	return x
+// WithUnitStyle sets the preferred style for units.
+func (df *DistanceFormatter) WithUnitStyle(unitStyle DistanceFormatterUnitStyle) *DistanceFormatter {
+	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setUnitStyle:"), unitStyle)
+	return df
 }
 
 // Locale wraps the corresponding Objective-C method.
-func (x *DistanceFormatter) Locale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+func (df *DistanceFormatter) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// SetLocale wraps the corresponding Objective-C method.
-func (x *DistanceFormatter) SetLocale(locale obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-}
-
 // Units wraps the corresponding Objective-C method.
-func (x *DistanceFormatter) Units() DistanceFormatterUnits {
-	_r := objc.Send[DistanceFormatterUnits](objref.IDOf(x), objc.RegisterName("units"))
+func (df *DistanceFormatter) Units() DistanceFormatterUnits {
+	_r := objc.Send[DistanceFormatterUnits](objref.IDOf(df), objc.RegisterName("units"))
 	return _r
-}
-
-// SetUnits wraps the corresponding Objective-C method.
-func (x *DistanceFormatter) SetUnits(units DistanceFormatterUnits) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnits:"), units)
 }
 
 // UnitStyle wraps the corresponding Objective-C method.
-func (x *DistanceFormatter) UnitStyle() DistanceFormatterUnitStyle {
-	_r := objc.Send[DistanceFormatterUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
+func (df *DistanceFormatter) UnitStyle() DistanceFormatterUnitStyle {
+	_r := objc.Send[DistanceFormatterUnitStyle](objref.IDOf(df), objc.RegisterName("unitStyle"))
 	return _r
 }
-
-// SetUnitStyle wraps the corresponding Objective-C method.
-func (x *DistanceFormatter) SetUnitStyle(unitStyle DistanceFormatterUnitStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
-}
-
-// DistanceFormatterable is the interface implemented by [DistanceFormatter], for mocking and DI.
-type DistanceFormatterable interface {
-	obj.Object
-	WithLocale(locale obj.Object) *DistanceFormatter
-	WithUnits(units DistanceFormatterUnits) *DistanceFormatter
-	WithUnitStyle(unitStyle DistanceFormatterUnitStyle) *DistanceFormatter
-	Locale() obj.Object
-	SetLocale(locale obj.Object)
-	Units() DistanceFormatterUnits
-	SetUnits(units DistanceFormatterUnits)
-	UnitStyle() DistanceFormatterUnitStyle
-	SetUnitStyle(unitStyle DistanceFormatterUnitStyle)
-}
-
-var _ DistanceFormatterable = (*DistanceFormatter)(nil)

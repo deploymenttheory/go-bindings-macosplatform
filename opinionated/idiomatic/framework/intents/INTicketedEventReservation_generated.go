@@ -62,24 +62,15 @@ func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeRes
 }
 
 // Event wraps the corresponding Objective-C method.
-func (x *TicketedEventReservation) Event() *TicketedEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("event"))
+func (ter *TicketedEventReservation) Event() *TicketedEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(ter), objc.RegisterName("event"))
 	return TicketedEventFromID(_r)
 }
 
 // ReservedSeat wraps the corresponding Objective-C method.
-func (x *TicketedEventReservation) ReservedSeat() *Seat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+func (ter *TicketedEventReservation) ReservedSeat() *Seat {
+	_r := objc.Send[objc.ID](objref.IDOf(ter), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
-
-// TicketedEventReservationable is the interface implemented by [TicketedEventReservation], for mocking and DI.
-type TicketedEventReservationable interface {
-	obj.Object
-	Event() *TicketedEvent
-	ReservedSeat() *Seat
-}
-
-var _ TicketedEventReservationable = (*TicketedEventReservation)(nil)
 
 var _ ReservationProvider = (*TicketedEventReservation)(nil)

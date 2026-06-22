@@ -50,73 +50,52 @@ func NewAVB17221AECPAVCMessage() *AVB17221AECPAVCMessage {
 	return aVB17221AECPAVCMessageAdopt(_id)
 }
 
-// WithCommandResponse the avc_command_response field of the AECP AEM message.
-func (x *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse obj.Object) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
-	return x
+// WithCommandResponse sets the avc_command_response field of the AECP AEM message.
+func (aam *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse obj.Object) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
+	return aam
 }
 
-// WithMessageType the message_type field of the AECP message.
-func (x *AVB17221AECPAVCMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
-	return x
+// WithMessageType sets the message_type field of the AECP message.
+func (aam *AVB17221AECPAVCMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setMessageType:"), messageType)
+	return aam
 }
 
-// WithStatus the status field of the AECP message.
-func (x *AVB17221AECPAVCMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status field of the AECP message.
+func (aam *AVB17221AECPAVCMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setStatus:"), status)
+	return aam
 }
 
-// WithTargetEntityID the target_entity_id field of the AECP message.
-func (x *AVB17221AECPAVCMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetEntityID:"), targetEntityID)
-	return x
+// WithTargetEntityID sets the target_entity_id field of the AECP message.
+func (aam *AVB17221AECPAVCMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setTargetEntityID:"), targetEntityID)
+	return aam
 }
 
-// WithControllerEntityID the controller_entity_id field of the AECP message.
-func (x *AVB17221AECPAVCMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
-	return x
+// WithControllerEntityID sets the controller_entity_id field of the AECP message.
+func (aam *AVB17221AECPAVCMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
+	return aam
 }
 
-// WithSequenceID the sequence_id field of the AECP message.
-func (x *AVB17221AECPAVCMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
-	return x
+// WithSequenceID sets the sequence_id field of the AECP message.
+func (aam *AVB17221AECPAVCMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSequenceID:"), sequenceID)
+	return aam
 }
 
-// WithSourceMAC the source_mac field of the AECP message.
-func (x *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
-	return x
+// WithSourceMAC sets the source_mac field of the AECP message.
+func (aam *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
+	return aam
 }
 
 // CommandResponse wraps the corresponding Objective-C method.
-func (x *AVB17221AECPAVCMessage) CommandResponse() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandResponse"))
+func (aam *AVB17221AECPAVCMessage) CommandResponse() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("commandResponse"))
 	return obj.Wrap(_r)
 }
-
-// SetCommandResponse wraps the corresponding Objective-C method.
-func (x *AVB17221AECPAVCMessage) SetCommandResponse(commandResponse obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
-}
-
-// AVB17221AECPAVCMessageable is the interface implemented by [AVB17221AECPAVCMessage], for mocking and DI.
-type AVB17221AECPAVCMessageable interface {
-	obj.Object
-	WithCommandResponse(commandResponse obj.Object) *AVB17221AECPAVCMessage
-	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAVCMessage
-	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAVCMessage
-	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage
-	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage
-	WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage
-	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage
-	CommandResponse() obj.Object
-	SetCommandResponse(commandResponse obj.Object)
-}
-
-var _ AVB17221AECPAVCMessageable = (*AVB17221AECPAVCMessage)(nil)
 
 var _ AVB17221AECPMessageProvider = (*AVB17221AECPAVCMessage)(nil)

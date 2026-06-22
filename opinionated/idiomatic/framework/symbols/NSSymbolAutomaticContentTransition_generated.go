@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewSymbolAutomaticContentTransition() *SymbolAutomaticContentTransition {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolAutomaticContentTransition")), objc.RegisterName("new"))
 	return symbolAutomaticContentTransitionAdopt(_id)
 }
-
-// SymbolAutomaticContentTransitionable is the interface implemented by [SymbolAutomaticContentTransition], for mocking and DI.
-type SymbolAutomaticContentTransitionable interface {
-	obj.Object
-}
-
-var _ SymbolAutomaticContentTransitionable = (*SymbolAutomaticContentTransition)(nil)
 
 var _ SymbolContentTransitionProvider = (*SymbolAutomaticContentTransition)(nil)

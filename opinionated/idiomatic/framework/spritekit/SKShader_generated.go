@@ -46,24 +46,24 @@ func shaderAdopt(id objc.ID) *Shader {
 }
 
 // Description returns the object's -description text.
-func (x *Shader) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shader) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Shader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Shader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Shader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Shader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Shader) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shader) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewShaderWithSource initializes a new shader object using the specified source code.
@@ -80,97 +80,63 @@ func NewShaderWithSourceUniforms(source string, uniforms []*Uniform) *Shader {
 	return shaderAdopt(_id)
 }
 
-// WithSource the source code for the shader.
-func (x *Shader) WithSource(source string) *Shader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
-	return x
+// WithSource sets the source code for the shader.
+func (s *Shader) WithSource(source string) *Shader {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSource:"), purego.NSString(source))
+	return s
 }
 
-// WithUniforms the list of uniforms associated with the shader.
-func (x *Shader) WithUniforms(items ...*Uniform) *Shader {
+// WithUniforms sets the list of uniforms associated with the shader.
+func (s *Shader) WithUniforms(items ...*Uniform) *Shader {
 	_arr := purego.SliceToNSArray(items, func(_v *Uniform) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniforms:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUniforms:"), _arr)
+	return s
 }
 
-// WithAttributes the list of attributes associated with the shader.
-func (x *Shader) WithAttributes(items ...*Attribute) *Shader {
+// WithAttributes sets the list of attributes associated with the shader.
+func (s *Shader) WithAttributes(items ...*Attribute) *Shader {
 	_arr := purego.SliceToNSArray(items, func(_v *Attribute) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributes:"), _arr)
+	return s
 }
 
 // AddUniform adds a uniform to the shader.
-func (x *Shader) AddUniform(uniform *Uniform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUniform:"), objref.IDOf(uniform))
+func (s *Shader) AddUniform(uniform *Uniform) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addUniform:"), objref.IDOf(uniform))
 }
 
 // UniformNamed returns the uniform object corresponding to a particular uniform variable.
-func (x *Shader) UniformNamed(name string) *Uniform {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformNamed:"), purego.NSString(name))
+func (s *Shader) UniformNamed(name string) *Uniform {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("uniformNamed:"), purego.NSString(name))
 	return UniformFromID(_r)
 }
 
 // RemoveUniformNamed removes a uniform from the shader.
-func (x *Shader) RemoveUniformNamed(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeUniformNamed:"), purego.NSString(name))
+func (s *Shader) RemoveUniformNamed(name string) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeUniformNamed:"), purego.NSString(name))
 }
 
 // Source wraps the corresponding Objective-C method.
-func (x *Shader) Source() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+func (s *Shader) Source() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSource wraps the corresponding Objective-C method.
-func (x *Shader) SetSource(source string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
-}
-
-// Uniforms you may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
+// Uniforms returns you may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
 //
 // Uniforms returns the collection as a Go slice.
-func (x *Shader) Uniforms() []*Uniform {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniforms"))
+func (s *Shader) Uniforms() []*Uniform {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("uniforms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Uniform { return UniformFromID(_id) })
-}
-
-// SetUniforms wraps the corresponding Objective-C method.
-func (x *Shader) SetUniforms(uniforms []*Uniform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniforms:"), purego.SliceToNSArray(uniforms, func(_v *Uniform) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Attributes wraps the corresponding Objective-C method.
 //
 // Attributes returns the collection as a Go slice.
-func (x *Shader) Attributes() []*Attribute {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (s *Shader) Attributes() []*Attribute {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Attribute { return AttributeFromID(_id) })
 }
-
-// SetAttributes wraps the corresponding Objective-C method.
-func (x *Shader) SetAttributes(attributes []*Attribute) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), purego.SliceToNSArray(attributes, func(_v *Attribute) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Shaderable is the interface implemented by [Shader], for mocking and DI.
-type Shaderable interface {
-	obj.Object
-	WithSource(source string) *Shader
-	WithUniforms(items ...*Uniform) *Shader
-	WithAttributes(items ...*Attribute) *Shader
-	AddUniform(uniform *Uniform)
-	UniformNamed(name string) *Uniform
-	RemoveUniformNamed(name string)
-	Source() string
-	SetSource(source string)
-	Uniforms() []*Uniform
-	SetUniforms(uniforms []*Uniform)
-	Attributes() []*Attribute
-	SetAttributes(attributes []*Attribute)
-}
-
-var _ Shaderable = (*Shader)(nil)

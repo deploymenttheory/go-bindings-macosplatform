@@ -7,7 +7,6 @@ package cinematic
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,24 +60,15 @@ func NewFixedDetectionTrackWithOriginalDetection(originalDetection *Detection) *
 }
 
 // FocusDisparity wraps the corresponding Objective-C method.
-func (x *FixedDetectionTrack) FocusDisparity() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
+func (fdt *FixedDetectionTrack) FocusDisparity() float32 {
+	_r := objc.Send[float32](objref.IDOf(fdt), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
-// OriginalDetection the original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
-func (x *FixedDetectionTrack) OriginalDetection() *Detection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalDetection"))
+// OriginalDetection returns the original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
+func (fdt *FixedDetectionTrack) OriginalDetection() *Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(fdt), objc.RegisterName("originalDetection"))
 	return DetectionFromID(_r)
 }
-
-// FixedDetectionTrackable is the interface implemented by [FixedDetectionTrack], for mocking and DI.
-type FixedDetectionTrackable interface {
-	obj.Object
-	FocusDisparity() float32
-	OriginalDetection() *Detection
-}
-
-var _ FixedDetectionTrackable = (*FixedDetectionTrack)(nil)
 
 var _ DetectionTrackProvider = (*FixedDetectionTrack)(nil)

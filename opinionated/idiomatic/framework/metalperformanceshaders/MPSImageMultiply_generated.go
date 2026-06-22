@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,88 +54,70 @@ func NewImageMultiply() *ImageMultiply {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageMultiply) WithPrimaryScale(primaryScale float32) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (im *ImageMultiply) WithPrimaryScale(primaryScale float32) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return im
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageMultiply) WithSecondaryScale(secondaryScale float32) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (im *ImageMultiply) WithSecondaryScale(secondaryScale float32) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return im
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *ImageMultiply) WithBias(bias float32) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (im *ImageMultiply) WithBias(bias float32) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setBias:"), bias)
+	return im
 }
 
-// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageMultiply) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
-	return x
+// WithPrimaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (im *ImageMultiply) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+	return im
 }
 
-// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageMultiply) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
-	return x
+// WithSecondaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (im *ImageMultiply) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+	return im
 }
 
-// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-func (x *ImageMultiply) WithMinimumValue(minimumValue float32) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+// WithMinimumValue sets minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+func (im *ImageMultiply) WithMinimumValue(minimumValue float32) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return im
 }
 
-// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-func (x *ImageMultiply) WithMaximumValue(maximumValue float32) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+// WithMaximumValue sets maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+func (im *ImageMultiply) WithMaximumValue(maximumValue float32) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return im
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer.
-func (x *ImageMultiply) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer.
+func (im *ImageMultiply) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return im
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer.
-func (x *ImageMultiply) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer.
+func (im *ImageMultiply) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return im
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageMultiply) WithClipRect(clipRect metal.MTLRegion) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (im *ImageMultiply) WithClipRect(clipRect metal.MTLRegion) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setClipRect:"), clipRect)
+	return im
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageMultiply) WithLabel(label string) *ImageMultiply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (im *ImageMultiply) WithLabel(label string) *ImageMultiply {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return im
 }
-
-// ImageMultiplyable is the interface implemented by [ImageMultiply], for mocking and DI.
-type ImageMultiplyable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *ImageMultiply
-	WithSecondaryScale(secondaryScale float32) *ImageMultiply
-	WithBias(bias float32) *ImageMultiply
-	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageMultiply
-	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageMultiply
-	WithMinimumValue(minimumValue float32) *ImageMultiply
-	WithMaximumValue(maximumValue float32) *ImageMultiply
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageMultiply
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageMultiply
-	WithClipRect(clipRect metal.MTLRegion) *ImageMultiply
-	WithLabel(label string) *ImageMultiply
-}
-
-var _ ImageMultiplyable = (*ImageMultiply)(nil)
 
 var _ ImageArithmeticProvider = (*ImageMultiply)(nil)
 

@@ -46,24 +46,24 @@ func storefrontAdopt(id objc.ID) *Storefront {
 }
 
 // Description returns the object's -description text.
-func (x *Storefront) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Storefront) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Storefront) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Storefront) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Storefront) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Storefront) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Storefront) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Storefront) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewStorefront creates a new Storefront.
@@ -73,8 +73,8 @@ func NewStorefront() *Storefront {
 }
 
 // CountryCode wraps the corresponding Objective-C method.
-func (x *Storefront) CountryCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+func (s *Storefront) CountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,19 +82,10 @@ func (x *Storefront) CountryCode() string {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *Storefront) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (s *Storefront) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Storefrontable is the interface implemented by [Storefront], for mocking and DI.
-type Storefrontable interface {
-	obj.Object
-	CountryCode() string
-	Identifier() string
-}
-
-var _ Storefrontable = (*Storefront)(nil)

@@ -45,24 +45,24 @@ func matrixCopyToImageAdopt(id objc.ID) *MatrixCopyToImage {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixCopyToImage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcti *MatrixCopyToImage) Description() string {
+	return rt.Description(objref.IDOf(mcti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixCopyToImage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcti *MatrixCopyToImage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixCopyToImage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcti *MatrixCopyToImage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixCopyToImage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcti *MatrixCopyToImage) String() string {
+	return rt.Description(objref.IDOf(mcti))
 }
 
 // NewMatrixCopyToImage creates a new MatrixCopyToImage.
@@ -71,49 +71,26 @@ func NewMatrixCopyToImage() *MatrixCopyToImage {
 	return matrixCopyToImageAdopt(_id)
 }
 
-// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixCopyToImage) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
-	return x
+// WithSourceMatrixOrigin sets the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mcti *MatrixCopyToImage) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage {
+	objc.Send[objc.ID](objref.IDOf(mcti), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return mcti
 }
 
-// WithSourceMatrixBatchIndex the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
-func (x *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex int) *MatrixCopyToImage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixBatchIndex:"), sourceMatrixBatchIndex)
-	return x
+// WithSourceMatrixBatchIndex sets the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
+func (mcti *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex int) *MatrixCopyToImage {
+	objc.Send[objc.ID](objref.IDOf(mcti), objc.RegisterName("setSourceMatrixBatchIndex:"), sourceMatrixBatchIndex)
+	return mcti
 }
 
-// SourceMatrixOrigin the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
-	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("sourceMatrixOrigin"))
+// SourceMatrixOrigin returns the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mcti *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mcti), objc.RegisterName("sourceMatrixOrigin"))
 	return _r
 }
 
-// SetSourceMatrixOrigin wraps the corresponding Objective-C method.
-func (x *MatrixCopyToImage) SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
-}
-
-// SourceMatrixBatchIndex the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
-func (x *MatrixCopyToImage) SourceMatrixBatchIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceMatrixBatchIndex"))
+// SourceMatrixBatchIndex returns the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
+func (mcti *MatrixCopyToImage) SourceMatrixBatchIndex() int {
+	_r := objc.Send[int](objref.IDOf(mcti), objc.RegisterName("sourceMatrixBatchIndex"))
 	return _r
 }
-
-// SetSourceMatrixBatchIndex wraps the corresponding Objective-C method.
-func (x *MatrixCopyToImage) SetSourceMatrixBatchIndex(sourceMatrixBatchIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixBatchIndex:"), sourceMatrixBatchIndex)
-}
-
-// MatrixCopyToImageable is the interface implemented by [MatrixCopyToImage], for mocking and DI.
-type MatrixCopyToImageable interface {
-	obj.Object
-	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage
-	WithSourceMatrixBatchIndex(sourceMatrixBatchIndex int) *MatrixCopyToImage
-	SourceMatrixOrigin() metal.MTLOrigin
-	SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin)
-	SourceMatrixBatchIndex() int
-	SetSourceMatrixBatchIndex(sourceMatrixBatchIndex int)
-}
-
-var _ MatrixCopyToImageable = (*MatrixCopyToImage)(nil)

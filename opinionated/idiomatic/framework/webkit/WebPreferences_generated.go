@@ -46,24 +46,24 @@ func webPreferencesAdopt(id objc.ID) *WebPreferences {
 }
 
 // Description returns the object's -description text.
-func (x *WebPreferences) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wp *WebPreferences) Description() string {
+	return rt.Description(objref.IDOf(wp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebPreferences) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wp *WebPreferences) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebPreferences) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wp *WebPreferences) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebPreferences) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wp *WebPreferences) String() string {
+	return rt.Description(objref.IDOf(wp))
 }
 
 // NewWebPreferencesWithIdentifier returns an initialized WebPreferences object, creating one if it does not exist.
@@ -73,177 +73,177 @@ func NewWebPreferencesWithIdentifier(anIdentifier string) *WebPreferences {
 	return webPreferencesAdopt(_id)
 }
 
-// WithStandardFontFamily the standard font family of the web view.
-func (x *WebPreferences) WithStandardFontFamily(standardFontFamily string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardFontFamily:"), purego.NSString(standardFontFamily))
-	return x
+// WithStandardFontFamily sets the standard font family of the web view.
+func (wp *WebPreferences) WithStandardFontFamily(standardFontFamily string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setStandardFontFamily:"), purego.NSString(standardFontFamily))
+	return wp
 }
 
-// WithFixedFontFamily the fixed font family of the web view.
-func (x *WebPreferences) WithFixedFontFamily(fixedFontFamily string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedFontFamily:"), purego.NSString(fixedFontFamily))
-	return x
+// WithFixedFontFamily sets the fixed font family of the web view.
+func (wp *WebPreferences) WithFixedFontFamily(fixedFontFamily string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setFixedFontFamily:"), purego.NSString(fixedFontFamily))
+	return wp
 }
 
-// WithSerifFontFamily the serif font family of the web view.
-func (x *WebPreferences) WithSerifFontFamily(serifFontFamily string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerifFontFamily:"), purego.NSString(serifFontFamily))
-	return x
+// WithSerifFontFamily sets the serif font family of the web view.
+func (wp *WebPreferences) WithSerifFontFamily(serifFontFamily string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setSerifFontFamily:"), purego.NSString(serifFontFamily))
+	return wp
 }
 
-// WithSansSerifFontFamily the sans serif font family of the web view.
-func (x *WebPreferences) WithSansSerifFontFamily(sansSerifFontFamily string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSansSerifFontFamily:"), purego.NSString(sansSerifFontFamily))
-	return x
+// WithSansSerifFontFamily sets the sans serif font family of the web view.
+func (wp *WebPreferences) WithSansSerifFontFamily(sansSerifFontFamily string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setSansSerifFontFamily:"), purego.NSString(sansSerifFontFamily))
+	return wp
 }
 
-// WithCursiveFontFamily the cursive font family of the web view.
-func (x *WebPreferences) WithCursiveFontFamily(cursiveFontFamily string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursiveFontFamily:"), purego.NSString(cursiveFontFamily))
-	return x
+// WithCursiveFontFamily sets the cursive font family of the web view.
+func (wp *WebPreferences) WithCursiveFontFamily(cursiveFontFamily string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setCursiveFontFamily:"), purego.NSString(cursiveFontFamily))
+	return wp
 }
 
-// WithFantasyFontFamily the fantasy font family of the web view.
-func (x *WebPreferences) WithFantasyFontFamily(fantasyFontFamily string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFantasyFontFamily:"), purego.NSString(fantasyFontFamily))
-	return x
+// WithFantasyFontFamily sets the fantasy font family of the web view.
+func (wp *WebPreferences) WithFantasyFontFamily(fantasyFontFamily string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setFantasyFontFamily:"), purego.NSString(fantasyFontFamily))
+	return wp
 }
 
-// WithDefaultFontSize the default font size of the web view.
-func (x *WebPreferences) WithDefaultFontSize(defaultFontSize int) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFontSize:"), defaultFontSize)
-	return x
+// WithDefaultFontSize sets the default font size of the web view.
+func (wp *WebPreferences) WithDefaultFontSize(defaultFontSize int) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setDefaultFontSize:"), defaultFontSize)
+	return wp
 }
 
-// WithDefaultFixedFontSize the default fixed font size of the web view.
-func (x *WebPreferences) WithDefaultFixedFontSize(defaultFixedFontSize int) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFixedFontSize:"), defaultFixedFontSize)
-	return x
+// WithDefaultFixedFontSize sets the default fixed font size of the web view.
+func (wp *WebPreferences) WithDefaultFixedFontSize(defaultFixedFontSize int) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setDefaultFixedFontSize:"), defaultFixedFontSize)
+	return wp
 }
 
-// WithMinimumFontSize the minimum font size of the web view.
-func (x *WebPreferences) WithMinimumFontSize(minimumFontSize int) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
-	return x
+// WithMinimumFontSize sets the minimum font size of the web view.
+func (wp *WebPreferences) WithMinimumFontSize(minimumFontSize int) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
+	return wp
 }
 
-// WithMinimumLogicalFontSize the minimum logical font size of the web view.
-func (x *WebPreferences) WithMinimumLogicalFontSize(minimumLogicalFontSize int) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLogicalFontSize:"), minimumLogicalFontSize)
-	return x
+// WithMinimumLogicalFontSize sets the minimum logical font size of the web view.
+func (wp *WebPreferences) WithMinimumLogicalFontSize(minimumLogicalFontSize int) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setMinimumLogicalFontSize:"), minimumLogicalFontSize)
+	return wp
 }
 
-// WithDefaultTextEncodingName the default text encoding of the web view.
-func (x *WebPreferences) WithDefaultTextEncodingName(defaultTextEncodingName string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTextEncodingName:"), purego.NSString(defaultTextEncodingName))
-	return x
+// WithDefaultTextEncodingName sets the default text encoding of the web view.
+func (wp *WebPreferences) WithDefaultTextEncodingName(defaultTextEncodingName string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setDefaultTextEncodingName:"), purego.NSString(defaultTextEncodingName))
+	return wp
 }
 
-// WithUserStyleSheetEnabled a Boolean that indicates whether or not user style sheets are enabled in the web view.
-func (x *WebPreferences) WithUserStyleSheetEnabled(userStyleSheetEnabled bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetEnabled:"), userStyleSheetEnabled)
-	return x
+// WithUserStyleSheetEnabled sets a Boolean that indicates whether or not user style sheets are enabled in the web view.
+func (wp *WebPreferences) WithUserStyleSheetEnabled(userStyleSheetEnabled bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setUserStyleSheetEnabled:"), userStyleSheetEnabled)
+	return wp
 }
 
-// WithUserStyleSheetLocation the location of the user style sheet.
-func (x *WebPreferences) WithUserStyleSheetLocation(userStyleSheetLocation string) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetLocation:"), rt.FileURL(userStyleSheetLocation))
-	return x
+// WithUserStyleSheetLocation sets the location of the user style sheet.
+func (wp *WebPreferences) WithUserStyleSheetLocation(userStyleSheetLocation string) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setUserStyleSheetLocation:"), rt.FileURL(userStyleSheetLocation))
+	return wp
 }
 
-// WithJavaEnabled a Boolean that indicates whether or not the web view allows Java.
-func (x *WebPreferences) WithJavaEnabled(javaEnabled bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaEnabled:"), javaEnabled)
-	return x
+// WithJavaEnabled sets a Boolean that indicates whether or not the web view allows Java.
+func (wp *WebPreferences) WithJavaEnabled(javaEnabled bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaEnabled:"), javaEnabled)
+	return wp
 }
 
-// WithJavaScriptEnabled a Boolean that indicates whether or not the web view allows JavaScript.
-func (x *WebPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
-	return x
+// WithJavaScriptEnabled sets a Boolean that indicates whether or not the web view allows JavaScript.
+func (wp *WebPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
+	return wp
 }
 
-// WithJavaScriptCanOpenWindowsAutomatically a Boolean that indicates whether or not the web view allows JavaScript to open windows automatically.
-func (x *WebPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
-	return x
+// WithJavaScriptCanOpenWindowsAutomatically sets a Boolean that indicates whether or not the web view allows JavaScript to open windows automatically.
+func (wp *WebPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
+	return wp
 }
 
-// WithPlugInsEnabled a Boolean that indicates whether or not the web view allows plug-ins.
-func (x *WebPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
-	return x
+// WithPlugInsEnabled sets a Boolean that indicates whether or not the web view allows plug-ins.
+func (wp *WebPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
+	return wp
 }
 
-// WithAllowsAnimatedImages a Boolean that indicates whether or not the receiver allows animated images.
-func (x *WebPreferences) WithAllowsAnimatedImages(allowsAnimatedImages bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImages:"), allowsAnimatedImages)
-	return x
+// WithAllowsAnimatedImages sets a Boolean that indicates whether or not the receiver allows animated images.
+func (wp *WebPreferences) WithAllowsAnimatedImages(allowsAnimatedImages bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setAllowsAnimatedImages:"), allowsAnimatedImages)
+	return wp
 }
 
-// WithAllowsAnimatedImageLooping a Boolean that indicates whether or not the receiver allows animated images to loop.
-func (x *WebPreferences) WithAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImageLooping:"), allowsAnimatedImageLooping)
-	return x
+// WithAllowsAnimatedImageLooping sets a Boolean that indicates whether or not the receiver allows animated images to loop.
+func (wp *WebPreferences) WithAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setAllowsAnimatedImageLooping:"), allowsAnimatedImageLooping)
+	return wp
 }
 
-// WithLoadsImagesAutomatically a Boolean that indicates whether or not the web view allows images to be loaded automatically.
-func (x *WebPreferences) WithLoadsImagesAutomatically(loadsImagesAutomatically bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadsImagesAutomatically:"), loadsImagesAutomatically)
-	return x
+// WithLoadsImagesAutomatically sets a Boolean that indicates whether or not the web view allows images to be loaded automatically.
+func (wp *WebPreferences) WithLoadsImagesAutomatically(loadsImagesAutomatically bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setLoadsImagesAutomatically:"), loadsImagesAutomatically)
+	return wp
 }
 
-// WithAutosaves a Boolean that indicates whether or not the receiver’s attributes are automatically stored in the user defaults database.
-func (x *WebPreferences) WithAutosaves(autosaves bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaves:"), autosaves)
-	return x
+// WithAutosaves sets a Boolean that indicates whether or not the receiver’s attributes are automatically stored in the user defaults database.
+func (wp *WebPreferences) WithAutosaves(autosaves bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setAutosaves:"), autosaves)
+	return wp
 }
 
-// WithShouldPrintBackgrounds a Boolean that indicates whether or not the web view should include backgrounds when printing.
-func (x *WebPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
-	return x
+// WithShouldPrintBackgrounds sets a Boolean that indicates whether or not the web view should include backgrounds when printing.
+func (wp *WebPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
+	return wp
 }
 
-// WithPrivateBrowsingEnabled a Boolean that indicates whether or not private browsing is enabled.
-func (x *WebPreferences) WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateBrowsingEnabled:"), privateBrowsingEnabled)
-	return x
+// WithPrivateBrowsingEnabled sets a Boolean that indicates whether or not private browsing is enabled.
+func (wp *WebPreferences) WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setPrivateBrowsingEnabled:"), privateBrowsingEnabled)
+	return wp
 }
 
-// WithTabsToLinks a Boolean that indicates whether or not the tab key will focus links.
-func (x *WebPreferences) WithTabsToLinks(tabsToLinks bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabsToLinks:"), tabsToLinks)
-	return x
+// WithTabsToLinks sets a Boolean that indicates whether or not the tab key will focus links.
+func (wp *WebPreferences) WithTabsToLinks(tabsToLinks bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setTabsToLinks:"), tabsToLinks)
+	return wp
 }
 
-// WithUsesPageCache a Boolean that indicates whether the web views associated with the receiver should use the shared page cache.
-func (x *WebPreferences) WithUsesPageCache(usesPageCache bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesPageCache:"), usesPageCache)
-	return x
+// WithUsesPageCache sets a Boolean that indicates whether the web views associated with the receiver should use the shared page cache.
+func (wp *WebPreferences) WithUsesPageCache(usesPageCache bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setUsesPageCache:"), usesPageCache)
+	return wp
 }
 
-// WithCacheModel the cache model for the web views associated with the receiver.
-func (x *WebPreferences) WithCacheModel(cacheModel WebCacheModel) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCacheModel:"), cacheModel)
-	return x
+// WithCacheModel sets the cache model for the web views associated with the receiver.
+func (wp *WebPreferences) WithCacheModel(cacheModel WebCacheModel) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setCacheModel:"), cacheModel)
+	return wp
 }
 
-// WithSuppressesIncrementalRendering a Boolean that indicates whether incremental rendering should be suppressed.
-func (x *WebPreferences) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesIncrementalRendering:"), suppressesIncrementalRendering)
-	return x
+// WithSuppressesIncrementalRendering sets a Boolean that indicates whether incremental rendering should be suppressed.
+func (wp *WebPreferences) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setSuppressesIncrementalRendering:"), suppressesIncrementalRendering)
+	return wp
 }
 
 // WithAllowsAirPlayForMediaPlayback sets the property and returns the receiver so calls can be chained.
-func (x *WebPreferences) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
-	return x
+func (wp *WebPreferences) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences {
+	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
+	return wp
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *WebPreferences) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (wp *WebPreferences) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -251,422 +251,190 @@ func (x *WebPreferences) Identifier() string {
 }
 
 // StandardFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) StandardFontFamily() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardFontFamily"))
+func (wp *WebPreferences) StandardFontFamily() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("standardFontFamily"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetStandardFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetStandardFontFamily(standardFontFamily string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardFontFamily:"), purego.NSString(standardFontFamily))
 }
 
 // FixedFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) FixedFontFamily() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fixedFontFamily"))
+func (wp *WebPreferences) FixedFontFamily() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("fixedFontFamily"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetFixedFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetFixedFontFamily(fixedFontFamily string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedFontFamily:"), purego.NSString(fixedFontFamily))
 }
 
 // SerifFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SerifFontFamily() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serifFontFamily"))
+func (wp *WebPreferences) SerifFontFamily() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("serifFontFamily"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetSerifFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetSerifFontFamily(serifFontFamily string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerifFontFamily:"), purego.NSString(serifFontFamily))
 }
 
 // SansSerifFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SansSerifFontFamily() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sansSerifFontFamily"))
+func (wp *WebPreferences) SansSerifFontFamily() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("sansSerifFontFamily"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetSansSerifFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetSansSerifFontFamily(sansSerifFontFamily string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSansSerifFontFamily:"), purego.NSString(sansSerifFontFamily))
 }
 
 // CursiveFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) CursiveFontFamily() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cursiveFontFamily"))
+func (wp *WebPreferences) CursiveFontFamily() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("cursiveFontFamily"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCursiveFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetCursiveFontFamily(cursiveFontFamily string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursiveFontFamily:"), purego.NSString(cursiveFontFamily))
 }
 
 // FantasyFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) FantasyFontFamily() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fantasyFontFamily"))
+func (wp *WebPreferences) FantasyFontFamily() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("fantasyFontFamily"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetFantasyFontFamily wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetFantasyFontFamily(fantasyFontFamily string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFantasyFontFamily:"), purego.NSString(fantasyFontFamily))
 }
 
 // DefaultFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) DefaultFontSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultFontSize"))
+func (wp *WebPreferences) DefaultFontSize() int {
+	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("defaultFontSize"))
 	return _r
-}
-
-// SetDefaultFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetDefaultFontSize(defaultFontSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFontSize:"), defaultFontSize)
 }
 
 // DefaultFixedFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) DefaultFixedFontSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultFixedFontSize"))
+func (wp *WebPreferences) DefaultFixedFontSize() int {
+	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("defaultFixedFontSize"))
 	return _r
-}
-
-// SetDefaultFixedFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetDefaultFixedFontSize(defaultFixedFontSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFixedFontSize:"), defaultFixedFontSize)
 }
 
 // MinimumFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) MinimumFontSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumFontSize"))
+func (wp *WebPreferences) MinimumFontSize() int {
+	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("minimumFontSize"))
 	return _r
-}
-
-// SetMinimumFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetMinimumFontSize(minimumFontSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
 }
 
 // MinimumLogicalFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) MinimumLogicalFontSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumLogicalFontSize"))
+func (wp *WebPreferences) MinimumLogicalFontSize() int {
+	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("minimumLogicalFontSize"))
 	return _r
 }
 
-// SetMinimumLogicalFontSize wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetMinimumLogicalFontSize(minimumLogicalFontSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLogicalFontSize:"), minimumLogicalFontSize)
-}
-
 // DefaultTextEncodingName wraps the corresponding Objective-C method.
-func (x *WebPreferences) DefaultTextEncodingName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultTextEncodingName"))
+func (wp *WebPreferences) DefaultTextEncodingName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("defaultTextEncodingName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDefaultTextEncodingName wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetDefaultTextEncodingName(defaultTextEncodingName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTextEncodingName:"), purego.NSString(defaultTextEncodingName))
-}
-
 // UserStyleSheetEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) UserStyleSheetEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("userStyleSheetEnabled"))
+func (wp *WebPreferences) UserStyleSheetEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("userStyleSheetEnabled"))
 	return _r
 }
 
-// SetUserStyleSheetEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetUserStyleSheetEnabled(userStyleSheetEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetEnabled:"), userStyleSheetEnabled)
-}
-
-// UserStyleSheetLocation the location of the user style sheet.
-func (x *WebPreferences) UserStyleSheetLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userStyleSheetLocation"))
+// UserStyleSheetLocation returns the location of the user style sheet.
+func (wp *WebPreferences) UserStyleSheetLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("userStyleSheetLocation"))
 	return obj.Wrap(_r)
 }
 
-// SetUserStyleSheetLocation wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetUserStyleSheetLocation(userStyleSheetLocation string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetLocation:"), rt.FileURL(userStyleSheetLocation))
-}
-
-// IsJavaEnabled deprecated function that does nothing and always returns false.
-func (x *WebPreferences) IsJavaEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isJavaEnabled"))
+// IsJavaEnabled reports whether deprecated function that does nothing and always returns false.
+func (wp *WebPreferences) IsJavaEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isJavaEnabled"))
 	return _r
-}
-
-// SetJavaEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetJavaEnabled(javaEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaEnabled:"), javaEnabled)
 }
 
 // IsJavaScriptEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) IsJavaScriptEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isJavaScriptEnabled"))
+func (wp *WebPreferences) IsJavaScriptEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isJavaScriptEnabled"))
 	return _r
-}
-
-// SetJavaScriptEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetJavaScriptEnabled(javaScriptEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
 }
 
 // JavaScriptCanOpenWindowsAutomatically wraps the corresponding Objective-C method.
-func (x *WebPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("javaScriptCanOpenWindowsAutomatically"))
+func (wp *WebPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaScriptCanOpenWindowsAutomatically"))
 	return _r
-}
-
-// SetJavaScriptCanOpenWindowsAutomatically wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
 }
 
 // ArePlugInsEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) ArePlugInsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("arePlugInsEnabled"))
+func (wp *WebPreferences) ArePlugInsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("arePlugInsEnabled"))
 	return _r
-}
-
-// SetPlugInsEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetPlugInsEnabled(plugInsEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
 }
 
 // AllowsAnimatedImages wraps the corresponding Objective-C method.
-func (x *WebPreferences) AllowsAnimatedImages() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAnimatedImages"))
+func (wp *WebPreferences) AllowsAnimatedImages() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("allowsAnimatedImages"))
 	return _r
-}
-
-// SetAllowsAnimatedImages wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetAllowsAnimatedImages(allowsAnimatedImages bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImages:"), allowsAnimatedImages)
 }
 
 // AllowsAnimatedImageLooping wraps the corresponding Objective-C method.
-func (x *WebPreferences) AllowsAnimatedImageLooping() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAnimatedImageLooping"))
+func (wp *WebPreferences) AllowsAnimatedImageLooping() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("allowsAnimatedImageLooping"))
 	return _r
-}
-
-// SetAllowsAnimatedImageLooping wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImageLooping:"), allowsAnimatedImageLooping)
 }
 
 // LoadsImagesAutomatically wraps the corresponding Objective-C method.
-func (x *WebPreferences) LoadsImagesAutomatically() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadsImagesAutomatically"))
+func (wp *WebPreferences) LoadsImagesAutomatically() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("loadsImagesAutomatically"))
 	return _r
 }
 
-// SetLoadsImagesAutomatically wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetLoadsImagesAutomatically(loadsImagesAutomatically bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadsImagesAutomatically:"), loadsImagesAutomatically)
-}
-
-// Autosaves if autosaves is YES the settings represented by WebPreferences will be stored in the user defaults database.
-func (x *WebPreferences) Autosaves() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autosaves"))
+// Autosaves reports whether if autosaves is true the settings represented by WebPreferences will be stored in the user defaults database.
+func (wp *WebPreferences) Autosaves() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("autosaves"))
 	return _r
-}
-
-// SetAutosaves wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetAutosaves(autosaves bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaves:"), autosaves)
 }
 
 // ShouldPrintBackgrounds wraps the corresponding Objective-C method.
-func (x *WebPreferences) ShouldPrintBackgrounds() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPrintBackgrounds"))
+func (wp *WebPreferences) ShouldPrintBackgrounds() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("shouldPrintBackgrounds"))
 	return _r
 }
 
-// SetShouldPrintBackgrounds wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetShouldPrintBackgrounds(shouldPrintBackgrounds bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
-}
-
-// PrivateBrowsingEnabled if private browsing is enabled, WebKit will not store information about sites the user visits.
-func (x *WebPreferences) PrivateBrowsingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("privateBrowsingEnabled"))
+// PrivateBrowsingEnabled reports whether if private browsing is enabled, WebKit will not store information about sites the user visits.
+func (wp *WebPreferences) PrivateBrowsingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("privateBrowsingEnabled"))
 	return _r
 }
 
-// SetPrivateBrowsingEnabled wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetPrivateBrowsingEnabled(privateBrowsingEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateBrowsingEnabled:"), privateBrowsingEnabled)
-}
-
-// TabsToLinks if tabsToLinks is YES, the tab key will focus links and form controls. The option key temporarily reverses this preference.
-func (x *WebPreferences) TabsToLinks() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tabsToLinks"))
+// TabsToLinks reports whether if tabsToLinks is true, the tab key will focus links and form controls. The option key temporarily reverses this preference.
+func (wp *WebPreferences) TabsToLinks() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("tabsToLinks"))
 	return _r
 }
 
-// SetTabsToLinks wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetTabsToLinks(tabsToLinks bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabsToLinks:"), tabsToLinks)
-}
-
-// UsesPageCache whether the receiver's associated WebViews use the shared page cache. Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
-func (x *WebPreferences) UsesPageCache() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesPageCache"))
+// UsesPageCache reports whether the receiver's associated WebViews use the shared page cache. Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
+func (wp *WebPreferences) UsesPageCache() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("usesPageCache"))
 	return _r
-}
-
-// SetUsesPageCache wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetUsesPageCache(usesPageCache bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesPageCache:"), usesPageCache)
 }
 
 // CacheModel specifies a usage model for a WebView, which WebKit will use to determine its caching behavior. If necessary, WebKit will prune its caches to match cacheModel when set. Research indicates that users tend to browse within clusters of documents that hold resources in common, and to revisit previously visited documents. WebKit and the frameworks below it include built-in caches that take advantage of these patterns, substantially improving document load speed in browsing situations. The WebKit cache model controls the behaviors of all of these caches, including NSURLCache and the various WebCore caches. Applications with a browsing interface can improve document load speed substantially by specifying WebCacheModelDocumentBrowser. Applications without a browsing interface can reduce memory usage substantially by specifying WebCacheModelDocumentViewer. If cacheModel is not set, WebKit will select a cache model automatically.
-func (x *WebPreferences) CacheModel() WebCacheModel {
-	_r := objc.Send[WebCacheModel](objref.IDOf(x), objc.RegisterName("cacheModel"))
+func (wp *WebPreferences) CacheModel() WebCacheModel {
+	_r := objc.Send[WebCacheModel](objref.IDOf(wp), objc.RegisterName("cacheModel"))
 	return _r
-}
-
-// SetCacheModel wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetCacheModel(cacheModel WebCacheModel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCacheModel:"), cacheModel)
 }
 
 // SuppressesIncrementalRendering wraps the corresponding Objective-C method.
-func (x *WebPreferences) SuppressesIncrementalRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suppressesIncrementalRendering"))
+func (wp *WebPreferences) SuppressesIncrementalRendering() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("suppressesIncrementalRendering"))
 	return _r
-}
-
-// SetSuppressesIncrementalRendering wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesIncrementalRendering:"), suppressesIncrementalRendering)
 }
 
 // AllowsAirPlayForMediaPlayback wraps the corresponding Objective-C method.
-func (x *WebPreferences) AllowsAirPlayForMediaPlayback() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAirPlayForMediaPlayback"))
+func (wp *WebPreferences) AllowsAirPlayForMediaPlayback() bool {
+	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("allowsAirPlayForMediaPlayback"))
 	return _r
 }
-
-// SetAllowsAirPlayForMediaPlayback wraps the corresponding Objective-C method.
-func (x *WebPreferences) SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
-}
-
-// WebPreferencesable is the interface implemented by [WebPreferences], for mocking and DI.
-type WebPreferencesable interface {
-	obj.Object
-	WithStandardFontFamily(standardFontFamily string) *WebPreferences
-	WithFixedFontFamily(fixedFontFamily string) *WebPreferences
-	WithSerifFontFamily(serifFontFamily string) *WebPreferences
-	WithSansSerifFontFamily(sansSerifFontFamily string) *WebPreferences
-	WithCursiveFontFamily(cursiveFontFamily string) *WebPreferences
-	WithFantasyFontFamily(fantasyFontFamily string) *WebPreferences
-	WithDefaultFontSize(defaultFontSize int) *WebPreferences
-	WithDefaultFixedFontSize(defaultFixedFontSize int) *WebPreferences
-	WithMinimumFontSize(minimumFontSize int) *WebPreferences
-	WithMinimumLogicalFontSize(minimumLogicalFontSize int) *WebPreferences
-	WithDefaultTextEncodingName(defaultTextEncodingName string) *WebPreferences
-	WithUserStyleSheetEnabled(userStyleSheetEnabled bool) *WebPreferences
-	WithUserStyleSheetLocation(userStyleSheetLocation string) *WebPreferences
-	WithJavaEnabled(javaEnabled bool) *WebPreferences
-	WithJavaScriptEnabled(javaScriptEnabled bool) *WebPreferences
-	WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WebPreferences
-	WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences
-	WithAllowsAnimatedImages(allowsAnimatedImages bool) *WebPreferences
-	WithAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) *WebPreferences
-	WithLoadsImagesAutomatically(loadsImagesAutomatically bool) *WebPreferences
-	WithAutosaves(autosaves bool) *WebPreferences
-	WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WebPreferences
-	WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences
-	WithTabsToLinks(tabsToLinks bool) *WebPreferences
-	WithUsesPageCache(usesPageCache bool) *WebPreferences
-	WithCacheModel(cacheModel WebCacheModel) *WebPreferences
-	WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences
-	WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences
-	Identifier() string
-	StandardFontFamily() string
-	SetStandardFontFamily(standardFontFamily string)
-	FixedFontFamily() string
-	SetFixedFontFamily(fixedFontFamily string)
-	SerifFontFamily() string
-	SetSerifFontFamily(serifFontFamily string)
-	SansSerifFontFamily() string
-	SetSansSerifFontFamily(sansSerifFontFamily string)
-	CursiveFontFamily() string
-	SetCursiveFontFamily(cursiveFontFamily string)
-	FantasyFontFamily() string
-	SetFantasyFontFamily(fantasyFontFamily string)
-	DefaultFontSize() int
-	SetDefaultFontSize(defaultFontSize int)
-	DefaultFixedFontSize() int
-	SetDefaultFixedFontSize(defaultFixedFontSize int)
-	MinimumFontSize() int
-	SetMinimumFontSize(minimumFontSize int)
-	MinimumLogicalFontSize() int
-	SetMinimumLogicalFontSize(minimumLogicalFontSize int)
-	DefaultTextEncodingName() string
-	SetDefaultTextEncodingName(defaultTextEncodingName string)
-	UserStyleSheetEnabled() bool
-	SetUserStyleSheetEnabled(userStyleSheetEnabled bool)
-	UserStyleSheetLocation() obj.Object
-	SetUserStyleSheetLocation(userStyleSheetLocation string)
-	IsJavaEnabled() bool
-	SetJavaEnabled(javaEnabled bool)
-	IsJavaScriptEnabled() bool
-	SetJavaScriptEnabled(javaScriptEnabled bool)
-	JavaScriptCanOpenWindowsAutomatically() bool
-	SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool)
-	ArePlugInsEnabled() bool
-	SetPlugInsEnabled(plugInsEnabled bool)
-	AllowsAnimatedImages() bool
-	SetAllowsAnimatedImages(allowsAnimatedImages bool)
-	AllowsAnimatedImageLooping() bool
-	SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool)
-	LoadsImagesAutomatically() bool
-	SetLoadsImagesAutomatically(loadsImagesAutomatically bool)
-	Autosaves() bool
-	SetAutosaves(autosaves bool)
-	ShouldPrintBackgrounds() bool
-	SetShouldPrintBackgrounds(shouldPrintBackgrounds bool)
-	PrivateBrowsingEnabled() bool
-	SetPrivateBrowsingEnabled(privateBrowsingEnabled bool)
-	TabsToLinks() bool
-	SetTabsToLinks(tabsToLinks bool)
-	UsesPageCache() bool
-	SetUsesPageCache(usesPageCache bool)
-	CacheModel() WebCacheModel
-	SetCacheModel(cacheModel WebCacheModel)
-	SuppressesIncrementalRendering() bool
-	SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool)
-	AllowsAirPlayForMediaPlayback() bool
-	SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool)
-}
-
-var _ WebPreferencesable = (*WebPreferences)(nil)

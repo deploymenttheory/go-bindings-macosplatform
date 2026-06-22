@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,35 +51,25 @@ func NewPolygon() *Polygon {
 	return polygonAdopt(_id)
 }
 
-// WithTitle the title of the shape annotation.
-func (x *Polygon) WithTitle(title string) *Polygon {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (p *Polygon) WithTitle(title string) *Polygon {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return p
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *Polygon) WithSubtitle(subtitle string) *Polygon {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (p *Polygon) WithSubtitle(subtitle string) *Polygon {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return p
 }
 
 // InteriorPolygons wraps the corresponding Objective-C method.
 //
 // InteriorPolygons returns the collection as a Go slice.
-func (x *Polygon) InteriorPolygons() []*Polygon {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interiorPolygons"))
+func (p *Polygon) InteriorPolygons() []*Polygon {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("interiorPolygons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Polygon { return PolygonFromID(_id) })
 }
-
-// Polygonable is the interface implemented by [Polygon], for mocking and DI.
-type Polygonable interface {
-	obj.Object
-	WithTitle(title string) *Polygon
-	WithSubtitle(subtitle string) *Polygon
-	InteriorPolygons() []*Polygon
-}
-
-var _ Polygonable = (*Polygon)(nil)
 
 var _ MultiPointProvider = (*Polygon)(nil)
 

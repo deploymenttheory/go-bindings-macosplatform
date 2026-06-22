@@ -59,18 +59,10 @@ func NewMultipleDirectoryShareWithDirectories(directories obj.Object) *MultipleD
 	return multipleDirectoryShareAdopt(_id)
 }
 
-// Directories the directories on the host to expose to the guest. The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised.
-func (x *MultipleDirectoryShare) Directories() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directories"))
+// Directories returns the directories on the host to expose to the guest. The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised.
+func (mds *MultipleDirectoryShare) Directories() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mds), objc.RegisterName("directories"))
 	return obj.Wrap(_r)
 }
-
-// MultipleDirectoryShareable is the interface implemented by [MultipleDirectoryShare], for mocking and DI.
-type MultipleDirectoryShareable interface {
-	obj.Object
-	Directories() obj.Object
-}
-
-var _ MultipleDirectoryShareable = (*MultipleDirectoryShare)(nil)
 
 var _ DirectoryShareProvider = (*MultipleDirectoryShare)(nil)

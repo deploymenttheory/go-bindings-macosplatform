@@ -48,36 +48,29 @@ func audioInputStreamSourceAdopt(id objc.ID) *AudioInputStreamSource {
 }
 
 // Description returns the object's -description text.
-func (x *AudioInputStreamSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aiss *AudioInputStreamSource) Description() string {
+	return rt.Description(objref.IDOf(aiss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioInputStreamSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aiss *AudioInputStreamSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aiss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioInputStreamSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aiss *AudioInputStreamSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aiss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioInputStreamSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aiss *AudioInputStreamSource) String() string {
+	return rt.Description(objref.IDOf(aiss))
 }
-
-// AudioInputStreamSourceable is the interface implemented by [AudioInputStreamSource], for mocking and DI.
-type AudioInputStreamSourceable interface {
-	obj.Object
-}
-
-var _ AudioInputStreamSourceable = (*AudioInputStreamSource)(nil)
 
 // isAudioInputStreamSource marks AudioInputStreamSource — and, by embedding promotion, its
 // subclasses — as a member of the AudioInputStreamSource hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioInputStreamSource) isAudioInputStreamSource() {}
+func (aiss *AudioInputStreamSource) isAudioInputStreamSource() {}
 
 var _ AudioInputStreamSourceProvider = (*AudioInputStreamSource)(nil)

@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,31 +45,22 @@ func nNBinaryGradientStateNodeAdopt(id objc.ID) *NNBinaryGradientStateNode {
 	return x
 }
 
-// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *NNBinaryGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-	return x
+// WithExportFromGraph sets tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+func (nbgsn *NNBinaryGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(nbgsn), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
+	return nbgsn
 }
 
-// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
-func (x *NNBinaryGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-	return x
+// WithSynchronizeResource sets set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
+func (nbgsn *NNBinaryGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(nbgsn), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
+	return nbgsn
 }
-
-// NNBinaryGradientStateNodeable is the interface implemented by [NNBinaryGradientStateNode], for mocking and DI.
-type NNBinaryGradientStateNodeable interface {
-	obj.Object
-	WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode
-	WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode
-}
-
-var _ NNBinaryGradientStateNodeable = (*NNBinaryGradientStateNode)(nil)
 
 // isNNBinaryGradientStateNode marks NNBinaryGradientStateNode — and, by embedding promotion, its
 // subclasses — as a member of the NNBinaryGradientStateNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNBinaryGradientStateNode) isNNBinaryGradientStateNode() {}
+func (nbgsn *NNBinaryGradientStateNode) isNNBinaryGradientStateNode() {}
 
 var _ NNBinaryGradientStateNodeProvider = (*NNBinaryGradientStateNode)(nil)
 

@@ -46,24 +46,24 @@ func stageInputOutputDescriptorAdopt(id objc.ID) *StageInputOutputDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *StageInputOutputDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (siod *StageInputOutputDescriptor) Description() string {
+	return rt.Description(objref.IDOf(siod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StageInputOutputDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (siod *StageInputOutputDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(siod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StageInputOutputDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (siod *StageInputOutputDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(siod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StageInputOutputDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (siod *StageInputOutputDescriptor) String() string {
+	return rt.Description(objref.IDOf(siod))
 }
 
 // NewStageInputOutputDescriptor creates a new StageInputOutputDescriptor.
@@ -72,69 +72,43 @@ func NewStageInputOutputDescriptor() *StageInputOutputDescriptor {
 	return stageInputOutputDescriptorAdopt(_id)
 }
 
-// WithIndexType the data type of the indices stored in the index buffer.
-func (x *StageInputOutputDescriptor) WithIndexType(indexType IndexType) *StageInputOutputDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-	return x
+// WithIndexType sets the data type of the indices stored in the index buffer.
+func (siod *StageInputOutputDescriptor) WithIndexType(indexType IndexType) *StageInputOutputDescriptor {
+	objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("setIndexType:"), indexType)
+	return siod
 }
 
-// WithIndexBufferIndex the location of the index buffer for a compute function using indexed thread addressing.
-func (x *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex int) *StageInputOutputDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferIndex:"), indexBufferIndex)
-	return x
+// WithIndexBufferIndex sets the location of the index buffer for a compute function using indexed thread addressing.
+func (siod *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex int) *StageInputOutputDescriptor {
+	objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("setIndexBufferIndex:"), indexBufferIndex)
+	return siod
 }
 
 // Reset resets the default state for the descriptor.
-func (x *StageInputOutputDescriptor) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (siod *StageInputOutputDescriptor) Reset() {
+	objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("reset"))
 }
 
 // Layouts wraps the corresponding Objective-C method.
-func (x *StageInputOutputDescriptor) Layouts() *BufferLayoutDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layouts"))
+func (siod *StageInputOutputDescriptor) Layouts() *BufferLayoutDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("layouts"))
 	return BufferLayoutDescriptorArrayFromID(_r)
 }
 
 // Attributes wraps the corresponding Objective-C method.
-func (x *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (siod *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("attributes"))
 	return AttributeDescriptorArrayFromID(_r)
 }
 
 // IndexType wraps the corresponding Objective-C method.
-func (x *StageInputOutputDescriptor) IndexType() IndexType {
-	_r := objc.Send[IndexType](objref.IDOf(x), objc.RegisterName("indexType"))
+func (siod *StageInputOutputDescriptor) IndexType() IndexType {
+	_r := objc.Send[IndexType](objref.IDOf(siod), objc.RegisterName("indexType"))
 	return _r
-}
-
-// SetIndexType wraps the corresponding Objective-C method.
-func (x *StageInputOutputDescriptor) SetIndexType(indexType IndexType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
 }
 
 // IndexBufferIndex wraps the corresponding Objective-C method.
-func (x *StageInputOutputDescriptor) IndexBufferIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferIndex"))
+func (siod *StageInputOutputDescriptor) IndexBufferIndex() int {
+	_r := objc.Send[int](objref.IDOf(siod), objc.RegisterName("indexBufferIndex"))
 	return _r
 }
-
-// SetIndexBufferIndex wraps the corresponding Objective-C method.
-func (x *StageInputOutputDescriptor) SetIndexBufferIndex(indexBufferIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferIndex:"), indexBufferIndex)
-}
-
-// StageInputOutputDescriptorable is the interface implemented by [StageInputOutputDescriptor], for mocking and DI.
-type StageInputOutputDescriptorable interface {
-	obj.Object
-	WithIndexType(indexType IndexType) *StageInputOutputDescriptor
-	WithIndexBufferIndex(indexBufferIndex int) *StageInputOutputDescriptor
-	Reset()
-	Layouts() *BufferLayoutDescriptorArray
-	Attributes() *AttributeDescriptorArray
-	IndexType() IndexType
-	SetIndexType(indexType IndexType)
-	IndexBufferIndex() int
-	SetIndexBufferIndex(indexBufferIndex int)
-}
-
-var _ StageInputOutputDescriptorable = (*StageInputOutputDescriptor)(nil)

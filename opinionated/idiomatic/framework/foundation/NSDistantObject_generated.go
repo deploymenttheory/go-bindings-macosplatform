@@ -46,24 +46,24 @@ func distantObjectAdopt(id objc.ID) *DistantObject {
 }
 
 // Description returns the object's -description text.
-func (x *DistantObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (do *DistantObject) Description() string {
+	return rt.Description(objref.IDOf(do))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistantObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (do *DistantObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(do), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistantObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (do *DistantObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(do), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DistantObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (do *DistantObject) String() string {
+	return rt.Description(objref.IDOf(do))
 }
 
 // NewDistantObjectWithTargetConnection initializes a newly allocated NSDistantObject as a remote proxy for target, which is an id in another thread or another application’s address space.
@@ -88,15 +88,7 @@ func NewDistantObjectWithCoder(inCoder *Coder) *DistantObject {
 }
 
 // ConnectionForProxy wraps the corresponding Objective-C method.
-func (x *DistantObject) ConnectionForProxy() *Connection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionForProxy"))
+func (do *DistantObject) ConnectionForProxy() *Connection {
+	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("connectionForProxy"))
 	return ConnectionFromID(_r)
 }
-
-// DistantObjectable is the interface implemented by [DistantObject], for mocking and DI.
-type DistantObjectable interface {
-	obj.Object
-	ConnectionForProxy() *Connection
-}
-
-var _ DistantObjectable = (*DistantObject)(nil)

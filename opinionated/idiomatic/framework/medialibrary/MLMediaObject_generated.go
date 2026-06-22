@@ -46,24 +46,24 @@ func mediaObjectAdopt(id objc.ID) *MediaObject {
 }
 
 // Description returns the object's -description text.
-func (x *MediaObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mo *MediaObject) Description() string {
+	return rt.Description(objref.IDOf(mo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mo *MediaObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mo *MediaObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mo *MediaObject) String() string {
+	return rt.Description(objref.IDOf(mo))
 }
 
 // NewMediaObject creates a new MediaObject.
@@ -73,14 +73,14 @@ func NewMediaObject() *MediaObject {
 }
 
 // MediaLibrary wraps the corresponding Objective-C method.
-func (x *MediaObject) MediaLibrary() *MediaLibrary {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
+func (mo *MediaObject) MediaLibrary() *MediaLibrary {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *MediaObject) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (mo *MediaObject) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,8 +88,8 @@ func (x *MediaObject) Identifier() string {
 }
 
 // MediaSourceIdentifier wraps the corresponding Objective-C method.
-func (x *MediaObject) MediaSourceIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
+func (mo *MediaObject) MediaSourceIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -97,20 +97,20 @@ func (x *MediaObject) MediaSourceIdentifier() string {
 }
 
 // Attributes wraps the corresponding Objective-C method.
-func (x *MediaObject) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (mo *MediaObject) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // MediaType wraps the corresponding Objective-C method.
-func (x *MediaObject) MediaType() MediaType {
-	_r := objc.Send[MediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
+func (mo *MediaObject) MediaType() MediaType {
+	_r := objc.Send[MediaType](objref.IDOf(mo), objc.RegisterName("mediaType"))
 	return _r
 }
 
 // ContentType wraps the corresponding Objective-C method.
-func (x *MediaObject) ContentType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+func (mo *MediaObject) ContentType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("contentType"))
 	if _r == 0 {
 		return ""
 	}
@@ -118,8 +118,8 @@ func (x *MediaObject) ContentType() string {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MediaObject) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mo *MediaObject) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -127,57 +127,37 @@ func (x *MediaObject) Name() string {
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *MediaObject) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (mo *MediaObject) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
 // OriginalURL wraps the corresponding Objective-C method.
-func (x *MediaObject) OriginalURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalURL"))
+func (mo *MediaObject) OriginalURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("originalURL"))
 	return obj.Wrap(_r)
 }
 
 // FileSize wraps the corresponding Objective-C method.
-func (x *MediaObject) FileSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileSize"))
+func (mo *MediaObject) FileSize() int {
+	_r := objc.Send[int](objref.IDOf(mo), objc.RegisterName("fileSize"))
 	return _r
 }
 
 // ModificationDate wraps the corresponding Objective-C method.
-func (x *MediaObject) ModificationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+func (mo *MediaObject) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
 
 // ThumbnailURL wraps the corresponding Objective-C method.
-func (x *MediaObject) ThumbnailURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailURL"))
+func (mo *MediaObject) ThumbnailURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("thumbnailURL"))
 	return obj.Wrap(_r)
 }
 
 // ArtworkImage wraps the corresponding Objective-C method.
-func (x *MediaObject) ArtworkImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artworkImage"))
+func (mo *MediaObject) ArtworkImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("artworkImage"))
 	return obj.Wrap(_r)
 }
-
-// MediaObjectable is the interface implemented by [MediaObject], for mocking and DI.
-type MediaObjectable interface {
-	obj.Object
-	MediaLibrary() *MediaLibrary
-	Identifier() string
-	MediaSourceIdentifier() string
-	Attributes() obj.Object
-	MediaType() MediaType
-	ContentType() string
-	Name() string
-	URL() obj.Object
-	OriginalURL() obj.Object
-	FileSize() int
-	ModificationDate() obj.Object
-	ThumbnailURL() obj.Object
-	ArtworkImage() obj.Object
-}
-
-var _ MediaObjectable = (*MediaObject)(nil)

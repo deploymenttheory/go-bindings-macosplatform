@@ -46,24 +46,24 @@ func sharedEventListenerAdopt(id objc.ID) *SharedEventListener {
 }
 
 // Description returns the object's -description text.
-func (x *SharedEventListener) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sel *SharedEventListener) Description() string {
+	return rt.Description(objref.IDOf(sel))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SharedEventListener) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sel *SharedEventListener) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sel), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SharedEventListener) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sel *SharedEventListener) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sel), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SharedEventListener) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sel *SharedEventListener) String() string {
+	return rt.Description(objref.IDOf(sel))
 }
 
 // NewSharedEventListener creates a new SharedEventListener.
@@ -80,15 +80,7 @@ func NewSharedEventListenerWithDispatchQueue(dispatchQueue obj.Object) *SharedEv
 }
 
 // DispatchQueue wraps the corresponding Objective-C method.
-func (x *SharedEventListener) DispatchQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchQueue"))
+func (sel *SharedEventListener) DispatchQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sel), objc.RegisterName("dispatchQueue"))
 	return obj.Wrap(_r)
 }
-
-// SharedEventListenerable is the interface implemented by [SharedEventListener], for mocking and DI.
-type SharedEventListenerable interface {
-	obj.Object
-	DispatchQueue() obj.Object
-}
-
-var _ SharedEventListenerable = (*SharedEventListener)(nil)

@@ -46,24 +46,24 @@ func quadtreeAdopt(id objc.ID) *Quadtree {
 }
 
 // Description returns the object's -description text.
-func (x *Quadtree) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Quadtree) Description() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Quadtree) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (q *Quadtree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Quadtree) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (q *Quadtree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Quadtree) String() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Quadtree) String() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // NewQuadtree creates a new Quadtree.
@@ -73,22 +73,13 @@ func NewQuadtree() *Quadtree {
 }
 
 // RemoveElement searches for the specified object and removes it from the tree.
-func (x *Quadtree) RemoveElement(element obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:"), objref.IDOf(element))
+func (q *Quadtree) RemoveElement(element obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(q), objc.RegisterName("removeElement:"), objref.IDOf(element))
 	return _r
 }
 
 // RemoveElementWithNode removes the specified object from the tree, using a reference to its containing node.
-func (x *Quadtree) RemoveElementWithNode(data obj.Object, node *QuadtreeNode) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:withNode:"), objref.IDOf(data), objref.IDOf(node))
+func (q *Quadtree) RemoveElementWithNode(data obj.Object, node *QuadtreeNode) bool {
+	_r := objc.Send[bool](objref.IDOf(q), objc.RegisterName("removeElement:withNode:"), objref.IDOf(data), objref.IDOf(node))
 	return _r
 }
-
-// Quadtreeable is the interface implemented by [Quadtree], for mocking and DI.
-type Quadtreeable interface {
-	obj.Object
-	RemoveElement(element obj.Object) bool
-	RemoveElementWithNode(data obj.Object, node *QuadtreeNode) bool
-}
-
-var _ Quadtreeable = (*Quadtree)(nil)

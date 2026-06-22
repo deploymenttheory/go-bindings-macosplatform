@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,79 +51,52 @@ func NewRNNMatrixInferenceLayer() *RNNMatrixInferenceLayer {
 	return rNNMatrixInferenceLayerAdopt(_id)
 }
 
-// WithRecurrentOutputIsTemporary how output states from
-func (x *RNNMatrixInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
-	return x
+// WithRecurrentOutputIsTemporary sets how output states from
+func (rmil *RNNMatrixInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(rmil), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
+	return rmil
 }
 
-// WithStoreAllIntermediateStates if YES then calls to
-func (x *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
-	return x
+// WithStoreAllIntermediateStates sets if YES then calls to
+func (rmil *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(rmil), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
+	return rmil
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *RNNMatrixInferenceLayer) WithLabel(label string) *RNNMatrixInferenceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (rmil *RNNMatrixInferenceLayer) WithLabel(label string) *RNNMatrixInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(rmil), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rmil
 }
 
-// InputFeatureChannels the number of feature channels input vector/matrix.
-func (x *RNNMatrixInferenceLayer) InputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+// InputFeatureChannels returns the number of feature channels input vector/matrix.
+func (rmil *RNNMatrixInferenceLayer) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// OutputFeatureChannels the number of feature channels in the output vector/matrix.
-func (x *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+// OutputFeatureChannels returns the number of feature channels in the output vector/matrix.
+func (rmil *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// NumberOfLayers number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
-func (x *RNNMatrixInferenceLayer) NumberOfLayers() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLayers"))
+// NumberOfLayers returns number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
+func (rmil *RNNMatrixInferenceLayer) NumberOfLayers() int {
+	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
-// RecurrentOutputIsTemporary how output states from
-func (x *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
+// RecurrentOutputIsTemporary reports whether how output states from
+func (rmil *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
+	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
-// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
-func (x *RNNMatrixInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
-}
-
-// StoreAllIntermediateStates if YES then calls to
-func (x *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
+// StoreAllIntermediateStates reports whether if true then calls to
+func (rmil *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
+	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }
-
-// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
-func (x *RNNMatrixInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
-}
-
-// RNNMatrixInferenceLayerable is the interface implemented by [RNNMatrixInferenceLayer], for mocking and DI.
-type RNNMatrixInferenceLayerable interface {
-	obj.Object
-	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer
-	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer
-	WithLabel(label string) *RNNMatrixInferenceLayer
-	InputFeatureChannels() int
-	OutputFeatureChannels() int
-	NumberOfLayers() int
-	RecurrentOutputIsTemporary() bool
-	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
-	StoreAllIntermediateStates() bool
-	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
-}
-
-var _ RNNMatrixInferenceLayerable = (*RNNMatrixInferenceLayer)(nil)
 
 var _ KernelProvider = (*RNNMatrixInferenceLayer)(nil)

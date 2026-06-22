@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialPRFAssertionInputAdopt(id objc.ID) *Authori
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) Description() string {
+	return rt.Description(objref.IDOf(apkcpai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkcpai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkcpai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) String() string {
+	return rt.Description(objref.IDOf(apkcpai))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues creates a new AuthorizationPublicKeyCredentialPRFAssertionInput.
@@ -74,22 +74,13 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCrede
 }
 
 // InputValues wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputValues"))
+func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpai), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)
 }
 
 // PerCredentialInputValues wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) PerCredentialInputValues() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("perCredentialInputValues"))
+func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) PerCredentialInputValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpai), objc.RegisterName("perCredentialInputValues"))
 	return obj.Wrap(_r)
 }
-
-// AuthorizationPublicKeyCredentialPRFAssertionInputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFAssertionInput], for mocking and DI.
-type AuthorizationPublicKeyCredentialPRFAssertionInputable interface {
-	obj.Object
-	InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues
-	PerCredentialInputValues() obj.Object
-}
-
-var _ AuthorizationPublicKeyCredentialPRFAssertionInputable = (*AuthorizationPublicKeyCredentialPRFAssertionInput)(nil)

@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,24 +51,16 @@ func NewNNScaleNodeWithSourceOutputSize(sourceNode *NNImageNode, size metal.MTLS
 	return nNScaleNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNScaleNode) WithLabel(label string) *NNScaleNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nsn *NNScaleNode) WithLabel(label string) *NNScaleNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nsn
 }
-
-// NNScaleNodeable is the interface implemented by [NNScaleNode], for mocking and DI.
-type NNScaleNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNScaleNode
-}
-
-var _ NNScaleNodeable = (*NNScaleNode)(nil)
 
 // isNNScaleNode marks NNScaleNode — and, by embedding promotion, its
 // subclasses — as a member of the NNScaleNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNScaleNode) isNNScaleNode() {}
+func (nsn *NNScaleNode) isNNScaleNode() {}
 
 var _ NNScaleNodeProvider = (*NNScaleNode)(nil)
 

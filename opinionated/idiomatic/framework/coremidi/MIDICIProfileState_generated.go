@@ -46,24 +46,24 @@ func cIProfileStateAdopt(id objc.ID) *CIProfileState {
 }
 
 // Description returns the object's -description text.
-func (x *CIProfileState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cps *CIProfileState) Description() string {
+	return rt.Description(objref.IDOf(cps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CIProfileState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cps *CIProfileState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CIProfileState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cps *CIProfileState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CIProfileState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cps *CIProfileState) String() string {
+	return rt.Description(objref.IDOf(cps))
 }
 
 // NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles creates a new profile state object for the specified MIDI channel and profiles.
@@ -81,33 +81,23 @@ func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled []*CIProfile, 
 }
 
 // MidiChannel wraps the corresponding Objective-C method.
-func (x *CIProfileState) MidiChannel() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("midiChannel"))
+func (cps *CIProfileState) MidiChannel() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(cps), objc.RegisterName("midiChannel"))
 	return _r
 }
 
 // EnabledProfiles wraps the corresponding Objective-C method.
 //
 // EnabledProfiles returns the collection as a Go slice.
-func (x *CIProfileState) EnabledProfiles() []*CIProfile {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enabledProfiles"))
+func (cps *CIProfileState) EnabledProfiles() []*CIProfile {
+	_arr := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("enabledProfiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }
 
 // DisabledProfiles wraps the corresponding Objective-C method.
 //
 // DisabledProfiles returns the collection as a Go slice.
-func (x *CIProfileState) DisabledProfiles() []*CIProfile {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disabledProfiles"))
+func (cps *CIProfileState) DisabledProfiles() []*CIProfile {
+	_arr := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("disabledProfiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }
-
-// CIProfileStateable is the interface implemented by [CIProfileState], for mocking and DI.
-type CIProfileStateable interface {
-	obj.Object
-	MidiChannel() uint8
-	EnabledProfiles() []*CIProfile
-	DisabledProfiles() []*CIProfile
-}
-
-var _ CIProfileStateable = (*CIProfileState)(nil)

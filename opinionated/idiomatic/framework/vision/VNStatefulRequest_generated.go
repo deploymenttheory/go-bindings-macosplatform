@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,52 +46,40 @@ func statefulRequestAdopt(id objc.ID) *StatefulRequest {
 	return x
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *StatefulRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (sr *StatefulRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest {
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return sr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *StatefulRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (sr *StatefulRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest {
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return sr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *StatefulRequest) WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (sr *StatefulRequest) WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest {
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return sr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *StatefulRequest) WithRevision(revision int) *StatefulRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (sr *StatefulRequest) WithRevision(revision int) *StatefulRequest {
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setRevision:"), revision)
+	return sr
 }
 
-// MinimumLatencyFrameCount the minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
-func (x *StatefulRequest) MinimumLatencyFrameCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumLatencyFrameCount"))
+// MinimumLatencyFrameCount returns the minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
+func (sr *StatefulRequest) MinimumLatencyFrameCount() int {
+	_r := objc.Send[int](objref.IDOf(sr), objc.RegisterName("minimumLatencyFrameCount"))
 	return _r
 }
-
-// StatefulRequestable is the interface implemented by [StatefulRequest], for mocking and DI.
-type StatefulRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest
-	WithRevision(revision int) *StatefulRequest
-	MinimumLatencyFrameCount() int
-}
-
-var _ StatefulRequestable = (*StatefulRequest)(nil)
 
 // isStatefulRequest marks StatefulRequest — and, by embedding promotion, its
 // subclasses — as a member of the StatefulRequest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *StatefulRequest) isStatefulRequest() {}
+func (sr *StatefulRequest) isStatefulRequest() {}
 
 var _ StatefulRequestProvider = (*StatefulRequest)(nil)
 

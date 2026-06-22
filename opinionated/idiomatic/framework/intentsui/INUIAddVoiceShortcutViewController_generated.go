@@ -46,24 +46,24 @@ func addVoiceShortcutViewControllerAdopt(id objc.ID) *AddVoiceShortcutViewContro
 }
 
 // Description returns the object's -description text.
-func (x *AddVoiceShortcutViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (avsvc *AddVoiceShortcutViewController) Description() string {
+	return rt.Description(objref.IDOf(avsvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddVoiceShortcutViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (avsvc *AddVoiceShortcutViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(avsvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddVoiceShortcutViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (avsvc *AddVoiceShortcutViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(avsvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddVoiceShortcutViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (avsvc *AddVoiceShortcutViewController) String() string {
+	return rt.Description(objref.IDOf(avsvc))
 }
 
 // NewAddVoiceShortcutViewControllerWithShortcut creates a view controller with a shortcut the user can add to Siri.
@@ -72,10 +72,3 @@ func NewAddVoiceShortcutViewControllerWithShortcut(shortcut obj.Object) *AddVoic
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShortcut:"), objref.IDOf(shortcut))
 	return addVoiceShortcutViewControllerAdopt(_id)
 }
-
-// AddVoiceShortcutViewControllerable is the interface implemented by [AddVoiceShortcutViewController], for mocking and DI.
-type AddVoiceShortcutViewControllerable interface {
-	obj.Object
-}
-
-var _ AddVoiceShortcutViewControllerable = (*AddVoiceShortcutViewController)(nil)

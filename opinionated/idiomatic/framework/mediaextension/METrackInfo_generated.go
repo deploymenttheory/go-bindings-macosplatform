@@ -47,24 +47,24 @@ func trackInfoAdopt(id objc.ID) *TrackInfo {
 }
 
 // Description returns the object's -description text.
-func (x *TrackInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ti *TrackInfo) Description() string {
+	return rt.Description(objref.IDOf(ti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TrackInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ti *TrackInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TrackInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ti *TrackInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TrackInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ti *TrackInfo) String() string {
+	return rt.Description(objref.IDOf(ti))
 }
 
 // NewTrackInfoWithMediaTypeTrackIDFormatDescriptions creates a new track info object with the media type, track ID, and format descriptions that you specify.
@@ -74,196 +74,122 @@ func NewTrackInfoWithMediaTypeTrackIDFormatDescriptions(mediaType int, trackID i
 	return trackInfoAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether the track is enabled by default.
-func (x *TrackInfo) WithEnabled(enabled bool) *TrackInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the track is enabled by default.
+func (ti *TrackInfo) WithEnabled(enabled bool) *TrackInfo {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setEnabled:"), enabled)
+	return ti
 }
 
-// WithNaturalTimescale the natural timescale of the track.
-func (x *TrackInfo) WithNaturalTimescale(naturalTimescale int32) *TrackInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalTimescale:"), naturalTimescale)
-	return x
+// WithNaturalTimescale sets the natural timescale of the track.
+func (ti *TrackInfo) WithNaturalTimescale(naturalTimescale int32) *TrackInfo {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setNaturalTimescale:"), naturalTimescale)
+	return ti
 }
 
-// WithTrackEdits an array of edit segments for the given track.
-func (x *TrackInfo) WithTrackEdits(items ...obj.Object) *TrackInfo {
+// WithTrackEdits sets an array of edit segments for the given track.
+func (ti *TrackInfo) WithTrackEdits(items ...obj.Object) *TrackInfo {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackEdits:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTrackEdits:"), _arr)
+	return ti
 }
 
-// WithExtendedLanguageTag a string that indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier.
-func (x *TrackInfo) WithExtendedLanguageTag(extendedLanguageTag string) *TrackInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
-	return x
+// WithExtendedLanguageTag sets a string that indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier.
+func (ti *TrackInfo) WithExtendedLanguageTag(extendedLanguageTag string) *TrackInfo {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
+	return ti
 }
 
-// WithNaturalSize indicates the natural dimensions of the media data referenced by the track.
-func (x *TrackInfo) WithNaturalSize(naturalSize corefoundation.CGSize) *TrackInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
-	return x
+// WithNaturalSize sets indicates the natural dimensions of the media data referenced by the track.
+func (ti *TrackInfo) WithNaturalSize(naturalSize corefoundation.CGSize) *TrackInfo {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setNaturalSize:"), naturalSize)
+	return ti
 }
 
-// WithPreferredTransform indicates the preferred affine display transform of the track media for visual display.
-func (x *TrackInfo) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *TrackInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
-	return x
+// WithPreferredTransform sets indicates the preferred affine display transform of the track media for visual display.
+func (ti *TrackInfo) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *TrackInfo {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPreferredTransform:"), preferredTransform)
+	return ti
 }
 
-// WithNominalFrameRate the frame rate of the track in frames per second, as a 32-bit floating point number.
-func (x *TrackInfo) WithNominalFrameRate(nominalFrameRate float32) *TrackInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalFrameRate:"), nominalFrameRate)
-	return x
+// WithNominalFrameRate sets the frame rate of the track in frames per second, as a 32-bit floating point number.
+func (ti *TrackInfo) WithNominalFrameRate(nominalFrameRate float32) *TrackInfo {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setNominalFrameRate:"), nominalFrameRate)
+	return ti
 }
 
-// WithRequiresFrameReordering a Boolean value that indicates whether frame reordering occurs in the track.
-func (x *TrackInfo) WithRequiresFrameReordering(requiresFrameReordering bool) *TrackInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresFrameReordering:"), requiresFrameReordering)
-	return x
+// WithRequiresFrameReordering sets a Boolean value that indicates whether frame reordering occurs in the track.
+func (ti *TrackInfo) WithRequiresFrameReordering(requiresFrameReordering bool) *TrackInfo {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setRequiresFrameReordering:"), requiresFrameReordering)
+	return ti
 }
 
-// MediaType the media type of the track. This value is set through the class initializer.
-func (x *TrackInfo) MediaType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mediaType"))
+// MediaType returns the media type of the track. This value is set through the class initializer.
+func (ti *TrackInfo) MediaType() int {
+	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("mediaType"))
 	return _r
 }
 
-// TrackID an integer identifying the track within the media asset. The track ID is used to uniquely identify the track within the MEFormatReader. Track IDs must be unique within a media asset but do not need to be unique across assets. If a media format does not have a native concept of track IDs, track IDs may be assigned starting from 1. The track ID value of 0 is reserved to indicate an invalid track ID. This value is set through the class initializer.
-func (x *TrackInfo) TrackID() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
+// TrackID returns an integer identifying the track within the media asset. The track ID is used to uniquely identify the track within the MEFormatReader. Track IDs must be unique within a media asset but do not need to be unique across assets. If a media format does not have a native concept of track IDs, track IDs may be assigned starting from 1. The track ID value of 0 is reserved to indicate an invalid track ID. This value is set through the class initializer.
+func (ti *TrackInfo) TrackID() int32 {
+	_r := objc.Send[int32](objref.IDOf(ti), objc.RegisterName("trackID"))
 	return _r
 }
 
-// IsEnabled a BOOL value indicating whether the track is enabled by default.
-func (x *TrackInfo) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether a BOOL value indicating whether the track is enabled by default.
+func (ti *TrackInfo) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// FormatDescriptions the format descriptions for the track, as an NSArray. This value is set through the class initializer.
-func (x *TrackInfo) FormatDescriptions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescriptions"))
+// FormatDescriptions returns the format descriptions for the track, as an NSArray. This value is set through the class initializer.
+func (ti *TrackInfo) FormatDescriptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("formatDescriptions"))
 	return obj.Wrap(_r)
 }
 
-// NaturalTimescale the natural timescale of the track, as a CMTimeScale value.
-func (x *TrackInfo) NaturalTimescale() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("naturalTimescale"))
+// NaturalTimescale returns the natural timescale of the track, as a CMTimeScale value.
+func (ti *TrackInfo) NaturalTimescale() int32 {
+	_r := objc.Send[int32](objref.IDOf(ti), objc.RegisterName("naturalTimescale"))
 	return _r
-}
-
-// SetNaturalTimescale wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetNaturalTimescale(naturalTimescale int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalTimescale:"), naturalTimescale)
 }
 
 // TrackEdits returns the array of edit segments for the given track. Each NSValue in the array contains a CMTimeMapping object describing the track edit. The CMTimeMapping.target time ranges for successive edits must partition the time range from 0 to the track's duration. In other words, for edit index = 0 the CMTimeMapping.target.start must be kCMTimeZero, while for edit index > 0, the CMTimeMapping.target.start must match the CMTimeRangeGetEnd(CMTimeMapping.target) for edit (index - 1). It is valid for a track to have an empty trackEdits array; this means that there is nothing at all in the track and the track duration is zero. If this property is implemented for media asset formats that do not support edit segments, it can return nil.
 //
 // TrackEdits returns the collection as a Go slice.
-func (x *TrackInfo) TrackEdits() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackEdits"))
+func (ti *TrackInfo) TrackEdits() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("trackEdits"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetTrackEdits wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetTrackEdits(trackEdits []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackEdits:"), purego.SliceToNSArray(trackEdits, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // ExtendedLanguageTag wraps the corresponding Objective-C method.
-func (x *TrackInfo) ExtendedLanguageTag() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLanguageTag"))
+func (ti *TrackInfo) ExtendedLanguageTag() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetExtendedLanguageTag wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetExtendedLanguageTag(extendedLanguageTag string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
-}
-
 // NaturalSize indicates the natural dimensions of the media data referenced by the track as a CGSize. This property is only valid for tracks with visual media types and should return CGSizeZero if implemented for other track types.
-func (x *TrackInfo) NaturalSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("naturalSize"))
+func (ti *TrackInfo) NaturalSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("naturalSize"))
 	return _r
-}
-
-// SetNaturalSize wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetNaturalSize(naturalSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
 }
 
 // PreferredTransform indicates the preferred affine display transform of the track media for visual display. Returns an CGAffineTransform representing the preferred affine transform of the track for visual display. This property is only valid for tracks with visual media types and should return CGAffineTransformIdentity if implemented for other track types.
-func (x *TrackInfo) PreferredTransform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+func (ti *TrackInfo) PreferredTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ti), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
-// SetPreferredTransform wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
-}
-
-// NominalFrameRate the frame rate of the track, in frames per second, as a 32-bit floating point number. For field-based video tracks that carry one field per media sample, the value of this property is the field rate, not the frame rate. This information from this property may be used by the MediaToolbox to calculate the maximum playback speed.
-func (x *TrackInfo) NominalFrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("nominalFrameRate"))
+// NominalFrameRate returns the frame rate of the track, in frames per second, as a 32-bit floating point number. For field-based video tracks that carry one field per media sample, the value of this property is the field rate, not the frame rate. This information from this property may be used by the MediaToolbox to calculate the maximum playback speed.
+func (ti *TrackInfo) NominalFrameRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(ti), objc.RegisterName("nominalFrameRate"))
 	return _r
 }
 
-// SetNominalFrameRate wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetNominalFrameRate(nominalFrameRate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalFrameRate:"), nominalFrameRate)
-}
-
-// RequiresFrameReordering indicates whether frame reordering occurs in the track. The value is YES if frame reordering occurs, NO otherwise. This property is only valid for tracks with video media type and should return NO for if implemented for other track types.
-func (x *TrackInfo) RequiresFrameReordering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresFrameReordering"))
+// RequiresFrameReordering reports whether frame reordering occurs in the track. The value is true if frame reordering occurs, false otherwise. This property is only valid for tracks with video media type and should return false for if implemented for other track types.
+func (ti *TrackInfo) RequiresFrameReordering() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("requiresFrameReordering"))
 	return _r
 }
-
-// SetRequiresFrameReordering wraps the corresponding Objective-C method.
-func (x *TrackInfo) SetRequiresFrameReordering(requiresFrameReordering bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresFrameReordering:"), requiresFrameReordering)
-}
-
-// TrackInfoable is the interface implemented by [TrackInfo], for mocking and DI.
-type TrackInfoable interface {
-	obj.Object
-	WithEnabled(enabled bool) *TrackInfo
-	WithNaturalTimescale(naturalTimescale int32) *TrackInfo
-	WithTrackEdits(items ...obj.Object) *TrackInfo
-	WithExtendedLanguageTag(extendedLanguageTag string) *TrackInfo
-	WithNaturalSize(naturalSize corefoundation.CGSize) *TrackInfo
-	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *TrackInfo
-	WithNominalFrameRate(nominalFrameRate float32) *TrackInfo
-	WithRequiresFrameReordering(requiresFrameReordering bool) *TrackInfo
-	MediaType() int
-	TrackID() int32
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	FormatDescriptions() obj.Object
-	NaturalTimescale() int32
-	SetNaturalTimescale(naturalTimescale int32)
-	TrackEdits() []obj.Object
-	SetTrackEdits(trackEdits []obj.Object)
-	ExtendedLanguageTag() string
-	SetExtendedLanguageTag(extendedLanguageTag string)
-	NaturalSize() corefoundation.CGSize
-	SetNaturalSize(naturalSize corefoundation.CGSize)
-	PreferredTransform() corefoundation.CGAffineTransform
-	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
-	NominalFrameRate() float32
-	SetNominalFrameRate(nominalFrameRate float32)
-	RequiresFrameReordering() bool
-	SetRequiresFrameReordering(requiresFrameReordering bool)
-}
-
-var _ TrackInfoable = (*TrackInfo)(nil)

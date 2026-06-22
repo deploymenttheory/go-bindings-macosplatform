@@ -54,87 +54,69 @@ func NewEPSImageRepWithData(epsData obj.Object) *EPSImageRep {
 	return ePSImageRepAdopt(_id)
 }
 
-// WithSize the size of the image representation, measured in points in the user coordinate space.
-func (x *EPSImageRep) WithSize(size corefoundation.CGSize) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the size of the image representation, measured in points in the user coordinate space.
+func (eir *EPSImageRep) WithSize(size corefoundation.CGSize) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setSize:"), size)
+	return eir
 }
 
-// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
-func (x *EPSImageRep) WithAlpha(alpha bool) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets a Boolean value that indicates whether the image data has an alpha channel.
+func (eir *EPSImageRep) WithAlpha(alpha bool) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setAlpha:"), alpha)
+	return eir
 }
 
-// WithOpaque a Boolean value that indicates whether the image is opaque.
-func (x *EPSImageRep) WithOpaque(opaque bool) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that indicates whether the image is opaque.
+func (eir *EPSImageRep) WithOpaque(opaque bool) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setOpaque:"), opaque)
+	return eir
 }
 
-// WithColorSpaceName the name of the color space used by the image data.
-func (x *EPSImageRep) WithColorSpaceName(colorSpaceName obj.Object) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-	return x
+// WithColorSpaceName sets the name of the color space used by the image data.
+func (eir *EPSImageRep) WithColorSpaceName(colorSpaceName obj.Object) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return eir
 }
 
-// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-func (x *EPSImageRep) WithBitsPerSample(bitsPerSample int) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
-	return x
+// WithBitsPerSample sets the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+func (eir *EPSImageRep) WithBitsPerSample(bitsPerSample int) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
+	return eir
 }
 
-// WithPixelsWide the width of the image, measured in pixels.
-func (x *EPSImageRep) WithPixelsWide(pixelsWide int) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
-	return x
+// WithPixelsWide sets the width of the image, measured in pixels.
+func (eir *EPSImageRep) WithPixelsWide(pixelsWide int) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setPixelsWide:"), pixelsWide)
+	return eir
 }
 
-// WithPixelsHigh the height of the image, measured in pixels.
-func (x *EPSImageRep) WithPixelsHigh(pixelsHigh int) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
-	return x
+// WithPixelsHigh sets the height of the image, measured in pixels.
+func (eir *EPSImageRep) WithPixelsHigh(pixelsHigh int) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
+	return eir
 }
 
-// WithLayoutDirection the layout direction for the image.
-func (x *EPSImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *EPSImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
-	return x
+// WithLayoutDirection sets the layout direction for the image.
+func (eir *EPSImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setLayoutDirection:"), layoutDirection)
+	return eir
 }
 
 // PrepareGState implemented by subclasses to configure the graphics state prior to drawing.
-func (x *EPSImageRep) PrepareGState() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareGState"))
+func (eir *EPSImageRep) PrepareGState() {
+	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("prepareGState"))
 }
 
-// BoundingBox the rectangle that bounds the image representation.
-func (x *EPSImageRep) BoundingBox() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingBox"))
+// BoundingBox returns the rectangle that bounds the image representation.
+func (eir *EPSImageRep) BoundingBox() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(eir), objc.RegisterName("boundingBox"))
 	return _r
 }
 
-// EPSRepresentation the EPS representation of the image representation.
-func (x *EPSImageRep) EPSRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("EPSRepresentation"))
+// EPSRepresentation returns the EPS representation of the image representation.
+func (eir *EPSImageRep) EPSRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("EPSRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// EPSImageRepable is the interface implemented by [EPSImageRep], for mocking and DI.
-type EPSImageRepable interface {
-	obj.Object
-	WithSize(size corefoundation.CGSize) *EPSImageRep
-	WithAlpha(alpha bool) *EPSImageRep
-	WithOpaque(opaque bool) *EPSImageRep
-	WithColorSpaceName(colorSpaceName obj.Object) *EPSImageRep
-	WithBitsPerSample(bitsPerSample int) *EPSImageRep
-	WithPixelsWide(pixelsWide int) *EPSImageRep
-	WithPixelsHigh(pixelsHigh int) *EPSImageRep
-	WithLayoutDirection(layoutDirection ImageLayoutDirection) *EPSImageRep
-	PrepareGState()
-	BoundingBox() corefoundation.CGRect
-	EPSRepresentation() obj.Object
-}
-
-var _ EPSImageRepable = (*EPSImageRep)(nil)
 
 var _ ImageRepProvider = (*EPSImageRep)(nil)

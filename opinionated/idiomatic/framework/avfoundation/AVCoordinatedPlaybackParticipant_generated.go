@@ -46,24 +46,24 @@ func coordinatedPlaybackParticipantAdopt(id objc.ID) *CoordinatedPlaybackPartici
 }
 
 // Description returns the object's -description text.
-func (x *CoordinatedPlaybackParticipant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpp *CoordinatedPlaybackParticipant) Description() string {
+	return rt.Description(objref.IDOf(cpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CoordinatedPlaybackParticipant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpp *CoordinatedPlaybackParticipant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CoordinatedPlaybackParticipant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpp *CoordinatedPlaybackParticipant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CoordinatedPlaybackParticipant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpp *CoordinatedPlaybackParticipant) String() string {
+	return rt.Description(objref.IDOf(cpp))
 }
 
 // NewCoordinatedPlaybackParticipant creates a new CoordinatedPlaybackParticipant.
@@ -72,32 +72,22 @@ func NewCoordinatedPlaybackParticipant() *CoordinatedPlaybackParticipant {
 	return coordinatedPlaybackParticipantAdopt(_id)
 }
 
-// SuspensionReasons the reason, if any, this participant is currently not participating in coordinated playback.
+// SuspensionReasons returns the reason, if any, this participant is currently not participating in coordinated playback.
 //
 // SuspensionReasons returns the collection as a Go slice.
-func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspensionReasons"))
+func (cpp *CoordinatedPlaybackParticipant) SuspensionReasons() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("suspensionReasons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsReadyToPlay YES if the participant is ready to play.
-func (x *CoordinatedPlaybackParticipant) IsReadyToPlay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyToPlay"))
+// IsReadyToPlay reports whether the participant is ready to play.
+func (cpp *CoordinatedPlaybackParticipant) IsReadyToPlay() bool {
+	_r := objc.Send[bool](objref.IDOf(cpp), objc.RegisterName("isReadyToPlay"))
 	return _r
 }
 
-// Identifier a unique id for the participant. Use this identifier to distinguish participants.
-func (x *CoordinatedPlaybackParticipant) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a unique id for the participant. Use this identifier to distinguish participants.
+func (cpp *CoordinatedPlaybackParticipant) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
-
-// CoordinatedPlaybackParticipantable is the interface implemented by [CoordinatedPlaybackParticipant], for mocking and DI.
-type CoordinatedPlaybackParticipantable interface {
-	obj.Object
-	SuspensionReasons() []obj.Object
-	IsReadyToPlay() bool
-	Identifier() obj.Object
-}
-
-var _ CoordinatedPlaybackParticipantable = (*CoordinatedPlaybackParticipant)(nil)

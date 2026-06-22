@@ -47,24 +47,24 @@ func textLayoutManagerAdopt(id objc.ID) *TextLayoutManager {
 }
 
 // Description returns the object's -description text.
-func (x *TextLayoutManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tlm *TextLayoutManager) Description() string {
+	return rt.Description(objref.IDOf(tlm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextLayoutManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tlm *TextLayoutManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tlm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextLayoutManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tlm *TextLayoutManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tlm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextLayoutManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tlm *TextLayoutManager) String() string {
+	return rt.Description(objref.IDOf(tlm))
 }
 
 // NewTextLayoutManager creates a new TextLayoutManager.
@@ -80,277 +80,183 @@ func NewTextLayoutManagerWithCoder(coder obj.Object) *TextLayoutManager {
 	return textLayoutManagerAdopt(_id)
 }
 
-// WithUsesFontLeading a Boolean value that controls whether the framework uses the leading information specified by the font when laying out text.
-func (x *TextLayoutManager) WithUsesFontLeading(usesFontLeading bool) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFontLeading:"), usesFontLeading)
-	return x
+// WithUsesFontLeading sets a Boolean value that controls whether the framework uses the leading information specified by the font when laying out text.
+func (tlm *TextLayoutManager) WithUsesFontLeading(usesFontLeading bool) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setUsesFontLeading:"), usesFontLeading)
+	return tlm
 }
 
-// WithLimitsLayoutForSuspiciousContents a Boolean value that controls internal security analysis for malicious inputs and activates defensive behaviors.
-func (x *TextLayoutManager) WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitsLayoutForSuspiciousContents:"), limitsLayoutForSuspiciousContents)
-	return x
+// WithLimitsLayoutForSuspiciousContents sets a Boolean value that controls internal security analysis for malicious inputs and activates defensive behaviors.
+func (tlm *TextLayoutManager) WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setLimitsLayoutForSuspiciousContents:"), limitsLayoutForSuspiciousContents)
+	return tlm
 }
 
-// WithUsesHyphenation a Boolean values that controls whether the text layout manager attempts to hyphenate when wrapping lines.
-func (x *TextLayoutManager) WithUsesHyphenation(usesHyphenation bool) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesHyphenation:"), usesHyphenation)
-	return x
+// WithUsesHyphenation sets a Boolean values that controls whether the text layout manager attempts to hyphenate when wrapping lines.
+func (tlm *TextLayoutManager) WithUsesHyphenation(usesHyphenation bool) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setUsesHyphenation:"), usesHyphenation)
+	return tlm
 }
 
-// WithResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
-func (x *TextLayoutManager) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
-	return x
+// WithResolvesNaturalAlignmentWithBaseWritingDirection sets specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
+func (tlm *TextLayoutManager) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	return tlm
 }
 
-// WithTextContainer the text container object that provides geometric information for the layout destination.
-func (x *TextLayoutManager) WithTextContainer(textContainer *TextContainer) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContainer:"), objref.IDOf(textContainer))
-	return x
+// WithTextContainer sets the text container object that provides geometric information for the layout destination.
+func (tlm *TextLayoutManager) WithTextContainer(textContainer *TextContainer) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setTextContainer:"), objref.IDOf(textContainer))
+	return tlm
 }
 
-// WithLayoutQueue the queue that the framework dispatches layout operations on.
-func (x *TextLayoutManager) WithLayoutQueue(layoutQueue obj.Object) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
-	return x
+// WithLayoutQueue sets the queue that the framework dispatches layout operations on.
+func (tlm *TextLayoutManager) WithLayoutQueue(layoutQueue obj.Object) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
+	return tlm
 }
 
-// WithTextSelections an array of text selections associated by the text layout manager.
-func (x *TextLayoutManager) WithTextSelections(items ...*TextSelection) *TextLayoutManager {
+// WithTextSelections sets an array of text selections associated by the text layout manager.
+func (tlm *TextLayoutManager) WithTextSelections(items ...*TextSelection) *TextLayoutManager {
 	_arr := purego.SliceToNSArray(items, func(_v *TextSelection) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextSelections:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setTextSelections:"), _arr)
+	return tlm
 }
 
-// WithTextSelectionNavigation returns a text selection manager configured to have the text layout manager as its data source.
-func (x *TextLayoutManager) WithTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextSelectionNavigation:"), objref.IDOf(textSelectionNavigation))
-	return x
+// WithTextSelectionNavigation sets returns a text selection manager configured to have the text layout manager as its data source.
+func (tlm *TextLayoutManager) WithTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setTextSelectionNavigation:"), objref.IDOf(textSelectionNavigation))
+	return tlm
 }
 
-// WithRenderingAttributesValidator a callback block that the framework invokes whenever the text layout manager needs to validate the rendering attributes for the range.
-func (x *TextLayoutManager) WithRenderingAttributesValidator(renderingAttributesValidator func(obj.Object, obj.Object)) *TextLayoutManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingAttributesValidator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
+// WithRenderingAttributesValidator sets a callback block that the framework invokes whenever the text layout manager needs to validate the rendering attributes for the range.
+func (tlm *TextLayoutManager) WithRenderingAttributesValidator(renderingAttributesValidator func(obj.Object, obj.Object)) *TextLayoutManager {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setRenderingAttributesValidator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
 		renderingAttributesValidator(obj.Wrap(_b0), obj.Wrap(_b1))
 	}))
-	return x
+	return tlm
 }
 
 // ReplaceTextContentManager replaces the current text content manager with a new one you provide.
-func (x *TextLayoutManager) ReplaceTextContentManager(textContentManager *TextContentManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceTextContentManager:"), objref.IDOf(textContentManager))
+func (tlm *TextLayoutManager) ReplaceTextContentManager(textContentManager *TextContentManager) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("replaceTextContentManager:"), objref.IDOf(textContentManager))
 }
 
 // EnsureLayoutForRange performs the layout for specified text range.
-func (x *TextLayoutManager) EnsureLayoutForRange(range_ *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLayoutForRange:"), objref.IDOf(range_))
+func (tlm *TextLayoutManager) EnsureLayoutForRange(range_ *TextRange) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("ensureLayoutForRange:"), objref.IDOf(range_))
 }
 
 // EnsureLayoutForBounds performs the layout for filling the bounds you specify inside the last text container.
-func (x *TextLayoutManager) EnsureLayoutForBounds(bounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLayoutForBounds:"), bounds)
+func (tlm *TextLayoutManager) EnsureLayoutForBounds(bounds corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("ensureLayoutForBounds:"), bounds)
 }
 
 // InvalidateLayoutForRange invalidates the layout information for specified text range.
-func (x *TextLayoutManager) InvalidateLayoutForRange(range_ *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayoutForRange:"), objref.IDOf(range_))
+func (tlm *TextLayoutManager) InvalidateLayoutForRange(range_ *TextRange) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("invalidateLayoutForRange:"), objref.IDOf(range_))
 }
 
 // TextLayoutFragmentForPosition returns the text layout fragment at the position you specify in the text container.
-func (x *TextLayoutManager) TextLayoutFragmentForPosition(position corefoundation.CGPoint) *TextLayoutFragment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutFragmentForPosition:"), position)
+func (tlm *TextLayoutManager) TextLayoutFragmentForPosition(position corefoundation.CGPoint) *TextLayoutFragment {
+	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textLayoutFragmentForPosition:"), position)
 	return TextLayoutFragmentFromID(_r)
 }
 
 // SetRenderingAttributesForTextRange sets the rendering attributes for the range you specify.
-func (x *TextLayoutManager) SetRenderingAttributesForTextRange(renderingAttributes obj.Object, textRange *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingAttributes:forTextRange:"), objref.IDOf(renderingAttributes), objref.IDOf(textRange))
+func (tlm *TextLayoutManager) SetRenderingAttributesForTextRange(renderingAttributes obj.Object, textRange *TextRange) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setRenderingAttributes:forTextRange:"), objref.IDOf(renderingAttributes), objref.IDOf(textRange))
 }
 
 // AddRenderingAttributeValueForTextRange sets the rendering attribute for the value and range you specify.
-func (x *TextLayoutManager) AddRenderingAttributeValueForTextRange(renderingAttribute obj.Object, value obj.Object, textRange *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRenderingAttribute:value:forTextRange:"), objref.IDOf(renderingAttribute), objref.IDOf(value), objref.IDOf(textRange))
+func (tlm *TextLayoutManager) AddRenderingAttributeValueForTextRange(renderingAttribute obj.Object, value obj.Object, textRange *TextRange) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("addRenderingAttribute:value:forTextRange:"), objref.IDOf(renderingAttribute), objref.IDOf(value), objref.IDOf(textRange))
 }
 
 // RemoveRenderingAttributeForTextRange removes the rendering attribute from the specified text range.
-func (x *TextLayoutManager) RemoveRenderingAttributeForTextRange(renderingAttribute obj.Object, textRange *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRenderingAttribute:forTextRange:"), objref.IDOf(renderingAttribute), objref.IDOf(textRange))
+func (tlm *TextLayoutManager) RemoveRenderingAttributeForTextRange(renderingAttribute obj.Object, textRange *TextRange) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("removeRenderingAttribute:forTextRange:"), objref.IDOf(renderingAttribute), objref.IDOf(textRange))
 }
 
 // InvalidateRenderingAttributesForTextRange invalidates the rendering attributes of the specified text range.
-func (x *TextLayoutManager) InvalidateRenderingAttributesForTextRange(textRange *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateRenderingAttributesForTextRange:"), objref.IDOf(textRange))
+func (tlm *TextLayoutManager) InvalidateRenderingAttributesForTextRange(textRange *TextRange) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("invalidateRenderingAttributesForTextRange:"), objref.IDOf(textRange))
 }
 
 // ReplaceContentsInRangeWithTextElements replaces content at the location you specify with the text elements string you provide.
-func (x *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *TextRange, textElements []*TextElement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceContentsInRange:withTextElements:"), objref.IDOf(range_), purego.SliceToNSArray(textElements, func(_v *TextElement) objc.ID { return objref.IDOf(_v) }))
+func (tlm *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *TextRange, textElements []*TextElement) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("replaceContentsInRange:withTextElements:"), objref.IDOf(range_), purego.SliceToNSArray(textElements, func(_v *TextElement) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ReplaceContentsInRangeWithAttributedString replaces content at the location you specify with an attributed string you provide.
-func (x *TextLayoutManager) ReplaceContentsInRangeWithAttributedString(range_ *TextRange, attributedString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceContentsInRange:withAttributedString:"), objref.IDOf(range_), objref.IDOf(attributedString))
+func (tlm *TextLayoutManager) ReplaceContentsInRangeWithAttributedString(range_ *TextRange, attributedString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("replaceContentsInRange:withAttributedString:"), objref.IDOf(range_), objref.IDOf(attributedString))
 }
 
 // UsesFontLeading wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) UsesFontLeading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesFontLeading"))
+func (tlm *TextLayoutManager) UsesFontLeading() bool {
+	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("usesFontLeading"))
 	return _r
-}
-
-// SetUsesFontLeading wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetUsesFontLeading(usesFontLeading bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFontLeading:"), usesFontLeading)
 }
 
 // LimitsLayoutForSuspiciousContents wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) LimitsLayoutForSuspiciousContents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("limitsLayoutForSuspiciousContents"))
+func (tlm *TextLayoutManager) LimitsLayoutForSuspiciousContents() bool {
+	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("limitsLayoutForSuspiciousContents"))
 	return _r
-}
-
-// SetLimitsLayoutForSuspiciousContents wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitsLayoutForSuspiciousContents:"), limitsLayoutForSuspiciousContents)
 }
 
 // UsesHyphenation wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) UsesHyphenation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesHyphenation"))
+func (tlm *TextLayoutManager) UsesHyphenation() bool {
+	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("usesHyphenation"))
 	return _r
 }
 
-// SetUsesHyphenation wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetUsesHyphenation(usesHyphenation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesHyphenation:"), usesHyphenation)
-}
-
-// ResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
-func (x *TextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection"))
+// ResolvesNaturalAlignmentWithBaseWritingDirection reports whether specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
+func (tlm *TextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
+	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection"))
 	return _r
-}
-
-// SetResolvesNaturalAlignmentWithBaseWritingDirection wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
 }
 
 // TextContentManager wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) TextContentManager() *TextContentManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContentManager"))
+func (tlm *TextLayoutManager) TextContentManager() *TextContentManager {
+	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
 // TextContainer wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) TextContainer() *TextContainer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContainer"))
+func (tlm *TextLayoutManager) TextContainer() *TextContainer {
+	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContainer"))
 	return TextContainerFromID(_r)
 }
 
-// SetTextContainer wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetTextContainer(textContainer *TextContainer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContainer:"), objref.IDOf(textContainer))
-}
-
 // UsageBoundsForTextContainer wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) UsageBoundsForTextContainer() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("usageBoundsForTextContainer"))
+func (tlm *TextLayoutManager) UsageBoundsForTextContainer() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlm), objc.RegisterName("usageBoundsForTextContainer"))
 	return _r
 }
 
 // TextViewportLayoutController wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) TextViewportLayoutController() *TextViewportLayoutController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textViewportLayoutController"))
+func (tlm *TextLayoutManager) TextViewportLayoutController() *TextViewportLayoutController {
+	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textViewportLayoutController"))
 	return TextViewportLayoutControllerFromID(_r)
 }
 
 // LayoutQueue wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) LayoutQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutQueue"))
+func (tlm *TextLayoutManager) LayoutQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("layoutQueue"))
 	return obj.Wrap(_r)
-}
-
-// SetLayoutQueue wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetLayoutQueue(layoutQueue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
 }
 
 // TextSelections wraps the corresponding Objective-C method.
 //
 // TextSelections returns the collection as a Go slice.
-func (x *TextLayoutManager) TextSelections() []*TextSelection {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelections"))
+func (tlm *TextLayoutManager) TextSelections() []*TextSelection {
+	_arr := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textSelections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextSelection { return TextSelectionFromID(_id) })
 }
 
-// SetTextSelections wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetTextSelections(textSelections []*TextSelection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextSelections:"), purego.SliceToNSArray(textSelections, func(_v *TextSelection) objc.ID { return objref.IDOf(_v) }))
-}
-
 // TextSelectionNavigation wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) TextSelectionNavigation() *TextSelectionNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelectionNavigation"))
+func (tlm *TextLayoutManager) TextSelectionNavigation() *TextSelectionNavigation {
+	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textSelectionNavigation"))
 	return TextSelectionNavigationFromID(_r)
 }
-
-// SetTextSelectionNavigation wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextSelectionNavigation:"), objref.IDOf(textSelectionNavigation))
-}
-
-// SetRenderingAttributesValidator wraps the corresponding Objective-C method.
-func (x *TextLayoutManager) SetRenderingAttributesValidator(renderingAttributesValidator func(obj.Object, obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingAttributesValidator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
-		renderingAttributesValidator(obj.Wrap(_b0), obj.Wrap(_b1))
-	}))
-}
-
-// TextLayoutManagerable is the interface implemented by [TextLayoutManager], for mocking and DI.
-type TextLayoutManagerable interface {
-	obj.Object
-	WithUsesFontLeading(usesFontLeading bool) *TextLayoutManager
-	WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *TextLayoutManager
-	WithUsesHyphenation(usesHyphenation bool) *TextLayoutManager
-	WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextLayoutManager
-	WithTextContainer(textContainer *TextContainer) *TextLayoutManager
-	WithLayoutQueue(layoutQueue obj.Object) *TextLayoutManager
-	WithTextSelections(items ...*TextSelection) *TextLayoutManager
-	WithTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) *TextLayoutManager
-	WithRenderingAttributesValidator(renderingAttributesValidator func(obj.Object, obj.Object)) *TextLayoutManager
-	ReplaceTextContentManager(textContentManager *TextContentManager)
-	EnsureLayoutForRange(range_ *TextRange)
-	EnsureLayoutForBounds(bounds corefoundation.CGRect)
-	InvalidateLayoutForRange(range_ *TextRange)
-	TextLayoutFragmentForPosition(position corefoundation.CGPoint) *TextLayoutFragment
-	SetRenderingAttributesForTextRange(renderingAttributes obj.Object, textRange *TextRange)
-	AddRenderingAttributeValueForTextRange(renderingAttribute obj.Object, value obj.Object, textRange *TextRange)
-	RemoveRenderingAttributeForTextRange(renderingAttribute obj.Object, textRange *TextRange)
-	InvalidateRenderingAttributesForTextRange(textRange *TextRange)
-	ReplaceContentsInRangeWithTextElements(range_ *TextRange, textElements []*TextElement)
-	ReplaceContentsInRangeWithAttributedString(range_ *TextRange, attributedString obj.Object)
-	UsesFontLeading() bool
-	SetUsesFontLeading(usesFontLeading bool)
-	LimitsLayoutForSuspiciousContents() bool
-	SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool)
-	UsesHyphenation() bool
-	SetUsesHyphenation(usesHyphenation bool)
-	ResolvesNaturalAlignmentWithBaseWritingDirection() bool
-	SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool)
-	TextContentManager() *TextContentManager
-	TextContainer() *TextContainer
-	SetTextContainer(textContainer *TextContainer)
-	UsageBoundsForTextContainer() corefoundation.CGRect
-	TextViewportLayoutController() *TextViewportLayoutController
-	LayoutQueue() obj.Object
-	SetLayoutQueue(layoutQueue obj.Object)
-	TextSelections() []*TextSelection
-	SetTextSelections(textSelections []*TextSelection)
-	TextSelectionNavigation() *TextSelectionNavigation
-	SetTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation)
-	SetRenderingAttributesValidator(renderingAttributesValidator func(obj.Object, obj.Object))
-}
-
-var _ TextLayoutManagerable = (*TextLayoutManager)(nil)

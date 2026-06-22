@@ -46,24 +46,24 @@ func electrocardiogramVoltageMeasurementAdopt(id objc.ID) *ElectrocardiogramVolt
 }
 
 // Description returns the object's -description text.
-func (x *ElectrocardiogramVoltageMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (evm *ElectrocardiogramVoltageMeasurement) Description() string {
+	return rt.Description(objref.IDOf(evm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ElectrocardiogramVoltageMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (evm *ElectrocardiogramVoltageMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(evm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ElectrocardiogramVoltageMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (evm *ElectrocardiogramVoltageMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(evm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ElectrocardiogramVoltageMeasurement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (evm *ElectrocardiogramVoltageMeasurement) String() string {
+	return rt.Description(objref.IDOf(evm))
 }
 
 // NewElectrocardiogramVoltageMeasurement creates a new ElectrocardiogramVoltageMeasurement.
@@ -73,22 +73,13 @@ func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasureme
 }
 
 // QuantityForLead returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit].
-func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead ElectrocardiogramLead) *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityForLead:"), lead)
+func (evm *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead ElectrocardiogramLead) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(evm), objc.RegisterName("quantityForLead:"), lead)
 	return QuantityFromID(_r)
 }
 
-// TimeSinceSampleStart the time interval between this voltage measurement and the start of the sample.
-func (x *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSinceSampleStart"))
+// TimeSinceSampleStart returns the time interval between this voltage measurement and the start of the sample.
+func (evm *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
+	_r := objc.Send[float64](objref.IDOf(evm), objc.RegisterName("timeSinceSampleStart"))
 	return _r
 }
-
-// ElectrocardiogramVoltageMeasurementable is the interface implemented by [ElectrocardiogramVoltageMeasurement], for mocking and DI.
-type ElectrocardiogramVoltageMeasurementable interface {
-	obj.Object
-	QuantityForLead(lead ElectrocardiogramLead) *Quantity
-	TimeSinceSampleStart() float64
-}
-
-var _ ElectrocardiogramVoltageMeasurementable = (*ElectrocardiogramVoltageMeasurement)(nil)

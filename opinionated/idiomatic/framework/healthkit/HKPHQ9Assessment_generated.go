@@ -50,28 +50,19 @@ func NewPHQ9Assessment() *PHQ9Assessment {
 	return pHQ9AssessmentAdopt(_id)
 }
 
-// Answers answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.
+// Answers returns answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.
 //
 // Answers returns the collection as a Go slice.
-func (x *PHQ9Assessment) Answers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("answers"))
+func (pa *PHQ9Assessment) Answers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("answers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Risk the risk determined by the score on a PHQ-9 assessment.
-func (x *PHQ9Assessment) Risk() PHQ9AssessmentRisk {
-	_r := objc.Send[PHQ9AssessmentRisk](objref.IDOf(x), objc.RegisterName("risk"))
+// Risk returns the risk determined by the score on a PHQ-9 assessment.
+func (pa *PHQ9Assessment) Risk() PHQ9AssessmentRisk {
+	_r := objc.Send[PHQ9AssessmentRisk](objref.IDOf(pa), objc.RegisterName("risk"))
 	return _r
 }
-
-// PHQ9Assessmentable is the interface implemented by [PHQ9Assessment], for mocking and DI.
-type PHQ9Assessmentable interface {
-	obj.Object
-	Answers() []obj.Object
-	Risk() PHQ9AssessmentRisk
-}
-
-var _ PHQ9Assessmentable = (*PHQ9Assessment)(nil)
 
 var _ ScoredAssessmentProvider = (*PHQ9Assessment)(nil)
 

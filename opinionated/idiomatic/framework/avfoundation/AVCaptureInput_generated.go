@@ -48,45 +48,37 @@ func captureInputAdopt(id objc.ID) *CaptureInput {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureInput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *CaptureInput) Description() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ci *CaptureInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ci *CaptureInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureInput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *CaptureInput) String() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // Ports wraps the corresponding Objective-C method.
 //
 // Ports returns the collection as a Go slice.
-func (x *CaptureInput) Ports() []*CaptureInputPort {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ports"))
+func (ci *CaptureInput) Ports() []*CaptureInputPort {
+	_arr := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("ports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureInputPort { return CaptureInputPortFromID(_id) })
 }
-
-// CaptureInputable is the interface implemented by [CaptureInput], for mocking and DI.
-type CaptureInputable interface {
-	obj.Object
-	Ports() []*CaptureInputPort
-}
-
-var _ CaptureInputable = (*CaptureInput)(nil)
 
 // isCaptureInput marks CaptureInput — and, by embedding promotion, its
 // subclasses — as a member of the CaptureInput hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CaptureInput) isCaptureInput() {}
+func (ci *CaptureInput) isCaptureInput() {}
 
 var _ CaptureInputProvider = (*CaptureInput)(nil)

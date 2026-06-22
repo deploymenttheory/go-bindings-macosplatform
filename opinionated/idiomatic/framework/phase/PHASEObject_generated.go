@@ -5,13 +5,14 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Object is an idiomatic wrapper over the Objective-C class PHASEObject.
@@ -50,24 +51,24 @@ func objectAdopt(id objc.ID) *Object {
 }
 
 // Description returns the object's -description text.
-func (x *Object) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Object) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Object) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Object) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // NewObjectWithEngine creates an object in the scene.
@@ -78,9 +79,9 @@ func NewObjectWithEngine(engine *Engine) *Object {
 }
 
 // AddChild adds the given object as a child.
-func (x *Object) AddChild(child *Object) error {
+func (o *Object) AddChild(child *Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addChild:error:"), objref.IDOf(child), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(o), objc.RegisterName("addChild:error:"), objref.IDOf(child), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -88,44 +89,32 @@ func (x *Object) AddChild(child *Object) error {
 }
 
 // RemoveChild removes the given object as a child.
-func (x *Object) RemoveChild(child *Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChild:"), objref.IDOf(child))
+func (o *Object) RemoveChild(child *Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeChild:"), objref.IDOf(child))
 }
 
 // RemoveChildren removes all child objects from the given object.
-func (x *Object) RemoveChildren() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildren"))
+func (o *Object) RemoveChildren() {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeChildren"))
 }
 
-// Parent the parent of this object, or nil if this object doesn't have a parent object.
-func (x *Object) Parent() *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+// Parent returns the parent of this object, or nil if this object doesn't have a parent object.
+func (o *Object) Parent() *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("parent"))
 	return ObjectFromID(_r)
 }
 
-// Children the children of this object.
+// Children returns the children of this object.
 //
 // Children returns the collection as a Go slice.
-func (x *Object) Children() []*Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+func (o *Object) Children() []*Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Object { return ObjectFromID(_id) })
 }
-
-// Objectable is the interface implemented by [Object], for mocking and DI.
-type Objectable interface {
-	obj.Object
-	AddChild(child *Object) error
-	RemoveChild(child *Object)
-	RemoveChildren()
-	Parent() *Object
-	Children() []*Object
-}
-
-var _ Objectable = (*Object)(nil)
 
 // isObject marks Object — and, by embedding promotion, its
 // subclasses — as a member of the Object hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Object) isObject() {}
+func (o *Object) isObject() {}
 
 var _ ObjectProvider = (*Object)(nil)

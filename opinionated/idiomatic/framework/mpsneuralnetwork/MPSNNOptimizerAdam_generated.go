@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,66 +49,46 @@ func NewNNOptimizerAdam() *NNOptimizerAdam {
 	return nNOptimizerAdamAdopt(_id)
 }
 
-// WithTimeStep current timeStep for the update, number of times update has occurred
-func (x *NNOptimizerAdam) WithTimeStep(timeStep int) *NNOptimizerAdam {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
-	return x
+// WithTimeStep sets current timeStep for the update, number of times update has occurred
+func (noa *NNOptimizerAdam) WithTimeStep(timeStep int) *NNOptimizerAdam {
+	objc.Send[objc.ID](objref.IDOf(noa), objc.RegisterName("setTimeStep:"), timeStep)
+	return noa
 }
 
-// WithLearningRate the learningRate at which we update values The default value is 1e-3
-func (x *NNOptimizerAdam) WithLearningRate(learningRate float32) *NNOptimizerAdam {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learningRate at which we update values The default value is 1e-3
+func (noa *NNOptimizerAdam) WithLearningRate(learningRate float32) *NNOptimizerAdam {
+	objc.Send[objc.ID](objref.IDOf(noa), objc.RegisterName("setLearningRate:"), learningRate)
+	return noa
 }
 
-// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
-func (x *NNOptimizerAdam) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
-	return x
+// WithApplyGradientClipping sets a bool which decides if gradient will be clipped The default value is NO
+func (noa *NNOptimizerAdam) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam {
+	objc.Send[objc.ID](objref.IDOf(noa), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
+	return noa
 }
 
-// Beta1 the beta1 at which we update values Default value is 0.9
-func (x *NNOptimizerAdam) Beta1() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta1"))
+// Beta1 returns the beta1 at which we update values Default value is 0.9
+func (noa *NNOptimizerAdam) Beta1() float64 {
+	_r := objc.Send[float64](objref.IDOf(noa), objc.RegisterName("beta1"))
 	return _r
 }
 
-// Beta2 the beta2 at which we update values Default value is 0.999
-func (x *NNOptimizerAdam) Beta2() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta2"))
+// Beta2 returns the beta2 at which we update values Default value is 0.999
+func (noa *NNOptimizerAdam) Beta2() float64 {
+	_r := objc.Send[float64](objref.IDOf(noa), objc.RegisterName("beta2"))
 	return _r
 }
 
-// Epsilon the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
-func (x *NNOptimizerAdam) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
+func (noa *NNOptimizerAdam) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(noa), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// TimeStep current timeStep for the update, number of times update has occurred
-func (x *NNOptimizerAdam) TimeStep() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeStep"))
+// TimeStep returns current timeStep for the update, number of times update has occurred
+func (noa *NNOptimizerAdam) TimeStep() int {
+	_r := objc.Send[int](objref.IDOf(noa), objc.RegisterName("timeStep"))
 	return _r
 }
-
-// SetTimeStep wraps the corresponding Objective-C method.
-func (x *NNOptimizerAdam) SetTimeStep(timeStep int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
-}
-
-// NNOptimizerAdamable is the interface implemented by [NNOptimizerAdam], for mocking and DI.
-type NNOptimizerAdamable interface {
-	obj.Object
-	WithTimeStep(timeStep int) *NNOptimizerAdam
-	WithLearningRate(learningRate float32) *NNOptimizerAdam
-	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam
-	Beta1() float64
-	Beta2() float64
-	Epsilon() float32
-	TimeStep() int
-	SetTimeStep(timeStep int)
-}
-
-var _ NNOptimizerAdamable = (*NNOptimizerAdam)(nil)
 
 var _ NNOptimizerProvider = (*NNOptimizerAdam)(nil)

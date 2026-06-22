@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RegularExpression is an idiomatic wrapper over the Objective-C class NSRegularExpression.
@@ -50,24 +51,24 @@ func regularExpressionAdopt(id objc.ID) *RegularExpression {
 }
 
 // Description returns the object's -description text.
-func (x *RegularExpression) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (re *RegularExpression) Description() string {
+	return rt.Description(objref.IDOf(re))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RegularExpression) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (re *RegularExpression) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(re), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RegularExpression) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (re *RegularExpression) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(re), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RegularExpression) String() string {
-	return rt.Description(objref.IDOf(x))
+func (re *RegularExpression) String() string {
+	return rt.Description(objref.IDOf(re))
 }
 
 // NewRegularExpressionWithPatternOptionsError returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
@@ -82,14 +83,14 @@ func NewRegularExpressionWithPatternOptionsError(pattern string, options Regular
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *RegularExpression) WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (re *RegularExpression) WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression {
+	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return re
 }
 
 // Pattern wraps the corresponding Objective-C method.
-func (x *RegularExpression) Pattern() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pattern"))
+func (re *RegularExpression) Pattern() string {
+	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("pattern"))
 	if _r == 0 {
 		return ""
 	}
@@ -97,41 +98,29 @@ func (x *RegularExpression) Pattern() string {
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *RegularExpression) Options() RegularExpressionOptions {
-	_r := objc.Send[RegularExpressionOptions](objref.IDOf(x), objc.RegisterName("options"))
+func (re *RegularExpression) Options() RegularExpressionOptions {
+	_r := objc.Send[RegularExpressionOptions](objref.IDOf(re), objc.RegisterName("options"))
 	return _r
 }
 
 // NumberOfCaptureGroups wraps the corresponding Objective-C method.
-func (x *RegularExpression) NumberOfCaptureGroups() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCaptureGroups"))
+func (re *RegularExpression) NumberOfCaptureGroups() int {
+	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("numberOfCaptureGroups"))
 	return _r
 }
 
 // ReplacementStringForResultInStringOffsetTemplate used to perform template substitution for a single result for clients implementing their own replace functionality.
-func (x *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, string_ string, offset int, templ string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementStringForResult:inString:offset:template:"), objref.IDOf(result), purego.NSString(string_), offset, purego.NSString(templ))
+func (re *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, string_ string, offset int, templ string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("replacementStringForResult:inString:offset:template:"), objref.IDOf(result), purego.NSString(string_), offset, purego.NSString(templ))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// RegularExpressionable is the interface implemented by [RegularExpression], for mocking and DI.
-type RegularExpressionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression
-	Pattern() string
-	Options() RegularExpressionOptions
-	NumberOfCaptureGroups() int
-	ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, string_ string, offset int, templ string) string
-}
-
-var _ RegularExpressionable = (*RegularExpression)(nil)
-
 // isRegularExpression marks RegularExpression — and, by embedding promotion, its
 // subclasses — as a member of the RegularExpression hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RegularExpression) isRegularExpression() {}
+func (re *RegularExpression) isRegularExpression() {}
 
 var _ RegularExpressionProvider = (*RegularExpression)(nil)

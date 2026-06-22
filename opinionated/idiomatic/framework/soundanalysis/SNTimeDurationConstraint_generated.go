@@ -46,24 +46,24 @@ func timeDurationConstraintAdopt(id objc.ID) *TimeDurationConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *TimeDurationConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tdc *TimeDurationConstraint) Description() string {
+	return rt.Description(objref.IDOf(tdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TimeDurationConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tdc *TimeDurationConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TimeDurationConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tdc *TimeDurationConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TimeDurationConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tdc *TimeDurationConstraint) String() string {
+	return rt.Description(objref.IDOf(tdc))
 }
 
 // NewTimeDurationConstraintWithEnumeratedDurations initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
@@ -73,25 +73,16 @@ func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations []obj.
 	return timeDurationConstraintAdopt(_id)
 }
 
-// Type the time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
-func (x *TimeDurationConstraint) Type() TimeDurationConstraintType {
-	_r := objc.Send[TimeDurationConstraintType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
+func (tdc *TimeDurationConstraint) Type() TimeDurationConstraintType {
+	_r := objc.Send[TimeDurationConstraintType](objref.IDOf(tdc), objc.RegisterName("type"))
 	return _r
 }
 
-// EnumeratedDurations if the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
+// EnumeratedDurations returns if the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
 //
 // EnumeratedDurations returns the collection as a Go slice.
-func (x *TimeDurationConstraint) EnumeratedDurations() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedDurations"))
+func (tdc *TimeDurationConstraint) EnumeratedDurations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("enumeratedDurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// TimeDurationConstraintable is the interface implemented by [TimeDurationConstraint], for mocking and DI.
-type TimeDurationConstraintable interface {
-	obj.Object
-	Type() TimeDurationConstraintType
-	EnumeratedDurations() []obj.Object
-}
-
-var _ TimeDurationConstraintable = (*TimeDurationConstraint)(nil)

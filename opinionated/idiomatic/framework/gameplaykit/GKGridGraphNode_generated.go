@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewGridGraphNode() *GridGraphNode {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKGridGraphNode")), objc.RegisterName("new"))
 	return gridGraphNodeAdopt(_id)
 }
-
-// GridGraphNodeable is the interface implemented by [GridGraphNode], for mocking and DI.
-type GridGraphNodeable interface {
-	obj.Object
-}
-
-var _ GridGraphNodeable = (*GridGraphNode)(nil)
 
 var _ GraphNodeProvider = (*GridGraphNode)(nil)

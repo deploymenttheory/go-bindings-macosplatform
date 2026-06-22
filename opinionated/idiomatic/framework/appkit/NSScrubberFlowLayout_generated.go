@@ -53,57 +53,33 @@ func NewScrubberFlowLayout() *ScrubberFlowLayout {
 	return scrubberFlowLayoutAdopt(_id)
 }
 
-// WithItemSpacing the horizontal spacing between items, specified in points.
-func (x *ScrubberFlowLayout) WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSpacing:"), itemSpacing)
-	return x
+// WithItemSpacing sets the horizontal spacing between items, specified in points.
+func (sfl *ScrubberFlowLayout) WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("setItemSpacing:"), itemSpacing)
+	return sfl
 }
 
-// WithItemSize the frame size for each item in the scrubber.
-func (x *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSize:"), itemSize)
-	return x
+// WithItemSize sets the frame size for each item in the scrubber.
+func (sfl *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("setItemSize:"), itemSize)
+	return sfl
 }
 
 // InvalidateLayoutForItemsAtIndexes informs the scrubber that it should perform a new layout pass for the items at the specified indexes.
-func (x *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayoutForItemsAtIndexes:"), objref.IDOf(invalidItemIndexes))
+func (sfl *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("invalidateLayoutForItemsAtIndexes:"), objref.IDOf(invalidItemIndexes))
 }
 
-// ItemSpacing the amount of horizontal spacing between items in points. The default value is 0.0.
-func (x *ScrubberFlowLayout) ItemSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("itemSpacing"))
+// ItemSpacing returns the amount of horizontal spacing between items in points. The default value is 0.0.
+func (sfl *ScrubberFlowLayout) ItemSpacing() float64 {
+	_r := objc.Send[float64](objref.IDOf(sfl), objc.RegisterName("itemSpacing"))
 	return _r
 }
 
-// SetItemSpacing the amount of horizontal spacing between items in points. The default value is 0.0.
-func (x *ScrubberFlowLayout) SetItemSpacing(itemSpacing float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSpacing:"), itemSpacing)
-}
-
-// ItemSize the frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
-func (x *ScrubberFlowLayout) ItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("itemSize"))
+// ItemSize returns the frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
+func (sfl *ScrubberFlowLayout) ItemSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sfl), objc.RegisterName("itemSize"))
 	return _r
 }
-
-// SetItemSize the frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
-func (x *ScrubberFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSize:"), itemSize)
-}
-
-// ScrubberFlowLayoutable is the interface implemented by [ScrubberFlowLayout], for mocking and DI.
-type ScrubberFlowLayoutable interface {
-	obj.Object
-	WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout
-	WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout
-	InvalidateLayoutForItemsAtIndexes(invalidItemIndexes obj.Object)
-	ItemSpacing() float64
-	SetItemSpacing(itemSpacing float64)
-	ItemSize() corefoundation.CGSize
-	SetItemSize(itemSize corefoundation.CGSize)
-}
-
-var _ ScrubberFlowLayoutable = (*ScrubberFlowLayout)(nil)
 
 var _ ScrubberLayoutProvider = (*ScrubberFlowLayout)(nil)

@@ -46,24 +46,24 @@ func wKSecurityOriginAdopt(id objc.ID) *WKSecurityOrigin {
 }
 
 // Description returns the object's -description text.
-func (x *WKSecurityOrigin) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wso *WKSecurityOrigin) Description() string {
+	return rt.Description(objref.IDOf(wso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKSecurityOrigin) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wso *WKSecurityOrigin) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKSecurityOrigin) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wso *WKSecurityOrigin) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKSecurityOrigin) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wso *WKSecurityOrigin) String() string {
+	return rt.Description(objref.IDOf(wso))
 }
 
 // NewWKSecurityOrigin creates a new WKSecurityOrigin.
@@ -72,36 +72,26 @@ func NewWKSecurityOrigin() *WKSecurityOrigin {
 	return wKSecurityOriginAdopt(_id)
 }
 
-// Protocol the security origin's protocol.
-func (x *WKSecurityOrigin) Protocol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
+// Protocol returns the security origin's protocol.
+func (wso *WKSecurityOrigin) Protocol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("protocol"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Host the security origin's host.
-func (x *WKSecurityOrigin) Host() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+// Host returns the security origin's host.
+func (wso *WKSecurityOrigin) Host() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("host"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Port the security origin's port.
-func (x *WKSecurityOrigin) Port() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
+// Port returns the security origin's port.
+func (wso *WKSecurityOrigin) Port() int {
+	_r := objc.Send[int](objref.IDOf(wso), objc.RegisterName("port"))
 	return _r
 }
-
-// WKSecurityOriginable is the interface implemented by [WKSecurityOrigin], for mocking and DI.
-type WKSecurityOriginable interface {
-	obj.Object
-	Protocol() string
-	Host() string
-	Port() int
-}
-
-var _ WKSecurityOriginable = (*WKSecurityOrigin)(nil)

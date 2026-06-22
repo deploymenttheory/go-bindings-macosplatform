@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func containerAdopt(id objc.ID) *Container {
 }
 
 // Description returns the object's -description text.
-func (x *Container) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Container) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Container) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Container) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Container) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Container) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Container) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Container) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewContainer creates a new Container.
@@ -75,13 +76,13 @@ func NewContainer() *Container {
 }
 
 // AddOperation adds an operation to the container’s queue.
-func (x *Container) AddOperation(operation *Operation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperation:"), objref.IDOf(operation))
+func (c *Container) AddOperation(operation *Operation) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
-// ContainerIdentifier the container's unique identifier. Use this property's value to distinguish different containers in your app.
-func (x *Container) ContainerIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
+// ContainerIdentifier returns the container's unique identifier. Use this property's value to distinguish different containers in your app.
+func (c *Container) ContainerIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,33 +90,33 @@ func (x *Container) ContainerIdentifier() string {
 }
 
 // DatabaseWithDatabaseScope returns the database with the specified scope.
-func (x *Container) DatabaseWithDatabaseScope(databaseScope DatabaseScope) *Database {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseWithDatabaseScope:"), databaseScope)
+func (c *Container) DatabaseWithDatabaseScope(databaseScope DatabaseScope) *Database {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("databaseWithDatabaseScope:"), databaseScope)
 	return DatabaseFromID(_r)
 }
 
-// PrivateCloudDatabase the user's private database. The user's private database is only available if the device has an iCloud account. Only the user can access their private database, by default. They own all of the database's content and can view and modify that content. Data in the private database isn't visible in the developer portal. Data in the private database counts toward the user's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
-func (x *Container) PrivateCloudDatabase() *Database {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateCloudDatabase"))
+// PrivateCloudDatabase returns the user's private database. The user's private database is only available if the device has an iCloud account. Only the user can access their private database, by default. They own all of the database's content and can view and modify that content. Data in the private database isn't visible in the developer portal. Data in the private database counts toward the user's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
+func (c *Container) PrivateCloudDatabase() *Database {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("privateCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
-// PublicCloudDatabase the app's public database. This database is available regardless of whether the user's device has an iCloud account. The contents of the public database are readable by all users of the app, and users have write access to the records, and other objects, they create. The public database's contents are visible in the developer portal, where you can assign roles to users and restrict access as necessary. Data in the public database counts toward your app's iCloud storage quota.
-func (x *Container) PublicCloudDatabase() *Database {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicCloudDatabase"))
+// PublicCloudDatabase returns the app's public database. This database is available regardless of whether the user's device has an iCloud account. The contents of the public database are readable by all users of the app, and users have write access to the records, and other objects, they create. The public database's contents are visible in the developer portal, where you can assign roles to users and restrict access as necessary. Data in the public database counts toward your app's iCloud storage quota.
+func (c *Container) PublicCloudDatabase() *Database {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("publicCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
-// SharedCloudDatabase the database that contains shared data. This database is only available if the device has an iCloud account. Permissions on the database are available only to the user according to the permissions of the enclosing “CKShare“ instance, which represents the shared record. The current user doesn't own the content in the shared database, and can view and modify that content only if the necessary permissions exist. Data in the shared database isn't visible in the developer portal or to any user who doesn't have access. Data in the shared database counts toward your app's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
-func (x *Container) SharedCloudDatabase() *Database {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedCloudDatabase"))
+// SharedCloudDatabase returns the database that contains shared data. This database is only available if the device has an iCloud account. Permissions on the database are available only to the user according to the permissions of the enclosing “CKShare“ instance, which represents the shared record. The current user doesn't own the content in the shared database, and can view and modify that content only if the necessary permissions exist. Data in the shared database isn't visible in the developer portal or to any user who doesn't have access. Data in the shared database counts toward your app's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
+func (c *Container) SharedCloudDatabase() *Database {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sharedCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
 // FetchUserRecordID fetches the user record ID of the current user.
 //
 // FetchUserRecordID blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, err error) {
+func (c *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
@@ -127,7 +128,7 @@ func (x *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, er
 		_o.val = RecordIDFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchUserRecordIDWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchUserRecordIDWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -140,7 +141,7 @@ func (x *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, er
 // DiscoverAllIdentities fetches all user identities that match entries in the user’s Contacts.
 //
 // DiscoverAllIdentities blocks until the operation completes or ctx is cancelled.
-func (x *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Object, err error) {
+func (c *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -152,7 +153,7 @@ func (x *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Objec
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoverAllIdentitiesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discoverAllIdentitiesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -165,7 +166,7 @@ func (x *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Objec
 // FetchShareParticipantWithEmailAddress fetches the share participant with the specified email address.
 //
 // FetchShareParticipantWithEmailAddress blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (result *ShareParticipant, err error) {
+func (c *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -177,7 +178,7 @@ func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, e
 		_o.val = ShareParticipantFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareParticipantWithEmailAddress:completionHandler:"), purego.NSString(emailAddress), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchShareParticipantWithEmailAddress:completionHandler:"), purego.NSString(emailAddress), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -190,7 +191,7 @@ func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, e
 // FetchShareParticipantWithPhoneNumber fetches the share participant with the specified phone number.
 //
 // FetchShareParticipantWithPhoneNumber blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (result *ShareParticipant, err error) {
+func (c *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -202,7 +203,7 @@ func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, ph
 		_o.val = ShareParticipantFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareParticipantWithPhoneNumber:completionHandler:"), purego.NSString(phoneNumber), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchShareParticipantWithPhoneNumber:completionHandler:"), purego.NSString(phoneNumber), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -215,7 +216,7 @@ func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, ph
 // FetchShareParticipantWithUserRecordID fetches the share participant with the specified user record ID.
 //
 // FetchShareParticipantWithUserRecordID blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (result *ShareParticipant, err error) {
+func (c *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -227,7 +228,7 @@ func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, u
 		_o.val = ShareParticipantFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareParticipantWithUserRecordID:completionHandler:"), objref.IDOf(userRecordID), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchShareParticipantWithUserRecordID:completionHandler:"), objref.IDOf(userRecordID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -240,7 +241,7 @@ func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, u
 // FetchShareMetadataWithURL fetches the share metadata for the specified share URL.
 //
 // FetchShareMetadataWithURL blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (result *ShareMetadata, err error) {
+func (c *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (result *ShareMetadata, err error) {
 	type _result struct {
 		val *ShareMetadata
 		err error
@@ -252,7 +253,7 @@ func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (
 		_o.val = ShareMetadataFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareMetadataWithURL:completionHandler:"), rt.FileURL(url), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchShareMetadataWithURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -265,7 +266,7 @@ func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (
 // AcceptShareMetadata accepts the specified share metadata.
 //
 // AcceptShareMetadata blocks until the operation completes or ctx is cancelled.
-func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (result *Share, err error) {
+func (c *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (result *Share, err error) {
 	type _result struct {
 		val *Share
 		err error
@@ -277,7 +278,7 @@ func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMeta
 		_o.val = ShareFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptShareMetadata:completionHandler:"), objref.IDOf(metadata), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("acceptShareMetadata:completionHandler:"), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -290,7 +291,7 @@ func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMeta
 // FetchAllLongLivedOperationIDs fetches the IDs of any long-lived operations that are running.
 //
 // FetchAllLongLivedOperationIDs blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result obj.Object, err error) {
+func (c *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -302,7 +303,7 @@ func (x *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result o
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAllLongLivedOperationIDsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchAllLongLivedOperationIDsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -311,24 +312,3 @@ func (x *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result o
 		return _zero, ctx.Err()
 	}
 }
-
-// Containerable is the interface implemented by [Container], for mocking and DI.
-type Containerable interface {
-	obj.Object
-	AddOperation(operation *Operation)
-	ContainerIdentifier() string
-	DatabaseWithDatabaseScope(databaseScope DatabaseScope) *Database
-	PrivateCloudDatabase() *Database
-	PublicCloudDatabase() *Database
-	SharedCloudDatabase() *Database
-	FetchUserRecordID(ctx context.Context) (*RecordID, error)
-	DiscoverAllIdentities(ctx context.Context) (obj.Object, error)
-	FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (*ShareParticipant, error)
-	FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (*ShareParticipant, error)
-	FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (*ShareParticipant, error)
-	FetchShareMetadataWithURL(ctx context.Context, url string) (*ShareMetadata, error)
-	AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (*Share, error)
-	FetchAllLongLivedOperationIDs(ctx context.Context) (obj.Object, error)
-}
-
-var _ Containerable = (*Container)(nil)

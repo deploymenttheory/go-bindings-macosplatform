@@ -46,24 +46,24 @@ func paymentAuthorizationViewControllerAdopt(id objc.ID) *PaymentAuthorizationVi
 }
 
 // Description returns the object's -description text.
-func (x *PaymentAuthorizationViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pavc *PaymentAuthorizationViewController) Description() string {
+	return rt.Description(objref.IDOf(pavc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentAuthorizationViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pavc *PaymentAuthorizationViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pavc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentAuthorizationViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pavc *PaymentAuthorizationViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pavc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentAuthorizationViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pavc *PaymentAuthorizationViewController) String() string {
+	return rt.Description(objref.IDOf(pavc))
 }
 
 // NewPaymentAuthorizationViewControllerWithPaymentRequest initializes and returns a payment authorization view controller.
@@ -79,10 +79,3 @@ func NewPaymentAuthorizationViewControllerWithDisbursementRequest(request *Disbu
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), objref.IDOf(request))
 	return paymentAuthorizationViewControllerAdopt(_id)
 }
-
-// PaymentAuthorizationViewControllerable is the interface implemented by [PaymentAuthorizationViewController], for mocking and DI.
-type PaymentAuthorizationViewControllerable interface {
-	obj.Object
-}
-
-var _ PaymentAuthorizationViewControllerable = (*PaymentAuthorizationViewController)(nil)

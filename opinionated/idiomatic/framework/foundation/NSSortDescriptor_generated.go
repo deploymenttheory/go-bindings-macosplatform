@@ -46,24 +46,24 @@ func sortDescriptorAdopt(id objc.ID) *SortDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *SortDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SortDescriptor) Description() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SortDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sd *SortDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SortDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sd *SortDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SortDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SortDescriptor) String() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // NewSortDescriptorWithKeyAscending creates a sort descriptor with a specified string key path and sort order.
@@ -81,25 +81,25 @@ func NewSortDescriptorWithCoder(coder *Coder) *SortDescriptor {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *SortDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (sd *SortDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return sd
 }
 
 // AllowEvaluation forces a securely decoded sort descriptor to allow evaluation.
-func (x *SortDescriptor) AllowEvaluation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
+func (sd *SortDescriptor) AllowEvaluation() {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("allowEvaluation"))
 }
 
 // CompareObjectToObject returns a comparison result value that indicates the sort order of two objects.
-func (x *SortDescriptor) CompareObjectToObject(object1 obj.Object, object2 obj.Object) ComparisonResult {
-	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compareObject:toObject:"), objref.IDOf(object1), objref.IDOf(object2))
+func (sd *SortDescriptor) CompareObjectToObject(object1 obj.Object, object2 obj.Object) ComparisonResult {
+	_r := objc.Send[ComparisonResult](objref.IDOf(sd), objc.RegisterName("compareObject:toObject:"), objref.IDOf(object1), objref.IDOf(object2))
 	return _r
 }
 
 // Key wraps the corresponding Objective-C method.
-func (x *SortDescriptor) Key() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+func (sd *SortDescriptor) Key() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
 	}
@@ -107,26 +107,13 @@ func (x *SortDescriptor) Key() string {
 }
 
 // Ascending wraps the corresponding Objective-C method.
-func (x *SortDescriptor) Ascending() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ascending"))
+func (sd *SortDescriptor) Ascending() bool {
+	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("ascending"))
 	return _r
 }
 
 // ReversedSortDescriptor wraps the corresponding Objective-C method.
-func (x *SortDescriptor) ReversedSortDescriptor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedSortDescriptor"))
+func (sd *SortDescriptor) ReversedSortDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("reversedSortDescriptor"))
 	return obj.Wrap(_r)
 }
-
-// SortDescriptorable is the interface implemented by [SortDescriptor], for mocking and DI.
-type SortDescriptorable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor
-	AllowEvaluation()
-	CompareObjectToObject(object1 obj.Object, object2 obj.Object) ComparisonResult
-	Key() string
-	Ascending() bool
-	ReversedSortDescriptor() obj.Object
-}
-
-var _ SortDescriptorable = (*SortDescriptor)(nil)

@@ -52,29 +52,20 @@ func NewVerifiableClinicalRecordQuery() *VerifiableClinicalRecordQuery {
 	return verifiableClinicalRecordQueryAdopt(_id)
 }
 
-// RecordTypes the record types that need to be present on desired records.
+// RecordTypes returns the record types that need to be present on desired records.
 //
 // RecordTypes returns the collection as a Go slice.
-func (x *VerifiableClinicalRecordQuery) RecordTypes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordTypes"))
+func (vcrq *VerifiableClinicalRecordQuery) RecordTypes() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(vcrq), objc.RegisterName("recordTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SourceTypes the source type(s) of the records.
+// SourceTypes returns the source type(s) of the records.
 //
 // SourceTypes returns the collection as a Go slice.
-func (x *VerifiableClinicalRecordQuery) SourceTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTypes"))
+func (vcrq *VerifiableClinicalRecordQuery) SourceTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(vcrq), objc.RegisterName("sourceTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// VerifiableClinicalRecordQueryable is the interface implemented by [VerifiableClinicalRecordQuery], for mocking and DI.
-type VerifiableClinicalRecordQueryable interface {
-	obj.Object
-	RecordTypes() []string
-	SourceTypes() []obj.Object
-}
-
-var _ VerifiableClinicalRecordQueryable = (*VerifiableClinicalRecordQuery)(nil)
 
 var _ QueryProvider = (*VerifiableClinicalRecordQuery)(nil)

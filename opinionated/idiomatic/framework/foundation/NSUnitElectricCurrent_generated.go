@@ -53,18 +53,10 @@ func NewUnitElectricCurrent() *UnitElectricCurrent {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitElectricCurrent) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCurrent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uec *UnitElectricCurrent) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCurrent {
+	objc.Send[objc.ID](objref.IDOf(uec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uec
 }
-
-// UnitElectricCurrentable is the interface implemented by [UnitElectricCurrent], for mocking and DI.
-type UnitElectricCurrentable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCurrent
-}
-
-var _ UnitElectricCurrentable = (*UnitElectricCurrent)(nil)
 
 var _ DimensionProvider = (*UnitElectricCurrent)(nil)
 

@@ -46,24 +46,24 @@ func systemExtensionRequestAdopt(id objc.ID) *SystemExtensionRequest {
 }
 
 // Description returns the object's -description text.
-func (x *SystemExtensionRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ser *SystemExtensionRequest) Description() string {
+	return rt.Description(objref.IDOf(ser))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SystemExtensionRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ser *SystemExtensionRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ser), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SystemExtensionRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ser *SystemExtensionRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ser), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SystemExtensionRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ser *SystemExtensionRequest) String() string {
+	return rt.Description(objref.IDOf(ser))
 }
 
 // NewSystemExtensionRequest creates a new SystemExtensionRequest.
@@ -72,19 +72,11 @@ func NewSystemExtensionRequest() *SystemExtensionRequest {
 	return systemExtensionRequestAdopt(_id)
 }
 
-// Identifier the bundle identifier of the target extension
-func (x *SystemExtensionRequest) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the bundle identifier of the target extension
+func (ser *SystemExtensionRequest) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ser), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SystemExtensionRequestable is the interface implemented by [SystemExtensionRequest], for mocking and DI.
-type SystemExtensionRequestable interface {
-	obj.Object
-	Identifier() string
-}
-
-var _ SystemExtensionRequestable = (*SystemExtensionRequest)(nil)

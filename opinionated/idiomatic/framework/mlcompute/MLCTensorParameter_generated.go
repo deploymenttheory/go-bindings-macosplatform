@@ -46,24 +46,24 @@ func tensorParameterAdopt(id objc.ID) *TensorParameter {
 }
 
 // Description returns the object's -description text.
-func (x *TensorParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tp *TensorParameter) Description() string {
+	return rt.Description(objref.IDOf(tp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TensorParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tp *TensorParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TensorParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tp *TensorParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TensorParameter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tp *TensorParameter) String() string {
+	return rt.Description(objref.IDOf(tp))
 }
 
 // NewTensorParameter creates a new TensorParameter.
@@ -72,36 +72,20 @@ func NewTensorParameter() *TensorParameter {
 	return tensorParameterAdopt(_id)
 }
 
-// WithIsUpdatable a Boolean that indicates whether this tensor parameter is updatable.
-func (x *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdatable:"), isUpdatable)
-	return x
+// WithIsUpdatable sets a Boolean that indicates whether this tensor parameter is updatable.
+func (tp *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
+	objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("setIsUpdatable:"), isUpdatable)
+	return tp
 }
 
-// Tensor the underlying tensor
-func (x *TensorParameter) Tensor() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensor"))
+// Tensor returns the underlying tensor
+func (tp *TensorParameter) Tensor() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("tensor"))
 	return TensorFromID(_r)
 }
 
-// IsUpdatable specifies whether this tensor parameter is updatable
-func (x *TensorParameter) IsUpdatable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdatable"))
+// IsUpdatable reports whether this tensor parameter is updatable
+func (tp *TensorParameter) IsUpdatable() bool {
+	_r := objc.Send[bool](objref.IDOf(tp), objc.RegisterName("isUpdatable"))
 	return _r
 }
-
-// SetIsUpdatable wraps the corresponding Objective-C method.
-func (x *TensorParameter) SetIsUpdatable(isUpdatable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdatable:"), isUpdatable)
-}
-
-// TensorParameterable is the interface implemented by [TensorParameter], for mocking and DI.
-type TensorParameterable interface {
-	obj.Object
-	WithIsUpdatable(isUpdatable bool) *TensorParameter
-	Tensor() *Tensor
-	IsUpdatable() bool
-	SetIsUpdatable(isUpdatable bool)
-}
-
-var _ TensorParameterable = (*TensorParameter)(nil)

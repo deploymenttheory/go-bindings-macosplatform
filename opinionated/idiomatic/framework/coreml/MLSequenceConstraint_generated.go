@@ -47,24 +47,24 @@ func sequenceConstraintAdopt(id objc.ID) *SequenceConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *SequenceConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *SequenceConstraint) Description() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SequenceConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sc *SequenceConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SequenceConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sc *SequenceConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SequenceConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *SequenceConstraint) String() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // NewSequenceConstraint creates a new SequenceConstraint.
@@ -74,22 +74,13 @@ func NewSequenceConstraint() *SequenceConstraint {
 }
 
 // ValueDescription wraps the corresponding Objective-C method.
-func (x *SequenceConstraint) ValueDescription() *FeatureDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueDescription"))
+func (sc *SequenceConstraint) ValueDescription() *FeatureDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("valueDescription"))
 	return FeatureDescriptionFromID(_r)
 }
 
 // CountRange wraps the corresponding Objective-C method.
-func (x *SequenceConstraint) CountRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("countRange"))
+func (sc *SequenceConstraint) CountRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(sc), objc.RegisterName("countRange"))
 	return _r
 }
-
-// SequenceConstraintable is the interface implemented by [SequenceConstraint], for mocking and DI.
-type SequenceConstraintable interface {
-	obj.Object
-	ValueDescription() *FeatureDescription
-	CountRange() foundation.NSRange
-}
-
-var _ SequenceConstraintable = (*SequenceConstraint)(nil)

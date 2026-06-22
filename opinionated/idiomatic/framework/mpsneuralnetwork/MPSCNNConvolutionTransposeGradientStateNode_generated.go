@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,26 +49,17 @@ func NewCNNConvolutionTransposeGradientStateNode() *CNNConvolutionTransposeGradi
 	return cNNConvolutionTransposeGradientStateNodeAdopt(_id)
 }
 
-// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *CNNConvolutionTransposeGradientStateNode) WithExportFromGraph(exportFromGraph bool) *CNNConvolutionTransposeGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-	return x
+// WithExportFromGraph sets tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+func (cctgsn *CNNConvolutionTransposeGradientStateNode) WithExportFromGraph(exportFromGraph bool) *CNNConvolutionTransposeGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(cctgsn), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
+	return cctgsn
 }
 
-// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
-func (x *CNNConvolutionTransposeGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionTransposeGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-	return x
+// WithSynchronizeResource sets set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
+func (cctgsn *CNNConvolutionTransposeGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionTransposeGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(cctgsn), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
+	return cctgsn
 }
-
-// CNNConvolutionTransposeGradientStateNodeable is the interface implemented by [CNNConvolutionTransposeGradientStateNode], for mocking and DI.
-type CNNConvolutionTransposeGradientStateNodeable interface {
-	obj.Object
-	WithExportFromGraph(exportFromGraph bool) *CNNConvolutionTransposeGradientStateNode
-	WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionTransposeGradientStateNode
-}
-
-var _ CNNConvolutionTransposeGradientStateNodeable = (*CNNConvolutionTransposeGradientStateNode)(nil)
 
 var _ CNNConvolutionGradientStateNodeProvider = (*CNNConvolutionTransposeGradientStateNode)(nil)
 

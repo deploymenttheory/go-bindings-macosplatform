@@ -48,35 +48,35 @@ func reservationAdopt(id objc.ID) *Reservation {
 }
 
 // Description returns the object's -description text.
-func (x *Reservation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Reservation) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Reservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Reservation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Reservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Reservation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Reservation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Reservation) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // ItemReference wraps the corresponding Objective-C method.
-func (x *Reservation) ItemReference() *SpeakableString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemReference"))
+func (r *Reservation) ItemReference() *SpeakableString {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("itemReference"))
 	return SpeakableStringFromID(_r)
 }
 
 // ReservationNumber wraps the corresponding Objective-C method.
-func (x *Reservation) ReservationNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationNumber"))
+func (r *Reservation) ReservationNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("reservationNumber"))
 	if _r == 0 {
 		return ""
 	}
@@ -84,20 +84,20 @@ func (x *Reservation) ReservationNumber() string {
 }
 
 // BookingTime wraps the corresponding Objective-C method.
-func (x *Reservation) BookingTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bookingTime"))
+func (r *Reservation) BookingTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("bookingTime"))
 	return obj.Wrap(_r)
 }
 
 // ReservationStatus wraps the corresponding Objective-C method.
-func (x *Reservation) ReservationStatus() ReservationStatus {
-	_r := objc.Send[ReservationStatus](objref.IDOf(x), objc.RegisterName("reservationStatus"))
+func (r *Reservation) ReservationStatus() ReservationStatus {
+	_r := objc.Send[ReservationStatus](objref.IDOf(r), objc.RegisterName("reservationStatus"))
 	return _r
 }
 
 // ReservationHolderName wraps the corresponding Objective-C method.
-func (x *Reservation) ReservationHolderName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationHolderName"))
+func (r *Reservation) ReservationHolderName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("reservationHolderName"))
 	if _r == 0 {
 		return ""
 	}
@@ -107,34 +107,20 @@ func (x *Reservation) ReservationHolderName() string {
 // Actions wraps the corresponding Objective-C method.
 //
 // Actions returns the collection as a Go slice.
-func (x *Reservation) Actions() []*ReservationAction {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actions"))
+func (r *Reservation) Actions() []*ReservationAction {
+	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("actions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ReservationAction { return ReservationActionFromID(_id) })
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *Reservation) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (r *Reservation) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// Reservationable is the interface implemented by [Reservation], for mocking and DI.
-type Reservationable interface {
-	obj.Object
-	ItemReference() *SpeakableString
-	ReservationNumber() string
-	BookingTime() obj.Object
-	ReservationStatus() ReservationStatus
-	ReservationHolderName() string
-	Actions() []*ReservationAction
-	URL() obj.Object
-}
-
-var _ Reservationable = (*Reservation)(nil)
 
 // isReservation marks Reservation — and, by embedding promotion, its
 // subclasses — as a member of the Reservation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Reservation) isReservation() {}
+func (r *Reservation) isReservation() {}
 
 var _ ReservationProvider = (*Reservation)(nil)

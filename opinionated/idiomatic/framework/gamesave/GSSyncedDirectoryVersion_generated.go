@@ -44,24 +44,24 @@ func syncedDirectoryVersionAdopt(id objc.ID) *SyncedDirectoryVersion {
 }
 
 // Description returns the object's -description text.
-func (x *SyncedDirectoryVersion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sdv *SyncedDirectoryVersion) Description() string {
+	return rt.Description(objref.IDOf(sdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncedDirectoryVersion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sdv *SyncedDirectoryVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncedDirectoryVersion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sdv *SyncedDirectoryVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncedDirectoryVersion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sdv *SyncedDirectoryVersion) String() string {
+	return rt.Description(objref.IDOf(sdv))
 }
 
 // NewSyncedDirectoryVersion creates a new SyncedDirectoryVersion.
@@ -70,40 +70,29 @@ func NewSyncedDirectoryVersion() *SyncedDirectoryVersion {
 	return syncedDirectoryVersionAdopt(_id)
 }
 
-// IsLocal `YES` if the directory version is local; otherwise `NO`.
-func (x *SyncedDirectoryVersion) IsLocal() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocal"))
+// IsLocal reports whether `YES` if the directory version is local; otherwise `NO`.
+func (sdv *SyncedDirectoryVersion) IsLocal() bool {
+	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("isLocal"))
 	return _r
 }
 
-// LocalizedNameOfSavingComputer the localized name of the device that saved this version.
-func (x *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNameOfSavingComputer"))
+// LocalizedNameOfSavingComputer returns the localized name of the device that saved this version.
+func (sdv *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("localizedNameOfSavingComputer"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ModifiedDate the date that this version was last modified.
-func (x *SyncedDirectoryVersion) ModifiedDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifiedDate"))
+// ModifiedDate returns the date that this version was last modified.
+func (sdv *SyncedDirectoryVersion) ModifiedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("modifiedDate"))
 	return obj.Wrap(_r)
 }
 
-// Url the URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
-func (x *SyncedDirectoryVersion) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
+func (sdv *SyncedDirectoryVersion) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
-
-// SyncedDirectoryVersionable is the interface implemented by [SyncedDirectoryVersion], for mocking and DI.
-type SyncedDirectoryVersionable interface {
-	obj.Object
-	IsLocal() bool
-	LocalizedNameOfSavingComputer() string
-	ModifiedDate() obj.Object
-	Url() obj.Object
-}
-
-var _ SyncedDirectoryVersionable = (*SyncedDirectoryVersion)(nil)

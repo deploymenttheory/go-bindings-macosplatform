@@ -46,24 +46,24 @@ func filePreviewRequestAdopt(id objc.ID) *FilePreviewRequest {
 }
 
 // Description returns the object's -description text.
-func (x *FilePreviewRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpr *FilePreviewRequest) Description() string {
+	return rt.Description(objref.IDOf(fpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FilePreviewRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpr *FilePreviewRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FilePreviewRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpr *FilePreviewRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FilePreviewRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpr *FilePreviewRequest) String() string {
+	return rt.Description(objref.IDOf(fpr))
 }
 
 // NewFilePreviewRequest creates a new FilePreviewRequest.
@@ -73,15 +73,7 @@ func NewFilePreviewRequest() *FilePreviewRequest {
 }
 
 // FileURL wraps the corresponding Objective-C method.
-func (x *FilePreviewRequest) FileURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+func (fpr *FilePreviewRequest) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
-
-// FilePreviewRequestable is the interface implemented by [FilePreviewRequest], for mocking and DI.
-type FilePreviewRequestable interface {
-	obj.Object
-	FileURL() obj.Object
-}
-
-var _ FilePreviewRequestable = (*FilePreviewRequest)(nil)

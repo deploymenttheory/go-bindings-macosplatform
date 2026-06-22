@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,93 +45,70 @@ func databaseOperationAdopt(id objc.ID) *DatabaseOperation {
 	return x
 }
 
-// WithDatabase the database that the operation uses.
-func (x *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (do *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return do
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (do *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return do
 }
 
-// WithGroup the operation’s group.
-func (x *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (do *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return do
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (do *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return do
 }
 
-// WithContainer the operation's container.
-func (x *DatabaseOperation) WithContainer(container *Container) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (do *DatabaseOperation) WithContainer(container *Container) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return do
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *DatabaseOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (do *DatabaseOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return do
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *DatabaseOperation) WithLongLived(longLived bool) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (do *DatabaseOperation) WithLongLived(longLived bool) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setLongLived:"), longLived)
+	return do
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *DatabaseOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (do *DatabaseOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return do
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (do *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return do
 }
 
 // Database wraps the corresponding Objective-C method.
-func (x *DatabaseOperation) Database() *Database {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("database"))
+func (do *DatabaseOperation) Database() *Database {
+	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("database"))
 	return DatabaseFromID(_r)
 }
-
-// SetDatabase wraps the corresponding Objective-C method.
-func (x *DatabaseOperation) SetDatabase(database *Database) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-}
-
-// DatabaseOperationable is the interface implemented by [DatabaseOperation], for mocking and DI.
-type DatabaseOperationable interface {
-	obj.Object
-	WithDatabase(database *Database) *DatabaseOperation
-	WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation
-	WithGroup(group *OperationGroup) *DatabaseOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation
-	WithContainer(container *Container) *DatabaseOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation
-	WithLongLived(longLived bool) *DatabaseOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation
-	Database() *Database
-	SetDatabase(database *Database)
-}
-
-var _ DatabaseOperationable = (*DatabaseOperation)(nil)
 
 // isDatabaseOperation marks DatabaseOperation — and, by embedding promotion, its
 // subclasses — as a member of the DatabaseOperation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DatabaseOperation) isDatabaseOperation() {}
+func (do *DatabaseOperation) isDatabaseOperation() {}
 
 var _ DatabaseOperationProvider = (*DatabaseOperation)(nil)
 

@@ -46,24 +46,24 @@ func turnBasedMatchmakerViewControllerAdopt(id objc.ID) *TurnBasedMatchmakerView
 }
 
 // Description returns the object's -description text.
-func (x *TurnBasedMatchmakerViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tbmvc *TurnBasedMatchmakerViewController) Description() string {
+	return rt.Description(objref.IDOf(tbmvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TurnBasedMatchmakerViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tbmvc *TurnBasedMatchmakerViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tbmvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TurnBasedMatchmakerViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tbmvc *TurnBasedMatchmakerViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tbmvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TurnBasedMatchmakerViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tbmvc *TurnBasedMatchmakerViewController) String() string {
+	return rt.Description(objref.IDOf(tbmvc))
 }
 
 // NewTurnBasedMatchmakerViewControllerWithMatchRequest creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
@@ -73,49 +73,26 @@ func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *MatchRequest)
 	return turnBasedMatchmakerViewControllerAdopt(_id)
 }
 
-// WithShowExistingMatches a Boolean value that determines whether the view controller shows existing matches.
-func (x *TurnBasedMatchmakerViewController) WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowExistingMatches:"), showExistingMatches)
-	return x
+// WithShowExistingMatches sets a Boolean value that determines whether the view controller shows existing matches.
+func (tbmvc *TurnBasedMatchmakerViewController) WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(tbmvc), objc.RegisterName("setShowExistingMatches:"), showExistingMatches)
+	return tbmvc
 }
 
-// WithMatchmakingMode the mode that a multiplayer game uses to find players.
-func (x *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *TurnBasedMatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
-	return x
+// WithMatchmakingMode sets the mode that a multiplayer game uses to find players.
+func (tbmvc *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *TurnBasedMatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(tbmvc), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
+	return tbmvc
 }
 
 // ShowExistingMatches wraps the corresponding Objective-C method.
-func (x *TurnBasedMatchmakerViewController) ShowExistingMatches() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showExistingMatches"))
+func (tbmvc *TurnBasedMatchmakerViewController) ShowExistingMatches() bool {
+	_r := objc.Send[bool](objref.IDOf(tbmvc), objc.RegisterName("showExistingMatches"))
 	return _r
-}
-
-// SetShowExistingMatches wraps the corresponding Objective-C method.
-func (x *TurnBasedMatchmakerViewController) SetShowExistingMatches(showExistingMatches bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowExistingMatches:"), showExistingMatches)
 }
 
 // MatchmakingMode wraps the corresponding Objective-C method.
-func (x *TurnBasedMatchmakerViewController) MatchmakingMode() MatchmakingMode {
-	_r := objc.Send[MatchmakingMode](objref.IDOf(x), objc.RegisterName("matchmakingMode"))
+func (tbmvc *TurnBasedMatchmakerViewController) MatchmakingMode() MatchmakingMode {
+	_r := objc.Send[MatchmakingMode](objref.IDOf(tbmvc), objc.RegisterName("matchmakingMode"))
 	return _r
 }
-
-// SetMatchmakingMode wraps the corresponding Objective-C method.
-func (x *TurnBasedMatchmakerViewController) SetMatchmakingMode(matchmakingMode MatchmakingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
-}
-
-// TurnBasedMatchmakerViewControllerable is the interface implemented by [TurnBasedMatchmakerViewController], for mocking and DI.
-type TurnBasedMatchmakerViewControllerable interface {
-	obj.Object
-	WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController
-	WithMatchmakingMode(matchmakingMode MatchmakingMode) *TurnBasedMatchmakerViewController
-	ShowExistingMatches() bool
-	SetShowExistingMatches(showExistingMatches bool)
-	MatchmakingMode() MatchmakingMode
-	SetMatchmakingMode(matchmakingMode MatchmakingMode)
-}
-
-var _ TurnBasedMatchmakerViewControllerable = (*TurnBasedMatchmakerViewController)(nil)

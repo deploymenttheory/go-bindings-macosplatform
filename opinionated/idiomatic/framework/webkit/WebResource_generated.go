@@ -46,24 +46,24 @@ func webResourceAdopt(id objc.ID) *WebResource {
 }
 
 // Description returns the object's -description text.
-func (x *WebResource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wr *WebResource) Description() string {
+	return rt.Description(objref.IDOf(wr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebResource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wr *WebResource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebResource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wr *WebResource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebResource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wr *WebResource) String() string {
+	return rt.Description(objref.IDOf(wr))
 }
 
 // NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName initializes and returns a web resource instance.
@@ -73,53 +73,41 @@ func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data obj.Object,
 	return webResourceAdopt(_id)
 }
 
-// Data the data of the resource.
-func (x *WebResource) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the data of the resource.
+func (wr *WebResource) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// URL the URL of the resource.
-func (x *WebResource) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the URL of the resource.
+func (wr *WebResource) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// MIMEType the MIME type of the resource.
-func (x *WebResource) MIMEType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MIMEType"))
+// MIMEType returns the MIME type of the resource.
+func (wr *WebResource) MIMEType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("MIMEType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// TextEncodingName the text encoding name of the resource (can be nil).
-func (x *WebResource) TextEncodingName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textEncodingName"))
+// TextEncodingName returns the text encoding name of the resource (can be nil).
+func (wr *WebResource) TextEncodingName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("textEncodingName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FrameName the frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil).
-func (x *WebResource) FrameName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameName"))
+// FrameName returns the frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil).
+func (wr *WebResource) FrameName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("frameName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// WebResourceable is the interface implemented by [WebResource], for mocking and DI.
-type WebResourceable interface {
-	obj.Object
-	Data() obj.Object
-	URL() obj.Object
-	MIMEType() string
-	TextEncodingName() string
-	FrameName() string
-}
-
-var _ WebResourceable = (*WebResource)(nil)

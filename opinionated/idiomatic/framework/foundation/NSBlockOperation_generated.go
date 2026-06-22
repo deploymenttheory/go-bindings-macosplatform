@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,50 +55,50 @@ func NewBlockOperation() *BlockOperation {
 }
 
 // WithQueuePriority sets the property and returns the receiver so calls can be chained.
-func (x *BlockOperation) WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
-	return x
+func (bo *BlockOperation) WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setQueuePriority:"), queuePriority)
+	return bo
 }
 
 // WithCompletionBlock sets the property and returns the receiver so calls can be chained.
-func (x *BlockOperation) WithCompletionBlock(completionBlock func()) *BlockOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
-	return x
+func (bo *BlockOperation) WithCompletionBlock(completionBlock func()) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
+	return bo
 }
 
 // WithThreadPriority sets the property and returns the receiver so calls can be chained.
-func (x *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
-	return x
+func (bo *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setThreadPriority:"), threadPriority)
+	return bo
 }
 
 // WithQualityOfService sets the property and returns the receiver so calls can be chained.
-func (x *BlockOperation) WithQualityOfService(qualityOfService QualityOfService) *BlockOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
-	return x
+func (bo *BlockOperation) WithQualityOfService(qualityOfService QualityOfService) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setQualityOfService:"), qualityOfService)
+	return bo
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *BlockOperation) WithName(name StringProvider) *BlockOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+func (bo *BlockOperation) WithName(name StringProvider) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setName:"), objref.IDOf(name))
+	return bo
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *BlockOperation) WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (bo *BlockOperation) WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return bo
 }
 
 // AddExecutionBlock wraps the corresponding Objective-C method.
 //
 // AddExecutionBlock blocks until the operation completes or ctx is cancelled.
-func (x *BlockOperation) AddExecutionBlock(ctx context.Context) error {
+func (bo *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addExecutionBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("addExecutionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -105,19 +106,5 @@ func (x *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
-
-// BlockOperationable is the interface implemented by [BlockOperation], for mocking and DI.
-type BlockOperationable interface {
-	obj.Object
-	WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation
-	WithCompletionBlock(completionBlock func()) *BlockOperation
-	WithThreadPriority(threadPriority float64) *BlockOperation
-	WithQualityOfService(qualityOfService QualityOfService) *BlockOperation
-	WithName(name StringProvider) *BlockOperation
-	WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation
-	AddExecutionBlock(ctx context.Context) error
-}
-
-var _ BlockOperationable = (*BlockOperation)(nil)
 
 var _ OperationProvider = (*BlockOperation)(nil)

@@ -46,24 +46,24 @@ func mapCameraAdopt(id objc.ID) *MapCamera {
 }
 
 // Description returns the object's -description text.
-func (x *MapCamera) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MapCamera) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapCamera) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MapCamera) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapCamera) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MapCamera) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapCamera) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MapCamera) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // NewMapCamera creates a new MapCamera.
@@ -72,29 +72,14 @@ func NewMapCamera() *MapCamera {
 	return mapCameraAdopt(_id)
 }
 
-// WithPitch the viewing angle of the camera, in degrees.
-func (x *MapCamera) WithPitch(pitch float64) *MapCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
-	return x
+// WithPitch sets the viewing angle of the camera, in degrees.
+func (mc *MapCamera) WithPitch(pitch float64) *MapCamera {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setPitch:"), pitch)
+	return mc
 }
 
 // Pitch wraps the corresponding Objective-C method.
-func (x *MapCamera) Pitch() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
+func (mc *MapCamera) Pitch() float64 {
+	_r := objc.Send[float64](objref.IDOf(mc), objc.RegisterName("pitch"))
 	return _r
 }
-
-// SetPitch wraps the corresponding Objective-C method.
-func (x *MapCamera) SetPitch(pitch float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
-}
-
-// MapCameraable is the interface implemented by [MapCamera], for mocking and DI.
-type MapCameraable interface {
-	obj.Object
-	WithPitch(pitch float64) *MapCamera
-	Pitch() float64
-	SetPitch(pitch float64)
-}
-
-var _ MapCameraable = (*MapCamera)(nil)

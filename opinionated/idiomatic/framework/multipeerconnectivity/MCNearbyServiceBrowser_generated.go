@@ -46,24 +46,24 @@ func nearbyServiceBrowserAdopt(id objc.ID) *NearbyServiceBrowser {
 }
 
 // Description returns the object's -description text.
-func (x *NearbyServiceBrowser) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nsb *NearbyServiceBrowser) Description() string {
+	return rt.Description(objref.IDOf(nsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NearbyServiceBrowser) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nsb *NearbyServiceBrowser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NearbyServiceBrowser) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nsb *NearbyServiceBrowser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NearbyServiceBrowser) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nsb *NearbyServiceBrowser) String() string {
+	return rt.Description(objref.IDOf(nsb))
 }
 
 // NewNearbyServiceBrowserWithPeerServiceType initializes the nearby service browser object.
@@ -74,43 +74,31 @@ func NewNearbyServiceBrowserWithPeerServiceType(myPeerID *PeerID, serviceType st
 }
 
 // StartBrowsingForPeers starts browsing for peers.
-func (x *NearbyServiceBrowser) StartBrowsingForPeers() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startBrowsingForPeers"))
+func (nsb *NearbyServiceBrowser) StartBrowsingForPeers() {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("startBrowsingForPeers"))
 }
 
 // StopBrowsingForPeers stops browsing for peers.
-func (x *NearbyServiceBrowser) StopBrowsingForPeers() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopBrowsingForPeers"))
+func (nsb *NearbyServiceBrowser) StopBrowsingForPeers() {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("stopBrowsingForPeers"))
 }
 
 // InvitePeerToSessionWithContextTimeout invites a discovered peer to join a Multipeer Connectivity session.
-func (x *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ obj.Object, timeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invitePeer:toSession:withContext:timeout:"), objref.IDOf(peerID), objref.IDOf(session), objref.IDOf(context_), timeout)
+func (nsb *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ obj.Object, timeout float64) {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("invitePeer:toSession:withContext:timeout:"), objref.IDOf(peerID), objref.IDOf(session), objref.IDOf(context_), timeout)
 }
 
 // MyPeerID wraps the corresponding Objective-C method.
-func (x *NearbyServiceBrowser) MyPeerID() *PeerID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("myPeerID"))
+func (nsb *NearbyServiceBrowser) MyPeerID() *PeerID {
+	_r := objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
 // ServiceType wraps the corresponding Objective-C method.
-func (x *NearbyServiceBrowser) ServiceType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
+func (nsb *NearbyServiceBrowser) ServiceType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("serviceType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// NearbyServiceBrowserable is the interface implemented by [NearbyServiceBrowser], for mocking and DI.
-type NearbyServiceBrowserable interface {
-	obj.Object
-	StartBrowsingForPeers()
-	StopBrowsingForPeers()
-	InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ obj.Object, timeout float64)
-	MyPeerID() *PeerID
-	ServiceType() string
-}
-
-var _ NearbyServiceBrowserable = (*NearbyServiceBrowser)(nil)

@@ -46,24 +46,24 @@ func nowPlayingInfoLanguageOptionGroupAdopt(id objc.ID) *NowPlayingInfoLanguageO
 }
 
 // Description returns the object's -description text.
-func (x *NowPlayingInfoLanguageOptionGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (npilog *NowPlayingInfoLanguageOptionGroup) Description() string {
+	return rt.Description(objref.IDOf(npilog))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NowPlayingInfoLanguageOptionGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (npilog *NowPlayingInfoLanguageOptionGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(npilog), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NowPlayingInfoLanguageOptionGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (npilog *NowPlayingInfoLanguageOptionGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(npilog), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NowPlayingInfoLanguageOptionGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (npilog *NowPlayingInfoLanguageOptionGroup) String() string {
+	return rt.Description(objref.IDOf(npilog))
 }
 
 // NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection creates a new language option group with the supplied language options.
@@ -73,32 +73,22 @@ func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptio
 	return nowPlayingInfoLanguageOptionGroupAdopt(_id)
 }
 
-// LanguageOptions the available language options within this group.
+// LanguageOptions returns the available language options within this group.
 //
 // LanguageOptions returns the collection as a Go slice.
-func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoLanguageOption {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageOptions"))
+func (npilog *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoLanguageOption {
+	_arr := objc.Send[objc.ID](objref.IDOf(npilog), objc.RegisterName("languageOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NowPlayingInfoLanguageOption { return NowPlayingInfoLanguageOptionFromID(_id) })
 }
 
-// DefaultLanguageOption the default language option, if any, within this group.
-func (x *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingInfoLanguageOption {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultLanguageOption"))
+// DefaultLanguageOption returns the default language option, if any, within this group.
+func (npilog *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingInfoLanguageOption {
+	_r := objc.Send[objc.ID](objref.IDOf(npilog), objc.RegisterName("defaultLanguageOption"))
 	return NowPlayingInfoLanguageOptionFromID(_r)
 }
 
-// AllowEmptySelection indicates whether a selection in this group is required at all times.
-func (x *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowEmptySelection"))
+// AllowEmptySelection reports whether a selection in this group is required at all times.
+func (npilog *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
+	_r := objc.Send[bool](objref.IDOf(npilog), objc.RegisterName("allowEmptySelection"))
 	return _r
 }
-
-// NowPlayingInfoLanguageOptionGroupable is the interface implemented by [NowPlayingInfoLanguageOptionGroup], for mocking and DI.
-type NowPlayingInfoLanguageOptionGroupable interface {
-	obj.Object
-	LanguageOptions() []*NowPlayingInfoLanguageOption
-	DefaultLanguageOption() *NowPlayingInfoLanguageOption
-	AllowEmptySelection() bool
-}
-
-var _ NowPlayingInfoLanguageOptionGroupable = (*NowPlayingInfoLanguageOptionGroup)(nil)

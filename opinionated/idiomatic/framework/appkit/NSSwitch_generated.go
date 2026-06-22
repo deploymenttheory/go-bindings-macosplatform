@@ -54,540 +54,453 @@ func NewSwitch() *Switch {
 	return switchAdopt(_id)
 }
 
-// WithState the current position of the switch.
-func (x *Switch) WithState(state int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the current position of the switch.
+func (s *Switch) WithState(state int) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setState:"), state)
+	return s
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *Switch) WithTarget(target obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (s *Switch) WithTarget(target obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return s
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *Switch) WithTag(tag int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (s *Switch) WithTag(tag int) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTag:"), tag)
+	return s
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *Switch) WithIgnoresMultiClick(ignoresMultiClick bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (s *Switch) WithIgnoresMultiClick(ignoresMultiClick bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return s
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *Switch) WithContinuous(continuous bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (s *Switch) WithContinuous(continuous bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContinuous:"), continuous)
+	return s
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *Switch) WithEnabled(enabled bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (s *Switch) WithEnabled(enabled bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEnabled:"), enabled)
+	return s
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *Switch) WithRefusesFirstResponder(refusesFirstResponder bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (s *Switch) WithRefusesFirstResponder(refusesFirstResponder bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return s
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *Switch) WithHighlighted(highlighted bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (s *Switch) WithHighlighted(highlighted bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHighlighted:"), highlighted)
+	return s
 }
 
-// WithControlSize the size of the control.
-func (x *Switch) WithControlSize(controlSize ControlSize) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (s *Switch) WithControlSize(controlSize ControlSize) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlSize:"), controlSize)
+	return s
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *Switch) WithFormatter(formatter obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (s *Switch) WithFormatter(formatter obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return s
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *Switch) WithObjectValue(objectValue obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (s *Switch) WithObjectValue(objectValue obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return s
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *Switch) WithStringValue(stringValue string) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (s *Switch) WithStringValue(stringValue string) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return s
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *Switch) WithAttributedStringValue(attributedStringValue obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (s *Switch) WithAttributedStringValue(attributedStringValue obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return s
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *Switch) WithIntValue(intValue int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (s *Switch) WithIntValue(intValue int) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntValue:"), intValue)
+	return s
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *Switch) WithIntegerValue(integerValue int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (s *Switch) WithIntegerValue(integerValue int) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntegerValue:"), integerValue)
+	return s
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *Switch) WithFloatValue(floatValue float32) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (s *Switch) WithFloatValue(floatValue float32) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:"), floatValue)
+	return s
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *Switch) WithDoubleValue(doubleValue float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (s *Switch) WithDoubleValue(doubleValue float64) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return s
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *Switch) WithFont(font *Font) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (s *Switch) WithFont(font *Font) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return s
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *Switch) WithUsesSingleLineMode(usesSingleLineMode bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (s *Switch) WithUsesSingleLineMode(usesSingleLineMode bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return s
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *Switch) WithLineBreakMode(lineBreakMode LineBreakMode) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (s *Switch) WithLineBreakMode(lineBreakMode LineBreakMode) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return s
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *Switch) WithAlignment(alignment TextAlignment) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (s *Switch) WithAlignment(alignment TextAlignment) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlignment:"), alignment)
+	return s
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *Switch) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (s *Switch) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return s
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *Switch) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (s *Switch) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return s
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithCell(cell CellProvider) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (s *Switch) WithCell(cell CellProvider) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return s
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithSubviews(items ...ViewProvider) *Switch {
+func (s *Switch) WithSubviews(items ...ViewProvider) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
+	return s
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithHidden(hidden bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (s *Switch) WithHidden(hidden bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	return s
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (s *Switch) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return s
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithAutoresizesSubviews(autoresizesSubviews bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (s *Switch) WithAutoresizesSubviews(autoresizesSubviews bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return s
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (s *Switch) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return s
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *Switch) WithFrame(frame corefoundation.CGRect) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (s *Switch) WithFrame(frame corefoundation.CGRect) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrame:"), frame)
+	return s
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithFrameRotation(frameRotation float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (s *Switch) WithFrameRotation(frameRotation float64) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return s
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithFrameCenterRotation(frameCenterRotation float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (s *Switch) WithFrameCenterRotation(frameCenterRotation float64) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return s
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithBoundsRotation(boundsRotation float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (s *Switch) WithBoundsRotation(boundsRotation float64) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return s
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *Switch) WithBounds(bounds corefoundation.CGRect) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (s *Switch) WithBounds(bounds corefoundation.CGRect) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBounds:"), bounds)
+	return s
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithCanDrawConcurrently(canDrawConcurrently bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (s *Switch) WithCanDrawConcurrently(canDrawConcurrently bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return s
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *Switch) WithNeedsDisplay(needsDisplay bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (s *Switch) WithNeedsDisplay(needsDisplay bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return s
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (s *Switch) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return s
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithWantsRestingTouches(wantsRestingTouches bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (s *Switch) WithWantsRestingTouches(wantsRestingTouches bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return s
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (s *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return s
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (s *Switch) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return s
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithWantsLayer(wantsLayer bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (s *Switch) WithWantsLayer(wantsLayer bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return s
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithLayer(layer obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (s *Switch) WithLayer(layer obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return s
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (s *Switch) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return s
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithNeedsLayout(needsLayout bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (s *Switch) WithNeedsLayout(needsLayout bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return s
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithAlphaValue(alphaValue float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (s *Switch) WithAlphaValue(alphaValue float64) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return s
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (s *Switch) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return s
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithBackgroundFilters(items ...obj.Object) *Switch {
+func (s *Switch) WithBackgroundFilters(items ...obj.Object) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return s
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithCompositingFilter(compositingFilter obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (s *Switch) WithCompositingFilter(compositingFilter obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return s
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithContentFilters(items ...obj.Object) *Switch {
+func (s *Switch) WithContentFilters(items ...obj.Object) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
+	return s
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithShadow(shadow *Shadow) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (s *Switch) WithShadow(shadow *Shadow) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return s
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithClipsToBounds(clipsToBounds bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (s *Switch) WithClipsToBounds(clipsToBounds bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return s
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (s *Switch) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return s
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithToolTip(toolTip string) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (s *Switch) WithToolTip(toolTip string) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return s
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (s *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return s
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (s *Switch) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return s
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithNextKeyView(nextKeyView ViewProvider) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (s *Switch) WithNextKeyView(nextKeyView ViewProvider) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return s
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithFocusRingType(focusRingType FocusRingType) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (s *Switch) WithFocusRingType(focusRingType FocusRingType) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return s
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch {
+func (s *Switch) WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return s
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (s *Switch) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return s
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (s *Switch) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return s
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (s *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return s
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (s *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return s
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (s *Switch) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return s
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (s *Switch) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return s
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (s *Switch) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return s
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (s *Switch) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return s
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (s *Switch) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return s
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (s *Switch) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return s
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (s *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return s
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (s *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return s
 }
 
-// WithMenu returns the responder’s menu.
-func (x *Switch) WithMenu(menu *Menu) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (s *Switch) WithMenu(menu *Menu) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return s
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *Switch) WithUserActivity(userActivity obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (s *Switch) WithUserActivity(userActivity obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return s
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (s *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return s
 }
 
 // State wraps the corresponding Objective-C method.
-func (x *Switch) State() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("state"))
+func (s *Switch) State() int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("state"))
 	return _r
 }
-
-// SetState wraps the corresponding Objective-C method.
-func (x *Switch) SetState(state int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-}
-
-// Switchable is the interface implemented by [Switch], for mocking and DI.
-type Switchable interface {
-	obj.Object
-	WithState(state int) *Switch
-	WithTarget(target obj.Object) *Switch
-	WithTag(tag int) *Switch
-	WithIgnoresMultiClick(ignoresMultiClick bool) *Switch
-	WithContinuous(continuous bool) *Switch
-	WithEnabled(enabled bool) *Switch
-	WithRefusesFirstResponder(refusesFirstResponder bool) *Switch
-	WithHighlighted(highlighted bool) *Switch
-	WithControlSize(controlSize ControlSize) *Switch
-	WithFormatter(formatter obj.Object) *Switch
-	WithObjectValue(objectValue obj.Object) *Switch
-	WithStringValue(stringValue string) *Switch
-	WithAttributedStringValue(attributedStringValue obj.Object) *Switch
-	WithIntValue(intValue int) *Switch
-	WithIntegerValue(integerValue int) *Switch
-	WithFloatValue(floatValue float32) *Switch
-	WithDoubleValue(doubleValue float64) *Switch
-	WithFont(font *Font) *Switch
-	WithUsesSingleLineMode(usesSingleLineMode bool) *Switch
-	WithLineBreakMode(lineBreakMode LineBreakMode) *Switch
-	WithAlignment(alignment TextAlignment) *Switch
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Switch
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch
-	WithCell(cell CellProvider) *Switch
-	WithSubviews(items ...ViewProvider) *Switch
-	WithHidden(hidden bool) *Switch
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch
-	WithAutoresizesSubviews(autoresizesSubviews bool) *Switch
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Switch
-	WithFrame(frame corefoundation.CGRect) *Switch
-	WithFrameRotation(frameRotation float64) *Switch
-	WithFrameCenterRotation(frameCenterRotation float64) *Switch
-	WithBoundsRotation(boundsRotation float64) *Switch
-	WithBounds(bounds corefoundation.CGRect) *Switch
-	WithCanDrawConcurrently(canDrawConcurrently bool) *Switch
-	WithNeedsDisplay(needsDisplay bool) *Switch
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch
-	WithWantsRestingTouches(wantsRestingTouches bool) *Switch
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Switch
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Switch
-	WithWantsLayer(wantsLayer bool) *Switch
-	WithLayer(layer obj.Object) *Switch
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch
-	WithNeedsLayout(needsLayout bool) *Switch
-	WithAlphaValue(alphaValue float64) *Switch
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch
-	WithBackgroundFilters(items ...obj.Object) *Switch
-	WithCompositingFilter(compositingFilter obj.Object) *Switch
-	WithContentFilters(items ...obj.Object) *Switch
-	WithShadow(shadow *Shadow) *Switch
-	WithClipsToBounds(clipsToBounds bool) *Switch
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch
-	WithToolTip(toolTip string) *Switch
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Switch
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch
-	WithNextKeyView(nextKeyView ViewProvider) *Switch
-	WithFocusRingType(focusRingType FocusRingType) *Switch
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Switch
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch
-	WithNextResponder(nextResponder ResponderProvider) *Switch
-	WithMenu(menu *Menu) *Switch
-	WithUserActivity(userActivity obj.Object) *Switch
-	WithTouchBar(touchBar *TouchBar) *Switch
-	State() int
-	SetState(state int)
-}
-
-var _ Switchable = (*Switch)(nil)
 
 var _ ControlProvider = (*Switch)(nil)
 

@@ -46,24 +46,24 @@ func goalAdopt(id objc.ID) *Goal {
 }
 
 // Description returns the object's -description text.
-func (x *Goal) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Goal) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Goal) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Goal) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Goal) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Goal) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Goal) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Goal) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // NewGoal creates a new Goal.
@@ -71,10 +71,3 @@ func NewGoal() *Goal {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("new"))
 	return goalAdopt(_id)
 }
-
-// Goalable is the interface implemented by [Goal], for mocking and DI.
-type Goalable interface {
-	obj.Object
-}
-
-var _ Goalable = (*Goal)(nil)

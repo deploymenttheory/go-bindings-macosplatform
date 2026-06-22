@@ -46,24 +46,24 @@ func vSAccountProviderResponseAdopt(id objc.ID) *VSAccountProviderResponse {
 }
 
 // Description returns the object's -description text.
-func (x *VSAccountProviderResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vapr *VSAccountProviderResponse) Description() string {
+	return rt.Description(objref.IDOf(vapr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSAccountProviderResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vapr *VSAccountProviderResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vapr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSAccountProviderResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vapr *VSAccountProviderResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vapr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSAccountProviderResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vapr *VSAccountProviderResponse) String() string {
+	return rt.Description(objref.IDOf(vapr))
 }
 
 // NewVSAccountProviderResponse creates a new VSAccountProviderResponse.
@@ -72,36 +72,26 @@ func NewVSAccountProviderResponse() *VSAccountProviderResponse {
 	return vSAccountProviderResponseAdopt(_id)
 }
 
-// AuthenticationScheme identifies the protocol used in constructing this response.
-func (x *VSAccountProviderResponse) AuthenticationScheme() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationScheme"))
+// AuthenticationScheme returns identifies the protocol used in constructing this response.
+func (vapr *VSAccountProviderResponse) AuthenticationScheme() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vapr), objc.RegisterName("authenticationScheme"))
 	return obj.Wrap(_r)
 }
 
-// Status the status code for this response. May be nil if there is no meaningful value for this type of response.
-func (x *VSAccountProviderResponse) Status() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the status code for this response. May be nil if there is no meaningful value for this type of response.
+func (vapr *VSAccountProviderResponse) Status() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vapr), objc.RegisterName("status"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Body the raw response from the provider. May be nil if the response contained security-sensitive information.
-func (x *VSAccountProviderResponse) Body() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
+// Body returns the raw response from the provider. May be nil if the response contained security-sensitive information.
+func (vapr *VSAccountProviderResponse) Body() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vapr), objc.RegisterName("body"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// VSAccountProviderResponseable is the interface implemented by [VSAccountProviderResponse], for mocking and DI.
-type VSAccountProviderResponseable interface {
-	obj.Object
-	AuthenticationScheme() obj.Object
-	Status() string
-	Body() string
-}
-
-var _ VSAccountProviderResponseable = (*VSAccountProviderResponse)(nil)

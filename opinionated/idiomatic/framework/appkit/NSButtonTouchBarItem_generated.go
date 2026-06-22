@@ -53,133 +53,78 @@ func NewButtonTouchBarItem() *ButtonTouchBarItem {
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *ButtonTouchBarItem) WithTitle(title string) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (btbi *ButtonTouchBarItem) WithTitle(title string) *ButtonTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return btbi
 }
 
 // WithImage sets the property and returns the receiver so calls can be chained.
-func (x *ButtonTouchBarItem) WithImage(image *Image) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+func (btbi *ButtonTouchBarItem) WithImage(image *Image) *ButtonTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return btbi
 }
 
 // WithBezelColor sets the property and returns the receiver so calls can be chained.
-func (x *ButtonTouchBarItem) WithBezelColor(bezelColor *Color) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
-	return x
+func (btbi *ButtonTouchBarItem) WithBezelColor(bezelColor *Color) *ButtonTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
+	return btbi
 }
 
 // WithTarget sets the property and returns the receiver so calls can be chained.
-func (x *ButtonTouchBarItem) WithTarget(target obj.Object) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+func (btbi *ButtonTouchBarItem) WithTarget(target obj.Object) *ButtonTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return btbi
 }
 
 // WithEnabled sets the property and returns the receiver so calls can be chained.
-func (x *ButtonTouchBarItem) WithEnabled(enabled bool) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+func (btbi *ButtonTouchBarItem) WithEnabled(enabled bool) *ButtonTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setEnabled:"), enabled)
+	return btbi
 }
 
-// WithCustomizationLabel the localized string labeling this item during user customization. The default value is empty string.
-func (x *ButtonTouchBarItem) WithCustomizationLabel(customizationLabel string) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-	return x
+// WithCustomizationLabel sets the localized string labeling this item during user customization. The default value is empty string.
+func (btbi *ButtonTouchBarItem) WithCustomizationLabel(customizationLabel string) *ButtonTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	return btbi
 }
 
-// WithVisibilityPriority determines which items are shown in a bar when space is limited.
-func (x *ButtonTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-	return x
+// WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
+func (btbi *ButtonTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ButtonTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return btbi
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (btbi *ButtonTouchBarItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
 // Image wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (btbi *ButtonTouchBarItem) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// SetImage wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) SetImage(image *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-}
-
 // BezelColor wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) BezelColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bezelColor"))
+func (btbi *ButtonTouchBarItem) BezelColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("bezelColor"))
 	return ColorFromID(_r)
 }
 
-// SetBezelColor wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) SetBezelColor(bezelColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
-}
-
 // Target wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (btbi *ButtonTouchBarItem) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (btbi *ButtonTouchBarItem) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(btbi), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// SetCustomizationLabel wraps the corresponding Objective-C method.
-func (x *ButtonTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-}
-
-// ButtonTouchBarItemable is the interface implemented by [ButtonTouchBarItem], for mocking and DI.
-type ButtonTouchBarItemable interface {
-	obj.Object
-	WithTitle(title string) *ButtonTouchBarItem
-	WithImage(image *Image) *ButtonTouchBarItem
-	WithBezelColor(bezelColor *Color) *ButtonTouchBarItem
-	WithTarget(target obj.Object) *ButtonTouchBarItem
-	WithEnabled(enabled bool) *ButtonTouchBarItem
-	WithCustomizationLabel(customizationLabel string) *ButtonTouchBarItem
-	WithVisibilityPriority(visibilityPriority float32) *ButtonTouchBarItem
-	Title() string
-	SetTitle(title string)
-	Image() *Image
-	SetImage(image *Image)
-	BezelColor() *Color
-	SetBezelColor(bezelColor *Color)
-	Target() obj.Object
-	SetTarget(target obj.Object)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	SetCustomizationLabel(customizationLabel string)
-}
-
-var _ ButtonTouchBarItemable = (*ButtonTouchBarItem)(nil)
 
 var _ TouchBarItemProvider = (*ButtonTouchBarItem)(nil)

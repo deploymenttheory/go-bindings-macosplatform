@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewShuffledDistribution() *ShuffledDistribution {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKShuffledDistribution")), objc.RegisterName("new"))
 	return shuffledDistributionAdopt(_id)
 }
-
-// ShuffledDistributionable is the interface implemented by [ShuffledDistribution], for mocking and DI.
-type ShuffledDistributionable interface {
-	obj.Object
-}
-
-var _ ShuffledDistributionable = (*ShuffledDistribution)(nil)
 
 var _ RandomDistributionProvider = (*ShuffledDistribution)(nil)

@@ -46,24 +46,24 @@ func imageAdopt(id objc.ID) *Image {
 }
 
 // Description returns the object's -description text.
-func (x *Image) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Image) Description() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Image) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (i *Image) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Image) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (i *Image) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Image) String() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Image) String() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // NewImage creates a new Image.
@@ -71,10 +71,3 @@ func NewImage() *Image {
 	_id := objc.Send[objc.ID](objc.ID(_class("INImage")), objc.RegisterName("new"))
 	return imageAdopt(_id)
 }
-
-// Imageable is the interface implemented by [Image], for mocking and DI.
-type Imageable interface {
-	obj.Object
-}
-
-var _ Imageable = (*Image)(nil)

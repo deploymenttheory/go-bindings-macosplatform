@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,58 +52,34 @@ func NewImageHistogram() *ImageHistogram {
 	return imageHistogramAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data.
-func (x *ImageHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data.
+func (ih *ImageHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram {
+	objc.Send[objc.ID](objref.IDOf(ih), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return ih
 }
 
-// WithZeroHistogram determines whether to zero-initialize the histogram results.
-func (x *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
-	return x
+// WithZeroHistogram sets determines whether to zero-initialize the histogram results.
+func (ih *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
+	objc.Send[objc.ID](objref.IDOf(ih), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
+	return ih
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageHistogram) WithLabel(label string) *ImageHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ih *ImageHistogram) WithLabel(label string) *ImageHistogram {
+	objc.Send[objc.ID](objref.IDOf(ih), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ih
 }
 
-// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-func (x *ImageHistogram) ClipRectSource() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+// ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+func (ih *ImageHistogram) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(ih), objc.RegisterName("clipRectSource"))
 	return _r
 }
 
-// SetClipRectSource wraps the corresponding Objective-C method.
-func (x *ImageHistogram) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-}
-
-// ZeroHistogram zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
-func (x *ImageHistogram) ZeroHistogram() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("zeroHistogram"))
+// ZeroHistogram reports whether zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: true.
+func (ih *ImageHistogram) ZeroHistogram() bool {
+	_r := objc.Send[bool](objref.IDOf(ih), objc.RegisterName("zeroHistogram"))
 	return _r
 }
-
-// SetZeroHistogram wraps the corresponding Objective-C method.
-func (x *ImageHistogram) SetZeroHistogram(zeroHistogram bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
-}
-
-// ImageHistogramable is the interface implemented by [ImageHistogram], for mocking and DI.
-type ImageHistogramable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram
-	WithZeroHistogram(zeroHistogram bool) *ImageHistogram
-	WithLabel(label string) *ImageHistogram
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-	ZeroHistogram() bool
-	SetZeroHistogram(zeroHistogram bool)
-}
-
-var _ ImageHistogramable = (*ImageHistogram)(nil)
 
 var _ KernelProvider = (*ImageHistogram)(nil)

@@ -5,13 +5,14 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // GeoJSONDecoder is an idiomatic wrapper over the Objective-C class MKGeoJSONDecoder.
@@ -48,24 +49,24 @@ func geoJSONDecoderAdopt(id objc.ID) *GeoJSONDecoder {
 }
 
 // Description returns the object's -description text.
-func (x *GeoJSONDecoder) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gjd *GeoJSONDecoder) Description() string {
+	return rt.Description(objref.IDOf(gjd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeoJSONDecoder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gjd *GeoJSONDecoder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gjd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeoJSONDecoder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gjd *GeoJSONDecoder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gjd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GeoJSONDecoder) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gjd *GeoJSONDecoder) String() string {
+	return rt.Description(objref.IDOf(gjd))
 }
 
 // NewGeoJSONDecoder creates a new GeoJSONDecoder.
@@ -75,19 +76,11 @@ func NewGeoJSONDecoder() *GeoJSONDecoder {
 }
 
 // GeoJSONObjectsWithDataError decodes the provided data into native MapKit types that a map can display.
-func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data obj.Object) (result []obj.Object, err error) {
+func (gjd *GeoJSONDecoder) GeoJSONObjectsWithDataError(data obj.Object) (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geoJSONObjectsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(gjd), objc.RegisterName("geoJSONObjectsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
-
-// GeoJSONDecoderable is the interface implemented by [GeoJSONDecoder], for mocking and DI.
-type GeoJSONDecoderable interface {
-	obj.Object
-	GeoJSONObjectsWithDataError(data obj.Object) (result []obj.Object, err error)
-}
-
-var _ GeoJSONDecoderable = (*GeoJSONDecoder)(nil)

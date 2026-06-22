@@ -51,59 +51,45 @@ func NewMTRTestClusterClusterTestFabricScoped() *MTRTestClusterClusterTestFabric
 }
 
 // WithFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
-	return x
+func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
+	return mtcctfs
 }
 
 // WithOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScoped) WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
-	return x
+func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
+	return mtcctfs
 }
 
 // WithNullableFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScoped) WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
-	return x
+func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
+	return mtcctfs
 }
 
 // WithNullableOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScoped) WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
-	return x
+func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
+	return mtcctfs
 }
 
 // WithFabricSensitiveCharString sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveCharString(fabricSensitiveCharString string) *MTRTestClusterClusterTestFabricScoped {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveCharString:"), purego.NSString(fabricSensitiveCharString))
-	return x
+func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveCharString(fabricSensitiveCharString string) *MTRTestClusterClusterTestFabricScoped {
+	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveCharString:"), purego.NSString(fabricSensitiveCharString))
+	return mtcctfs
 }
 
 // WithFabricSensitiveStruct sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestFabricScoped {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
-	return x
+func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestFabricScoped {
+	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
+	return mtcctfs
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScoped) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScoped {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mtcctfs
 }
-
-// MTRTestClusterClusterTestFabricScopedable is the interface implemented by [MTRTestClusterClusterTestFabricScoped], for mocking and DI.
-type MTRTestClusterClusterTestFabricScopedable interface {
-	obj.Object
-	WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped
-	WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped
-	WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped
-	WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped
-	WithFabricSensitiveCharString(fabricSensitiveCharString string) *MTRTestClusterClusterTestFabricScoped
-	WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestFabricScoped
-	WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScoped
-}
-
-var _ MTRTestClusterClusterTestFabricScopedable = (*MTRTestClusterClusterTestFabricScoped)(nil)
 
 var _ MTRUnitTestingClusterTestFabricScopedProvider = (*MTRTestClusterClusterTestFabricScoped)(nil)

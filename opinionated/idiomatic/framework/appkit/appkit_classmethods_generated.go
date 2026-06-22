@@ -6,6 +6,8 @@ package appkit
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -14,7 +16,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // SharedTypesetter wraps the corresponding Objective-C method.
@@ -1063,37 +1064,37 @@ func SystemCyanColor() *Color {
 	return ColorFromID(_r)
 }
 
-// SystemFillColor a color appropriate for filling thin shapes, such as the track of a slider.
+// SystemFillColor returns a color appropriate for filling thin shapes, such as the track of a slider.
 func SystemFillColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemFillColor"))
 	return ColorFromID(_r)
 }
 
-// SecondarySystemFillColor a color appropriate for filling small-size shapes, such as the backing of a progress indicator.
+// SecondarySystemFillColor returns a color appropriate for filling small-size shapes, such as the backing of a progress indicator.
 func SecondarySystemFillColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("secondarySystemFillColor"))
 	return ColorFromID(_r)
 }
 
-// TertiarySystemFillColor a color appropriate for filling medium-size shapes, such as the backing of a switch.
+// TertiarySystemFillColor returns a color appropriate for filling medium-size shapes, such as the backing of a switch.
 func TertiarySystemFillColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("tertiarySystemFillColor"))
 	return ColorFromID(_r)
 }
 
-// QuaternarySystemFillColor a color appropriate for filling large areas, such as a group box or tab pane.
+// QuaternarySystemFillColor returns a color appropriate for filling large areas, such as a group box or tab pane.
 func QuaternarySystemFillColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("quaternarySystemFillColor"))
 	return ColorFromID(_r)
 }
 
-// QuinarySystemFillColor a color appropriate for filling large areas that require subtle emphasis, such as content of a form.
+// QuinarySystemFillColor returns a color appropriate for filling large areas that require subtle emphasis, such as content of a form.
 func QuinarySystemFillColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("quinarySystemFillColor"))
 	return ColorFromID(_r)
 }
 
-// ControlAccentColor a dynamic color that reflects the user's current preferred accent color. This color automatically updates when the accent color preference changes. Do not make assumptions about the color space of this color, which may change across releases.
+// ControlAccentColor returns a dynamic color that reflects the user's current preferred accent color. This color automatically updates when the accent color preference changes. Do not make assumptions about the color space of this color, which may change across releases.
 func ControlAccentColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlAccentColor"))
 	return ColorFromID(_r)
@@ -1128,61 +1129,61 @@ func SetIgnoresAlpha(ignoresAlpha bool) {
 	objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("setIgnoresAlpha:"), ignoresAlpha)
 }
 
-// ControlHighlightColor historically used as the inner border highlight color for beveled buttons. No longer used.
+// ControlHighlightColor returns historically used as the inner border highlight color for beveled buttons. No longer used.
 func ControlHighlightColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlHighlightColor"))
 	return ColorFromID(_r)
 }
 
-// ControlLightHighlightColor historically used as the outer border highlight color for beveled buttons. No longer used.
+// ControlLightHighlightColor returns historically used as the outer border highlight color for beveled buttons. No longer used.
 func ControlLightHighlightColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlLightHighlightColor"))
 	return ColorFromID(_r)
 }
 
-// ControlShadowColor historically used as the inner border shadow color for beveled buttons. No longer used.
+// ControlShadowColor returns historically used as the inner border shadow color for beveled buttons. No longer used.
 func ControlShadowColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlShadowColor"))
 	return ColorFromID(_r)
 }
 
-// ControlDarkShadowColor historically used as the outer border shadow color for beveled buttons. No longer used.
+// ControlDarkShadowColor returns historically used as the outer border shadow color for beveled buttons. No longer used.
 func ControlDarkShadowColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlDarkShadowColor"))
 	return ColorFromID(_r)
 }
 
-// ScrollBarColor historically used as the color of scroll bars. No longer used.
+// ScrollBarColor returns historically used as the color of scroll bars. No longer used.
 func ScrollBarColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("scrollBarColor"))
 	return ColorFromID(_r)
 }
 
-// KnobColor historically used as the color of scroll bar knobs. No longer used.
+// KnobColor returns historically used as the color of scroll bar knobs. No longer used.
 func KnobColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("knobColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedKnobColor historically used as the color of scroll bar knobs being dragged. No longer used.
+// SelectedKnobColor returns historically used as the color of scroll bar knobs being dragged. No longer used.
 func SelectedKnobColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedKnobColor"))
 	return ColorFromID(_r)
 }
 
-// WindowFrameColor historically used as the color of the window chrome, which is no longer able to be represented by a color. No longer used.
+// WindowFrameColor returns historically used as the color of the window chrome, which is no longer able to be represented by a color. No longer used.
 func WindowFrameColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("windowFrameColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedMenuItemColor historically used as the color of selected menu items, which is no longer a color but a tinted blur effect. No longer used.
+// SelectedMenuItemColor returns historically used as the color of selected menu items, which is no longer a color but a tinted blur effect. No longer used.
 func SelectedMenuItemColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedMenuItemColor"))
 	return ColorFromID(_r)
 }
 
-// HeaderColor historically used as the color of table headers, which is no longer a color but a tinted blur effect.
+// HeaderColor returns historically used as the color of table headers, which is no longer a color but a tinted blur effect.
 func HeaderColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("headerColor"))
 	return ColorFromID(_r)
@@ -1484,7 +1485,7 @@ func RowResizeCursor() *Cursor {
 	return CursorFromID(_r)
 }
 
-// CurrentSystemCursor this property will always be `nil` in a future version of macOS.
+// CurrentSystemCursor returns this property will always be `nil` in a future version of macOS.
 func CurrentSystemCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("currentSystemCursor"))
 	return CursorFromID(_r)
@@ -2036,7 +2037,7 @@ func GraphicsContextWithCGContextFlipped(graphicsPort obj.Object, initialFlipped
 	return GraphicsContextFromID(_r)
 }
 
-// CurrentContextDrawingToScreen returns a Boolean value that indicates whether the current context is drawing to the screen.
+// CurrentContextDrawingToScreen reports whether returns a Boolean value that indicates whether the current context is drawing to the screen.
 func CurrentContextDrawingToScreen() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("currentContextDrawingToScreen"))
 	return _r
@@ -2391,7 +2392,7 @@ func ImageViewWithImage(image *Image) *ImageView {
 	return ImageViewFromID(_r)
 }
 
-// DefaultPreferredImageDynamicRange default preferred image dynamic range. Defaults to `NSImageDynamicRangeConstrainedHigh` on macOS 14 and higher, `NSImageDynamicRangeStandard` otherwise. Set to another value to change the default for all subsequently created `NSImageView`s in your app.
+// DefaultPreferredImageDynamicRange returns default preferred image dynamic range. Defaults to `NSImageDynamicRangeConstrainedHigh` on macOS 14 and higher, `NSImageDynamicRangeStandard` otherwise. Set to another value to change the default for all subsequently created `NSImageView`s in your app.
 func DefaultPreferredImageDynamicRange() ImageDynamicRange {
 	_r := objc.Send[ImageDynamicRange](objc.ID(_class("NSImageView")), objc.RegisterName("defaultPreferredImageDynamicRange"))
 	return _r
@@ -2479,7 +2480,7 @@ func SetMenuBarVisible(visible bool) {
 	objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("setMenuBarVisible:"), visible)
 }
 
-// MenuBarVisible returns a Boolean value that indicates whether the menu bar is visible.
+// MenuBarVisible reports whether returns a Boolean value that indicates whether the menu bar is visible.
 func MenuBarVisible() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSMenu")), objc.RegisterName("menuBarVisible"))
 	return _r
@@ -2520,7 +2521,7 @@ func SetUsesUserKeyEquivalents(usesUserKeyEquivalents bool) {
 	objc.Send[objc.ID](objc.ID(_class("NSMenuItem")), objc.RegisterName("setUsesUserKeyEquivalents:"), usesUserKeyEquivalents)
 }
 
-// WritingToolsItems an array of standard menu items related to Writing Tools. Each call to this method returns an array of newly allocated instances of NSMenuItem.
+// WritingToolsItems returns an array of standard menu items related to Writing Tools. Each call to this method returns an array of newly allocated instances of NSMenuItem.
 //
 // WritingToolsItems returns the collection as a Go slice.
 func WritingToolsItems() []*MenuItem {
@@ -2902,19 +2903,19 @@ func ScreensHaveSeparateSpaces() bool {
 	return _r
 }
 
-// AutomaticStyle the automatic scroll edge effect style.
+// AutomaticStyle returns the automatic scroll edge effect style.
 func AutomaticStyle() *ScrollEdgeEffectStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScrollEdgeEffectStyle")), objc.RegisterName("automaticStyle"))
 	return ScrollEdgeEffectStyleFromID(_r)
 }
 
-// SoftStyle a scroll edge effect with a soft edge.
+// SoftStyle returns a scroll edge effect with a soft edge.
 func SoftStyle() *ScrollEdgeEffectStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScrollEdgeEffectStyle")), objc.RegisterName("softStyle"))
 	return ScrollEdgeEffectStyleFromID(_r)
 }
 
-// HardStyle a scroll edge effect with a hard cutoff.
+// HardStyle returns a scroll edge effect with a hard cutoff.
 func HardStyle() *ScrollEdgeEffectStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScrollEdgeEffectStyle")), objc.RegisterName("hardStyle"))
 	return ScrollEdgeEffectStyleFromID(_r)
@@ -3004,19 +3005,19 @@ func BehaviorWithHandler(handler func(obj.Object)) *SliderAccessoryBehavior {
 	return SliderAccessoryBehaviorFromID(_r)
 }
 
-// AutomaticBehavior the behavior is automatically picked to be the system standard, given the slider's current context. For example, NSTouchBarItems have `.valueStep` behavior.
+// AutomaticBehavior returns the behavior is automatically picked to be the system standard, given the slider's current context. For example, NSTouchBarItems have `.valueStep` behavior.
 func AutomaticBehavior() *SliderAccessoryBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessoryBehavior")), objc.RegisterName("automaticBehavior"))
 	return SliderAccessoryBehaviorFromID(_r)
 }
 
-// ValueStepBehavior the value of the slider moves towards the associated value for the accessory with by a delta of the slider's `altIncrementValue`.
+// ValueStepBehavior returns the value of the slider moves towards the associated value for the accessory with by a delta of the slider's `altIncrementValue`.
 func ValueStepBehavior() *SliderAccessoryBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessoryBehavior")), objc.RegisterName("valueStepBehavior"))
 	return SliderAccessoryBehaviorFromID(_r)
 }
 
-// ValueResetBehavior the value of the slider is reset to the associated value for the accessory.
+// ValueResetBehavior returns the value of the slider is reset to the associated value for the accessory.
 func ValueResetBehavior() *SliderAccessoryBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessoryBehavior")), objc.RegisterName("valueResetBehavior"))
 	return SliderAccessoryBehaviorFromID(_r)
@@ -3566,7 +3567,7 @@ func DefaultDepthLimit() WindowDepth {
 	return _r
 }
 
-// AllowsAutomaticWindowTabbing allows automatic window tabbing when the value is \c YES. By default, this will be set to \c YES, but applications can explicitly opt out of all automatic tabbing by setting it to NO, and can still adopted explicit window tabbing, if desired.
+// AllowsAutomaticWindowTabbing reports whether allows automatic window tabbing when the value is \c true. By default, this will be set to \c true, but applications can explicitly opt out of all automatic tabbing by setting it to false, and can still adopted explicit window tabbing, if desired.
 func AllowsAutomaticWindowTabbing() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSWindow")), objc.RegisterName("allowsAutomaticWindowTabbing"))
 	return _r
@@ -3600,7 +3601,7 @@ func Configuration() *WorkspaceOpenConfiguration {
 	return WorkspaceOpenConfigurationFromID(_r)
 }
 
-// IsWritingToolsAvailable a Boolean value that indicates whether Writing Tools features are currently available. The value of this property is `true` when Writing Tools features are available, and `false` when they aren’t. Writing Tools support might be unavailable because of device constraints or because the system isn’t ready to process Writing Tools requests.
+// IsWritingToolsAvailable reports whether writing Tools features are currently available. The value of this property is `true` when Writing Tools features are available, and `false` when they aren’t. Writing Tools support might be unavailable because of device constraints or because the system isn’t ready to process Writing Tools requests.
 func IsWritingToolsAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSWritingToolsCoordinator")), objc.RegisterName("isWritingToolsAvailable"))
 	return _r

@@ -46,24 +46,24 @@ func audiogramSensitivityPointAdopt(id objc.ID) *AudiogramSensitivityPoint {
 }
 
 // Description returns the object's -description text.
-func (x *AudiogramSensitivityPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asp *AudiogramSensitivityPoint) Description() string {
+	return rt.Description(objref.IDOf(asp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudiogramSensitivityPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asp *AudiogramSensitivityPoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudiogramSensitivityPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asp *AudiogramSensitivityPoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudiogramSensitivityPoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asp *AudiogramSensitivityPoint) String() string {
+	return rt.Description(objref.IDOf(asp))
 }
 
 // NewAudiogramSensitivityPoint creates a new AudiogramSensitivityPoint.
@@ -73,38 +73,27 @@ func NewAudiogramSensitivityPoint() *AudiogramSensitivityPoint {
 }
 
 // Frequency wraps the corresponding Objective-C method.
-func (x *AudiogramSensitivityPoint) Frequency() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frequency"))
+func (asp *AudiogramSensitivityPoint) Frequency() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("frequency"))
 	return QuantityFromID(_r)
 }
 
 // LeftEarSensitivity wraps the corresponding Objective-C method.
-func (x *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEarSensitivity"))
+func (asp *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("leftEarSensitivity"))
 	return QuantityFromID(_r)
 }
 
 // RightEarSensitivity wraps the corresponding Objective-C method.
-func (x *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEarSensitivity"))
+func (asp *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("rightEarSensitivity"))
 	return QuantityFromID(_r)
 }
 
-// Tests the tests conducted at this frequency
+// Tests returns the tests conducted at this frequency
 //
 // Tests returns the collection as a Go slice.
-func (x *AudiogramSensitivityPoint) Tests() []*AudiogramSensitivityTest {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tests"))
+func (asp *AudiogramSensitivityPoint) Tests() []*AudiogramSensitivityTest {
+	_arr := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("tests"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudiogramSensitivityTest { return AudiogramSensitivityTestFromID(_id) })
 }
-
-// AudiogramSensitivityPointable is the interface implemented by [AudiogramSensitivityPoint], for mocking and DI.
-type AudiogramSensitivityPointable interface {
-	obj.Object
-	Frequency() *Quantity
-	LeftEarSensitivity() *Quantity
-	RightEarSensitivity() *Quantity
-	Tests() []*AudiogramSensitivityTest
-}
-
-var _ AudiogramSensitivityPointable = (*AudiogramSensitivityPoint)(nil)

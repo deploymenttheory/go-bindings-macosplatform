@@ -53,25 +53,16 @@ func NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriti
 	return fileHandleSerialPortAttachmentAdopt(_id)
 }
 
-// FileHandleForReading file handle for reading from the file. Data written to fileHandleForReading goes to the guest.
-func (x *FileHandleSerialPortAttachment) FileHandleForReading() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForReading"))
+// FileHandleForReading returns file handle for reading from the file. Data written to fileHandleForReading goes to the guest.
+func (fhspa *FileHandleSerialPortAttachment) FileHandleForReading() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fhspa), objc.RegisterName("fileHandleForReading"))
 	return obj.Wrap(_r)
 }
 
-// FileHandleForWriting file handle for writing to the file. Data sent from the guest appears on fileHandleForWriting.
-func (x *FileHandleSerialPortAttachment) FileHandleForWriting() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForWriting"))
+// FileHandleForWriting returns file handle for writing to the file. Data sent from the guest appears on fileHandleForWriting.
+func (fhspa *FileHandleSerialPortAttachment) FileHandleForWriting() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fhspa), objc.RegisterName("fileHandleForWriting"))
 	return obj.Wrap(_r)
 }
-
-// FileHandleSerialPortAttachmentable is the interface implemented by [FileHandleSerialPortAttachment], for mocking and DI.
-type FileHandleSerialPortAttachmentable interface {
-	obj.Object
-	FileHandleForReading() obj.Object
-	FileHandleForWriting() obj.Object
-}
-
-var _ FileHandleSerialPortAttachmentable = (*FileHandleSerialPortAttachment)(nil)
 
 var _ SerialPortAttachmentProvider = (*FileHandleSerialPortAttachment)(nil)

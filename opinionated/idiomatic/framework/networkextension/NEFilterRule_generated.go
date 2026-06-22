@@ -46,24 +46,24 @@ func nEFilterRuleAdopt(id objc.ID) *NEFilterRule {
 }
 
 // Description returns the object's -description text.
-func (x *NEFilterRule) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfr *NEFilterRule) Description() string {
+	return rt.Description(objref.IDOf(nfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfr *NEFilterRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfr *NEFilterRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFilterRule) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfr *NEFilterRule) String() string {
+	return rt.Description(objref.IDOf(nfr))
 }
 
 // NewNEFilterRuleWithNetworkRuleAction creates a new filter rule from a network rule and an action to take when network traffic matches.
@@ -73,23 +73,14 @@ func NewNEFilterRuleWithNetworkRuleAction(networkRule *NENetworkRule, action NEF
 	return nEFilterRuleAdopt(_id)
 }
 
-// NetworkRule the NENetworkRule that defines the network traffic characteristics that this rule matches.
-func (x *NEFilterRule) NetworkRule() *NENetworkRule {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkRule"))
+// NetworkRule returns the NENetworkRule that defines the network traffic characteristics that this rule matches.
+func (nfr *NEFilterRule) NetworkRule() *NENetworkRule {
+	_r := objc.Send[objc.ID](objref.IDOf(nfr), objc.RegisterName("networkRule"))
 	return NENetworkRuleFromID(_r)
 }
 
-// Action the action to take when this rule matches network traffic.
-func (x *NEFilterRule) Action() NEFilterAction {
-	_r := objc.Send[NEFilterAction](objref.IDOf(x), objc.RegisterName("action"))
+// Action returns the action to take when this rule matches network traffic.
+func (nfr *NEFilterRule) Action() NEFilterAction {
+	_r := objc.Send[NEFilterAction](objref.IDOf(nfr), objc.RegisterName("action"))
 	return _r
 }
-
-// NEFilterRuleable is the interface implemented by [NEFilterRule], for mocking and DI.
-type NEFilterRuleable interface {
-	obj.Object
-	NetworkRule() *NENetworkRule
-	Action() NEFilterAction
-}
-
-var _ NEFilterRuleable = (*NEFilterRule)(nil)

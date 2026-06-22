@@ -53,24 +53,15 @@ func NewProjectMapElement() *ProjectMapElement {
 }
 
 // Pitch wraps the corresponding Objective-C method.
-func (x *ProjectMapElement) Pitch() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
+func (pme *ProjectMapElement) Pitch() float64 {
+	_r := objc.Send[float64](objref.IDOf(pme), objc.RegisterName("pitch"))
 	return _r
 }
 
 // Annotations wraps the corresponding Objective-C method.
-func (x *ProjectMapElement) Annotations() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotations"))
+func (pme *ProjectMapElement) Annotations() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pme), objc.RegisterName("annotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ProjectMapElementable is the interface implemented by [ProjectMapElement], for mocking and DI.
-type ProjectMapElementable interface {
-	obj.Object
-	Pitch() float64
-	Annotations() []obj.Object
-}
-
-var _ ProjectMapElementable = (*ProjectMapElement)(nil)
 
 var _ ProjectElementProvider = (*ProjectMapElement)(nil)

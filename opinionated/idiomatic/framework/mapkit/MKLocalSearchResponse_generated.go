@@ -46,24 +46,24 @@ func localSearchResponseAdopt(id objc.ID) *LocalSearchResponse {
 }
 
 // Description returns the object's -description text.
-func (x *LocalSearchResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lsr *LocalSearchResponse) Description() string {
+	return rt.Description(objref.IDOf(lsr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalSearchResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lsr *LocalSearchResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lsr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalSearchResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lsr *LocalSearchResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lsr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocalSearchResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lsr *LocalSearchResponse) String() string {
+	return rt.Description(objref.IDOf(lsr))
 }
 
 // NewLocalSearchResponse creates a new LocalSearchResponse.
@@ -75,15 +75,7 @@ func NewLocalSearchResponse() *LocalSearchResponse {
 // MapItems wraps the corresponding Objective-C method.
 //
 // MapItems returns the collection as a Go slice.
-func (x *LocalSearchResponse) MapItems() []*MapItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItems"))
+func (lsr *LocalSearchResponse) MapItems() []*MapItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("mapItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MapItem { return MapItemFromID(_id) })
 }
-
-// LocalSearchResponseable is the interface implemented by [LocalSearchResponse], for mocking and DI.
-type LocalSearchResponseable interface {
-	obj.Object
-	MapItems() []*MapItem
-}
-
-var _ LocalSearchResponseable = (*LocalSearchResponse)(nil)

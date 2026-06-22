@@ -47,24 +47,24 @@ func sourceRevisionAdopt(id objc.ID) *SourceRevision {
 }
 
 // Description returns the object's -description text.
-func (x *SourceRevision) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sr *SourceRevision) Description() string {
+	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SourceRevision) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sr *SourceRevision) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SourceRevision) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sr *SourceRevision) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SourceRevision) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sr *SourceRevision) String() string {
+	return rt.Description(objref.IDOf(sr))
 }
 
 // NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion initializes a new source revision object with the provided source, version, product type, and operating system.
@@ -81,15 +81,15 @@ func NewSourceRevisionWithSourceVersion(source *Source, version string) *SourceR
 	return sourceRevisionAdopt(_id)
 }
 
-// Source the HKSource of the receiver.
-func (x *SourceRevision) Source() *Source {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+// Source returns the HKSource of the receiver.
+func (sr *SourceRevision) Source() *Source {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("source"))
 	return SourceFromID(_r)
 }
 
 // ProductType represents the product type of the device running HealthKit when the object was created. This value may be nil for older data, which indicates an unknown product type.
-func (x *SourceRevision) ProductType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productType"))
+func (sr *SourceRevision) ProductType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("productType"))
 	if _r == 0 {
 		return ""
 	}
@@ -97,17 +97,7 @@ func (x *SourceRevision) ProductType() string {
 }
 
 // OperatingSystemVersion represents the operating system version of the device running HealthKit when the object was created. iOS versions after 8.0 but prior to 8.2 are saved as 8.0, and iOS version after 8.2 but prior to 9.0 are saved as 8.2.
-func (x *SourceRevision) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
-	_r := objc.Send[foundation.NSOperatingSystemVersion](objref.IDOf(x), objc.RegisterName("operatingSystemVersion"))
+func (sr *SourceRevision) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
+	_r := objc.Send[foundation.NSOperatingSystemVersion](objref.IDOf(sr), objc.RegisterName("operatingSystemVersion"))
 	return _r
 }
-
-// SourceRevisionable is the interface implemented by [SourceRevision], for mocking and DI.
-type SourceRevisionable interface {
-	obj.Object
-	Source() *Source
-	ProductType() string
-	OperatingSystemVersion() foundation.NSOperatingSystemVersion
-}
-
-var _ SourceRevisionable = (*SourceRevision)(nil)

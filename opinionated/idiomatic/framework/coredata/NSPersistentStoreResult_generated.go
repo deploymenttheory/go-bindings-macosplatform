@@ -48,36 +48,29 @@ func persistentStoreResultAdopt(id objc.ID) *PersistentStoreResult {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentStoreResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (psr *PersistentStoreResult) Description() string {
+	return rt.Description(objref.IDOf(psr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentStoreResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (psr *PersistentStoreResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(psr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentStoreResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (psr *PersistentStoreResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(psr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentStoreResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (psr *PersistentStoreResult) String() string {
+	return rt.Description(objref.IDOf(psr))
 }
-
-// PersistentStoreResultable is the interface implemented by [PersistentStoreResult], for mocking and DI.
-type PersistentStoreResultable interface {
-	obj.Object
-}
-
-var _ PersistentStoreResultable = (*PersistentStoreResult)(nil)
 
 // isPersistentStoreResult marks PersistentStoreResult — and, by embedding promotion, its
 // subclasses — as a member of the PersistentStoreResult hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PersistentStoreResult) isPersistentStoreResult() {}
+func (psr *PersistentStoreResult) isPersistentStoreResult() {}
 
 var _ PersistentStoreResultProvider = (*PersistentStoreResult)(nil)

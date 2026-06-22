@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewGenerateAttentionBasedSaliencyImageRequest() *GenerateAttentionBasedSali
 	return generateAttentionBasedSaliencyImageRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *GenerateAttentionBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateAttentionBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (gabsir *GenerateAttentionBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateAttentionBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gabsir), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return gabsir
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *GenerateAttentionBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateAttentionBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (gabsir *GenerateAttentionBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateAttentionBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gabsir), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return gabsir
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *GenerateAttentionBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateAttentionBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (gabsir *GenerateAttentionBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateAttentionBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gabsir), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return gabsir
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *GenerateAttentionBasedSaliencyImageRequest) WithRevision(revision int) *GenerateAttentionBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (gabsir *GenerateAttentionBasedSaliencyImageRequest) WithRevision(revision int) *GenerateAttentionBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gabsir), objc.RegisterName("setRevision:"), revision)
+	return gabsir
 }
-
-// GenerateAttentionBasedSaliencyImageRequestable is the interface implemented by [GenerateAttentionBasedSaliencyImageRequest], for mocking and DI.
-type GenerateAttentionBasedSaliencyImageRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateAttentionBasedSaliencyImageRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateAttentionBasedSaliencyImageRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *GenerateAttentionBasedSaliencyImageRequest
-	WithRevision(revision int) *GenerateAttentionBasedSaliencyImageRequest
-}
-
-var _ GenerateAttentionBasedSaliencyImageRequestable = (*GenerateAttentionBasedSaliencyImageRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*GenerateAttentionBasedSaliencyImageRequest)(nil)
 

@@ -5,13 +5,14 @@
 package browserenginekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RenderingProcess is an idiomatic wrapper over the Objective-C class BERenderingProcess.
@@ -48,24 +49,24 @@ func renderingProcessAdopt(id objc.ID) *RenderingProcess {
 }
 
 // Description returns the object's -description text.
-func (x *RenderingProcess) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rp *RenderingProcess) Description() string {
+	return rt.Description(objref.IDOf(rp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderingProcess) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rp *RenderingProcess) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderingProcess) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rp *RenderingProcess) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderingProcess) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rp *RenderingProcess) String() string {
+	return rt.Description(objref.IDOf(rp))
 }
 
 // NewRenderingProcess creates a new RenderingProcess.
@@ -75,25 +76,16 @@ func NewRenderingProcess() *RenderingProcess {
 }
 
 // Invalidate stops the rendering process.
-func (x *RenderingProcess) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (rp *RenderingProcess) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(rp), objc.RegisterName("invalidate"))
 }
 
 // MakeLibXPCConnectionError creates a new XPC connection to the extension process.
-func (x *RenderingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
+func (rp *RenderingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(rp), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
-
-// RenderingProcessable is the interface implemented by [RenderingProcess], for mocking and DI.
-type RenderingProcessable interface {
-	obj.Object
-	Invalidate()
-	MakeLibXPCConnectionError() (result obj.Object, err error)
-}
-
-var _ RenderingProcessable = (*RenderingProcess)(nil)

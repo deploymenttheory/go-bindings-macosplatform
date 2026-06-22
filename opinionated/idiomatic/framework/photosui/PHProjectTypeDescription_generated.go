@@ -46,24 +46,24 @@ func projectTypeDescriptionAdopt(id objc.ID) *ProjectTypeDescription {
 }
 
 // Description returns the object's -description text.
-func (x *ProjectTypeDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ptd *ProjectTypeDescription) Description() string {
+	return rt.Description(objref.IDOf(ptd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectTypeDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ptd *ProjectTypeDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ptd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectTypeDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ptd *ProjectTypeDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ptd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProjectTypeDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ptd *ProjectTypeDescription) String() string {
+	return rt.Description(objref.IDOf(ptd))
 }
 
 // NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageSubtypeDescriptions a designated initializer for project type descriptions with the full subtype hierarchy specified up front and a standard string for description text.
@@ -101,15 +101,15 @@ func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageCanP
 	return projectTypeDescriptionAdopt(_id)
 }
 
-// ProjectType identifier for the project type info. These should be added to the extensible string enum defined in PhotosUITypes.h.
-func (x *ProjectTypeDescription) ProjectType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectType"))
+// ProjectType returns identifier for the project type info. These should be added to the extensible string enum defined in PhotosUITypes.h.
+func (ptd *ProjectTypeDescription) ProjectType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("projectType"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedTitle localized title and description of the project type to be displayed to the user. The title is required, but description is optional.
-func (x *ProjectTypeDescription) LocalizedTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+// LocalizedTitle returns localized title and description of the project type to be displayed to the user. The title is required, but description is optional.
+func (ptd *ProjectTypeDescription) LocalizedTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -117,8 +117,8 @@ func (x *ProjectTypeDescription) LocalizedTitle() string {
 }
 
 // LocalizedDescription wraps the corresponding Objective-C method.
-func (x *ProjectTypeDescription) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+func (ptd *ProjectTypeDescription) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
@@ -126,41 +126,27 @@ func (x *ProjectTypeDescription) LocalizedDescription() string {
 }
 
 // LocalizedAttributedDescription wraps the corresponding Objective-C method.
-func (x *ProjectTypeDescription) LocalizedAttributedDescription() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedAttributedDescription"))
+func (ptd *ProjectTypeDescription) LocalizedAttributedDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedAttributedDescription"))
 	return obj.Wrap(_r)
 }
 
-// Image optional image to be associated with the project type in the picker; PNG images are recommended.
-func (x *ProjectTypeDescription) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+// Image returns optional image to be associated with the project type in the picker; PNG images are recommended.
+func (ptd *ProjectTypeDescription) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
-// SubtypeDescriptions array of type descriptions for subtype descriptions, may be empty.
+// SubtypeDescriptions returns array of type descriptions for subtype descriptions, may be empty.
 //
 // SubtypeDescriptions returns the collection as a Go slice.
-func (x *ProjectTypeDescription) SubtypeDescriptions() []*ProjectTypeDescription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtypeDescriptions"))
+func (ptd *ProjectTypeDescription) SubtypeDescriptions() []*ProjectTypeDescription {
+	_arr := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("subtypeDescriptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectTypeDescription { return ProjectTypeDescriptionFromID(_id) })
 }
 
-// CanProvideSubtypes for spase instances canProvideSubtypes is an indicator if subtypes can be fetched from the data source. If subtypeDescriptions is not empty it will also return YES.
-func (x *ProjectTypeDescription) CanProvideSubtypes() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canProvideSubtypes"))
+// CanProvideSubtypes reports whether for spase instances canProvideSubtypes is an indicator if subtypes can be fetched from the data source. If subtypeDescriptions is not empty it will also return true.
+func (ptd *ProjectTypeDescription) CanProvideSubtypes() bool {
+	_r := objc.Send[bool](objref.IDOf(ptd), objc.RegisterName("canProvideSubtypes"))
 	return _r
 }
-
-// ProjectTypeDescriptionable is the interface implemented by [ProjectTypeDescription], for mocking and DI.
-type ProjectTypeDescriptionable interface {
-	obj.Object
-	ProjectType() obj.Object
-	LocalizedTitle() string
-	LocalizedDescription() string
-	LocalizedAttributedDescription() obj.Object
-	Image() obj.Object
-	SubtypeDescriptions() []*ProjectTypeDescription
-	CanProvideSubtypes() bool
-}
-
-var _ ProjectTypeDescriptionable = (*ProjectTypeDescription)(nil)

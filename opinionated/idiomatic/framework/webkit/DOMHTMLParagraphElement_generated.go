@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,153 +50,121 @@ func NewDOMHTMLParagraphElement() *DOMHTMLParagraphElement {
 }
 
 // WithAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithAlign(align string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithAlign(align string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setAlign:"), purego.NSString(align))
+	return dpe
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithTitle(title string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithTitle(title string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dpe
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithLang(lang string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithLang(lang string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dpe
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithDir(dir string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithDir(dir string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dpe
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithTabIndex(tabIndex int) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dpe *DOMHTMLParagraphElement) WithTabIndex(tabIndex int) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dpe
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithAccessKey(accessKey string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithAccessKey(accessKey string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dpe
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithInnerText(innerText string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithInnerText(innerText string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dpe
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithOuterText(outerText string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithOuterText(outerText string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dpe
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithContentEditable(contentEditable string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithContentEditable(contentEditable string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dpe
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithIdName(idName string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dpe *DOMHTMLParagraphElement) WithIDName(idName string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dpe
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithScrollLeft(scrollLeft int) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dpe *DOMHTMLParagraphElement) WithScrollLeft(scrollLeft int) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dpe
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithScrollTop(scrollTop int) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dpe *DOMHTMLParagraphElement) WithScrollTop(scrollTop int) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dpe
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithInnerHTML(innerHTML string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithInnerHTML(innerHTML string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dpe
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithOuterHTML(outerHTML string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithOuterHTML(outerHTML string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dpe
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithClassName(className string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithClassName(className string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dpe
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithNodeValue(nodeValue string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithNodeValue(nodeValue string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dpe
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithPrefix(prefix string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithPrefix(prefix string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dpe
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParagraphElement) WithTextContent(textContent string) *DOMHTMLParagraphElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dpe *DOMHTMLParagraphElement) WithTextContent(textContent string) *DOMHTMLParagraphElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dpe
 }
 
 // Align wraps the corresponding Objective-C method.
-func (x *DOMHTMLParagraphElement) Align() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+func (dpe *DOMHTMLParagraphElement) Align() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLParagraphElement) SetAlign(align string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-}
-
-// DOMHTMLParagraphElementable is the interface implemented by [DOMHTMLParagraphElement], for mocking and DI.
-type DOMHTMLParagraphElementable interface {
-	obj.Object
-	WithAlign(align string) *DOMHTMLParagraphElement
-	WithTitle(title string) *DOMHTMLParagraphElement
-	WithLang(lang string) *DOMHTMLParagraphElement
-	WithDir(dir string) *DOMHTMLParagraphElement
-	WithTabIndex(tabIndex int) *DOMHTMLParagraphElement
-	WithAccessKey(accessKey string) *DOMHTMLParagraphElement
-	WithInnerText(innerText string) *DOMHTMLParagraphElement
-	WithOuterText(outerText string) *DOMHTMLParagraphElement
-	WithContentEditable(contentEditable string) *DOMHTMLParagraphElement
-	WithIdName(idName string) *DOMHTMLParagraphElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLParagraphElement
-	WithScrollTop(scrollTop int) *DOMHTMLParagraphElement
-	WithInnerHTML(innerHTML string) *DOMHTMLParagraphElement
-	WithOuterHTML(outerHTML string) *DOMHTMLParagraphElement
-	WithClassName(className string) *DOMHTMLParagraphElement
-	WithNodeValue(nodeValue string) *DOMHTMLParagraphElement
-	WithPrefix(prefix string) *DOMHTMLParagraphElement
-	WithTextContent(textContent string) *DOMHTMLParagraphElement
-	Align() string
-	SetAlign(align string)
-}
-
-var _ DOMHTMLParagraphElementable = (*DOMHTMLParagraphElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLParagraphElement)(nil)
 

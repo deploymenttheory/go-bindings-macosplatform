@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,79 +51,47 @@ func NewAudioUnitTimePitch() *AudioUnitTimePitch {
 	return audioUnitTimePitchAdopt(_id)
 }
 
-// WithRate the playback rate of the input signal.
-func (x *AudioUnitTimePitch) WithRate(rate float32) *AudioUnitTimePitch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the playback rate of the input signal.
+func (autp *AudioUnitTimePitch) WithRate(rate float32) *AudioUnitTimePitch {
+	objc.Send[objc.ID](objref.IDOf(autp), objc.RegisterName("setRate:"), rate)
+	return autp
 }
 
-// WithPitch the amount to use to pitch shift the input signal.
-func (x *AudioUnitTimePitch) WithPitch(pitch float32) *AudioUnitTimePitch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
-	return x
+// WithPitch sets the amount to use to pitch shift the input signal.
+func (autp *AudioUnitTimePitch) WithPitch(pitch float32) *AudioUnitTimePitch {
+	objc.Send[objc.ID](objref.IDOf(autp), objc.RegisterName("setPitch:"), pitch)
+	return autp
 }
 
-// WithOverlap the amount of overlap between segments of the input audio signal.
-func (x *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
-	return x
+// WithOverlap sets the amount of overlap between segments of the input audio signal.
+func (autp *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
+	objc.Send[objc.ID](objref.IDOf(autp), objc.RegisterName("setOverlap:"), overlap)
+	return autp
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitTimePitch) WithBypass(bypass bool) *AudioUnitTimePitch {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (autp *AudioUnitTimePitch) WithBypass(bypass bool) *AudioUnitTimePitch {
+	objc.Send[objc.ID](objref.IDOf(autp), objc.RegisterName("setBypass:"), bypass)
+	return autp
 }
 
-// Rate playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
-func (x *AudioUnitTimePitch) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
+func (autp *AudioUnitTimePitch) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(autp), objc.RegisterName("rate"))
 	return _r
 }
 
-// SetRate wraps the corresponding Objective-C method.
-func (x *AudioUnitTimePitch) SetRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-}
-
-// Pitch amount by which the input signal is pitch shifted 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
-func (x *AudioUnitTimePitch) Pitch() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pitch"))
+// Pitch returns amount by which the input signal is pitch shifted 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
+func (autp *AudioUnitTimePitch) Pitch() float32 {
+	_r := objc.Send[float32](objref.IDOf(autp), objc.RegisterName("pitch"))
 	return _r
 }
 
-// SetPitch wraps the corresponding Objective-C method.
-func (x *AudioUnitTimePitch) SetPitch(pitch float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
-}
-
-// Overlap amount of overlap between segments of the input audio signal A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
-func (x *AudioUnitTimePitch) Overlap() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overlap"))
+// Overlap returns amount of overlap between segments of the input audio signal A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
+func (autp *AudioUnitTimePitch) Overlap() float32 {
+	_r := objc.Send[float32](objref.IDOf(autp), objc.RegisterName("overlap"))
 	return _r
 }
-
-// SetOverlap wraps the corresponding Objective-C method.
-func (x *AudioUnitTimePitch) SetOverlap(overlap float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
-}
-
-// AudioUnitTimePitchable is the interface implemented by [AudioUnitTimePitch], for mocking and DI.
-type AudioUnitTimePitchable interface {
-	obj.Object
-	WithRate(rate float32) *AudioUnitTimePitch
-	WithPitch(pitch float32) *AudioUnitTimePitch
-	WithOverlap(overlap float32) *AudioUnitTimePitch
-	WithBypass(bypass bool) *AudioUnitTimePitch
-	Rate() float32
-	SetRate(rate float32)
-	Pitch() float32
-	SetPitch(pitch float32)
-	Overlap() float32
-	SetOverlap(overlap float32)
-}
-
-var _ AudioUnitTimePitchable = (*AudioUnitTimePitch)(nil)
 
 var _ AudioUnitTimeEffectProvider = (*AudioUnitTimePitch)(nil)
 

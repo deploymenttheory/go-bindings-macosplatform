@@ -46,24 +46,24 @@ func physicalInputElementCollectionAdopt(id objc.ID) *PhysicalInputElementCollec
 }
 
 // Description returns the object's -description text.
-func (x *PhysicalInputElementCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (piec *PhysicalInputElementCollection) Description() string {
+	return rt.Description(objref.IDOf(piec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicalInputElementCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (piec *PhysicalInputElementCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(piec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicalInputElementCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (piec *PhysicalInputElementCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(piec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicalInputElementCollection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (piec *PhysicalInputElementCollection) String() string {
+	return rt.Description(objref.IDOf(piec))
 }
 
 // NewPhysicalInputElementCollection creates a new PhysicalInputElementCollection.
@@ -73,36 +73,25 @@ func NewPhysicalInputElementCollection() *PhysicalInputElementCollection {
 }
 
 // ElementForAlias returns the element associated with a given alias.
-func (x *PhysicalInputElementCollection) ElementForAlias(alias obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementForAlias:"), objref.IDOf(alias))
+func (piec *PhysicalInputElementCollection) ElementForAlias(alias obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("elementForAlias:"), objref.IDOf(alias))
 	return obj.Wrap(_r)
 }
 
 // ObjectForKeyedSubscript wraps the corresponding Objective-C method.
-func (x *PhysicalInputElementCollection) ObjectForKeyedSubscript(key obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
+func (piec *PhysicalInputElementCollection) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // ElementEnumerator wraps the corresponding Objective-C method.
-func (x *PhysicalInputElementCollection) ElementEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementEnumerator"))
+func (piec *PhysicalInputElementCollection) ElementEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("elementEnumerator"))
 	return obj.Wrap(_r)
 }
 
-// Count the number of elements in the collection.
-func (x *PhysicalInputElementCollection) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of elements in the collection.
+func (piec *PhysicalInputElementCollection) Count() int {
+	_r := objc.Send[int](objref.IDOf(piec), objc.RegisterName("count"))
 	return _r
 }
-
-// PhysicalInputElementCollectionable is the interface implemented by [PhysicalInputElementCollection], for mocking and DI.
-type PhysicalInputElementCollectionable interface {
-	obj.Object
-	ElementForAlias(alias obj.Object) obj.Object
-	ObjectForKeyedSubscript(key obj.Object) obj.Object
-	ElementEnumerator() obj.Object
-	Count() int
-}
-
-var _ PhysicalInputElementCollectionable = (*PhysicalInputElementCollection)(nil)

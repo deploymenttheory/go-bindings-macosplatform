@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,40 +53,29 @@ func NewImageReduceColumnMax() *ImageReduceColumnMax {
 	return imageReduceColumnMaxAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-func (x *ImageReduceColumnMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (ircm *ImageReduceColumnMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMax {
+	objc.Send[objc.ID](objref.IDOf(ircm), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return ircm
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageReduceColumnMax) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ircm *ImageReduceColumnMax) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMax {
+	objc.Send[objc.ID](objref.IDOf(ircm), objc.RegisterName("setOffset:"), offset)
+	return ircm
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageReduceColumnMax) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ircm *ImageReduceColumnMax) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMax {
+	objc.Send[objc.ID](objref.IDOf(ircm), objc.RegisterName("setClipRect:"), clipRect)
+	return ircm
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageReduceColumnMax) WithLabel(label string) *ImageReduceColumnMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ircm *ImageReduceColumnMax) WithLabel(label string) *ImageReduceColumnMax {
+	objc.Send[objc.ID](objref.IDOf(ircm), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ircm
 }
-
-// ImageReduceColumnMaxable is the interface implemented by [ImageReduceColumnMax], for mocking and DI.
-type ImageReduceColumnMaxable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMax
-	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMax
-	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMax
-	WithLabel(label string) *ImageReduceColumnMax
-}
-
-var _ ImageReduceColumnMaxable = (*ImageReduceColumnMax)(nil)
 
 var _ ImageReduceUnaryProvider = (*ImageReduceColumnMax)(nil)
 

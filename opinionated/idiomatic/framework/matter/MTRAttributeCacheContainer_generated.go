@@ -44,24 +44,24 @@ func mTRAttributeCacheContainerAdopt(id objc.ID) *MTRAttributeCacheContainer {
 }
 
 // Description returns the object's -description text.
-func (x *MTRAttributeCacheContainer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (macc *MTRAttributeCacheContainer) Description() string {
+	return rt.Description(objref.IDOf(macc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAttributeCacheContainer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (macc *MTRAttributeCacheContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(macc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAttributeCacheContainer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (macc *MTRAttributeCacheContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(macc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAttributeCacheContainer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (macc *MTRAttributeCacheContainer) String() string {
+	return rt.Description(objref.IDOf(macc))
 }
 
 // NewMTRAttributeCacheContainer creates a new MTRAttributeCacheContainer.
@@ -69,10 +69,3 @@ func NewMTRAttributeCacheContainer() *MTRAttributeCacheContainer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAttributeCacheContainer")), objc.RegisterName("new"))
 	return mTRAttributeCacheContainerAdopt(_id)
 }
-
-// MTRAttributeCacheContainerable is the interface implemented by [MTRAttributeCacheContainer], for mocking and DI.
-type MTRAttributeCacheContainerable interface {
-	obj.Object
-}
-
-var _ MTRAttributeCacheContainerable = (*MTRAttributeCacheContainer)(nil)

@@ -46,24 +46,24 @@ func audioSourceAdopt(id objc.ID) *AudioSource {
 }
 
 // Description returns the object's -description text.
-func (x *AudioSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AudioSource) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *AudioSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *AudioSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AudioSource) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewAudioSourceWithFileNamed initializes an audio source from an audio file in the application’s main bundle.
@@ -80,135 +80,79 @@ func NewAudioSourceWithURL(url string) *AudioSource {
 	return audioSourceAdopt(_id)
 }
 
-// WithPositional a Boolean value that determines whether audio from this source uses 3D positional mixing.
-func (x *AudioSource) WithPositional(positional bool) *AudioSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositional:"), positional)
-	return x
+// WithPositional sets a Boolean value that determines whether audio from this source uses 3D positional mixing.
+func (as *AudioSource) WithPositional(positional bool) *AudioSource {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setPositional:"), positional)
+	return as
 }
 
-// WithVolume the default playback volume for the audio source.
-func (x *AudioSource) WithVolume(volume float32) *AudioSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the default playback volume for the audio source.
+func (as *AudioSource) WithVolume(volume float32) *AudioSource {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setVolume:"), volume)
+	return as
 }
 
-// WithRate the default playback rate for the audio source.
-func (x *AudioSource) WithRate(rate float32) *AudioSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the default playback rate for the audio source.
+func (as *AudioSource) WithRate(rate float32) *AudioSource {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setRate:"), rate)
+	return as
 }
 
-// WithReverbBlend the default blend of blend of unmodified and reverb-processed (also called dry and wet) audio for playback of the audio source.
-func (x *AudioSource) WithReverbBlend(reverbBlend float32) *AudioSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverbBlend:"), reverbBlend)
-	return x
+// WithReverbBlend sets the default blend of blend of unmodified and reverb-processed (also called dry and wet) audio for playback of the audio source.
+func (as *AudioSource) WithReverbBlend(reverbBlend float32) *AudioSource {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setReverbBlend:"), reverbBlend)
+	return as
 }
 
-// WithLoops a Boolean value that determines whether the audio source should play repeatedly.
-func (x *AudioSource) WithLoops(loops bool) *AudioSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoops:"), loops)
-	return x
+// WithLoops sets a Boolean value that determines whether the audio source should play repeatedly.
+func (as *AudioSource) WithLoops(loops bool) *AudioSource {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setLoops:"), loops)
+	return as
 }
 
-// WithShouldStream a Boolean value that determines whether the audio source should stream content from its source URL when playing.
-func (x *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStream:"), shouldStream)
-	return x
+// WithShouldStream sets a Boolean value that determines whether the audio source should stream content from its source URL when playing.
+func (as *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setShouldStream:"), shouldStream)
+	return as
 }
 
 // Load loads audio data from the source and prepares it for playing.
-func (x *AudioSource) Load() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("load"))
+func (as *AudioSource) Load() {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("load"))
 }
 
-// IsPositional marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to YES. shouldStream must be set to false in order to get positional audio (see shouldStream).
-func (x *AudioSource) IsPositional() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPositional"))
+// IsPositional reports whether marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to true. shouldStream must be set to false in order to get positional audio (see shouldStream).
+func (as *AudioSource) IsPositional() bool {
+	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isPositional"))
 	return _r
 }
 
-// SetPositional wraps the corresponding Objective-C method.
-func (x *AudioSource) SetPositional(positional bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositional:"), positional)
-}
-
-// Volume the default volume for this audio buffer. Default is 1.0 (full volume).
-func (x *AudioSource) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+// Volume returns the default volume for this audio buffer. Default is 1.0 (full volume).
+func (as *AudioSource) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("volume"))
 	return _r
 }
 
-// SetVolume wraps the corresponding Objective-C method.
-func (x *AudioSource) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-}
-
-// Rate the default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
-func (x *AudioSource) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns the default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
+func (as *AudioSource) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("rate"))
 	return _r
 }
 
-// SetRate wraps the corresponding Objective-C method.
-func (x *AudioSource) SetRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-}
-
-// ReverbBlend the default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
-func (x *AudioSource) ReverbBlend() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("reverbBlend"))
+// ReverbBlend returns the default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
+func (as *AudioSource) ReverbBlend() float32 {
+	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("reverbBlend"))
 	return _r
 }
 
-// SetReverbBlend wraps the corresponding Objective-C method.
-func (x *AudioSource) SetReverbBlend(reverbBlend float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverbBlend:"), reverbBlend)
-}
-
-// Loops specifies whether the audio source should loop or not. Defaults to NO.
-func (x *AudioSource) Loops() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loops"))
+// Loops reports whether the audio source should loop or not. Defaults to false.
+func (as *AudioSource) Loops() bool {
+	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("loops"))
 	return _r
 }
 
-// SetLoops wraps the corresponding Objective-C method.
-func (x *AudioSource) SetLoops(loops bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoops:"), loops)
-}
-
-// ShouldStream specifies whether the audio source should be streamed or not. Defaults to NO.
-func (x *AudioSource) ShouldStream() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldStream"))
+// ShouldStream reports whether the audio source should be streamed or not. Defaults to false.
+func (as *AudioSource) ShouldStream() bool {
+	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("shouldStream"))
 	return _r
 }
-
-// SetShouldStream wraps the corresponding Objective-C method.
-func (x *AudioSource) SetShouldStream(shouldStream bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStream:"), shouldStream)
-}
-
-// AudioSourceable is the interface implemented by [AudioSource], for mocking and DI.
-type AudioSourceable interface {
-	obj.Object
-	WithPositional(positional bool) *AudioSource
-	WithVolume(volume float32) *AudioSource
-	WithRate(rate float32) *AudioSource
-	WithReverbBlend(reverbBlend float32) *AudioSource
-	WithLoops(loops bool) *AudioSource
-	WithShouldStream(shouldStream bool) *AudioSource
-	Load()
-	IsPositional() bool
-	SetPositional(positional bool)
-	Volume() float32
-	SetVolume(volume float32)
-	Rate() float32
-	SetRate(rate float32)
-	ReverbBlend() float32
-	SetReverbBlend(reverbBlend float32)
-	Loops() bool
-	SetLoops(loops bool)
-	ShouldStream() bool
-	SetShouldStream(shouldStream bool)
-}
-
-var _ AudioSourceable = (*AudioSource)(nil)

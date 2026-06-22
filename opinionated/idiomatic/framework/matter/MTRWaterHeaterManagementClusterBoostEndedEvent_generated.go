@@ -44,24 +44,24 @@ func mTRWaterHeaterManagementClusterBoostEndedEventAdopt(id objc.ID) *MTRWaterHe
 }
 
 // Description returns the object's -description text.
-func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) Description() string {
+	return rt.Description(objref.IDOf(mwhmcbee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwhmcbee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwhmcbee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) String() string {
+	return rt.Description(objref.IDOf(mwhmcbee))
 }
 
 // NewMTRWaterHeaterManagementClusterBoostEndedEvent creates a new MTRWaterHeaterManagementClusterBoostEndedEvent.
@@ -69,10 +69,3 @@ func NewMTRWaterHeaterManagementClusterBoostEndedEvent() *MTRWaterHeaterManageme
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterManagementClusterBoostEndedEvent")), objc.RegisterName("new"))
 	return mTRWaterHeaterManagementClusterBoostEndedEventAdopt(_id)
 }
-
-// MTRWaterHeaterManagementClusterBoostEndedEventable is the interface implemented by [MTRWaterHeaterManagementClusterBoostEndedEvent], for mocking and DI.
-type MTRWaterHeaterManagementClusterBoostEndedEventable interface {
-	obj.Object
-}
-
-var _ MTRWaterHeaterManagementClusterBoostEndedEventable = (*MTRWaterHeaterManagementClusterBoostEndedEvent)(nil)

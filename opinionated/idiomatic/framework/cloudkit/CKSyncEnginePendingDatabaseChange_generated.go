@@ -48,50 +48,41 @@ func syncEnginePendingDatabaseChangeAdopt(id objc.ID) *SyncEnginePendingDatabase
 }
 
 // Description returns the object's -description text.
-func (x *SyncEnginePendingDatabaseChange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sepdc *SyncEnginePendingDatabaseChange) Description() string {
+	return rt.Description(objref.IDOf(sepdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEnginePendingDatabaseChange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sepdc *SyncEnginePendingDatabaseChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sepdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEnginePendingDatabaseChange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sepdc *SyncEnginePendingDatabaseChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sepdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEnginePendingDatabaseChange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sepdc *SyncEnginePendingDatabaseChange) String() string {
+	return rt.Description(objref.IDOf(sepdc))
 }
 
-// ZoneID the identifier of the record zone to change.
-func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+// ZoneID returns the identifier of the record zone to change.
+func (sepdc *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(sepdc), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// Type the type of database change.
-func (x *SyncEnginePendingDatabaseChange) Type() SyncEnginePendingDatabaseChangeType {
-	_r := objc.Send[SyncEnginePendingDatabaseChangeType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of database change.
+func (sepdc *SyncEnginePendingDatabaseChange) Type() SyncEnginePendingDatabaseChangeType {
+	_r := objc.Send[SyncEnginePendingDatabaseChangeType](objref.IDOf(sepdc), objc.RegisterName("type"))
 	return _r
 }
-
-// SyncEnginePendingDatabaseChangeable is the interface implemented by [SyncEnginePendingDatabaseChange], for mocking and DI.
-type SyncEnginePendingDatabaseChangeable interface {
-	obj.Object
-	ZoneID() *RecordZoneID
-	Type() SyncEnginePendingDatabaseChangeType
-}
-
-var _ SyncEnginePendingDatabaseChangeable = (*SyncEnginePendingDatabaseChange)(nil)
 
 // isSyncEnginePendingDatabaseChange marks SyncEnginePendingDatabaseChange — and, by embedding promotion, its
 // subclasses — as a member of the SyncEnginePendingDatabaseChange hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SyncEnginePendingDatabaseChange) isSyncEnginePendingDatabaseChange() {}
+func (sepdc *SyncEnginePendingDatabaseChange) isSyncEnginePendingDatabaseChange() {}
 
 var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingDatabaseChange)(nil)

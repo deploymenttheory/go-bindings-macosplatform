@@ -5,13 +5,14 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NetworkBlockDeviceStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZNetworkBlockDeviceStorageDeviceAttachment.
@@ -71,39 +72,28 @@ func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (resul
 	return networkBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// URL URL referring to the NBD server to which the NBD client is to be connected.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns URL referring to the NBD server to which the NBD client is to be connected.
+func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nbdsda), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Timeout the timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) Timeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeout"))
+// Timeout returns the timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
+func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) Timeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(nbdsda), objc.RegisterName("timeout"))
 	return _r
 }
 
-// IsForcedReadOnly whether the underlying disk attachment is forced to be read-only. The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to YES will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForcedReadOnly"))
+// IsForcedReadOnly reports whether the underlying disk attachment is forced to be read-only. The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to true will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
+func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(nbdsda), objc.RegisterName("isForcedReadOnly"))
 	return _r
 }
 
-// SynchronizationMode the mode in which the NBD client synchronizes data with the NBD server.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
-	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
+// SynchronizationMode returns the mode in which the NBD client synchronizes data with the NBD server.
+func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
+	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(nbdsda), objc.RegisterName("synchronizationMode"))
 	return _r
 }
-
-// NetworkBlockDeviceStorageDeviceAttachmentable is the interface implemented by [NetworkBlockDeviceStorageDeviceAttachment], for mocking and DI.
-type NetworkBlockDeviceStorageDeviceAttachmentable interface {
-	obj.Object
-	URL() obj.Object
-	Timeout() float64
-	IsForcedReadOnly() bool
-	SynchronizationMode() DiskSynchronizationMode
-}
-
-var _ NetworkBlockDeviceStorageDeviceAttachmentable = (*NetworkBlockDeviceStorageDeviceAttachment)(nil)
 
 var _ StorageDeviceAttachmentProvider = (*NetworkBlockDeviceStorageDeviceAttachment)(nil)

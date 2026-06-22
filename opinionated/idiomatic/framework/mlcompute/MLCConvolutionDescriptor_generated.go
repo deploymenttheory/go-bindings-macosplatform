@@ -46,24 +46,24 @@ func convolutionDescriptorAdopt(id objc.ID) *ConvolutionDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ConvolutionDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *ConvolutionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConvolutionDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cd *ConvolutionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConvolutionDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cd *ConvolutionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ConvolutionDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *ConvolutionDescriptor) String() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // NewConvolutionDescriptor creates a new ConvolutionDescriptor.
@@ -72,114 +72,92 @@ func NewConvolutionDescriptor() *ConvolutionDescriptor {
 	return convolutionDescriptorAdopt(_id)
 }
 
-// ConvolutionType the type of convolution.
-func (x *ConvolutionDescriptor) ConvolutionType() ConvolutionType {
-	_r := objc.Send[ConvolutionType](objref.IDOf(x), objc.RegisterName("convolutionType"))
+// ConvolutionType returns the type of convolution.
+func (cd *ConvolutionDescriptor) ConvolutionType() ConvolutionType {
+	_r := objc.Send[ConvolutionType](objref.IDOf(cd), objc.RegisterName("convolutionType"))
 	return _r
 }
 
-// KernelWidth the convolution kernel size in x.
-func (x *ConvolutionDescriptor) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+// KernelWidth returns the convolution kernel size in x.
+func (cd *ConvolutionDescriptor) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// KernelHeight the convolution kernel size in y.
-func (x *ConvolutionDescriptor) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+// KernelHeight returns the convolution kernel size in y.
+func (cd *ConvolutionDescriptor) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// InputFeatureChannelCount number of channels in the input tensor
-func (x *ConvolutionDescriptor) InputFeatureChannelCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannelCount"))
+// InputFeatureChannelCount returns number of channels in the input tensor
+func (cd *ConvolutionDescriptor) InputFeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("inputFeatureChannelCount"))
 	return _r
 }
 
-// OutputFeatureChannelCount number of channels in the output tensor
-func (x *ConvolutionDescriptor) OutputFeatureChannelCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannelCount"))
+// OutputFeatureChannelCount returns number of channels in the output tensor
+func (cd *ConvolutionDescriptor) OutputFeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("outputFeatureChannelCount"))
 	return _r
 }
 
-// StrideInX the stride of the kernel in x.
-func (x *ConvolutionDescriptor) StrideInX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
+// StrideInX returns the stride of the kernel in x.
+func (cd *ConvolutionDescriptor) StrideInX() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("strideInX"))
 	return _r
 }
 
-// StrideInY the stride of the kernel in y.
-func (x *ConvolutionDescriptor) StrideInY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
+// StrideInY returns the stride of the kernel in y.
+func (cd *ConvolutionDescriptor) StrideInY() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("strideInY"))
 	return _r
 }
 
-// DilationRateInX the dilation rate i.e. stride of elements in the kernel in x.
-func (x *ConvolutionDescriptor) DilationRateInX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
+// DilationRateInX returns the dilation rate i.e. stride of elements in the kernel in x.
+func (cd *ConvolutionDescriptor) DilationRateInX() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
-// DilationRateInY the dilation rate i.e. stride of elements in the kernel in y.
-func (x *ConvolutionDescriptor) DilationRateInY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
+// DilationRateInY returns the dilation rate i.e. stride of elements in the kernel in y.
+func (cd *ConvolutionDescriptor) DilationRateInY() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
-// GroupCount number of blocked connections from input channels to output channels
-func (x *ConvolutionDescriptor) GroupCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupCount"))
+// GroupCount returns number of blocked connections from input channels to output channels
+func (cd *ConvolutionDescriptor) GroupCount() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("groupCount"))
 	return _r
 }
 
-// PaddingPolicy the padding policy to use.
-func (x *ConvolutionDescriptor) PaddingPolicy() PaddingPolicy {
-	_r := objc.Send[PaddingPolicy](objref.IDOf(x), objc.RegisterName("paddingPolicy"))
+// PaddingPolicy returns the padding policy to use.
+func (cd *ConvolutionDescriptor) PaddingPolicy() PaddingPolicy {
+	_r := objc.Send[PaddingPolicy](objref.IDOf(cd), objc.RegisterName("paddingPolicy"))
 	return _r
 }
 
-// PaddingSizeInX the pooling size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
-func (x *ConvolutionDescriptor) PaddingSizeInX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInX"))
+// PaddingSizeInX returns the pooling size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+func (cd *ConvolutionDescriptor) PaddingSizeInX() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("paddingSizeInX"))
 	return _r
 }
 
-// PaddingSizeInY the pooling size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
-func (x *ConvolutionDescriptor) PaddingSizeInY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInY"))
+// PaddingSizeInY returns the pooling size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+func (cd *ConvolutionDescriptor) PaddingSizeInY() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("paddingSizeInY"))
 	return _r
 }
 
-// IsConvolutionTranspose a flag to indicate if this is a convolution transpose
-func (x *ConvolutionDescriptor) IsConvolutionTranspose() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConvolutionTranspose"))
+// IsConvolutionTranspose reports whether a flag to indicate if this is a convolution transpose
+func (cd *ConvolutionDescriptor) IsConvolutionTranspose() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isConvolutionTranspose"))
 	return _r
 }
 
-// UsesDepthwiseConvolution a flag to indicate depthwise convolution
-func (x *ConvolutionDescriptor) UsesDepthwiseConvolution() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDepthwiseConvolution"))
+// UsesDepthwiseConvolution reports whether a flag to indicate depthwise convolution
+func (cd *ConvolutionDescriptor) UsesDepthwiseConvolution() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("usesDepthwiseConvolution"))
 	return _r
 }
-
-// ConvolutionDescriptorable is the interface implemented by [ConvolutionDescriptor], for mocking and DI.
-type ConvolutionDescriptorable interface {
-	obj.Object
-	ConvolutionType() ConvolutionType
-	KernelWidth() int
-	KernelHeight() int
-	InputFeatureChannelCount() int
-	OutputFeatureChannelCount() int
-	StrideInX() int
-	StrideInY() int
-	DilationRateInX() int
-	DilationRateInY() int
-	GroupCount() int
-	PaddingPolicy() PaddingPolicy
-	PaddingSizeInX() int
-	PaddingSizeInY() int
-	IsConvolutionTranspose() bool
-	UsesDepthwiseConvolution() bool
-}
-
-var _ ConvolutionDescriptorable = (*ConvolutionDescriptor)(nil)

@@ -46,24 +46,24 @@ func linkedFunctionsAdopt(id objc.ID) *LinkedFunctions {
 }
 
 // Description returns the object's -description text.
-func (x *LinkedFunctions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lf *LinkedFunctions) Description() string {
+	return rt.Description(objref.IDOf(lf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LinkedFunctions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lf *LinkedFunctions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LinkedFunctions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lf *LinkedFunctions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LinkedFunctions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lf *LinkedFunctions) String() string {
+	return rt.Description(objref.IDOf(lf))
 }
 
 // NewLinkedFunctions creates a new LinkedFunctions.
@@ -72,68 +72,47 @@ func NewLinkedFunctions() *LinkedFunctions {
 	return linkedFunctionsAdopt(_id)
 }
 
-// WithGroups an optional list of groups specifying which functions your shader can call at each call site.
-func (x *LinkedFunctions) WithGroups(groups obj.Object) *LinkedFunctions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), objref.IDOf(groups))
-	return x
+// WithGroups sets an optional list of groups specifying which functions your shader can call at each call site.
+func (lf *LinkedFunctions) WithGroups(groups obj.Object) *LinkedFunctions {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setGroups:"), objref.IDOf(groups))
+	return lf
 }
 
-// Functions the array of functions to be AIR linked.
-func (x *LinkedFunctions) Functions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functions"))
+// Functions returns the array of functions to be AIR linked.
+func (lf *LinkedFunctions) Functions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("functions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetFunctions wraps the corresponding Objective-C method.
-func (x *LinkedFunctions) SetFunctions(functions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctions:"), purego.SliceToNSArray(functions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (lf *LinkedFunctions) SetFunctions(functions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setFunctions:"), purego.SliceToNSArray(functions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// BinaryFunctions the array of functions compiled to binary to be linked.
-func (x *LinkedFunctions) BinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryFunctions"))
+// BinaryFunctions returns the array of functions compiled to binary to be linked.
+func (lf *LinkedFunctions) BinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("binaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryFunctions wraps the corresponding Objective-C method.
-func (x *LinkedFunctions) SetBinaryFunctions(binaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryFunctions:"), purego.SliceToNSArray(binaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (lf *LinkedFunctions) SetBinaryFunctions(binaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setBinaryFunctions:"), purego.SliceToNSArray(binaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Groups groups of functions, grouped to match callsites in the shader code.
-func (x *LinkedFunctions) Groups() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groups"))
+// Groups returns groups of functions, grouped to match callsites in the shader code.
+func (lf *LinkedFunctions) Groups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("groups"))
 	return obj.Wrap(_r)
 }
 
-// SetGroups wraps the corresponding Objective-C method.
-func (x *LinkedFunctions) SetGroups(groups obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), objref.IDOf(groups))
-}
-
-// PrivateFunctions the array of functions to be AIR linked. These functions are not exported by the pipeline state as MTLFunctionHandle objects. Function pointer support is not required to link private functions.
-func (x *LinkedFunctions) PrivateFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateFunctions"))
+// PrivateFunctions returns the array of functions to be AIR linked. These functions are not exported by the pipeline state as MTLFunctionHandle objects. Function pointer support is not required to link private functions.
+func (lf *LinkedFunctions) PrivateFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("privateFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetPrivateFunctions wraps the corresponding Objective-C method.
-func (x *LinkedFunctions) SetPrivateFunctions(privateFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateFunctions:"), purego.SliceToNSArray(privateFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (lf *LinkedFunctions) SetPrivateFunctions(privateFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setPrivateFunctions:"), purego.SliceToNSArray(privateFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// LinkedFunctionsable is the interface implemented by [LinkedFunctions], for mocking and DI.
-type LinkedFunctionsable interface {
-	obj.Object
-	WithGroups(groups obj.Object) *LinkedFunctions
-	Functions() []obj.Object
-	SetFunctions(functions []obj.Object)
-	BinaryFunctions() []obj.Object
-	SetBinaryFunctions(binaryFunctions []obj.Object)
-	Groups() obj.Object
-	SetGroups(groups obj.Object)
-	PrivateFunctions() []obj.Object
-	SetPrivateFunctions(privateFunctions []obj.Object)
-}
-
-var _ LinkedFunctionsable = (*LinkedFunctions)(nil)

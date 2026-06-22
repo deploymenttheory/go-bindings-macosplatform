@@ -48,78 +48,65 @@ func oBEXSessionAdopt(id objc.ID) *OBEXSession {
 }
 
 // Description returns the object's -description text.
-func (x *OBEXSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (os *OBEXSession) Description() string {
+	return rt.Description(objref.IDOf(os))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OBEXSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (os *OBEXSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(os), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OBEXSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (os *OBEXSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(os), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OBEXSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (os *OBEXSession) String() string {
+	return rt.Description(objref.IDOf(os))
 }
 
 // GetAvailableCommandPayloadLength determine the maximum amount of data you can send in a particular command as an OBEX client session.
-func (x *OBEXSession) GetAvailableCommandPayloadLength(inOpCode uint8) uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAvailableCommandPayloadLength:"), inOpCode)
+func (os *OBEXSession) GetAvailableCommandPayloadLength(inOpCode uint8) uint16 {
+	_r := objc.Send[uint16](objref.IDOf(os), objc.RegisterName("getAvailableCommandPayloadLength:"), inOpCode)
 	return _r
 }
 
 // GetAvailableCommandResponsePayloadLength determine the maximum amount of data you can send in a particular command response as an OBEX server session.
-func (x *OBEXSession) GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAvailableCommandResponsePayloadLength:"), inOpCode)
+func (os *OBEXSession) GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16 {
+	_r := objc.Send[uint16](objref.IDOf(os), objc.RegisterName("getAvailableCommandResponsePayloadLength:"), inOpCode)
 	return _r
 }
 
 // GetMaxPacketLength gets current max packet length.
-func (x *OBEXSession) GetMaxPacketLength() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getMaxPacketLength"))
+func (os *OBEXSession) GetMaxPacketLength() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(os), objc.RegisterName("getMaxPacketLength"))
 	return _r
 }
 
-// HasOpenOBEXConnection has a successful connect packet been sent and received? This API tells you so.
-func (x *OBEXSession) HasOpenOBEXConnection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOpenOBEXConnection"))
+// HasOpenOBEXConnection reports whether has a successful connect packet been sent and received? This API tells you so.
+func (os *OBEXSession) HasOpenOBEXConnection() bool {
+	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("hasOpenOBEXConnection"))
 	return _r
 }
 
-// HasOpenTransportConnection you must override this - it will be called periodically to determine if a transport connection is open or not.
-func (x *OBEXSession) HasOpenTransportConnection() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("hasOpenTransportConnection"))
+// HasOpenTransportConnection returns you must override this - it will be called periodically to determine if a transport connection is open or not.
+func (os *OBEXSession) HasOpenTransportConnection() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(os), objc.RegisterName("hasOpenTransportConnection"))
 	return _r
 }
 
-// CloseTransportConnection you must override this - it will be called when the transport connection should be shutdown.
-func (x *OBEXSession) CloseTransportConnection() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("closeTransportConnection"))
+// CloseTransportConnection returns you must override this - it will be called when the transport connection should be shutdown.
+func (os *OBEXSession) CloseTransportConnection() int32 {
+	_r := objc.Send[int32](objref.IDOf(os), objc.RegisterName("closeTransportConnection"))
 	return _r
 }
-
-// OBEXSessionable is the interface implemented by [OBEXSession], for mocking and DI.
-type OBEXSessionable interface {
-	obj.Object
-	GetAvailableCommandPayloadLength(inOpCode uint8) uint16
-	GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16
-	GetMaxPacketLength() uint16
-	HasOpenOBEXConnection() bool
-	HasOpenTransportConnection() uint8
-	CloseTransportConnection() int32
-}
-
-var _ OBEXSessionable = (*OBEXSession)(nil)
 
 // isOBEXSession marks OBEXSession — and, by embedding promotion, its
 // subclasses — as a member of the OBEXSession hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *OBEXSession) isOBEXSession() {}
+func (os *OBEXSession) isOBEXSession() {}
 
 var _ OBEXSessionProvider = (*OBEXSession)(nil)

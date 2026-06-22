@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewVirtioConsoleDeviceSerialPortConfiguration() *VirtioConsoleDeviceSerialP
 	return virtioConsoleDeviceSerialPortConfigurationAdopt(_id)
 }
 
-// WithAttachment the object that defines how the configuration of the virtual machine’s serial port interfaces.
-func (x *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-	return x
+// WithAttachment sets the object that defines how the configuration of the virtual machine’s serial port interfaces.
+func (vcdspc *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vcdspc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return vcdspc
 }
-
-// VirtioConsoleDeviceSerialPortConfigurationable is the interface implemented by [VirtioConsoleDeviceSerialPortConfiguration], for mocking and DI.
-type VirtioConsoleDeviceSerialPortConfigurationable interface {
-	obj.Object
-	WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration
-}
-
-var _ VirtioConsoleDeviceSerialPortConfigurationable = (*VirtioConsoleDeviceSerialPortConfiguration)(nil)
 
 var _ SerialPortConfigurationProvider = (*VirtioConsoleDeviceSerialPortConfiguration)(nil)

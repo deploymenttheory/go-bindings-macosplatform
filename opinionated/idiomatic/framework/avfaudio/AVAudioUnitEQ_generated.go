@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,48 +52,31 @@ func NewAudioUnitEQWithNumberOfBands(numberOfBands int) *AudioUnitEQ {
 	return audioUnitEQAdopt(_id)
 }
 
-// WithGlobalGain the overall gain adjustment that the audio unit applies to the signal, in decibels.
-func (x *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalGain:"), globalGain)
-	return x
+// WithGlobalGain sets the overall gain adjustment that the audio unit applies to the signal, in decibels.
+func (aue *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
+	objc.Send[objc.ID](objref.IDOf(aue), objc.RegisterName("setGlobalGain:"), globalGain)
+	return aue
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (aue *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
+	objc.Send[objc.ID](objref.IDOf(aue), objc.RegisterName("setBypass:"), bypass)
+	return aue
 }
 
-// Bands array of AVAudioUnitEQFilterParameters objects. The number of elements in the array is equal to the number of bands.
+// Bands returns array of AVAudioUnitEQFilterParameters objects. The number of elements in the array is equal to the number of bands.
 //
 // Bands returns the collection as a Go slice.
-func (x *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bands"))
+func (aue *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
+	_arr := objc.Send[objc.ID](objref.IDOf(aue), objc.RegisterName("bands"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioUnitEQFilterParameters { return AudioUnitEQFilterParametersFromID(_id) })
 }
 
-// GlobalGain overall gain adjustment applied to the signal. Range:     -96 -> 24 Default:   0 Unit:      dB
-func (x *AudioUnitEQ) GlobalGain() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("globalGain"))
+// GlobalGain returns overall gain adjustment applied to the signal. Range:     -96 -> 24 Default:   0 Unit:      dB
+func (aue *AudioUnitEQ) GlobalGain() float32 {
+	_r := objc.Send[float32](objref.IDOf(aue), objc.RegisterName("globalGain"))
 	return _r
 }
-
-// SetGlobalGain wraps the corresponding Objective-C method.
-func (x *AudioUnitEQ) SetGlobalGain(globalGain float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalGain:"), globalGain)
-}
-
-// AudioUnitEQable is the interface implemented by [AudioUnitEQ], for mocking and DI.
-type AudioUnitEQable interface {
-	obj.Object
-	WithGlobalGain(globalGain float32) *AudioUnitEQ
-	WithBypass(bypass bool) *AudioUnitEQ
-	Bands() []*AudioUnitEQFilterParameters
-	GlobalGain() float32
-	SetGlobalGain(globalGain float32)
-}
-
-var _ AudioUnitEQable = (*AudioUnitEQ)(nil)
 
 var _ AudioUnitEffectProvider = (*AudioUnitEQ)(nil)
 

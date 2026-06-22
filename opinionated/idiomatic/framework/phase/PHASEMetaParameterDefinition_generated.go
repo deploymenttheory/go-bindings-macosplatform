@@ -47,23 +47,15 @@ func metaParameterDefinitionAdopt(id objc.ID) *MetaParameterDefinition {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MetaParameterDefinition) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mpd *MetaParameterDefinition) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mpd), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// MetaParameterDefinitionable is the interface implemented by [MetaParameterDefinition], for mocking and DI.
-type MetaParameterDefinitionable interface {
-	obj.Object
-	Value() obj.Object
-}
-
-var _ MetaParameterDefinitionable = (*MetaParameterDefinition)(nil)
 
 // isMetaParameterDefinition marks MetaParameterDefinition — and, by embedding promotion, its
 // subclasses — as a member of the MetaParameterDefinition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetaParameterDefinition) isMetaParameterDefinition() {}
+func (mpd *MetaParameterDefinition) isMetaParameterDefinition() {}
 
 var _ MetaParameterDefinitionProvider = (*MetaParameterDefinition)(nil)
 

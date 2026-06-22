@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,53 +51,40 @@ func NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKe
 }
 
 // WithReturnValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMWheelEvent) WithReturnValue(returnValue bool) *DOMWheelEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
-	return x
+func (dwe *DOMWheelEvent) WithReturnValue(returnValue bool) *DOMWheelEvent {
+	objc.Send[objc.ID](objref.IDOf(dwe), objc.RegisterName("setReturnValue:"), returnValue)
+	return dwe
 }
 
 // WithCancelBubble sets the property and returns the receiver so calls can be chained.
-func (x *DOMWheelEvent) WithCancelBubble(cancelBubble bool) *DOMWheelEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
-	return x
+func (dwe *DOMWheelEvent) WithCancelBubble(cancelBubble bool) *DOMWheelEvent {
+	objc.Send[objc.ID](objref.IDOf(dwe), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return dwe
 }
 
 // WheelDeltaX wraps the corresponding Objective-C method.
-func (x *DOMWheelEvent) WheelDeltaX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("wheelDeltaX"))
+func (dwe *DOMWheelEvent) WheelDeltaX() int {
+	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDeltaX"))
 	return _r
 }
 
 // WheelDeltaY wraps the corresponding Objective-C method.
-func (x *DOMWheelEvent) WheelDeltaY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("wheelDeltaY"))
+func (dwe *DOMWheelEvent) WheelDeltaY() int {
+	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDeltaY"))
 	return _r
 }
 
 // WheelDelta wraps the corresponding Objective-C method.
-func (x *DOMWheelEvent) WheelDelta() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("wheelDelta"))
+func (dwe *DOMWheelEvent) WheelDelta() int {
+	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDelta"))
 	return _r
 }
 
 // IsHorizontal wraps the corresponding Objective-C method.
-func (x *DOMWheelEvent) IsHorizontal() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHorizontal"))
+func (dwe *DOMWheelEvent) IsHorizontal() bool {
+	_r := objc.Send[bool](objref.IDOf(dwe), objc.RegisterName("isHorizontal"))
 	return _r
 }
-
-// DOMWheelEventable is the interface implemented by [DOMWheelEvent], for mocking and DI.
-type DOMWheelEventable interface {
-	obj.Object
-	WithReturnValue(returnValue bool) *DOMWheelEvent
-	WithCancelBubble(cancelBubble bool) *DOMWheelEvent
-	WheelDeltaX() int
-	WheelDeltaY() int
-	WheelDelta() int
-	IsHorizontal() bool
-}
-
-var _ DOMWheelEventable = (*DOMWheelEvent)(nil)
 
 var _ DOMMouseEventProvider = (*DOMWheelEvent)(nil)
 

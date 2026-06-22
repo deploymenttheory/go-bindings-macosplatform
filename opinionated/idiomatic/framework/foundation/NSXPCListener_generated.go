@@ -46,24 +46,24 @@ func xPCListenerAdopt(id objc.ID) *XPCListener {
 }
 
 // Description returns the object's -description text.
-func (x *XPCListener) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (xl *XPCListener) Description() string {
+	return rt.Description(objref.IDOf(xl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XPCListener) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (xl *XPCListener) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(xl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XPCListener) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (xl *XPCListener) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(xl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *XPCListener) String() string {
-	return rt.Description(objref.IDOf(x))
+func (xl *XPCListener) String() string {
+	return rt.Description(objref.IDOf(xl))
 }
 
 // NewXPCListenerWithMachServiceName initializes a listener in a LaunchAgent or LaunchDaemon which has a name advertised in a launchd.plist file.
@@ -74,52 +74,38 @@ func NewXPCListenerWithMachServiceName(name string) *XPCListener {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *XPCListener) WithScriptingProperties(scriptingProperties obj.Object) *XPCListener {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (xl *XPCListener) WithScriptingProperties(scriptingProperties obj.Object) *XPCListener {
+	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return xl
 }
 
 // Resume starts processing of incoming requests.
-func (x *XPCListener) Resume() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
+func (xl *XPCListener) Resume() {
+	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("resume"))
 }
 
 // Suspend suspends the listener.
-func (x *XPCListener) Suspend() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspend"))
+func (xl *XPCListener) Suspend() {
+	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("suspend"))
 }
 
 // Activate activates the listener.
-func (x *XPCListener) Activate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
+func (xl *XPCListener) Activate() {
+	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("activate"))
 }
 
 // Invalidate invalidates the listener.
-func (x *XPCListener) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (xl *XPCListener) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("invalidate"))
 }
 
 // SetConnectionCodeSigningRequirement sets the code signing requirement for connections to this listener.
-func (x *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionCodeSigningRequirement:"), purego.NSString(requirement))
+func (xl *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
+	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setConnectionCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *XPCListener) Endpoint() *XPCListenerEndpoint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (xl *XPCListener) Endpoint() *XPCListenerEndpoint {
+	_r := objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("endpoint"))
 	return XPCListenerEndpointFromID(_r)
 }
-
-// XPCListenerable is the interface implemented by [XPCListener], for mocking and DI.
-type XPCListenerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *XPCListener
-	Resume()
-	Suspend()
-	Activate()
-	Invalidate()
-	SetConnectionCodeSigningRequirement(requirement string)
-	Endpoint() *XPCListenerEndpoint
-}
-
-var _ XPCListenerable = (*XPCListener)(nil)

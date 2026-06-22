@@ -46,24 +46,24 @@ func appleScriptAdopt(id objc.ID) *AppleScript {
 }
 
 // Description returns the object's -description text.
-func (x *AppleScript) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AppleScript) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppleScript) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *AppleScript) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppleScript) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *AppleScript) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppleScript) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AppleScript) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewAppleScriptWithContentsOfURLError initializes a newly allocated script instance from the source identified by the passed URL.
@@ -81,32 +81,32 @@ func NewAppleScriptWithSource(source string) *AppleScript {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AppleScript) WithScriptingProperties(scriptingProperties obj.Object) *AppleScript {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (as *AppleScript) WithScriptingProperties(scriptingProperties obj.Object) *AppleScript {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return as
 }
 
 // CompileAndReturnError compiles the receiver, if it is not already compiled.
-func (x *AppleScript) CompileAndReturnError(errorInfo obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
+func (as *AppleScript) CompileAndReturnError(errorInfo obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
 	return _r
 }
 
 // ExecuteAndReturnError executes the receiver, compiling it first if it is not already compiled.
-func (x *AppleScript) ExecuteAndReturnError(errorInfo obj.Object) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
+func (as *AppleScript) ExecuteAndReturnError(errorInfo obj.Object) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // ExecuteAppleEventError executes an Apple event in the context of the receiver, as a means of allowing the application to invoke a handler in the script.
-func (x *AppleScript) ExecuteAppleEventError(event *AppleEventDescriptor, errorInfo obj.Object) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
+func (as *AppleScript) ExecuteAppleEventError(event *AppleEventDescriptor, errorInfo obj.Object) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // Source wraps the corresponding Objective-C method.
-func (x *AppleScript) Source() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+func (as *AppleScript) Source() string {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
 	}
@@ -114,20 +114,7 @@ func (x *AppleScript) Source() string {
 }
 
 // IsCompiled wraps the corresponding Objective-C method.
-func (x *AppleScript) IsCompiled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompiled"))
+func (as *AppleScript) IsCompiled() bool {
+	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isCompiled"))
 	return _r
 }
-
-// AppleScriptable is the interface implemented by [AppleScript], for mocking and DI.
-type AppleScriptable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *AppleScript
-	CompileAndReturnError(errorInfo obj.Object) bool
-	ExecuteAndReturnError(errorInfo obj.Object) *AppleEventDescriptor
-	ExecuteAppleEventError(event *AppleEventDescriptor, errorInfo obj.Object) *AppleEventDescriptor
-	Source() string
-	IsCompiled() bool
-}
-
-var _ AppleScriptable = (*AppleScript)(nil)

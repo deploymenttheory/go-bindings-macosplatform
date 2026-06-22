@@ -48,69 +48,52 @@ func overlayRendererAdopt(id objc.ID) *OverlayRenderer {
 }
 
 // Description returns the object's -description text.
-func (x *OverlayRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (or *OverlayRenderer) Description() string {
+	return rt.Description(objref.IDOf(or))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OverlayRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (or *OverlayRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(or), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OverlayRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (or *OverlayRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(or), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OverlayRenderer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (or *OverlayRenderer) String() string {
+	return rt.Description(objref.IDOf(or))
 }
 
-// WithAlpha the amount of transparency to apply to the overlay.
-func (x *OverlayRenderer) WithAlpha(alpha float64) *OverlayRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the amount of transparency to apply to the overlay.
+func (or *OverlayRenderer) WithAlpha(alpha float64) *OverlayRenderer {
+	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("setAlpha:"), alpha)
+	return or
 }
 
 // SetNeedsDisplay invalidates the entire contents of the overlay for all zoom scales.
-func (x *OverlayRenderer) SetNeedsDisplay() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay"))
+func (or *OverlayRenderer) SetNeedsDisplay() {
+	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("setNeedsDisplay"))
 }
 
 // Alpha wraps the corresponding Objective-C method.
-func (x *OverlayRenderer) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+func (or *OverlayRenderer) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(or), objc.RegisterName("alpha"))
 	return _r
-}
-
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *OverlayRenderer) SetAlpha(alpha float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // ContentScaleFactor wraps the corresponding Objective-C method.
-func (x *OverlayRenderer) ContentScaleFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contentScaleFactor"))
+func (or *OverlayRenderer) ContentScaleFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(or), objc.RegisterName("contentScaleFactor"))
 	return _r
 }
-
-// OverlayRendererable is the interface implemented by [OverlayRenderer], for mocking and DI.
-type OverlayRendererable interface {
-	obj.Object
-	WithAlpha(alpha float64) *OverlayRenderer
-	SetNeedsDisplay()
-	Alpha() float64
-	SetAlpha(alpha float64)
-	ContentScaleFactor() float64
-}
-
-var _ OverlayRendererable = (*OverlayRenderer)(nil)
 
 // isOverlayRenderer marks OverlayRenderer — and, by embedding promotion, its
 // subclasses — as a member of the OverlayRenderer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *OverlayRenderer) isOverlayRenderer() {}
+func (or *OverlayRenderer) isOverlayRenderer() {}
 
 var _ OverlayRendererProvider = (*OverlayRenderer)(nil)

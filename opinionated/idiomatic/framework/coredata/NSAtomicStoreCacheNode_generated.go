@@ -46,24 +46,24 @@ func atomicStoreCacheNodeAdopt(id objc.ID) *AtomicStoreCacheNode {
 }
 
 // Description returns the object's -description text.
-func (x *AtomicStoreCacheNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ascn *AtomicStoreCacheNode) Description() string {
+	return rt.Description(objref.IDOf(ascn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AtomicStoreCacheNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ascn *AtomicStoreCacheNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ascn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AtomicStoreCacheNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ascn *AtomicStoreCacheNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ascn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AtomicStoreCacheNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ascn *AtomicStoreCacheNode) String() string {
+	return rt.Description(objref.IDOf(ascn))
 }
 
 // NewAtomicStoreCacheNodeWithObjectID returns a cache node for the given managed object ID.
@@ -73,36 +73,20 @@ func NewAtomicStoreCacheNodeWithObjectID(moid *ManagedObjectID) *AtomicStoreCach
 	return atomicStoreCacheNodeAdopt(_id)
 }
 
-// WithPropertyCache the property cache dictionary of the node.
-func (x *AtomicStoreCacheNode) WithPropertyCache(propertyCache obj.Object) *AtomicStoreCacheNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyCache:"), objref.IDOf(propertyCache))
-	return x
+// WithPropertyCache sets the property cache dictionary of the node.
+func (ascn *AtomicStoreCacheNode) WithPropertyCache(propertyCache obj.Object) *AtomicStoreCacheNode {
+	objc.Send[objc.ID](objref.IDOf(ascn), objc.RegisterName("setPropertyCache:"), objref.IDOf(propertyCache))
+	return ascn
 }
 
 // ObjectID wraps the corresponding Objective-C method.
-func (x *AtomicStoreCacheNode) ObjectID() *ManagedObjectID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
+func (ascn *AtomicStoreCacheNode) ObjectID() *ManagedObjectID {
+	_r := objc.Send[objc.ID](objref.IDOf(ascn), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
 // PropertyCache wraps the corresponding Objective-C method.
-func (x *AtomicStoreCacheNode) PropertyCache() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyCache"))
+func (ascn *AtomicStoreCacheNode) PropertyCache() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ascn), objc.RegisterName("propertyCache"))
 	return obj.Wrap(_r)
 }
-
-// SetPropertyCache wraps the corresponding Objective-C method.
-func (x *AtomicStoreCacheNode) SetPropertyCache(propertyCache obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyCache:"), objref.IDOf(propertyCache))
-}
-
-// AtomicStoreCacheNodeable is the interface implemented by [AtomicStoreCacheNode], for mocking and DI.
-type AtomicStoreCacheNodeable interface {
-	obj.Object
-	WithPropertyCache(propertyCache obj.Object) *AtomicStoreCacheNode
-	ObjectID() *ManagedObjectID
-	PropertyCache() obj.Object
-	SetPropertyCache(propertyCache obj.Object)
-}
-
-var _ AtomicStoreCacheNodeable = (*AtomicStoreCacheNode)(nil)

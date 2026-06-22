@@ -46,24 +46,24 @@ func iOBluetoothDeviceInquiryAdopt(id objc.ID) *IOBluetoothDeviceInquiry {
 }
 
 // Description returns the object's -description text.
-func (x *IOBluetoothDeviceInquiry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ibdi *IOBluetoothDeviceInquiry) Description() string {
+	return rt.Description(objref.IDOf(ibdi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothDeviceInquiry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ibdi *IOBluetoothDeviceInquiry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ibdi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothDeviceInquiry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ibdi *IOBluetoothDeviceInquiry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ibdi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IOBluetoothDeviceInquiry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ibdi *IOBluetoothDeviceInquiry) String() string {
+	return rt.Description(objref.IDOf(ibdi))
 }
 
 // NewIOBluetoothDeviceInquiryWithDelegate initializes an alloc’d inquiry object, and sets the delegate object, as if -setDelegate: were called on it.
@@ -74,121 +74,77 @@ func NewIOBluetoothDeviceInquiryWithDelegate(delegate obj.Object) *IOBluetoothDe
 }
 
 // WithDelegate sets the property and returns the receiver so calls can be chained.
-func (x *IOBluetoothDeviceInquiry) WithDelegate(delegate obj.Object) *IOBluetoothDeviceInquiry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+func (ibdi *IOBluetoothDeviceInquiry) WithDelegate(delegate obj.Object) *IOBluetoothDeviceInquiry {
+	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return ibdi
 }
 
-// WithInquiryLength set the length of the inquiry that is performed each time -start is used on an inquiry object.
-func (x *IOBluetoothDeviceInquiry) WithInquiryLength(inquiryLength uint8) *IOBluetoothDeviceInquiry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInquiryLength:"), inquiryLength)
-	return x
+// WithInquiryLength sets set the length of the inquiry that is performed each time -start is used on an inquiry object.
+func (ibdi *IOBluetoothDeviceInquiry) WithInquiryLength(inquiryLength uint8) *IOBluetoothDeviceInquiry {
+	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setInquiryLength:"), inquiryLength)
+	return ibdi
 }
 
-// WithSearchType set the devices that are found.
-func (x *IOBluetoothDeviceInquiry) WithSearchType(searchType int) *IOBluetoothDeviceInquiry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchType:"), searchType)
-	return x
+// WithSearchType sets set the devices that are found.
+func (ibdi *IOBluetoothDeviceInquiry) WithSearchType(searchType int) *IOBluetoothDeviceInquiry {
+	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setSearchType:"), searchType)
+	return ibdi
 }
 
-// WithUpdateNewDeviceNames sets whether or not the inquiry object will retrieve the names of devices found during the search.
-func (x *IOBluetoothDeviceInquiry) WithUpdateNewDeviceNames(updateNewDeviceNames bool) *IOBluetoothDeviceInquiry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateNewDeviceNames:"), updateNewDeviceNames)
-	return x
+// WithUpdateNewDeviceNames sets sets whether or not the inquiry object will retrieve the names of devices found during the search.
+func (ibdi *IOBluetoothDeviceInquiry) WithUpdateNewDeviceNames(updateNewDeviceNames bool) *IOBluetoothDeviceInquiry {
+	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setUpdateNewDeviceNames:"), updateNewDeviceNames)
+	return ibdi
 }
 
-// Start tells inquiry object to begin the inquiry and name updating process, if specified.
-func (x *IOBluetoothDeviceInquiry) Start() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("start"))
+// Start returns tells inquiry object to begin the inquiry and name updating process, if specified.
+func (ibdi *IOBluetoothDeviceInquiry) Start() int {
+	_r := objc.Send[int](objref.IDOf(ibdi), objc.RegisterName("start"))
 	return _r
 }
 
-// Stop halts the inquiry object. Could either stop the search for new devices, or the updating of found device names.
-func (x *IOBluetoothDeviceInquiry) Stop() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stop"))
+// Stop returns halts the inquiry object. Could either stop the search for new devices, or the updating of found device names.
+func (ibdi *IOBluetoothDeviceInquiry) Stop() int {
+	_r := objc.Send[int](objref.IDOf(ibdi), objc.RegisterName("stop"))
 	return _r
 }
 
 // FoundDevices returns found IOBluetoothDevice objects as an array.
-func (x *IOBluetoothDeviceInquiry) FoundDevices() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("foundDevices"))
+func (ibdi *IOBluetoothDeviceInquiry) FoundDevices() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("foundDevices"))
 	return obj.Wrap(_r)
 }
 
 // ClearFoundDevices removes all found devices from the inquiry object.
-func (x *IOBluetoothDeviceInquiry) ClearFoundDevices() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearFoundDevices"))
+func (ibdi *IOBluetoothDeviceInquiry) ClearFoundDevices() {
+	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("clearFoundDevices"))
 }
 
 // SetSearchCriteriaMajorDeviceClassMinorDeviceClass use this method to set the criteria for the device search.
-func (x *IOBluetoothDeviceInquiry) SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchCriteria:majorDeviceClass:minorDeviceClass:"), inServiceClassMajor, inMajorDeviceClass, inMinorDeviceClass)
+func (ibdi *IOBluetoothDeviceInquiry) SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32) {
+	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setSearchCriteria:majorDeviceClass:minorDeviceClass:"), inServiceClassMajor, inMajorDeviceClass, inMinorDeviceClass)
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (ibdi *IOBluetoothDeviceInquiry) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
 // InquiryLength wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) InquiryLength() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("inquiryLength"))
+func (ibdi *IOBluetoothDeviceInquiry) InquiryLength() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibdi), objc.RegisterName("inquiryLength"))
 	return _r
-}
-
-// SetInquiryLength wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) SetInquiryLength(inquiryLength uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInquiryLength:"), inquiryLength)
 }
 
 // SearchType wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) SearchType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("searchType"))
+func (ibdi *IOBluetoothDeviceInquiry) SearchType() int {
+	_r := objc.Send[int](objref.IDOf(ibdi), objc.RegisterName("searchType"))
 	return _r
-}
-
-// SetSearchType wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) SetSearchType(searchType int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchType:"), searchType)
 }
 
 // UpdateNewDeviceNames wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) UpdateNewDeviceNames() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateNewDeviceNames"))
+func (ibdi *IOBluetoothDeviceInquiry) UpdateNewDeviceNames() bool {
+	_r := objc.Send[bool](objref.IDOf(ibdi), objc.RegisterName("updateNewDeviceNames"))
 	return _r
 }
-
-// SetUpdateNewDeviceNames wraps the corresponding Objective-C method.
-func (x *IOBluetoothDeviceInquiry) SetUpdateNewDeviceNames(updateNewDeviceNames bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateNewDeviceNames:"), updateNewDeviceNames)
-}
-
-// IOBluetoothDeviceInquiryable is the interface implemented by [IOBluetoothDeviceInquiry], for mocking and DI.
-type IOBluetoothDeviceInquiryable interface {
-	obj.Object
-	WithDelegate(delegate obj.Object) *IOBluetoothDeviceInquiry
-	WithInquiryLength(inquiryLength uint8) *IOBluetoothDeviceInquiry
-	WithSearchType(searchType int) *IOBluetoothDeviceInquiry
-	WithUpdateNewDeviceNames(updateNewDeviceNames bool) *IOBluetoothDeviceInquiry
-	Start() int
-	Stop() int
-	FoundDevices() obj.Object
-	ClearFoundDevices()
-	SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32)
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-	InquiryLength() uint8
-	SetInquiryLength(inquiryLength uint8)
-	SearchType() int
-	SetSearchType(searchType int)
-	UpdateNewDeviceNames() bool
-	SetUpdateNewDeviceNames(updateNewDeviceNames bool)
-}
-
-var _ IOBluetoothDeviceInquiryable = (*IOBluetoothDeviceInquiry)(nil)

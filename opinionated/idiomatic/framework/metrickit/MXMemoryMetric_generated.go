@@ -52,25 +52,16 @@ func NewMemoryMetric() *MemoryMetric {
 	return memoryMetricAdopt(_id)
 }
 
-// PeakMemoryUsage a single value representing the peak memory consumption of the application. Dimensioned as NSUnitInformationStorage.
-func (x *MemoryMetric) PeakMemoryUsage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peakMemoryUsage"))
+// PeakMemoryUsage returns a single value representing the peak memory consumption of the application. Dimensioned as NSUnitInformationStorage.
+func (mm *MemoryMetric) PeakMemoryUsage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("peakMemoryUsage"))
 	return obj.Wrap(_r)
 }
 
-// AverageSuspendedMemory average memory of the application upon suspend. Dimensioned as NSUnitInformationStorage.
-func (x *MemoryMetric) AverageSuspendedMemory() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageSuspendedMemory"))
+// AverageSuspendedMemory returns average memory of the application upon suspend. Dimensioned as NSUnitInformationStorage.
+func (mm *MemoryMetric) AverageSuspendedMemory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("averageSuspendedMemory"))
 	return obj.Wrap(_r)
 }
-
-// MemoryMetricable is the interface implemented by [MemoryMetric], for mocking and DI.
-type MemoryMetricable interface {
-	obj.Object
-	PeakMemoryUsage() obj.Object
-	AverageSuspendedMemory() obj.Object
-}
-
-var _ MemoryMetricable = (*MemoryMetric)(nil)
 
 var _ MetricProvider = (*MemoryMetric)(nil)

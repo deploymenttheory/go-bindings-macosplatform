@@ -46,24 +46,24 @@ func tokenDriverConfigurationAdopt(id objc.ID) *TokenDriverConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *TokenDriverConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tdc *TokenDriverConfiguration) Description() string {
+	return rt.Description(objref.IDOf(tdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenDriverConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tdc *TokenDriverConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenDriverConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tdc *TokenDriverConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenDriverConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tdc *TokenDriverConfiguration) String() string {
+	return rt.Description(objref.IDOf(tdc))
 }
 
 // NewTokenDriverConfiguration creates a new TokenDriverConfiguration.
@@ -73,35 +73,24 @@ func NewTokenDriverConfiguration() *TokenDriverConfiguration {
 }
 
 // AddTokenConfigurationForTokenInstanceID creates new configuration object for token with specified instanceID and adds it into tokenConfigurations dictionary. If configuration with specified instanceID already exists, it is replaced with new empty configuration.
-func (x *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID obj.Object) *TokenConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
+func (tdc *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID obj.Object) *TokenConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("addTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
 	return TokenConfigurationFromID(_r)
 }
 
 // RemoveTokenConfigurationForTokenInstanceID removes configuration with specified tokenID. Does nothing if no such token configuration exists.
-func (x *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
+func (tdc *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("removeTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
 }
 
-// ClassID classID of the token configuration. ClassID is taken from
-func (x *TokenDriverConfiguration) ClassID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classID"))
+// ClassID returns classID of the token configuration. ClassID is taken from
+func (tdc *TokenDriverConfiguration) ClassID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("classID"))
 	return obj.Wrap(_r)
 }
 
-// TokenConfigurations dictionary of all currently configured tokens for this token class, keyed by instanceID.
-func (x *TokenDriverConfiguration) TokenConfigurations() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenConfigurations"))
+// TokenConfigurations returns dictionary of all currently configured tokens for this token class, keyed by instanceID.
+func (tdc *TokenDriverConfiguration) TokenConfigurations() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("tokenConfigurations"))
 	return obj.Wrap(_r)
 }
-
-// TokenDriverConfigurationable is the interface implemented by [TokenDriverConfiguration], for mocking and DI.
-type TokenDriverConfigurationable interface {
-	obj.Object
-	AddTokenConfigurationForTokenInstanceID(instanceID obj.Object) *TokenConfiguration
-	RemoveTokenConfigurationForTokenInstanceID(instanceID obj.Object)
-	ClassID() obj.Object
-	TokenConfigurations() obj.Object
-}
-
-var _ TokenDriverConfigurationable = (*TokenDriverConfiguration)(nil)

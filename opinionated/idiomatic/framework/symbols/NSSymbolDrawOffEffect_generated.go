@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,45 +52,33 @@ func NewSymbolDrawOffEffect() *SymbolDrawOffEffect {
 }
 
 // EffectWithByLayer returns a copy of the effect requesting an animation that applies separately to each motion group.
-func (x *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+func (sdoe *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithByLayer"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
-func (x *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+func (sdoe *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithIndividually returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
-func (x *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIndividually"))
+func (sdoe *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithIndividually"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithReversed returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
-func (x *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithReversed"))
+func (sdoe *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithReversed"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithNonReversed returns a copy of the effect that only animates forwards. This cancels the reversed variant.
-func (x *SymbolDrawOffEffect) EffectWithNonReversed() *SymbolDrawOffEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithNonReversed"))
+func (sdoe *SymbolDrawOffEffect) EffectWithNonReversed() *SymbolDrawOffEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithNonReversed"))
 	return SymbolDrawOffEffectFromID(_r)
 }
-
-// SymbolDrawOffEffectable is the interface implemented by [SymbolDrawOffEffect], for mocking and DI.
-type SymbolDrawOffEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolDrawOffEffect
-	EffectWithWholeSymbol() *SymbolDrawOffEffect
-	EffectWithIndividually() *SymbolDrawOffEffect
-	EffectWithReversed() *SymbolDrawOffEffect
-	EffectWithNonReversed() *SymbolDrawOffEffect
-}
-
-var _ SymbolDrawOffEffectable = (*SymbolDrawOffEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolDrawOffEffect)(nil)

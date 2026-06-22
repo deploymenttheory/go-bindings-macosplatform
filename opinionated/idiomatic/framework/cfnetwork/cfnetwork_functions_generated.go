@@ -5,12 +5,13 @@
 package cfnetwork
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // CFNetworkCopyProxiesForAutoConfigurationScript reports an error if the CFNetwork framework function CFNetworkCopyProxiesForAutoConfigurationScript fails.

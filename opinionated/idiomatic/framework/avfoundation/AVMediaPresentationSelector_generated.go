@@ -46,24 +46,24 @@ func mediaPresentationSelectorAdopt(id objc.ID) *MediaPresentationSelector {
 }
 
 // Description returns the object's -description text.
-func (x *MediaPresentationSelector) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mps *MediaPresentationSelector) Description() string {
+	return rt.Description(objref.IDOf(mps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaPresentationSelector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mps *MediaPresentationSelector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaPresentationSelector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mps *MediaPresentationSelector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaPresentationSelector) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mps *MediaPresentationSelector) String() string {
+	return rt.Description(objref.IDOf(mps))
 }
 
 // NewMediaPresentationSelector creates a new MediaPresentationSelector.
@@ -73,8 +73,8 @@ func NewMediaPresentationSelector() *MediaPresentationSelector {
 }
 
 // DisplayNameForLocaleIdentifier returns the display name for the selector that best matches the specified locale identifier.
-func (x *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
+func (mps *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +82,8 @@ func (x *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentif
 }
 
 // Identifier provides the authored identifier for the selector.
-func (x *MediaPresentationSelector) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (mps *MediaPresentationSelector) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -93,17 +93,7 @@ func (x *MediaPresentationSelector) Identifier() string {
 // Settings provides selectable mutually exclusive settings for the selector.
 //
 // Settings returns the collection as a Go slice.
-func (x *MediaPresentationSelector) Settings() []*MediaPresentationSetting {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
+func (mps *MediaPresentationSelector) Settings() []*MediaPresentationSetting {
+	_arr := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("settings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaPresentationSetting { return MediaPresentationSettingFromID(_id) })
 }
-
-// MediaPresentationSelectorable is the interface implemented by [MediaPresentationSelector], for mocking and DI.
-type MediaPresentationSelectorable interface {
-	obj.Object
-	DisplayNameForLocaleIdentifier(localeIdentifier string) string
-	Identifier() string
-	Settings() []*MediaPresentationSetting
-}
-
-var _ MediaPresentationSelectorable = (*MediaPresentationSelector)(nil)

@@ -46,24 +46,24 @@ func webAuthenticationSessionWebBrowserSessionManagerAdopt(id objc.ID) *WebAuthe
 }
 
 // Description returns the object's -description text.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) Description() string {
+	return rt.Description(objref.IDOf(waswbsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(waswbsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(waswbsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) String() string {
+	return rt.Description(objref.IDOf(waswbsm))
 }
 
 // NewWebAuthenticationSessionWebBrowserSessionManager creates a new WebAuthenticationSessionWebBrowserSessionManager.
@@ -73,15 +73,7 @@ func NewWebAuthenticationSessionWebBrowserSessionManager() *WebAuthenticationSes
 }
 
 // WasLaunchedByAuthenticationServices wraps the corresponding Objective-C method.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) WasLaunchedByAuthenticationServices() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasLaunchedByAuthenticationServices"))
+func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) WasLaunchedByAuthenticationServices() bool {
+	_r := objc.Send[bool](objref.IDOf(waswbsm), objc.RegisterName("wasLaunchedByAuthenticationServices"))
 	return _r
 }
-
-// WebAuthenticationSessionWebBrowserSessionManagerable is the interface implemented by [WebAuthenticationSessionWebBrowserSessionManager], for mocking and DI.
-type WebAuthenticationSessionWebBrowserSessionManagerable interface {
-	obj.Object
-	WasLaunchedByAuthenticationServices() bool
-}
-
-var _ WebAuthenticationSessionWebBrowserSessionManagerable = (*WebAuthenticationSessionWebBrowserSessionManager)(nil)

@@ -53,37 +53,26 @@ func NewXPCCoder() *XPCCoder {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *XPCCoder) WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (xc *XPCCoder) WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder {
+	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return xc
 }
 
 // EncodeXPCObjectForKey encodes an object to send over an XPC connection.
-func (x *XPCCoder) EncodeXPCObjectForKey(xpcObject *Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeXPCObject:forKey:"), objref.IDOf(xpcObject), purego.NSString(key))
+func (xc *XPCCoder) EncodeXPCObjectForKey(xpcObject *Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("encodeXPCObject:forKey:"), objref.IDOf(xpcObject), purego.NSString(key))
 }
 
 // DecodeXPCObjectOfTypeForKey decodes an object and validates that its type matches the type a service provides over XPC.
-func (x *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeXPCObjectOfType:forKey:"), objref.IDOf(type_), purego.NSString(key))
+func (xc *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("decodeXPCObjectOfType:forKey:"), objref.IDOf(type_), purego.NSString(key))
 	return ObjectFromID(_r)
 }
 
 // Connection wraps the corresponding Objective-C method.
-func (x *XPCCoder) Connection() *XPCConnection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
+func (xc *XPCCoder) Connection() *XPCConnection {
+	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("connection"))
 	return XPCConnectionFromID(_r)
 }
-
-// XPCCoderable is the interface implemented by [XPCCoder], for mocking and DI.
-type XPCCoderable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder
-	EncodeXPCObjectForKey(xpcObject *Object, key string)
-	DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *Object
-	Connection() *XPCConnection
-}
-
-var _ XPCCoderable = (*XPCCoder)(nil)
 
 var _ CoderProvider = (*XPCCoder)(nil)

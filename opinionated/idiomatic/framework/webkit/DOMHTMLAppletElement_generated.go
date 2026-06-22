@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,377 +50,265 @@ func NewDOMHTMLAppletElement() *DOMHTMLAppletElement {
 }
 
 // WithAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithAlign(align string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-	return x
+func (dae *DOMHTMLAppletElement) WithAlign(align string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setAlign:"), purego.NSString(align))
+	return dae
 }
 
 // WithAlt sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithAlt(alt string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
-	return x
+func (dae *DOMHTMLAppletElement) WithAlt(alt string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setAlt:"), purego.NSString(alt))
+	return dae
 }
 
 // WithArchive sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithArchive(archive string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArchive:"), purego.NSString(archive))
-	return x
+func (dae *DOMHTMLAppletElement) WithArchive(archive string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setArchive:"), purego.NSString(archive))
+	return dae
 }
 
 // WithCode sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithCode(code string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCode:"), purego.NSString(code))
-	return x
+func (dae *DOMHTMLAppletElement) WithCode(code string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setCode:"), purego.NSString(code))
+	return dae
 }
 
 // WithCodeBase sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithCodeBase(codeBase string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodeBase:"), purego.NSString(codeBase))
-	return x
+func (dae *DOMHTMLAppletElement) WithCodeBase(codeBase string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setCodeBase:"), purego.NSString(codeBase))
+	return dae
 }
 
 // WithHeight sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithHeight(height string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), purego.NSString(height))
-	return x
+func (dae *DOMHTMLAppletElement) WithHeight(height string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setHeight:"), purego.NSString(height))
+	return dae
 }
 
 // WithHspace sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithHspace(hspace int) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHspace:"), hspace)
-	return x
+func (dae *DOMHTMLAppletElement) WithHspace(hspace int) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setHspace:"), hspace)
+	return dae
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithName(name string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (dae *DOMHTMLAppletElement) WithName(name string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setName:"), purego.NSString(name))
+	return dae
 }
 
 // WithObject sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithObject(object string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:"), purego.NSString(object))
-	return x
+func (dae *DOMHTMLAppletElement) WithObject(object string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setObject:"), purego.NSString(object))
+	return dae
 }
 
 // WithVspace sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithVspace(vspace int) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVspace:"), vspace)
-	return x
+func (dae *DOMHTMLAppletElement) WithVspace(vspace int) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setVspace:"), vspace)
+	return dae
 }
 
 // WithWidth sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithWidth(width string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
-	return x
+func (dae *DOMHTMLAppletElement) WithWidth(width string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setWidth:"), purego.NSString(width))
+	return dae
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithTitle(title string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dae *DOMHTMLAppletElement) WithTitle(title string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dae
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithLang(lang string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dae *DOMHTMLAppletElement) WithLang(lang string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dae
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithDir(dir string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dae *DOMHTMLAppletElement) WithDir(dir string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dae
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithTabIndex(tabIndex int) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dae *DOMHTMLAppletElement) WithTabIndex(tabIndex int) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dae
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithAccessKey(accessKey string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dae *DOMHTMLAppletElement) WithAccessKey(accessKey string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dae
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithInnerText(innerText string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dae *DOMHTMLAppletElement) WithInnerText(innerText string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dae
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithOuterText(outerText string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dae *DOMHTMLAppletElement) WithOuterText(outerText string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dae
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithContentEditable(contentEditable string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dae *DOMHTMLAppletElement) WithContentEditable(contentEditable string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dae
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithIdName(idName string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dae *DOMHTMLAppletElement) WithIDName(idName string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dae
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithScrollLeft(scrollLeft int) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dae *DOMHTMLAppletElement) WithScrollLeft(scrollLeft int) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dae
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithScrollTop(scrollTop int) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dae *DOMHTMLAppletElement) WithScrollTop(scrollTop int) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dae
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithInnerHTML(innerHTML string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dae *DOMHTMLAppletElement) WithInnerHTML(innerHTML string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dae
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithOuterHTML(outerHTML string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dae *DOMHTMLAppletElement) WithOuterHTML(outerHTML string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dae
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithClassName(className string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dae *DOMHTMLAppletElement) WithClassName(className string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dae
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithNodeValue(nodeValue string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dae *DOMHTMLAppletElement) WithNodeValue(nodeValue string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dae
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithPrefix(prefix string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dae *DOMHTMLAppletElement) WithPrefix(prefix string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dae
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAppletElement) WithTextContent(textContent string) *DOMHTMLAppletElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dae *DOMHTMLAppletElement) WithTextContent(textContent string) *DOMHTMLAppletElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dae
 }
 
 // Align wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Align() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+func (dae *DOMHTMLAppletElement) Align() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetAlign(align string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 }
 
 // Alt wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Alt() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alt"))
+func (dae *DOMHTMLAppletElement) Alt() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("alt"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAlt wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetAlt(alt string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 }
 
 // Archive wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Archive() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("archive"))
+func (dae *DOMHTMLAppletElement) Archive() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("archive"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetArchive wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetArchive(archive string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArchive:"), purego.NSString(archive))
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Code() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("code"))
+func (dae *DOMHTMLAppletElement) Code() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("code"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCode wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetCode(code string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCode:"), purego.NSString(code))
 }
 
 // CodeBase wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) CodeBase() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("codeBase"))
+func (dae *DOMHTMLAppletElement) CodeBase() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("codeBase"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCodeBase wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetCodeBase(codeBase string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodeBase:"), purego.NSString(codeBase))
 }
 
 // Height wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Height() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
+func (dae *DOMHTMLAppletElement) Height() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("height"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetHeight wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetHeight(height string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), purego.NSString(height))
 }
 
 // Hspace wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Hspace() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hspace"))
+func (dae *DOMHTMLAppletElement) Hspace() int {
+	_r := objc.Send[int](objref.IDOf(dae), objc.RegisterName("hspace"))
 	return _r
-}
-
-// SetHspace wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetHspace(hspace int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHspace:"), hspace)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (dae *DOMHTMLAppletElement) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Object wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Object() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("object"))
+func (dae *DOMHTMLAppletElement) Object() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("object"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetObject wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetObject(object string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:"), purego.NSString(object))
 }
 
 // Vspace wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Vspace() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vspace"))
+func (dae *DOMHTMLAppletElement) Vspace() int {
+	_r := objc.Send[int](objref.IDOf(dae), objc.RegisterName("vspace"))
 	return _r
 }
 
-// SetVspace wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetVspace(vspace int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVspace:"), vspace)
-}
-
 // Width wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) Width() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
+func (dae *DOMHTMLAppletElement) Width() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetWidth wraps the corresponding Objective-C method.
-func (x *DOMHTMLAppletElement) SetWidth(width string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
-}
-
-// DOMHTMLAppletElementable is the interface implemented by [DOMHTMLAppletElement], for mocking and DI.
-type DOMHTMLAppletElementable interface {
-	obj.Object
-	WithAlign(align string) *DOMHTMLAppletElement
-	WithAlt(alt string) *DOMHTMLAppletElement
-	WithArchive(archive string) *DOMHTMLAppletElement
-	WithCode(code string) *DOMHTMLAppletElement
-	WithCodeBase(codeBase string) *DOMHTMLAppletElement
-	WithHeight(height string) *DOMHTMLAppletElement
-	WithHspace(hspace int) *DOMHTMLAppletElement
-	WithName(name string) *DOMHTMLAppletElement
-	WithObject(object string) *DOMHTMLAppletElement
-	WithVspace(vspace int) *DOMHTMLAppletElement
-	WithWidth(width string) *DOMHTMLAppletElement
-	WithTitle(title string) *DOMHTMLAppletElement
-	WithLang(lang string) *DOMHTMLAppletElement
-	WithDir(dir string) *DOMHTMLAppletElement
-	WithTabIndex(tabIndex int) *DOMHTMLAppletElement
-	WithAccessKey(accessKey string) *DOMHTMLAppletElement
-	WithInnerText(innerText string) *DOMHTMLAppletElement
-	WithOuterText(outerText string) *DOMHTMLAppletElement
-	WithContentEditable(contentEditable string) *DOMHTMLAppletElement
-	WithIdName(idName string) *DOMHTMLAppletElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLAppletElement
-	WithScrollTop(scrollTop int) *DOMHTMLAppletElement
-	WithInnerHTML(innerHTML string) *DOMHTMLAppletElement
-	WithOuterHTML(outerHTML string) *DOMHTMLAppletElement
-	WithClassName(className string) *DOMHTMLAppletElement
-	WithNodeValue(nodeValue string) *DOMHTMLAppletElement
-	WithPrefix(prefix string) *DOMHTMLAppletElement
-	WithTextContent(textContent string) *DOMHTMLAppletElement
-	Align() string
-	SetAlign(align string)
-	Alt() string
-	SetAlt(alt string)
-	Archive() string
-	SetArchive(archive string)
-	Code() string
-	SetCode(code string)
-	CodeBase() string
-	SetCodeBase(codeBase string)
-	Height() string
-	SetHeight(height string)
-	Hspace() int
-	SetHspace(hspace int)
-	Name() string
-	SetName(name string)
-	Object() string
-	SetObject(object string)
-	Vspace() int
-	SetVspace(vspace int)
-	Width() string
-	SetWidth(width string)
-}
-
-var _ DOMHTMLAppletElementable = (*DOMHTMLAppletElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLAppletElement)(nil)
 

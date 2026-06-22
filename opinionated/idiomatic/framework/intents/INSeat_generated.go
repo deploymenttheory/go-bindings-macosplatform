@@ -46,24 +46,24 @@ func seatAdopt(id objc.ID) *Seat {
 }
 
 // Description returns the object's -description text.
-func (x *Seat) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Seat) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Seat) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Seat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Seat) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Seat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Seat) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Seat) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSeatWithSeatSectionSeatRowSeatNumberSeatingType creates a new seat object containing the required seat information.
@@ -74,8 +74,8 @@ func NewSeatWithSeatSectionSeatRowSeatNumberSeatingType(seatSection string, seat
 }
 
 // SeatSection wraps the corresponding Objective-C method.
-func (x *Seat) SeatSection() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatSection"))
+func (s *Seat) SeatSection() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("seatSection"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *Seat) SeatSection() string {
 }
 
 // SeatRow wraps the corresponding Objective-C method.
-func (x *Seat) SeatRow() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatRow"))
+func (s *Seat) SeatRow() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("seatRow"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +92,8 @@ func (x *Seat) SeatRow() string {
 }
 
 // SeatNumber wraps the corresponding Objective-C method.
-func (x *Seat) SeatNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatNumber"))
+func (s *Seat) SeatNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("seatNumber"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,21 +101,10 @@ func (x *Seat) SeatNumber() string {
 }
 
 // SeatingType wraps the corresponding Objective-C method.
-func (x *Seat) SeatingType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatingType"))
+func (s *Seat) SeatingType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("seatingType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Seatable is the interface implemented by [Seat], for mocking and DI.
-type Seatable interface {
-	obj.Object
-	SeatSection() string
-	SeatRow() string
-	SeatNumber() string
-	SeatingType() string
-}
-
-var _ Seatable = (*Seat)(nil)

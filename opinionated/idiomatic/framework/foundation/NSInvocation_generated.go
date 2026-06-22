@@ -46,24 +46,24 @@ func invocationAdopt(id objc.ID) *Invocation {
 }
 
 // Description returns the object's -description text.
-func (x *Invocation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Invocation) Description() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Invocation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (i *Invocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Invocation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (i *Invocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Invocation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Invocation) String() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // NewInvocation creates a new Invocation.
@@ -72,68 +72,47 @@ func NewInvocation() *Invocation {
 	return invocationAdopt(_id)
 }
 
-// WithTarget the receiver’s target, or nil if the receiver has no target.
-func (x *Invocation) WithTarget(target obj.Object) *Invocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the receiver’s target, or nil if the receiver has no target.
+func (i *Invocation) WithTarget(target obj.Object) *Invocation {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return i
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Invocation) WithScriptingProperties(scriptingProperties obj.Object) *Invocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (i *Invocation) WithScriptingProperties(scriptingProperties obj.Object) *Invocation {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return i
 }
 
 // RetainArguments if the receiver hasn’t already done so, retains the target and all object arguments of the receiver and copies all of its C-string arguments and blocks. If a returnvalue has been set, this is also retained or copied.
-func (x *Invocation) RetainArguments() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retainArguments"))
+func (i *Invocation) RetainArguments() {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("retainArguments"))
 }
 
 // Invoke sends the receiver’s message (with arguments) to its target and sets the return value.
-func (x *Invocation) Invoke() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invoke"))
+func (i *Invocation) Invoke() {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invoke"))
 }
 
 // InvokeWithTarget sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
-func (x *Invocation) InvokeWithTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeWithTarget:"), objref.IDOf(target))
+func (i *Invocation) InvokeWithTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invokeWithTarget:"), objref.IDOf(target))
 }
 
 // MethodSignature wraps the corresponding Objective-C method.
-func (x *Invocation) MethodSignature() *MethodSignature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("methodSignature"))
+func (i *Invocation) MethodSignature() *MethodSignature {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("methodSignature"))
 	return MethodSignatureFromID(_r)
 }
 
 // ArgumentsRetained wraps the corresponding Objective-C method.
-func (x *Invocation) ArgumentsRetained() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("argumentsRetained"))
+func (i *Invocation) ArgumentsRetained() bool {
+	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("argumentsRetained"))
 	return _r
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *Invocation) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (i *Invocation) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
-
-// SetTarget wraps the corresponding Objective-C method.
-func (x *Invocation) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
-// Invocationable is the interface implemented by [Invocation], for mocking and DI.
-type Invocationable interface {
-	obj.Object
-	WithTarget(target obj.Object) *Invocation
-	WithScriptingProperties(scriptingProperties obj.Object) *Invocation
-	RetainArguments()
-	Invoke()
-	InvokeWithTarget(target obj.Object)
-	MethodSignature() *MethodSignature
-	ArgumentsRetained() bool
-	Target() obj.Object
-	SetTarget(target obj.Object)
-}
-
-var _ Invocationable = (*Invocation)(nil)

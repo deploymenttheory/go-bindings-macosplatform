@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func leaderboardSetAdopt(id objc.ID) *LeaderboardSet {
 }
 
 // Description returns the object's -description text.
-func (x *LeaderboardSet) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LeaderboardSet) Description() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LeaderboardSet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ls *LeaderboardSet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LeaderboardSet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ls *LeaderboardSet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LeaderboardSet) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LeaderboardSet) String() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // NewLeaderboardSet creates a new LeaderboardSet.
@@ -74,16 +75,16 @@ func NewLeaderboardSet() *LeaderboardSet {
 	return leaderboardSetAdopt(_id)
 }
 
-// WithIdentifier the identifier for the leaderboard set.
-func (x *LeaderboardSet) WithIdentifier(identifier string) *LeaderboardSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-	return x
+// WithIdentifier sets the identifier for the leaderboard set.
+func (ls *LeaderboardSet) WithIdentifier(identifier string) *LeaderboardSet {
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
+	return ls
 }
 
 // LoadLeaderboardsWithHandler loads the leaderboards in the leaderboard set.
 //
 // LoadLeaderboardsWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (result obj.Object, err error) {
+func (ls *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -95,7 +96,7 @@ func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (resul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadLeaderboardsWithHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("loadLeaderboardsWithHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -105,9 +106,9 @@ func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (resul
 	}
 }
 
-// Title localized set title.
-func (x *LeaderboardSet) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns localized set title.
+func (ls *LeaderboardSet) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -115,32 +116,27 @@ func (x *LeaderboardSet) Title() string {
 }
 
 // GroupIdentifier set when leaderboardSets have been designated a game group; set when loadLeaderboardSetsWithCompletionHandler has been called for leaderboards that support game groups
-func (x *LeaderboardSet) GroupIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+func (ls *LeaderboardSet) GroupIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Identifier leaderboard set.
-func (x *LeaderboardSet) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns leaderboard set.
+func (ls *LeaderboardSet) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetIdentifier wraps the corresponding Objective-C method.
-func (x *LeaderboardSet) SetIdentifier(identifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
 // LoadLeaderboards loads all of the leaderboards for the current leaderboard set.
 //
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
-func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (result obj.Object, err error) {
+func (ls *LeaderboardSet) LoadLeaderboards(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -152,7 +148,7 @@ func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (result obj.Objec
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadLeaderboardsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("loadLeaderboardsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -165,7 +161,7 @@ func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (result obj.Objec
 // LoadImage loads the localized image that you associate with the leaderboard set.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
-func (x *LeaderboardSet) LoadImage(ctx context.Context) (result obj.Object, err error) {
+func (ls *LeaderboardSet) LoadImage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -177,7 +173,7 @@ func (x *LeaderboardSet) LoadImage(ctx context.Context) (result obj.Object, err 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -186,18 +182,3 @@ func (x *LeaderboardSet) LoadImage(ctx context.Context) (result obj.Object, err 
 		return _zero, ctx.Err()
 	}
 }
-
-// LeaderboardSetable is the interface implemented by [LeaderboardSet], for mocking and DI.
-type LeaderboardSetable interface {
-	obj.Object
-	WithIdentifier(identifier string) *LeaderboardSet
-	LoadLeaderboardsWithHandler(ctx context.Context) (obj.Object, error)
-	Title() string
-	GroupIdentifier() string
-	Identifier() string
-	SetIdentifier(identifier string)
-	LoadLeaderboards(ctx context.Context) (obj.Object, error)
-	LoadImage(ctx context.Context) (obj.Object, error)
-}
-
-var _ LeaderboardSetable = (*LeaderboardSet)(nil)

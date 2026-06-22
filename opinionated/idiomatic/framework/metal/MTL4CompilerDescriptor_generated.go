@@ -46,24 +46,24 @@ func mTL4CompilerDescriptorAdopt(id objc.ID) *MTL4CompilerDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *MTL4CompilerDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcd *MTL4CompilerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4CompilerDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcd *MTL4CompilerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4CompilerDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcd *MTL4CompilerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4CompilerDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcd *MTL4CompilerDescriptor) String() string {
+	return rt.Description(objref.IDOf(mcd))
 }
 
 // NewMTL4CompilerDescriptor creates a new MTL4CompilerDescriptor.
@@ -72,32 +72,17 @@ func NewMTL4CompilerDescriptor() *MTL4CompilerDescriptor {
 	return mTL4CompilerDescriptorAdopt(_id)
 }
 
-// WithLabel assigns an optional descriptor label to the compiler for debugging purposes.
-func (x *MTL4CompilerDescriptor) WithLabel(label string) *MTL4CompilerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional descriptor label to the compiler for debugging purposes.
+func (mcd *MTL4CompilerDescriptor) WithLabel(label string) *MTL4CompilerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mcd
 }
 
-// Label assigns an optional descriptor label to the compiler for debugging purposes.
-func (x *MTL4CompilerDescriptor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns assigns an optional descriptor label to the compiler for debugging purposes.
+func (mcd *MTL4CompilerDescriptor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTL4CompilerDescriptor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// MTL4CompilerDescriptorable is the interface implemented by [MTL4CompilerDescriptor], for mocking and DI.
-type MTL4CompilerDescriptorable interface {
-	obj.Object
-	WithLabel(label string) *MTL4CompilerDescriptor
-	Label() string
-	SetLabel(label string)
-}
-
-var _ MTL4CompilerDescriptorable = (*MTL4CompilerDescriptor)(nil)

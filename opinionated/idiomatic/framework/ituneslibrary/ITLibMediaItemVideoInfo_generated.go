@@ -46,24 +46,24 @@ func libMediaItemVideoInfoAdopt(id objc.ID) *LibMediaItemVideoInfo {
 }
 
 // Description returns the object's -description text.
-func (x *LibMediaItemVideoInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lmivi *LibMediaItemVideoInfo) Description() string {
+	return rt.Description(objref.IDOf(lmivi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LibMediaItemVideoInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lmivi *LibMediaItemVideoInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lmivi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LibMediaItemVideoInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lmivi *LibMediaItemVideoInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lmivi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LibMediaItemVideoInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lmivi *LibMediaItemVideoInfo) String() string {
+	return rt.Description(objref.IDOf(lmivi))
 }
 
 // NewLibMediaItemVideoInfo creates a new LibMediaItemVideoInfo.
@@ -72,74 +72,59 @@ func NewLibMediaItemVideoInfo() *LibMediaItemVideoInfo {
 	return libMediaItemVideoInfoAdopt(_id)
 }
 
-// Series the name of TV series the video is associated with (implies track is a TV show).
-func (x *LibMediaItemVideoInfo) Series() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("series"))
+// Series returns the name of TV series the video is associated with (implies track is a TV show).
+func (lmivi *LibMediaItemVideoInfo) Series() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lmivi), objc.RegisterName("series"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SortSeries the name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
-func (x *LibMediaItemVideoInfo) SortSeries() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortSeries"))
+// SortSeries returns the name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
+func (lmivi *LibMediaItemVideoInfo) SortSeries() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lmivi), objc.RegisterName("sortSeries"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Season the name of TV season the video is associated with (implies the track is a TV show).
-func (x *LibMediaItemVideoInfo) Season() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("season"))
+// Season returns the name of TV season the video is associated with (implies the track is a TV show).
+func (lmivi *LibMediaItemVideoInfo) Season() int {
+	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("season"))
 	return _r
 }
 
-// Episode the TV episode the video is associated with (implies the track is a TV show).
-func (x *LibMediaItemVideoInfo) Episode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("episode"))
+// Episode returns the TV episode the video is associated with (implies the track is a TV show).
+func (lmivi *LibMediaItemVideoInfo) Episode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lmivi), objc.RegisterName("episode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// EpisodeOrder the TV episode order the video is associated with (implies the track is a TV show).
-func (x *LibMediaItemVideoInfo) EpisodeOrder() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("episodeOrder"))
+// EpisodeOrder returns the TV episode order the video is associated with (implies the track is a TV show).
+func (lmivi *LibMediaItemVideoInfo) EpisodeOrder() int {
+	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("episodeOrder"))
 	return _r
 }
 
-// IsHD whether the video is high definition.
-func (x *LibMediaItemVideoInfo) IsHD() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHD"))
+// IsHD reports whether the video is high definition.
+func (lmivi *LibMediaItemVideoInfo) IsHD() bool {
+	_r := objc.Send[bool](objref.IDOf(lmivi), objc.RegisterName("isHD"))
 	return _r
 }
 
-// VideoWidth the width of the video.
-func (x *LibMediaItemVideoInfo) VideoWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("videoWidth"))
+// VideoWidth returns the width of the video.
+func (lmivi *LibMediaItemVideoInfo) VideoWidth() int {
+	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("videoWidth"))
 	return _r
 }
 
-// VideoHeight the height of the video.
-func (x *LibMediaItemVideoInfo) VideoHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("videoHeight"))
+// VideoHeight returns the height of the video.
+func (lmivi *LibMediaItemVideoInfo) VideoHeight() int {
+	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("videoHeight"))
 	return _r
 }
-
-// LibMediaItemVideoInfoable is the interface implemented by [LibMediaItemVideoInfo], for mocking and DI.
-type LibMediaItemVideoInfoable interface {
-	obj.Object
-	Series() string
-	SortSeries() string
-	Season() int
-	Episode() string
-	EpisodeOrder() int
-	IsHD() bool
-	VideoWidth() int
-	VideoHeight() int
-}
-
-var _ LibMediaItemVideoInfoable = (*LibMediaItemVideoInfo)(nil)

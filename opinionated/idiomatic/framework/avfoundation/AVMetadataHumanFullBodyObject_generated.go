@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewMetadataHumanFullBodyObject() *MetadataHumanFullBodyObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataHumanFullBodyObject")), objc.RegisterName("new"))
 	return metadataHumanFullBodyObjectAdopt(_id)
 }
-
-// MetadataHumanFullBodyObjectable is the interface implemented by [MetadataHumanFullBodyObject], for mocking and DI.
-type MetadataHumanFullBodyObjectable interface {
-	obj.Object
-}
-
-var _ MetadataHumanFullBodyObjectable = (*MetadataHumanFullBodyObject)(nil)
 
 var _ MetadataBodyObjectProvider = (*MetadataHumanFullBodyObject)(nil)
 

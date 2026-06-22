@@ -52,82 +52,60 @@ func NewTriangleAccelerationStructure() *TriangleAccelerationStructure {
 	return triangleAccelerationStructureAdopt(_id)
 }
 
-// WithTriangleCount number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
-func (x *TriangleAccelerationStructure) WithTriangleCount(triangleCount int) *TriangleAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
-	return x
+// WithTriangleCount sets number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
+func (tas *TriangleAccelerationStructure) WithTriangleCount(triangleCount int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setTriangleCount:"), triangleCount)
+	return tas
 }
 
-// WithVertexStride offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
-func (x *TriangleAccelerationStructure) WithVertexStride(vertexStride int) *TriangleAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
-	return x
+// WithVertexStride sets offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
+func (tas *TriangleAccelerationStructure) WithVertexStride(vertexStride int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setVertexStride:"), vertexStride)
+	return tas
 }
 
-// WithVertexBufferOffset offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *TriangleAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset int) *TriangleAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
-	return x
+// WithVertexBufferOffset sets offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (tas *TriangleAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
+	return tas
 }
 
-// WithIndexBufferOffset offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *TriangleAccelerationStructure) WithIndexBufferOffset(indexBufferOffset int) *TriangleAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
-	return x
+// WithIndexBufferOffset sets offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (tas *TriangleAccelerationStructure) WithIndexBufferOffset(indexBufferOffset int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
+	return tas
 }
 
-// WithMaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *TriangleAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *TriangleAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
-	return x
+// WithMaskBufferOffset sets offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (tas *TriangleAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
+	return tas
 }
 
-// WithPolygonCount number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *TriangleAccelerationStructure) WithPolygonCount(polygonCount int) *TriangleAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
-	return x
+// WithPolygonCount sets number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (tas *TriangleAccelerationStructure) WithPolygonCount(polygonCount int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setPolygonCount:"), polygonCount)
+	return tas
 }
 
-// WithPolygonBuffers array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
-func (x *TriangleAccelerationStructure) WithPolygonBuffers(items ...obj.Object) *TriangleAccelerationStructure {
+// WithPolygonBuffers sets array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
+func (tas *TriangleAccelerationStructure) WithPolygonBuffers(items ...obj.Object) *TriangleAccelerationStructure {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonBuffers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setPolygonBuffers:"), _arr)
+	return tas
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *TriangleAccelerationStructure) WithLabel(label string) *TriangleAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (tas *TriangleAccelerationStructure) WithLabel(label string) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(tas), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return tas
 }
 
-// TriangleCount number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
-func (x *TriangleAccelerationStructure) TriangleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("triangleCount"))
+// TriangleCount returns number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
+func (tas *TriangleAccelerationStructure) TriangleCount() int {
+	_r := objc.Send[int](objref.IDOf(tas), objc.RegisterName("triangleCount"))
 	return _r
 }
-
-// SetTriangleCount wraps the corresponding Objective-C method.
-func (x *TriangleAccelerationStructure) SetTriangleCount(triangleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
-}
-
-// TriangleAccelerationStructureable is the interface implemented by [TriangleAccelerationStructure], for mocking and DI.
-type TriangleAccelerationStructureable interface {
-	obj.Object
-	WithTriangleCount(triangleCount int) *TriangleAccelerationStructure
-	WithVertexStride(vertexStride int) *TriangleAccelerationStructure
-	WithVertexBufferOffset(vertexBufferOffset int) *TriangleAccelerationStructure
-	WithIndexBufferOffset(indexBufferOffset int) *TriangleAccelerationStructure
-	WithMaskBufferOffset(maskBufferOffset int) *TriangleAccelerationStructure
-	WithPolygonCount(polygonCount int) *TriangleAccelerationStructure
-	WithPolygonBuffers(items ...obj.Object) *TriangleAccelerationStructure
-	WithLabel(label string) *TriangleAccelerationStructure
-	TriangleCount() int
-	SetTriangleCount(triangleCount int)
-}
-
-var _ TriangleAccelerationStructureable = (*TriangleAccelerationStructure)(nil)
 
 var _ PolygonAccelerationStructureProvider = (*TriangleAccelerationStructure)(nil)
 

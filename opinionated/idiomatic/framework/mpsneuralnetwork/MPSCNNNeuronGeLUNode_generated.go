@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,19 +52,11 @@ func NewCNNNeuronGeLUNodeWithSource(sourceNode *NNImageNode) *CNNNeuronGeLUNode 
 	return cNNNeuronGeLUNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronGeLUNode) WithLabel(label string) *CNNNeuronGeLUNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cngln *CNNNeuronGeLUNode) WithLabel(label string) *CNNNeuronGeLUNode {
+	objc.Send[objc.ID](objref.IDOf(cngln), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cngln
 }
-
-// CNNNeuronGeLUNodeable is the interface implemented by [CNNNeuronGeLUNode], for mocking and DI.
-type CNNNeuronGeLUNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronGeLUNode
-}
-
-var _ CNNNeuronGeLUNodeable = (*CNNNeuronGeLUNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronGeLUNode)(nil)
 

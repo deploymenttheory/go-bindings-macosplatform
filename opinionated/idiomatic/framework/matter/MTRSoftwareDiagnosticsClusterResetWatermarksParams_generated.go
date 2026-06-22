@@ -44,24 +44,24 @@ func mTRSoftwareDiagnosticsClusterResetWatermarksParamsAdopt(id objc.ID) *MTRSof
 }
 
 // Description returns the object's -description text.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) Description() string {
+	return rt.Description(objref.IDOf(msdcrwp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msdcrwp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msdcrwp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) String() string {
+	return rt.Description(objref.IDOf(msdcrwp))
 }
 
 // NewMTRSoftwareDiagnosticsClusterResetWatermarksParams creates a new MTRSoftwareDiagnosticsClusterResetWatermarksParams.
@@ -70,49 +70,26 @@ func NewMTRSoftwareDiagnosticsClusterResetWatermarksParams() *MTRSoftwareDiagnos
 	return mTRSoftwareDiagnosticsClusterResetWatermarksParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams {
+	objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return msdcrwp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams {
+	objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return msdcrwp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRSoftwareDiagnosticsClusterResetWatermarksParamsable is the interface implemented by [MTRSoftwareDiagnosticsClusterResetWatermarksParams], for mocking and DI.
-type MTRSoftwareDiagnosticsClusterResetWatermarksParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRSoftwareDiagnosticsClusterResetWatermarksParamsable = (*MTRSoftwareDiagnosticsClusterResetWatermarksParams)(nil)

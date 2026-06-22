@@ -46,24 +46,24 @@ func metadataRangeAdopt(id objc.ID) *MetadataRange {
 }
 
 // Description returns the object's -description text.
-func (x *MetadataRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MetadataRange) Description() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mr *MetadataRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mr *MetadataRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetadataRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MetadataRange) String() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // NewMetadataRangeWithOffsetSegmentLengthSegmentCount initializes a metadata range with the given properties.
@@ -73,30 +73,20 @@ func NewMetadataRangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segm
 	return metadataRangeAdopt(_id)
 }
 
-// StartOffset the start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
-func (x *MetadataRange) StartOffset() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("startOffset"))
+// StartOffset returns the start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
+func (mr *MetadataRange) StartOffset() int64 {
+	_r := objc.Send[int64](objref.IDOf(mr), objc.RegisterName("startOffset"))
 	return _r
 }
 
-// SegmentLength the segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
-func (x *MetadataRange) SegmentLength() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("segmentLength"))
+// SegmentLength returns the segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
+func (mr *MetadataRange) SegmentLength() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(mr), objc.RegisterName("segmentLength"))
 	return _r
 }
 
-// SegmentCount the number of segments in the range.
-func (x *MetadataRange) SegmentCount() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("segmentCount"))
+// SegmentCount returns the number of segments in the range.
+func (mr *MetadataRange) SegmentCount() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(mr), objc.RegisterName("segmentCount"))
 	return _r
 }
-
-// MetadataRangeable is the interface implemented by [MetadataRange], for mocking and DI.
-type MetadataRangeable interface {
-	obj.Object
-	StartOffset() int64
-	SegmentLength() uint64
-	SegmentCount() uint64
-}
-
-var _ MetadataRangeable = (*MetadataRange)(nil)

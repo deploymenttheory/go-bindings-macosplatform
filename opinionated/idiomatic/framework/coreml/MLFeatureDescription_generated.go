@@ -46,24 +46,24 @@ func featureDescriptionAdopt(id objc.ID) *FeatureDescription {
 }
 
 // Description returns the object's -description text.
-func (x *FeatureDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fd *FeatureDescription) Description() string {
+	return rt.Description(objref.IDOf(fd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FeatureDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fd *FeatureDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FeatureDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fd *FeatureDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FeatureDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fd *FeatureDescription) String() string {
+	return rt.Description(objref.IDOf(fd))
 }
 
 // NewFeatureDescription creates a new FeatureDescription.
@@ -73,74 +73,58 @@ func NewFeatureDescription() *FeatureDescription {
 }
 
 // IsAllowedValue checks whether the model will accept an input feature value.
-func (x *FeatureDescription) IsAllowedValue(value *FeatureValue) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllowedValue:"), objref.IDOf(value))
+func (fd *FeatureDescription) IsAllowedValue(value *FeatureValue) bool {
+	_r := objc.Send[bool](objref.IDOf(fd), objc.RegisterName("isAllowedValue:"), objref.IDOf(value))
 	return _r
 }
 
-// Name name of feature
-func (x *FeatureDescription) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name of feature
+func (fd *FeatureDescription) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Type type of data
-func (x *FeatureDescription) Type() FeatureType {
-	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns type of data
+func (fd *FeatureDescription) Type() FeatureType {
+	_r := objc.Send[FeatureType](objref.IDOf(fd), objc.RegisterName("type"))
 	return _r
 }
 
-// IsOptional whether this feature can take an undefined value or not
-func (x *FeatureDescription) IsOptional() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOptional"))
+// IsOptional reports whether this feature can take an undefined value or not
+func (fd *FeatureDescription) IsOptional() bool {
+	_r := objc.Send[bool](objref.IDOf(fd), objc.RegisterName("isOptional"))
 	return _r
 }
 
-// MultiArrayConstraint constraint when type == MLFeatureTypeMultiArray, nil otherwise
-func (x *FeatureDescription) MultiArrayConstraint() *MultiArrayConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiArrayConstraint"))
+// MultiArrayConstraint returns constraint when type == MLFeatureTypeMultiArray, nil otherwise
+func (fd *FeatureDescription) MultiArrayConstraint() *MultiArrayConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("multiArrayConstraint"))
 	return MultiArrayConstraintFromID(_r)
 }
 
-// ImageConstraint constraint when type == MLFeatureTypeImage, nil otherwise
-func (x *FeatureDescription) ImageConstraint() *ImageConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageConstraint"))
+// ImageConstraint returns constraint when type == MLFeatureTypeImage, nil otherwise
+func (fd *FeatureDescription) ImageConstraint() *ImageConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("imageConstraint"))
 	return ImageConstraintFromID(_r)
 }
 
-// DictionaryConstraint constraint when type == MLFeatureTypeDictionary, nil otherwise
-func (x *FeatureDescription) DictionaryConstraint() *DictionaryConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryConstraint"))
+// DictionaryConstraint returns constraint when type == MLFeatureTypeDictionary, nil otherwise
+func (fd *FeatureDescription) DictionaryConstraint() *DictionaryConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("dictionaryConstraint"))
 	return DictionaryConstraintFromID(_r)
 }
 
-// SequenceConstraint constraint when type == MLFeatureTypeSequence, nil otherwise
-func (x *FeatureDescription) SequenceConstraint() *SequenceConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sequenceConstraint"))
+// SequenceConstraint returns constraint when type == MLFeatureTypeSequence, nil otherwise
+func (fd *FeatureDescription) SequenceConstraint() *SequenceConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("sequenceConstraint"))
 	return SequenceConstraintFromID(_r)
 }
 
-// StateConstraint the state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
-func (x *FeatureDescription) StateConstraint() *StateConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateConstraint"))
+// StateConstraint returns the state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
+func (fd *FeatureDescription) StateConstraint() *StateConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("stateConstraint"))
 	return StateConstraintFromID(_r)
 }
-
-// FeatureDescriptionable is the interface implemented by [FeatureDescription], for mocking and DI.
-type FeatureDescriptionable interface {
-	obj.Object
-	IsAllowedValue(value *FeatureValue) bool
-	Name() string
-	Type() FeatureType
-	IsOptional() bool
-	MultiArrayConstraint() *MultiArrayConstraint
-	ImageConstraint() *ImageConstraint
-	DictionaryConstraint() *DictionaryConstraint
-	SequenceConstraint() *SequenceConstraint
-	StateConstraint() *StateConstraint
-}
-
-var _ FeatureDescriptionable = (*FeatureDescription)(nil)

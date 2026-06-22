@@ -7,7 +7,6 @@ package gamecontroller
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewRacingWheelInput() *RacingWheelInput {
 }
 
 // Capture returns a snapshot of the racing wheel inputs.
-func (x *RacingWheelInput) Capture() *RacingWheelInputState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
+func (rwi *RacingWheelInput) Capture() *RacingWheelInputState {
+	_r := objc.Send[objc.ID](objref.IDOf(rwi), objc.RegisterName("capture"))
 	return RacingWheelInputStateFromID(_r)
 }
 
 // NextInputState returns the next input state of the racing wheel from the queue.
-func (x *RacingWheelInput) NextInputState() *RacingWheelInputState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextInputState"))
+func (rwi *RacingWheelInput) NextInputState() *RacingWheelInputState {
+	_r := objc.Send[objc.ID](objref.IDOf(rwi), objc.RegisterName("nextInputState"))
 	return RacingWheelInputStateFromID(_r)
 }
-
-// RacingWheelInputable is the interface implemented by [RacingWheelInput], for mocking and DI.
-type RacingWheelInputable interface {
-	obj.Object
-	Capture() *RacingWheelInputState
-	NextInputState() *RacingWheelInputState
-}
-
-var _ RacingWheelInputable = (*RacingWheelInput)(nil)
 
 var _ RacingWheelInputStateProvider = (*RacingWheelInput)(nil)

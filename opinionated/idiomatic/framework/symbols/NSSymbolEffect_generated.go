@@ -48,36 +48,29 @@ func symbolEffectAdopt(id objc.ID) *SymbolEffect {
 }
 
 // Description returns the object's -description text.
-func (x *SymbolEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SymbolEffect) Description() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (se *SymbolEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (se *SymbolEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SymbolEffect) String() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SymbolEffect) String() string {
+	return rt.Description(objref.IDOf(se))
 }
-
-// SymbolEffectable is the interface implemented by [SymbolEffect], for mocking and DI.
-type SymbolEffectable interface {
-	obj.Object
-}
-
-var _ SymbolEffectable = (*SymbolEffect)(nil)
 
 // isSymbolEffect marks SymbolEffect — and, by embedding promotion, its
 // subclasses — as a member of the SymbolEffect hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SymbolEffect) isSymbolEffect() {}
+func (se *SymbolEffect) isSymbolEffect() {}
 
 var _ SymbolEffectProvider = (*SymbolEffect)(nil)

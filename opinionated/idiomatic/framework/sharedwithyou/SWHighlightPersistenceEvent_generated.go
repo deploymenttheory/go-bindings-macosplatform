@@ -46,24 +46,24 @@ func highlightPersistenceEventAdopt(id objc.ID) *HighlightPersistenceEvent {
 }
 
 // Description returns the object's -description text.
-func (x *HighlightPersistenceEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hpe *HighlightPersistenceEvent) Description() string {
+	return rt.Description(objref.IDOf(hpe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HighlightPersistenceEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hpe *HighlightPersistenceEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hpe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HighlightPersistenceEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hpe *HighlightPersistenceEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hpe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HighlightPersistenceEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hpe *HighlightPersistenceEvent) String() string {
+	return rt.Description(objref.IDOf(hpe))
 }
 
 // NewHighlightPersistenceEventWithHighlightTrigger creates and initializes a persistence event.
@@ -74,15 +74,7 @@ func NewHighlightPersistenceEventWithHighlightTrigger(highlight *Highlight, trig
 }
 
 // PersistenceEventTrigger wraps the corresponding Objective-C method.
-func (x *HighlightPersistenceEvent) PersistenceEventTrigger() HighlightPersistenceEventTrigger {
-	_r := objc.Send[HighlightPersistenceEventTrigger](objref.IDOf(x), objc.RegisterName("persistenceEventTrigger"))
+func (hpe *HighlightPersistenceEvent) PersistenceEventTrigger() HighlightPersistenceEventTrigger {
+	_r := objc.Send[HighlightPersistenceEventTrigger](objref.IDOf(hpe), objc.RegisterName("persistenceEventTrigger"))
 	return _r
 }
-
-// HighlightPersistenceEventable is the interface implemented by [HighlightPersistenceEvent], for mocking and DI.
-type HighlightPersistenceEventable interface {
-	obj.Object
-	PersistenceEventTrigger() HighlightPersistenceEventTrigger
-}
-
-var _ HighlightPersistenceEventable = (*HighlightPersistenceEvent)(nil)

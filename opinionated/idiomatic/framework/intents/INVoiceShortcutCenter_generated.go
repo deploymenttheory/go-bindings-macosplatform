@@ -6,6 +6,7 @@ package intents
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func voiceShortcutCenterAdopt(id objc.ID) *VoiceShortcutCenter {
 }
 
 // Description returns the object's -description text.
-func (x *VoiceShortcutCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vsc *VoiceShortcutCenter) Description() string {
+	return rt.Description(objref.IDOf(vsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VoiceShortcutCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vsc *VoiceShortcutCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VoiceShortcutCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vsc *VoiceShortcutCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VoiceShortcutCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vsc *VoiceShortcutCenter) String() string {
+	return rt.Description(objref.IDOf(vsc))
 }
 
 // NewVoiceShortcutCenter creates a new VoiceShortcutCenter.
@@ -77,7 +78,7 @@ func NewVoiceShortcutCenter() *VoiceShortcutCenter {
 // GetAllVoiceShortcutsWithCompletion retrieves all shortcuts added to Siri for your app.
 //
 // GetAllVoiceShortcutsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (vsc *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllVoiceShortcutsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(vsc), objc.RegisterName("getAllVoiceShortcutsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,7 +103,7 @@ func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Con
 // GetVoiceShortcutWithIdentifierCompletion retrieves a shortcut the user added to Siri.
 //
 // GetVoiceShortcutWithIdentifierCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (result *VoiceShortcut, err error) {
+func (vsc *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (result *VoiceShortcut, err error) {
 	type _result struct {
 		val *VoiceShortcut
 		err error
@@ -114,7 +115,7 @@ func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx conte
 		_o.val = VoiceShortcutFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getVoiceShortcutWithIdentifier:completion:"), objref.IDOf(identifier), _block)
+	objc.Send[objc.ID](objref.IDOf(vsc), objc.RegisterName("getVoiceShortcutWithIdentifier:completion:"), objref.IDOf(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -125,16 +126,6 @@ func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx conte
 }
 
 // SetShortcutSuggestions suggests shortcuts the user may want to add to Siri.
-func (x *VoiceShortcutCenter) SetShortcutSuggestions(suggestions []*Shortcut) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcutSuggestions:"), purego.SliceToNSArray(suggestions, func(_v *Shortcut) objc.ID { return objref.IDOf(_v) }))
+func (vsc *VoiceShortcutCenter) SetShortcutSuggestions(suggestions []*Shortcut) {
+	objc.Send[objc.ID](objref.IDOf(vsc), objc.RegisterName("setShortcutSuggestions:"), purego.SliceToNSArray(suggestions, func(_v *Shortcut) objc.ID { return objref.IDOf(_v) }))
 }
-
-// VoiceShortcutCenterable is the interface implemented by [VoiceShortcutCenter], for mocking and DI.
-type VoiceShortcutCenterable interface {
-	obj.Object
-	GetAllVoiceShortcutsWithCompletion(ctx context.Context) (obj.Object, error)
-	GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (*VoiceShortcut, error)
-	SetShortcutSuggestions(suggestions []*Shortcut)
-}
-
-var _ VoiceShortcutCenterable = (*VoiceShortcutCenter)(nil)

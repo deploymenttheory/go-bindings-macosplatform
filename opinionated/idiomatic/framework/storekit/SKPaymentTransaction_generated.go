@@ -46,24 +46,24 @@ func paymentTransactionAdopt(id objc.ID) *PaymentTransaction {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentTransaction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pt *PaymentTransaction) Description() string {
+	return rt.Description(objref.IDOf(pt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentTransaction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pt *PaymentTransaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentTransaction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pt *PaymentTransaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentTransaction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pt *PaymentTransaction) String() string {
+	return rt.Description(objref.IDOf(pt))
 }
 
 // NewPaymentTransaction creates a new PaymentTransaction.
@@ -73,48 +73,36 @@ func NewPaymentTransaction() *PaymentTransaction {
 }
 
 // OriginalTransaction wraps the corresponding Objective-C method.
-func (x *PaymentTransaction) OriginalTransaction() *PaymentTransaction {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalTransaction"))
+func (pt *PaymentTransaction) OriginalTransaction() *PaymentTransaction {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("originalTransaction"))
 	return PaymentTransactionFromID(_r)
 }
 
 // Payment wraps the corresponding Objective-C method.
-func (x *PaymentTransaction) Payment() *Payment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payment"))
+func (pt *PaymentTransaction) Payment() *Payment {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("payment"))
 	return PaymentFromID(_r)
 }
 
 // Downloads wraps the corresponding Objective-C method.
 //
 // Downloads returns the collection as a Go slice.
-func (x *PaymentTransaction) Downloads() []*Download {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloads"))
+func (pt *PaymentTransaction) Downloads() []*Download {
+	_arr := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("downloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
 // TransactionDate wraps the corresponding Objective-C method.
-func (x *PaymentTransaction) TransactionDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionDate"))
+func (pt *PaymentTransaction) TransactionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionDate"))
 	return obj.Wrap(_r)
 }
 
 // TransactionIdentifier wraps the corresponding Objective-C method.
-func (x *PaymentTransaction) TransactionIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionIdentifier"))
+func (pt *PaymentTransaction) TransactionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// PaymentTransactionable is the interface implemented by [PaymentTransaction], for mocking and DI.
-type PaymentTransactionable interface {
-	obj.Object
-	OriginalTransaction() *PaymentTransaction
-	Payment() *Payment
-	Downloads() []*Download
-	TransactionDate() obj.Object
-	TransactionIdentifier() string
-}
-
-var _ PaymentTransactionable = (*PaymentTransaction)(nil)

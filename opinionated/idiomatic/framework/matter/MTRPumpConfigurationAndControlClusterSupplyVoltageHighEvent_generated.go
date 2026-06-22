@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterSupplyVoltageHighEventAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsvhe *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccsvhe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccsvhe *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccsvhe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccsvhe *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccsvhe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsvhe *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccsvhe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent creates a new MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent() *MTRPumpCo
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterSupplyVoltageHighEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventable = (*MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent)(nil)

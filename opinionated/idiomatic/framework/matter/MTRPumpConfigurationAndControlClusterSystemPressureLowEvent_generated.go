@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterSystemPressureLowEventAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsple *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccsple))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccsple *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccsple), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccsple *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccsple), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsple *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccsple))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSystemPressureLowEvent creates a new MTRPumpConfigurationAndControlClusterSystemPressureLowEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterSystemPressureLowEvent() *MTRPumpCo
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSystemPressureLowEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterSystemPressureLowEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterSystemPressureLowEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSystemPressureLowEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterSystemPressureLowEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterSystemPressureLowEventable = (*MTRPumpConfigurationAndControlClusterSystemPressureLowEvent)(nil)

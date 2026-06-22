@@ -7,7 +7,6 @@ package datadetection
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,22 @@ func NewMatchEmailAddress() *MatchEmailAddress {
 	return matchEmailAddressAdopt(_id)
 }
 
-// EmailAddress a string that represents an email address.
-func (x *MatchEmailAddress) EmailAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
+// EmailAddress returns a string that represents an email address.
+func (mea *MatchEmailAddress) EmailAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mea), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Label a string that categorizes an email address, such as Home or Work.
-func (x *MatchEmailAddress) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a string that categorizes an email address, such as Home or Work.
+func (mea *MatchEmailAddress) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mea), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MatchEmailAddressable is the interface implemented by [MatchEmailAddress], for mocking and DI.
-type MatchEmailAddressable interface {
-	obj.Object
-	EmailAddress() string
-	Label() string
-}
-
-var _ MatchEmailAddressable = (*MatchEmailAddress)(nil)
 
 var _ MatchProvider = (*MatchEmailAddress)(nil)

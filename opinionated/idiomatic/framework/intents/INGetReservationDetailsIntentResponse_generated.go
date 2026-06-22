@@ -53,48 +53,31 @@ func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code GetReservat
 	return getReservationDetailsIntentResponseAdopt(_id)
 }
 
-// WithReservations an array containing reservations reqeusted by the user.
-func (x *GetReservationDetailsIntentResponse) WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse {
+// WithReservations sets an array containing reservations reqeusted by the user.
+func (grdir *GetReservationDetailsIntentResponse) WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse {
 	_arr := purego.SliceToNSArray(items, func(_v ReservationProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservations:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(grdir), objc.RegisterName("setReservations:"), _arr)
+	return grdir
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *GetReservationDetailsIntentResponse) WithUserActivity(userActivity obj.Object) *GetReservationDetailsIntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (grdir *GetReservationDetailsIntentResponse) WithUserActivity(userActivity obj.Object) *GetReservationDetailsIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(grdir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return grdir
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *GetReservationDetailsIntentResponse) Code() GetReservationDetailsIntentResponseCode {
-	_r := objc.Send[GetReservationDetailsIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+func (grdir *GetReservationDetailsIntentResponse) Code() GetReservationDetailsIntentResponseCode {
+	_r := objc.Send[GetReservationDetailsIntentResponseCode](objref.IDOf(grdir), objc.RegisterName("code"))
 	return _r
 }
 
 // Reservations wraps the corresponding Objective-C method.
 //
 // Reservations returns the collection as a Go slice.
-func (x *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservations"))
+func (grdir *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(grdir), objc.RegisterName("reservations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Reservation { return ReservationFromID(_id) })
 }
-
-// SetReservations wraps the corresponding Objective-C method.
-func (x *GetReservationDetailsIntentResponse) SetReservations(reservations []*Reservation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservations:"), purego.SliceToNSArray(reservations, func(_v *Reservation) objc.ID { return objref.IDOf(_v) }))
-}
-
-// GetReservationDetailsIntentResponseable is the interface implemented by [GetReservationDetailsIntentResponse], for mocking and DI.
-type GetReservationDetailsIntentResponseable interface {
-	obj.Object
-	WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse
-	WithUserActivity(userActivity obj.Object) *GetReservationDetailsIntentResponse
-	Code() GetReservationDetailsIntentResponseCode
-	Reservations() []*Reservation
-	SetReservations(reservations []*Reservation)
-}
-
-var _ GetReservationDetailsIntentResponseable = (*GetReservationDetailsIntentResponse)(nil)
 
 var _ IntentResponseProvider = (*GetReservationDetailsIntentResponse)(nil)

@@ -46,24 +46,24 @@ func termOfAddressAdopt(id objc.ID) *TermOfAddress {
 }
 
 // Description returns the object's -description text.
-func (x *TermOfAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (toa *TermOfAddress) Description() string {
+	return rt.Description(objref.IDOf(toa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TermOfAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (toa *TermOfAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(toa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TermOfAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (toa *TermOfAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(toa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TermOfAddress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (toa *TermOfAddress) String() string {
+	return rt.Description(objref.IDOf(toa))
 }
 
 // NewTermOfAddress creates a new TermOfAddress.
@@ -73,34 +73,24 @@ func NewTermOfAddress() *TermOfAddress {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *TermOfAddress) WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (toa *TermOfAddress) WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress {
+	objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return toa
 }
 
-// LanguageIdentifier the ISO language code if this is a localized term of address
-func (x *TermOfAddress) LanguageIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageIdentifier"))
+// LanguageIdentifier returns the ISO language code if this is a localized term of address
+func (toa *TermOfAddress) LanguageIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("languageIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Pronouns a list of pronouns for a localized term of address
+// Pronouns returns a list of pronouns for a localized term of address
 //
 // Pronouns returns the collection as a Go slice.
-func (x *TermOfAddress) Pronouns() []*MorphologyPronoun {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pronouns"))
+func (toa *TermOfAddress) Pronouns() []*MorphologyPronoun {
+	_arr := objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("pronouns"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MorphologyPronoun { return MorphologyPronounFromID(_id) })
 }
-
-// TermOfAddressable is the interface implemented by [TermOfAddress], for mocking and DI.
-type TermOfAddressable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress
-	LanguageIdentifier() string
-	Pronouns() []*MorphologyPronoun
-}
-
-var _ TermOfAddressable = (*TermOfAddress)(nil)

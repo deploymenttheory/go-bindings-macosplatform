@@ -62,1001 +62,733 @@ func NewControlWithCoder(coder obj.Object) *Control {
 	return controlAdopt(_id)
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *Control) WithTarget(target obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (c *Control) WithTarget(target obj.Object) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return c
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *Control) WithTag(tag int) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (c *Control) WithTag(tag int) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTag:"), tag)
+	return c
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *Control) WithIgnoresMultiClick(ignoresMultiClick bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (c *Control) WithIgnoresMultiClick(ignoresMultiClick bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return c
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *Control) WithContinuous(continuous bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (c *Control) WithContinuous(continuous bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setContinuous:"), continuous)
+	return c
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *Control) WithEnabled(enabled bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (c *Control) WithEnabled(enabled bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEnabled:"), enabled)
+	return c
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *Control) WithRefusesFirstResponder(refusesFirstResponder bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (c *Control) WithRefusesFirstResponder(refusesFirstResponder bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return c
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *Control) WithHighlighted(highlighted bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (c *Control) WithHighlighted(highlighted bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHighlighted:"), highlighted)
+	return c
 }
 
-// WithControlSize the size of the control.
-func (x *Control) WithControlSize(controlSize ControlSize) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (c *Control) WithControlSize(controlSize ControlSize) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setControlSize:"), controlSize)
+	return c
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *Control) WithFormatter(formatter obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (c *Control) WithFormatter(formatter obj.Object) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return c
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *Control) WithObjectValue(objectValue obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (c *Control) WithObjectValue(objectValue obj.Object) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return c
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *Control) WithStringValue(stringValue string) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (c *Control) WithStringValue(stringValue string) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return c
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *Control) WithAttributedStringValue(attributedStringValue obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (c *Control) WithAttributedStringValue(attributedStringValue obj.Object) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return c
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *Control) WithIntValue(intValue int) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (c *Control) WithIntValue(intValue int) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIntValue:"), intValue)
+	return c
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *Control) WithIntegerValue(integerValue int) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (c *Control) WithIntegerValue(integerValue int) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIntegerValue:"), integerValue)
+	return c
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *Control) WithFloatValue(floatValue float32) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (c *Control) WithFloatValue(floatValue float32) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFloatValue:"), floatValue)
+	return c
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *Control) WithDoubleValue(doubleValue float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (c *Control) WithDoubleValue(doubleValue float64) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return c
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *Control) WithFont(font *Font) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (c *Control) WithFont(font *Font) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return c
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *Control) WithUsesSingleLineMode(usesSingleLineMode bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (c *Control) WithUsesSingleLineMode(usesSingleLineMode bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return c
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *Control) WithLineBreakMode(lineBreakMode LineBreakMode) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (c *Control) WithLineBreakMode(lineBreakMode LineBreakMode) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return c
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *Control) WithAlignment(alignment TextAlignment) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (c *Control) WithAlignment(alignment TextAlignment) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAlignment:"), alignment)
+	return c
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *Control) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (c *Control) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return c
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *Control) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (c *Control) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return c
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithCell(cell CellProvider) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (c *Control) WithCell(cell CellProvider) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return c
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithSubviews(items ...ViewProvider) *Control {
+func (c *Control) WithSubviews(items ...ViewProvider) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSubviews:"), _arr)
+	return c
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithHidden(hidden bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (c *Control) WithHidden(hidden bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHidden:"), hidden)
+	return c
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (c *Control) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return c
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithAutoresizesSubviews(autoresizesSubviews bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (c *Control) WithAutoresizesSubviews(autoresizesSubviews bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return c
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (c *Control) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return c
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *Control) WithFrame(frame corefoundation.CGRect) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (c *Control) WithFrame(frame corefoundation.CGRect) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrame:"), frame)
+	return c
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithFrameRotation(frameRotation float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (c *Control) WithFrameRotation(frameRotation float64) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return c
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithFrameCenterRotation(frameCenterRotation float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (c *Control) WithFrameCenterRotation(frameCenterRotation float64) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return c
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithBoundsRotation(boundsRotation float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (c *Control) WithBoundsRotation(boundsRotation float64) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return c
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *Control) WithBounds(bounds corefoundation.CGRect) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (c *Control) WithBounds(bounds corefoundation.CGRect) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBounds:"), bounds)
+	return c
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithCanDrawConcurrently(canDrawConcurrently bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (c *Control) WithCanDrawConcurrently(canDrawConcurrently bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return c
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *Control) WithNeedsDisplay(needsDisplay bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (c *Control) WithNeedsDisplay(needsDisplay bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return c
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (c *Control) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return c
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithWantsRestingTouches(wantsRestingTouches bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (c *Control) WithWantsRestingTouches(wantsRestingTouches bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return c
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (c *Control) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return c
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (c *Control) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return c
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithWantsLayer(wantsLayer bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (c *Control) WithWantsLayer(wantsLayer bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return c
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithLayer(layer obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (c *Control) WithLayer(layer obj.Object) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return c
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (c *Control) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return c
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithNeedsLayout(needsLayout bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (c *Control) WithNeedsLayout(needsLayout bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return c
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithAlphaValue(alphaValue float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (c *Control) WithAlphaValue(alphaValue float64) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return c
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (c *Control) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return c
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithBackgroundFilters(items ...obj.Object) *Control {
+func (c *Control) WithBackgroundFilters(items ...obj.Object) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return c
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithCompositingFilter(compositingFilter obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (c *Control) WithCompositingFilter(compositingFilter obj.Object) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return c
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithContentFilters(items ...obj.Object) *Control {
+func (c *Control) WithContentFilters(items ...obj.Object) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setContentFilters:"), _arr)
+	return c
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithShadow(shadow *Shadow) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (c *Control) WithShadow(shadow *Shadow) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return c
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithClipsToBounds(clipsToBounds bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (c *Control) WithClipsToBounds(clipsToBounds bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return c
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (c *Control) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return c
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithToolTip(toolTip string) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (c *Control) WithToolTip(toolTip string) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return c
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (c *Control) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return c
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (c *Control) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return c
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithNextKeyView(nextKeyView ViewProvider) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (c *Control) WithNextKeyView(nextKeyView ViewProvider) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return c
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithFocusRingType(focusRingType FocusRingType) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (c *Control) WithFocusRingType(focusRingType FocusRingType) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return c
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithGestureRecognizers(items ...GestureRecognizerProvider) *Control {
+func (c *Control) WithGestureRecognizers(items ...GestureRecognizerProvider) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return c
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (c *Control) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return c
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (c *Control) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return c
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *Control) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (c *Control) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return c
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (c *Control) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return c
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (c *Control) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return c
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (c *Control) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return c
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (c *Control) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return c
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (c *Control) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return c
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (c *Control) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return c
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (c *Control) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return c
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *Control) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (c *Control) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return c
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *Control) WithNextResponder(nextResponder ResponderProvider) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (c *Control) WithNextResponder(nextResponder ResponderProvider) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return c
 }
 
-// WithMenu returns the responder’s menu.
-func (x *Control) WithMenu(menu *Menu) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (c *Control) WithMenu(menu *Menu) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return c
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *Control) WithUserActivity(userActivity obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (c *Control) WithUserActivity(userActivity obj.Object) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return c
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *Control) WithTouchBar(touchBar *TouchBar) *Control {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (c *Control) WithTouchBar(touchBar *TouchBar) *Control {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return c
 }
 
 // SizeThatFits asks the control to calculate and return the size that best fits the specified size.
-func (x *Control) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeThatFits:"), size)
+func (c *Control) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(c), objc.RegisterName("sizeThatFits:"), size)
 	return _r
 }
 
 // SizeToFit resizes the receiver’s frame so that it’s the minimum size needed to contain its cell.
-func (x *Control) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
+func (c *Control) SizeToFit() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sizeToFit"))
 }
 
 // SendActionOn sets the conditions on which the receiver sends action messages to its target.
-func (x *Control) SendActionOn(mask EventMask) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendActionOn:"), mask)
+func (c *Control) SendActionOn(mask EventMask) int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("sendActionOn:"), mask)
 	return _r
 }
 
 // TakeIntValueFrom sets the value of the receiver’s cell to an integer value obtained from the specified object.
-func (x *Control) TakeIntValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeIntValueFrom:"), objref.IDOf(sender))
+func (c *Control) TakeIntValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntValueFrom:"), objref.IDOf(sender))
 }
 
 // TakeFloatValueFrom sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
-func (x *Control) TakeFloatValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeFloatValueFrom:"), objref.IDOf(sender))
+func (c *Control) TakeFloatValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeFloatValueFrom:"), objref.IDOf(sender))
 }
 
 // TakeDoubleValueFrom sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
-func (x *Control) TakeDoubleValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeDoubleValueFrom:"), objref.IDOf(sender))
+func (c *Control) TakeDoubleValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeDoubleValueFrom:"), objref.IDOf(sender))
 }
 
 // TakeStringValueFrom sets the value of the receiver’s cell to the string value obtained from the specified object.
-func (x *Control) TakeStringValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeStringValueFrom:"), objref.IDOf(sender))
+func (c *Control) TakeStringValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeStringValueFrom:"), objref.IDOf(sender))
 }
 
 // TakeObjectValueFrom sets the value of the receiver’s cell to the object value obtained from the specified object.
-func (x *Control) TakeObjectValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeObjectValueFrom:"), objref.IDOf(sender))
+func (c *Control) TakeObjectValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeObjectValueFrom:"), objref.IDOf(sender))
 }
 
 // TakeIntegerValueFrom sets the value of the receiver’s cell to an NSInteger value obtained from the specified object.
-func (x *Control) TakeIntegerValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeIntegerValueFrom:"), objref.IDOf(sender))
+func (c *Control) TakeIntegerValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntegerValueFrom:"), objref.IDOf(sender))
 }
 
 // PerformClick simulates a single mouse click on the receiver.
-func (x *Control) PerformClick(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performClick:"), objref.IDOf(sender))
+func (c *Control) PerformClick(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("performClick:"), objref.IDOf(sender))
 }
 
 // ExpansionFrameWithFrame the frame in which a tool tip can be displayed, if needed.
-func (x *Control) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("expansionFrameWithFrame:"), contentFrame)
+func (c *Control) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("expansionFrameWithFrame:"), contentFrame)
 	return _r
 }
 
 // DrawWithExpansionFrameInView performs custom expansion tool tip drawing.
-func (x *Control) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWithExpansionFrame:inView:"), contentFrame, objref.IDOf(view))
+func (c *Control) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *View) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawWithExpansionFrame:inView:"), contentFrame, objref.IDOf(view))
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *Control) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (c *Control) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("target"))
 	return obj.Wrap(_r)
-}
-
-// SetTarget wraps the corresponding Objective-C method.
-func (x *Control) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
-// SetTag wraps the corresponding Objective-C method.
-func (x *Control) SetTag(tag int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 }
 
 // IgnoresMultiClick wraps the corresponding Objective-C method.
-func (x *Control) IgnoresMultiClick() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresMultiClick"))
+func (c *Control) IgnoresMultiClick() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("ignoresMultiClick"))
 	return _r
-}
-
-// SetIgnoresMultiClick wraps the corresponding Objective-C method.
-func (x *Control) SetIgnoresMultiClick(ignoresMultiClick bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 }
 
 // IsContinuous wraps the corresponding Objective-C method.
-func (x *Control) IsContinuous() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContinuous"))
+func (c *Control) IsContinuous() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isContinuous"))
 	return _r
-}
-
-// SetContinuous wraps the corresponding Objective-C method.
-func (x *Control) SetContinuous(continuous bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *Control) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (c *Control) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEnabled"))
 	return _r
-}
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *Control) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // RefusesFirstResponder wraps the corresponding Objective-C method.
-func (x *Control) RefusesFirstResponder() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("refusesFirstResponder"))
+func (c *Control) RefusesFirstResponder() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("refusesFirstResponder"))
 	return _r
-}
-
-// SetRefusesFirstResponder wraps the corresponding Objective-C method.
-func (x *Control) SetRefusesFirstResponder(refusesFirstResponder bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 }
 
 // IsHighlighted wraps the corresponding Objective-C method.
-func (x *Control) IsHighlighted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighlighted"))
+func (c *Control) IsHighlighted() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isHighlighted"))
 	return _r
-}
-
-// SetHighlighted wraps the corresponding Objective-C method.
-func (x *Control) SetHighlighted(highlighted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 }
 
 // ControlSize wraps the corresponding Objective-C method.
-func (x *Control) ControlSize() ControlSize {
-	_r := objc.Send[ControlSize](objref.IDOf(x), objc.RegisterName("controlSize"))
+func (c *Control) ControlSize() ControlSize {
+	_r := objc.Send[ControlSize](objref.IDOf(c), objc.RegisterName("controlSize"))
 	return _r
 }
 
-// SetControlSize wraps the corresponding Objective-C method.
-func (x *Control) SetControlSize(controlSize ControlSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-}
-
 // Formatter wraps the corresponding Objective-C method.
-func (x *Control) Formatter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatter"))
+func (c *Control) Formatter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("formatter"))
 	return obj.Wrap(_r)
-}
-
-// SetFormatter wraps the corresponding Objective-C method.
-func (x *Control) SetFormatter(formatter obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 }
 
 // ObjectValue wraps the corresponding Objective-C method.
-func (x *Control) ObjectValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectValue"))
+func (c *Control) ObjectValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectValue"))
 	return obj.Wrap(_r)
 }
 
-// SetObjectValue wraps the corresponding Objective-C method.
-func (x *Control) SetObjectValue(objectValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-}
-
 // StringValue wraps the corresponding Objective-C method.
-func (x *Control) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (c *Control) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetStringValue wraps the corresponding Objective-C method.
-func (x *Control) SetStringValue(stringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-}
-
 // AttributedStringValue wraps the corresponding Objective-C method.
-func (x *Control) AttributedStringValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringValue"))
+func (c *Control) AttributedStringValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributedStringValue"))
 	return obj.Wrap(_r)
 }
 
-// SetAttributedStringValue wraps the corresponding Objective-C method.
-func (x *Control) SetAttributedStringValue(attributedStringValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-}
-
 // IntValue wraps the corresponding Objective-C method.
-func (x *Control) IntValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intValue"))
+func (c *Control) IntValue() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("intValue"))
 	return _r
-}
-
-// SetIntValue wraps the corresponding Objective-C method.
-func (x *Control) SetIntValue(intValue int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 }
 
 // IntegerValue wraps the corresponding Objective-C method.
-func (x *Control) IntegerValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("integerValue"))
+func (c *Control) IntegerValue() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("integerValue"))
 	return _r
-}
-
-// SetIntegerValue wraps the corresponding Objective-C method.
-func (x *Control) SetIntegerValue(integerValue int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 }
 
 // FloatValue wraps the corresponding Objective-C method.
-func (x *Control) FloatValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+func (c *Control) FloatValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("floatValue"))
 	return _r
-}
-
-// SetFloatValue wraps the corresponding Objective-C method.
-func (x *Control) SetFloatValue(floatValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }
 
 // DoubleValue wraps the corresponding Objective-C method.
-func (x *Control) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+func (c *Control) DoubleValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("doubleValue"))
 	return _r
-}
-
-// SetDoubleValue wraps the corresponding Objective-C method.
-func (x *Control) SetDoubleValue(doubleValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 }
 
 // Font wraps the corresponding Objective-C method.
-func (x *Control) Font() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+func (c *Control) Font() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
-// SetFont wraps the corresponding Objective-C method.
-func (x *Control) SetFont(font *Font) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-}
-
 // UsesSingleLineMode wraps the corresponding Objective-C method.
-func (x *Control) UsesSingleLineMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesSingleLineMode"))
+func (c *Control) UsesSingleLineMode() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("usesSingleLineMode"))
 	return _r
-}
-
-// SetUsesSingleLineMode wraps the corresponding Objective-C method.
-func (x *Control) SetUsesSingleLineMode(usesSingleLineMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 }
 
 // LineBreakMode wraps the corresponding Objective-C method.
-func (x *Control) LineBreakMode() LineBreakMode {
-	_r := objc.Send[LineBreakMode](objref.IDOf(x), objc.RegisterName("lineBreakMode"))
+func (c *Control) LineBreakMode() LineBreakMode {
+	_r := objc.Send[LineBreakMode](objref.IDOf(c), objc.RegisterName("lineBreakMode"))
 	return _r
-}
-
-// SetLineBreakMode wraps the corresponding Objective-C method.
-func (x *Control) SetLineBreakMode(lineBreakMode LineBreakMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 }
 
 // Alignment wraps the corresponding Objective-C method.
-func (x *Control) Alignment() TextAlignment {
-	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+func (c *Control) Alignment() TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(c), objc.RegisterName("alignment"))
 	return _r
-}
-
-// SetAlignment wraps the corresponding Objective-C method.
-func (x *Control) SetAlignment(alignment TextAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 }
 
 // BaseWritingDirection wraps the corresponding Objective-C method.
-func (x *Control) BaseWritingDirection() WritingDirection {
-	_r := objc.Send[WritingDirection](objref.IDOf(x), objc.RegisterName("baseWritingDirection"))
+func (c *Control) BaseWritingDirection() WritingDirection {
+	_r := objc.Send[WritingDirection](objref.IDOf(c), objc.RegisterName("baseWritingDirection"))
 	return _r
-}
-
-// SetBaseWritingDirection wraps the corresponding Objective-C method.
-func (x *Control) SetBaseWritingDirection(baseWritingDirection WritingDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 }
 
 // AllowsExpansionToolTips wraps the corresponding Objective-C method.
-func (x *Control) AllowsExpansionToolTips() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExpansionToolTips"))
+func (c *Control) AllowsExpansionToolTips() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("allowsExpansionToolTips"))
 	return _r
 }
 
-// SetAllowsExpansionToolTips wraps the corresponding Objective-C method.
-func (x *Control) SetAllowsExpansionToolTips(allowsExpansionToolTips bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-}
-
 // CurrentEditor returns the current field editor for the control.
-func (x *Control) CurrentEditor() *Text {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentEditor"))
+func (c *Control) CurrentEditor() *Text {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("currentEditor"))
 	return TextFromID(_r)
 }
 
-// AbortEditing terminates the current editing operation and discards any edited text.
-func (x *Control) AbortEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortEditing"))
+// AbortEditing reports whether terminates the current editing operation and discards any edited text.
+func (c *Control) AbortEditing() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("abortEditing"))
 	return _r
 }
 
 // ValidateEditing validates changes to any user-typed text.
-func (x *Control) ValidateEditing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateEditing"))
+func (c *Control) ValidateEditing() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("validateEditing"))
 }
 
 // EditWithFrameEditorDelegateEvent begins editing of the receiver’s text using the specified field editor.
-func (x *Control) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editWithFrame:editor:delegate:event:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), objref.IDOf(event))
+func (c *Control) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, event *Event) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("editWithFrame:editor:delegate:event:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), objref.IDOf(event))
 }
 
 // SelectWithFrameEditorDelegateStartLength selects the specified text range in the receiver’s field editor.
-func (x *Control) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, selStart int, selLength int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectWithFrame:editor:delegate:start:length:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), selStart, selLength)
+func (c *Control) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, selStart int, selLength int) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectWithFrame:editor:delegate:start:length:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), selStart, selLength)
 }
 
 // EndEditing ends the editing of text in the receiver using the specified field editor.
-func (x *Control) EndEditing(textObj *Text) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endEditing:"), objref.IDOf(textObj))
+func (c *Control) EndEditing(textObj *Text) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("endEditing:"), objref.IDOf(textObj))
 }
 
 // SetFloatingPointFormatLeftRight sets the auto-ranging and floating point number format of the receiver’s cell.
-func (x *Control) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int, rightDigits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatingPointFormat:left:right:"), autoRange, leftDigits, rightDigits)
+func (c *Control) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int, rightDigits int) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFloatingPointFormat:left:right:"), autoRange, leftDigits, rightDigits)
 }
 
 // SelectedCell wraps the corresponding Objective-C method.
-func (x *Control) SelectedCell() *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedCell"))
+func (c *Control) SelectedCell() *Cell {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectedCell"))
 	return CellFromID(_r)
 }
 
 // SelectedTag wraps the corresponding Objective-C method.
-func (x *Control) SelectedTag() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedTag"))
+func (c *Control) SelectedTag() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("selectedTag"))
 	return _r
 }
 
 // SetNeedsDisplay wraps the corresponding Objective-C method.
-func (x *Control) SetNeedsDisplay() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay"))
+func (c *Control) SetNeedsDisplay() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsDisplay"))
 }
 
 // CalcSize wraps the corresponding Objective-C method.
-func (x *Control) CalcSize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calcSize"))
+func (c *Control) CalcSize() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calcSize"))
 }
 
 // UpdateCell wraps the corresponding Objective-C method.
-func (x *Control) UpdateCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateCell:"), objref.IDOf(cell))
+func (c *Control) UpdateCell(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCell:"), objref.IDOf(cell))
 }
 
 // UpdateCellInside wraps the corresponding Objective-C method.
-func (x *Control) UpdateCellInside(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateCellInside:"), objref.IDOf(cell))
+func (c *Control) UpdateCellInside(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCellInside:"), objref.IDOf(cell))
 }
 
 // DrawCellInside wraps the corresponding Objective-C method.
-func (x *Control) DrawCellInside(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawCellInside:"), objref.IDOf(cell))
+func (c *Control) DrawCellInside(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCellInside:"), objref.IDOf(cell))
 }
 
 // DrawCell wraps the corresponding Objective-C method.
-func (x *Control) DrawCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawCell:"), objref.IDOf(cell))
+func (c *Control) DrawCell(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCell:"), objref.IDOf(cell))
 }
 
 // SelectCell wraps the corresponding Objective-C method.
-func (x *Control) SelectCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectCell:"), objref.IDOf(cell))
+func (c *Control) SelectCell(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCell:"), objref.IDOf(cell))
 }
 
 // Cell wraps the corresponding Objective-C method.
-func (x *Control) Cell() *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cell"))
+func (c *Control) Cell() *Cell {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("cell"))
 	return CellFromID(_r)
 }
 
-// SetCell wraps the corresponding Objective-C method.
-func (x *Control) SetCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-}
-
 // InvalidateIntrinsicContentSizeForCell notifies the control that the intrinsic content size for its cell is no longer valid.
-func (x *Control) InvalidateIntrinsicContentSizeForCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateIntrinsicContentSizeForCell:"), objref.IDOf(cell))
+func (c *Control) InvalidateIntrinsicContentSizeForCell(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("invalidateIntrinsicContentSizeForCell:"), objref.IDOf(cell))
 }
-
-// Controlable is the interface implemented by [Control], for mocking and DI.
-type Controlable interface {
-	obj.Object
-	WithTarget(target obj.Object) *Control
-	WithTag(tag int) *Control
-	WithIgnoresMultiClick(ignoresMultiClick bool) *Control
-	WithContinuous(continuous bool) *Control
-	WithEnabled(enabled bool) *Control
-	WithRefusesFirstResponder(refusesFirstResponder bool) *Control
-	WithHighlighted(highlighted bool) *Control
-	WithControlSize(controlSize ControlSize) *Control
-	WithFormatter(formatter obj.Object) *Control
-	WithObjectValue(objectValue obj.Object) *Control
-	WithStringValue(stringValue string) *Control
-	WithAttributedStringValue(attributedStringValue obj.Object) *Control
-	WithIntValue(intValue int) *Control
-	WithIntegerValue(integerValue int) *Control
-	WithFloatValue(floatValue float32) *Control
-	WithDoubleValue(doubleValue float64) *Control
-	WithFont(font *Font) *Control
-	WithUsesSingleLineMode(usesSingleLineMode bool) *Control
-	WithLineBreakMode(lineBreakMode LineBreakMode) *Control
-	WithAlignment(alignment TextAlignment) *Control
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Control
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Control
-	WithCell(cell CellProvider) *Control
-	WithSubviews(items ...ViewProvider) *Control
-	WithHidden(hidden bool) *Control
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Control
-	WithAutoresizesSubviews(autoresizesSubviews bool) *Control
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Control
-	WithFrame(frame corefoundation.CGRect) *Control
-	WithFrameRotation(frameRotation float64) *Control
-	WithFrameCenterRotation(frameCenterRotation float64) *Control
-	WithBoundsRotation(boundsRotation float64) *Control
-	WithBounds(bounds corefoundation.CGRect) *Control
-	WithCanDrawConcurrently(canDrawConcurrently bool) *Control
-	WithNeedsDisplay(needsDisplay bool) *Control
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Control
-	WithWantsRestingTouches(wantsRestingTouches bool) *Control
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Control
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Control
-	WithWantsLayer(wantsLayer bool) *Control
-	WithLayer(layer obj.Object) *Control
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Control
-	WithNeedsLayout(needsLayout bool) *Control
-	WithAlphaValue(alphaValue float64) *Control
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Control
-	WithBackgroundFilters(items ...obj.Object) *Control
-	WithCompositingFilter(compositingFilter obj.Object) *Control
-	WithContentFilters(items ...obj.Object) *Control
-	WithShadow(shadow *Shadow) *Control
-	WithClipsToBounds(clipsToBounds bool) *Control
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Control
-	WithToolTip(toolTip string) *Control
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Control
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Control
-	WithNextKeyView(nextKeyView ViewProvider) *Control
-	WithFocusRingType(focusRingType FocusRingType) *Control
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *Control
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Control
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Control
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Control
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Control
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Control
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Control
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Control
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Control
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Control
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Control
-	WithNextResponder(nextResponder ResponderProvider) *Control
-	WithMenu(menu *Menu) *Control
-	WithUserActivity(userActivity obj.Object) *Control
-	WithTouchBar(touchBar *TouchBar) *Control
-	SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize
-	SizeToFit()
-	SendActionOn(mask EventMask) int
-	TakeIntValueFrom(sender obj.Object)
-	TakeFloatValueFrom(sender obj.Object)
-	TakeDoubleValueFrom(sender obj.Object)
-	TakeStringValueFrom(sender obj.Object)
-	TakeObjectValueFrom(sender obj.Object)
-	TakeIntegerValueFrom(sender obj.Object)
-	PerformClick(sender obj.Object)
-	ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect
-	DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *View)
-	Target() obj.Object
-	SetTarget(target obj.Object)
-	SetTag(tag int)
-	IgnoresMultiClick() bool
-	SetIgnoresMultiClick(ignoresMultiClick bool)
-	IsContinuous() bool
-	SetContinuous(continuous bool)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	RefusesFirstResponder() bool
-	SetRefusesFirstResponder(refusesFirstResponder bool)
-	IsHighlighted() bool
-	SetHighlighted(highlighted bool)
-	ControlSize() ControlSize
-	SetControlSize(controlSize ControlSize)
-	Formatter() obj.Object
-	SetFormatter(formatter obj.Object)
-	ObjectValue() obj.Object
-	SetObjectValue(objectValue obj.Object)
-	StringValue() string
-	SetStringValue(stringValue string)
-	AttributedStringValue() obj.Object
-	SetAttributedStringValue(attributedStringValue obj.Object)
-	IntValue() int
-	SetIntValue(intValue int)
-	IntegerValue() int
-	SetIntegerValue(integerValue int)
-	FloatValue() float32
-	SetFloatValue(floatValue float32)
-	DoubleValue() float64
-	SetDoubleValue(doubleValue float64)
-	Font() *Font
-	SetFont(font *Font)
-	UsesSingleLineMode() bool
-	SetUsesSingleLineMode(usesSingleLineMode bool)
-	LineBreakMode() LineBreakMode
-	SetLineBreakMode(lineBreakMode LineBreakMode)
-	Alignment() TextAlignment
-	SetAlignment(alignment TextAlignment)
-	BaseWritingDirection() WritingDirection
-	SetBaseWritingDirection(baseWritingDirection WritingDirection)
-	AllowsExpansionToolTips() bool
-	SetAllowsExpansionToolTips(allowsExpansionToolTips bool)
-	CurrentEditor() *Text
-	AbortEditing() bool
-	ValidateEditing()
-	EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, event *Event)
-	SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, selStart int, selLength int)
-	EndEditing(textObj *Text)
-	SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int, rightDigits int)
-	SelectedCell() *Cell
-	SelectedTag() int
-	SetNeedsDisplay()
-	CalcSize()
-	UpdateCell(cell *Cell)
-	UpdateCellInside(cell *Cell)
-	DrawCellInside(cell *Cell)
-	DrawCell(cell *Cell)
-	SelectCell(cell *Cell)
-	Cell() *Cell
-	SetCell(cell *Cell)
-	InvalidateIntrinsicContentSizeForCell(cell *Cell)
-}
-
-var _ Controlable = (*Control)(nil)
 
 // isControl marks Control — and, by embedding promotion, its
 // subclasses — as a member of the Control hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Control) isControl() {}
+func (c *Control) isControl() {}
 
 var _ ControlProvider = (*Control)(nil)
 

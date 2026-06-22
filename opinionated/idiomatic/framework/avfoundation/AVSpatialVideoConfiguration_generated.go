@@ -44,24 +44,24 @@ func spatialVideoConfigurationAdopt(id objc.ID) *SpatialVideoConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *SpatialVideoConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (svc *SpatialVideoConfiguration) Description() string {
+	return rt.Description(objref.IDOf(svc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpatialVideoConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (svc *SpatialVideoConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(svc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpatialVideoConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (svc *SpatialVideoConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(svc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpatialVideoConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (svc *SpatialVideoConfiguration) String() string {
+	return rt.Description(objref.IDOf(svc))
 }
 
 // NewSpatialVideoConfiguration creates a new SpatialVideoConfiguration.
@@ -77,92 +77,53 @@ func NewSpatialVideoConfigurationWithFormatDescription(formatDescription obj.Obj
 	return spatialVideoConfigurationAdopt(_id)
 }
 
-// WithCameraCalibrationDataLensCollection specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters.  This property is only applicable when the projection kind is kCMTagProjectionTypeParametricImmersive.  Can be nil if the value is unknown.
-func (x *SpatialVideoConfiguration) WithCameraCalibrationDataLensCollection(items ...obj.Object) *SpatialVideoConfiguration {
+// WithCameraCalibrationDataLensCollection sets specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters.  This property is only applicable when the projection kind is kCMTagProjectionTypeParametricImmersive.  Can be nil if the value is unknown.
+func (svc *SpatialVideoConfiguration) WithCameraCalibrationDataLensCollection(items ...obj.Object) *SpatialVideoConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraCalibrationDataLensCollection:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setCameraCalibrationDataLensCollection:"), _arr)
+	return svc
 }
 
-// WithHorizontalFieldOfView specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
-func (x *SpatialVideoConfiguration) WithHorizontalFieldOfView(horizontalFieldOfView obj.Object) *SpatialVideoConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalFieldOfView:"), objref.IDOf(horizontalFieldOfView))
-	return x
+// WithHorizontalFieldOfView sets specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
+func (svc *SpatialVideoConfiguration) WithHorizontalFieldOfView(horizontalFieldOfView obj.Object) *SpatialVideoConfiguration {
+	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setHorizontalFieldOfView:"), objref.IDOf(horizontalFieldOfView))
+	return svc
 }
 
-// WithCameraSystemBaseline specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
-func (x *SpatialVideoConfiguration) WithCameraSystemBaseline(cameraSystemBaseline obj.Object) *SpatialVideoConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraSystemBaseline:"), objref.IDOf(cameraSystemBaseline))
-	return x
+// WithCameraSystemBaseline sets specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
+func (svc *SpatialVideoConfiguration) WithCameraSystemBaseline(cameraSystemBaseline obj.Object) *SpatialVideoConfiguration {
+	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setCameraSystemBaseline:"), objref.IDOf(cameraSystemBaseline))
+	return svc
 }
 
-// WithDisparityAdjustment specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
-func (x *SpatialVideoConfiguration) WithDisparityAdjustment(disparityAdjustment obj.Object) *SpatialVideoConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisparityAdjustment:"), objref.IDOf(disparityAdjustment))
-	return x
+// WithDisparityAdjustment sets specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
+func (svc *SpatialVideoConfiguration) WithDisparityAdjustment(disparityAdjustment obj.Object) *SpatialVideoConfiguration {
+	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setDisparityAdjustment:"), objref.IDOf(disparityAdjustment))
+	return svc
 }
 
 // CameraCalibrationDataLensCollection specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters.  This property is only applicable when the projection kind is kCMTagProjectionTypeParametricImmersive.  Can be nil if the value is unknown.
 //
 // CameraCalibrationDataLensCollection returns the collection as a Go slice.
-func (x *SpatialVideoConfiguration) CameraCalibrationDataLensCollection() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraCalibrationDataLensCollection"))
+func (svc *SpatialVideoConfiguration) CameraCalibrationDataLensCollection() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("cameraCalibrationDataLensCollection"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetCameraCalibrationDataLensCollection wraps the corresponding Objective-C method.
-func (x *SpatialVideoConfiguration) SetCameraCalibrationDataLensCollection(cameraCalibrationDataLensCollection []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraCalibrationDataLensCollection:"), purego.SliceToNSArray(cameraCalibrationDataLensCollection, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // HorizontalFieldOfView specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
-func (x *SpatialVideoConfiguration) HorizontalFieldOfView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("horizontalFieldOfView"))
+func (svc *SpatialVideoConfiguration) HorizontalFieldOfView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("horizontalFieldOfView"))
 	return obj.Wrap(_r)
-}
-
-// SetHorizontalFieldOfView wraps the corresponding Objective-C method.
-func (x *SpatialVideoConfiguration) SetHorizontalFieldOfView(horizontalFieldOfView obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalFieldOfView:"), objref.IDOf(horizontalFieldOfView))
 }
 
 // CameraSystemBaseline specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
-func (x *SpatialVideoConfiguration) CameraSystemBaseline() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraSystemBaseline"))
+func (svc *SpatialVideoConfiguration) CameraSystemBaseline() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("cameraSystemBaseline"))
 	return obj.Wrap(_r)
-}
-
-// SetCameraSystemBaseline wraps the corresponding Objective-C method.
-func (x *SpatialVideoConfiguration) SetCameraSystemBaseline(cameraSystemBaseline obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraSystemBaseline:"), objref.IDOf(cameraSystemBaseline))
 }
 
 // DisparityAdjustment specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
-func (x *SpatialVideoConfiguration) DisparityAdjustment() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disparityAdjustment"))
+func (svc *SpatialVideoConfiguration) DisparityAdjustment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("disparityAdjustment"))
 	return obj.Wrap(_r)
 }
-
-// SetDisparityAdjustment wraps the corresponding Objective-C method.
-func (x *SpatialVideoConfiguration) SetDisparityAdjustment(disparityAdjustment obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisparityAdjustment:"), objref.IDOf(disparityAdjustment))
-}
-
-// SpatialVideoConfigurationable is the interface implemented by [SpatialVideoConfiguration], for mocking and DI.
-type SpatialVideoConfigurationable interface {
-	obj.Object
-	WithCameraCalibrationDataLensCollection(items ...obj.Object) *SpatialVideoConfiguration
-	WithHorizontalFieldOfView(horizontalFieldOfView obj.Object) *SpatialVideoConfiguration
-	WithCameraSystemBaseline(cameraSystemBaseline obj.Object) *SpatialVideoConfiguration
-	WithDisparityAdjustment(disparityAdjustment obj.Object) *SpatialVideoConfiguration
-	CameraCalibrationDataLensCollection() []obj.Object
-	SetCameraCalibrationDataLensCollection(cameraCalibrationDataLensCollection []obj.Object)
-	HorizontalFieldOfView() obj.Object
-	SetHorizontalFieldOfView(horizontalFieldOfView obj.Object)
-	CameraSystemBaseline() obj.Object
-	SetCameraSystemBaseline(cameraSystemBaseline obj.Object)
-	DisparityAdjustment() obj.Object
-	SetDisparityAdjustment(disparityAdjustment obj.Object)
-}
-
-var _ SpatialVideoConfigurationable = (*SpatialVideoConfiguration)(nil)

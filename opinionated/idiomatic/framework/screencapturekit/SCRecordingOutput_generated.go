@@ -44,24 +44,24 @@ func recordingOutputAdopt(id objc.ID) *RecordingOutput {
 }
 
 // Description returns the object's -description text.
-func (x *RecordingOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ro *RecordingOutput) Description() string {
+	return rt.Description(objref.IDOf(ro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecordingOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ro *RecordingOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecordingOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ro *RecordingOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecordingOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ro *RecordingOutput) String() string {
+	return rt.Description(objref.IDOf(ro))
 }
 
 // NewRecordingOutput creates a new RecordingOutput.
@@ -71,15 +71,7 @@ func NewRecordingOutput() *RecordingOutput {
 }
 
 // RecordedFileSize indicates current size, in bytes, of the data recorded to the output file.
-func (x *RecordingOutput) RecordedFileSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recordedFileSize"))
+func (ro *RecordingOutput) RecordedFileSize() int {
+	_r := objc.Send[int](objref.IDOf(ro), objc.RegisterName("recordedFileSize"))
 	return _r
 }
-
-// RecordingOutputable is the interface implemented by [RecordingOutput], for mocking and DI.
-type RecordingOutputable interface {
-	obj.Object
-	RecordedFileSize() int
-}
-
-var _ RecordingOutputable = (*RecordingOutput)(nil)

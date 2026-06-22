@@ -49,90 +49,65 @@ func physicsJointAdopt(id objc.ID) *PhysicsJoint {
 }
 
 // Description returns the object's -description text.
-func (x *PhysicsJoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pj *PhysicsJoint) Description() string {
+	return rt.Description(objref.IDOf(pj))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsJoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pj *PhysicsJoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pj), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsJoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pj *PhysicsJoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pj), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicsJoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pj *PhysicsJoint) String() string {
+	return rt.Description(objref.IDOf(pj))
 }
 
-// WithBodyA the first body connected by the joint.
-func (x *PhysicsJoint) WithBodyA(bodyA *PhysicsBody) *PhysicsJoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
-	return x
+// WithBodyA sets the first body connected by the joint.
+func (pj *PhysicsJoint) WithBodyA(bodyA *PhysicsBody) *PhysicsJoint {
+	objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
+	return pj
 }
 
-// WithBodyB the second body connected by the joint.
-func (x *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
-	return x
+// WithBodyB sets the second body connected by the joint.
+func (pj *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
+	objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
+	return pj
 }
 
 // BodyA wraps the corresponding Objective-C method.
-func (x *PhysicsJoint) BodyA() *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+func (pj *PhysicsJoint) BodyA() *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
-}
-
-// SetBodyA wraps the corresponding Objective-C method.
-func (x *PhysicsJoint) SetBodyA(bodyA *PhysicsBody) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 }
 
 // BodyB wraps the corresponding Objective-C method.
-func (x *PhysicsJoint) BodyB() *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+func (pj *PhysicsJoint) BodyB() *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
-// SetBodyB wraps the corresponding Objective-C method.
-func (x *PhysicsJoint) SetBodyB(bodyB *PhysicsBody) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
-}
-
 // ReactionForce wraps the corresponding Objective-C method.
-func (x *PhysicsJoint) ReactionForce() corefoundation.CGVector {
-	_r := objc.Send[corefoundation.CGVector](objref.IDOf(x), objc.RegisterName("reactionForce"))
+func (pj *PhysicsJoint) ReactionForce() corefoundation.CGVector {
+	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pj), objc.RegisterName("reactionForce"))
 	return _r
 }
 
 // ReactionTorque wraps the corresponding Objective-C method.
-func (x *PhysicsJoint) ReactionTorque() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reactionTorque"))
+func (pj *PhysicsJoint) ReactionTorque() float64 {
+	_r := objc.Send[float64](objref.IDOf(pj), objc.RegisterName("reactionTorque"))
 	return _r
 }
-
-// PhysicsJointable is the interface implemented by [PhysicsJoint], for mocking and DI.
-type PhysicsJointable interface {
-	obj.Object
-	WithBodyA(bodyA *PhysicsBody) *PhysicsJoint
-	WithBodyB(bodyB *PhysicsBody) *PhysicsJoint
-	BodyA() *PhysicsBody
-	SetBodyA(bodyA *PhysicsBody)
-	BodyB() *PhysicsBody
-	SetBodyB(bodyB *PhysicsBody)
-	ReactionForce() corefoundation.CGVector
-	ReactionTorque() float64
-}
-
-var _ PhysicsJointable = (*PhysicsJoint)(nil)
 
 // isPhysicsJoint marks PhysicsJoint — and, by embedding promotion, its
 // subclasses — as a member of the PhysicsJoint hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PhysicsJoint) isPhysicsJoint() {}
+func (pj *PhysicsJoint) isPhysicsJoint() {}
 
 var _ PhysicsJointProvider = (*PhysicsJoint)(nil)

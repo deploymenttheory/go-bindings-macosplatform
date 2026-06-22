@@ -46,24 +46,24 @@ func authenticationRequirementAdopt(id objc.ID) *AuthenticationRequirement {
 }
 
 // Description returns the object's -description text.
-func (x *AuthenticationRequirement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AuthenticationRequirement) Description() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthenticationRequirement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ar *AuthenticationRequirement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthenticationRequirement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ar *AuthenticationRequirement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthenticationRequirement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AuthenticationRequirement) String() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // NewAuthenticationRequirement creates a new AuthenticationRequirement.
@@ -71,10 +71,3 @@ func NewAuthenticationRequirement() *AuthenticationRequirement {
 	_id := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("new"))
 	return authenticationRequirementAdopt(_id)
 }
-
-// AuthenticationRequirementable is the interface implemented by [AuthenticationRequirement], for mocking and DI.
-type AuthenticationRequirementable interface {
-	obj.Object
-}
-
-var _ AuthenticationRequirementable = (*AuthenticationRequirement)(nil)

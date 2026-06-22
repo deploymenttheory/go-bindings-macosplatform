@@ -44,24 +44,24 @@ func matrixNeuronGradientAdopt(id objc.ID) *MatrixNeuronGradient {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixNeuronGradient) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mng *MatrixNeuronGradient) Description() string {
+	return rt.Description(objref.IDOf(mng))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixNeuronGradient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mng *MatrixNeuronGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mng), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixNeuronGradient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mng *MatrixNeuronGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mng), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixNeuronGradient) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mng *MatrixNeuronGradient) String() string {
+	return rt.Description(objref.IDOf(mng))
 }
 
 // NewMatrixNeuronGradient creates a new MatrixNeuronGradient.
@@ -70,109 +70,72 @@ func NewMatrixNeuronGradient() *MatrixNeuronGradient {
 	return matrixNeuronGradientAdopt(_id)
 }
 
-// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.
-func (x *MatrixNeuronGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-	return x
+// WithSourceNumberOfFeatureVectors sets the number of input vectors which make up the input array.
+func (mng *MatrixNeuronGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(mng), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return mng
 }
 
-// WithSourceInputFeatureChannels the number of feature channels in the input vectors.
-func (x *MatrixNeuronGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-	return x
+// WithSourceInputFeatureChannels sets the number of feature channels in the input vectors.
+func (mng *MatrixNeuronGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(mng), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return mng
 }
 
-// WithAlpha the scale factor to apply to the input.
-func (x *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the scale factor to apply to the input.
+func (mng *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(mng), objc.RegisterName("setAlpha:"), alpha)
+	return mng
 }
 
 // SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
-func (x *MatrixNeuronGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
+func (mng *MatrixNeuronGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	objc.Send[objc.ID](objref.IDOf(mng), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
-// NeuronType getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixNeuronGradient) NeuronType() CNNNeuronType {
-	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
+// NeuronType returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mng *MatrixNeuronGradient) NeuronType() CNNNeuronType {
+	_r := objc.Send[CNNNeuronType](objref.IDOf(mng), objc.RegisterName("neuronType"))
 	return _r
 }
 
-// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixNeuronGradient) NeuronParameterA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+// NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mng *MatrixNeuronGradient) NeuronParameterA() float32 {
+	_r := objc.Send[float32](objref.IDOf(mng), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixNeuronGradient) NeuronParameterB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+// NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mng *MatrixNeuronGradient) NeuronParameterB() float32 {
+	_r := objc.Send[float32](objref.IDOf(mng), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixNeuronGradient) NeuronParameterC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+// NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mng *MatrixNeuronGradient) NeuronParameterC() float32 {
+	_r := objc.Send[float32](objref.IDOf(mng), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SetNeuronToPReLUWithParametersA add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
-func (x *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
+func (mng *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mng), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
 }
 
-// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.
-func (x *MatrixNeuronGradient) SourceNumberOfFeatureVectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+// SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.
+func (mng *MatrixNeuronGradient) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(mng), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
-// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
-func (x *MatrixNeuronGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-}
-
-// SourceInputFeatureChannels the number of feature channels in the input vectors.
-func (x *MatrixNeuronGradient) SourceInputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+// SourceInputFeatureChannels returns the number of feature channels in the input vectors.
+func (mng *MatrixNeuronGradient) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mng), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
-// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixNeuronGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-}
-
-// Alpha the scale factor to apply to the input.
-func (x *MatrixNeuronGradient) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the scale factor to apply to the input.
+func (mng *MatrixNeuronGradient) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(mng), objc.RegisterName("alpha"))
 	return _r
 }
-
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *MatrixNeuronGradient) SetAlpha(alpha float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// MatrixNeuronGradientable is the interface implemented by [MatrixNeuronGradient], for mocking and DI.
-type MatrixNeuronGradientable interface {
-	obj.Object
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient
-	WithAlpha(alpha float64) *MatrixNeuronGradient
-	SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() CNNNeuronType
-	NeuronParameterA() float32
-	NeuronParameterB() float32
-	NeuronParameterC() float32
-	SetNeuronToPReLUWithParametersA(a obj.Object)
-	SourceNumberOfFeatureVectors() int
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
-	SourceInputFeatureChannels() int
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
-	Alpha() float64
-	SetAlpha(alpha float64)
-}
-
-var _ MatrixNeuronGradientable = (*MatrixNeuronGradient)(nil)

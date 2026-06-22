@@ -48,43 +48,35 @@ func notificationTriggerAdopt(id objc.ID) *NotificationTrigger {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationTrigger) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nt *NotificationTrigger) Description() string {
+	return rt.Description(objref.IDOf(nt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationTrigger) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nt *NotificationTrigger) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationTrigger) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nt *NotificationTrigger) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationTrigger) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nt *NotificationTrigger) String() string {
+	return rt.Description(objref.IDOf(nt))
 }
 
 // Repeats wraps the corresponding Objective-C method.
-func (x *NotificationTrigger) Repeats() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("repeats"))
+func (nt *NotificationTrigger) Repeats() bool {
+	_r := objc.Send[bool](objref.IDOf(nt), objc.RegisterName("repeats"))
 	return _r
 }
-
-// NotificationTriggerable is the interface implemented by [NotificationTrigger], for mocking and DI.
-type NotificationTriggerable interface {
-	obj.Object
-	Repeats() bool
-}
-
-var _ NotificationTriggerable = (*NotificationTrigger)(nil)
 
 // isNotificationTrigger marks NotificationTrigger — and, by embedding promotion, its
 // subclasses — as a member of the NotificationTrigger hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NotificationTrigger) isNotificationTrigger() {}
+func (nt *NotificationTrigger) isNotificationTrigger() {}
 
 var _ NotificationTriggerProvider = (*NotificationTrigger)(nil)

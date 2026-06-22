@@ -44,24 +44,24 @@ func mTRModeSelectClusterModeOptionStructAdopt(id objc.ID) *MTRModeSelectCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRModeSelectClusterModeOptionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(mmscmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRModeSelectClusterModeOptionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmscmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRModeSelectClusterModeOptionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmscmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRModeSelectClusterModeOptionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(mmscmos))
 }
 
 // NewMTRModeSelectClusterModeOptionStruct creates a new MTRModeSelectClusterModeOptionStruct.
@@ -71,64 +71,39 @@ func NewMTRModeSelectClusterModeOptionStruct() *MTRModeSelectClusterModeOptionSt
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRModeSelectClusterModeOptionStruct) WithLabel(label string) *MTRModeSelectClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) WithLabel(label string) *MTRModeSelectClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mmscmos
 }
 
 // WithMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRModeSelectClusterModeOptionStruct) WithMode(mode obj.Object) *MTRModeSelectClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-	return x
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) WithMode(mode obj.Object) *MTRModeSelectClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	return mmscmos
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterModeOptionStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterModeOptionStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Mode wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterModeOptionStruct) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterModeOptionStruct) SetMode(mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-}
-
 // SemanticTags wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterModeOptionStruct) SemanticTags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticTags"))
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) SemanticTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("semanticTags"))
 	return obj.Wrap(_r)
 }
 
 // SetSemanticTags wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterModeOptionStruct) SetSemanticTags(semanticTags obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSemanticTags:"), objref.IDOf(semanticTags))
+func (mmscmos *MTRModeSelectClusterModeOptionStruct) SetSemanticTags(semanticTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("setSemanticTags:"), objref.IDOf(semanticTags))
 }
-
-// MTRModeSelectClusterModeOptionStructable is the interface implemented by [MTRModeSelectClusterModeOptionStruct], for mocking and DI.
-type MTRModeSelectClusterModeOptionStructable interface {
-	obj.Object
-	WithLabel(label string) *MTRModeSelectClusterModeOptionStruct
-	WithMode(mode obj.Object) *MTRModeSelectClusterModeOptionStruct
-	Label() string
-	SetLabel(label string)
-	Mode() obj.Object
-	SetMode(mode obj.Object)
-	SemanticTags() obj.Object
-	SetSemanticTags(semanticTags obj.Object)
-}
-
-var _ MTRModeSelectClusterModeOptionStructable = (*MTRModeSelectClusterModeOptionStruct)(nil)

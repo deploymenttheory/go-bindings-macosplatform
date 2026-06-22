@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,36 +51,21 @@ func NewVirtioSoundDeviceConfiguration() *VirtioSoundDeviceConfiguration {
 	return virtioSoundDeviceConfigurationAdopt(_id)
 }
 
-// WithStreams list of audio streams exposed by this device.
-func (x *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration {
+// WithStreams sets list of audio streams exposed by this device.
+func (vsdc *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v VirtioSoundDeviceStreamConfigurationProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreams:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(vsdc), objc.RegisterName("setStreams:"), _arr)
+	return vsdc
 }
 
 // Streams wraps the corresponding Objective-C method.
 //
 // Streams returns the collection as a Go slice.
-func (x *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streams"))
+func (vsdc *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {
+	_arr := objc.Send[objc.ID](objref.IDOf(vsdc), objc.RegisterName("streams"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtioSoundDeviceStreamConfiguration {
 		return VirtioSoundDeviceStreamConfigurationFromID(_id)
 	})
 }
-
-// SetStreams wraps the corresponding Objective-C method.
-func (x *VirtioSoundDeviceConfiguration) SetStreams(streams []*VirtioSoundDeviceStreamConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreams:"), purego.SliceToNSArray(streams, func(_v *VirtioSoundDeviceStreamConfiguration) objc.ID { return objref.IDOf(_v) }))
-}
-
-// VirtioSoundDeviceConfigurationable is the interface implemented by [VirtioSoundDeviceConfiguration], for mocking and DI.
-type VirtioSoundDeviceConfigurationable interface {
-	obj.Object
-	WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration
-	Streams() []*VirtioSoundDeviceStreamConfiguration
-	SetStreams(streams []*VirtioSoundDeviceStreamConfiguration)
-}
-
-var _ VirtioSoundDeviceConfigurationable = (*VirtioSoundDeviceConfiguration)(nil)
 
 var _ AudioDeviceConfigurationProvider = (*VirtioSoundDeviceConfiguration)(nil)

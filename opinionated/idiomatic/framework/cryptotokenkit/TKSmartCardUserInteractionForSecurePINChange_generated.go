@@ -52,82 +52,60 @@ func NewSmartCardUserInteractionForSecurePINChange() *SmartCardUserInteractionFo
 	return smartCardUserInteractionForSecurePINChangeAdopt(_id)
 }
 
-// WithPINConfirmation the way PIN confirmation is requested. TKSmartCardPINConfirmationNone by default.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConfirmation SmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINConfirmation:"), pINConfirmation)
-	return x
+// WithPINConfirmation sets the way PIN confirmation is requested. TKSmartCardPINConfirmationNone by default.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConfirmation SmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setPINConfirmation:"), pINConfirmation)
+	return scuifspc
 }
 
-// WithPINCompletion the conditions under which PIN entry should be considered complete.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
-	return x
+// WithPINCompletion sets the conditions under which PIN entry should be considered complete.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setPINCompletion:"), pINCompletion)
+	return scuifspc
 }
 
-// WithPINMessageIndices a list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINChange {
+// WithPINMessageIndices sets a list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINChange {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setPINMessageIndices:"), _arr)
+	return scuifspc
 }
 
-// WithLocale the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
-func (x *SmartCardUserInteractionForSecurePINChange) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+// WithLocale sets the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return scuifspc
 }
 
-// WithResultSW the SW1-SW2 status bytes.
-func (x *SmartCardUserInteractionForSecurePINChange) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
-	return x
+// WithResultSW sets the SW1-SW2 status bytes.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setResultSW:"), resultSW)
+	return scuifspc
 }
 
-// WithResultData the returned data without SW1-SW2 bytes, if any.
-func (x *SmartCardUserInteractionForSecurePINChange) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
-	return x
+// WithResultData sets the returned data without SW1-SW2 bytes, if any.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
+	return scuifspc
 }
 
-// WithInitialTimeout the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteractionForSecurePINChange) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
-	return x
+// WithInitialTimeout sets the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setInitialTimeout:"), initialTimeout)
+	return scuifspc
 }
 
-// WithInteractionTimeout the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteractionForSecurePINChange) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
-	return x
+// WithInteractionTimeout sets the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
+	return scuifspc
 }
 
 // PINConfirmation wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteractionForSecurePINChange) PINConfirmation() SmartCardPINConfirmation {
-	_r := objc.Send[SmartCardPINConfirmation](objref.IDOf(x), objc.RegisterName("PINConfirmation"))
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) PINConfirmation() SmartCardPINConfirmation {
+	_r := objc.Send[SmartCardPINConfirmation](objref.IDOf(scuifspc), objc.RegisterName("PINConfirmation"))
 	return _r
 }
-
-// SetPINConfirmation wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation SmartCardPINConfirmation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINConfirmation:"), pINConfirmation)
-}
-
-// SmartCardUserInteractionForSecurePINChangeable is the interface implemented by [SmartCardUserInteractionForSecurePINChange], for mocking and DI.
-type SmartCardUserInteractionForSecurePINChangeable interface {
-	obj.Object
-	WithPINConfirmation(pINConfirmation SmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange
-	WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange
-	WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINChange
-	WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINChange
-	WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange
-	WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINChange
-	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange
-	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange
-	PINConfirmation() SmartCardPINConfirmation
-	SetPINConfirmation(pINConfirmation SmartCardPINConfirmation)
-}
-
-var _ SmartCardUserInteractionForSecurePINChangeable = (*SmartCardUserInteractionForSecurePINChange)(nil)
 
 var _ SmartCardUserInteractionForPINOperationProvider = (*SmartCardUserInteractionForSecurePINChange)(nil)
 

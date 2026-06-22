@@ -46,24 +46,24 @@ func notificationBannerAdopt(id objc.ID) *NotificationBanner {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationBanner) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nb *NotificationBanner) Description() string {
+	return rt.Description(objref.IDOf(nb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationBanner) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nb *NotificationBanner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationBanner) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nb *NotificationBanner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationBanner) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nb *NotificationBanner) String() string {
+	return rt.Description(objref.IDOf(nb))
 }
 
 // NewNotificationBanner creates a new NotificationBanner.
@@ -71,10 +71,3 @@ func NewNotificationBanner() *NotificationBanner {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKNotificationBanner")), objc.RegisterName("new"))
 	return notificationBannerAdopt(_id)
 }
-
-// NotificationBannerable is the interface implemented by [NotificationBanner], for mocking and DI.
-type NotificationBannerable interface {
-	obj.Object
-}
-
-var _ NotificationBannerable = (*NotificationBanner)(nil)

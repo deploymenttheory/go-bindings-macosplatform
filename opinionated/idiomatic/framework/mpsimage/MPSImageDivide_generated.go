@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,81 +52,64 @@ func NewImageDivide() *ImageDivide {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageDivide) WithPrimaryScale(primaryScale float32) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (id_ *ImageDivide) WithPrimaryScale(primaryScale float32) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return id_
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageDivide) WithSecondaryScale(secondaryScale float32) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (id_ *ImageDivide) WithSecondaryScale(secondaryScale float32) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return id_
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *ImageDivide) WithBias(bias float32) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (id_ *ImageDivide) WithBias(bias float32) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setBias:"), bias)
+	return id_
 }
 
-// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageDivide) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
-	return x
+// WithPrimaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (id_ *ImageDivide) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+	return id_
 }
 
-// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageDivide) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
-	return x
+// WithSecondaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (id_ *ImageDivide) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+	return id_
 }
 
-// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-func (x *ImageDivide) WithMinimumValue(minimumValue float32) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+// WithMinimumValue sets minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+func (id_ *ImageDivide) WithMinimumValue(minimumValue float32) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return id_
 }
 
-// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-func (x *ImageDivide) WithMaximumValue(maximumValue float32) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+// WithMaximumValue sets maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+func (id_ *ImageDivide) WithMaximumValue(maximumValue float32) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return id_
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
-func (x *ImageDivide) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
+func (id_ *ImageDivide) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return id_
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
-func (x *ImageDivide) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
+func (id_ *ImageDivide) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return id_
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageDivide) WithClipRect(clipRect metal.MTLRegion) *ImageDivide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (id_ *ImageDivide) WithClipRect(clipRect metal.MTLRegion) *ImageDivide {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setClipRect:"), clipRect)
+	return id_
 }
-
-// ImageDivideable is the interface implemented by [ImageDivide], for mocking and DI.
-type ImageDivideable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *ImageDivide
-	WithSecondaryScale(secondaryScale float32) *ImageDivide
-	WithBias(bias float32) *ImageDivide
-	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageDivide
-	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageDivide
-	WithMinimumValue(minimumValue float32) *ImageDivide
-	WithMaximumValue(maximumValue float32) *ImageDivide
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageDivide
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageDivide
-	WithClipRect(clipRect metal.MTLRegion) *ImageDivide
-}
-
-var _ ImageDivideable = (*ImageDivide)(nil)
 
 var _ ImageArithmeticProvider = (*ImageDivide)(nil)
 

@@ -47,24 +47,24 @@ func documentAdopt(id objc.ID) *Document {
 }
 
 // Description returns the object's -description text.
-func (x *Document) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Document) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Document) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Document) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Document) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Document) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Document) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Document) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDocument creates a new Document.
@@ -88,276 +88,225 @@ func NewDocumentWithData(data obj.Object) *Document {
 }
 
 // WithDocumentAttributes sets the property and returns the receiver so calls can be chained.
-func (x *Document) WithDocumentAttributes(documentAttributes obj.Object) *Document {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
-	return x
+func (d *Document) WithDocumentAttributes(documentAttributes obj.Object) *Document {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
+	return d
 }
 
 // UnlockWithPassword attempts to unlock an encrypted document.
-func (x *Document) UnlockWithPassword(password string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unlockWithPassword:"), purego.NSString(password))
+func (d *Document) UnlockWithPassword(password string) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("unlockWithPassword:"), purego.NSString(password))
 	return _r
 }
 
 // DataRepresentation wraps the corresponding Objective-C method.
-func (x *Document) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+func (d *Document) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // DataRepresentationWithOptions wraps the corresponding Objective-C method.
-func (x *Document) DataRepresentationWithOptions(options obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentationWithOptions:"), objref.IDOf(options))
+func (d *Document) DataRepresentationWithOptions(options obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentationWithOptions:"), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
 // WriteToFile wraps the corresponding Objective-C method.
-func (x *Document) WriteToFile(path string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:"), purego.NSString(path))
+func (d *Document) WriteToFile(path string) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:"), purego.NSString(path))
 	return _r
 }
 
 // WriteToFileWithOptions wraps the corresponding Objective-C method.
-func (x *Document) WriteToFileWithOptions(path string, options obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:withOptions:"), purego.NSString(path), objref.IDOf(options))
+func (d *Document) WriteToFileWithOptions(path string, options obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:withOptions:"), purego.NSString(path), objref.IDOf(options))
 	return _r
 }
 
 // WriteToURL wraps the corresponding Objective-C method.
-func (x *Document) WriteToURL(url string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:"), rt.FileURL(url))
+func (d *Document) WriteToURL(url string) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:"), rt.FileURL(url))
 	return _r
 }
 
 // WriteToURLWithOptions wraps the corresponding Objective-C method.
-func (x *Document) WriteToURLWithOptions(url string, options obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:withOptions:"), rt.FileURL(url), objref.IDOf(options))
+func (d *Document) WriteToURLWithOptions(url string, options obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:withOptions:"), rt.FileURL(url), objref.IDOf(options))
 	return _r
 }
 
 // OutlineItemForSelection wraps the corresponding Objective-C method.
-func (x *Document) OutlineItemForSelection(selection *Selection) *Outline {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outlineItemForSelection:"), objref.IDOf(selection))
+func (d *Document) OutlineItemForSelection(selection *Selection) *Outline {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("outlineItemForSelection:"), objref.IDOf(selection))
 	return OutlineFromID(_r)
 }
 
 // PageAtIndex wraps the corresponding Objective-C method.
-func (x *Document) PageAtIndex(index int) *Page {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageAtIndex:"), index)
+func (d *Document) PageAtIndex(index int) *Page {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("pageAtIndex:"), index)
 	return PageFromID(_r)
 }
 
 // IndexForPage wraps the corresponding Objective-C method.
-func (x *Document) IndexForPage(page *Page) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexForPage:"), objref.IDOf(page))
+func (d *Document) IndexForPage(page *Page) int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("indexForPage:"), objref.IDOf(page))
 	return _r
 }
 
 // InsertPageAtIndex wraps the corresponding Objective-C method.
-func (x *Document) InsertPageAtIndex(page *Page, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertPage:atIndex:"), objref.IDOf(page), index)
+func (d *Document) InsertPageAtIndex(page *Page, index int) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("insertPage:atIndex:"), objref.IDOf(page), index)
 }
 
 // RemovePageAtIndex wraps the corresponding Objective-C method.
-func (x *Document) RemovePageAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePageAtIndex:"), index)
+func (d *Document) RemovePageAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("removePageAtIndex:"), index)
 }
 
 // ExchangePageAtIndexWithPageAtIndex wraps the corresponding Objective-C method.
-func (x *Document) ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangePageAtIndex:withPageAtIndex:"), indexA, indexB)
+func (d *Document) ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("exchangePageAtIndex:withPageAtIndex:"), indexA, indexB)
 }
 
 // CancelFindString wraps the corresponding Objective-C method.
-func (x *Document) CancelFindString() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelFindString"))
+func (d *Document) CancelFindString() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("cancelFindString"))
 }
 
 // PrintOperationForPrintInfoScalingModeAutoRotate wraps the corresponding Objective-C method.
-func (x *Document) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo obj.Object, scaleMode PrintScalingMode, doRotate bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printOperationForPrintInfo:scalingMode:autoRotate:"), objref.IDOf(printInfo), scaleMode, doRotate)
+func (d *Document) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo obj.Object, scaleMode PrintScalingMode, doRotate bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printOperationForPrintInfo:scalingMode:autoRotate:"), objref.IDOf(printInfo), scaleMode, doRotate)
 	return obj.Wrap(_r)
 }
 
 // SelectionFromPageAtPointToPageAtPoint wraps the corresponding Objective-C method.
-func (x *Document) SelectionFromPageAtPointToPageAtPoint(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint) *Selection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:"), objref.IDOf(startPage), startPoint, objref.IDOf(endPage), endPoint)
+func (d *Document) SelectionFromPageAtPointToPageAtPoint(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint) *Selection {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:"), objref.IDOf(startPage), startPoint, objref.IDOf(endPage), endPoint)
 	return SelectionFromID(_r)
 }
 
 // SelectionFromPageAtPointToPageAtPointWithGranularity wraps the corresponding Objective-C method.
-func (x *Document) SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint, granularity SelectionGranularity) *Selection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:withGranularity:"), objref.IDOf(startPage), startPoint, objref.IDOf(endPage), endPoint, granularity)
+func (d *Document) SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint, granularity SelectionGranularity) *Selection {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:withGranularity:"), objref.IDOf(startPage), startPoint, objref.IDOf(endPage), endPoint, granularity)
 	return SelectionFromID(_r)
 }
 
 // SelectionFromPageAtCharacterIndexToPageAtCharacterIndex wraps the corresponding Objective-C method.
-func (x *Document) SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *Page, startCharacter int, endPage *Page, endCharacter int) *Selection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPage:atCharacterIndex:toPage:atCharacterIndex:"), objref.IDOf(startPage), startCharacter, objref.IDOf(endPage), endCharacter)
+func (d *Document) SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *Page, startCharacter int, endPage *Page, endCharacter int) *Selection {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("selectionFromPage:atCharacterIndex:toPage:atCharacterIndex:"), objref.IDOf(startPage), startCharacter, objref.IDOf(endPage), endCharacter)
 	return SelectionFromID(_r)
 }
 
 // DocumentURL wraps the corresponding Objective-C method.
-func (x *Document) DocumentURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentURL"))
+func (d *Document) DocumentURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentURL"))
 	return obj.Wrap(_r)
 }
 
 // DocumentRef wraps the corresponding Objective-C method.
-func (x *Document) DocumentRef() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentRef"))
+func (d *Document) DocumentRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentRef"))
 	return obj.Wrap(_r)
 }
 
 // DocumentAttributes wraps the corresponding Objective-C method.
-func (x *Document) DocumentAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentAttributes"))
+func (d *Document) DocumentAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentAttributes"))
 	return obj.Wrap(_r)
 }
 
-// SetDocumentAttributes wraps the corresponding Objective-C method.
-func (x *Document) SetDocumentAttributes(documentAttributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
-}
-
 // MajorVersion wraps the corresponding Objective-C method.
-func (x *Document) MajorVersion() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("majorVersion"))
+func (d *Document) MajorVersion() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("majorVersion"))
 	return _r
 }
 
 // MinorVersion wraps the corresponding Objective-C method.
-func (x *Document) MinorVersion() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minorVersion"))
+func (d *Document) MinorVersion() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("minorVersion"))
 	return _r
 }
 
 // IsEncrypted wraps the corresponding Objective-C method.
-func (x *Document) IsEncrypted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+func (d *Document) IsEncrypted() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
 // IsLocked wraps the corresponding Objective-C method.
-func (x *Document) IsLocked() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocked"))
+func (d *Document) IsLocked() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isLocked"))
 	return _r
 }
 
 // AllowsPrinting wraps the corresponding Objective-C method.
-func (x *Document) AllowsPrinting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsPrinting"))
+func (d *Document) AllowsPrinting() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsPrinting"))
 	return _r
 }
 
 // AllowsCopying wraps the corresponding Objective-C method.
-func (x *Document) AllowsCopying() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCopying"))
+func (d *Document) AllowsCopying() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsCopying"))
 	return _r
 }
 
 // AllowsDocumentChanges wraps the corresponding Objective-C method.
-func (x *Document) AllowsDocumentChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDocumentChanges"))
+func (d *Document) AllowsDocumentChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsDocumentChanges"))
 	return _r
 }
 
 // AllowsDocumentAssembly wraps the corresponding Objective-C method.
-func (x *Document) AllowsDocumentAssembly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDocumentAssembly"))
+func (d *Document) AllowsDocumentAssembly() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsDocumentAssembly"))
 	return _r
 }
 
 // AllowsContentAccessibility wraps the corresponding Objective-C method.
-func (x *Document) AllowsContentAccessibility() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsContentAccessibility"))
+func (d *Document) AllowsContentAccessibility() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsContentAccessibility"))
 	return _r
 }
 
 // AllowsCommenting wraps the corresponding Objective-C method.
-func (x *Document) AllowsCommenting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCommenting"))
+func (d *Document) AllowsCommenting() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsCommenting"))
 	return _r
 }
 
 // AllowsFormFieldEntry wraps the corresponding Objective-C method.
-func (x *Document) AllowsFormFieldEntry() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsFormFieldEntry"))
+func (d *Document) AllowsFormFieldEntry() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsFormFieldEntry"))
 	return _r
 }
 
 // AccessPermissions wraps the corresponding Objective-C method.
-func (x *Document) AccessPermissions() AccessPermissions {
-	_r := objc.Send[AccessPermissions](objref.IDOf(x), objc.RegisterName("accessPermissions"))
+func (d *Document) AccessPermissions() AccessPermissions {
+	_r := objc.Send[AccessPermissions](objref.IDOf(d), objc.RegisterName("accessPermissions"))
 	return _r
 }
 
 // PermissionsStatus wraps the corresponding Objective-C method.
-func (x *Document) PermissionsStatus() DocumentPermissions {
-	_r := objc.Send[DocumentPermissions](objref.IDOf(x), objc.RegisterName("permissionsStatus"))
+func (d *Document) PermissionsStatus() DocumentPermissions {
+	_r := objc.Send[DocumentPermissions](objref.IDOf(d), objc.RegisterName("permissionsStatus"))
 	return _r
 }
 
 // PageCount wraps the corresponding Objective-C method.
-func (x *Document) PageCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageCount"))
+func (d *Document) PageCount() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("pageCount"))
 	return _r
 }
 
 // IsFinding wraps the corresponding Objective-C method.
-func (x *Document) IsFinding() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinding"))
+func (d *Document) IsFinding() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isFinding"))
 	return _r
 }
 
 // SelectionForEntireDocument wraps the corresponding Objective-C method.
-func (x *Document) SelectionForEntireDocument() *Selection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionForEntireDocument"))
+func (d *Document) SelectionForEntireDocument() *Selection {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("selectionForEntireDocument"))
 	return SelectionFromID(_r)
 }
-
-// Documentable is the interface implemented by [Document], for mocking and DI.
-type Documentable interface {
-	obj.Object
-	WithDocumentAttributes(documentAttributes obj.Object) *Document
-	UnlockWithPassword(password string) bool
-	DataRepresentation() obj.Object
-	DataRepresentationWithOptions(options obj.Object) obj.Object
-	WriteToFile(path string) bool
-	WriteToFileWithOptions(path string, options obj.Object) bool
-	WriteToURL(url string) bool
-	WriteToURLWithOptions(url string, options obj.Object) bool
-	OutlineItemForSelection(selection *Selection) *Outline
-	PageAtIndex(index int) *Page
-	IndexForPage(page *Page) int
-	InsertPageAtIndex(page *Page, index int)
-	RemovePageAtIndex(index int)
-	ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int)
-	CancelFindString()
-	PrintOperationForPrintInfoScalingModeAutoRotate(printInfo obj.Object, scaleMode PrintScalingMode, doRotate bool) obj.Object
-	SelectionFromPageAtPointToPageAtPoint(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint) *Selection
-	SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint, granularity SelectionGranularity) *Selection
-	SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *Page, startCharacter int, endPage *Page, endCharacter int) *Selection
-	DocumentURL() obj.Object
-	DocumentRef() obj.Object
-	DocumentAttributes() obj.Object
-	SetDocumentAttributes(documentAttributes obj.Object)
-	MajorVersion() int
-	MinorVersion() int
-	IsEncrypted() bool
-	IsLocked() bool
-	AllowsPrinting() bool
-	AllowsCopying() bool
-	AllowsDocumentChanges() bool
-	AllowsDocumentAssembly() bool
-	AllowsContentAccessibility() bool
-	AllowsCommenting() bool
-	AllowsFormFieldEntry() bool
-	AccessPermissions() AccessPermissions
-	PermissionsStatus() DocumentPermissions
-	PageCount() int
-	IsFinding() bool
-	SelectionForEntireDocument() *Selection
-}
-
-var _ Documentable = (*Document)(nil)

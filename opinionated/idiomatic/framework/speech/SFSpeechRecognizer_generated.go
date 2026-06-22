@@ -46,24 +46,24 @@ func speechRecognizerAdopt(id objc.ID) *SpeechRecognizer {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechRecognizer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sr *SpeechRecognizer) Description() string {
+	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechRecognizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sr *SpeechRecognizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechRecognizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sr *SpeechRecognizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechRecognizer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sr *SpeechRecognizer) String() string {
+	return rt.Description(objref.IDOf(sr))
 }
 
 // NewSpeechRecognizer creates a new SpeechRecognizer.
@@ -79,83 +79,50 @@ func NewSpeechRecognizerWithLocale(locale obj.Object) *SpeechRecognizer {
 	return speechRecognizerAdopt(_id)
 }
 
-// WithSupportsOnDeviceRecognition a Boolean value that indicates whether the speech recognizer can operate without network access.
-func (x *SpeechRecognizer) WithSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool) *SpeechRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsOnDeviceRecognition:"), supportsOnDeviceRecognition)
-	return x
+// WithSupportsOnDeviceRecognition sets a Boolean value that indicates whether the speech recognizer can operate without network access.
+func (sr *SpeechRecognizer) WithSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool) *SpeechRecognizer {
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setSupportsOnDeviceRecognition:"), supportsOnDeviceRecognition)
+	return sr
 }
 
-// WithDefaultTaskHint a hint that indicates the type of speech recognition being requested.
-func (x *SpeechRecognizer) WithDefaultTaskHint(defaultTaskHint SpeechRecognitionTaskHint) *SpeechRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTaskHint:"), defaultTaskHint)
-	return x
+// WithDefaultTaskHint sets a hint that indicates the type of speech recognition being requested.
+func (sr *SpeechRecognizer) WithDefaultTaskHint(defaultTaskHint SpeechRecognitionTaskHint) *SpeechRecognizer {
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setDefaultTaskHint:"), defaultTaskHint)
+	return sr
 }
 
-// WithQueue the queue on which to execute recognition task handlers and delegate methods.
-func (x *SpeechRecognizer) WithQueue(queue obj.Object) *SpeechRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueue:"), objref.IDOf(queue))
-	return x
+// WithQueue sets the queue on which to execute recognition task handlers and delegate methods.
+func (sr *SpeechRecognizer) WithQueue(queue obj.Object) *SpeechRecognizer {
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setQueue:"), objref.IDOf(queue))
+	return sr
 }
 
-// IsAvailable a Boolean value that indicates whether the speech recognizer is currently available. When the value of this property is `true`, you may create new speech recognition tasks. When value of this property is `false`, speech recognition services are not available.
-func (x *SpeechRecognizer) IsAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAvailable"))
+// IsAvailable reports whether the speech recognizer is currently available. When the value of this property is `true`, you may create new speech recognition tasks. When value of this property is `false`, speech recognition services are not available.
+func (sr *SpeechRecognizer) IsAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isAvailable"))
 	return _r
 }
 
-// Locale the locale of the speech recognizer. The locale of the speech recognizer is an `NSLocale` object. The default value of this property is the system locale (that is, `+[NSLocale systemLocale]`).
-func (x *SpeechRecognizer) Locale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+// Locale returns the locale of the speech recognizer. The locale of the speech recognizer is an `NSLocale` object. The default value of this property is the system locale (that is, `+[NSLocale systemLocale]`).
+func (sr *SpeechRecognizer) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// SupportsOnDeviceRecognition a Boolean value that indicates whether the speech recognizer can operate without network access. An “SFSpeechRecognitionRequest“ can only honor its “SFSpeechRecognitionRequest/requiresOnDeviceRecognition“ property if “supportsOnDeviceRecognition“ is `true`. If “supportsOnDeviceRecognition“ is `false`, the “SFSpeechRecognizer“ requires a network in order to recognize speech.
-func (x *SpeechRecognizer) SupportsOnDeviceRecognition() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsOnDeviceRecognition"))
+// SupportsOnDeviceRecognition reports whether the speech recognizer can operate without network access. An “SFSpeechRecognitionRequest“ can only honor its “SFSpeechRecognitionRequest/requiresOnDeviceRecognition“ property if “supportsOnDeviceRecognition“ is `true`. If “supportsOnDeviceRecognition“ is `false`, the “SFSpeechRecognizer“ requires a network in order to recognize speech.
+func (sr *SpeechRecognizer) SupportsOnDeviceRecognition() bool {
+	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("supportsOnDeviceRecognition"))
 	return _r
 }
 
-// SetSupportsOnDeviceRecognition wraps the corresponding Objective-C method.
-func (x *SpeechRecognizer) SetSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsOnDeviceRecognition:"), supportsOnDeviceRecognition)
-}
-
-// DefaultTaskHint a hint that indicates the type of speech recognition being requested. By default, the value of this property overrides the “SFSpeechRecognitionTaskHint/unspecified“ value for requests. For possible values, see “SFSpeechRecognitionTaskHint“.
-func (x *SpeechRecognizer) DefaultTaskHint() SpeechRecognitionTaskHint {
-	_r := objc.Send[SpeechRecognitionTaskHint](objref.IDOf(x), objc.RegisterName("defaultTaskHint"))
+// DefaultTaskHint returns a hint that indicates the type of speech recognition being requested. By default, the value of this property overrides the “SFSpeechRecognitionTaskHint/unspecified“ value for requests. For possible values, see “SFSpeechRecognitionTaskHint“.
+func (sr *SpeechRecognizer) DefaultTaskHint() SpeechRecognitionTaskHint {
+	_r := objc.Send[SpeechRecognitionTaskHint](objref.IDOf(sr), objc.RegisterName("defaultTaskHint"))
 	return _r
 }
 
-// SetDefaultTaskHint wraps the corresponding Objective-C method.
-func (x *SpeechRecognizer) SetDefaultTaskHint(defaultTaskHint SpeechRecognitionTaskHint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTaskHint:"), defaultTaskHint)
-}
-
-// Queue the queue on which to execute recognition task handlers and delegate methods. The default value of this property is the app's main queue. Assign a different queue if you want delegate methods and handlers to be executed on a background queue. The handler you pass to the “requestAuthorization(_:)“ method does not use this queue.
-func (x *SpeechRecognizer) Queue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+// Queue returns the queue on which to execute recognition task handlers and delegate methods. The default value of this property is the app's main queue. Assign a different queue if you want delegate methods and handlers to be executed on a background queue. The handler you pass to the “requestAuthorization(_:)“ method does not use this queue.
+func (sr *SpeechRecognizer) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("queue"))
 	return obj.Wrap(_r)
 }
-
-// SetQueue wraps the corresponding Objective-C method.
-func (x *SpeechRecognizer) SetQueue(queue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueue:"), objref.IDOf(queue))
-}
-
-// SpeechRecognizerable is the interface implemented by [SpeechRecognizer], for mocking and DI.
-type SpeechRecognizerable interface {
-	obj.Object
-	WithSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool) *SpeechRecognizer
-	WithDefaultTaskHint(defaultTaskHint SpeechRecognitionTaskHint) *SpeechRecognizer
-	WithQueue(queue obj.Object) *SpeechRecognizer
-	IsAvailable() bool
-	Locale() obj.Object
-	SupportsOnDeviceRecognition() bool
-	SetSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool)
-	DefaultTaskHint() SpeechRecognitionTaskHint
-	SetDefaultTaskHint(defaultTaskHint SpeechRecognitionTaskHint)
-	Queue() obj.Object
-	SetQueue(queue obj.Object)
-}
-
-var _ SpeechRecognizerable = (*SpeechRecognizer)(nil)

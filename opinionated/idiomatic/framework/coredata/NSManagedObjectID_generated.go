@@ -46,24 +46,24 @@ func managedObjectIDAdopt(id objc.ID) *ManagedObjectID {
 }
 
 // Description returns the object's -description text.
-func (x *ManagedObjectID) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moi *ManagedObjectID) Description() string {
+	return rt.Description(objref.IDOf(moi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ManagedObjectID) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moi *ManagedObjectID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ManagedObjectID) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moi *ManagedObjectID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ManagedObjectID) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moi *ManagedObjectID) String() string {
+	return rt.Description(objref.IDOf(moi))
 }
 
 // NewManagedObjectID creates a new ManagedObjectID.
@@ -73,36 +73,25 @@ func NewManagedObjectID() *ManagedObjectID {
 }
 
 // URIRepresentation returns a URI that provides an archiveable reference to the object for the object ID.
-func (x *ManagedObjectID) URIRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URIRepresentation"))
+func (moi *ManagedObjectID) URIRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("URIRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // Entity wraps the corresponding Objective-C method.
-func (x *ManagedObjectID) Entity() *EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+func (moi *ManagedObjectID) Entity() *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // PersistentStore wraps the corresponding Objective-C method.
-func (x *ManagedObjectID) PersistentStore() *PersistentStore {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStore"))
+func (moi *ManagedObjectID) PersistentStore() *PersistentStore {
+	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("persistentStore"))
 	return PersistentStoreFromID(_r)
 }
 
 // IsTemporaryID wraps the corresponding Objective-C method.
-func (x *ManagedObjectID) IsTemporaryID() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTemporaryID"))
+func (moi *ManagedObjectID) IsTemporaryID() bool {
+	_r := objc.Send[bool](objref.IDOf(moi), objc.RegisterName("isTemporaryID"))
 	return _r
 }
-
-// ManagedObjectIDable is the interface implemented by [ManagedObjectID], for mocking and DI.
-type ManagedObjectIDable interface {
-	obj.Object
-	URIRepresentation() obj.Object
-	Entity() *EntityDescription
-	PersistentStore() *PersistentStore
-	IsTemporaryID() bool
-}
-
-var _ ManagedObjectIDable = (*ManagedObjectID)(nil)

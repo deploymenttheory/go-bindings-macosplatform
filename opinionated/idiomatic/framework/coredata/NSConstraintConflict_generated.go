@@ -46,24 +46,24 @@ func constraintConflictAdopt(id objc.ID) *ConstraintConflict {
 }
 
 // Description returns the object's -description text.
-func (x *ConstraintConflict) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *ConstraintConflict) Description() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConstraintConflict) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cc *ConstraintConflict) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConstraintConflict) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cc *ConstraintConflict) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ConstraintConflict) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *ConstraintConflict) String() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots initializes a constraint conflict.
@@ -76,54 +76,41 @@ func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictin
 // Constraint wraps the corresponding Objective-C method.
 //
 // Constraint returns the collection as a Go slice.
-func (x *ConstraintConflict) Constraint() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraint"))
+func (cc *ConstraintConflict) Constraint() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("constraint"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ConstraintValues wraps the corresponding Objective-C method.
-func (x *ConstraintConflict) ConstraintValues() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintValues"))
+func (cc *ConstraintConflict) ConstraintValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("constraintValues"))
 	return obj.Wrap(_r)
 }
 
 // DatabaseObject wraps the corresponding Objective-C method.
-func (x *ConstraintConflict) DatabaseObject() *ManagedObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseObject"))
+func (cc *ConstraintConflict) DatabaseObject() *ManagedObject {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("databaseObject"))
 	return ManagedObjectFromID(_r)
 }
 
 // DatabaseSnapshot wraps the corresponding Objective-C method.
-func (x *ConstraintConflict) DatabaseSnapshot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseSnapshot"))
+func (cc *ConstraintConflict) DatabaseSnapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("databaseSnapshot"))
 	return obj.Wrap(_r)
 }
 
 // ConflictingObjects wraps the corresponding Objective-C method.
 //
 // ConflictingObjects returns the collection as a Go slice.
-func (x *ConstraintConflict) ConflictingObjects() []*ManagedObject {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conflictingObjects"))
+func (cc *ConstraintConflict) ConflictingObjects() []*ManagedObject {
+	_arr := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("conflictingObjects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
 // ConflictingSnapshots wraps the corresponding Objective-C method.
 //
 // ConflictingSnapshots returns the collection as a Go slice.
-func (x *ConstraintConflict) ConflictingSnapshots() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conflictingSnapshots"))
+func (cc *ConstraintConflict) ConflictingSnapshots() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("conflictingSnapshots"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ConstraintConflictable is the interface implemented by [ConstraintConflict], for mocking and DI.
-type ConstraintConflictable interface {
-	obj.Object
-	Constraint() []string
-	ConstraintValues() obj.Object
-	DatabaseObject() *ManagedObject
-	DatabaseSnapshot() obj.Object
-	ConflictingObjects() []*ManagedObject
-	ConflictingSnapshots() []obj.Object
-}
-
-var _ ConstraintConflictable = (*ConstraintConflict)(nil)

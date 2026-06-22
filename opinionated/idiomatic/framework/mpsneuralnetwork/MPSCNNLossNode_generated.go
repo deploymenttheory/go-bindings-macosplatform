@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewCNNLossNodeWithSourceLossDescriptor(source *NNImageNode, descriptor *CNN
 	return cNNLossNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNLossNode) WithLabel(label string) *CNNLossNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cln *CNNLossNode) WithLabel(label string) *CNNLossNode {
+	objc.Send[objc.ID](objref.IDOf(cln), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cln
 }
 
 // InputLabels get the input node for labes and weights, for example to set the handle
-func (x *CNNLossNode) InputLabels() *NNLabelsNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputLabels"))
+func (cln *CNNLossNode) InputLabels() *NNLabelsNode {
+	_r := objc.Send[objc.ID](objref.IDOf(cln), objc.RegisterName("inputLabels"))
 	return NNLabelsNodeFromID(_r)
 }
-
-// CNNLossNodeable is the interface implemented by [CNNLossNode], for mocking and DI.
-type CNNLossNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNLossNode
-	InputLabels() *NNLabelsNode
-}
-
-var _ CNNLossNodeable = (*CNNLossNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNLossNode)(nil)

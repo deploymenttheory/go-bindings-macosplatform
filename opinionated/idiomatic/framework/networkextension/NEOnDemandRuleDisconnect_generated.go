@@ -53,49 +53,37 @@ func NewNEOnDemandRuleDisconnect() *NEOnDemandRuleDisconnect {
 	return nEOnDemandRuleDisconnectAdopt(_id)
 }
 
-// WithDNSSearchDomainMatch DNS search domains that identify a network.
-func (x *NEOnDemandRuleDisconnect) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
+// WithDNSSearchDomainMatch sets DNS search domains that identify a network.
+func (nodrd *NEOnDemandRuleDisconnect) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrd), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
+	return nodrd
 }
 
-// WithDNSServerAddressMatch DNS server addresses that identify a network.
-func (x *NEOnDemandRuleDisconnect) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
+// WithDNSServerAddressMatch sets DNS server addresses that identify a network.
+func (nodrd *NEOnDemandRuleDisconnect) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrd), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
+	return nodrd
 }
 
-// WithInterfaceTypeMatch an interface type to identify a network.
-func (x *NEOnDemandRuleDisconnect) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleDisconnect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
-	return x
+// WithInterfaceTypeMatch sets an interface type to identify a network.
+func (nodrd *NEOnDemandRuleDisconnect) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleDisconnect {
+	objc.Send[objc.ID](objref.IDOf(nodrd), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
+	return nodrd
 }
 
-// WithSSIDMatch SSIDs that identify a network.
-func (x *NEOnDemandRuleDisconnect) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
+// WithSSIDMatch sets SSIDs that identify a network.
+func (nodrd *NEOnDemandRuleDisconnect) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrd), objc.RegisterName("setSSIDMatch:"), _arr)
+	return nodrd
 }
 
-// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
-func (x *NEOnDemandRuleDisconnect) WithProbeURL(probeURL string) *NEOnDemandRuleDisconnect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
-	return x
+// WithProbeURL sets a URL to probe when all other network identifiers match to validate that an expected resource is available.
+func (nodrd *NEOnDemandRuleDisconnect) WithProbeURL(probeURL string) *NEOnDemandRuleDisconnect {
+	objc.Send[objc.ID](objref.IDOf(nodrd), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
+	return nodrd
 }
-
-// NEOnDemandRuleDisconnectable is the interface implemented by [NEOnDemandRuleDisconnect], for mocking and DI.
-type NEOnDemandRuleDisconnectable interface {
-	obj.Object
-	WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleDisconnect
-	WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleDisconnect
-	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleDisconnect
-	WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleDisconnect
-	WithProbeURL(probeURL string) *NEOnDemandRuleDisconnect
-}
-
-var _ NEOnDemandRuleDisconnectable = (*NEOnDemandRuleDisconnect)(nil)
 
 var _ NEOnDemandRuleProvider = (*NEOnDemandRuleDisconnect)(nil)

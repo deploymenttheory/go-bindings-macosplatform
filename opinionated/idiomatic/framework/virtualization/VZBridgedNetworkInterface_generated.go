@@ -46,24 +46,24 @@ func bridgedNetworkInterfaceAdopt(id objc.ID) *BridgedNetworkInterface {
 }
 
 // Description returns the object's -description text.
-func (x *BridgedNetworkInterface) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bni *BridgedNetworkInterface) Description() string {
+	return rt.Description(objref.IDOf(bni))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BridgedNetworkInterface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bni *BridgedNetworkInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bni), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BridgedNetworkInterface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bni *BridgedNetworkInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bni), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BridgedNetworkInterface) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bni *BridgedNetworkInterface) String() string {
+	return rt.Description(objref.IDOf(bni))
 }
 
 // NewBridgedNetworkInterface creates a new BridgedNetworkInterface.
@@ -72,29 +72,20 @@ func NewBridgedNetworkInterface() *BridgedNetworkInterface {
 	return bridgedNetworkInterfaceAdopt(_id)
 }
 
-// Identifier return the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
-func (x *BridgedNetworkInterface) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
+func (bni *BridgedNetworkInterface) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bni), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalizedDisplayName return a display name if available (e.g. "Ethernet").
-func (x *BridgedNetworkInterface) LocalizedDisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDisplayName"))
+// LocalizedDisplayName returns a display name if available (e.g. "Ethernet").
+func (bni *BridgedNetworkInterface) LocalizedDisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bni), objc.RegisterName("localizedDisplayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// BridgedNetworkInterfaceable is the interface implemented by [BridgedNetworkInterface], for mocking and DI.
-type BridgedNetworkInterfaceable interface {
-	obj.Object
-	Identifier() string
-	LocalizedDisplayName() string
-}
-
-var _ BridgedNetworkInterfaceable = (*BridgedNetworkInterface)(nil)

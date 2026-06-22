@@ -46,24 +46,24 @@ func customContentAdopt(id objc.ID) *CustomContent {
 }
 
 // Description returns the object's -description text.
-func (x *CustomContent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *CustomContent) Description() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CustomContent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cc *CustomContent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CustomContent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cc *CustomContent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CustomContent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *CustomContent) String() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // NewCustomContent creates a new CustomContent.
@@ -72,15 +72,15 @@ func NewCustomContent() *CustomContent {
 	return customContentAdopt(_id)
 }
 
-// WithImportance an object that determines when to output custom accessibility content.
-func (x *CustomContent) WithImportance(importance CustomContentImportance) *CustomContent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportance:"), importance)
-	return x
+// WithImportance sets an object that determines when to output custom accessibility content.
+func (cc *CustomContent) WithImportance(importance CustomContentImportance) *CustomContent {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setImportance:"), importance)
+	return cc
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *CustomContent) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (cc *CustomContent) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,14 +88,14 @@ func (x *CustomContent) Label() string {
 }
 
 // AttributedLabel wraps the corresponding Objective-C method.
-func (x *CustomContent) AttributedLabel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedLabel"))
+func (cc *CustomContent) AttributedLabel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("attributedLabel"))
 	return obj.Wrap(_r)
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *CustomContent) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (cc *CustomContent) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
@@ -103,32 +103,13 @@ func (x *CustomContent) Value() string {
 }
 
 // AttributedValue wraps the corresponding Objective-C method.
-func (x *CustomContent) AttributedValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedValue"))
+func (cc *CustomContent) AttributedValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("attributedValue"))
 	return obj.Wrap(_r)
 }
 
 // Importance wraps the corresponding Objective-C method.
-func (x *CustomContent) Importance() CustomContentImportance {
-	_r := objc.Send[CustomContentImportance](objref.IDOf(x), objc.RegisterName("importance"))
+func (cc *CustomContent) Importance() CustomContentImportance {
+	_r := objc.Send[CustomContentImportance](objref.IDOf(cc), objc.RegisterName("importance"))
 	return _r
 }
-
-// SetImportance wraps the corresponding Objective-C method.
-func (x *CustomContent) SetImportance(importance CustomContentImportance) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportance:"), importance)
-}
-
-// CustomContentable is the interface implemented by [CustomContent], for mocking and DI.
-type CustomContentable interface {
-	obj.Object
-	WithImportance(importance CustomContentImportance) *CustomContent
-	Label() string
-	AttributedLabel() obj.Object
-	Value() string
-	AttributedValue() obj.Object
-	Importance() CustomContentImportance
-	SetImportance(importance CustomContentImportance)
-}
-
-var _ CustomContentable = (*CustomContent)(nil)

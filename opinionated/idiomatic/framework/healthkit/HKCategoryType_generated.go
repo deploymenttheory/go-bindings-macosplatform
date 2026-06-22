@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewCategoryType() *CategoryType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKCategoryType")), objc.RegisterName("new"))
 	return categoryTypeAdopt(_id)
 }
-
-// CategoryTypeable is the interface implemented by [CategoryType], for mocking and DI.
-type CategoryTypeable interface {
-	obj.Object
-}
-
-var _ CategoryTypeable = (*CategoryType)(nil)
 
 var _ SampleTypeProvider = (*CategoryType)(nil)
 

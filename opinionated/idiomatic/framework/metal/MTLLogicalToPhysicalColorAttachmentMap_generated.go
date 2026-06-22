@@ -46,24 +46,24 @@ func logicalToPhysicalColorAttachmentMapAdopt(id objc.ID) *LogicalToPhysicalColo
 }
 
 // Description returns the object's -description text.
-func (x *LogicalToPhysicalColorAttachmentMap) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ltpcam *LogicalToPhysicalColorAttachmentMap) Description() string {
+	return rt.Description(objref.IDOf(ltpcam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogicalToPhysicalColorAttachmentMap) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ltpcam *LogicalToPhysicalColorAttachmentMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ltpcam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogicalToPhysicalColorAttachmentMap) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ltpcam *LogicalToPhysicalColorAttachmentMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ltpcam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LogicalToPhysicalColorAttachmentMap) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ltpcam *LogicalToPhysicalColorAttachmentMap) String() string {
+	return rt.Description(objref.IDOf(ltpcam))
 }
 
 // NewLogicalToPhysicalColorAttachmentMap creates a new LogicalToPhysicalColorAttachmentMap.
@@ -73,27 +73,17 @@ func NewLogicalToPhysicalColorAttachmentMap() *LogicalToPhysicalColorAttachmentM
 }
 
 // SetPhysicalIndexForLogicalIndex maps a physical color attachment index to a logical index.
-func (x *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex int, logicalIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicalIndex:forLogicalIndex:"), physicalIndex, logicalIndex)
+func (ltpcam *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex int, logicalIndex int) {
+	objc.Send[objc.ID](objref.IDOf(ltpcam), objc.RegisterName("setPhysicalIndex:forLogicalIndex:"), physicalIndex, logicalIndex)
 }
 
 // GetPhysicalIndexForLogicalIndex queries the physical color attachment index corresponding to a logical index.
-func (x *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getPhysicalIndexForLogicalIndex:"), logicalIndex)
+func (ltpcam *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex int) int {
+	_r := objc.Send[int](objref.IDOf(ltpcam), objc.RegisterName("getPhysicalIndexForLogicalIndex:"), logicalIndex)
 	return _r
 }
 
 // Reset wraps the corresponding Objective-C method.
-func (x *LogicalToPhysicalColorAttachmentMap) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (ltpcam *LogicalToPhysicalColorAttachmentMap) Reset() {
+	objc.Send[objc.ID](objref.IDOf(ltpcam), objc.RegisterName("reset"))
 }
-
-// LogicalToPhysicalColorAttachmentMapable is the interface implemented by [LogicalToPhysicalColorAttachmentMap], for mocking and DI.
-type LogicalToPhysicalColorAttachmentMapable interface {
-	obj.Object
-	SetPhysicalIndexForLogicalIndex(physicalIndex int, logicalIndex int)
-	GetPhysicalIndexForLogicalIndex(logicalIndex int) int
-	Reset()
-}
-
-var _ LogicalToPhysicalColorAttachmentMapable = (*LogicalToPhysicalColorAttachmentMap)(nil)

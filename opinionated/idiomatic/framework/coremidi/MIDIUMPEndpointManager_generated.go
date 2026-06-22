@@ -44,24 +44,24 @@ func uMPEndpointManagerAdopt(id objc.ID) *UMPEndpointManager {
 }
 
 // Description returns the object's -description text.
-func (x *UMPEndpointManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uem *UMPEndpointManager) Description() string {
+	return rt.Description(objref.IDOf(uem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UMPEndpointManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uem *UMPEndpointManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UMPEndpointManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uem *UMPEndpointManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UMPEndpointManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uem *UMPEndpointManager) String() string {
+	return rt.Description(objref.IDOf(uem))
 }
 
 // NewUMPEndpointManager creates a new UMPEndpointManager.
@@ -70,18 +70,10 @@ func NewUMPEndpointManager() *UMPEndpointManager {
 	return uMPEndpointManagerAdopt(_id)
 }
 
-// UMPEndpoints a  list of UMP endpoints discovered using UMP endpoint discovery.
+// UMPEndpoints returns a  list of UMP endpoints discovered using UMP endpoint discovery.
 //
 // UMPEndpoints returns the collection as a Go slice.
-func (x *UMPEndpointManager) UMPEndpoints() []*UMPEndpoint {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UMPEndpoints"))
+func (uem *UMPEndpointManager) UMPEndpoints() []*UMPEndpoint {
+	_arr := objc.Send[objc.ID](objref.IDOf(uem), objc.RegisterName("UMPEndpoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPEndpoint { return UMPEndpointFromID(_id) })
 }
-
-// UMPEndpointManagerable is the interface implemented by [UMPEndpointManager], for mocking and DI.
-type UMPEndpointManagerable interface {
-	obj.Object
-	UMPEndpoints() []*UMPEndpoint
-}
-
-var _ UMPEndpointManagerable = (*UMPEndpointManager)(nil)

@@ -45,24 +45,24 @@ func matrixSumAdopt(id objc.ID) *MatrixSum {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixSum) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MatrixSum) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixSum) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MatrixSum) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixSum) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MatrixSum) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixSum) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MatrixSum) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMatrixSum creates a new MatrixSum.
@@ -71,91 +71,67 @@ func NewMatrixSum() *MatrixSum {
 	return matrixSumAdopt(_id)
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
-func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
+func (ms *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return ms
 }
 
 // SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixSum kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
-func (x *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
+func (ms *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
-// NeuronType getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixSum) NeuronType() CNNNeuronType {
-	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
+// NeuronType returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (ms *MatrixSum) NeuronType() CNNNeuronType {
+	_r := objc.Send[CNNNeuronType](objref.IDOf(ms), objc.RegisterName("neuronType"))
 	return _r
 }
 
-// Rows the number of rows to sum.
-func (x *MatrixSum) Rows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
+// Rows returns the number of rows to sum.
+func (ms *MatrixSum) Rows() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("rows"))
 	return _r
 }
 
-// Columns the number of columns to sum.
-func (x *MatrixSum) Columns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
+// Columns returns the number of columns to sum.
+func (ms *MatrixSum) Columns() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("columns"))
 	return _r
 }
 
-// Count the number of matrices to sum.
-func (x *MatrixSum) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of matrices to sum.
+func (ms *MatrixSum) Count() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("count"))
 	return _r
 }
 
-// Transpose the transposition used to initialize the kernel.
-func (x *MatrixSum) Transpose() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transpose"))
+// Transpose reports whether the transposition used to initialize the kernel.
+func (ms *MatrixSum) Transpose() bool {
+	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("transpose"))
 	return _r
 }
 
-// ResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
-func (x *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
-	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("resultMatrixOrigin"))
+// ResultMatrixOrigin returns the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
+func (ms *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(ms), objc.RegisterName("resultMatrixOrigin"))
 	return _r
 }
 
-// SetResultMatrixOrigin wraps the corresponding Objective-C method.
-func (x *MatrixSum) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-}
-
-// NeuronParameterA neuron parameter A.
-func (x *MatrixSum) NeuronParameterA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+// NeuronParameterA returns neuron parameter A.
+func (ms *MatrixSum) NeuronParameterA() float32 {
+	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// NeuronParameterB neuron parameter B.
-func (x *MatrixSum) NeuronParameterB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+// NeuronParameterB returns neuron parameter B.
+func (ms *MatrixSum) NeuronParameterB() float32 {
+	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// NeuronParameterC neuron parameter C.
-func (x *MatrixSum) NeuronParameterC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+// NeuronParameterC returns neuron parameter C.
+func (ms *MatrixSum) NeuronParameterC() float32 {
+	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterC"))
 	return _r
 }
-
-// MatrixSumable is the interface implemented by [MatrixSum], for mocking and DI.
-type MatrixSumable interface {
-	obj.Object
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum
-	SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() CNNNeuronType
-	Rows() int
-	Columns() int
-	Count() int
-	Transpose() bool
-	ResultMatrixOrigin() metal.MTLOrigin
-	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
-	NeuronParameterA() float32
-	NeuronParameterB() float32
-	NeuronParameterC() float32
-}
-
-var _ MatrixSumable = (*MatrixSum)(nil)

@@ -48,36 +48,29 @@ func physicsBehaviorAdopt(id objc.ID) *PhysicsBehavior {
 }
 
 // Description returns the object's -description text.
-func (x *PhysicsBehavior) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pb *PhysicsBehavior) Description() string {
+	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsBehavior) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pb *PhysicsBehavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsBehavior) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pb *PhysicsBehavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicsBehavior) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pb *PhysicsBehavior) String() string {
+	return rt.Description(objref.IDOf(pb))
 }
-
-// PhysicsBehaviorable is the interface implemented by [PhysicsBehavior], for mocking and DI.
-type PhysicsBehaviorable interface {
-	obj.Object
-}
-
-var _ PhysicsBehaviorable = (*PhysicsBehavior)(nil)
 
 // isPhysicsBehavior marks PhysicsBehavior — and, by embedding promotion, its
 // subclasses — as a member of the PhysicsBehavior hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PhysicsBehavior) isPhysicsBehavior() {}
+func (pb *PhysicsBehavior) isPhysicsBehavior() {}
 
 var _ PhysicsBehaviorProvider = (*PhysicsBehavior)(nil)

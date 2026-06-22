@@ -44,24 +44,24 @@ func mTRLaundryWasherModeClusterModeTagStructAdopt(id objc.ID) *MTRLaundryWasher
 }
 
 // Description returns the object's -description text.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(mlwmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mlwmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mlwmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(mlwmcmts))
 }
 
 // NewMTRLaundryWasherModeClusterModeTagStruct creates a new MTRLaundryWasherModeClusterModeTagStruct.
@@ -71,48 +71,25 @@ func NewMTRLaundryWasherModeClusterModeTagStruct() *MTRLaundryWasherModeClusterM
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRLaundryWasherModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRLaundryWasherModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mlwmcmts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) WithValue(value obj.Object) *MTRLaundryWasherModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) WithValue(value obj.Object) *MTRLaundryWasherModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mlwmcmts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterModeTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTRLaundryWasherModeClusterModeTagStructable is the interface implemented by [MTRLaundryWasherModeClusterModeTagStruct], for mocking and DI.
-type MTRLaundryWasherModeClusterModeTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRLaundryWasherModeClusterModeTagStruct
-	WithValue(value obj.Object) *MTRLaundryWasherModeClusterModeTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTRLaundryWasherModeClusterModeTagStructable = (*MTRLaundryWasherModeClusterModeTagStruct)(nil)

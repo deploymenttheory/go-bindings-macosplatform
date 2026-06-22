@@ -44,24 +44,24 @@ func eraseAdopt(id objc.ID) *Erase {
 }
 
 // Description returns the object's -description text.
-func (x *Erase) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Erase) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Erase) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Erase) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Erase) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Erase) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Erase) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Erase) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewEraseWithDevice initializes an erase object. An erase object created with this method is ready to erase media.
@@ -72,36 +72,36 @@ func NewEraseWithDevice(device *Device) *Erase {
 }
 
 // Start begin the process of erasing media. This method only kicks off the erase. Once the erasure starts, control returns to the caller. The caller can monitor the progress of the erase by listening for a notification or by polling
-func (x *Erase) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (e *Erase) Start() {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("start"))
 }
 
 // Status returns a dictionary containing the status of the erase. The same dictionary is returned through the
-func (x *Erase) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (e *Erase) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
 // Properties returns the properties dictionary of the erase.
-func (x *Erase) Properties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+func (e *Erase) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // SetProperties sets the properties dictionary of the erase
-func (x *Erase) SetProperties(properties obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
+func (e *Erase) SetProperties(properties obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setProperties:"), objref.IDOf(properties))
 }
 
 // Device returns the device being used for the erase.
-func (x *Erase) Device() *Device {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+func (e *Erase) Device() *Device {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
 
 // EraseType returns the type of erase to be performed.
-func (x *Erase) EraseType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseType"))
+func (e *Erase) EraseType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("eraseType"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,20 +109,6 @@ func (x *Erase) EraseType() string {
 }
 
 // SetEraseType sets the type of erase to perform.
-func (x *Erase) SetEraseType(type_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseType:"), purego.NSString(type_))
+func (e *Erase) SetEraseType(type_ string) {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setEraseType:"), purego.NSString(type_))
 }
-
-// Eraseable is the interface implemented by [Erase], for mocking and DI.
-type Eraseable interface {
-	obj.Object
-	Start()
-	Status() obj.Object
-	Properties() obj.Object
-	SetProperties(properties obj.Object)
-	Device() *Device
-	EraseType() string
-	SetEraseType(type_ string)
-}
-
-var _ Eraseable = (*Erase)(nil)

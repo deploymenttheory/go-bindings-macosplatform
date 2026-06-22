@@ -53,59 +53,45 @@ func NewInferenceGraph() *InferenceGraph {
 }
 
 // AddInputs adds the inputs you specify to the inference graph.
-func (x *InferenceGraph) AddInputs(inputs obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:"), objref.IDOf(inputs))
+func (ig *InferenceGraph) AddInputs(inputs obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addInputs:"), objref.IDOf(inputs))
 	return _r
 }
 
 // AddInputsLossLabelsLossLabelWeights adds the inputs, loss labels, and loss label weights that you specify to the inference graph.
-func (x *InferenceGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
+func (ig *InferenceGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
 	return _r
 }
 
 // AddOutputs adds the outputs you specify to the inference graph.
-func (x *InferenceGraph) AddOutputs(outputs obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
+func (ig *InferenceGraph) AddOutputs(outputs obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
 	return _r
 }
 
 // CompileWithOptionsDevice compiles the inference graph for the options and device you specify.
-func (x *InferenceGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
+func (ig *InferenceGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
 	return _r
 }
 
 // CompileWithOptionsDeviceInputTensorsInputTensorsData compiles the inference graph for the options, device, and input tensors you specify.
-func (x *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
+func (ig *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
 	return _r
 }
 
 // LinkWithGraphs links the inference graphs you specify.
-func (x *InferenceGraph) LinkWithGraphs(graphs []*InferenceGraph) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *InferenceGraph) objc.ID { return objref.IDOf(_v) }))
+func (ig *InferenceGraph) LinkWithGraphs(graphs []*InferenceGraph) bool {
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *InferenceGraph) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // DeviceMemorySize returns the total size in bytes of device memory used by all intermediate tensors in the inference graph
-func (x *InferenceGraph) DeviceMemorySize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceMemorySize"))
+func (ig *InferenceGraph) DeviceMemorySize() int {
+	_r := objc.Send[int](objref.IDOf(ig), objc.RegisterName("deviceMemorySize"))
 	return _r
 }
-
-// InferenceGraphable is the interface implemented by [InferenceGraph], for mocking and DI.
-type InferenceGraphable interface {
-	obj.Object
-	AddInputs(inputs obj.Object) bool
-	AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool
-	AddOutputs(outputs obj.Object) bool
-	CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool
-	CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool
-	LinkWithGraphs(graphs []*InferenceGraph) bool
-	DeviceMemorySize() int
-}
-
-var _ InferenceGraphable = (*InferenceGraph)(nil)
 
 var _ GraphProvider = (*InferenceGraph)(nil)

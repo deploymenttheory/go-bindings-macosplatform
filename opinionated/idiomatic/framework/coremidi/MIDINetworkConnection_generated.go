@@ -46,24 +46,24 @@ func networkConnectionAdopt(id objc.ID) *NetworkConnection {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkConnection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NetworkConnection) Description() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkConnection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nc *NetworkConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkConnection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nc *NetworkConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkConnection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NetworkConnection) String() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // NewNetworkConnection creates a new NetworkConnection.
@@ -73,15 +73,7 @@ func NewNetworkConnection() *NetworkConnection {
 }
 
 // Host wraps the corresponding Objective-C method.
-func (x *NetworkConnection) Host() *NetworkHost {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+func (nc *NetworkConnection) Host() *NetworkHost {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("host"))
 	return NetworkHostFromID(_r)
 }
-
-// NetworkConnectionable is the interface implemented by [NetworkConnection], for mocking and DI.
-type NetworkConnectionable interface {
-	obj.Object
-	Host() *NetworkHost
-}
-
-var _ NetworkConnectionable = (*NetworkConnection)(nil)

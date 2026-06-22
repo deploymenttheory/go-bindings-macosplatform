@@ -46,24 +46,24 @@ func collectionLayoutSpacingAdopt(id objc.ID) *CollectionLayoutSpacing {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionLayoutSpacing) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cls *CollectionLayoutSpacing) Description() string {
+	return rt.Description(objref.IDOf(cls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutSpacing) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cls *CollectionLayoutSpacing) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutSpacing) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cls *CollectionLayoutSpacing) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionLayoutSpacing) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cls *CollectionLayoutSpacing) String() string {
+	return rt.Description(objref.IDOf(cls))
 }
 
 // NewCollectionLayoutSpacing creates a new CollectionLayoutSpacing.
@@ -73,29 +73,19 @@ func NewCollectionLayoutSpacing() *CollectionLayoutSpacing {
 }
 
 // Spacing wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSpacing) Spacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spacing"))
+func (cls *CollectionLayoutSpacing) Spacing() float64 {
+	_r := objc.Send[float64](objref.IDOf(cls), objc.RegisterName("spacing"))
 	return _r
 }
 
 // IsFlexibleSpacing wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlexibleSpacing"))
+func (cls *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
+	_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFlexibleSpacing"))
 	return _r
 }
 
 // IsFixedSpacing wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSpacing) IsFixedSpacing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFixedSpacing"))
+func (cls *CollectionLayoutSpacing) IsFixedSpacing() bool {
+	_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFixedSpacing"))
 	return _r
 }
-
-// CollectionLayoutSpacingable is the interface implemented by [CollectionLayoutSpacing], for mocking and DI.
-type CollectionLayoutSpacingable interface {
-	obj.Object
-	Spacing() float64
-	IsFlexibleSpacing() bool
-	IsFixedSpacing() bool
-}
-
-var _ CollectionLayoutSpacingable = (*CollectionLayoutSpacing)(nil)

@@ -44,24 +44,24 @@ func pickerResultAdopt(id objc.ID) *PickerResult {
 }
 
 // Description returns the object's -description text.
-func (x *PickerResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *PickerResult) Description() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PickerResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pr *PickerResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PickerResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pr *PickerResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PickerResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *PickerResult) String() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // NewPickerResult creates a new PickerResult.
@@ -70,26 +70,17 @@ func NewPickerResult() *PickerResult {
 	return pickerResultAdopt(_id)
 }
 
-// ItemProvider representations of the selected asset.
-func (x *PickerResult) ItemProvider() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemProvider"))
+// ItemProvider returns representations of the selected asset.
+func (pr *PickerResult) ItemProvider() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("itemProvider"))
 	return obj.Wrap(_r)
 }
 
-// AssetIdentifier the local identifier of the selected asset.
-func (x *PickerResult) AssetIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetIdentifier"))
+// AssetIdentifier returns the local identifier of the selected asset.
+func (pr *PickerResult) AssetIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("assetIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// PickerResultable is the interface implemented by [PickerResult], for mocking and DI.
-type PickerResultable interface {
-	obj.Object
-	ItemProvider() obj.Object
-	AssetIdentifier() string
-}
-
-var _ PickerResultable = (*PickerResult)(nil)

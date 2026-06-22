@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewPaymentMethodResolutionResult() *PaymentMethodResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INPaymentMethodResolutionResult")), objc.RegisterName("new"))
 	return paymentMethodResolutionResultAdopt(_id)
 }
-
-// PaymentMethodResolutionResultable is the interface implemented by [PaymentMethodResolutionResult], for mocking and DI.
-type PaymentMethodResolutionResultable interface {
-	obj.Object
-}
-
-var _ PaymentMethodResolutionResultable = (*PaymentMethodResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*PaymentMethodResolutionResult)(nil)

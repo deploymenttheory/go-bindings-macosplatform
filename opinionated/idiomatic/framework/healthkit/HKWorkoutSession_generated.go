@@ -46,24 +46,24 @@ func workoutSessionAdopt(id objc.ID) *WorkoutSession {
 }
 
 // Description returns the object's -description text.
-func (x *WorkoutSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ws *WorkoutSession) Description() string {
+	return rt.Description(objref.IDOf(ws))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkoutSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ws *WorkoutSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ws), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkoutSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ws *WorkoutSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ws), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkoutSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ws *WorkoutSession) String() string {
+	return rt.Description(objref.IDOf(ws))
 }
 
 // NewWorkoutSession creates a new WorkoutSession.
@@ -73,112 +73,89 @@ func NewWorkoutSession() *WorkoutSession {
 }
 
 // Prepare prepares the workout session.
-func (x *WorkoutSession) Prepare() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepare"))
+func (ws *WorkoutSession) Prepare() {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("prepare"))
 }
 
 // StartActivityWithDate starts the workout session activity, and sets the start date.
-func (x *WorkoutSession) StartActivityWithDate(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startActivityWithDate:"), objref.IDOf(date))
+func (ws *WorkoutSession) StartActivityWithDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("startActivityWithDate:"), objref.IDOf(date))
 }
 
 // StopActivityWithDate stops the workout session activity, and sets the end date.
-func (x *WorkoutSession) StopActivityWithDate(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopActivityWithDate:"), objref.IDOf(date))
+func (ws *WorkoutSession) StopActivityWithDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("stopActivityWithDate:"), objref.IDOf(date))
 }
 
 // End ends the workout session.
-func (x *WorkoutSession) End() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+func (ws *WorkoutSession) End() {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("end"))
 }
 
 // Pause pauses the workout session.
-func (x *WorkoutSession) Pause() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+func (ws *WorkoutSession) Pause() {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("pause"))
 }
 
 // Resume resumes the workout session.
-func (x *WorkoutSession) Resume() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
+func (ws *WorkoutSession) Resume() {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("resume"))
 }
 
 // BeginNewActivityWithConfigurationDateMetadata begins a new workout activity in the workout session.
-func (x *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *WorkoutConfiguration, date obj.Object, metadata obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginNewActivityWithConfiguration:date:metadata:"), objref.IDOf(workoutConfiguration), objref.IDOf(date), objref.IDOf(metadata))
+func (ws *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *WorkoutConfiguration, date obj.Object, metadata obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("beginNewActivityWithConfiguration:date:metadata:"), objref.IDOf(workoutConfiguration), objref.IDOf(date), objref.IDOf(metadata))
 }
 
 // EndCurrentActivityOnDate ends the current workout activity.
-func (x *WorkoutSession) EndCurrentActivityOnDate(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endCurrentActivityOnDate:"), objref.IDOf(date))
+func (ws *WorkoutSession) EndCurrentActivityOnDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("endCurrentActivityOnDate:"), objref.IDOf(date))
 }
 
 // ActivityType indicates the type of workout that will be performed during the session.
-func (x *WorkoutSession) ActivityType() WorkoutActivityType {
-	_r := objc.Send[WorkoutActivityType](objref.IDOf(x), objc.RegisterName("activityType"))
+func (ws *WorkoutSession) ActivityType() WorkoutActivityType {
+	_r := objc.Send[WorkoutActivityType](objref.IDOf(ws), objc.RegisterName("activityType"))
 	return _r
 }
 
 // LocationType indicates the type of location (indoors vs. outdoors) where the workout will take place. Knowing the location type allows for more accurate measurements and better performance.
-func (x *WorkoutSession) LocationType() WorkoutSessionLocationType {
-	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(x), objc.RegisterName("locationType"))
+func (ws *WorkoutSession) LocationType() WorkoutSessionLocationType {
+	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(ws), objc.RegisterName("locationType"))
 	return _r
 }
 
-// WorkoutConfiguration the configuration object describing the workout. This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to the returned object have no impact on the HKWorkoutSession.
-func (x *WorkoutSession) WorkoutConfiguration() *WorkoutConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutConfiguration"))
+// WorkoutConfiguration returns the configuration object describing the workout. This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to the returned object have no impact on the HKWorkoutSession.
+func (ws *WorkoutSession) WorkoutConfiguration() *WorkoutConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("workoutConfiguration"))
 	return WorkoutConfigurationFromID(_r)
 }
 
 // State indicates the current state of the workout session. Each time this value is updated, the delegate method workoutSession:didChangeToState:fromState:date: will be called.
-func (x *WorkoutSession) State() WorkoutSessionState {
-	_r := objc.Send[WorkoutSessionState](objref.IDOf(x), objc.RegisterName("state"))
+func (ws *WorkoutSession) State() WorkoutSessionState {
+	_r := objc.Send[WorkoutSessionState](objref.IDOf(ws), objc.RegisterName("state"))
 	return _r
 }
 
 // Type indicates the type of the workout session. A workout session created using an initializer will be primary, while a session retrieved with the `HKHealthStore` `workoutSessionMirroringStartHandler` property will be mirrored.
-func (x *WorkoutSession) Type() WorkoutSessionType {
-	_r := objc.Send[WorkoutSessionType](objref.IDOf(x), objc.RegisterName("type"))
+func (ws *WorkoutSession) Type() WorkoutSessionType {
+	_r := objc.Send[WorkoutSessionType](objref.IDOf(ws), objc.RegisterName("type"))
 	return _r
 }
 
 // StartDate indicates the date when the workout session started running. This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateRunning.
-func (x *WorkoutSession) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (ws *WorkoutSession) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate indicates the date when the workout session stopped. This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateStopped.
-func (x *WorkoutSession) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (ws *WorkoutSession) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// CurrentActivity the current workout activity. This returns a copy of the session's current workout activity. It will return a copy of the main workout activity if no new activity has begun. Changes made to the returned object have no impact on the HKWorkoutSession.
-func (x *WorkoutSession) CurrentActivity() *WorkoutActivity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentActivity"))
+// CurrentActivity returns the current workout activity. This returns a copy of the session's current workout activity. It will return a copy of the main workout activity if no new activity has begun. Changes made to the returned object have no impact on the HKWorkoutSession.
+func (ws *WorkoutSession) CurrentActivity() *WorkoutActivity {
+	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("currentActivity"))
 	return WorkoutActivityFromID(_r)
 }
-
-// WorkoutSessionable is the interface implemented by [WorkoutSession], for mocking and DI.
-type WorkoutSessionable interface {
-	obj.Object
-	Prepare()
-	StartActivityWithDate(date obj.Object)
-	StopActivityWithDate(date obj.Object)
-	End()
-	Pause()
-	Resume()
-	BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *WorkoutConfiguration, date obj.Object, metadata obj.Object)
-	EndCurrentActivityOnDate(date obj.Object)
-	ActivityType() WorkoutActivityType
-	LocationType() WorkoutSessionLocationType
-	WorkoutConfiguration() *WorkoutConfiguration
-	State() WorkoutSessionState
-	Type() WorkoutSessionType
-	StartDate() obj.Object
-	EndDate() obj.Object
-	CurrentActivity() *WorkoutActivity
-}
-
-var _ WorkoutSessionable = (*WorkoutSession)(nil)

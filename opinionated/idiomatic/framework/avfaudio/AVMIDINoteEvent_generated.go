@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,91 +52,52 @@ func NewMIDINoteEventWithChannelKeyVelocityDuration(channel int, keyNum int, vel
 	return mIDINoteEventAdopt(_id)
 }
 
-// WithChannel the MIDI channel.
-func (x *MIDINoteEvent) WithChannel(channel int) *MIDINoteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+// WithChannel sets the MIDI channel.
+func (mne *MIDINoteEvent) WithChannel(channel int) *MIDINoteEvent {
+	objc.Send[objc.ID](objref.IDOf(mne), objc.RegisterName("setChannel:"), channel)
+	return mne
 }
 
-// WithKey the MIDI key number.
-func (x *MIDINoteEvent) WithKey(key int) *MIDINoteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
-	return x
+// WithKey sets the MIDI key number.
+func (mne *MIDINoteEvent) WithKey(key int) *MIDINoteEvent {
+	objc.Send[objc.ID](objref.IDOf(mne), objc.RegisterName("setKey:"), key)
+	return mne
 }
 
-// WithVelocity the MIDI velocity.
-func (x *MIDINoteEvent) WithVelocity(velocity int) *MIDINoteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
-	return x
+// WithVelocity sets the MIDI velocity.
+func (mne *MIDINoteEvent) WithVelocity(velocity int) *MIDINoteEvent {
+	objc.Send[objc.ID](objref.IDOf(mne), objc.RegisterName("setVelocity:"), velocity)
+	return mne
 }
 
-// WithDuration the duration for the note, in beats.
-func (x *MIDINoteEvent) WithDuration(duration float64) *MIDINoteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-	return x
+// WithDuration sets the duration for the note, in beats.
+func (mne *MIDINoteEvent) WithDuration(duration float64) *MIDINoteEvent {
+	objc.Send[objc.ID](objref.IDOf(mne), objc.RegisterName("setDuration:"), duration)
+	return mne
 }
 
 // Channel wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) Channel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channel"))
+func (mne *MIDINoteEvent) Channel() int {
+	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("channel"))
 	return _r
-}
-
-// SetChannel wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) SetChannel(channel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 }
 
 // Key wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) Key() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("key"))
+func (mne *MIDINoteEvent) Key() int {
+	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("key"))
 	return _r
-}
-
-// SetKey wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) SetKey(key int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
 }
 
 // Velocity wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) Velocity() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("velocity"))
+func (mne *MIDINoteEvent) Velocity() int {
+	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("velocity"))
 	return _r
-}
-
-// SetVelocity wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) SetVelocity(velocity int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (mne *MIDINoteEvent) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(mne), objc.RegisterName("duration"))
 	return _r
 }
-
-// SetDuration wraps the corresponding Objective-C method.
-func (x *MIDINoteEvent) SetDuration(duration float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-}
-
-// MIDINoteEventable is the interface implemented by [MIDINoteEvent], for mocking and DI.
-type MIDINoteEventable interface {
-	obj.Object
-	WithChannel(channel int) *MIDINoteEvent
-	WithKey(key int) *MIDINoteEvent
-	WithVelocity(velocity int) *MIDINoteEvent
-	WithDuration(duration float64) *MIDINoteEvent
-	Channel() int
-	SetChannel(channel int)
-	Key() int
-	SetKey(key int)
-	Velocity() int
-	SetVelocity(velocity int)
-	Duration() float64
-	SetDuration(duration float64)
-}
-
-var _ MIDINoteEventable = (*MIDINoteEvent)(nil)
 
 var _ MusicEventProvider = (*MIDINoteEvent)(nil)

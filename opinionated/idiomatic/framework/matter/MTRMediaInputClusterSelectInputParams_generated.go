@@ -44,24 +44,24 @@ func mTRMediaInputClusterSelectInputParamsAdopt(id objc.ID) *MTRMediaInputCluste
 }
 
 // Description returns the object's -description text.
-func (x *MTRMediaInputClusterSelectInputParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmicsip *MTRMediaInputClusterSelectInputParams) Description() string {
+	return rt.Description(objref.IDOf(mmicsip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMediaInputClusterSelectInputParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmicsip *MTRMediaInputClusterSelectInputParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmicsip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMediaInputClusterSelectInputParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmicsip *MTRMediaInputClusterSelectInputParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmicsip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMediaInputClusterSelectInputParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmicsip *MTRMediaInputClusterSelectInputParams) String() string {
+	return rt.Description(objref.IDOf(mmicsip))
 }
 
 // NewMTRMediaInputClusterSelectInputParams creates a new MTRMediaInputClusterSelectInputParams.
@@ -71,68 +71,37 @@ func NewMTRMediaInputClusterSelectInputParams() *MTRMediaInputClusterSelectInput
 }
 
 // WithIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaInputClusterSelectInputParams) WithIndex(index obj.Object) *MTRMediaInputClusterSelectInputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
-	return x
+func (mmicsip *MTRMediaInputClusterSelectInputParams) WithIndex(index obj.Object) *MTRMediaInputClusterSelectInputParams {
+	objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("setIndex:"), objref.IDOf(index))
+	return mmicsip
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRMediaInputClusterSelectInputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaInputClusterSelectInputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mmicsip *MTRMediaInputClusterSelectInputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaInputClusterSelectInputParams {
+	objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mmicsip
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRMediaInputClusterSelectInputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaInputClusterSelectInputParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mmicsip *MTRMediaInputClusterSelectInputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaInputClusterSelectInputParams {
+	objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mmicsip
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterSelectInputParams) Index() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("index"))
+func (mmicsip *MTRMediaInputClusterSelectInputParams) Index() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
-// SetIndex wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterSelectInputParams) SetIndex(index obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRMediaInputClusterSelectInputParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mmicsip *MTRMediaInputClusterSelectInputParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterSelectInputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRMediaInputClusterSelectInputParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mmicsip *MTRMediaInputClusterSelectInputParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterSelectInputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRMediaInputClusterSelectInputParamsable is the interface implemented by [MTRMediaInputClusterSelectInputParams], for mocking and DI.
-type MTRMediaInputClusterSelectInputParamsable interface {
-	obj.Object
-	WithIndex(index obj.Object) *MTRMediaInputClusterSelectInputParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaInputClusterSelectInputParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaInputClusterSelectInputParams
-	Index() obj.Object
-	SetIndex(index obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRMediaInputClusterSelectInputParamsable = (*MTRMediaInputClusterSelectInputParams)(nil)

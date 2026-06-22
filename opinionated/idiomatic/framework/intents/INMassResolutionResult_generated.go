@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMassResolutionResult() *MassResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INMassResolutionResult")), objc.RegisterName("new"))
 	return massResolutionResultAdopt(_id)
 }
-
-// MassResolutionResultable is the interface implemented by [MassResolutionResult], for mocking and DI.
-type MassResolutionResultable interface {
-	obj.Object
-}
-
-var _ MassResolutionResultable = (*MassResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*MassResolutionResult)(nil)

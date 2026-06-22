@@ -46,24 +46,24 @@ func languageRecognizerAdopt(id objc.ID) *LanguageRecognizer {
 }
 
 // Description returns the object's -description text.
-func (x *LanguageRecognizer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lr *LanguageRecognizer) Description() string {
+	return rt.Description(objref.IDOf(lr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LanguageRecognizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lr *LanguageRecognizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LanguageRecognizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lr *LanguageRecognizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LanguageRecognizer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lr *LanguageRecognizer) String() string {
+	return rt.Description(objref.IDOf(lr))
 }
 
 // NewLanguageRecognizer creates a new LanguageRecognizer.
@@ -72,78 +72,51 @@ func NewLanguageRecognizer() *LanguageRecognizer {
 	return languageRecognizerAdopt(_id)
 }
 
-// WithLanguageHints a dictionary that maps languages to their probabilities in the language identification process.
-func (x *LanguageRecognizer) WithLanguageHints(languageHints obj.Object) *LanguageRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageHints:"), objref.IDOf(languageHints))
-	return x
+// WithLanguageHints sets a dictionary that maps languages to their probabilities in the language identification process.
+func (lr *LanguageRecognizer) WithLanguageHints(languageHints obj.Object) *LanguageRecognizer {
+	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("setLanguageHints:"), objref.IDOf(languageHints))
+	return lr
 }
 
-// WithLanguageConstraints limits the set of possible languages that the recognizer will return.
-func (x *LanguageRecognizer) WithLanguageConstraints(items ...obj.Object) *LanguageRecognizer {
+// WithLanguageConstraints sets limits the set of possible languages that the recognizer will return.
+func (lr *LanguageRecognizer) WithLanguageConstraints(items ...obj.Object) *LanguageRecognizer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("setLanguageConstraints:"), _arr)
+	return lr
 }
 
 // ProcessString analyzes the piece of text to determine its dominant language.
-func (x *LanguageRecognizer) ProcessString(string_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processString:"), purego.NSString(string_))
+func (lr *LanguageRecognizer) ProcessString(string_ string) {
+	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("processString:"), purego.NSString(string_))
 }
 
 // Reset resets the recognizer to its initial state.
-func (x *LanguageRecognizer) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (lr *LanguageRecognizer) Reset() {
+	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("reset"))
 }
 
 // LanguageHypothesesWithMaximum generates the probabilities of possible languages for the processed text.
-func (x *LanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageHypothesesWithMaximum:"), maxHypotheses)
+func (lr *LanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("languageHypothesesWithMaximum:"), maxHypotheses)
 	return obj.Wrap(_r)
 }
 
 // DominantLanguage wraps the corresponding Objective-C method.
-func (x *LanguageRecognizer) DominantLanguage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dominantLanguage"))
+func (lr *LanguageRecognizer) DominantLanguage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("dominantLanguage"))
 	return obj.Wrap(_r)
 }
 
 // LanguageHints wraps the corresponding Objective-C method.
-func (x *LanguageRecognizer) LanguageHints() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageHints"))
+func (lr *LanguageRecognizer) LanguageHints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("languageHints"))
 	return obj.Wrap(_r)
-}
-
-// SetLanguageHints wraps the corresponding Objective-C method.
-func (x *LanguageRecognizer) SetLanguageHints(languageHints obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageHints:"), objref.IDOf(languageHints))
 }
 
 // LanguageConstraints wraps the corresponding Objective-C method.
 //
 // LanguageConstraints returns the collection as a Go slice.
-func (x *LanguageRecognizer) LanguageConstraints() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageConstraints"))
+func (lr *LanguageRecognizer) LanguageConstraints() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("languageConstraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetLanguageConstraints wraps the corresponding Objective-C method.
-func (x *LanguageRecognizer) SetLanguageConstraints(languageConstraints []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageConstraints:"), purego.SliceToNSArray(languageConstraints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// LanguageRecognizerable is the interface implemented by [LanguageRecognizer], for mocking and DI.
-type LanguageRecognizerable interface {
-	obj.Object
-	WithLanguageHints(languageHints obj.Object) *LanguageRecognizer
-	WithLanguageConstraints(items ...obj.Object) *LanguageRecognizer
-	ProcessString(string_ string)
-	Reset()
-	LanguageHypothesesWithMaximum(maxHypotheses int) obj.Object
-	DominantLanguage() obj.Object
-	LanguageHints() obj.Object
-	SetLanguageHints(languageHints obj.Object)
-	LanguageConstraints() []obj.Object
-	SetLanguageConstraints(languageConstraints []obj.Object)
-}
-
-var _ LanguageRecognizerable = (*LanguageRecognizer)(nil)

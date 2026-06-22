@@ -7,7 +7,6 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewNEFilterPacketProvider() *NEFilterPacketProvider {
 }
 
 // DelayCurrentPacket delay a packet currently processed by a packet handler.
-func (x *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delayCurrentPacket:"), objref.IDOf(context_))
+func (nfpp *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpp), objc.RegisterName("delayCurrentPacket:"), objref.IDOf(context_))
 	return NEPacketFromID(_r)
 }
 
 // AllowPacket allow delivery of a previously-delayed packet.
-func (x *NEFilterPacketProvider) AllowPacket(packet *NEPacket) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowPacket:"), objref.IDOf(packet))
+func (nfpp *NEFilterPacketProvider) AllowPacket(packet *NEPacket) {
+	objc.Send[objc.ID](objref.IDOf(nfpp), objc.RegisterName("allowPacket:"), objref.IDOf(packet))
 }
-
-// NEFilterPacketProviderable is the interface implemented by [NEFilterPacketProvider], for mocking and DI.
-type NEFilterPacketProviderable interface {
-	obj.Object
-	DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket
-	AllowPacket(packet *NEPacket)
-}
-
-var _ NEFilterPacketProviderable = (*NEFilterPacketProvider)(nil)
 
 var _ NEFilterProviderProvider = (*NEFilterPacketProvider)(nil)
 

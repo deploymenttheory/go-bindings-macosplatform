@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,17 +50,9 @@ func NewAnimatedMatrix4x4() *AnimatedMatrix4x4 {
 }
 
 // WithInterpolation sets the property and returns the receiver so calls can be chained.
-func (x *AnimatedMatrix4x4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedMatrix4x4 {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
-	return x
+func (am *AnimatedMatrix4x4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedMatrix4x4 {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setInterpolation:"), interpolation)
+	return am
 }
-
-// AnimatedMatrix4x4able is the interface implemented by [AnimatedMatrix4x4], for mocking and DI.
-type AnimatedMatrix4x4able interface {
-	obj.Object
-	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedMatrix4x4
-}
-
-var _ AnimatedMatrix4x4able = (*AnimatedMatrix4x4)(nil)
 
 var _ AnimatedValueProvider = (*AnimatedMatrix4x4)(nil)

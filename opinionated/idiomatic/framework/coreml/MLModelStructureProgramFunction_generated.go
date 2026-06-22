@@ -46,24 +46,24 @@ func modelStructureProgramFunctionAdopt(id objc.ID) *ModelStructureProgramFuncti
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureProgramFunction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mspf *ModelStructureProgramFunction) Description() string {
+	return rt.Description(objref.IDOf(mspf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureProgramFunction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mspf *ModelStructureProgramFunction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mspf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureProgramFunction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mspf *ModelStructureProgramFunction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mspf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureProgramFunction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mspf *ModelStructureProgramFunction) String() string {
+	return rt.Description(objref.IDOf(mspf))
 }
 
 // NewModelStructureProgramFunction creates a new ModelStructureProgramFunction.
@@ -72,27 +72,18 @@ func NewModelStructureProgramFunction() *ModelStructureProgramFunction {
 	return modelStructureProgramFunctionAdopt(_id)
 }
 
-// Inputs the named inputs to the function.
+// Inputs returns the named inputs to the function.
 //
 // Inputs returns the collection as a Go slice.
-func (x *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedValueType {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+func (mspf *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedValueType {
+	_arr := objc.Send[objc.ID](objref.IDOf(mspf), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
 		return ModelStructureProgramNamedValueTypeFromID(_id)
 	})
 }
 
-// Block the active block in the function.
-func (x *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("block"))
+// Block returns the active block in the function.
+func (mspf *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
+	_r := objc.Send[objc.ID](objref.IDOf(mspf), objc.RegisterName("block"))
 	return ModelStructureProgramBlockFromID(_r)
 }
-
-// ModelStructureProgramFunctionable is the interface implemented by [ModelStructureProgramFunction], for mocking and DI.
-type ModelStructureProgramFunctionable interface {
-	obj.Object
-	Inputs() []*ModelStructureProgramNamedValueType
-	Block() *ModelStructureProgramBlock
-}
-
-var _ ModelStructureProgramFunctionable = (*ModelStructureProgramFunction)(nil)

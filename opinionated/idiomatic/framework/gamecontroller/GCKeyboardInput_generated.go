@@ -52,32 +52,22 @@ func NewKeyboardInput() *KeyboardInput {
 	return keyboardInputAdopt(_id)
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *KeyboardInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (ki *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *KeyboardInput {
+	objc.Send[objc.ID](objref.IDOf(ki), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return ki
 }
 
 // ButtonForKeyCode returns the button element for the specified key code.
-func (x *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonForKeyCode:"), code)
+func (ki *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(ki), objc.RegisterName("buttonForKeyCode:"), code)
 	return ControllerButtonInputFromID(_r)
 }
 
-// IsAnyKeyPressed before querying any key for a value it might be useful to check if any key is actually pressed
-func (x *KeyboardInput) IsAnyKeyPressed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnyKeyPressed"))
+// IsAnyKeyPressed reports whether before querying any key for a value it might be useful to check if any key is actually pressed
+func (ki *KeyboardInput) IsAnyKeyPressed() bool {
+	_r := objc.Send[bool](objref.IDOf(ki), objc.RegisterName("isAnyKeyPressed"))
 	return _r
 }
-
-// KeyboardInputable is the interface implemented by [KeyboardInput], for mocking and DI.
-type KeyboardInputable interface {
-	obj.Object
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *KeyboardInput
-	ButtonForKeyCode(code int) *ControllerButtonInput
-	IsAnyKeyPressed() bool
-}
-
-var _ KeyboardInputable = (*KeyboardInput)(nil)
 
 var _ PhysicalInputProfileProvider = (*KeyboardInput)(nil)

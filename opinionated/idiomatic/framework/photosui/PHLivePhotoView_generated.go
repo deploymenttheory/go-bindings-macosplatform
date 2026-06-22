@@ -47,24 +47,24 @@ func livePhotoViewAdopt(id objc.ID) *LivePhotoView {
 }
 
 // Description returns the object's -description text.
-func (x *LivePhotoView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lpv *LivePhotoView) Description() string {
+	return rt.Description(objref.IDOf(lpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LivePhotoView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lpv *LivePhotoView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LivePhotoView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lpv *LivePhotoView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LivePhotoView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lpv *LivePhotoView) String() string {
+	return rt.Description(objref.IDOf(lpv))
 }
 
 // NewLivePhotoView creates a new LivePhotoView.
@@ -73,134 +73,83 @@ func NewLivePhotoView() *LivePhotoView {
 	return livePhotoViewAdopt(_id)
 }
 
-// WithLivePhoto the Live Photo displayed in the view.
-func (x *LivePhotoView) WithLivePhoto(livePhoto obj.Object) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLivePhoto:"), objref.IDOf(livePhoto))
-	return x
+// WithLivePhoto sets the Live Photo displayed in the view.
+func (lpv *LivePhotoView) WithLivePhoto(livePhoto obj.Object) *LivePhotoView {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setLivePhoto:"), objref.IDOf(livePhoto))
+	return lpv
 }
 
-// WithContentMode the mode in which the view displays its content.
-func (x *LivePhotoView) WithContentMode(contentMode LivePhotoViewContentMode) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMode:"), contentMode)
-	return x
+// WithContentMode sets the mode in which the view displays its content.
+func (lpv *LivePhotoView) WithContentMode(contentMode LivePhotoViewContentMode) *LivePhotoView {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setContentMode:"), contentMode)
+	return lpv
 }
 
-// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
-func (x *LivePhotoView) WithContentsRect(contentsRect corefoundation.CGRect) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-	return x
+// WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
+func (lpv *LivePhotoView) WithContentsRect(contentsRect corefoundation.CGRect) *LivePhotoView {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setContentsRect:"), contentsRect)
+	return lpv
 }
 
-// WithAudioVolume the audio gain to apply to the Live Photo’s movie content during playback.
-func (x *LivePhotoView) WithAudioVolume(audioVolume float32) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioVolume:"), audioVolume)
-	return x
+// WithAudioVolume sets the audio gain to apply to the Live Photo’s movie content during playback.
+func (lpv *LivePhotoView) WithAudioVolume(audioVolume float32) *LivePhotoView {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setAudioVolume:"), audioVolume)
+	return lpv
 }
 
-// WithMuted a Boolean value that determines whether the view plays the audio content of its Live Photo.
-func (x *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
-	return x
+// WithMuted sets a Boolean value that determines whether the view plays the audio content of its Live Photo.
+func (lpv *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setMuted:"), muted)
+	return lpv
 }
 
 // StartPlaybackWithStyle begins playback of Live Photo content in the view.
-func (x *LivePhotoView) StartPlaybackWithStyle(playbackStyle LivePhotoViewPlaybackStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startPlaybackWithStyle:"), playbackStyle)
+func (lpv *LivePhotoView) StartPlaybackWithStyle(playbackStyle LivePhotoViewPlaybackStyle) {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("startPlaybackWithStyle:"), playbackStyle)
 }
 
 // StopPlayback stops playback of a Live Photo.
-func (x *LivePhotoView) StopPlayback() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPlayback"))
+func (lpv *LivePhotoView) StopPlayback() {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlayback"))
 }
 
 // StopPlaybackAnimated stops playback of a Live Photo in an animated manner.
-func (x *LivePhotoView) StopPlaybackAnimated(animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPlaybackAnimated:"), animated)
+func (lpv *LivePhotoView) StopPlaybackAnimated(animated bool) {
+	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlaybackAnimated:"), animated)
 }
 
-// LivePhoto live photo displayed in the receiver.
-func (x *LivePhotoView) LivePhoto() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("livePhoto"))
+// LivePhoto returns live photo displayed in the receiver.
+func (lpv *LivePhotoView) LivePhoto() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("livePhoto"))
 	return obj.Wrap(_r)
 }
 
-// SetLivePhoto live photo displayed in the receiver.
-func (x *LivePhotoView) SetLivePhoto(livePhoto obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLivePhoto:"), objref.IDOf(livePhoto))
-}
-
-// ContentMode the mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
-func (x *LivePhotoView) ContentMode() LivePhotoViewContentMode {
-	_r := objc.Send[LivePhotoViewContentMode](objref.IDOf(x), objc.RegisterName("contentMode"))
+// ContentMode returns the mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
+func (lpv *LivePhotoView) ContentMode() LivePhotoViewContentMode {
+	_r := objc.Send[LivePhotoViewContentMode](objref.IDOf(lpv), objc.RegisterName("contentMode"))
 	return _r
 }
 
-// SetContentMode the mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
-func (x *LivePhotoView) SetContentMode(contentMode LivePhotoViewContentMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMode:"), contentMode)
-}
-
-// ContentsRect the rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
-func (x *LivePhotoView) ContentsRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentsRect"))
+// ContentsRect returns the rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
+func (lpv *LivePhotoView) ContentsRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lpv), objc.RegisterName("contentsRect"))
 	return _r
 }
 
-// SetContentsRect wraps the corresponding Objective-C method.
-func (x *LivePhotoView) SetContentsRect(contentsRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-}
-
-// AudioVolume the audio volume during playback
-func (x *LivePhotoView) AudioVolume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("audioVolume"))
+// AudioVolume returns the audio volume during playback
+func (lpv *LivePhotoView) AudioVolume() float32 {
+	_r := objc.Send[float32](objref.IDOf(lpv), objc.RegisterName("audioVolume"))
 	return _r
 }
 
-// SetAudioVolume the audio volume during playback
-func (x *LivePhotoView) SetAudioVolume(audioVolume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioVolume:"), audioVolume)
-}
-
-// IsMuted indicates whether the audio of the Live Photo is muted.
-func (x *LivePhotoView) IsMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMuted"))
+// IsMuted reports whether the audio of the Live Photo is muted.
+func (lpv *LivePhotoView) IsMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(lpv), objc.RegisterName("isMuted"))
 	return _r
 }
 
-// SetMuted indicates whether the audio of the Live Photo is muted.
-func (x *LivePhotoView) SetMuted(muted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
-}
-
-// LivePhotoBadgeView directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
-func (x *LivePhotoView) LivePhotoBadgeView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("livePhotoBadgeView"))
+// LivePhotoBadgeView returns directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
+func (lpv *LivePhotoView) LivePhotoBadgeView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("livePhotoBadgeView"))
 	return obj.Wrap(_r)
 }
-
-// LivePhotoViewable is the interface implemented by [LivePhotoView], for mocking and DI.
-type LivePhotoViewable interface {
-	obj.Object
-	WithLivePhoto(livePhoto obj.Object) *LivePhotoView
-	WithContentMode(contentMode LivePhotoViewContentMode) *LivePhotoView
-	WithContentsRect(contentsRect corefoundation.CGRect) *LivePhotoView
-	WithAudioVolume(audioVolume float32) *LivePhotoView
-	WithMuted(muted bool) *LivePhotoView
-	StartPlaybackWithStyle(playbackStyle LivePhotoViewPlaybackStyle)
-	StopPlayback()
-	StopPlaybackAnimated(animated bool)
-	LivePhoto() obj.Object
-	SetLivePhoto(livePhoto obj.Object)
-	ContentMode() LivePhotoViewContentMode
-	SetContentMode(contentMode LivePhotoViewContentMode)
-	ContentsRect() corefoundation.CGRect
-	SetContentsRect(contentsRect corefoundation.CGRect)
-	AudioVolume() float32
-	SetAudioVolume(audioVolume float32)
-	IsMuted() bool
-	SetMuted(muted bool)
-	LivePhotoBadgeView() obj.Object
-}
-
-var _ LivePhotoViewable = (*LivePhotoView)(nil)

@@ -46,50 +46,41 @@ func mTRClusterPathAdopt(id objc.ID) *MTRClusterPath {
 }
 
 // Description returns the object's -description text.
-func (x *MTRClusterPath) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcp *MTRClusterPath) Description() string {
+	return rt.Description(objref.IDOf(mcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterPath) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcp *MTRClusterPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterPath) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcp *MTRClusterPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRClusterPath) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcp *MTRClusterPath) String() string {
+	return rt.Description(objref.IDOf(mcp))
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTRClusterPath) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (mcp *MTRClusterPath) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
 // Cluster wraps the corresponding Objective-C method.
-func (x *MTRClusterPath) Cluster() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+func (mcp *MTRClusterPath) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterPathable is the interface implemented by [MTRClusterPath], for mocking and DI.
-type MTRClusterPathable interface {
-	obj.Object
-	Endpoint() obj.Object
-	Cluster() obj.Object
-}
-
-var _ MTRClusterPathable = (*MTRClusterPath)(nil)
 
 // isMTRClusterPath marks MTRClusterPath — and, by embedding promotion, its
 // subclasses — as a member of the MTRClusterPath hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRClusterPath) isMTRClusterPath() {}
+func (mcp *MTRClusterPath) isMTRClusterPath() {}
 
 var _ MTRClusterPathProvider = (*MTRClusterPath)(nil)

@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewWorkoutRouteQuery() *WorkoutRouteQuery {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteQuery")), objc.RegisterName("new"))
 	return workoutRouteQueryAdopt(_id)
 }
-
-// WorkoutRouteQueryable is the interface implemented by [WorkoutRouteQuery], for mocking and DI.
-type WorkoutRouteQueryable interface {
-	obj.Object
-}
-
-var _ WorkoutRouteQueryable = (*WorkoutRouteQuery)(nil)
 
 var _ QueryProvider = (*WorkoutRouteQuery)(nil)

@@ -46,24 +46,24 @@ func smartCardATRInterfaceGroupAdopt(id objc.ID) *SmartCardATRInterfaceGroup {
 }
 
 // Description returns the object's -description text.
-func (x *SmartCardATRInterfaceGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (scaig *SmartCardATRInterfaceGroup) Description() string {
+	return rt.Description(objref.IDOf(scaig))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SmartCardATRInterfaceGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (scaig *SmartCardATRInterfaceGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(scaig), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SmartCardATRInterfaceGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (scaig *SmartCardATRInterfaceGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(scaig), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SmartCardATRInterfaceGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (scaig *SmartCardATRInterfaceGroup) String() string {
+	return rt.Description(objref.IDOf(scaig))
 }
 
 // NewSmartCardATRInterfaceGroup creates a new SmartCardATRInterfaceGroup.
@@ -72,37 +72,26 @@ func NewSmartCardATRInterfaceGroup() *SmartCardATRInterfaceGroup {
 	return smartCardATRInterfaceGroupAdopt(_id)
 }
 
-// TA TA interface byte of ATR group, or nil if TA is not present.
-func (x *SmartCardATRInterfaceGroup) TA() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TA"))
+// TA returns TA interface byte of ATR group, or nil if TA is not present.
+func (scaig *SmartCardATRInterfaceGroup) TA() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("TA"))
 	return obj.Wrap(_r)
 }
 
-// TB TB interface byte of ATR group, or nil if TB is not present.
-func (x *SmartCardATRInterfaceGroup) TB() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TB"))
+// TB returns TB interface byte of ATR group, or nil if TB is not present.
+func (scaig *SmartCardATRInterfaceGroup) TB() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("TB"))
 	return obj.Wrap(_r)
 }
 
-// TC TC interface byte of ATR group, or nil if TC is not present.
-func (x *SmartCardATRInterfaceGroup) TC() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TC"))
+// TC returns TC interface byte of ATR group, or nil if TC is not present.
+func (scaig *SmartCardATRInterfaceGroup) TC() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("TC"))
 	return obj.Wrap(_r)
 }
 
-// Protocol protocol number for this group.  First group (global) has protocol unassigned, contains nil.
-func (x *SmartCardATRInterfaceGroup) Protocol() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
+// Protocol returns protocol number for this group.  First group (global) has protocol unassigned, contains nil.
+func (scaig *SmartCardATRInterfaceGroup) Protocol() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("protocol"))
 	return obj.Wrap(_r)
 }
-
-// SmartCardATRInterfaceGroupable is the interface implemented by [SmartCardATRInterfaceGroup], for mocking and DI.
-type SmartCardATRInterfaceGroupable interface {
-	obj.Object
-	TA() obj.Object
-	TB() obj.Object
-	TC() obj.Object
-	Protocol() obj.Object
-}
-
-var _ SmartCardATRInterfaceGroupable = (*SmartCardATRInterfaceGroup)(nil)

@@ -51,24 +51,15 @@ func NewMTRAccessControlClusterExtensionEntry() *MTRAccessControlClusterExtensio
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterExtensionEntry) WithData(data obj.Object) *MTRAccessControlClusterExtensionEntry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-	return x
+func (maccee *MTRAccessControlClusterExtensionEntry) WithData(data obj.Object) *MTRAccessControlClusterExtensionEntry {
+	objc.Send[objc.ID](objref.IDOf(maccee), objc.RegisterName("setData:"), objref.IDOf(data))
+	return maccee
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterExtensionEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterExtensionEntry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (maccee *MTRAccessControlClusterExtensionEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterExtensionEntry {
+	objc.Send[objc.ID](objref.IDOf(maccee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return maccee
 }
-
-// MTRAccessControlClusterExtensionEntryable is the interface implemented by [MTRAccessControlClusterExtensionEntry], for mocking and DI.
-type MTRAccessControlClusterExtensionEntryable interface {
-	obj.Object
-	WithData(data obj.Object) *MTRAccessControlClusterExtensionEntry
-	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterExtensionEntry
-}
-
-var _ MTRAccessControlClusterExtensionEntryable = (*MTRAccessControlClusterExtensionEntry)(nil)
 
 var _ MTRAccessControlClusterAccessControlExtensionStructProvider = (*MTRAccessControlClusterExtensionEntry)(nil)

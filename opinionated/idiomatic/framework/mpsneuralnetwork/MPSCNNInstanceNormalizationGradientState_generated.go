@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,18 +49,10 @@ func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradien
 	return cNNInstanceNormalizationGradientStateAdopt(_id)
 }
 
-// InstanceNormalization the MPSCNNInstanceNormalization object that created this state object.
-func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() *CNNInstanceNormalization {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceNormalization"))
+// InstanceNormalization returns the MPSCNNInstanceNormalization object that created this state object.
+func (cings *CNNInstanceNormalizationGradientState) InstanceNormalization() *CNNInstanceNormalization {
+	_r := objc.Send[objc.ID](objref.IDOf(cings), objc.RegisterName("instanceNormalization"))
 	return CNNInstanceNormalizationFromID(_r)
 }
-
-// CNNInstanceNormalizationGradientStateable is the interface implemented by [CNNInstanceNormalizationGradientState], for mocking and DI.
-type CNNInstanceNormalizationGradientStateable interface {
-	obj.Object
-	InstanceNormalization() *CNNInstanceNormalization
-}
-
-var _ CNNInstanceNormalizationGradientStateable = (*CNNInstanceNormalizationGradientState)(nil)
 
 var _ NNGradientStateProvider = (*CNNInstanceNormalizationGradientState)(nil)

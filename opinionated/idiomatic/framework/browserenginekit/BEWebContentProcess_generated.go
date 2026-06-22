@@ -5,13 +5,14 @@
 package browserenginekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // WebContentProcess is an idiomatic wrapper over the Objective-C class BEWebContentProcess.
@@ -48,24 +49,24 @@ func webContentProcessAdopt(id objc.ID) *WebContentProcess {
 }
 
 // Description returns the object's -description text.
-func (x *WebContentProcess) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wcp *WebContentProcess) Description() string {
+	return rt.Description(objref.IDOf(wcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebContentProcess) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wcp *WebContentProcess) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebContentProcess) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wcp *WebContentProcess) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebContentProcess) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wcp *WebContentProcess) String() string {
+	return rt.Description(objref.IDOf(wcp))
 }
 
 // NewWebContentProcess creates a new WebContentProcess.
@@ -75,25 +76,16 @@ func NewWebContentProcess() *WebContentProcess {
 }
 
 // Invalidate stops the web content process.
-func (x *WebContentProcess) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (wcp *WebContentProcess) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(wcp), objc.RegisterName("invalidate"))
 }
 
 // MakeLibXPCConnectionError creates a new XPC connection to the extension process.
-func (x *WebContentProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
+func (wcp *WebContentProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(wcp), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
-
-// WebContentProcessable is the interface implemented by [WebContentProcess], for mocking and DI.
-type WebContentProcessable interface {
-	obj.Object
-	Invalidate()
-	MakeLibXPCConnectionError() (result obj.Object, err error)
-}
-
-var _ WebContentProcessable = (*WebContentProcess)(nil)

@@ -46,24 +46,24 @@ func changeAdopt(id objc.ID) *Change {
 }
 
 // Description returns the object's -description text.
-func (x *Change) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Change) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Change) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Change) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Change) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Change) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Change) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Change) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewChange creates a new Change.
@@ -73,22 +73,13 @@ func NewChange() *Change {
 }
 
 // ChangeDetailsForObject returns detailed change information for the specified asset or collection.
-func (x *Change) ChangeDetailsForObject(object *Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForObject:"), objref.IDOf(object))
+func (c *Change) ChangeDetailsForObject(object *Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("changeDetailsForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
 // ChangeDetailsForFetchResult returns detailed change information for a fetch result.
-func (x *Change) ChangeDetailsForFetchResult(object obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForFetchResult:"), objref.IDOf(object))
+func (c *Change) ChangeDetailsForFetchResult(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("changeDetailsForFetchResult:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
-
-// Changeable is the interface implemented by [Change], for mocking and DI.
-type Changeable interface {
-	obj.Object
-	ChangeDetailsForObject(object *Object) obj.Object
-	ChangeDetailsForFetchResult(object obj.Object) obj.Object
-}
-
-var _ Changeable = (*Change)(nil)

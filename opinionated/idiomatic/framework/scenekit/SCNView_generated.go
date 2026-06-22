@@ -47,24 +47,24 @@ func viewAdopt(id objc.ID) *View {
 }
 
 // Description returns the object's -description text.
-func (x *View) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *View) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *View) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *View) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *View) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *View) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewViewWithFrameOptions initializes and returns a newly allocated SceneKit view object with the specified frame rectangle and options.
@@ -74,181 +74,113 @@ func NewViewWithFrameOptions(frame corefoundation.CGRect, options obj.Object) *V
 	return viewAdopt(_id)
 }
 
-// WithScene the scene to be displayed in the view.
-func (x *View) WithScene(scene *Scene) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-	return x
+// WithScene sets the scene to be displayed in the view.
+func (v_ *View) WithScene(scene *Scene) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	return v_
 }
 
-// WithRendersContinuously a Boolean value that determines whether the view always renders at its preferred frame rate or only when its visible content changes.
-func (x *View) WithRendersContinuously(rendersContinuously bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRendersContinuously:"), rendersContinuously)
-	return x
+// WithRendersContinuously sets a Boolean value that determines whether the view always renders at its preferred frame rate or only when its visible content changes.
+func (v_ *View) WithRendersContinuously(rendersContinuously bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setRendersContinuously:"), rendersContinuously)
+	return v_
 }
 
-// WithBackgroundColor the background color of the view.
-func (x *View) WithBackgroundColor(backgroundColor obj.Object) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the view.
+func (v_ *View) WithBackgroundColor(backgroundColor obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return v_
 }
 
-// WithAllowsCameraControl a Boolean value that determines whether the user can manipulate the current point of view that is used to render the scene.
-func (x *View) WithAllowsCameraControl(allowsCameraControl bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCameraControl:"), allowsCameraControl)
-	return x
+// WithAllowsCameraControl sets a Boolean value that determines whether the user can manipulate the current point of view that is used to render the scene.
+func (v_ *View) WithAllowsCameraControl(allowsCameraControl bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAllowsCameraControl:"), allowsCameraControl)
+	return v_
 }
 
-// WithPreferredFramesPerSecond the animation frame rate that the view uses to render its scene.
-func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
-	return x
+// WithPreferredFramesPerSecond sets the animation frame rate that the view uses to render its scene.
+func (v_ *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
+	return v_
 }
 
-// WithDrawableResizesAsynchronously specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES. If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
-func (x *View) WithDrawableResizesAsynchronously(drawableResizesAsynchronously bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableResizesAsynchronously:"), drawableResizesAsynchronously)
-	return x
+// WithDrawableResizesAsynchronously sets specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES. If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
+func (v_ *View) WithDrawableResizesAsynchronously(drawableResizesAsynchronously bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDrawableResizesAsynchronously:"), drawableResizesAsynchronously)
+	return v_
 }
 
-// WithAntialiasingMode the antialiasing mode used for rendering the view’s scene.
-func (x *View) WithAntialiasingMode(antialiasingMode AntialiasingMode) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAntialiasingMode:"), antialiasingMode)
-	return x
+// WithAntialiasingMode sets the antialiasing mode used for rendering the view’s scene.
+func (v_ *View) WithAntialiasingMode(antialiasingMode AntialiasingMode) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAntialiasingMode:"), antialiasingMode)
+	return v_
 }
 
-// Snapshot renders the view’s scene into a new image object.
-func (x *View) Snapshot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
+// Snapshot returns renders the view’s scene into a new image object.
+func (v_ *View) Snapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("snapshot"))
 	return obj.Wrap(_r)
 }
 
 // Play resumes playback of the view’s scene.
-func (x *View) Play(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play:"), objref.IDOf(sender))
+func (v_ *View) Play(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("play:"), objref.IDOf(sender))
 }
 
 // Pause pauses playback of the view’s scene.
-func (x *View) Pause(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause:"), objref.IDOf(sender))
+func (v_ *View) Pause(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pause:"), objref.IDOf(sender))
 }
 
 // Stop stops playback of the view’s scene and resets the scene time to its start time.
-func (x *View) Stop(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
+func (v_ *View) Stop(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
 // Scene specifies the scene of the receiver
-func (x *View) Scene() *Scene {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+func (v_ *View) Scene() *Scene {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
-// SetScene wraps the corresponding Objective-C method.
-func (x *View) SetScene(scene *Scene) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-}
-
-// RendersContinuously when set to YES, the view continously redraw at the display link frame rate. When set to NO the view will only redraw when something change or animates in the receiver's scene. Defaults to NO.
-func (x *View) RendersContinuously() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rendersContinuously"))
+// RendersContinuously reports whether when set to true, the view continously redraw at the display link frame rate. When set to false the view will only redraw when something change or animates in the receiver's scene. Defaults to false.
+func (v_ *View) RendersContinuously() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("rendersContinuously"))
 	return _r
-}
-
-// SetRendersContinuously wraps the corresponding Objective-C method.
-func (x *View) SetRendersContinuously(rendersContinuously bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRendersContinuously:"), rendersContinuously)
 }
 
 // BackgroundColor specifies the background color of the receiver. Defaults to opaque white.
-func (x *View) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (v_ *View) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *View) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
-// AllowsCameraControl a Boolean value that determines whether the user can manipulate the point of view used to render the scene. When set to YES, the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is NO. Note that the primary purpose of this property is to aid in debugging your application. You may want to implement your own camera controller suitable for your application. The built-in camera controller let you: - drag the mouse to rotate the camera around the scene - drag+cmd to rotate the camera in local space - drag+shift to rotate using sticky axis - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan - alt+scroll wheel to move the camera forward/backward - rotate gesture (trackpad only) to roll the camera (rotation around the Z axis) - pinch gesture (trackpad only) move the camera forward/backward - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the field of view of the camera)
-func (x *View) AllowsCameraControl() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCameraControl"))
+// AllowsCameraControl reports whether a Boolean value that determines whether the user can manipulate the point of view used to render the scene. When set to true, the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is false. Note that the primary purpose of this property is to aid in debugging your application. You may want to implement your own camera controller suitable for your application. The built-in camera controller let you: - drag the mouse to rotate the camera around the scene - drag+cmd to rotate the camera in local space - drag+shift to rotate using sticky axis - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan - alt+scroll wheel to move the camera forward/backward - rotate gesture (trackpad only) to roll the camera (rotation around the Z axis) - pinch gesture (trackpad only) move the camera forward/backward - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the field of view of the camera)
+func (v_ *View) AllowsCameraControl() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("allowsCameraControl"))
 	return _r
-}
-
-// SetAllowsCameraControl wraps the corresponding Objective-C method.
-func (x *View) SetAllowsCameraControl(allowsCameraControl bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCameraControl:"), allowsCameraControl)
 }
 
 // DefaultCameraController returns the default SCNCameraController used to drive the current point of view when allowCameraController is set to YES.
-func (x *View) DefaultCameraController() *CameraController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCameraController"))
+func (v_ *View) DefaultCameraController() *CameraController {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("defaultCameraController"))
 	return CameraControllerFromID(_r)
 }
 
-// PreferredFramesPerSecond the rate you want the view to redraw its contents. When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 0 which means the display link will fire at the native cadence of the display hardware.
-func (x *View) PreferredFramesPerSecond() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredFramesPerSecond"))
+// PreferredFramesPerSecond returns the rate you want the view to redraw its contents. When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 0 which means the display link will fire at the native cadence of the display hardware.
+func (v_ *View) PreferredFramesPerSecond() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("preferredFramesPerSecond"))
 	return _r
 }
 
-// SetPreferredFramesPerSecond wraps the corresponding Objective-C method.
-func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
-}
-
-// DrawableResizesAsynchronously specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES. If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
-func (x *View) DrawableResizesAsynchronously() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawableResizesAsynchronously"))
+// DrawableResizesAsynchronously reports whether the drawable is resized asynchonously during a live resize operation. Defaults to true. If set to true, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
+func (v_ *View) DrawableResizesAsynchronously() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("drawableResizesAsynchronously"))
 	return _r
 }
 
-// SetDrawableResizesAsynchronously wraps the corresponding Objective-C method.
-func (x *View) SetDrawableResizesAsynchronously(drawableResizesAsynchronously bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableResizesAsynchronously:"), drawableResizesAsynchronously)
-}
-
-// AntialiasingMode defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
-func (x *View) AntialiasingMode() AntialiasingMode {
-	_r := objc.Send[AntialiasingMode](objref.IDOf(x), objc.RegisterName("antialiasingMode"))
+// AntialiasingMode returns defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
+func (v_ *View) AntialiasingMode() AntialiasingMode {
+	_r := objc.Send[AntialiasingMode](objref.IDOf(v_), objc.RegisterName("antialiasingMode"))
 	return _r
 }
-
-// SetAntialiasingMode wraps the corresponding Objective-C method.
-func (x *View) SetAntialiasingMode(antialiasingMode AntialiasingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAntialiasingMode:"), antialiasingMode)
-}
-
-// Viewable is the interface implemented by [View], for mocking and DI.
-type Viewable interface {
-	obj.Object
-	WithScene(scene *Scene) *View
-	WithRendersContinuously(rendersContinuously bool) *View
-	WithBackgroundColor(backgroundColor obj.Object) *View
-	WithAllowsCameraControl(allowsCameraControl bool) *View
-	WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
-	WithDrawableResizesAsynchronously(drawableResizesAsynchronously bool) *View
-	WithAntialiasingMode(antialiasingMode AntialiasingMode) *View
-	Snapshot() obj.Object
-	Play(sender obj.Object)
-	Pause(sender obj.Object)
-	Stop(sender obj.Object)
-	Scene() *Scene
-	SetScene(scene *Scene)
-	RendersContinuously() bool
-	SetRendersContinuously(rendersContinuously bool)
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-	AllowsCameraControl() bool
-	SetAllowsCameraControl(allowsCameraControl bool)
-	DefaultCameraController() *CameraController
-	PreferredFramesPerSecond() int
-	SetPreferredFramesPerSecond(preferredFramesPerSecond int)
-	DrawableResizesAsynchronously() bool
-	SetDrawableResizesAsynchronously(drawableResizesAsynchronously bool)
-	AntialiasingMode() AntialiasingMode
-	SetAntialiasingMode(antialiasingMode AntialiasingMode)
-}
-
-var _ Viewable = (*View)(nil)

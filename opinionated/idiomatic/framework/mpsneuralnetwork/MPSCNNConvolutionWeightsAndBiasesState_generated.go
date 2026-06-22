@@ -44,24 +44,24 @@ func cNNConvolutionWeightsAndBiasesStateAdopt(id objc.ID) *CNNConvolutionWeights
 }
 
 // Description returns the object's -description text.
-func (x *CNNConvolutionWeightsAndBiasesState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) Description() string {
+	return rt.Description(objref.IDOf(ccwabs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolutionWeightsAndBiasesState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ccwabs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolutionWeightsAndBiasesState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ccwabs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CNNConvolutionWeightsAndBiasesState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) String() string {
+	return rt.Description(objref.IDOf(ccwabs))
 }
 
 // NewCNNConvolutionWeightsAndBiasesState creates a new CNNConvolutionWeightsAndBiasesState.
@@ -70,23 +70,14 @@ func NewCNNConvolutionWeightsAndBiasesState() *CNNConvolutionWeightsAndBiasesSta
 	return cNNConvolutionWeightsAndBiasesStateAdopt(_id)
 }
 
-// WeightsOffset offset at which weights start in weights buffer Default value is 0.
-func (x *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weightsOffset"))
+// WeightsOffset returns offset at which weights start in weights buffer Default value is 0.
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
+	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("weightsOffset"))
 	return _r
 }
 
-// BiasesOffset offset at which weights start in biases buffer Default value is 0.
-func (x *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("biasesOffset"))
+// BiasesOffset returns offset at which weights start in biases buffer Default value is 0.
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
+	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("biasesOffset"))
 	return _r
 }
-
-// CNNConvolutionWeightsAndBiasesStateable is the interface implemented by [CNNConvolutionWeightsAndBiasesState], for mocking and DI.
-type CNNConvolutionWeightsAndBiasesStateable interface {
-	obj.Object
-	WeightsOffset() int
-	BiasesOffset() int
-}
-
-var _ CNNConvolutionWeightsAndBiasesStateable = (*CNNConvolutionWeightsAndBiasesState)(nil)

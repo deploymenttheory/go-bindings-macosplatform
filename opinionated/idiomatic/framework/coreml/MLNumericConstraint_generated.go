@@ -46,24 +46,24 @@ func numericConstraintAdopt(id objc.ID) *NumericConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *NumericConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NumericConstraint) Description() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NumericConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nc *NumericConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NumericConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nc *NumericConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NumericConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NumericConstraint) String() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // NewNumericConstraint creates a new NumericConstraint.
@@ -73,29 +73,19 @@ func NewNumericConstraint() *NumericConstraint {
 }
 
 // MinNumber wraps the corresponding Objective-C method.
-func (x *NumericConstraint) MinNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minNumber"))
+func (nc *NumericConstraint) MinNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("minNumber"))
 	return obj.Wrap(_r)
 }
 
 // MaxNumber wraps the corresponding Objective-C method.
-func (x *NumericConstraint) MaxNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxNumber"))
+func (nc *NumericConstraint) MaxNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("maxNumber"))
 	return obj.Wrap(_r)
 }
 
 // EnumeratedNumbers wraps the corresponding Objective-C method.
-func (x *NumericConstraint) EnumeratedNumbers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedNumbers"))
+func (nc *NumericConstraint) EnumeratedNumbers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("enumeratedNumbers"))
 	return obj.Wrap(_r)
 }
-
-// NumericConstraintable is the interface implemented by [NumericConstraint], for mocking and DI.
-type NumericConstraintable interface {
-	obj.Object
-	MinNumber() obj.Object
-	MaxNumber() obj.Object
-	EnumeratedNumbers() obj.Object
-}
-
-var _ NumericConstraintable = (*NumericConstraint)(nil)

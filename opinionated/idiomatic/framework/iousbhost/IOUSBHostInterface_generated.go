@@ -5,12 +5,12 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostInterface is an idiomatic wrapper over the Objective-C class IOUSBHostInterface.
@@ -55,9 +55,9 @@ func NewHostInterface() *HostInterface {
 }
 
 // SetIdleTimeout sets the desired idle suspend timeout for the interface.
-func (x *HostInterface) SetIdleTimeout(idleTimeout float64) error {
+func (hi *HostInterface) SetIdleTimeout(idleTimeout float64) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hi), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -65,9 +65,9 @@ func (x *HostInterface) SetIdleTimeout(idleTimeout float64) error {
 }
 
 // SelectAlternateSetting selects an alternative setting for the interface.
-func (x *HostInterface) SelectAlternateSetting(alternateSetting int) error {
+func (hi *HostInterface) SelectAlternateSetting(alternateSetting int) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectAlternateSetting:error:"), alternateSetting, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hi), objc.RegisterName("selectAlternateSetting:error:"), alternateSetting, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -75,30 +75,19 @@ func (x *HostInterface) SelectAlternateSetting(alternateSetting int) error {
 }
 
 // CopyPipeWithAddressError copies a pipe for a specific endpoint address.
-func (x *HostInterface) CopyPipeWithAddressError(address int) (result *HostPipe, err error) {
+func (hi *HostInterface) CopyPipeWithAddressError(address int) (result *HostPipe, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyPipeWithAddress:error:"), address, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hi), objc.RegisterName("copyPipeWithAddress:error:"), address, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return HostPipeFromID(_r), nil
 }
 
-// IdleTimeout retrieve the current idle suspend timeout. See
-func (x *HostInterface) IdleTimeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("idleTimeout"))
+// IdleTimeout returns retrieve the current idle suspend timeout. See
+func (hi *HostInterface) IdleTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(hi), objc.RegisterName("idleTimeout"))
 	return _r
 }
-
-// HostInterfaceable is the interface implemented by [HostInterface], for mocking and DI.
-type HostInterfaceable interface {
-	obj.Object
-	SetIdleTimeout(idleTimeout float64) error
-	SelectAlternateSetting(alternateSetting int) error
-	CopyPipeWithAddressError(address int) (result *HostPipe, err error)
-	IdleTimeout() float64
-}
-
-var _ HostInterfaceable = (*HostInterface)(nil)
 
 var _ HostObjectProvider = (*HostInterface)(nil)

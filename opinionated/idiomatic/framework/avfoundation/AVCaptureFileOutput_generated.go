@@ -46,110 +46,79 @@ func captureFileOutputAdopt(id objc.ID) *CaptureFileOutput {
 	return x
 }
 
-// WithMaxRecordedFileSize the maximum size, in bytes, of the data that should be recorded by the receiver.
-func (x *CaptureFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
-	return x
+// WithMaxRecordedFileSize sets the maximum size, in bytes, of the data that should be recorded by the receiver.
+func (cfo *CaptureFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
+	return cfo
 }
 
-// WithMinFreeDiskSpaceLimit the minimum amount of free space, in bytes, required for recording to continue on a given volume.
-func (x *CaptureFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
-	return x
+// WithMinFreeDiskSpaceLimit sets the minimum amount of free space, in bytes, required for recording to continue on a given volume.
+func (cfo *CaptureFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
+	return cfo
 }
 
-// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
-func (x *CaptureFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
-	return x
+// WithDeferredStartEnabled sets a Boolean value that indicates whether to defer starting this capture output.
+func (cfo *CaptureFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
+	return cfo
 }
 
 // StopRecording tells the receiver to stop recording to the current file.
-func (x *CaptureFileOutput) StopRecording() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRecording"))
+func (cfo *CaptureFileOutput) StopRecording() {
+	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("stopRecording"))
 }
 
 // PauseRecording pauses recording to the current output file.
-func (x *CaptureFileOutput) PauseRecording() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseRecording"))
+func (cfo *CaptureFileOutput) PauseRecording() {
+	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("pauseRecording"))
 }
 
 // ResumeRecording resumes recording to the current output file after it was previously paused using pauseRecording.
-func (x *CaptureFileOutput) ResumeRecording() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeRecording"))
+func (cfo *CaptureFileOutput) ResumeRecording() {
+	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("resumeRecording"))
 }
 
-// OutputFileURL the file URL of the file to which the receiver is currently recording incoming buffers. The value of this property is an NSURL object containing the file URL of the file currently being written by the receiver. Returns nil if the receiver is not recording to any file.
-func (x *CaptureFileOutput) OutputFileURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileURL"))
+// OutputFileURL returns the file URL of the file to which the receiver is currently recording incoming buffers. The value of this property is an NSURL object containing the file URL of the file currently being written by the receiver. Returns nil if the receiver is not recording to any file.
+func (cfo *CaptureFileOutput) OutputFileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("outputFileURL"))
 	return obj.Wrap(_r)
 }
 
-// IsRecording indicates whether the receiver is currently recording. The value of this property is YES when the receiver currently has a file to which it is writing new samples, NO otherwise.
-func (x *CaptureFileOutput) IsRecording() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecording"))
+// IsRecording reports whether the receiver is currently recording. The value of this property is true when the receiver currently has a file to which it is writing new samples.
+func (cfo *CaptureFileOutput) IsRecording() bool {
+	_r := objc.Send[bool](objref.IDOf(cfo), objc.RegisterName("isRecording"))
 	return _r
 }
 
-// IsRecordingPaused indicates whether recording to the current output file is paused. This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
-func (x *CaptureFileOutput) IsRecordingPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecordingPaused"))
+// IsRecordingPaused reports whether recording to the current output file is paused. This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
+func (cfo *CaptureFileOutput) IsRecordingPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(cfo), objc.RegisterName("isRecordingPaused"))
 	return _r
 }
 
 // RecordedFileSize indicates the size, in bytes, of the data recorded to the current output file. If a recording is in progress, this property returns the size in bytes of the data recorded so far.
-func (x *CaptureFileOutput) RecordedFileSize() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("recordedFileSize"))
+func (cfo *CaptureFileOutput) RecordedFileSize() int64 {
+	_r := objc.Send[int64](objref.IDOf(cfo), objc.RegisterName("recordedFileSize"))
 	return _r
 }
 
 // MaxRecordedFileSize specifies the maximum size, in bytes, of the data that should be recorded by the receiver. This property specifies a hard limit on the data size of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is 0, which indicates no limit.
-func (x *CaptureFileOutput) MaxRecordedFileSize() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("maxRecordedFileSize"))
+func (cfo *CaptureFileOutput) MaxRecordedFileSize() int64 {
+	_r := objc.Send[int64](objref.IDOf(cfo), objc.RegisterName("maxRecordedFileSize"))
 	return _r
-}
-
-// SetMaxRecordedFileSize wraps the corresponding Objective-C method.
-func (x *CaptureFileOutput) SetMaxRecordedFileSize(maxRecordedFileSize int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
 }
 
 // MinFreeDiskSpaceLimit specifies the minimum amount of free space, in bytes, required for recording to continue on a given volume. This property specifies a hard lower limit on the amount of free space that must remain on a target volume for recording to continue. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error.
-func (x *CaptureFileOutput) MinFreeDiskSpaceLimit() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("minFreeDiskSpaceLimit"))
+func (cfo *CaptureFileOutput) MinFreeDiskSpaceLimit() int64 {
+	_r := objc.Send[int64](objref.IDOf(cfo), objc.RegisterName("minFreeDiskSpaceLimit"))
 	return _r
 }
-
-// SetMinFreeDiskSpaceLimit wraps the corresponding Objective-C method.
-func (x *CaptureFileOutput) SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
-}
-
-// CaptureFileOutputable is the interface implemented by [CaptureFileOutput], for mocking and DI.
-type CaptureFileOutputable interface {
-	obj.Object
-	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput
-	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput
-	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput
-	StopRecording()
-	PauseRecording()
-	ResumeRecording()
-	OutputFileURL() obj.Object
-	IsRecording() bool
-	IsRecordingPaused() bool
-	RecordedFileSize() int64
-	MaxRecordedFileSize() int64
-	SetMaxRecordedFileSize(maxRecordedFileSize int64)
-	MinFreeDiskSpaceLimit() int64
-	SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64)
-}
-
-var _ CaptureFileOutputable = (*CaptureFileOutput)(nil)
 
 // isCaptureFileOutput marks CaptureFileOutput — and, by embedding promotion, its
 // subclasses — as a member of the CaptureFileOutput hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CaptureFileOutput) isCaptureFileOutput() {}
+func (cfo *CaptureFileOutput) isCaptureFileOutput() {}
 
 var _ CaptureFileOutputProvider = (*CaptureFileOutput)(nil)
 

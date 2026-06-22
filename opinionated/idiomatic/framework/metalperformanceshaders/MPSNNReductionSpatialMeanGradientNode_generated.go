@@ -51,19 +51,11 @@ func NewNNReductionSpatialMeanGradientNodeWithSourceGradientSourceImageGradientS
 	return nNReductionSpatialMeanGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionSpatialMeanGradientNode) WithLabel(label string) *NNReductionSpatialMeanGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrsmgn *NNReductionSpatialMeanGradientNode) WithLabel(label string) *NNReductionSpatialMeanGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nrsmgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrsmgn
 }
-
-// NNReductionSpatialMeanGradientNodeable is the interface implemented by [NNReductionSpatialMeanGradientNode], for mocking and DI.
-type NNReductionSpatialMeanGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNReductionSpatialMeanGradientNode
-}
-
-var _ NNReductionSpatialMeanGradientNodeable = (*NNReductionSpatialMeanGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*NNReductionSpatialMeanGradientNode)(nil)
 

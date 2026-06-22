@@ -46,24 +46,24 @@ func emergencyResponseManagerAdopt(id objc.ID) *EmergencyResponseManager {
 }
 
 // Description returns the object's -description text.
-func (x *EmergencyResponseManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (erm *EmergencyResponseManager) Description() string {
+	return rt.Description(objref.IDOf(erm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EmergencyResponseManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (erm *EmergencyResponseManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(erm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EmergencyResponseManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (erm *EmergencyResponseManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(erm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EmergencyResponseManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (erm *EmergencyResponseManager) String() string {
+	return rt.Description(objref.IDOf(erm))
 }
 
 // NewEmergencyResponseManager creates a new EmergencyResponseManager.
@@ -71,10 +71,3 @@ func NewEmergencyResponseManager() *EmergencyResponseManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("SAEmergencyResponseManager")), objc.RegisterName("new"))
 	return emergencyResponseManagerAdopt(_id)
 }
-
-// EmergencyResponseManagerable is the interface implemented by [EmergencyResponseManager], for mocking and DI.
-type EmergencyResponseManagerable interface {
-	obj.Object
-}
-
-var _ EmergencyResponseManagerable = (*EmergencyResponseManager)(nil)

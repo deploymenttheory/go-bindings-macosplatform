@@ -53,53 +53,39 @@ func NewMutableIndexSet() *MutableIndexSet {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableIndexSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mis *MutableIndexSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mis
 }
 
 // AddIndexes adds the indexes in an index set to the receiver.
-func (x *MutableIndexSet) AddIndexes(indexSet *IndexSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addIndexes:"), objref.IDOf(indexSet))
+func (mis *MutableIndexSet) AddIndexes(indexSet *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("addIndexes:"), objref.IDOf(indexSet))
 }
 
 // RemoveIndexes removes the indexes in an index set from the receiver.
-func (x *MutableIndexSet) RemoveIndexes(indexSet *IndexSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeIndexes:"), objref.IDOf(indexSet))
+func (mis *MutableIndexSet) RemoveIndexes(indexSet *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeIndexes:"), objref.IDOf(indexSet))
 }
 
 // RemoveAllIndexes removes the receiver’s indexes.
-func (x *MutableIndexSet) RemoveAllIndexes() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllIndexes"))
+func (mis *MutableIndexSet) RemoveAllIndexes() {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeAllIndexes"))
 }
 
 // AddIndex adds an index to the receiver.
-func (x *MutableIndexSet) AddIndex(value int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addIndex:"), value)
+func (mis *MutableIndexSet) AddIndex(value int) {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("addIndex:"), value)
 }
 
 // RemoveIndex removes an index from the receiver.
-func (x *MutableIndexSet) RemoveIndex(value int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeIndex:"), value)
+func (mis *MutableIndexSet) RemoveIndex(value int) {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeIndex:"), value)
 }
 
 // ShiftIndexesStartingAtIndexBy shifts a group of indexes to the left or the right within the receiver.
-func (x *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index int, delta int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shiftIndexesStartingAtIndex:by:"), index, delta)
+func (mis *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index int, delta int) {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("shiftIndexesStartingAtIndex:by:"), index, delta)
 }
-
-// MutableIndexSetable is the interface implemented by [MutableIndexSet], for mocking and DI.
-type MutableIndexSetable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet
-	AddIndexes(indexSet *IndexSet)
-	RemoveIndexes(indexSet *IndexSet)
-	RemoveAllIndexes()
-	AddIndex(value int)
-	RemoveIndex(value int)
-	ShiftIndexesStartingAtIndexBy(index int, delta int)
-}
-
-var _ MutableIndexSetable = (*MutableIndexSet)(nil)
 
 var _ IndexSetProvider = (*MutableIndexSet)(nil)

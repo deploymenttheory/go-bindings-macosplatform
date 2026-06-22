@@ -46,24 +46,24 @@ func authorizationAppleIDProviderAdopt(id objc.ID) *AuthorizationAppleIDProvider
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationAppleIDProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aaip *AuthorizationAppleIDProvider) Description() string {
+	return rt.Description(objref.IDOf(aaip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationAppleIDProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aaip *AuthorizationAppleIDProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aaip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationAppleIDProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aaip *AuthorizationAppleIDProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aaip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationAppleIDProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aaip *AuthorizationAppleIDProvider) String() string {
+	return rt.Description(objref.IDOf(aaip))
 }
 
 // NewAuthorizationAppleIDProvider creates a new AuthorizationAppleIDProvider.
@@ -73,15 +73,7 @@ func NewAuthorizationAppleIDProvider() *AuthorizationAppleIDProvider {
 }
 
 // CreateRequest creates a new Apple ID authorization request.
-func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
+func (aaip *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(aaip), objc.RegisterName("createRequest"))
 	return AuthorizationAppleIDRequestFromID(_r)
 }
-
-// AuthorizationAppleIDProviderable is the interface implemented by [AuthorizationAppleIDProvider], for mocking and DI.
-type AuthorizationAppleIDProviderable interface {
-	obj.Object
-	CreateRequest() *AuthorizationAppleIDRequest
-}
-
-var _ AuthorizationAppleIDProviderable = (*AuthorizationAppleIDProvider)(nil)

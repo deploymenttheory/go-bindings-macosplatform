@@ -48,74 +48,57 @@ func collectionLayoutItemAdopt(id objc.ID) *CollectionLayoutItem {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionLayoutItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cli *CollectionLayoutItem) Description() string {
+	return rt.Description(objref.IDOf(cli))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cli *CollectionLayoutItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cli), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cli *CollectionLayoutItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cli), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionLayoutItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cli *CollectionLayoutItem) String() string {
+	return rt.Description(objref.IDOf(cli))
 }
 
-// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
-func (x *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
-	return x
+// WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
+func (cli *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
+	objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	return cli
 }
 
 // EdgeSpacing wraps the corresponding Objective-C method.
-func (x *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("edgeSpacing"))
+func (cli *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
+	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("edgeSpacing"))
 	return CollectionLayoutEdgeSpacingFromID(_r)
 }
 
-// SetEdgeSpacing wraps the corresponding Objective-C method.
-func (x *CollectionLayoutItem) SetEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
-}
-
 // LayoutSize wraps the corresponding Objective-C method.
-func (x *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutSize"))
+func (cli *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
+	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("layoutSize"))
 	return CollectionLayoutSizeFromID(_r)
 }
 
 // SupplementaryItems wraps the corresponding Objective-C method.
 //
 // SupplementaryItems returns the collection as a Go slice.
-func (x *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementaryItems"))
+func (cli *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("supplementaryItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutSupplementaryItem {
 		return CollectionLayoutSupplementaryItemFromID(_id)
 	})
 }
 
-// CollectionLayoutItemable is the interface implemented by [CollectionLayoutItem], for mocking and DI.
-type CollectionLayoutItemable interface {
-	obj.Object
-	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem
-	EdgeSpacing() *CollectionLayoutEdgeSpacing
-	SetEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing)
-	LayoutSize() *CollectionLayoutSize
-	SupplementaryItems() []*CollectionLayoutSupplementaryItem
-}
-
-var _ CollectionLayoutItemable = (*CollectionLayoutItem)(nil)
-
 // isCollectionLayoutItem marks CollectionLayoutItem — and, by embedding promotion, its
 // subclasses — as a member of the CollectionLayoutItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CollectionLayoutItem) isCollectionLayoutItem() {}
+func (cli *CollectionLayoutItem) isCollectionLayoutItem() {}
 
 var _ CollectionLayoutItemProvider = (*CollectionLayoutItem)(nil)

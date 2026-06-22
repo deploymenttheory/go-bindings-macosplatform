@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,44 +47,33 @@ func rectangleObservationAdopt(id objc.ID) *RectangleObservation {
 }
 
 // TopLeft wraps the corresponding Objective-C method.
-func (x *RectangleObservation) TopLeft() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topLeft"))
+func (ro *RectangleObservation) TopLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("topLeft"))
 	return _r
 }
 
 // TopRight wraps the corresponding Objective-C method.
-func (x *RectangleObservation) TopRight() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topRight"))
+func (ro *RectangleObservation) TopRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("topRight"))
 	return _r
 }
 
 // BottomLeft wraps the corresponding Objective-C method.
-func (x *RectangleObservation) BottomLeft() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomLeft"))
+func (ro *RectangleObservation) BottomLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
 // BottomRight wraps the corresponding Objective-C method.
-func (x *RectangleObservation) BottomRight() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomRight"))
+func (ro *RectangleObservation) BottomRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("bottomRight"))
 	return _r
 }
-
-// RectangleObservationable is the interface implemented by [RectangleObservation], for mocking and DI.
-type RectangleObservationable interface {
-	obj.Object
-	TopLeft() corefoundation.CGPoint
-	TopRight() corefoundation.CGPoint
-	BottomLeft() corefoundation.CGPoint
-	BottomRight() corefoundation.CGPoint
-}
-
-var _ RectangleObservationable = (*RectangleObservation)(nil)
 
 // isRectangleObservation marks RectangleObservation — and, by embedding promotion, its
 // subclasses — as a member of the RectangleObservation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RectangleObservation) isRectangleObservation() {}
+func (ro *RectangleObservation) isRectangleObservation() {}
 
 var _ RectangleObservationProvider = (*RectangleObservation)(nil)
 

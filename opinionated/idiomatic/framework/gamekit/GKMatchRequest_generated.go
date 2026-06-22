@@ -46,24 +46,24 @@ func matchRequestAdopt(id objc.ID) *MatchRequest {
 }
 
 // Description returns the object's -description text.
-func (x *MatchRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MatchRequest) Description() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mr *MatchRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mr *MatchRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatchRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MatchRequest) String() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // NewMatchRequest creates a new MatchRequest.
@@ -72,241 +72,146 @@ func NewMatchRequest() *MatchRequest {
 	return matchRequestAdopt(_id)
 }
 
-// WithMinPlayers the minimum number of players that can join the match.
-func (x *MatchRequest) WithMinPlayers(minPlayers int) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPlayers:"), minPlayers)
-	return x
+// WithMinPlayers sets the minimum number of players that can join the match.
+func (mr *MatchRequest) WithMinPlayers(minPlayers int) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setMinPlayers:"), minPlayers)
+	return mr
 }
 
-// WithMaxPlayers the maximum number of players that can join the match.
-func (x *MatchRequest) WithMaxPlayers(maxPlayers int) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPlayers:"), maxPlayers)
-	return x
+// WithMaxPlayers sets the maximum number of players that can join the match.
+func (mr *MatchRequest) WithMaxPlayers(maxPlayers int) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setMaxPlayers:"), maxPlayers)
+	return mr
 }
 
-// WithPlayerGroup a number identifying a subset of players invited to join a match.
-func (x *MatchRequest) WithPlayerGroup(playerGroup int) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerGroup:"), playerGroup)
-	return x
+// WithPlayerGroup sets a number identifying a subset of players invited to join a match.
+func (mr *MatchRequest) WithPlayerGroup(playerGroup int) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setPlayerGroup:"), playerGroup)
+	return mr
 }
 
-// WithPlayerAttributes a mask that specifies the role that the local player would like to play in the game.
-func (x *MatchRequest) WithPlayerAttributes(playerAttributes uint32) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerAttributes:"), playerAttributes)
-	return x
+// WithPlayerAttributes sets a mask that specifies the role that the local player would like to play in the game.
+func (mr *MatchRequest) WithPlayerAttributes(playerAttributes uint32) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setPlayerAttributes:"), playerAttributes)
+	return mr
 }
 
-// WithRecipients the players to invite to the match.
-func (x *MatchRequest) WithRecipients(items ...PlayerProvider) *MatchRequest {
+// WithRecipients sets the players to invite to the match.
+func (mr *MatchRequest) WithRecipients(items ...PlayerProvider) *MatchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PlayerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipients:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setRecipients:"), _arr)
+	return mr
 }
 
-// WithInviteMessage the message sent to other players when the local player invites them to join a match.
-func (x *MatchRequest) WithInviteMessage(inviteMessage string) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInviteMessage:"), purego.NSString(inviteMessage))
-	return x
+// WithInviteMessage sets the message sent to other players when the local player invites them to join a match.
+func (mr *MatchRequest) WithInviteMessage(inviteMessage string) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setInviteMessage:"), purego.NSString(inviteMessage))
+	return mr
 }
 
-// WithDefaultNumberOfPlayers the default number of players for the match.
-func (x *MatchRequest) WithDefaultNumberOfPlayers(defaultNumberOfPlayers int) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultNumberOfPlayers:"), defaultNumberOfPlayers)
-	return x
+// WithDefaultNumberOfPlayers sets the default number of players for the match.
+func (mr *MatchRequest) WithDefaultNumberOfPlayers(defaultNumberOfPlayers int) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setDefaultNumberOfPlayers:"), defaultNumberOfPlayers)
+	return mr
 }
 
-// WithRestrictToAutomatch a Boolean value that determines whether a game uses automatch to find players or the local player invites players.
-func (x *MatchRequest) WithRestrictToAutomatch(restrictToAutomatch bool) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictToAutomatch:"), restrictToAutomatch)
-	return x
+// WithRestrictToAutomatch sets a Boolean value that determines whether a game uses automatch to find players or the local player invites players.
+func (mr *MatchRequest) WithRestrictToAutomatch(restrictToAutomatch bool) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setRestrictToAutomatch:"), restrictToAutomatch)
+	return mr
 }
 
-// WithPlayersToInvite a list of player identifiers for players to invite to the match.
-func (x *MatchRequest) WithPlayersToInvite(items ...obj.Object) *MatchRequest {
+// WithPlayersToInvite sets a list of player identifiers for players to invite to the match.
+func (mr *MatchRequest) WithPlayersToInvite(items ...obj.Object) *MatchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayersToInvite:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setPlayersToInvite:"), _arr)
+	return mr
 }
 
-// WithQueueName the name of the queue that Game Center places the match request in.
-func (x *MatchRequest) WithQueueName(queueName string) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueueName:"), purego.NSString(queueName))
-	return x
+// WithQueueName sets the name of the queue that Game Center places the match request in.
+func (mr *MatchRequest) WithQueueName(queueName string) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setQueueName:"), purego.NSString(queueName))
+	return mr
 }
 
-// WithRecipientProperties the criteria for recipients of the match request that Game Center uses to find other players when using matchmaking rules.
-func (x *MatchRequest) WithRecipientProperties(recipientProperties obj.Object) *MatchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientProperties:"), objref.IDOf(recipientProperties))
-	return x
+// WithRecipientProperties sets the criteria for recipients of the match request that Game Center uses to find other players when using matchmaking rules.
+func (mr *MatchRequest) WithRecipientProperties(recipientProperties obj.Object) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setRecipientProperties:"), objref.IDOf(recipientProperties))
+	return mr
 }
 
-// MinPlayers minimum number of players for the match
-func (x *MatchRequest) MinPlayers() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minPlayers"))
+// MinPlayers returns minimum number of players for the match
+func (mr *MatchRequest) MinPlayers() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("minPlayers"))
 	return _r
 }
 
-// SetMinPlayers wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetMinPlayers(minPlayers int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPlayers:"), minPlayers)
-}
-
-// MaxPlayers maximum number of players for the match
-func (x *MatchRequest) MaxPlayers() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxPlayers"))
+// MaxPlayers returns maximum number of players for the match
+func (mr *MatchRequest) MaxPlayers() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("maxPlayers"))
 	return _r
 }
 
-// SetMaxPlayers wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetMaxPlayers(maxPlayers int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPlayers:"), maxPlayers)
-}
-
-// PlayerGroup the player group identifier. Matchmaking will only take place between players in the same group.
-func (x *MatchRequest) PlayerGroup() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playerGroup"))
+// PlayerGroup returns the player group identifier. Matchmaking will only take place between players in the same group.
+func (mr *MatchRequest) PlayerGroup() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("playerGroup"))
 	return _r
 }
 
-// SetPlayerGroup wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetPlayerGroup(playerGroup int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerGroup:"), playerGroup)
-}
-
-// PlayerAttributes optional mask that specifies the role that the local player would like to play in the game.  If this value is 0, it will be set to 0xFFFFFFFF (the default), and this property will be ignored. If the value is nonzero, then automatching uses the value as a mask that restricts the role the player can play in the group. Automatching with player attributes matches new players into the game so that the bitwise OR of the masks of all the players in the resulting match equals 0xFFFFFFFF.
-func (x *MatchRequest) PlayerAttributes() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("playerAttributes"))
+// PlayerAttributes returns optional mask that specifies the role that the local player would like to play in the game.  If this value is 0, it will be set to 0xFFFFFFFF (the default), and this property will be ignored. If the value is nonzero, then automatching uses the value as a mask that restricts the role the player can play in the group. Automatching with player attributes matches new players into the game so that the bitwise OR of the masks of all the players in the resulting match equals 0xFFFFFFFF.
+func (mr *MatchRequest) PlayerAttributes() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(mr), objc.RegisterName("playerAttributes"))
 	return _r
 }
 
-// SetPlayerAttributes wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetPlayerAttributes(playerAttributes uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerAttributes:"), playerAttributes)
-}
-
-// Recipients array of GKPlayers to invite, or nil if none. This array can also include local guest players.
+// Recipients returns array of GKPlayers to invite, or nil if none. This array can also include local guest players.
 //
 // Recipients returns the collection as a Go slice.
-func (x *MatchRequest) Recipients() []*Player {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipients"))
+func (mr *MatchRequest) Recipients() []*Player {
+	_arr := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
-// SetRecipients wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetRecipients(recipients []*Player) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipients:"), purego.SliceToNSArray(recipients, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
-}
-
-// InviteMessage message sent to invited players, may be modified if using GKMatchmakerViewController Will return nil if the player is underage or restricted.
-func (x *MatchRequest) InviteMessage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inviteMessage"))
+// InviteMessage returns message sent to invited players, may be modified if using GKMatchmakerViewController Will return nil if the player is underage or restricted.
+func (mr *MatchRequest) InviteMessage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("inviteMessage"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetInviteMessage wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetInviteMessage(inviteMessage string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInviteMessage:"), purego.NSString(inviteMessage))
-}
-
-// DefaultNumberOfPlayers default number of players to use during matchmaking. If not set we will default to the number that the player previously set for this game, or maxPlayers.
-func (x *MatchRequest) DefaultNumberOfPlayers() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultNumberOfPlayers"))
+// DefaultNumberOfPlayers returns default number of players to use during matchmaking. If not set we will default to the number that the player previously set for this game, or maxPlayers.
+func (mr *MatchRequest) DefaultNumberOfPlayers() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("defaultNumberOfPlayers"))
 	return _r
 }
 
-// SetDefaultNumberOfPlayers wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetDefaultNumberOfPlayers(defaultNumberOfPlayers int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultNumberOfPlayers:"), defaultNumberOfPlayers)
-}
-
-// RestrictToAutomatch whether or not a match will be created only using automatch.  If YES, then a player will not be able to invite anyone (including contacts, friends, and nearby players) to the match, but rely on automatching to find players for the match.  Default is NO.
-func (x *MatchRequest) RestrictToAutomatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("restrictToAutomatch"))
+// RestrictToAutomatch reports whether a match will be created only using automatch. If true, then a player will not be able to invite anyone (including contacts, friends, and nearby players) to the match, but rely on automatching to find players for the match. Default is false.
+func (mr *MatchRequest) RestrictToAutomatch() bool {
+	_r := objc.Send[bool](objref.IDOf(mr), objc.RegisterName("restrictToAutomatch"))
 	return _r
-}
-
-// SetRestrictToAutomatch wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetRestrictToAutomatch(restrictToAutomatch bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictToAutomatch:"), restrictToAutomatch)
 }
 
 // PlayersToInvite wraps the corresponding Objective-C method.
 //
 // PlayersToInvite returns the collection as a Go slice.
-func (x *MatchRequest) PlayersToInvite() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playersToInvite"))
+func (mr *MatchRequest) PlayersToInvite() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("playersToInvite"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetPlayersToInvite wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetPlayersToInvite(playersToInvite []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayersToInvite:"), purego.SliceToNSArray(playersToInvite, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// QueueName the name of the queue, if rule-based matchmaking is used.
-func (x *MatchRequest) QueueName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queueName"))
+// QueueName returns the name of the queue, if rule-based matchmaking is used.
+func (mr *MatchRequest) QueueName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("queueName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetQueueName wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetQueueName(queueName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueueName:"), purego.NSString(queueName))
-}
-
-// RecipientProperties the recipient specific match properties, if rule-based matchmaking is used when inviting players.
-func (x *MatchRequest) RecipientProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipientProperties"))
+// RecipientProperties returns the recipient specific match properties, if rule-based matchmaking is used when inviting players.
+func (mr *MatchRequest) RecipientProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("recipientProperties"))
 	return obj.Wrap(_r)
 }
-
-// SetRecipientProperties wraps the corresponding Objective-C method.
-func (x *MatchRequest) SetRecipientProperties(recipientProperties obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientProperties:"), objref.IDOf(recipientProperties))
-}
-
-// MatchRequestable is the interface implemented by [MatchRequest], for mocking and DI.
-type MatchRequestable interface {
-	obj.Object
-	WithMinPlayers(minPlayers int) *MatchRequest
-	WithMaxPlayers(maxPlayers int) *MatchRequest
-	WithPlayerGroup(playerGroup int) *MatchRequest
-	WithPlayerAttributes(playerAttributes uint32) *MatchRequest
-	WithRecipients(items ...PlayerProvider) *MatchRequest
-	WithInviteMessage(inviteMessage string) *MatchRequest
-	WithDefaultNumberOfPlayers(defaultNumberOfPlayers int) *MatchRequest
-	WithRestrictToAutomatch(restrictToAutomatch bool) *MatchRequest
-	WithPlayersToInvite(items ...obj.Object) *MatchRequest
-	WithQueueName(queueName string) *MatchRequest
-	WithRecipientProperties(recipientProperties obj.Object) *MatchRequest
-	MinPlayers() int
-	SetMinPlayers(minPlayers int)
-	MaxPlayers() int
-	SetMaxPlayers(maxPlayers int)
-	PlayerGroup() int
-	SetPlayerGroup(playerGroup int)
-	PlayerAttributes() uint32
-	SetPlayerAttributes(playerAttributes uint32)
-	Recipients() []*Player
-	SetRecipients(recipients []*Player)
-	InviteMessage() string
-	SetInviteMessage(inviteMessage string)
-	DefaultNumberOfPlayers() int
-	SetDefaultNumberOfPlayers(defaultNumberOfPlayers int)
-	RestrictToAutomatch() bool
-	SetRestrictToAutomatch(restrictToAutomatch bool)
-	PlayersToInvite() []string
-	SetPlayersToInvite(playersToInvite []string)
-	QueueName() string
-	SetQueueName(queueName string)
-	RecipientProperties() obj.Object
-	SetRecipientProperties(recipientProperties obj.Object)
-}
-
-var _ MatchRequestable = (*MatchRequest)(nil)

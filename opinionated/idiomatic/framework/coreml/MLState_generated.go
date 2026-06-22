@@ -6,6 +6,7 @@ package coreml
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func stateAdopt(id objc.ID) *State {
 }
 
 // Description returns the object's -description text.
-func (x *State) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *State) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *State) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *State) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *State) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *State) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *State) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *State) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewState creates a new State.
@@ -76,7 +77,7 @@ func NewState() *State {
 // GetMultiArrayForStateNamedHandler gets a mutable view into a state buffer.
 //
 // GetMultiArrayForStateNamedHandler blocks until the operation completes or ctx is cancelled.
-func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (result *MultiArray, err error) {
+func (s *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (result *MultiArray, err error) {
 	type _result struct {
 		val *MultiArray
 		err error
@@ -87,7 +88,7 @@ func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName
 		_o.val = MultiArrayFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMultiArrayForStateNamed:handler:"), purego.NSString(stateName), _block)
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("getMultiArrayForStateNamed:handler:"), purego.NSString(stateName), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -96,11 +97,3 @@ func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName
 		return _zero, ctx.Err()
 	}
 }
-
-// Stateable is the interface implemented by [State], for mocking and DI.
-type Stateable interface {
-	obj.Object
-	GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (*MultiArray, error)
-}
-
-var _ Stateable = (*State)(nil)

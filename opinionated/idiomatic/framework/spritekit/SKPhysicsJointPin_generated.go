@@ -7,7 +7,6 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,125 +51,76 @@ func NewPhysicsJointPin() *PhysicsJointPin {
 	return physicsJointPinAdopt(_id)
 }
 
-// WithShouldEnableLimits a Boolean value that indicates whether the pin joint’s rotation is limited to a specific range of values.
-func (x *PhysicsJointPin) WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointPin {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
-	return x
+// WithShouldEnableLimits sets a Boolean value that indicates whether the pin joint’s rotation is limited to a specific range of values.
+func (pjp *PhysicsJointPin) WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointPin {
+	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
+	return pjp
 }
 
-// WithLowerAngleLimit the smallest angle allowed for the pin joint, in radians.
-func (x *PhysicsJointPin) WithLowerAngleLimit(lowerAngleLimit float64) *PhysicsJointPin {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
-	return x
+// WithLowerAngleLimit sets the smallest angle allowed for the pin joint, in radians.
+func (pjp *PhysicsJointPin) WithLowerAngleLimit(lowerAngleLimit float64) *PhysicsJointPin {
+	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
+	return pjp
 }
 
-// WithUpperAngleLimit the largest angle allowed for the pin joint, in radians.
-func (x *PhysicsJointPin) WithUpperAngleLimit(upperAngleLimit float64) *PhysicsJointPin {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
-	return x
+// WithUpperAngleLimit sets the largest angle allowed for the pin joint, in radians.
+func (pjp *PhysicsJointPin) WithUpperAngleLimit(upperAngleLimit float64) *PhysicsJointPin {
+	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
+	return pjp
 }
 
-// WithFrictionTorque the resistance applied by the pin joint to spinning around the anchor point.
-func (x *PhysicsJointPin) WithFrictionTorque(frictionTorque float64) *PhysicsJointPin {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrictionTorque:"), frictionTorque)
-	return x
+// WithFrictionTorque sets the resistance applied by the pin joint to spinning around the anchor point.
+func (pjp *PhysicsJointPin) WithFrictionTorque(frictionTorque float64) *PhysicsJointPin {
+	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setFrictionTorque:"), frictionTorque)
+	return pjp
 }
 
-// WithRotationSpeed the speed, in radians per second, at which the physics bodies are driven around the pin joint.
-func (x *PhysicsJointPin) WithRotationSpeed(rotationSpeed float64) *PhysicsJointPin {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationSpeed:"), rotationSpeed)
-	return x
+// WithRotationSpeed sets the speed, in radians per second, at which the physics bodies are driven around the pin joint.
+func (pjp *PhysicsJointPin) WithRotationSpeed(rotationSpeed float64) *PhysicsJointPin {
+	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setRotationSpeed:"), rotationSpeed)
+	return pjp
 }
 
-// WithBodyA the first body connected by the joint.
-func (x *PhysicsJointPin) WithBodyA(bodyA *PhysicsBody) *PhysicsJointPin {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
-	return x
+// WithBodyA sets the first body connected by the joint.
+func (pjp *PhysicsJointPin) WithBodyA(bodyA *PhysicsBody) *PhysicsJointPin {
+	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
+	return pjp
 }
 
-// WithBodyB the second body connected by the joint.
-func (x *PhysicsJointPin) WithBodyB(bodyB *PhysicsBody) *PhysicsJointPin {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
-	return x
+// WithBodyB sets the second body connected by the joint.
+func (pjp *PhysicsJointPin) WithBodyB(bodyB *PhysicsBody) *PhysicsJointPin {
+	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
+	return pjp
 }
 
 // ShouldEnableLimits wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) ShouldEnableLimits() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldEnableLimits"))
+func (pjp *PhysicsJointPin) ShouldEnableLimits() bool {
+	_r := objc.Send[bool](objref.IDOf(pjp), objc.RegisterName("shouldEnableLimits"))
 	return _r
-}
-
-// SetShouldEnableLimits wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) SetShouldEnableLimits(shouldEnableLimits bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
 }
 
 // LowerAngleLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) LowerAngleLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerAngleLimit"))
+func (pjp *PhysicsJointPin) LowerAngleLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("lowerAngleLimit"))
 	return _r
-}
-
-// SetLowerAngleLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) SetLowerAngleLimit(lowerAngleLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
 }
 
 // UpperAngleLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) UpperAngleLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperAngleLimit"))
+func (pjp *PhysicsJointPin) UpperAngleLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("upperAngleLimit"))
 	return _r
-}
-
-// SetUpperAngleLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) SetUpperAngleLimit(upperAngleLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
 }
 
 // FrictionTorque wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) FrictionTorque() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frictionTorque"))
+func (pjp *PhysicsJointPin) FrictionTorque() float64 {
+	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("frictionTorque"))
 	return _r
-}
-
-// SetFrictionTorque wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) SetFrictionTorque(frictionTorque float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrictionTorque:"), frictionTorque)
 }
 
 // RotationSpeed wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) RotationSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rotationSpeed"))
+func (pjp *PhysicsJointPin) RotationSpeed() float64 {
+	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("rotationSpeed"))
 	return _r
 }
-
-// SetRotationSpeed wraps the corresponding Objective-C method.
-func (x *PhysicsJointPin) SetRotationSpeed(rotationSpeed float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationSpeed:"), rotationSpeed)
-}
-
-// PhysicsJointPinable is the interface implemented by [PhysicsJointPin], for mocking and DI.
-type PhysicsJointPinable interface {
-	obj.Object
-	WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointPin
-	WithLowerAngleLimit(lowerAngleLimit float64) *PhysicsJointPin
-	WithUpperAngleLimit(upperAngleLimit float64) *PhysicsJointPin
-	WithFrictionTorque(frictionTorque float64) *PhysicsJointPin
-	WithRotationSpeed(rotationSpeed float64) *PhysicsJointPin
-	WithBodyA(bodyA *PhysicsBody) *PhysicsJointPin
-	WithBodyB(bodyB *PhysicsBody) *PhysicsJointPin
-	ShouldEnableLimits() bool
-	SetShouldEnableLimits(shouldEnableLimits bool)
-	LowerAngleLimit() float64
-	SetLowerAngleLimit(lowerAngleLimit float64)
-	UpperAngleLimit() float64
-	SetUpperAngleLimit(upperAngleLimit float64)
-	FrictionTorque() float64
-	SetFrictionTorque(frictionTorque float64)
-	RotationSpeed() float64
-	SetRotationSpeed(rotationSpeed float64)
-}
-
-var _ PhysicsJointPinable = (*PhysicsJointPin)(nil)
 
 var _ PhysicsJointProvider = (*PhysicsJointPin)(nil)

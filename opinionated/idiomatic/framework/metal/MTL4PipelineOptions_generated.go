@@ -46,24 +46,24 @@ func mTL4PipelineOptionsAdopt(id objc.ID) *MTL4PipelineOptions {
 }
 
 // Description returns the object's -description text.
-func (x *MTL4PipelineOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpo *MTL4PipelineOptions) Description() string {
+	return rt.Description(objref.IDOf(mpo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4PipelineOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpo *MTL4PipelineOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4PipelineOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpo *MTL4PipelineOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4PipelineOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpo *MTL4PipelineOptions) String() string {
+	return rt.Description(objref.IDOf(mpo))
 }
 
 // NewMTL4PipelineOptions creates a new MTL4PipelineOptions.
@@ -72,49 +72,26 @@ func NewMTL4PipelineOptions() *MTL4PipelineOptions {
 	return mTL4PipelineOptionsAdopt(_id)
 }
 
-// WithShaderValidation controls whether to enable or disable Metal Shader Validation for the pipeline.
-func (x *MTL4PipelineOptions) WithShaderValidation(shaderValidation ShaderValidation) *MTL4PipelineOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
-	return x
+// WithShaderValidation sets controls whether to enable or disable Metal Shader Validation for the pipeline.
+func (mpo *MTL4PipelineOptions) WithShaderValidation(shaderValidation ShaderValidation) *MTL4PipelineOptions {
+	objc.Send[objc.ID](objref.IDOf(mpo), objc.RegisterName("setShaderValidation:"), shaderValidation)
+	return mpo
 }
 
-// WithShaderReflection controls whether to include Metal shader reflection in this pipeline.
-func (x *MTL4PipelineOptions) WithShaderReflection(shaderReflection MTL4ShaderReflection) *MTL4PipelineOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderReflection:"), shaderReflection)
-	return x
+// WithShaderReflection sets controls whether to include Metal shader reflection in this pipeline.
+func (mpo *MTL4PipelineOptions) WithShaderReflection(shaderReflection MTL4ShaderReflection) *MTL4PipelineOptions {
+	objc.Send[objc.ID](objref.IDOf(mpo), objc.RegisterName("setShaderReflection:"), shaderReflection)
+	return mpo
 }
 
-// ShaderValidation controls whether to enable or disable Metal Shader Validation for the pipeline.
-func (x *MTL4PipelineOptions) ShaderValidation() ShaderValidation {
-	_r := objc.Send[ShaderValidation](objref.IDOf(x), objc.RegisterName("shaderValidation"))
+// ShaderValidation returns controls whether to enable or disable Metal Shader Validation for the pipeline.
+func (mpo *MTL4PipelineOptions) ShaderValidation() ShaderValidation {
+	_r := objc.Send[ShaderValidation](objref.IDOf(mpo), objc.RegisterName("shaderValidation"))
 	return _r
 }
 
-// SetShaderValidation wraps the corresponding Objective-C method.
-func (x *MTL4PipelineOptions) SetShaderValidation(shaderValidation ShaderValidation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
-}
-
-// ShaderReflection controls whether to include Metal shader reflection in this pipeline.
-func (x *MTL4PipelineOptions) ShaderReflection() MTL4ShaderReflection {
-	_r := objc.Send[MTL4ShaderReflection](objref.IDOf(x), objc.RegisterName("shaderReflection"))
+// ShaderReflection returns controls whether to include Metal shader reflection in this pipeline.
+func (mpo *MTL4PipelineOptions) ShaderReflection() MTL4ShaderReflection {
+	_r := objc.Send[MTL4ShaderReflection](objref.IDOf(mpo), objc.RegisterName("shaderReflection"))
 	return _r
 }
-
-// SetShaderReflection wraps the corresponding Objective-C method.
-func (x *MTL4PipelineOptions) SetShaderReflection(shaderReflection MTL4ShaderReflection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderReflection:"), shaderReflection)
-}
-
-// MTL4PipelineOptionsable is the interface implemented by [MTL4PipelineOptions], for mocking and DI.
-type MTL4PipelineOptionsable interface {
-	obj.Object
-	WithShaderValidation(shaderValidation ShaderValidation) *MTL4PipelineOptions
-	WithShaderReflection(shaderReflection MTL4ShaderReflection) *MTL4PipelineOptions
-	ShaderValidation() ShaderValidation
-	SetShaderValidation(shaderValidation ShaderValidation)
-	ShaderReflection() MTL4ShaderReflection
-	SetShaderReflection(shaderReflection MTL4ShaderReflection)
-}
-
-var _ MTL4PipelineOptionsable = (*MTL4PipelineOptions)(nil)

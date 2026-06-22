@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,39 +50,28 @@ func NewDOMRect() *DOMRect {
 }
 
 // Top wraps the corresponding Objective-C method.
-func (x *DOMRect) Top() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("top"))
+func (dr *DOMRect) Top() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("top"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Right wraps the corresponding Objective-C method.
-func (x *DOMRect) Right() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("right"))
+func (dr *DOMRect) Right() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("right"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Bottom wraps the corresponding Objective-C method.
-func (x *DOMRect) Bottom() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottom"))
+func (dr *DOMRect) Bottom() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("bottom"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Left wraps the corresponding Objective-C method.
-func (x *DOMRect) Left() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("left"))
+func (dr *DOMRect) Left() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("left"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
-
-// DOMRectable is the interface implemented by [DOMRect], for mocking and DI.
-type DOMRectable interface {
-	obj.Object
-	Top() *DOMCSSPrimitiveValue
-	Right() *DOMCSSPrimitiveValue
-	Bottom() *DOMCSSPrimitiveValue
-	Left() *DOMCSSPrimitiveValue
-}
-
-var _ DOMRectable = (*DOMRect)(nil)
 
 var _ DOMObjectProvider = (*DOMRect)(nil)
 

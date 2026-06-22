@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewGraphDevice() *GraphDevice {
 	return graphDeviceAdopt(_id)
 }
 
-// Type device of the MPSGraphDevice.
-func (x *GraphDevice) Type() GraphDeviceType {
-	_r := objc.Send[GraphDeviceType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns device of the MPSGraphDevice.
+func (gd *GraphDevice) Type() GraphDeviceType {
+	_r := objc.Send[GraphDeviceType](objref.IDOf(gd), objc.RegisterName("type"))
 	return _r
 }
-
-// GraphDeviceable is the interface implemented by [GraphDevice], for mocking and DI.
-type GraphDeviceable interface {
-	obj.Object
-	Type() GraphDeviceType
-}
-
-var _ GraphDeviceable = (*GraphDevice)(nil)
 
 var _ GraphObjectProvider = (*GraphDevice)(nil)

@@ -44,24 +44,24 @@ func mTRWindowCoveringClusterGoToTiltPercentageParamsAdopt(id objc.ID) *MTRWindo
 }
 
 // Description returns the object's -description text.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) Description() string {
+	return rt.Description(objref.IDOf(mwccgttpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwccgttpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwccgttpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) String() string {
+	return rt.Description(objref.IDOf(mwccgttpp))
 }
 
 // NewMTRWindowCoveringClusterGoToTiltPercentageParams creates a new MTRWindowCoveringClusterGoToTiltPercentageParams.
@@ -71,68 +71,37 @@ func NewMTRWindowCoveringClusterGoToTiltPercentageParams() *MTRWindowCoveringClu
 }
 
 // WithTiltPercent100thsValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) WithTiltPercent100thsValue(tiltPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTiltPercent100thsValue:"), objref.IDOf(tiltPercent100thsValue))
-	return x
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithTiltPercent100thsValue(tiltPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
+	objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("setTiltPercent100thsValue:"), objref.IDOf(tiltPercent100thsValue))
+	return mwccgttpp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
+	objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mwccgttpp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
+	objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mwccgttpp
 }
 
 // TiltPercent100thsValue wraps the corresponding Objective-C method.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) TiltPercent100thsValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tiltPercent100thsValue"))
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) TiltPercent100thsValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("tiltPercent100thsValue"))
 	return obj.Wrap(_r)
 }
 
-// SetTiltPercent100thsValue wraps the corresponding Objective-C method.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) SetTiltPercent100thsValue(tiltPercent100thsValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTiltPercent100thsValue:"), objref.IDOf(tiltPercent100thsValue))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRWindowCoveringClusterGoToTiltPercentageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRWindowCoveringClusterGoToTiltPercentageParamsable is the interface implemented by [MTRWindowCoveringClusterGoToTiltPercentageParams], for mocking and DI.
-type MTRWindowCoveringClusterGoToTiltPercentageParamsable interface {
-	obj.Object
-	WithTiltPercent100thsValue(tiltPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams
-	TiltPercent100thsValue() obj.Object
-	SetTiltPercent100thsValue(tiltPercent100thsValue obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRWindowCoveringClusterGoToTiltPercentageParamsable = (*MTRWindowCoveringClusterGoToTiltPercentageParams)(nil)

@@ -46,24 +46,24 @@ func monitoringEventAdopt(id objc.ID) *MonitoringEvent {
 }
 
 // Description returns the object's -description text.
-func (x *MonitoringEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (me *MonitoringEvent) Description() string {
+	return rt.Description(objref.IDOf(me))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MonitoringEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (me *MonitoringEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(me), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MonitoringEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (me *MonitoringEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(me), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MonitoringEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (me *MonitoringEvent) String() string {
+	return rt.Description(objref.IDOf(me))
 }
 
 // NewMonitoringEvent creates a new MonitoringEvent.
@@ -73,8 +73,8 @@ func NewMonitoringEvent() *MonitoringEvent {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (me *MonitoringEvent) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,100 +82,79 @@ func (x *MonitoringEvent) Identifier() string {
 }
 
 // Refinement wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) Refinement() *Condition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refinement"))
+func (me *MonitoringEvent) Refinement() *Condition {
+	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("refinement"))
 	return ConditionFromID(_r)
 }
 
 // State wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) State() MonitoringState {
-	_r := objc.Send[MonitoringState](objref.IDOf(x), objc.RegisterName("state"))
+func (me *MonitoringEvent) State() MonitoringState {
+	_r := objc.Send[MonitoringState](objref.IDOf(me), objc.RegisterName("state"))
 	return _r
 }
 
 // Date wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+func (me *MonitoringEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
 // AuthorizationDenied wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) AuthorizationDenied() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDenied"))
+func (me *MonitoringEvent) AuthorizationDenied() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationDenied"))
 	return _r
 }
 
 // AuthorizationDeniedGlobally wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) AuthorizationDeniedGlobally() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDeniedGlobally"))
+func (me *MonitoringEvent) AuthorizationDeniedGlobally() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationDeniedGlobally"))
 	return _r
 }
 
 // AuthorizationRestricted wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) AuthorizationRestricted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRestricted"))
+func (me *MonitoringEvent) AuthorizationRestricted() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationRestricted"))
 	return _r
 }
 
 // InsufficientlyInUse wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) InsufficientlyInUse() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("insufficientlyInUse"))
+func (me *MonitoringEvent) InsufficientlyInUse() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("insufficientlyInUse"))
 	return _r
 }
 
 // AccuracyLimited wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) AccuracyLimited() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accuracyLimited"))
+func (me *MonitoringEvent) AccuracyLimited() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("accuracyLimited"))
 	return _r
 }
 
 // ConditionUnsupported wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) ConditionUnsupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conditionUnsupported"))
+func (me *MonitoringEvent) ConditionUnsupported() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("conditionUnsupported"))
 	return _r
 }
 
 // ConditionLimitExceeded wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) ConditionLimitExceeded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conditionLimitExceeded"))
+func (me *MonitoringEvent) ConditionLimitExceeded() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("conditionLimitExceeded"))
 	return _r
 }
 
 // PersistenceUnavailable wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) PersistenceUnavailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("persistenceUnavailable"))
+func (me *MonitoringEvent) PersistenceUnavailable() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("persistenceUnavailable"))
 	return _r
 }
 
 // ServiceSessionRequired wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) ServiceSessionRequired() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("serviceSessionRequired"))
+func (me *MonitoringEvent) ServiceSessionRequired() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("serviceSessionRequired"))
 	return _r
 }
 
 // AuthorizationRequestInProgress wraps the corresponding Objective-C method.
-func (x *MonitoringEvent) AuthorizationRequestInProgress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRequestInProgress"))
+func (me *MonitoringEvent) AuthorizationRequestInProgress() bool {
+	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationRequestInProgress"))
 	return _r
 }
-
-// MonitoringEventable is the interface implemented by [MonitoringEvent], for mocking and DI.
-type MonitoringEventable interface {
-	obj.Object
-	Identifier() string
-	Refinement() *Condition
-	State() MonitoringState
-	Date() obj.Object
-	AuthorizationDenied() bool
-	AuthorizationDeniedGlobally() bool
-	AuthorizationRestricted() bool
-	InsufficientlyInUse() bool
-	AccuracyLimited() bool
-	ConditionUnsupported() bool
-	ConditionLimitExceeded() bool
-	PersistenceUnavailable() bool
-	ServiceSessionRequired() bool
-	AuthorizationRequestInProgress() bool
-}
-
-var _ MonitoringEventable = (*MonitoringEvent)(nil)

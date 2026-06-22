@@ -48,53 +48,44 @@ func objectTypeAdopt(id objc.ID) *ObjectType {
 }
 
 // Description returns the object's -description text.
-func (x *ObjectType) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ot *ObjectType) Description() string {
+	return rt.Description(objref.IDOf(ot))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ot *ObjectType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ot), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ot *ObjectType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ot), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ObjectType) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ot *ObjectType) String() string {
+	return rt.Description(objref.IDOf(ot))
 }
 
-// RequiresPerObjectAuthorization returns a Boolean that indicates whether the data type requires per-object authorization.
-func (x *ObjectType) RequiresPerObjectAuthorization() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresPerObjectAuthorization"))
+// RequiresPerObjectAuthorization reports whether returns a Boolean that indicates whether the data type requires per-object authorization.
+func (ot *ObjectType) RequiresPerObjectAuthorization() bool {
+	_r := objc.Send[bool](objref.IDOf(ot), objc.RegisterName("requiresPerObjectAuthorization"))
 	return _r
 }
 
-// Identifier a unique string identifying a type of health object. See HKTypeIdentifiers.h for possible values.
-func (x *ObjectType) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a unique string identifying a type of health object. See HKTypeIdentifiers.h for possible values.
+func (ot *ObjectType) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ObjectTypeable is the interface implemented by [ObjectType], for mocking and DI.
-type ObjectTypeable interface {
-	obj.Object
-	RequiresPerObjectAuthorization() bool
-	Identifier() string
-}
-
-var _ ObjectTypeable = (*ObjectType)(nil)
-
 // isObjectType marks ObjectType — and, by embedding promotion, its
 // subclasses — as a member of the ObjectType hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ObjectType) isObjectType() {}
+func (ot *ObjectType) isObjectType() {}
 
 var _ ObjectTypeProvider = (*ObjectType)(nil)

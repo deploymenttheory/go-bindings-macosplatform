@@ -46,24 +46,24 @@ func colorSpaceAdopt(id objc.ID) *ColorSpace {
 }
 
 // Description returns the object's -description text.
-func (x *ColorSpace) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ColorSpace) Description() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ColorSpace) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cs *ColorSpace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ColorSpace) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cs *ColorSpace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ColorSpace) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ColorSpace) String() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // NewColorSpaceWithICCProfileData initializes and returns a color space object from the specified ICC profile.
@@ -81,46 +81,34 @@ func NewColorSpaceWithCGColorSpace(cgColorSpace obj.Object) *ColorSpace {
 }
 
 // ICCProfileData wraps the corresponding Objective-C method.
-func (x *ColorSpace) ICCProfileData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ICCProfileData"))
+func (cs *ColorSpace) ICCProfileData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("ICCProfileData"))
 	return obj.Wrap(_r)
 }
 
 // CGColorSpace wraps the corresponding Objective-C method.
-func (x *ColorSpace) CGColorSpace() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGColorSpace"))
+func (cs *ColorSpace) CGColorSpace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("CGColorSpace"))
 	return obj.Wrap(_r)
 }
 
 // NumberOfColorComponents wraps the corresponding Objective-C method.
-func (x *ColorSpace) NumberOfColorComponents() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColorComponents"))
+func (cs *ColorSpace) NumberOfColorComponents() int {
+	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("numberOfColorComponents"))
 	return _r
 }
 
 // ColorSpaceModel wraps the corresponding Objective-C method.
-func (x *ColorSpace) ColorSpaceModel() ColorSpaceModel {
-	_r := objc.Send[ColorSpaceModel](objref.IDOf(x), objc.RegisterName("colorSpaceModel"))
+func (cs *ColorSpace) ColorSpaceModel() ColorSpaceModel {
+	_r := objc.Send[ColorSpaceModel](objref.IDOf(cs), objc.RegisterName("colorSpaceModel"))
 	return _r
 }
 
 // LocalizedName wraps the corresponding Objective-C method.
-func (x *ColorSpace) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+func (cs *ColorSpace) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ColorSpaceable is the interface implemented by [ColorSpace], for mocking and DI.
-type ColorSpaceable interface {
-	obj.Object
-	ICCProfileData() obj.Object
-	CGColorSpace() obj.Object
-	NumberOfColorComponents() int
-	ColorSpaceModel() ColorSpaceModel
-	LocalizedName() string
-}
-
-var _ ColorSpaceable = (*ColorSpace)(nil)

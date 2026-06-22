@@ -17,6 +17,7 @@ import (
 type classHeaderView struct {
 	DocComment string
 	GoTypeName string
+	RecvVar    string // receiver variable for the promoted root methods, e.g. "vm"
 	ClassName  string // Objective-C class name, for the doc line
 	AdoptName  string // unexported +1-adopt helper, e.g. "virtualMachineAdopt"
 	// BaseType is the same-framework wrapper type this class embeds, promoting
@@ -31,6 +32,8 @@ type classHeaderView struct {
 // classSealView is the template data for class_seal.tmpl.
 type classSealView struct {
 	GoTypeName string
+	// RecvVar is the receiver variable for the sealing marker method, e.g. "bl".
+	RecvVar string
 	// MarkerName is the sealing method this class defines when it is itself a
 	// provider base, or "" when it is not.
 	MarkerName string
@@ -192,6 +195,23 @@ func emitClassFile(
 		func(e withEntry) bool { return objMethodNames[e.goName] },
 	)
 
+	// Drop the plain void Set* accessor for any property already exposed through a
+	// fluent With* setter: the two send the same Objective-C setter selector, so
+	// the void form is redundant surface. Matching is by selector (exact), not by
+	// name. The chainable With* form is kept as the single mutator.
+	if len(withMethods) > 0 {
+		coveredSetters := make(map[string]bool, len(withMethods))
+		for _, we := range withMethods {
+			if we.setterSelector != "" {
+				coveredSetters[we.setterSelector] = true
+			}
+		}
+		methods = slices.DeleteFunc(
+			methods,
+			func(e methodEntry) bool { return coveredSetters[e.selector] },
+		)
+	}
+
 	// Drop anything a hand-authored file in this package already declares, so the
 	// human's version wins (no duplicate-method compile error).
 	if len(handFuncs) > 0 {
@@ -263,6 +283,7 @@ func emitClassFile(
 	renderTemplate(&body, "class_header", classHeaderView{
 		DocComment: buildClassDoc(goTypeName, className, isAbstract, subLinks, baseType, cls.Doc),
 		GoTypeName: goTypeName,
+		RecvVar:    receiverName(goTypeName),
 		ClassName:  className,
 		AdoptName:  adoptHelperName(goTypeName),
 		BaseType:   baseType,
@@ -307,16 +328,12 @@ func emitClassFile(
 		genericInstantiation(len(cls.GenericParams)),
 	)
 
-	// Mockable interface: lists Unwrap plus every generated exported method so
-	// callers can accept the interface and supply test doubles. The compile-time
-	// assertion guarantees the wrapper keeps satisfying it.
-	writeMockInterface(&body, goTypeName, withMethods, methods)
-
 	// Sealing: a class that is itself a provider base defines the unexported
 	// marker method; every class also gets a compile-time assertion that it
 	// satisfies each provider interface its embed chain grants it (E11).
 	seal := classSealView{
 		GoTypeName:     goTypeName,
+		RecvVar:        receiverName(goTypeName),
 		ProviderIfaces: classProviderIfaces(cls, goTypeName, fc, prefix, abstractBases),
 	}
 	if _, isBase := abstractBases[className]; isBase {
@@ -330,6 +347,11 @@ func emitClassFile(
 	}
 
 	imports := classFileImports(ctors, withMethods, methods, providerImports, embedsRoot)
+	if className == "NSMutableDictionary" {
+		// The dictionary augment helpers (Set/SetString/Get) use obj, which a
+		// non-root class would not otherwise import.
+		imports["obj"] = objImportPath
+	}
 
 	// ── Write output ───────────────────────────────────────────────────────────
 
@@ -361,12 +383,14 @@ func classFileImports(
 		"objref": objrefImportPath,
 		"objc":   objcImportPath,
 		"purego": pureobjcImportPath,
-		// Every class emits a <Type>able mock interface that embeds obj.Object.
-		"obj": objImportPath,
 	}
 	if embedsRoot {
-		// Only a root defines Description/IsEqual/IsKind/String, which use rt.
+		// Only a root defines Description/IsEqual/IsKind/String, which use rt; its
+		// IsEqual also names obj.Object. A subclass promotes that surface from its
+		// embedded base and names obj only when one of its own constructs does
+		// (recorded in that construct's extraImports below).
 		imports["rt"] = rtImportPath
+		imports["obj"] = objImportPath
 	}
 	for _, c := range ctors {
 		maps.Copy(imports, c.extraImports)

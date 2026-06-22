@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewDetectDocumentSegmentationRequest() *DetectDocumentSegmentationRequest {
 	return detectDocumentSegmentationRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectDocumentSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (ddsr *DetectDocumentSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(ddsr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return ddsr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectDocumentSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (ddsr *DetectDocumentSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(ddsr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return ddsr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectDocumentSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (ddsr *DetectDocumentSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(ddsr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return ddsr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectDocumentSegmentationRequest) WithRevision(revision int) *DetectDocumentSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (ddsr *DetectDocumentSegmentationRequest) WithRevision(revision int) *DetectDocumentSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(ddsr), objc.RegisterName("setRevision:"), revision)
+	return ddsr
 }
-
-// DetectDocumentSegmentationRequestable is the interface implemented by [DetectDocumentSegmentationRequest], for mocking and DI.
-type DetectDocumentSegmentationRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest
-	WithRevision(revision int) *DetectDocumentSegmentationRequest
-}
-
-var _ DetectDocumentSegmentationRequestable = (*DetectDocumentSegmentationRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectDocumentSegmentationRequest)(nil)
 

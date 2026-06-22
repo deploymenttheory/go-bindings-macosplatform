@@ -6,6 +6,7 @@ package quicklookthumbnailing
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func thumbnailGeneratorAdopt(id objc.ID) *ThumbnailGenerator {
 }
 
 // Description returns the object's -description text.
-func (x *ThumbnailGenerator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tg *ThumbnailGenerator) Description() string {
+	return rt.Description(objref.IDOf(tg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ThumbnailGenerator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tg *ThumbnailGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ThumbnailGenerator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tg *ThumbnailGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ThumbnailGenerator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tg *ThumbnailGenerator) String() string {
+	return rt.Description(objref.IDOf(tg))
 }
 
 // NewThumbnailGenerator creates a new ThumbnailGenerator.
@@ -77,7 +78,7 @@ func NewThumbnailGenerator() *ThumbnailGenerator {
 // GenerateBestRepresentationForRequest generates the best possible thumbnail representation for a file and calls a handler upon completion.
 //
 // GenerateBestRepresentationForRequest blocks until the operation completes or ctx is cancelled.
-func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Context, request *ThumbnailGenerationRequest) (result *ThumbnailRepresentation, err error) {
+func (tg *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Context, request *ThumbnailGenerationRequest) (result *ThumbnailRepresentation, err error) {
 	type _result struct {
 		val *ThumbnailRepresentation
 		err error
@@ -89,7 +90,7 @@ func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Co
 		_o.val = ThumbnailRepresentationFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateBestRepresentationForRequest:completionHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("generateBestRepresentationForRequest:completionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -100,21 +101,21 @@ func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Co
 }
 
 // CancelRequest cancels the generation of a thumbnail for a given request.
-func (x *ThumbnailGenerator) CancelRequest(request *ThumbnailGenerationRequest) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelRequest:"), objref.IDOf(request))
+func (tg *ThumbnailGenerator) CancelRequest(request *ThumbnailGenerationRequest) {
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("cancelRequest:"), objref.IDOf(request))
 }
 
 // SaveBestRepresentationForRequestToFileAtURLAsContentType saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit.
 //
 // SaveBestRepresentationForRequestToFileAtURLAsContentType blocks until the operation completes or ctx is cancelled.
-func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType obj.Object) error {
+func (tg *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveBestRepresentationForRequest:toFileAtURL:asContentType:completionHandler:"), objref.IDOf(request), rt.FileURL(fileURL), objref.IDOf(contentType), _block)
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("saveBestRepresentationForRequest:toFileAtURL:asContentType:completionHandler:"), objref.IDOf(request), rt.FileURL(fileURL), objref.IDOf(contentType), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -126,14 +127,14 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsConten
 // SaveBestRepresentationForRequestToFileAtURLWithContentType saves the best representation of thumbnail for a specific request to the specified URL.
 //
 // SaveBestRepresentationForRequestToFileAtURLWithContentType blocks until the operation completes or ctx is cancelled.
-func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType string) error {
+func (tg *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveBestRepresentationForRequest:toFileAtURL:withContentType:completionHandler:"), objref.IDOf(request), rt.FileURL(fileURL), purego.NSString(contentType), _block)
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("saveBestRepresentationForRequest:toFileAtURL:withContentType:completionHandler:"), objref.IDOf(request), rt.FileURL(fileURL), purego.NSString(contentType), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -141,14 +142,3 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithCont
 		return ctx.Err()
 	}
 }
-
-// ThumbnailGeneratorable is the interface implemented by [ThumbnailGenerator], for mocking and DI.
-type ThumbnailGeneratorable interface {
-	obj.Object
-	GenerateBestRepresentationForRequest(ctx context.Context, request *ThumbnailGenerationRequest) (*ThumbnailRepresentation, error)
-	CancelRequest(request *ThumbnailGenerationRequest)
-	SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType obj.Object) error
-	SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType string) error
-}
-
-var _ ThumbnailGeneratorable = (*ThumbnailGenerator)(nil)

@@ -46,24 +46,24 @@ func coreMLModelAdopt(id objc.ID) *CoreMLModel {
 }
 
 // Description returns the object's -description text.
-func (x *CoreMLModel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cmm *CoreMLModel) Description() string {
+	return rt.Description(objref.IDOf(cmm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CoreMLModel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cmm *CoreMLModel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cmm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CoreMLModel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cmm *CoreMLModel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cmm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CoreMLModel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cmm *CoreMLModel) String() string {
+	return rt.Description(objref.IDOf(cmm))
 }
 
 // NewCoreMLModel creates a new CoreMLModel.
@@ -72,32 +72,17 @@ func NewCoreMLModel() *CoreMLModel {
 	return coreMLModelAdopt(_id)
 }
 
-// WithInputImageFeatureName the name of the feature value that Vision sets from the request handler.
-func (x *CoreMLModel) WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImageFeatureName:"), purego.NSString(inputImageFeatureName))
-	return x
+// WithInputImageFeatureName sets the name of the feature value that Vision sets from the request handler.
+func (cmm *CoreMLModel) WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel {
+	objc.Send[objc.ID](objref.IDOf(cmm), objc.RegisterName("setInputImageFeatureName:"), purego.NSString(inputImageFeatureName))
+	return cmm
 }
 
-// InputImageFeatureName the name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
-func (x *CoreMLModel) InputImageFeatureName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImageFeatureName"))
+// InputImageFeatureName returns the name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
+func (cmm *CoreMLModel) InputImageFeatureName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cmm), objc.RegisterName("inputImageFeatureName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetInputImageFeatureName wraps the corresponding Objective-C method.
-func (x *CoreMLModel) SetInputImageFeatureName(inputImageFeatureName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImageFeatureName:"), purego.NSString(inputImageFeatureName))
-}
-
-// CoreMLModelable is the interface implemented by [CoreMLModel], for mocking and DI.
-type CoreMLModelable interface {
-	obj.Object
-	WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel
-	InputImageFeatureName() string
-	SetInputImageFeatureName(inputImageFeatureName string)
-}
-
-var _ CoreMLModelable = (*CoreMLModel)(nil)

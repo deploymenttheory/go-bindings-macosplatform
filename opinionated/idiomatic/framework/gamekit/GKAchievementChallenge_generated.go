@@ -7,7 +7,6 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewAchievementChallenge() *AchievementChallenge {
 }
 
 // Achievement wraps the corresponding Objective-C method.
-func (x *AchievementChallenge) Achievement() *Achievement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("achievement"))
+func (ac *AchievementChallenge) Achievement() *Achievement {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("achievement"))
 	return AchievementFromID(_r)
 }
-
-// AchievementChallengeable is the interface implemented by [AchievementChallenge], for mocking and DI.
-type AchievementChallengeable interface {
-	obj.Object
-	Achievement() *Achievement
-}
-
-var _ AchievementChallengeable = (*AchievementChallenge)(nil)
 
 var _ ChallengeProvider = (*AchievementChallenge)(nil)

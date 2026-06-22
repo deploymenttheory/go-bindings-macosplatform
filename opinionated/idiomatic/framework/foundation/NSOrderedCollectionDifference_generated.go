@@ -46,24 +46,24 @@ func orderedCollectionDifferenceAdopt(id objc.ID) *OrderedCollectionDifference {
 }
 
 // Description returns the object's -description text.
-func (x *OrderedCollectionDifference) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ocd *OrderedCollectionDifference) Description() string {
+	return rt.Description(objref.IDOf(ocd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OrderedCollectionDifference) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ocd *OrderedCollectionDifference) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ocd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OrderedCollectionDifference) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ocd *OrderedCollectionDifference) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ocd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OrderedCollectionDifference) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ocd *OrderedCollectionDifference) String() string {
+	return rt.Description(objref.IDOf(ocd))
 }
 
 // NewOrderedCollectionDifferenceWithChanges creates an ordered collection difference using an array of ordered collection changes.
@@ -88,47 +88,35 @@ func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexes
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ocd *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference {
+	objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ocd
 }
 
-// InverseDifference calculate the difference between two objects in the reverse direction of comparison.
-func (x *OrderedCollectionDifference) InverseDifference() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseDifference"))
+// InverseDifference returns calculate the difference between two objects in the reverse direction of comparison.
+func (ocd *OrderedCollectionDifference) InverseDifference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("inverseDifference"))
 	return obj.Wrap(_r)
 }
 
 // Insertions wraps the corresponding Objective-C method.
 //
 // Insertions returns the collection as a Go slice.
-func (x *OrderedCollectionDifference) Insertions() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertions"))
+func (ocd *OrderedCollectionDifference) Insertions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("insertions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Removals wraps the corresponding Objective-C method.
 //
 // Removals returns the collection as a Go slice.
-func (x *OrderedCollectionDifference) Removals() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removals"))
+func (ocd *OrderedCollectionDifference) Removals() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("removals"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HasChanges wraps the corresponding Objective-C method.
-func (x *OrderedCollectionDifference) HasChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
+func (ocd *OrderedCollectionDifference) HasChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("hasChanges"))
 	return _r
 }
-
-// OrderedCollectionDifferenceable is the interface implemented by [OrderedCollectionDifference], for mocking and DI.
-type OrderedCollectionDifferenceable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference
-	InverseDifference() obj.Object
-	Insertions() []obj.Object
-	Removals() []obj.Object
-	HasChanges() bool
-}
-
-var _ OrderedCollectionDifferenceable = (*OrderedCollectionDifference)(nil)

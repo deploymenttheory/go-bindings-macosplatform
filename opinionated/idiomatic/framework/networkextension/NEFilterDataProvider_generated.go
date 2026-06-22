@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -55,46 +56,46 @@ func NewNEFilterDataProvider() *NEFilterDataProvider {
 }
 
 // HandleNewFlow make a filtering decision for a newly-created flow of network content.
-func (x *NEFilterDataProvider) HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
+func (nfdp *NEFilterDataProvider) HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
 // HandleInboundDataFromFlowReadBytesStartOffsetReadBytes make a filtering decision about a chunk of inbound data.
-func (x *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
+func (nfdp *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
 	return NEFilterDataVerdictFromID(_r)
 }
 
 // HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes make a filtering decision about a chunk of outbound data.
-func (x *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleOutboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
+func (nfdp *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleOutboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
 	return NEFilterDataVerdictFromID(_r)
 }
 
 // HandleInboundDataCompleteForFlow make a filtering decision after seeing all of the inbound data for a flow.
-func (x *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleInboundDataCompleteForFlow:"), objref.IDOf(flow))
+func (nfdp *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleInboundDataCompleteForFlow:"), objref.IDOf(flow))
 	return NEFilterDataVerdictFromID(_r)
 }
 
 // HandleOutboundDataCompleteForFlow make a filtering decision after seeing all of the outbound data for a flow.
-func (x *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleOutboundDataCompleteForFlow:"), objref.IDOf(flow))
+func (nfdp *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleOutboundDataCompleteForFlow:"), objref.IDOf(flow))
 	return NEFilterDataVerdictFromID(_r)
 }
 
 // ApplySettings applies a set of filtering rules associated with the provider and changes the default filtering action.
 //
 // ApplySettings blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *NEFilterSettings) error {
+func (nfdp *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *NEFilterSettings) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySettings:completionHandler:"), objref.IDOf(settings), _block)
+	objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("applySettings:completionHandler:"), objref.IDOf(settings), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -104,29 +105,14 @@ func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *NEFi
 }
 
 // ResumeFlowWithVerdict resumes a previously-paused flow.
-func (x *NEFilterDataProvider) ResumeFlowWithVerdict(flow *NEFilterFlow, verdict *NEFilterVerdict) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeFlow:withVerdict:"), objref.IDOf(flow), objref.IDOf(verdict))
+func (nfdp *NEFilterDataProvider) ResumeFlowWithVerdict(flow *NEFilterFlow, verdict *NEFilterVerdict) {
+	objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("resumeFlow:withVerdict:"), objref.IDOf(flow), objref.IDOf(verdict))
 }
 
 // UpdateFlowUsingVerdictForDirection updates the verdict for a flow outside the context of any filter data provider callback.
-func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFlow:usingVerdict:forDirection:"), objref.IDOf(flow), objref.IDOf(verdict), direction)
+func (nfdp *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection) {
+	objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("updateFlow:usingVerdict:forDirection:"), objref.IDOf(flow), objref.IDOf(verdict), direction)
 }
-
-// NEFilterDataProviderable is the interface implemented by [NEFilterDataProvider], for mocking and DI.
-type NEFilterDataProviderable interface {
-	obj.Object
-	HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict
-	HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict
-	HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict
-	HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict
-	HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict
-	ApplySettings(ctx context.Context, settings *NEFilterSettings) error
-	ResumeFlowWithVerdict(flow *NEFilterFlow, verdict *NEFilterVerdict)
-	UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection)
-}
-
-var _ NEFilterDataProviderable = (*NEFilterDataProvider)(nil)
 
 var _ NEFilterProviderProvider = (*NEFilterDataProvider)(nil)
 

@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DetectAnimalBodyPoseRequest is an idiomatic wrapper over the Objective-C class VNDetectAnimalBodyPoseRequest.
@@ -55,66 +56,53 @@ func NewDetectAnimalBodyPoseRequest() *DetectAnimalBodyPoseRequest {
 	return detectAnimalBodyPoseRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectAnimalBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dabpr *DetectAnimalBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dabpr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectAnimalBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dabpr *DetectAnimalBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dabpr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectAnimalBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dabpr *DetectAnimalBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dabpr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectAnimalBodyPoseRequest) WithRevision(revision int) *DetectAnimalBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dabpr *DetectAnimalBodyPoseRequest) WithRevision(revision int) *DetectAnimalBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("setRevision:"), revision)
+	return dabpr
 }
 
-// SupportedJointNames retrieves the joint names the request supports.
+// SupportedJointNames returns retrieves the joint names the request supports.
 //
 // SupportedJointNames returns the collection as a Go slice.
-func (x *DetectAnimalBodyPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
+func (dabpr *DetectAnimalBodyPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// SupportedJointsGroupNames retrieves the joint group names the request supports.
+// SupportedJointsGroupNames returns retrieves the joint group names the request supports.
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
-func (x *DetectAnimalBodyPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
+func (dabpr *DetectAnimalBodyPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
-
-// DetectAnimalBodyPoseRequestable is the interface implemented by [DetectAnimalBodyPoseRequest], for mocking and DI.
-type DetectAnimalBodyPoseRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest
-	WithRevision(revision int) *DetectAnimalBodyPoseRequest
-	SupportedJointNames() ([]obj.Object, error)
-	SupportedJointsGroupNames() ([]obj.Object, error)
-}
-
-var _ DetectAnimalBodyPoseRequestable = (*DetectAnimalBodyPoseRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectAnimalBodyPoseRequest)(nil)
 

@@ -52,38 +52,27 @@ func NewNumberMetaParameter() *NumberMetaParameter {
 	return numberMetaParameterAdopt(_id)
 }
 
-// WithValue a value for the metaparameter.
-func (x *NumberMetaParameter) WithValue(value obj.Object) *NumberMetaParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+// WithValue sets a value for the metaparameter.
+func (nmp *NumberMetaParameter) WithValue(value obj.Object) *NumberMetaParameter {
+	objc.Send[objc.ID](objref.IDOf(nmp), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return nmp
 }
 
 // FadeToValueDuration sets the value gradually over the given amount of time.
-func (x *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeToValue:duration:"), value, duration)
+func (nmp *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
+	objc.Send[objc.ID](objref.IDOf(nmp), objc.RegisterName("fadeToValue:duration:"), value, duration)
 }
 
-// Minimum the minimum value this metaparameter can be set to
-func (x *NumberMetaParameter) Minimum() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimum"))
+// Minimum returns the minimum value this metaparameter can be set to
+func (nmp *NumberMetaParameter) Minimum() float64 {
+	_r := objc.Send[float64](objref.IDOf(nmp), objc.RegisterName("minimum"))
 	return _r
 }
 
-// Maximum the maximum value this metaparameter can be set to
-func (x *NumberMetaParameter) Maximum() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximum"))
+// Maximum returns the maximum value this metaparameter can be set to
+func (nmp *NumberMetaParameter) Maximum() float64 {
+	_r := objc.Send[float64](objref.IDOf(nmp), objc.RegisterName("maximum"))
 	return _r
 }
-
-// NumberMetaParameterable is the interface implemented by [NumberMetaParameter], for mocking and DI.
-type NumberMetaParameterable interface {
-	obj.Object
-	WithValue(value obj.Object) *NumberMetaParameter
-	FadeToValueDuration(value float64, duration float64)
-	Minimum() float64
-	Maximum() float64
-}
-
-var _ NumberMetaParameterable = (*NumberMetaParameter)(nil)
 
 var _ MetaParameterProvider = (*NumberMetaParameter)(nil)

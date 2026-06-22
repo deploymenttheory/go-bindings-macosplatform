@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRClusterDoorLockWithDeviceEndpointQueue(device *MTRDevice, endpoint ui
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedV
 		_o.val = MTRDoorLockClusterGetWeekDayScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedV
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedV
 		_o.val = MTRDoorLockClusterGetYearDayScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getYearDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getYearDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedV
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -125,7 +126,7 @@ func (x *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedV
 		_o.val = MTRDoorLockClusterGetHolidayScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getHolidayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getHolidayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedV
 // GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -150,7 +151,7 @@ func (x *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInterva
 		_o.val = MTRDoorLockClusterGetUserResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUserWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getUserWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInterva
 // SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -175,7 +176,7 @@ func (x *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueI
 		_o.val = MTRDoorLockClusterSetCredentialResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setCredentialWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueI
 // GetCredentialStatusWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetCredentialStatusWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error
@@ -200,7 +201,7 @@ func (x *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpected
 		_o.val = MTRDoorLockClusterGetCredentialStatusResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCredentialStatusWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getCredentialStatusWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -211,489 +212,489 @@ func (x *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpected
 }
 
 // ReadAttributeLockStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeLockStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLockStateWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeLockStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLockStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLockTypeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeLockTypeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLockTypeWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeLockTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLockTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeActuatorEnabledWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeActuatorEnabledWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActuatorEnabledWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeActuatorEnabledWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeActuatorEnabledWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDoorStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeDoorStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDoorStateWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeDoorStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDoorStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDoorOpenEventsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeDoorOpenEventsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDoorOpenEventsWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeDoorOpenEventsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDoorOpenEventsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeDoorOpenEventsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDoorOpenEventsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeDoorClosedEventsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeDoorClosedEventsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDoorClosedEventsWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeDoorClosedEventsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDoorClosedEventsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeDoorClosedEventsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDoorClosedEventsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOpenPeriodWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeOpenPeriodWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOpenPeriodWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeOpenPeriodWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeOpenPeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOpenPeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOpenPeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNumberOfTotalUsersSupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfTotalUsersSupportedWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfTotalUsersSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfPINUsersSupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfPINUsersSupportedWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfPINUsersSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfRFIDUsersSupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfRFIDUsersSupportedWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfRFIDUsersSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfHolidaySchedulesSupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfHolidaySchedulesSupportedWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfHolidaySchedulesSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMaxPINCodeLengthWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeMaxPINCodeLengthWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxPINCodeLengthWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeMaxPINCodeLengthWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMaxPINCodeLengthWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMinPINCodeLengthWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeMinPINCodeLengthWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinPINCodeLengthWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeMinPINCodeLengthWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMinPINCodeLengthWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMaxRFIDCodeLengthWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxRFIDCodeLengthWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMaxRFIDCodeLengthWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMinRFIDCodeLengthWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinRFIDCodeLengthWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMinRFIDCodeLengthWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCredentialRulesSupportWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeCredentialRulesSupportWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCredentialRulesSupportWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeCredentialRulesSupportWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeCredentialRulesSupportWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfCredentialsSupportedPerUserWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfCredentialsSupportedPerUserWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfCredentialsSupportedPerUserWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLanguageWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeLanguageWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLanguageWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeLanguageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLanguageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeLanguageWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLanguageWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLEDSettingsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeLEDSettingsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLEDSettingsWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeLEDSettingsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLEDSettingsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeLEDSettingsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLEDSettingsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAutoRelockTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAutoRelockTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAutoRelockTimeWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAutoRelockTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAutoRelockTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeAutoRelockTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeAutoRelockTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSoundVolumeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeSoundVolumeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoundVolumeWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeSoundVolumeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeSoundVolumeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeSoundVolumeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSoundVolumeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOperatingModeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeOperatingModeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperatingModeWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeOperatingModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeOperatingModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOperatingModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOperatingModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSupportedOperatingModesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeSupportedOperatingModesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedOperatingModesWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeSupportedOperatingModesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeSupportedOperatingModesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDefaultConfigurationRegisterWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultConfigurationRegisterWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDefaultConfigurationRegisterWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeEnableLocalProgrammingWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeEnableLocalProgrammingWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnableLocalProgrammingWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnableLocalProgrammingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnableLocalProgrammingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEnableLocalProgrammingWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnableLocalProgrammingWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnableOneTouchLockingWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeEnableOneTouchLockingWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnableOneTouchLockingWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnableOneTouchLockingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnableOneTouchLockingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEnableOneTouchLockingWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnableOneTouchLockingWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnableInsideStatusLEDWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnableInsideStatusLEDWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnableInsideStatusLEDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEnableInsideStatusLEDWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnableInsideStatusLEDWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnablePrivacyModeButtonWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnablePrivacyModeButtonWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnablePrivacyModeButtonWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLocalProgrammingFeaturesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocalProgrammingFeaturesWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLocalProgrammingFeaturesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeWrongCodeEntryLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWrongCodeEntryLimitWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeWrongCodeEntryLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeWrongCodeEntryLimitWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeWrongCodeEntryLimitWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUserCodeTemporaryDisableTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUserCodeTemporaryDisableTimeWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeUserCodeTemporaryDisableTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSendPINOverTheAirWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeSendPINOverTheAirWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSendPINOverTheAirWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeSendPINOverTheAirWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeSendPINOverTheAirWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeSendPINOverTheAirWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSendPINOverTheAirWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRequirePINforRemoteOperationWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRequirePINforRemoteOperationWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeRequirePINforRemoteOperationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeExpiringUserTimeoutWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeExpiringUserTimeoutWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExpiringUserTimeoutWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeExpiringUserTimeoutWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeExpiringUserTimeoutWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeExpiringUserTimeoutWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeExpiringUserTimeoutWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAliroReaderVerificationKeyWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAliroReaderVerificationKeyWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroReaderVerificationKeyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAliroReaderGroupIdentifierWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAliroReaderGroupIdentifierWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroReaderGroupIdentifierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAliroReaderGroupSubIdentifierWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAliroReaderGroupSubIdentifierWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroReaderGroupSubIdentifierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAliroGroupResolvingKeyWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAliroGroupResolvingKeyWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroGroupResolvingKeyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAliroSupportedBLEUWBProtocolVersionsWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroSupportedBLEUWBProtocolVersionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAliroBLEAdvertisingVersionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAliroBLEAdvertisingVersionWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroBLEAdvertisingVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfAliroEndpointKeysSupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfAliroEndpointKeysSupportedWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfAliroEndpointKeysSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDoorLock) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -705,7 +706,7 @@ func (x *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedV
 		_o.val = MTRDoorLockClusterGetWeekDayScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -718,7 +719,7 @@ func (x *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedV
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -730,7 +731,7 @@ func (x *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedV
 		_o.val = MTRDoorLockClusterGetYearDayScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getYearDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getYearDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -743,7 +744,7 @@ func (x *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedV
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -755,7 +756,7 @@ func (x *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedV
 		_o.val = MTRDoorLockClusterGetHolidayScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getHolidayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getHolidayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -768,7 +769,7 @@ func (x *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedV
 // GetUserWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetUserWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -780,7 +781,7 @@ func (x *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInterva
 		_o.val = MTRDoorLockClusterGetUserResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUserWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getUserWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -793,7 +794,7 @@ func (x *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInterva
 // SetCredentialWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // SetCredentialWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -805,7 +806,7 @@ func (x *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueI
 		_o.val = MTRDoorLockClusterSetCredentialResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setCredentialWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -818,7 +819,7 @@ func (x *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueI
 // GetCredentialStatusWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetCredentialStatusWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
+func (mcdl *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error
@@ -830,7 +831,7 @@ func (x *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpected
 		_o.val = MTRDoorLockClusterGetCredentialStatusResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCredentialStatusWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("getCredentialStatusWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -839,111 +840,6 @@ func (x *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpected
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterDoorLockable is the interface implemented by [MTRClusterDoorLock], for mocking and DI.
-type MTRClusterDoorLockable interface {
-	obj.Object
-	GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetWeekDayScheduleResponseParams, error)
-	GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetYearDayScheduleResponseParams, error)
-	GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetHolidayScheduleResponseParams, error)
-	GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetUserResponseParams, error)
-	SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterSetCredentialResponseParams, error)
-	GetCredentialStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetCredentialStatusResponseParams, error)
-	ReadAttributeLockStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLockTypeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeActuatorEnabledWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDoorStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDoorOpenEventsWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeDoorOpenEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeDoorOpenEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeDoorClosedEventsWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeDoorClosedEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeDoorClosedEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOpenPeriodWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOpenPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOpenPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNumberOfTotalUsersSupportedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfPINUsersSupportedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfRFIDUsersSupportedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfHolidaySchedulesSupportedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMaxPINCodeLengthWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMinPINCodeLengthWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMaxRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMinRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCredentialRulesSupportWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfCredentialsSupportedPerUserWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLanguageWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeLanguageWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeLanguageWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeLEDSettingsWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeLEDSettingsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeLEDSettingsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeAutoRelockTimeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeAutoRelockTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeAutoRelockTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeSoundVolumeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeSoundVolumeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeSoundVolumeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOperatingModeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOperatingModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOperatingModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeSupportedOperatingModesWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDefaultConfigurationRegisterWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeEnableLocalProgrammingWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEnableLocalProgrammingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEnableLocalProgrammingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEnableOneTouchLockingWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEnableOneTouchLockingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEnableOneTouchLockingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEnableInsideStatusLEDWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEnableInsideStatusLEDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEnableInsideStatusLEDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEnablePrivacyModeButtonWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeLocalProgrammingFeaturesWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeWrongCodeEntryLimitWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeWrongCodeEntryLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeWrongCodeEntryLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeUserCodeTemporaryDisableTimeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeSendPINOverTheAirWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeSendPINOverTheAirWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeSendPINOverTheAirWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeRequirePINforRemoteOperationWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeExpiringUserTimeoutWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeExpiringUserTimeoutWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeExpiringUserTimeoutWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeAliroReaderVerificationKeyWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAliroReaderGroupIdentifierWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAliroReaderGroupSubIdentifierWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAliroGroupResolvingKeyWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAliroBLEAdvertisingVersionWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfAliroEndpointKeysSupportedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-	GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetWeekDayScheduleResponseParams, error)
-	GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetYearDayScheduleResponseParams, error)
-	GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetHolidayScheduleResponseParams, error)
-	GetUserWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetUserResponseParams, error)
-	SetCredentialWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterSetCredentialResponseParams, error)
-	GetCredentialStatusWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDoorLockClusterGetCredentialStatusResponseParams, error)
-}
-
-var _ MTRClusterDoorLockable = (*MTRClusterDoorLock)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterDoorLock)(nil)
 

@@ -52,135 +52,100 @@ func NewRotationGestureRecognizer() *RotationGestureRecognizer {
 	return rotationGestureRecognizerAdopt(_id)
 }
 
-// WithRotation the rotation of the gesture in radians.
-func (x *RotationGestureRecognizer) WithRotation(rotation float64) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
-	return x
+// WithRotation sets the rotation of the gesture in radians.
+func (rgr *RotationGestureRecognizer) WithRotation(rotation float64) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setRotation:"), rotation)
+	return rgr
 }
 
-// WithRotationInDegrees the rotation of the gesture in degrees.
-func (x *RotationGestureRecognizer) WithRotationInDegrees(rotationInDegrees float64) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationInDegrees:"), rotationInDegrees)
-	return x
+// WithRotationInDegrees sets the rotation of the gesture in degrees.
+func (rgr *RotationGestureRecognizer) WithRotationInDegrees(rotationInDegrees float64) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setRotationInDegrees:"), rotationInDegrees)
+	return rgr
 }
 
-// WithTarget the object that implements the action method.
-func (x *RotationGestureRecognizer) WithTarget(target obj.Object) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that implements the action method.
+func (rgr *RotationGestureRecognizer) WithTarget(target obj.Object) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return rgr
 }
 
-// WithState the current state of the gesture recognizer.
-func (x *RotationGestureRecognizer) WithState(state GestureRecognizerState) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the current state of the gesture recognizer.
+func (rgr *RotationGestureRecognizer) WithState(state GestureRecognizerState) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setState:"), state)
+	return rgr
 }
 
-// WithEnabled a Boolean value indicating whether the gesture recognizer is able to handle events.
-func (x *RotationGestureRecognizer) WithEnabled(enabled bool) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
+func (rgr *RotationGestureRecognizer) WithEnabled(enabled bool) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setEnabled:"), enabled)
+	return rgr
 }
 
-// WithPressureConfiguration configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
-func (x *RotationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+// WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+func (rgr *RotationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return rgr
 }
 
-// WithDelaysPrimaryMouseButtonEvents a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
-func (x *RotationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
-	return x
+// WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+func (rgr *RotationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	return rgr
 }
 
-// WithDelaysSecondaryMouseButtonEvents a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
-func (x *RotationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
-	return x
+// WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+func (rgr *RotationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	return rgr
 }
 
-// WithDelaysOtherMouseButtonEvents a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
-func (x *RotationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
-	return x
+// WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+func (rgr *RotationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	return rgr
 }
 
-// WithDelaysKeyEvents a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
-func (x *RotationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
-	return x
+// WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+func (rgr *RotationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	return rgr
 }
 
-// WithDelaysMagnificationEvents a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
-func (x *RotationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
-	return x
+// WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+func (rgr *RotationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	return rgr
 }
 
-// WithDelaysRotationEvents a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
-func (x *RotationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
-	return x
+// WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+func (rgr *RotationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	return rgr
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *RotationGestureRecognizer) WithName(name string) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (rgr *RotationGestureRecognizer) WithName(name string) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setName:"), purego.NSString(name))
+	return rgr
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *RotationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RotationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (rgr *RotationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RotationGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return rgr
 }
 
 // Rotation wraps the corresponding Objective-C method.
-func (x *RotationGestureRecognizer) Rotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rotation"))
+func (rgr *RotationGestureRecognizer) Rotation() float64 {
+	_r := objc.Send[float64](objref.IDOf(rgr), objc.RegisterName("rotation"))
 	return _r
-}
-
-// SetRotation wraps the corresponding Objective-C method.
-func (x *RotationGestureRecognizer) SetRotation(rotation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 }
 
 // RotationInDegrees wraps the corresponding Objective-C method.
-func (x *RotationGestureRecognizer) RotationInDegrees() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rotationInDegrees"))
+func (rgr *RotationGestureRecognizer) RotationInDegrees() float64 {
+	_r := objc.Send[float64](objref.IDOf(rgr), objc.RegisterName("rotationInDegrees"))
 	return _r
 }
-
-// SetRotationInDegrees wraps the corresponding Objective-C method.
-func (x *RotationGestureRecognizer) SetRotationInDegrees(rotationInDegrees float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationInDegrees:"), rotationInDegrees)
-}
-
-// RotationGestureRecognizerable is the interface implemented by [RotationGestureRecognizer], for mocking and DI.
-type RotationGestureRecognizerable interface {
-	obj.Object
-	WithRotation(rotation float64) *RotationGestureRecognizer
-	WithRotationInDegrees(rotationInDegrees float64) *RotationGestureRecognizer
-	WithTarget(target obj.Object) *RotationGestureRecognizer
-	WithState(state GestureRecognizerState) *RotationGestureRecognizer
-	WithEnabled(enabled bool) *RotationGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer
-	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *RotationGestureRecognizer
-	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *RotationGestureRecognizer
-	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *RotationGestureRecognizer
-	WithDelaysKeyEvents(delaysKeyEvents bool) *RotationGestureRecognizer
-	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *RotationGestureRecognizer
-	WithDelaysRotationEvents(delaysRotationEvents bool) *RotationGestureRecognizer
-	WithName(name string) *RotationGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RotationGestureRecognizer
-	Rotation() float64
-	SetRotation(rotation float64)
-	RotationInDegrees() float64
-	SetRotationInDegrees(rotationInDegrees float64)
-}
-
-var _ RotationGestureRecognizerable = (*RotationGestureRecognizer)(nil)
 
 var _ GestureRecognizerProvider = (*RotationGestureRecognizer)(nil)

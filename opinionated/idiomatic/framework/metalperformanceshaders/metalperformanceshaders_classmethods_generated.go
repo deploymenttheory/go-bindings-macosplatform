@@ -31,7 +31,7 @@ func CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutp
 	return CNNConvolutionDescriptorFromID(_r)
 }
 
-// SupportsSecureCoding <NSSecureCoding> support
+// SupportsSecureCoding reports whether <NSSecureCoding> support
 func SupportsSecureCoding() bool {
 	_r := objc.Send[bool](objc.ID(_class("MPSCNNConvolutionDescriptor")), objc.RegisterName("supportsSecureCoding"))
 	return _r
@@ -379,13 +379,13 @@ func CreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatu
 	return GRUDescriptorFromID(_r)
 }
 
-// MaxKernelDiameter queries the maximum diameter, in pixels, of the filter window supported by the median filter.
+// MaxKernelDiameter returns queries the maximum diameter, in pixels, of the filter window supported by the median filter.
 func MaxKernelDiameter() int {
 	_r := objc.Send[int](objc.ID(_class("MPSImageMedian")), objc.RegisterName("maxKernelDiameter"))
 	return _r
 }
 
-// MinKernelDiameter queries the minimum diameter, in pixels, of the filter window supported by the median filter.
+// MinKernelDiameter returns queries the minimum diameter, in pixels, of the filter window supported by the median filter.
 func MinKernelDiameter() int {
 	_r := objc.Send[int](objc.ID(_class("MPSImageMedian")), objc.RegisterName("minKernelDiameter"))
 	return _r
@@ -421,7 +421,7 @@ func NormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum(mean fl
 	return obj.Wrap(_r)
 }
 
-// DefaultDistributionDescriptor make a descriptor for a default distribution.
+// DefaultDistributionDescriptor returns make a descriptor for a default distribution.
 func DefaultDistributionDescriptor() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("defaultDistributionDescriptor"))
 	return obj.Wrap(_r)
@@ -457,13 +457,13 @@ func MPSNNConcatenationNodeNodeWithSources(sourceNodes []obj.Object) *NNConcaten
 	return NNConcatenationNodeFromID(_r)
 }
 
-// PaddingForTensorflowAveragePooling a padding policy that attempts to reproduce TensorFlow behavior for average pooling Most TensorFlow padding is covered by the standard MPSNNPaddingMethod encodings. You can use +paddingWithMethod to get quick access to MPSNNPadding objects, when default filter behavior isn't enough. (It often is.)  However, the edging for max pooling in TensorFlow is a bit unusual. This padding method attempts to reproduce TensorFlow padding for average pooling. In addition to setting MPSNNPaddingMethodSizeSame | MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToBottomRight, it also configures the filter to run with MPSImageEdgeModeClamp, which (as a special case for average pooling only), normalizes the sum of contributing samples to the area of valid contributing pixels only.
+// PaddingForTensorflowAveragePooling returns a padding policy that attempts to reproduce TensorFlow behavior for average pooling Most TensorFlow padding is covered by the standard MPSNNPaddingMethod encodings. You can use +paddingWithMethod to get quick access to MPSNNPadding objects, when default filter behavior isn't enough. (It often is.)  However, the edging for max pooling in TensorFlow is a bit unusual. This padding method attempts to reproduce TensorFlow padding for average pooling. In addition to setting MPSNNPaddingMethodSizeSame | MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToBottomRight, it also configures the filter to run with MPSImageEdgeModeClamp, which (as a special case for average pooling only), normalizes the sum of contributing samples to the area of valid contributing pixels only.
 func PaddingForTensorflowAveragePooling() *NNDefaultPadding {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("paddingForTensorflowAveragePooling"))
 	return NNDefaultPaddingFromID(_r)
 }
 
-// PaddingForTensorflowAveragePoolingValidOnly typical pooling padding policy for valid only mode
+// PaddingForTensorflowAveragePoolingValidOnly returns typical pooling padding policy for valid only mode
 func PaddingForTensorflowAveragePoolingValidOnly() *NNDefaultPadding {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("paddingForTensorflowAveragePoolingValidOnly"))
 	return NNDefaultPaddingFromID(_r)
@@ -601,7 +601,7 @@ func CreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels(
 	return RNNSingleGateDescriptorFromID(_r)
 }
 
-// ResourceList init an empty autoreleased resource list
+// ResourceList returns init an empty autoreleased resource list
 func ResourceList() *StateResourceList {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSStateResourceList")), objc.RegisterName("resourceList"))
 	return StateResourceListFromID(_r)

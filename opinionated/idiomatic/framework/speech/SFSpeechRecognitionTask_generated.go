@@ -46,24 +46,24 @@ func speechRecognitionTaskAdopt(id objc.ID) *SpeechRecognitionTask {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechRecognitionTask) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (srt *SpeechRecognitionTask) Description() string {
+	return rt.Description(objref.IDOf(srt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechRecognitionTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (srt *SpeechRecognitionTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(srt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechRecognitionTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (srt *SpeechRecognitionTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(srt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechRecognitionTask) String() string {
-	return rt.Description(objref.IDOf(x))
+func (srt *SpeechRecognitionTask) String() string {
+	return rt.Description(objref.IDOf(srt))
 }
 
 // NewSpeechRecognitionTask creates a new SpeechRecognitionTask.
@@ -73,41 +73,29 @@ func NewSpeechRecognitionTask() *SpeechRecognitionTask {
 }
 
 // Finish stops accepting new audio and finishes processing on the audio input that has already been accepted.
-func (x *SpeechRecognitionTask) Finish() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finish"))
+func (srt *SpeechRecognitionTask) Finish() {
+	objc.Send[objc.ID](objref.IDOf(srt), objc.RegisterName("finish"))
 }
 
 // Cancel cancels the current speech recognition task.
-func (x *SpeechRecognitionTask) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (srt *SpeechRecognitionTask) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(srt), objc.RegisterName("cancel"))
 }
 
-// State the current state of the speech recognition task. Check the value of this property to get the state of the in-progress speech recognition session. For valid values, see “SFSpeechRecognitionTaskState“.
-func (x *SpeechRecognitionTask) State() SpeechRecognitionTaskState {
-	_r := objc.Send[SpeechRecognitionTaskState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the current state of the speech recognition task. Check the value of this property to get the state of the in-progress speech recognition session. For valid values, see “SFSpeechRecognitionTaskState“.
+func (srt *SpeechRecognitionTask) State() SpeechRecognitionTaskState {
+	_r := objc.Send[SpeechRecognitionTaskState](objref.IDOf(srt), objc.RegisterName("state"))
 	return _r
 }
 
-// IsFinishing a Boolean value that indicates whether audio input has stopped. By default, the value of this property is `false`.
-func (x *SpeechRecognitionTask) IsFinishing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinishing"))
+// IsFinishing reports whether audio input has stopped. By default, the value of this property is `false`.
+func (srt *SpeechRecognitionTask) IsFinishing() bool {
+	_r := objc.Send[bool](objref.IDOf(srt), objc.RegisterName("isFinishing"))
 	return _r
 }
 
-// IsCancelled a Boolean value that indicates whether the speech recognition task was canceled. By default, the value of this property is `false`.
-func (x *SpeechRecognitionTask) IsCancelled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+// IsCancelled reports whether the speech recognition task was canceled. By default, the value of this property is `false`.
+func (srt *SpeechRecognitionTask) IsCancelled() bool {
+	_r := objc.Send[bool](objref.IDOf(srt), objc.RegisterName("isCancelled"))
 	return _r
 }
-
-// SpeechRecognitionTaskable is the interface implemented by [SpeechRecognitionTask], for mocking and DI.
-type SpeechRecognitionTaskable interface {
-	obj.Object
-	Finish()
-	Cancel()
-	State() SpeechRecognitionTaskState
-	IsFinishing() bool
-	IsCancelled() bool
-}
-
-var _ SpeechRecognitionTaskable = (*SpeechRecognitionTask)(nil)

@@ -46,24 +46,24 @@ func attributedStringMarkdownParsingOptionsAdopt(id objc.ID) *AttributedStringMa
 }
 
 // Description returns the object's -description text.
-func (x *AttributedStringMarkdownParsingOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asmpo *AttributedStringMarkdownParsingOptions) Description() string {
+	return rt.Description(objref.IDOf(asmpo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AttributedStringMarkdownParsingOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asmpo *AttributedStringMarkdownParsingOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asmpo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AttributedStringMarkdownParsingOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asmpo *AttributedStringMarkdownParsingOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asmpo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AttributedStringMarkdownParsingOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asmpo *AttributedStringMarkdownParsingOptions) String() string {
+	return rt.Description(objref.IDOf(asmpo))
 }
 
 // NewAttributedStringMarkdownParsingOptions creates a new AttributedStringMarkdownParsingOptions.
@@ -72,119 +72,71 @@ func NewAttributedStringMarkdownParsingOptions() *AttributedStringMarkdownParsin
 	return attributedStringMarkdownParsingOptionsAdopt(_id)
 }
 
-// WithAllowsExtendedAttributes a Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes.
-func (x *AttributedStringMarkdownParsingOptions) WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtendedAttributes:"), allowsExtendedAttributes)
-	return x
+// WithAllowsExtendedAttributes sets a Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes.
+func (asmpo *AttributedStringMarkdownParsingOptions) WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setAllowsExtendedAttributes:"), allowsExtendedAttributes)
+	return asmpo
 }
 
-// WithInterpretedSyntax the syntax for intepreting a Markdown string.
-func (x *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpretedSyntax:"), interpretedSyntax)
-	return x
+// WithInterpretedSyntax sets the syntax for intepreting a Markdown string.
+func (asmpo *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setInterpretedSyntax:"), interpretedSyntax)
+	return asmpo
 }
 
-// WithFailurePolicy the policy for handling a parsing failure.
-func (x *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailurePolicy:"), failurePolicy)
-	return x
+// WithFailurePolicy sets the policy for handling a parsing failure.
+func (asmpo *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setFailurePolicy:"), failurePolicy)
+	return asmpo
 }
 
-// WithLanguageCode the BCP-47 language code for this document.
-func (x *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCode StringProvider) *AttributedStringMarkdownParsingOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), objref.IDOf(languageCode))
-	return x
+// WithLanguageCode sets the BCP-47 language code for this document.
+func (asmpo *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCode StringProvider) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setLanguageCode:"), objref.IDOf(languageCode))
+	return asmpo
 }
 
-// WithAppliesSourcePositionAttributes a Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
-func (x *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
-	return x
+// WithAppliesSourcePositionAttributes sets a Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
+func (asmpo *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
+	return asmpo
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (asmpo *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return asmpo
 }
 
 // AllowsExtendedAttributes wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExtendedAttributes"))
+func (asmpo *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
+	_r := objc.Send[bool](objref.IDOf(asmpo), objc.RegisterName("allowsExtendedAttributes"))
 	return _r
-}
-
-// SetAllowsExtendedAttributes wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) SetAllowsExtendedAttributes(allowsExtendedAttributes bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtendedAttributes:"), allowsExtendedAttributes)
 }
 
 // InterpretedSyntax wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax {
-	_r := objc.Send[AttributedStringMarkdownInterpretedSyntax](objref.IDOf(x), objc.RegisterName("interpretedSyntax"))
+func (asmpo *AttributedStringMarkdownParsingOptions) InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax {
+	_r := objc.Send[AttributedStringMarkdownInterpretedSyntax](objref.IDOf(asmpo), objc.RegisterName("interpretedSyntax"))
 	return _r
-}
-
-// SetInterpretedSyntax wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpretedSyntax:"), interpretedSyntax)
 }
 
 // FailurePolicy wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) FailurePolicy() AttributedStringMarkdownParsingFailurePolicy {
-	_r := objc.Send[AttributedStringMarkdownParsingFailurePolicy](objref.IDOf(x), objc.RegisterName("failurePolicy"))
+func (asmpo *AttributedStringMarkdownParsingOptions) FailurePolicy() AttributedStringMarkdownParsingFailurePolicy {
+	_r := objc.Send[AttributedStringMarkdownParsingFailurePolicy](objref.IDOf(asmpo), objc.RegisterName("failurePolicy"))
 	return _r
 }
 
-// SetFailurePolicy wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailurePolicy:"), failurePolicy)
-}
-
 // LanguageCode wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) LanguageCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageCode"))
+func (asmpo *AttributedStringMarkdownParsingOptions) LanguageCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("languageCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLanguageCode wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) SetLanguageCode(languageCode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
-}
-
 // AppliesSourcePositionAttributes wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesSourcePositionAttributes"))
+func (asmpo *AttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
+	_r := objc.Send[bool](objref.IDOf(asmpo), objc.RegisterName("appliesSourcePositionAttributes"))
 	return _r
 }
-
-// SetAppliesSourcePositionAttributes wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownParsingOptions) SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
-}
-
-// AttributedStringMarkdownParsingOptionsable is the interface implemented by [AttributedStringMarkdownParsingOptions], for mocking and DI.
-type AttributedStringMarkdownParsingOptionsable interface {
-	obj.Object
-	WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions
-	WithInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions
-	WithFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions
-	WithLanguageCode(languageCode StringProvider) *AttributedStringMarkdownParsingOptions
-	WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions
-	WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions
-	AllowsExtendedAttributes() bool
-	SetAllowsExtendedAttributes(allowsExtendedAttributes bool)
-	InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax
-	SetInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax)
-	FailurePolicy() AttributedStringMarkdownParsingFailurePolicy
-	SetFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy)
-	LanguageCode() string
-	SetLanguageCode(languageCode string)
-	AppliesSourcePositionAttributes() bool
-	SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool)
-}
-
-var _ AttributedStringMarkdownParsingOptionsable = (*AttributedStringMarkdownParsingOptions)(nil)

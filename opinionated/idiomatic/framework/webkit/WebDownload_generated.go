@@ -46,24 +46,24 @@ func webDownloadAdopt(id objc.ID) *WebDownload {
 }
 
 // Description returns the object's -description text.
-func (x *WebDownload) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wd *WebDownload) Description() string {
+	return rt.Description(objref.IDOf(wd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebDownload) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wd *WebDownload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebDownload) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wd *WebDownload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebDownload) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wd *WebDownload) String() string {
+	return rt.Description(objref.IDOf(wd))
 }
 
 // NewWebDownload creates a new WebDownload.
@@ -71,10 +71,3 @@ func NewWebDownload() *WebDownload {
 	_id := objc.Send[objc.ID](objc.ID(_class("WebDownload")), objc.RegisterName("new"))
 	return webDownloadAdopt(_id)
 }
-
-// WebDownloadable is the interface implemented by [WebDownload], for mocking and DI.
-type WebDownloadable interface {
-	obj.Object
-}
-
-var _ WebDownloadable = (*WebDownload)(nil)

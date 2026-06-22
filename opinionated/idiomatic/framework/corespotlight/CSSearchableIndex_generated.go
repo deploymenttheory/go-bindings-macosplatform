@@ -6,6 +6,7 @@ package corespotlight
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func searchableIndexAdopt(id objc.ID) *SearchableIndex {
 }
 
 // Description returns the object's -description text.
-func (x *SearchableIndex) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (si *SearchableIndex) Description() string {
+	return rt.Description(objref.IDOf(si))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SearchableIndex) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (si *SearchableIndex) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(si), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SearchableIndex) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (si *SearchableIndex) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(si), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SearchableIndex) String() string {
-	return rt.Description(objref.IDOf(x))
+func (si *SearchableIndex) String() string {
+	return rt.Description(objref.IDOf(si))
 }
 
 // NewSearchableIndexWithName returns an on-device index with the specified name.
@@ -85,14 +86,14 @@ func NewSearchableIndexWithNameProtectionClass(name string, protectionClass obj.
 // IndexSearchableItems adds or updates items in the index.
 //
 // IndexSearchableItems blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items []*SearchableItem) error {
+func (si *SearchableIndex) IndexSearchableItems(ctx context.Context, items []*SearchableItem) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexSearchableItems:completionHandler:"), purego.SliceToNSArray(items, func(_v *SearchableItem) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("indexSearchableItems:completionHandler:"), purego.SliceToNSArray(items, func(_v *SearchableItem) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -104,14 +105,14 @@ func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items []*Sea
 // DeleteSearchableItemsWithIdentifiers removes from the index all items with the specified identifiers.
 //
 // DeleteSearchableItemsWithIdentifiers blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers []string) error {
+func (si *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers []string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteSearchableItemsWithIdentifiers:completionHandler:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("deleteSearchableItemsWithIdentifiers:completionHandler:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -123,14 +124,14 @@ func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Conte
 // DeleteSearchableItemsWithDomainIdentifiers removes from the index all searchable items associated with the specified domain.
 //
 // DeleteSearchableItemsWithDomainIdentifiers blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers []string) error {
+func (si *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers []string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteSearchableItemsWithDomainIdentifiers:completionHandler:"), purego.SliceToNSArray(domainIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("deleteSearchableItemsWithDomainIdentifiers:completionHandler:"), purego.SliceToNSArray(domainIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -142,14 +143,14 @@ func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context
 // DeleteAllSearchableItems deletes all searchable items from the index.
 //
 // DeleteAllSearchableItems blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
+func (si *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteAllSearchableItemsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("deleteAllSearchableItemsWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -159,21 +160,21 @@ func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 }
 
 // BeginIndexBatch begins a batch of updates to an index.
-func (x *SearchableIndex) BeginIndexBatch() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginIndexBatch"))
+func (si *SearchableIndex) BeginIndexBatch() {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("beginIndexBatch"))
 }
 
 // EndIndexBatchWithExpectedClientStateNewClientState ends a batch of index updates and stores the specified state information.
 //
 // EndIndexBatchWithExpectedClientStateNewClientState blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState obj.Object, newClientState obj.Object) error {
+func (si *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState obj.Object, newClientState obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endIndexBatchWithExpectedClientState:newClientState:completionHandler:"), objref.IDOf(expectedClientState), objref.IDOf(newClientState), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("endIndexBatchWithExpectedClientState:newClientState:completionHandler:"), objref.IDOf(expectedClientState), objref.IDOf(newClientState), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -185,14 +186,14 @@ func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx
 // EndIndexBatchWithClientState ends a batch of index updates and stores the specified state information.
 //
 // EndIndexBatchWithClientState blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clientState obj.Object) error {
+func (si *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clientState obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endIndexBatchWithClientState:completionHandler:"), objref.IDOf(clientState), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("endIndexBatchWithClientState:completionHandler:"), objref.IDOf(clientState), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -204,7 +205,7 @@ func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clie
 // FetchLastClientState fetches the app’s most recent client state information asynchronously.
 //
 // FetchLastClientState blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (result obj.Object, err error) {
+func (si *SearchableIndex) FetchLastClientState(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -216,7 +217,7 @@ func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (result obj.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchLastClientStateWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("fetchLastClientStateWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -229,7 +230,7 @@ func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (result obj.
 // FetchDataForBundleIdentifierItemIdentifierContentType fetches data from an external provider.
 //
 // FetchDataForBundleIdentifierItemIdentifierContentType blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType obj.Object) (result obj.Object, err error) {
+func (si *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -241,7 +242,7 @@ func (x *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchDataForBundleIdentifier:itemIdentifier:contentType:completionHandler:"), purego.NSString(bundleIdentifier), purego.NSString(itemIdentifier), objref.IDOf(contentType), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("fetchDataForBundleIdentifier:itemIdentifier:contentType:completionHandler:"), purego.NSString(bundleIdentifier), purego.NSString(itemIdentifier), objref.IDOf(contentType), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -250,19 +251,3 @@ func (x *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(
 		return _zero, ctx.Err()
 	}
 }
-
-// SearchableIndexable is the interface implemented by [SearchableIndex], for mocking and DI.
-type SearchableIndexable interface {
-	obj.Object
-	IndexSearchableItems(ctx context.Context, items []*SearchableItem) error
-	DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers []string) error
-	DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers []string) error
-	DeleteAllSearchableItems(ctx context.Context) error
-	BeginIndexBatch()
-	EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState obj.Object, newClientState obj.Object) error
-	EndIndexBatchWithClientState(ctx context.Context, clientState obj.Object) error
-	FetchLastClientState(ctx context.Context) (obj.Object, error)
-	FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType obj.Object) (obj.Object, error)
-}
-
-var _ SearchableIndexable = (*SearchableIndex)(nil)

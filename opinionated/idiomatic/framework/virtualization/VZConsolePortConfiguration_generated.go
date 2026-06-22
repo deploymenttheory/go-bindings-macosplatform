@@ -48,56 +48,41 @@ func consolePortConfigurationAdopt(id objc.ID) *ConsolePortConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *ConsolePortConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpc *ConsolePortConfiguration) Description() string {
+	return rt.Description(objref.IDOf(cpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConsolePortConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpc *ConsolePortConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConsolePortConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpc *ConsolePortConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ConsolePortConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpc *ConsolePortConfiguration) String() string {
+	return rt.Description(objref.IDOf(cpc))
 }
 
-// WithAttachment the serial port attachment.
-func (x *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-	return x
+// WithAttachment sets the serial port attachment.
+func (cpc *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration {
+	objc.Send[objc.ID](objref.IDOf(cpc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return cpc
 }
 
 // Attachment wraps the corresponding Objective-C method.
-func (x *ConsolePortConfiguration) Attachment() *SerialPortAttachment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
+func (cpc *ConsolePortConfiguration) Attachment() *SerialPortAttachment {
+	_r := objc.Send[objc.ID](objref.IDOf(cpc), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)
 }
-
-// SetAttachment wraps the corresponding Objective-C method.
-func (x *ConsolePortConfiguration) SetAttachment(attachment *SerialPortAttachment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-}
-
-// ConsolePortConfigurationable is the interface implemented by [ConsolePortConfiguration], for mocking and DI.
-type ConsolePortConfigurationable interface {
-	obj.Object
-	WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration
-	Attachment() *SerialPortAttachment
-	SetAttachment(attachment *SerialPortAttachment)
-}
-
-var _ ConsolePortConfigurationable = (*ConsolePortConfiguration)(nil)
 
 // isConsolePortConfiguration marks ConsolePortConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the ConsolePortConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ConsolePortConfiguration) isConsolePortConfiguration() {}
+func (cpc *ConsolePortConfiguration) isConsolePortConfiguration() {}
 
 var _ ConsolePortConfigurationProvider = (*ConsolePortConfiguration)(nil)

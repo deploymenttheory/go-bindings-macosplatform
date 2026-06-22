@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewGraphNode2D() *GraphNode2D {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKGraphNode2D")), objc.RegisterName("new"))
 	return graphNode2DAdopt(_id)
 }
-
-// GraphNode2Dable is the interface implemented by [GraphNode2D], for mocking and DI.
-type GraphNode2Dable interface {
-	obj.Object
-}
-
-var _ GraphNode2Dable = (*GraphNode2D)(nil)
 
 var _ GraphNodeProvider = (*GraphNode2D)(nil)

@@ -46,24 +46,24 @@ func reservationActionAdopt(id objc.ID) *ReservationAction {
 }
 
 // Description returns the object's -description text.
-func (x *ReservationAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ra *ReservationAction) Description() string {
+	return rt.Description(objref.IDOf(ra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ReservationAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ra *ReservationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ReservationAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ra *ReservationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ReservationAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ra *ReservationAction) String() string {
+	return rt.Description(objref.IDOf(ra))
 }
 
 // NewReservationActionWithTypeValidDurationUserActivity creates a new reservation action.
@@ -74,29 +74,19 @@ func NewReservationActionWithTypeValidDurationUserActivity(type_ ReservationActi
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *ReservationAction) Type() ReservationActionType {
-	_r := objc.Send[ReservationActionType](objref.IDOf(x), objc.RegisterName("type"))
+func (ra *ReservationAction) Type() ReservationActionType {
+	_r := objc.Send[ReservationActionType](objref.IDOf(ra), objc.RegisterName("type"))
 	return _r
 }
 
 // ValidDuration wraps the corresponding Objective-C method.
-func (x *ReservationAction) ValidDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validDuration"))
+func (ra *ReservationAction) ValidDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("validDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // UserActivity wraps the corresponding Objective-C method.
-func (x *ReservationAction) UserActivity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
+func (ra *ReservationAction) UserActivity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)
 }
-
-// ReservationActionable is the interface implemented by [ReservationAction], for mocking and DI.
-type ReservationActionable interface {
-	obj.Object
-	Type() ReservationActionType
-	ValidDuration() *DateComponentsRange
-	UserActivity() obj.Object
-}
-
-var _ ReservationActionable = (*ReservationAction)(nil)

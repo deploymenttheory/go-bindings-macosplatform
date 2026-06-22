@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,100 +52,65 @@ func NewGenerateOpticalFlowRequest() *GenerateOpticalFlowRequest {
 	return generateOpticalFlowRequestAdopt(_id)
 }
 
-// WithComputationAccuracy the accuracy level for computing optical flow.
-func (x *GenerateOpticalFlowRequest) WithComputationAccuracy(computationAccuracy GenerateOpticalFlowRequestComputationAccuracy) *GenerateOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
-	return x
+// WithComputationAccuracy sets the accuracy level for computing optical flow.
+func (gofr *GenerateOpticalFlowRequest) WithComputationAccuracy(computationAccuracy GenerateOpticalFlowRequestComputationAccuracy) *GenerateOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(gofr), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
+	return gofr
 }
 
-// WithOutputPixelFormat the output buffer’s pixel format.
-func (x *GenerateOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat int) *GenerateOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
-	return x
+// WithOutputPixelFormat sets the output buffer’s pixel format.
+func (gofr *GenerateOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat int) *GenerateOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(gofr), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
+	return gofr
 }
 
-// WithKeepNetworkOutput a Boolean value that indicates whether to keep the raw pixel buffer coming from the machine learning network.
-func (x *GenerateOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) *GenerateOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
-	return x
+// WithKeepNetworkOutput sets a Boolean value that indicates whether to keep the raw pixel buffer coming from the machine learning network.
+func (gofr *GenerateOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) *GenerateOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(gofr), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
+	return gofr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *GenerateOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (gofr *GenerateOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(gofr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return gofr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *GenerateOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (gofr *GenerateOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(gofr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return gofr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *GenerateOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (gofr *GenerateOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(gofr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return gofr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *GenerateOpticalFlowRequest) WithRevision(revision int) *GenerateOpticalFlowRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (gofr *GenerateOpticalFlowRequest) WithRevision(revision int) *GenerateOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(gofr), objc.RegisterName("setRevision:"), revision)
+	return gofr
 }
 
-// ComputationAccuracy the level of accuracy used to compute the optical flow. Default is VNGenerateOpticalFlowRequestComputationAccuracyMedium. The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
-func (x *GenerateOpticalFlowRequest) ComputationAccuracy() GenerateOpticalFlowRequestComputationAccuracy {
-	_r := objc.Send[GenerateOpticalFlowRequestComputationAccuracy](objref.IDOf(x), objc.RegisterName("computationAccuracy"))
+// ComputationAccuracy returns the level of accuracy used to compute the optical flow. Default is VNGenerateOpticalFlowRequestComputationAccuracyMedium. The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
+func (gofr *GenerateOpticalFlowRequest) ComputationAccuracy() GenerateOpticalFlowRequestComputationAccuracy {
+	_r := objc.Send[GenerateOpticalFlowRequestComputationAccuracy](objref.IDOf(gofr), objc.RegisterName("computationAccuracy"))
 	return _r
 }
 
-// SetComputationAccuracy wraps the corresponding Objective-C method.
-func (x *GenerateOpticalFlowRequest) SetComputationAccuracy(computationAccuracy GenerateOpticalFlowRequestComputationAccuracy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
-}
-
-// OutputPixelFormat pixel format type of the output buffer. Valid values are kCVPixelFormatType_TwoComponent32Float and kCVPixelFormatType_TwoComponent16Half. Default is kCVPixelFormatType_TwoComponent32Float.
-func (x *GenerateOpticalFlowRequest) OutputPixelFormat() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputPixelFormat"))
+// OutputPixelFormat returns pixel format type of the output buffer. Valid values are kCVPixelFormatType_TwoComponent32Float and kCVPixelFormatType_TwoComponent16Half. Default is kCVPixelFormatType_TwoComponent32Float.
+func (gofr *GenerateOpticalFlowRequest) OutputPixelFormat() int {
+	_r := objc.Send[int](objref.IDOf(gofr), objc.RegisterName("outputPixelFormat"))
 	return _r
 }
 
-// SetOutputPixelFormat wraps the corresponding Objective-C method.
-func (x *GenerateOpticalFlowRequest) SetOutputPixelFormat(outputPixelFormat int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
-}
-
-// KeepNetworkOutput setting this to YES will keep the raw pixel buffer coming from the the ML network. The default is NO. When set to YES, the outputPixelFormat is ignored. Setting this for revision 1 is a no-op as it is not ML-based.
-func (x *GenerateOpticalFlowRequest) KeepNetworkOutput() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("keepNetworkOutput"))
+// KeepNetworkOutput reports whether setting this to true will keep the raw pixel buffer coming from the the ML network. The default is false. When set to true, the outputPixelFormat is ignored. Setting this for revision 1 is a no-op as it is not ML-based.
+func (gofr *GenerateOpticalFlowRequest) KeepNetworkOutput() bool {
+	_r := objc.Send[bool](objref.IDOf(gofr), objc.RegisterName("keepNetworkOutput"))
 	return _r
 }
-
-// SetKeepNetworkOutput wraps the corresponding Objective-C method.
-func (x *GenerateOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
-}
-
-// GenerateOpticalFlowRequestable is the interface implemented by [GenerateOpticalFlowRequest], for mocking and DI.
-type GenerateOpticalFlowRequestable interface {
-	obj.Object
-	WithComputationAccuracy(computationAccuracy GenerateOpticalFlowRequestComputationAccuracy) *GenerateOpticalFlowRequest
-	WithOutputPixelFormat(outputPixelFormat int) *GenerateOpticalFlowRequest
-	WithKeepNetworkOutput(keepNetworkOutput bool) *GenerateOpticalFlowRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateOpticalFlowRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateOpticalFlowRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *GenerateOpticalFlowRequest
-	WithRevision(revision int) *GenerateOpticalFlowRequest
-	ComputationAccuracy() GenerateOpticalFlowRequestComputationAccuracy
-	SetComputationAccuracy(computationAccuracy GenerateOpticalFlowRequestComputationAccuracy)
-	OutputPixelFormat() int
-	SetOutputPixelFormat(outputPixelFormat int)
-	KeepNetworkOutput() bool
-	SetKeepNetworkOutput(keepNetworkOutput bool)
-}
-
-var _ GenerateOpticalFlowRequestable = (*GenerateOpticalFlowRequest)(nil)
 
 var _ TargetedImageRequestProvider = (*GenerateOpticalFlowRequest)(nil)
 

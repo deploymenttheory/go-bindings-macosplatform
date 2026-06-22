@@ -46,24 +46,24 @@ func authorizationSecurityKeyPublicKeyCredentialAssertionAdopt(id objc.ID) *Auth
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Description() string {
+	return rt.Description(objref.IDOf(askpkca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(askpkca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(askpkca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) String() string {
+	return rt.Description(objref.IDOf(askpkca))
 }
 
 // NewAuthorizationSecurityKeyPublicKeyCredentialAssertion creates a new AuthorizationSecurityKeyPublicKeyCredentialAssertion.
@@ -72,23 +72,14 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertion() *AuthorizationSec
 	return authorizationSecurityKeyPublicKeyCredentialAssertionAdopt(_id)
 }
 
-// AppID indicates that this assertion used the appid WebAuthn extension. This can only happen if the requesting app is a web browser and requested to use this extension.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appID"))
+// AppID reports whether indicates that this assertion used the appid WebAuthn extension. This can only happen if the requesting app is a web browser and requested to use this extension.
+func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
+	_r := objc.Send[bool](objref.IDOf(askpkca), objc.RegisterName("appID"))
 	return _r
 }
 
 // Prf wraps the corresponding Objective-C method.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(askpkca), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)
 }
-
-// AuthorizationSecurityKeyPublicKeyCredentialAssertionable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialAssertion], for mocking and DI.
-type AuthorizationSecurityKeyPublicKeyCredentialAssertionable interface {
-	obj.Object
-	AppID() bool
-	Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput
-}
-
-var _ AuthorizationSecurityKeyPublicKeyCredentialAssertionable = (*AuthorizationSecurityKeyPublicKeyCredentialAssertion)(nil)

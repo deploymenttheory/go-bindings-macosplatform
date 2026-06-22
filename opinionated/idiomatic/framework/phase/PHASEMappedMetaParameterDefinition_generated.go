@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,26 +59,17 @@ func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(in
 	return mappedMetaParameterDefinitionAdopt(_id)
 }
 
-// Envelope an Envelope to define segments of curves
-func (x *MappedMetaParameterDefinition) Envelope() *Envelope {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("envelope"))
+// Envelope returns an Envelope to define segments of curves
+func (mmpd *MappedMetaParameterDefinition) Envelope() *Envelope {
+	_r := objc.Send[objc.ID](objref.IDOf(mmpd), objc.RegisterName("envelope"))
 	return EnvelopeFromID(_r)
 }
 
-// InputMetaParameterDefinition the readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
-func (x *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMetaParameterDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputMetaParameterDefinition"))
+// InputMetaParameterDefinition returns the readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
+func (mmpd *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(mmpd), objc.RegisterName("inputMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
-
-// MappedMetaParameterDefinitionable is the interface implemented by [MappedMetaParameterDefinition], for mocking and DI.
-type MappedMetaParameterDefinitionable interface {
-	obj.Object
-	Envelope() *Envelope
-	InputMetaParameterDefinition() *NumberMetaParameterDefinition
-}
-
-var _ MappedMetaParameterDefinitionable = (*MappedMetaParameterDefinition)(nil)
 
 var _ NumberMetaParameterDefinitionProvider = (*MappedMetaParameterDefinition)(nil)
 

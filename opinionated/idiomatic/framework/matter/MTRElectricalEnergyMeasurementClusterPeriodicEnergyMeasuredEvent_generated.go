@@ -44,24 +44,24 @@ func mTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventAdopt(id ob
 }
 
 // Description returns the object's -description text.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) Description() string {
+	return rt.Description(objref.IDOf(meemcpeme))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meemcpeme), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meemcpeme), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) String() string {
+	return rt.Description(objref.IDOf(meemcpeme))
 }
 
 // NewMTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent creates a new MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent.
@@ -71,48 +71,25 @@ func NewMTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent() *MTRE
 }
 
 // WithEnergyImported sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) WithEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyImported:"), objref.IDOf(energyImported))
-	return x
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) WithEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent {
+	objc.Send[objc.ID](objref.IDOf(meemcpeme), objc.RegisterName("setEnergyImported:"), objref.IDOf(energyImported))
+	return meemcpeme
 }
 
 // WithEnergyExported sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) WithEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyExported:"), objref.IDOf(energyExported))
-	return x
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) WithEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent {
+	objc.Send[objc.ID](objref.IDOf(meemcpeme), objc.RegisterName("setEnergyExported:"), objref.IDOf(energyExported))
+	return meemcpeme
 }
 
 // EnergyImported wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energyImported"))
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcpeme), objc.RegisterName("energyImported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)
-}
-
-// SetEnergyImported wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) SetEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyImported:"), objref.IDOf(energyImported))
 }
 
 // EnergyExported wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energyExported"))
+func (meemcpeme *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcpeme), objc.RegisterName("energyExported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)
 }
-
-// SetEnergyExported wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) SetEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyExported:"), objref.IDOf(energyExported))
-}
-
-// MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventable is the interface implemented by [MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent], for mocking and DI.
-type MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventable interface {
-	obj.Object
-	WithEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent
-	WithEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent
-	EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
-	SetEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct)
-	EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
-	SetEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct)
-}
-
-var _ MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventable = (*MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent)(nil)

@@ -52,66 +52,41 @@ func NewPersistentHistoryChangeRequest() *PersistentHistoryChangeRequest {
 	return persistentHistoryChangeRequestAdopt(_id)
 }
 
-// WithResultType the type of result that this request returns.
-func (x *PersistentHistoryChangeRequest) WithResultType(resultType PersistentHistoryResultType) *PersistentHistoryChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-	return x
+// WithResultType sets the type of result that this request returns.
+func (phcr *PersistentHistoryChangeRequest) WithResultType(resultType PersistentHistoryResultType) *PersistentHistoryChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("setResultType:"), resultType)
+	return phcr
 }
 
-// WithFetchRequest the specified fetch request, when retrieving history.
-func (x *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
-	return x
+// WithFetchRequest sets the specified fetch request, when retrieving history.
+func (phcr *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
+	return phcr
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (phcr *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("setAffectedStores:"), _arr)
+	return phcr
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChangeRequest) ResultType() PersistentHistoryResultType {
-	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (phcr *PersistentHistoryChangeRequest) ResultType() PersistentHistoryResultType {
+	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(phcr), objc.RegisterName("resultType"))
 	return _r
 }
 
-// SetResultType wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChangeRequest) SetResultType(resultType PersistentHistoryResultType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-}
-
 // Token wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+func (phcr *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
+	_r := objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)
 }
 
 // FetchRequest wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChangeRequest) FetchRequest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+func (phcr *PersistentHistoryChangeRequest) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
-
-// SetFetchRequest wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChangeRequest) SetFetchRequest(fetchRequest obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
-}
-
-// PersistentHistoryChangeRequestable is the interface implemented by [PersistentHistoryChangeRequest], for mocking and DI.
-type PersistentHistoryChangeRequestable interface {
-	obj.Object
-	WithResultType(resultType PersistentHistoryResultType) *PersistentHistoryChangeRequest
-	WithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest
-	WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest
-	ResultType() PersistentHistoryResultType
-	SetResultType(resultType PersistentHistoryResultType)
-	Token() *PersistentHistoryToken
-	FetchRequest() obj.Object
-	SetFetchRequest(fetchRequest obj.Object)
-}
-
-var _ PersistentHistoryChangeRequestable = (*PersistentHistoryChangeRequest)(nil)
 
 var _ PersistentStoreRequestProvider = (*PersistentHistoryChangeRequest)(nil)

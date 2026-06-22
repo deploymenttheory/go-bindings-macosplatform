@@ -5,13 +5,14 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Gradient is an idiomatic wrapper over the Objective-C class NSGradient.
@@ -48,24 +49,24 @@ func gradientAdopt(id objc.ID) *Gradient {
 }
 
 // Description returns the object's -description text.
-func (x *Gradient) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Gradient) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Gradient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Gradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Gradient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Gradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Gradient) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Gradient) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // NewGradientWithStartingColorEndingColor initializes a newly allocated gradient object with two colors.
@@ -97,73 +98,56 @@ func NewGradientWithCoder(coder obj.Object) *Gradient {
 }
 
 // DrawFromPointToPointOptions draws a linear gradient between the specified start and end points.
-func (x *Gradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options GradientDrawingOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawFromPoint:toPoint:options:"), startingPoint, endingPoint, options)
+func (g *Gradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options GradientDrawingOptions) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawFromPoint:toPoint:options:"), startingPoint, endingPoint, options)
 }
 
 // DrawInRectAngle fills the specified rectangle with a linear gradient.
-func (x *Gradient) DrawInRectAngle(rect corefoundation.CGRect, angle float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:angle:"), rect, angle)
+func (g *Gradient) DrawInRectAngle(rect corefoundation.CGRect, angle float64) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInRect:angle:"), rect, angle)
 }
 
 // DrawInBezierPathAngle fills the specified path with a linear gradient.
-func (x *Gradient) DrawInBezierPathAngle(path *BezierPath, angle float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInBezierPath:angle:"), objref.IDOf(path), angle)
+func (g *Gradient) DrawInBezierPathAngle(path *BezierPath, angle float64) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInBezierPath:angle:"), objref.IDOf(path), angle)
 }
 
 // DrawFromCenterRadiusToCenterRadiusOptions draws a radial gradient between the specified circles.
-func (x *Gradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options GradientDrawingOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawFromCenter:radius:toCenter:radius:options:"), startCenter, startRadius, endCenter, endRadius, options)
+func (g *Gradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options GradientDrawingOptions) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawFromCenter:radius:toCenter:radius:options:"), startCenter, startRadius, endCenter, endRadius, options)
 }
 
 // DrawInRectRelativeCenterPosition draws a radial gradient starting at the center of the specified rectangle.
-func (x *Gradient) DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:relativeCenterPosition:"), rect, relativeCenterPosition)
+func (g *Gradient) DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInRect:relativeCenterPosition:"), rect, relativeCenterPosition)
 }
 
 // DrawInBezierPathRelativeCenterPosition draws a radial gradient starting at the center point of the specified path.
-func (x *Gradient) DrawInBezierPathRelativeCenterPosition(path *BezierPath, relativeCenterPosition corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInBezierPath:relativeCenterPosition:"), objref.IDOf(path), relativeCenterPosition)
+func (g *Gradient) DrawInBezierPathRelativeCenterPosition(path *BezierPath, relativeCenterPosition corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInBezierPath:relativeCenterPosition:"), objref.IDOf(path), relativeCenterPosition)
 }
 
 // GetColorLocationAtIndex returns information about the color stop at the specified index in the receiver’s color array.
-func (x *Gradient) GetColorLocationAtIndex(color *Color, index int) (location float64) {
+func (g *Gradient) GetColorLocationAtIndex(color *Color, index int) (location float64) {
 	var _out0 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getColor:location:atIndex:"), objref.IDOf(color), unsafe.Pointer(&_out0), index)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("getColor:location:atIndex:"), objref.IDOf(color), unsafe.Pointer(&_out0), index)
 	return _out0
 }
 
 // InterpolatedColorAtLocation returns the color of the rendered gradient at the specified relative location.
-func (x *Gradient) InterpolatedColorAtLocation(location float64) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpolatedColorAtLocation:"), location)
+func (g *Gradient) InterpolatedColorAtLocation(location float64) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("interpolatedColorAtLocation:"), location)
 	return ColorFromID(_r)
 }
 
 // ColorSpace wraps the corresponding Objective-C method.
-func (x *Gradient) ColorSpace() *ColorSpace {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+func (g *Gradient) ColorSpace() *ColorSpace {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
 // NumberOfColorStops wraps the corresponding Objective-C method.
-func (x *Gradient) NumberOfColorStops() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColorStops"))
+func (g *Gradient) NumberOfColorStops() int {
+	_r := objc.Send[int](objref.IDOf(g), objc.RegisterName("numberOfColorStops"))
 	return _r
 }
-
-// Gradientable is the interface implemented by [Gradient], for mocking and DI.
-type Gradientable interface {
-	obj.Object
-	DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options GradientDrawingOptions)
-	DrawInRectAngle(rect corefoundation.CGRect, angle float64)
-	DrawInBezierPathAngle(path *BezierPath, angle float64)
-	DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options GradientDrawingOptions)
-	DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint)
-	DrawInBezierPathRelativeCenterPosition(path *BezierPath, relativeCenterPosition corefoundation.CGPoint)
-	GetColorLocationAtIndex(color *Color, index int) (location float64)
-	InterpolatedColorAtLocation(location float64) *Color
-	ColorSpace() *ColorSpace
-	NumberOfColorStops() int
-}
-
-var _ Gradientable = (*Gradient)(nil)

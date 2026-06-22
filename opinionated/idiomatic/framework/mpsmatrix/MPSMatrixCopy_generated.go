@@ -44,24 +44,24 @@ func matrixCopyAdopt(id objc.ID) *MatrixCopy {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixCopy) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MatrixCopy) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixCopy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MatrixCopy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixCopy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MatrixCopy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixCopy) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MatrixCopy) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // NewMatrixCopy creates a new MatrixCopy.
@@ -70,37 +70,26 @@ func NewMatrixCopy() *MatrixCopy {
 	return matrixCopyAdopt(_id)
 }
 
-// CopyRows the number of rows to copy for each copy operation
-func (x *MatrixCopy) CopyRows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyRows"))
+// CopyRows returns the number of rows to copy for each copy operation
+func (mc *MatrixCopy) CopyRows() int {
+	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyRows"))
 	return _r
 }
 
-// CopyColumns the number of columns to copy for each copy operation
-func (x *MatrixCopy) CopyColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyColumns"))
+// CopyColumns returns the number of columns to copy for each copy operation
+func (mc *MatrixCopy) CopyColumns() int {
+	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyColumns"))
 	return _r
 }
 
-// SourcesAreTransposed if YES, the sources are in row major storage order
-func (x *MatrixCopy) SourcesAreTransposed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sourcesAreTransposed"))
+// SourcesAreTransposed reports whether if true, the sources are in row major storage order
+func (mc *MatrixCopy) SourcesAreTransposed() bool {
+	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("sourcesAreTransposed"))
 	return _r
 }
 
-// DestinationsAreTransposed if YES, the destinations are in row major storage order
-func (x *MatrixCopy) DestinationsAreTransposed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("destinationsAreTransposed"))
+// DestinationsAreTransposed reports whether if true, the destinations are in row major storage order
+func (mc *MatrixCopy) DestinationsAreTransposed() bool {
+	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("destinationsAreTransposed"))
 	return _r
 }
-
-// MatrixCopyable is the interface implemented by [MatrixCopy], for mocking and DI.
-type MatrixCopyable interface {
-	obj.Object
-	CopyRows() int
-	CopyColumns() int
-	SourcesAreTransposed() bool
-	DestinationsAreTransposed() bool
-}
-
-var _ MatrixCopyable = (*MatrixCopy)(nil)

@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,33 +51,23 @@ func NewCNNBinaryFullyConnectedNode() *CNNBinaryFullyConnectedNode {
 	return cNNBinaryFullyConnectedNodeAdopt(_id)
 }
 
-// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNBinaryFullyConnectedNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-	return x
+// WithTrainingStyle sets the training style of the forward node will be propagated to gradient nodes made from it
+func (cbfcn *CNNBinaryFullyConnectedNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cbfcn), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return cbfcn
 }
 
-// WithAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-func (x *CNNBinaryFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
-	return x
+// WithAccumulatorPrecision sets set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+func (cbfcn *CNNBinaryFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cbfcn), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+	return cbfcn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBinaryFullyConnectedNode) WithLabel(label string) *CNNBinaryFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbfcn *CNNBinaryFullyConnectedNode) WithLabel(label string) *CNNBinaryFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cbfcn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbfcn
 }
-
-// CNNBinaryFullyConnectedNodeable is the interface implemented by [CNNBinaryFullyConnectedNode], for mocking and DI.
-type CNNBinaryFullyConnectedNodeable interface {
-	obj.Object
-	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryFullyConnectedNode
-	WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode
-	WithLabel(label string) *CNNBinaryFullyConnectedNode
-}
-
-var _ CNNBinaryFullyConnectedNodeable = (*CNNBinaryFullyConnectedNode)(nil)
 
 var _ CNNBinaryConvolutionNodeProvider = (*CNNBinaryFullyConnectedNode)(nil)
 

@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,36 +51,26 @@ func NewTrajectoryObservation() *TrajectoryObservation {
 	return trajectoryObservationAdopt(_id)
 }
 
-// DetectedPoints the centroids of the contour being detected along the trajectory. These are the unprocessed centroid points of the detected contour that is tracked on the trajectory. The points may be slightly off the ideal trajectory as these are the measured points that fall within the allowed tolerance. The maximum number or past points is limited by the maximum trajectory length set in the request.
+// DetectedPoints returns the centroids of the contour being detected along the trajectory. These are the unprocessed centroid points of the detected contour that is tracked on the trajectory. The points may be slightly off the ideal trajectory as these are the measured points that fall within the allowed tolerance. The maximum number or past points is limited by the maximum trajectory length set in the request.
 //
 // DetectedPoints returns the collection as a Go slice.
-func (x *TrajectoryObservation) DetectedPoints() []*Point {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectedPoints"))
+func (to *TrajectoryObservation) DetectedPoints() []*Point {
+	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("detectedPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Point { return PointFromID(_id) })
 }
 
-// ProjectedPoints the centroids of  the calculated trajectory from the detected points. These are the calculated centroid points along the ideal trajectory described by the parabolic equation. The equation and the projected points of the detected trajectory get refined over time. The maximum number of cached points is limited by the maximum points needed to describe the trajectory together with the parabolic equation.
+// ProjectedPoints returns the centroids of  the calculated trajectory from the detected points. These are the calculated centroid points along the ideal trajectory described by the parabolic equation. The equation and the projected points of the detected trajectory get refined over time. The maximum number of cached points is limited by the maximum points needed to describe the trajectory together with the parabolic equation.
 //
 // ProjectedPoints returns the collection as a Go slice.
-func (x *TrajectoryObservation) ProjectedPoints() []*Point {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectedPoints"))
+func (to *TrajectoryObservation) ProjectedPoints() []*Point {
+	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("projectedPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Point { return PointFromID(_id) })
 }
 
-// MovingAverageRadius the moving average radius of the object being tracked. This is the radius of the object at each detected point (used to determine the trajectory) averaged.
-func (x *TrajectoryObservation) MovingAverageRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("movingAverageRadius"))
+// MovingAverageRadius returns the moving average radius of the object being tracked. This is the radius of the object at each detected point (used to determine the trajectory) averaged.
+func (to *TrajectoryObservation) MovingAverageRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(to), objc.RegisterName("movingAverageRadius"))
 	return _r
 }
-
-// TrajectoryObservationable is the interface implemented by [TrajectoryObservation], for mocking and DI.
-type TrajectoryObservationable interface {
-	obj.Object
-	DetectedPoints() []*Point
-	ProjectedPoints() []*Point
-	MovingAverageRadius() float64
-}
-
-var _ TrajectoryObservationable = (*TrajectoryObservation)(nil)
 
 var _ ObservationProvider = (*TrajectoryObservation)(nil)

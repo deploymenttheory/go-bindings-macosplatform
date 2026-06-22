@@ -53,25 +53,16 @@ func NewNSPredicateRuleWithPredicate(predicate obj.Object) *NSPredicateRule {
 	return nSPredicateRuleAdopt(_id)
 }
 
-// WithSalience the importance of the rule relative to others in a rule system’s agenda.
-func (x *NSPredicateRule) WithSalience(salience int) *NSPredicateRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
-	return x
+// WithSalience sets the importance of the rule relative to others in a rule system’s agenda.
+func (npr *NSPredicateRule) WithSalience(salience int) *NSPredicateRule {
+	objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("setSalience:"), salience)
+	return npr
 }
 
-// Predicate the NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem:
-func (x *NSPredicateRule) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+// Predicate returns the NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem:
+func (npr *NSPredicateRule) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
-
-// NSPredicateRuleable is the interface implemented by [NSPredicateRule], for mocking and DI.
-type NSPredicateRuleable interface {
-	obj.Object
-	WithSalience(salience int) *NSPredicateRule
-	Predicate() obj.Object
-}
-
-var _ NSPredicateRuleable = (*NSPredicateRule)(nil)
 
 var _ RuleProvider = (*NSPredicateRule)(nil)

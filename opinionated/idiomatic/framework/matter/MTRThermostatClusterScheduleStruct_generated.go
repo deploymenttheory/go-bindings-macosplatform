@@ -44,24 +44,24 @@ func mTRThermostatClusterScheduleStructAdopt(id objc.ID) *MTRThermostatClusterSc
 }
 
 // Description returns the object's -description text.
-func (x *MTRThermostatClusterScheduleStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcss *MTRThermostatClusterScheduleStruct) Description() string {
+	return rt.Description(objref.IDOf(mtcss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterScheduleStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtcss *MTRThermostatClusterScheduleStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtcss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterScheduleStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtcss *MTRThermostatClusterScheduleStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtcss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThermostatClusterScheduleStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcss *MTRThermostatClusterScheduleStruct) String() string {
+	return rt.Description(objref.IDOf(mtcss))
 }
 
 // NewMTRThermostatClusterScheduleStruct creates a new MTRThermostatClusterScheduleStruct.
@@ -71,124 +71,75 @@ func NewMTRThermostatClusterScheduleStruct() *MTRThermostatClusterScheduleStruct
 }
 
 // WithScheduleHandle sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleStruct) WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterScheduleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
-	return x
+func (mtcss *MTRThermostatClusterScheduleStruct) WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
+	return mtcss
 }
 
 // WithSystemMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
-	return x
+func (mtcss *MTRThermostatClusterScheduleStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
+	return mtcss
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleStruct) WithName(name string) *MTRThermostatClusterScheduleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mtcss *MTRThermostatClusterScheduleStruct) WithName(name string) *MTRThermostatClusterScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setName:"), purego.NSString(name))
+	return mtcss
 }
 
 // WithPresetHandle sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterScheduleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
-	return x
+func (mtcss *MTRThermostatClusterScheduleStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
+	return mtcss
 }
 
 // WithBuiltIn sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterScheduleStruct) WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterScheduleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
-	return x
+func (mtcss *MTRThermostatClusterScheduleStruct) WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
+	return mtcss
 }
 
 // ScheduleHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) ScheduleHandle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleHandle"))
+func (mtcss *MTRThermostatClusterScheduleStruct) ScheduleHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("scheduleHandle"))
 	return obj.Wrap(_r)
-}
-
-// SetScheduleHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) SetScheduleHandle(scheduleHandle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
 }
 
 // SystemMode wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) SystemMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemMode"))
+func (mtcss *MTRThermostatClusterScheduleStruct) SystemMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("systemMode"))
 	return obj.Wrap(_r)
 }
 
-// SetSystemMode wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) SetSystemMode(systemMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mtcss *MTRThermostatClusterScheduleStruct) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // PresetHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) PresetHandle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetHandle"))
+func (mtcss *MTRThermostatClusterScheduleStruct) PresetHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("presetHandle"))
 	return obj.Wrap(_r)
 }
 
-// SetPresetHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) SetPresetHandle(presetHandle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
-}
-
 // Transitions wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) Transitions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitions"))
+func (mtcss *MTRThermostatClusterScheduleStruct) Transitions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("transitions"))
 	return obj.Wrap(_r)
 }
 
 // SetTransitions wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) SetTransitions(transitions obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitions:"), objref.IDOf(transitions))
+func (mtcss *MTRThermostatClusterScheduleStruct) SetTransitions(transitions obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setTransitions:"), objref.IDOf(transitions))
 }
 
 // BuiltIn wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) BuiltIn() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("builtIn"))
+func (mtcss *MTRThermostatClusterScheduleStruct) BuiltIn() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("builtIn"))
 	return obj.Wrap(_r)
 }
-
-// SetBuiltIn wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterScheduleStruct) SetBuiltIn(builtIn obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
-}
-
-// MTRThermostatClusterScheduleStructable is the interface implemented by [MTRThermostatClusterScheduleStruct], for mocking and DI.
-type MTRThermostatClusterScheduleStructable interface {
-	obj.Object
-	WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterScheduleStruct
-	WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleStruct
-	WithName(name string) *MTRThermostatClusterScheduleStruct
-	WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterScheduleStruct
-	WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterScheduleStruct
-	ScheduleHandle() obj.Object
-	SetScheduleHandle(scheduleHandle obj.Object)
-	SystemMode() obj.Object
-	SetSystemMode(systemMode obj.Object)
-	Name() string
-	SetName(name string)
-	PresetHandle() obj.Object
-	SetPresetHandle(presetHandle obj.Object)
-	Transitions() obj.Object
-	SetTransitions(transitions obj.Object)
-	BuiltIn() obj.Object
-	SetBuiltIn(builtIn obj.Object)
-}
-
-var _ MTRThermostatClusterScheduleStructable = (*MTRThermostatClusterScheduleStruct)(nil)

@@ -52,18 +52,10 @@ func NewStringMetaParameter() *StringMetaParameter {
 	return stringMetaParameterAdopt(_id)
 }
 
-// WithValue a value for the metaparameter.
-func (x *StringMetaParameter) WithValue(value obj.Object) *StringMetaParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+// WithValue sets a value for the metaparameter.
+func (smp *StringMetaParameter) WithValue(value obj.Object) *StringMetaParameter {
+	objc.Send[objc.ID](objref.IDOf(smp), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return smp
 }
-
-// StringMetaParameterable is the interface implemented by [StringMetaParameter], for mocking and DI.
-type StringMetaParameterable interface {
-	obj.Object
-	WithValue(value obj.Object) *StringMetaParameter
-}
-
-var _ StringMetaParameterable = (*StringMetaParameter)(nil)
 
 var _ MetaParameterProvider = (*StringMetaParameter)(nil)

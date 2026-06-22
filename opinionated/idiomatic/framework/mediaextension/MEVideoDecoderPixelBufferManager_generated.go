@@ -46,24 +46,24 @@ func videoDecoderPixelBufferManagerAdopt(id objc.ID) *VideoDecoderPixelBufferMan
 }
 
 // Description returns the object's -description text.
-func (x *VideoDecoderPixelBufferManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vdpbm *VideoDecoderPixelBufferManager) Description() string {
+	return rt.Description(objref.IDOf(vdpbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoDecoderPixelBufferManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vdpbm *VideoDecoderPixelBufferManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vdpbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoDecoderPixelBufferManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vdpbm *VideoDecoderPixelBufferManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vdpbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoDecoderPixelBufferManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vdpbm *VideoDecoderPixelBufferManager) String() string {
+	return rt.Description(objref.IDOf(vdpbm))
 }
 
 // NewVideoDecoderPixelBufferManager creates a new VideoDecoderPixelBufferManager.
@@ -72,35 +72,19 @@ func NewVideoDecoderPixelBufferManager() *VideoDecoderPixelBufferManager {
 	return videoDecoderPixelBufferManagerAdopt(_id)
 }
 
-// WithPixelBufferAttributes a dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the decoder.
-func (x *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *VideoDecoderPixelBufferManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
-	return x
+// WithPixelBufferAttributes sets a dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the decoder.
+func (vdpbm *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *VideoDecoderPixelBufferManager {
+	objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+	return vdpbm
 }
 
 // RegisterCustomPixelFormat videoToolbox will register the described pixelFormat in both the Extension process and the client process. This property is appropriate for decoders which produce output in a custom pixel format.  This will generally only be used by decoders which produce RAW output, where the decoder's output buffers will only be consumed by an MERAWProcessor extension which registers the same pixel format. MERAWProcessor needs to manually register the custom pixel format using CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType().
-func (x *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerCustomPixelFormat:"), objref.IDOf(customPixelFormat))
+func (vdpbm *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("registerCustomPixelFormat:"), objref.IDOf(customPixelFormat))
 }
 
-// PixelBufferAttributes videoToolbox will use these attributes when creating a PixelBuffer for the decoder. This can be updated by the decoder before requesting a new pixelBuffer.
-func (x *VideoDecoderPixelBufferManager) PixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBufferAttributes"))
+// PixelBufferAttributes returns videoToolbox will use these attributes when creating a PixelBuffer for the decoder. This can be updated by the decoder before requesting a new pixelBuffer.
+func (vdpbm *VideoDecoderPixelBufferManager) PixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("pixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
-
-// SetPixelBufferAttributes wraps the corresponding Objective-C method.
-func (x *VideoDecoderPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
-}
-
-// VideoDecoderPixelBufferManagerable is the interface implemented by [VideoDecoderPixelBufferManager], for mocking and DI.
-type VideoDecoderPixelBufferManagerable interface {
-	obj.Object
-	WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *VideoDecoderPixelBufferManager
-	RegisterCustomPixelFormat(customPixelFormat obj.Object)
-	PixelBufferAttributes() obj.Object
-	SetPixelBufferAttributes(pixelBufferAttributes obj.Object)
-}
-
-var _ VideoDecoderPixelBufferManagerable = (*VideoDecoderPixelBufferManager)(nil)

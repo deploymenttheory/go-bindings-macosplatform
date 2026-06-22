@@ -46,24 +46,24 @@ func messageAdopt(id objc.ID) *Message {
 }
 
 // Description returns the object's -description text.
-func (x *Message) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Message) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Message) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Message) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Message) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Message) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Message) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Message) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMessage creates a new Message.
@@ -72,113 +72,93 @@ func NewMessage() *Message {
 	return messageAdopt(_id)
 }
 
-// State the state of the mail message.
-func (x *Message) State() MessageState {
-	_r := objc.Send[MessageState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the state of the mail message.
+func (m *Message) State() MessageState {
+	_r := objc.Send[MessageState](objref.IDOf(m), objc.RegisterName("state"))
 	return _r
 }
 
-// EncryptionState the encryption state of the mail message.
-func (x *Message) EncryptionState() MessageEncryptionState {
-	_r := objc.Send[MessageEncryptionState](objref.IDOf(x), objc.RegisterName("encryptionState"))
+// EncryptionState returns the encryption state of the mail message.
+func (m *Message) EncryptionState() MessageEncryptionState {
+	_r := objc.Send[MessageEncryptionState](objref.IDOf(m), objc.RegisterName("encryptionState"))
 	return _r
 }
 
-// Subject the subject of the mail message.
-func (x *Message) Subject() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
+// Subject returns the subject of the mail message.
+func (m *Message) Subject() string {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("subject"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FromAddress message sender's email address.
-func (x *Message) FromAddress() *EmailAddress {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromAddress"))
+// FromAddress returns message sender's email address.
+func (m *Message) FromAddress() *EmailAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("fromAddress"))
 	return EmailAddressFromID(_r)
 }
 
-// ToAddresses recipient email addresses in the "To" address field of the message.
+// ToAddresses returns recipient email addresses in the "To" address field of the message.
 //
 // ToAddresses returns the collection as a Go slice.
-func (x *Message) ToAddresses() []*EmailAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toAddresses"))
+func (m *Message) ToAddresses() []*EmailAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("toAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// CcAddresses recipient email addresses in the "Cc" address field of the message.
+// CcAddresses returns recipient email addresses in the "Cc" address field of the message.
 //
 // CcAddresses returns the collection as a Go slice.
-func (x *Message) CcAddresses() []*EmailAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ccAddresses"))
+func (m *Message) CcAddresses() []*EmailAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("ccAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// BccAddresses recipient email addresses in the "Bcc" address field of the message.
+// BccAddresses returns recipient email addresses in the "Bcc" address field of the message.
 //
 // BccAddresses returns the collection as a Go slice.
-func (x *Message) BccAddresses() []*EmailAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bccAddresses"))
+func (m *Message) BccAddresses() []*EmailAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("bccAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// ReplyToAddresses recipient email addresses in the "Reply-To" field of the message.
+// ReplyToAddresses returns recipient email addresses in the "Reply-To" field of the message.
 //
 // ReplyToAddresses returns the collection as a Go slice.
-func (x *Message) ReplyToAddresses() []*EmailAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyToAddresses"))
+func (m *Message) ReplyToAddresses() []*EmailAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("replyToAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// AllRecipientAddresses an array containing all recipients of the message.
+// AllRecipientAddresses returns an array containing all recipients of the message.
 //
 // AllRecipientAddresses returns the collection as a Go slice.
-func (x *Message) AllRecipientAddresses() []*EmailAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allRecipientAddresses"))
+func (m *Message) AllRecipientAddresses() []*EmailAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("allRecipientAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// DateSent the date the mail message was sent. Optionally set by the by the sender.
-func (x *Message) DateSent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateSent"))
+// DateSent returns the date the mail message was sent. Optionally set by the by the sender.
+func (m *Message) DateSent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("dateSent"))
 	return obj.Wrap(_r)
 }
 
-// DateReceived the date the mail message was received. Only present if the message has been received.
-func (x *Message) DateReceived() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateReceived"))
+// DateReceived returns the date the mail message was received. Only present if the message has been received.
+func (m *Message) DateReceived() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("dateReceived"))
 	return obj.Wrap(_r)
 }
 
-// Headers the headers for the message. Might only be a subset if the full body has not been downloaded.
-func (x *Message) Headers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headers"))
+// Headers returns the headers for the message. Might only be a subset if the full body has not been downloaded.
+func (m *Message) Headers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("headers"))
 	return obj.Wrap(_r)
 }
 
-// RawData the full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
-func (x *Message) RawData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
+// RawData returns the full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
+func (m *Message) RawData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("rawData"))
 	return obj.Wrap(_r)
 }
-
-// Messageable is the interface implemented by [Message], for mocking and DI.
-type Messageable interface {
-	obj.Object
-	State() MessageState
-	EncryptionState() MessageEncryptionState
-	Subject() string
-	FromAddress() *EmailAddress
-	ToAddresses() []*EmailAddress
-	CcAddresses() []*EmailAddress
-	BccAddresses() []*EmailAddress
-	ReplyToAddresses() []*EmailAddress
-	AllRecipientAddresses() []*EmailAddress
-	DateSent() obj.Object
-	DateReceived() obj.Object
-	Headers() obj.Object
-	RawData() obj.Object
-}
-
-var _ Messageable = (*Message)(nil)

@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // GeneratePersonSegmentationRequest is an idiomatic wrapper over the Objective-C class VNGeneratePersonSegmentationRequest.
@@ -55,93 +56,65 @@ func NewGeneratePersonSegmentationRequest() *GeneratePersonSegmentationRequest {
 	return generatePersonSegmentationRequestAdopt(_id)
 }
 
-// WithQualityLevel a value that indicates how the request balances accuracy and performance.
-func (x *GeneratePersonSegmentationRequest) WithQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityLevel:"), qualityLevel)
-	return x
+// WithQualityLevel sets a value that indicates how the request balances accuracy and performance.
+func (gpsr *GeneratePersonSegmentationRequest) WithQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("setQualityLevel:"), qualityLevel)
+	return gpsr
 }
 
-// WithOutputPixelFormat the pixel format of the output image.
-func (x *GeneratePersonSegmentationRequest) WithOutputPixelFormat(outputPixelFormat int) *GeneratePersonSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
-	return x
+// WithOutputPixelFormat sets the pixel format of the output image.
+func (gpsr *GeneratePersonSegmentationRequest) WithOutputPixelFormat(outputPixelFormat int) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
+	return gpsr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *GeneratePersonSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (gpsr *GeneratePersonSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return gpsr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *GeneratePersonSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (gpsr *GeneratePersonSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return gpsr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *GeneratePersonSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (gpsr *GeneratePersonSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return gpsr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *GeneratePersonSegmentationRequest) WithRevision(revision int) *GeneratePersonSegmentationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (gpsr *GeneratePersonSegmentationRequest) WithRevision(revision int) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("setRevision:"), revision)
+	return gpsr
 }
 
 // SupportedOutputPixelFormats returns a list of output pixel formats that the request supports.
 //
 // SupportedOutputPixelFormats returns the collection as a Go slice.
-func (x *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() (result []obj.Object, err error) {
+func (gpsr *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedOutputPixelFormatsAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("supportedOutputPixelFormatsAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// QualityLevel the quality level selects which techniques will be used during the person segmentation. There are trade-offs between performance and accuracy.
-func (x *GeneratePersonSegmentationRequest) QualityLevel() GeneratePersonSegmentationRequestQualityLevel {
-	_r := objc.Send[GeneratePersonSegmentationRequestQualityLevel](objref.IDOf(x), objc.RegisterName("qualityLevel"))
+// QualityLevel returns the quality level selects which techniques will be used during the person segmentation. There are trade-offs between performance and accuracy.
+func (gpsr *GeneratePersonSegmentationRequest) QualityLevel() GeneratePersonSegmentationRequestQualityLevel {
+	_r := objc.Send[GeneratePersonSegmentationRequestQualityLevel](objref.IDOf(gpsr), objc.RegisterName("qualityLevel"))
 	return _r
 }
 
-// SetQualityLevel wraps the corresponding Objective-C method.
-func (x *GeneratePersonSegmentationRequest) SetQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityLevel:"), qualityLevel)
-}
-
-// OutputPixelFormat pixel format type of the output buffer. Valid values are kCVPixelFormatType_OneComponent32Float, kCVPixelFormatType_OneComponent16Half, and kCVPixelFormatType_OneComponent8. Default is kCVPixelFormatType_OneComponent8.
-func (x *GeneratePersonSegmentationRequest) OutputPixelFormat() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputPixelFormat"))
+// OutputPixelFormat returns pixel format type of the output buffer. Valid values are kCVPixelFormatType_OneComponent32Float, kCVPixelFormatType_OneComponent16Half, and kCVPixelFormatType_OneComponent8. Default is kCVPixelFormatType_OneComponent8.
+func (gpsr *GeneratePersonSegmentationRequest) OutputPixelFormat() int {
+	_r := objc.Send[int](objref.IDOf(gpsr), objc.RegisterName("outputPixelFormat"))
 	return _r
 }
-
-// SetOutputPixelFormat wraps the corresponding Objective-C method.
-func (x *GeneratePersonSegmentationRequest) SetOutputPixelFormat(outputPixelFormat int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
-}
-
-// GeneratePersonSegmentationRequestable is the interface implemented by [GeneratePersonSegmentationRequest], for mocking and DI.
-type GeneratePersonSegmentationRequestable interface {
-	obj.Object
-	WithQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest
-	WithOutputPixelFormat(outputPixelFormat int) *GeneratePersonSegmentationRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest
-	WithRevision(revision int) *GeneratePersonSegmentationRequest
-	SupportedOutputPixelFormats() ([]obj.Object, error)
-	QualityLevel() GeneratePersonSegmentationRequestQualityLevel
-	SetQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel)
-	OutputPixelFormat() int
-	SetOutputPixelFormat(outputPixelFormat int)
-}
-
-var _ GeneratePersonSegmentationRequestable = (*GeneratePersonSegmentationRequest)(nil)
 
 var _ StatefulRequestProvider = (*GeneratePersonSegmentationRequest)(nil)
 

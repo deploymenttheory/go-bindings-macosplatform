@@ -44,24 +44,24 @@ func mSFAdopt(id objc.ID) *MSF {
 }
 
 // Description returns the object's -description text.
-func (x *MSF) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *MSF) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MSF) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *MSF) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MSF) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *MSF) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MSF) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *MSF) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMSFWithFrames initializes an msf object whose length is frames.
@@ -79,44 +79,44 @@ func NewMSFWithString(string_ string) *MSF {
 }
 
 // Minutes returns the number of minutes represented by the receiver. If the receiver represents a non integral number of minutes, only the whole minute value is returned. For example an DRMSF value of 5:30:72 will return 5 from a message to
-func (x *MSF) Minutes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minutes"))
+func (m *MSF) Minutes() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("minutes"))
 	return _r
 }
 
 // Seconds returns the number of seconds represented by the receiver. If the receiver represents a non integral number of seconds, only the whole second value is returned. For example an DRMSF value of 5:30:72 will return 30 from a message to
-func (x *MSF) Seconds() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seconds"))
+func (m *MSF) Seconds() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("seconds"))
 	return _r
 }
 
 // Frames returns the number of frames represented by the receiver. This method differs from
-func (x *MSF) Frames() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frames"))
+func (m *MSF) Frames() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("frames"))
 	return _r
 }
 
 // Sectors returns the total number of frames/sectors represented by the receiver. This method differs from
-func (x *MSF) Sectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sectors"))
+func (m *MSF) Sectors() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("sectors"))
 	return _r
 }
 
 // MsfByAdding adds an msf to the receiver.
-func (x *MSF) MsfByAdding(msf *MSF) *MSF {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("msfByAdding:"), objref.IDOf(msf))
+func (m *MSF) MsfByAdding(msf *MSF) *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("msfByAdding:"), objref.IDOf(msf))
 	return MSFFromID(_r)
 }
 
 // MsfBySubtracting subtracts an msf to the receiver.
-func (x *MSF) MsfBySubtracting(msf *MSF) *MSF {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("msfBySubtracting:"), objref.IDOf(msf))
+func (m *MSF) MsfBySubtracting(msf *MSF) *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("msfBySubtracting:"), objref.IDOf(msf))
 	return MSFFromID(_r)
 }
 
 // DescriptionWithFormat returns a textual representation of the receiver. The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. For example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value
-func (x *MSF) DescriptionWithFormat(format string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithFormat:"), purego.NSString(format))
+func (m *MSF) DescriptionWithFormat(format string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("descriptionWithFormat:"), purego.NSString(format))
 	if _r == 0 {
 		return ""
 	}
@@ -124,22 +124,7 @@ func (x *MSF) DescriptionWithFormat(format string) string {
 }
 
 // IsEqualToMSF compares on emsf to another.
-func (x *MSF) IsEqualToMSF(otherDRMSF *MSF) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToMSF:"), objref.IDOf(otherDRMSF))
+func (m *MSF) IsEqualToMSF(otherDRMSF *MSF) bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isEqualToMSF:"), objref.IDOf(otherDRMSF))
 	return _r
 }
-
-// MSFable is the interface implemented by [MSF], for mocking and DI.
-type MSFable interface {
-	obj.Object
-	Minutes() int
-	Seconds() int
-	Frames() int
-	Sectors() int
-	MsfByAdding(msf *MSF) *MSF
-	MsfBySubtracting(msf *MSF) *MSF
-	DescriptionWithFormat(format string) string
-	IsEqualToMSF(otherDRMSF *MSF) bool
-}
-
-var _ MSFable = (*MSF)(nil)

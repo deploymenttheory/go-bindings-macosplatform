@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,34 +51,19 @@ func NewMTL4LibraryFunctionDescriptor() *MTL4LibraryFunctionDescriptor {
 	return mTL4LibraryFunctionDescriptorAdopt(_id)
 }
 
-// WithName assigns a name to the function.
-func (x *MTL4LibraryFunctionDescriptor) WithName(name string) *MTL4LibraryFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets assigns a name to the function.
+func (mlfd *MTL4LibraryFunctionDescriptor) WithName(name string) *MTL4LibraryFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mlfd), objc.RegisterName("setName:"), purego.NSString(name))
+	return mlfd
 }
 
-// Name assigns a name to the function.
-func (x *MTL4LibraryFunctionDescriptor) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns assigns a name to the function.
+func (mlfd *MTL4LibraryFunctionDescriptor) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mlfd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MTL4LibraryFunctionDescriptor) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// MTL4LibraryFunctionDescriptorable is the interface implemented by [MTL4LibraryFunctionDescriptor], for mocking and DI.
-type MTL4LibraryFunctionDescriptorable interface {
-	obj.Object
-	WithName(name string) *MTL4LibraryFunctionDescriptor
-	Name() string
-	SetName(name string)
-}
-
-var _ MTL4LibraryFunctionDescriptorable = (*MTL4LibraryFunctionDescriptor)(nil)
 
 var _ MTL4FunctionDescriptorProvider = (*MTL4LibraryFunctionDescriptor)(nil)

@@ -47,24 +47,24 @@ func rendererAdopt(id objc.ID) *Renderer {
 }
 
 // Description returns the object's -description text.
-func (x *Renderer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Renderer) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Renderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Renderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Renderer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Renderer) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRenderer creates a new Renderer.
@@ -73,81 +73,53 @@ func NewRenderer() *Renderer {
 	return rendererAdopt(_id)
 }
 
-// WithLayer the root layer of the layer-tree the receiver should render.
-func (x *Renderer) WithLayer(layer LayerProvider) *Renderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+// WithLayer sets the root layer of the layer-tree the receiver should render.
+func (r *Renderer) WithLayer(layer LayerProvider) *Renderer {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return r
 }
 
-// WithBounds the bounds of the receiver.
-func (x *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the bounds of the receiver.
+func (r *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setBounds:"), bounds)
+	return r
 }
 
 // UpdateBounds returns the bounds of the update region that contains all pixels that will be rendered by the current frame.
-func (x *Renderer) UpdateBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("updateBounds"))
+func (r *Renderer) UpdateBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(r), objc.RegisterName("updateBounds"))
 	return _r
 }
 
 // AddUpdateRect adds the rectangle to the update region of the current frame.
-func (x *Renderer) AddUpdateRect(r corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUpdateRect:"), r)
+func (r_ *Renderer) AddUpdateRect(r corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(r_), objc.RegisterName("addUpdateRect:"), r)
 }
 
 // Render render the update region of the current frame to the target context.
-func (x *Renderer) Render() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("render"))
+func (r *Renderer) Render() {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("render"))
 }
 
 // NextFrameTime returns the time at which the next update should happen.
-func (x *Renderer) NextFrameTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("nextFrameTime"))
+func (r *Renderer) NextFrameTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("nextFrameTime"))
 	return _r
 }
 
 // EndFrame release any data associated with the current frame.
-func (x *Renderer) EndFrame() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endFrame"))
+func (r *Renderer) EndFrame() {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("endFrame"))
 }
 
 // Layer wraps the corresponding Objective-C method.
-func (x *Renderer) Layer() *Layer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layer"))
+func (r *Renderer) Layer() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("layer"))
 	return LayerFromID(_r)
 }
 
-// SetLayer wraps the corresponding Objective-C method.
-func (x *Renderer) SetLayer(layer *Layer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-}
-
 // Bounds wraps the corresponding Objective-C method.
-func (x *Renderer) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+func (r *Renderer) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(r), objc.RegisterName("bounds"))
 	return _r
 }
-
-// SetBounds wraps the corresponding Objective-C method.
-func (x *Renderer) SetBounds(bounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-}
-
-// Rendererable is the interface implemented by [Renderer], for mocking and DI.
-type Rendererable interface {
-	obj.Object
-	WithLayer(layer LayerProvider) *Renderer
-	WithBounds(bounds corefoundation.CGRect) *Renderer
-	UpdateBounds() corefoundation.CGRect
-	AddUpdateRect(r corefoundation.CGRect)
-	Render()
-	NextFrameTime() float64
-	EndFrame()
-	Layer() *Layer
-	SetLayer(layer *Layer)
-	Bounds() corefoundation.CGRect
-	SetBounds(bounds corefoundation.CGRect)
-}
-
-var _ Rendererable = (*Renderer)(nil)

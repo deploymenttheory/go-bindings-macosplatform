@@ -47,14 +47,14 @@ func transitPassPropertiesAdopt(id objc.ID) *TransitPassProperties {
 }
 
 // TransitBalance wraps the corresponding Objective-C method.
-func (x *TransitPassProperties) TransitBalance() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitBalance"))
+func (tpp *TransitPassProperties) TransitBalance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tpp), objc.RegisterName("transitBalance"))
 	return obj.Wrap(_r)
 }
 
 // TransitBalanceCurrencyCode wraps the corresponding Objective-C method.
-func (x *TransitPassProperties) TransitBalanceCurrencyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitBalanceCurrencyCode"))
+func (tpp *TransitPassProperties) TransitBalanceCurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tpp), objc.RegisterName("transitBalanceCurrencyCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -62,25 +62,15 @@ func (x *TransitPassProperties) TransitBalanceCurrencyCode() string {
 }
 
 // IsInStation wraps the corresponding Objective-C method.
-func (x *TransitPassProperties) IsInStation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInStation"))
+func (tpp *TransitPassProperties) IsInStation() bool {
+	_r := objc.Send[bool](objref.IDOf(tpp), objc.RegisterName("isInStation"))
 	return _r
 }
-
-// TransitPassPropertiesable is the interface implemented by [TransitPassProperties], for mocking and DI.
-type TransitPassPropertiesable interface {
-	obj.Object
-	TransitBalance() obj.Object
-	TransitBalanceCurrencyCode() string
-	IsInStation() bool
-}
-
-var _ TransitPassPropertiesable = (*TransitPassProperties)(nil)
 
 // isTransitPassProperties marks TransitPassProperties — and, by embedding promotion, its
 // subclasses — as a member of the TransitPassProperties hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TransitPassProperties) isTransitPassProperties() {}
+func (tpp *TransitPassProperties) isTransitPassProperties() {}
 
 var _ TransitPassPropertiesProvider = (*TransitPassProperties)(nil)
 

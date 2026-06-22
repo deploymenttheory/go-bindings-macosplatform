@@ -46,24 +46,24 @@ func headphoneActivityManagerAdopt(id objc.ID) *HeadphoneActivityManager {
 }
 
 // Description returns the object's -description text.
-func (x *HeadphoneActivityManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ham *HeadphoneActivityManager) Description() string {
+	return rt.Description(objref.IDOf(ham))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HeadphoneActivityManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ham *HeadphoneActivityManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ham), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HeadphoneActivityManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ham *HeadphoneActivityManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ham), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HeadphoneActivityManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ham *HeadphoneActivityManager) String() string {
+	return rt.Description(objref.IDOf(ham))
 }
 
 // NewHeadphoneActivityManager creates a new HeadphoneActivityManager.
@@ -73,48 +73,35 @@ func NewHeadphoneActivityManager() *HeadphoneActivityManager {
 }
 
 // StopActivityUpdates stops headphone activity updates.
-func (x *HeadphoneActivityManager) StopActivityUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopActivityUpdates"))
+func (ham *HeadphoneActivityManager) StopActivityUpdates() {
+	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("stopActivityUpdates"))
 }
 
 // StopStatusUpdates stops headphone status updates.
-func (x *HeadphoneActivityManager) StopStatusUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopStatusUpdates"))
+func (ham *HeadphoneActivityManager) StopStatusUpdates() {
+	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("stopStatusUpdates"))
 }
 
 // IsActivityAvailable wraps the corresponding Objective-C method.
-func (x *HeadphoneActivityManager) IsActivityAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActivityAvailable"))
+func (ham *HeadphoneActivityManager) IsActivityAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isActivityAvailable"))
 	return _r
 }
 
 // IsActivityActive wraps the corresponding Objective-C method.
-func (x *HeadphoneActivityManager) IsActivityActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActivityActive"))
+func (ham *HeadphoneActivityManager) IsActivityActive() bool {
+	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isActivityActive"))
 	return _r
 }
 
 // IsStatusAvailable wraps the corresponding Objective-C method.
-func (x *HeadphoneActivityManager) IsStatusAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStatusAvailable"))
+func (ham *HeadphoneActivityManager) IsStatusAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isStatusAvailable"))
 	return _r
 }
 
 // IsStatusActive wraps the corresponding Objective-C method.
-func (x *HeadphoneActivityManager) IsStatusActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStatusActive"))
+func (ham *HeadphoneActivityManager) IsStatusActive() bool {
+	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isStatusActive"))
 	return _r
 }
-
-// HeadphoneActivityManagerable is the interface implemented by [HeadphoneActivityManager], for mocking and DI.
-type HeadphoneActivityManagerable interface {
-	obj.Object
-	StopActivityUpdates()
-	StopStatusUpdates()
-	IsActivityAvailable() bool
-	IsActivityActive() bool
-	IsStatusAvailable() bool
-	IsStatusActive() bool
-}
-
-var _ HeadphoneActivityManagerable = (*HeadphoneActivityManager)(nil)

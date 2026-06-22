@@ -15,7 +15,7 @@ func DefaultsForModuleWithName(inModuleName string) *ScreenSaverDefaults {
 	return ScreenSaverDefaultsFromID(_r)
 }
 
-// PerformGammaFade indicates whether to perform a gradual screen fade when the system starts and stops your screen saver’s animation.
+// PerformGammaFade reports whether to perform a gradual screen fade when the system starts and stops your screen saver’s animation.
 func PerformGammaFade() bool {
 	_r := objc.Send[bool](objc.ID(_class("ScreenSaverView")), objc.RegisterName("performGammaFade"))
 	return _r

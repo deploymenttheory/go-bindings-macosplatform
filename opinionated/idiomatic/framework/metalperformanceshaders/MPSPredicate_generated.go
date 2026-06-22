@@ -44,24 +44,24 @@ func predicateAdopt(id objc.ID) *Predicate {
 }
 
 // Description returns the object's -description text.
-func (x *Predicate) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Predicate) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Predicate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Predicate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Predicate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Predicate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Predicate) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Predicate) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPredicate creates a new Predicate.
@@ -70,16 +70,8 @@ func NewPredicate() *Predicate {
 	return predicateAdopt(_id)
 }
 
-// PredicateOffset location of the predicate in bytes, must be multiple of four. If the uint32_t value stored at this location in
-func (x *Predicate) PredicateOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("predicateOffset"))
+// PredicateOffset returns location of the predicate in bytes, must be multiple of four. If the uint32_t value stored at this location in
+func (p *Predicate) PredicateOffset() int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("predicateOffset"))
 	return _r
 }
-
-// Predicateable is the interface implemented by [Predicate], for mocking and DI.
-type Predicateable interface {
-	obj.Object
-	PredicateOffset() int
-}
-
-var _ Predicateable = (*Predicate)(nil)

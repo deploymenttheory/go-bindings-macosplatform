@@ -68,17 +68,9 @@ func NewLogicalTestNotTestWithTest(subTest *ScriptWhoseTest) *LogicalTest {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *LogicalTest) WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (lt *LogicalTest) WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest {
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return lt
 }
-
-// LogicalTestable is the interface implemented by [LogicalTest], for mocking and DI.
-type LogicalTestable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest
-}
-
-var _ LogicalTestable = (*LogicalTest)(nil)
 
 var _ ScriptWhoseTestProvider = (*LogicalTest)(nil)

@@ -44,24 +44,24 @@ func transformRotateOpAdopt(id objc.ID) *TransformRotateOp {
 }
 
 // Description returns the object's -description text.
-func (x *TransformRotateOp) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tro *TransformRotateOp) Description() string {
+	return rt.Description(objref.IDOf(tro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformRotateOp) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tro *TransformRotateOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformRotateOp) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tro *TransformRotateOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TransformRotateOp) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tro *TransformRotateOp) String() string {
+	return rt.Description(objref.IDOf(tro))
 }
 
 // NewTransformRotateOp creates a new TransformRotateOp.
@@ -71,8 +71,8 @@ func NewTransformRotateOp() *TransformRotateOp {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TransformRotateOp) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (tro *TransformRotateOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tro), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,16 +80,7 @@ func (x *TransformRotateOp) Name() string {
 }
 
 // AnimatedValue wraps the corresponding Objective-C method.
-func (x *TransformRotateOp) AnimatedValue() *AnimatedVector3 {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+func (tro *TransformRotateOp) AnimatedValue() *AnimatedVector3 {
+	_r := objc.Send[objc.ID](objref.IDOf(tro), objc.RegisterName("animatedValue"))
 	return AnimatedVector3FromID(_r)
 }
-
-// TransformRotateOpable is the interface implemented by [TransformRotateOp], for mocking and DI.
-type TransformRotateOpable interface {
-	obj.Object
-	Name() string
-	AnimatedValue() *AnimatedVector3
-}
-
-var _ TransformRotateOpable = (*TransformRotateOp)(nil)

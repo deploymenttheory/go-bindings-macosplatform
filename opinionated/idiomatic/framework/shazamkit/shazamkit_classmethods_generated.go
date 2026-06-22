@@ -6,12 +6,13 @@ package shazamkit
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // New creates a new custom catalog object for storing reference audio signatures and their associated metadata.
@@ -51,7 +52,7 @@ func FetchMediaItemWithShazamID(ctx context.Context, shazamID string) (result *M
 	}
 }
 
-// DefaultLibrary an instance of the user's default Shazam library.
+// DefaultLibrary returns an instance of the user's default Shazam library.
 func DefaultLibrary() *MediaLibrary {
 	_r := objc.Send[objc.ID](objc.ID(_class("SHMediaLibrary")), objc.RegisterName("defaultLibrary"))
 	return MediaLibraryFromID(_r)

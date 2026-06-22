@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt(id objc.ID) *
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Description() string {
+	return rt.Description(objref.IDOf(apkclbao))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkclbao), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkclbao), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) String() string {
+	return rt.Description(objref.IDOf(apkclbao))
 }
 
 // NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput creates a new AuthorizationPublicKeyCredentialLargeBlobAssertionOutput.
@@ -73,22 +73,13 @@ func NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput() *Authorizatio
 }
 
 // ReadData wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readData"))
+func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkclbao), objc.RegisterName("readData"))
 	return obj.Wrap(_r)
 }
 
 // DidWrite wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) DidWrite() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didWrite"))
+func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) DidWrite() bool {
+	_r := objc.Send[bool](objref.IDOf(apkclbao), objc.RegisterName("didWrite"))
 	return _r
 }
-
-// AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobAssertionOutput], for mocking and DI.
-type AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable interface {
-	obj.Object
-	ReadData() obj.Object
-	DidWrite() bool
-}
-
-var _ AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable = (*AuthorizationPublicKeyCredentialLargeBlobAssertionOutput)(nil)

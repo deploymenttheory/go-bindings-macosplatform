@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,47 +53,35 @@ func NewImageThresholdBinary() *ImageThresholdBinary {
 	return imageThresholdBinaryAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageThresholdBinary) WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinary {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (itb *ImageThresholdBinary) WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinary {
+	objc.Send[objc.ID](objref.IDOf(itb), objc.RegisterName("setOffset:"), offset)
+	return itb
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageThresholdBinary) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinary {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (itb *ImageThresholdBinary) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinary {
+	objc.Send[objc.ID](objref.IDOf(itb), objc.RegisterName("setClipRect:"), clipRect)
+	return itb
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageThresholdBinary) WithLabel(label string) *ImageThresholdBinary {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (itb *ImageThresholdBinary) WithLabel(label string) *ImageThresholdBinary {
+	objc.Send[objc.ID](objref.IDOf(itb), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return itb
 }
 
-// ThresholdValue the threshold value used to init the threshold filter
-func (x *ImageThresholdBinary) ThresholdValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
+// ThresholdValue returns the threshold value used to init the threshold filter
+func (itb *ImageThresholdBinary) ThresholdValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(itb), objc.RegisterName("thresholdValue"))
 	return _r
 }
 
-// MaximumValue the maximum value used to init the threshold filter
-func (x *ImageThresholdBinary) MaximumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
+// MaximumValue returns the maximum value used to init the threshold filter
+func (itb *ImageThresholdBinary) MaximumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(itb), objc.RegisterName("maximumValue"))
 	return _r
 }
-
-// ImageThresholdBinaryable is the interface implemented by [ImageThresholdBinary], for mocking and DI.
-type ImageThresholdBinaryable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinary
-	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinary
-	WithLabel(label string) *ImageThresholdBinary
-	ThresholdValue() float32
-	MaximumValue() float32
-}
-
-var _ ImageThresholdBinaryable = (*ImageThresholdBinary)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageThresholdBinary)(nil)
 

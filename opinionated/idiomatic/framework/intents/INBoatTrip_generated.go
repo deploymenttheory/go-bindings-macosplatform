@@ -46,24 +46,24 @@ func boatTripAdopt(id objc.ID) *BoatTrip {
 }
 
 // Description returns the object's -description text.
-func (x *BoatTrip) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BoatTrip) Description() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BoatTrip) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bt *BoatTrip) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BoatTrip) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bt *BoatTrip) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BoatTrip) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BoatTrip) String() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation creates a boat trip with the specified contents and attributes.
@@ -74,8 +74,8 @@ func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalL
 }
 
 // Provider wraps the corresponding Objective-C method.
-func (x *BoatTrip) Provider() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
+func (bt *BoatTrip) Provider() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("provider"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *BoatTrip) Provider() string {
 }
 
 // BoatName wraps the corresponding Objective-C method.
-func (x *BoatTrip) BoatName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatName"))
+func (bt *BoatTrip) BoatName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("boatName"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +92,8 @@ func (x *BoatTrip) BoatName() string {
 }
 
 // BoatNumber wraps the corresponding Objective-C method.
-func (x *BoatTrip) BoatNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatNumber"))
+func (bt *BoatTrip) BoatNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("boatNumber"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,32 +101,19 @@ func (x *BoatTrip) BoatNumber() string {
 }
 
 // TripDuration wraps the corresponding Objective-C method.
-func (x *BoatTrip) TripDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
+func (bt *BoatTrip) TripDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // DepartureBoatTerminalLocation wraps the corresponding Objective-C method.
-func (x *BoatTrip) DepartureBoatTerminalLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureBoatTerminalLocation"))
+func (bt *BoatTrip) DepartureBoatTerminalLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departureBoatTerminalLocation"))
 	return obj.Wrap(_r)
 }
 
 // ArrivalBoatTerminalLocation wraps the corresponding Objective-C method.
-func (x *BoatTrip) ArrivalBoatTerminalLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalBoatTerminalLocation"))
+func (bt *BoatTrip) ArrivalBoatTerminalLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalBoatTerminalLocation"))
 	return obj.Wrap(_r)
 }
-
-// BoatTripable is the interface implemented by [BoatTrip], for mocking and DI.
-type BoatTripable interface {
-	obj.Object
-	Provider() string
-	BoatName() string
-	BoatNumber() string
-	TripDuration() *DateComponentsRange
-	DepartureBoatTerminalLocation() obj.Object
-	ArrivalBoatTerminalLocation() obj.Object
-}
-
-var _ BoatTripable = (*BoatTrip)(nil)

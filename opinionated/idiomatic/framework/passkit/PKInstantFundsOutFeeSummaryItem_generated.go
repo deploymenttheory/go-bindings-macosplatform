@@ -52,32 +52,22 @@ func NewInstantFundsOutFeeSummaryItem() *InstantFundsOutFeeSummaryItem {
 	return instantFundsOutFeeSummaryItemAdopt(_id)
 }
 
-// WithLabel a short, localized description of the item.
-func (x *InstantFundsOutFeeSummaryItem) WithLabel(label string) *InstantFundsOutFeeSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a short, localized description of the item.
+func (ifofsi *InstantFundsOutFeeSummaryItem) WithLabel(label string) *InstantFundsOutFeeSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(ifofsi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ifofsi
 }
 
-// WithAmount the summary item’s amount.
-func (x *InstantFundsOutFeeSummaryItem) WithAmount(amount obj.Object) *InstantFundsOutFeeSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
-	return x
+// WithAmount sets the summary item’s amount.
+func (ifofsi *InstantFundsOutFeeSummaryItem) WithAmount(amount obj.Object) *InstantFundsOutFeeSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(ifofsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
+	return ifofsi
 }
 
-// WithType the summary item’s type that indicates whether the amount is final.
-func (x *InstantFundsOutFeeSummaryItem) WithType(type_ PaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the summary item’s type that indicates whether the amount is final.
+func (ifofsi *InstantFundsOutFeeSummaryItem) WithType(type_ PaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(ifofsi), objc.RegisterName("setType:"), type_)
+	return ifofsi
 }
-
-// InstantFundsOutFeeSummaryItemable is the interface implemented by [InstantFundsOutFeeSummaryItem], for mocking and DI.
-type InstantFundsOutFeeSummaryItemable interface {
-	obj.Object
-	WithLabel(label string) *InstantFundsOutFeeSummaryItem
-	WithAmount(amount obj.Object) *InstantFundsOutFeeSummaryItem
-	WithType(type_ PaymentSummaryItemType) *InstantFundsOutFeeSummaryItem
-}
-
-var _ InstantFundsOutFeeSummaryItemable = (*InstantFundsOutFeeSummaryItem)(nil)
 
 var _ PaymentSummaryItemProvider = (*InstantFundsOutFeeSummaryItem)(nil)

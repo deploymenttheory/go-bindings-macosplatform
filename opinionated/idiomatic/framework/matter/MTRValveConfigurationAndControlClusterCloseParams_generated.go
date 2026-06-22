@@ -44,24 +44,24 @@ func mTRValveConfigurationAndControlClusterCloseParamsAdopt(id objc.ID) *MTRValv
 }
 
 // Description returns the object's -description text.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) Description() string {
+	return rt.Description(objref.IDOf(mvcacccp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mvcacccp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mvcacccp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) String() string {
+	return rt.Description(objref.IDOf(mvcacccp))
 }
 
 // NewMTRValveConfigurationAndControlClusterCloseParams creates a new MTRValveConfigurationAndControlClusterCloseParams.
@@ -70,49 +70,26 @@ func NewMTRValveConfigurationAndControlClusterCloseParams() *MTRValveConfigurati
 	return mTRValveConfigurationAndControlClusterCloseParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRValveConfigurationAndControlClusterCloseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRValveConfigurationAndControlClusterCloseParams {
+	objc.Send[objc.ID](objref.IDOf(mvcacccp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mvcacccp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRValveConfigurationAndControlClusterCloseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRValveConfigurationAndControlClusterCloseParams {
+	objc.Send[objc.ID](objref.IDOf(mvcacccp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mvcacccp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mvcacccp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mvcacccp *MTRValveConfigurationAndControlClusterCloseParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mvcacccp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRValveConfigurationAndControlClusterCloseParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRValveConfigurationAndControlClusterCloseParamsable is the interface implemented by [MTRValveConfigurationAndControlClusterCloseParams], for mocking and DI.
-type MTRValveConfigurationAndControlClusterCloseParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRValveConfigurationAndControlClusterCloseParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRValveConfigurationAndControlClusterCloseParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRValveConfigurationAndControlClusterCloseParamsable = (*MTRValveConfigurationAndControlClusterCloseParams)(nil)

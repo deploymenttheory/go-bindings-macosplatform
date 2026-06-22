@@ -88,38 +88,22 @@ func NewToolPickerInkingItemWithInkTypeColorWidthAzimuthIdentifier(inkType obj.O
 	return toolPickerInkingItemAdopt(_id)
 }
 
-// WithAllowsColorSelection present color selection UI to the user. Default value is YES.
-func (x *ToolPickerInkingItem) WithAllowsColorSelection(allowsColorSelection bool) *ToolPickerInkingItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsColorSelection:"), allowsColorSelection)
-	return x
+// WithAllowsColorSelection sets present color selection UI to the user. Default value is YES.
+func (tpii *ToolPickerInkingItem) WithAllowsColorSelection(allowsColorSelection bool) *ToolPickerInkingItem {
+	objc.Send[objc.ID](objref.IDOf(tpii), objc.RegisterName("setAllowsColorSelection:"), allowsColorSelection)
+	return tpii
 }
 
-// InkingTool a tool for drawing on a `PKCanvasView`.
-func (x *ToolPickerInkingItem) InkingTool() *InkingTool {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkingTool"))
+// InkingTool returns a tool for drawing on a `PKCanvasView`.
+func (tpii *ToolPickerInkingItem) InkingTool() *InkingTool {
+	_r := objc.Send[objc.ID](objref.IDOf(tpii), objc.RegisterName("inkingTool"))
 	return InkingToolFromID(_r)
 }
 
-// AllowsColorSelection present color selection UI to the user. Default value is YES.
-func (x *ToolPickerInkingItem) AllowsColorSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsColorSelection"))
+// AllowsColorSelection reports whether present color selection UI to the user. Default value is true.
+func (tpii *ToolPickerInkingItem) AllowsColorSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(tpii), objc.RegisterName("allowsColorSelection"))
 	return _r
 }
-
-// SetAllowsColorSelection wraps the corresponding Objective-C method.
-func (x *ToolPickerInkingItem) SetAllowsColorSelection(allowsColorSelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsColorSelection:"), allowsColorSelection)
-}
-
-// ToolPickerInkingItemable is the interface implemented by [ToolPickerInkingItem], for mocking and DI.
-type ToolPickerInkingItemable interface {
-	obj.Object
-	WithAllowsColorSelection(allowsColorSelection bool) *ToolPickerInkingItem
-	InkingTool() *InkingTool
-	AllowsColorSelection() bool
-	SetAllowsColorSelection(allowsColorSelection bool)
-}
-
-var _ ToolPickerInkingItemable = (*ToolPickerInkingItem)(nil)
 
 var _ ToolPickerItemProvider = (*ToolPickerInkingItem)(nil)

@@ -44,24 +44,24 @@ func mTRDoorLockClusterUnlockDoorParamsAdopt(id objc.ID) *MTRDoorLockClusterUnlo
 }
 
 // Description returns the object's -description text.
-func (x *MTRDoorLockClusterUnlockDoorParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) Description() string {
+	return rt.Description(objref.IDOf(mdlcudp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDoorLockClusterUnlockDoorParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlcudp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDoorLockClusterUnlockDoorParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlcudp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDoorLockClusterUnlockDoorParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) String() string {
+	return rt.Description(objref.IDOf(mdlcudp))
 }
 
 // NewMTRDoorLockClusterUnlockDoorParams creates a new MTRDoorLockClusterUnlockDoorParams.
@@ -71,68 +71,37 @@ func NewMTRDoorLockClusterUnlockDoorParams() *MTRDoorLockClusterUnlockDoorParams
 }
 
 // WithPinCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterUnlockDoorParams) WithPinCode(pinCode obj.Object) *MTRDoorLockClusterUnlockDoorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinCode:"), objref.IDOf(pinCode))
-	return x
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) WithPinCode(pinCode obj.Object) *MTRDoorLockClusterUnlockDoorParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("setPinCode:"), objref.IDOf(pinCode))
+	return mdlcudp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDoorLockClusterUnlockDoorParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterUnlockDoorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterUnlockDoorParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mdlcudp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDoorLockClusterUnlockDoorParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterUnlockDoorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterUnlockDoorParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mdlcudp
 }
 
 // PinCode wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterUnlockDoorParams) PinCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pinCode"))
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) PinCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("pinCode"))
 	return obj.Wrap(_r)
 }
 
-// SetPinCode wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterUnlockDoorParams) SetPinCode(pinCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinCode:"), objref.IDOf(pinCode))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDoorLockClusterUnlockDoorParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterUnlockDoorParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDoorLockClusterUnlockDoorParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterUnlockDoorParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRDoorLockClusterUnlockDoorParamsable is the interface implemented by [MTRDoorLockClusterUnlockDoorParams], for mocking and DI.
-type MTRDoorLockClusterUnlockDoorParamsable interface {
-	obj.Object
-	WithPinCode(pinCode obj.Object) *MTRDoorLockClusterUnlockDoorParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterUnlockDoorParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterUnlockDoorParams
-	PinCode() obj.Object
-	SetPinCode(pinCode obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRDoorLockClusterUnlockDoorParamsable = (*MTRDoorLockClusterUnlockDoorParams)(nil)

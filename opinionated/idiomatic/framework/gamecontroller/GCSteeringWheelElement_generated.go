@@ -46,24 +46,24 @@ func steeringWheelElementAdopt(id objc.ID) *SteeringWheelElement {
 }
 
 // Description returns the object's -description text.
-func (x *SteeringWheelElement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (swe *SteeringWheelElement) Description() string {
+	return rt.Description(objref.IDOf(swe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SteeringWheelElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (swe *SteeringWheelElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(swe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SteeringWheelElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (swe *SteeringWheelElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(swe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SteeringWheelElement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (swe *SteeringWheelElement) String() string {
+	return rt.Description(objref.IDOf(swe))
 }
 
 // NewSteeringWheelElement creates a new SteeringWheelElement.
@@ -73,15 +73,7 @@ func NewSteeringWheelElement() *SteeringWheelElement {
 }
 
 // MaximumDegreesOfRotation wraps the corresponding Objective-C method.
-func (x *SteeringWheelElement) MaximumDegreesOfRotation() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumDegreesOfRotation"))
+func (swe *SteeringWheelElement) MaximumDegreesOfRotation() float32 {
+	_r := objc.Send[float32](objref.IDOf(swe), objc.RegisterName("maximumDegreesOfRotation"))
 	return _r
 }
-
-// SteeringWheelElementable is the interface implemented by [SteeringWheelElement], for mocking and DI.
-type SteeringWheelElementable interface {
-	obj.Object
-	MaximumDegreesOfRotation() float32
-}
-
-var _ SteeringWheelElementable = (*SteeringWheelElement)(nil)

@@ -5,13 +5,14 @@
 package coredata
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MigrationManager is an idiomatic wrapper over the Objective-C class NSMigrationManager.
@@ -48,24 +49,24 @@ func migrationManagerAdopt(id objc.ID) *MigrationManager {
 }
 
 // Description returns the object's -description text.
-func (x *MigrationManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mm *MigrationManager) Description() string {
+	return rt.Description(objref.IDOf(mm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MigrationManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mm *MigrationManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MigrationManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mm *MigrationManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MigrationManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mm *MigrationManager) String() string {
+	return rt.Description(objref.IDOf(mm))
 }
 
 // NewMigrationManagerWithSourceModelDestinationModel initializes a migration manager instance with given source and destination models.
@@ -75,22 +76,22 @@ func NewMigrationManagerWithSourceModelDestinationModel(sourceModel *ManagedObje
 	return migrationManagerAdopt(_id)
 }
 
-// WithUsesStoreSpecificMigrationManager a Boolean value that indicates whether the migration manager tries to use a store specific migration manager to perform the migration.
-func (x *MigrationManager) WithUsesStoreSpecificMigrationManager(usesStoreSpecificMigrationManager bool) *MigrationManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStoreSpecificMigrationManager:"), usesStoreSpecificMigrationManager)
-	return x
+// WithUsesStoreSpecificMigrationManager sets a Boolean value that indicates whether the migration manager tries to use a store specific migration manager to perform the migration.
+func (mm *MigrationManager) WithUsesStoreSpecificMigrationManager(usesStoreSpecificMigrationManager bool) *MigrationManager {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setUsesStoreSpecificMigrationManager:"), usesStoreSpecificMigrationManager)
+	return mm
 }
 
-// WithUserInfo the user info for the migration manager.
-func (x *MigrationManager) WithUserInfo(userInfo obj.Object) *MigrationManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info for the migration manager.
+func (mm *MigrationManager) WithUserInfo(userInfo obj.Object) *MigrationManager {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return mm
 }
 
 // MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptions migrates the store at a given source URL to the store at a given destination URL, performing all of the mappings specified in a given mapping model.
-func (x *MigrationManager) MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptions(sourceURL string, sStoreType string, sOptions obj.Object, mappings *MappingModel, dURL string, dStoreType string, dOptions obj.Object) error {
+func (mm *MigrationManager) MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptions(sourceURL string, sStoreType string, sOptions obj.Object, mappings *MappingModel, dURL string, dStoreType string, dOptions obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("migrateStoreFromURL:type:options:withMappingModel:toDestinationURL:destinationType:destinationOptions:error:"), rt.FileURL(sourceURL), purego.NSString(sStoreType), objref.IDOf(sOptions), objref.IDOf(mappings), rt.FileURL(dURL), purego.NSString(dStoreType), objref.IDOf(dOptions), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(mm), objc.RegisterName("migrateStoreFromURL:type:options:withMappingModel:toDestinationURL:destinationType:destinationOptions:error:"), rt.FileURL(sourceURL), purego.NSString(sStoreType), objref.IDOf(sOptions), objref.IDOf(mappings), rt.FileURL(dURL), purego.NSString(dStoreType), objref.IDOf(dOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -98,126 +99,89 @@ func (x *MigrationManager) MigrateStoreFromURLTypeOptionsWithMappingModelToDesti
 }
 
 // Reset resets the association tables for the migration.
-func (x *MigrationManager) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (mm *MigrationManager) Reset() {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("reset"))
 }
 
 // SourceEntityForEntityMapping returns the entity description for the source entity of a given entity mapping.
-func (x *MigrationManager) SourceEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceEntityForEntityMapping:"), objref.IDOf(mEntity))
+func (mm *MigrationManager) SourceEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceEntityForEntityMapping:"), objref.IDOf(mEntity))
 	return EntityDescriptionFromID(_r)
 }
 
 // DestinationEntityForEntityMapping returns the entity description for the destination entity of a given entity mapping.
-func (x *MigrationManager) DestinationEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationEntityForEntityMapping:"), objref.IDOf(mEntity))
+func (mm *MigrationManager) DestinationEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationEntityForEntityMapping:"), objref.IDOf(mEntity))
 	return EntityDescriptionFromID(_r)
 }
 
 // AssociateSourceInstanceWithDestinationInstanceForEntityMapping associates a given source managed object instance with an array of destination instances for a given property mapping.
-func (x *MigrationManager) AssociateSourceInstanceWithDestinationInstanceForEntityMapping(sourceInstance *ManagedObject, destinationInstance *ManagedObject, entityMapping *EntityMapping) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associateSourceInstance:withDestinationInstance:forEntityMapping:"), objref.IDOf(sourceInstance), objref.IDOf(destinationInstance), objref.IDOf(entityMapping))
+func (mm *MigrationManager) AssociateSourceInstanceWithDestinationInstanceForEntityMapping(sourceInstance *ManagedObject, destinationInstance *ManagedObject, entityMapping *EntityMapping) {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("associateSourceInstance:withDestinationInstance:forEntityMapping:"), objref.IDOf(sourceInstance), objref.IDOf(destinationInstance), objref.IDOf(entityMapping))
 }
 
 // DestinationInstancesForEntityMappingNamedSourceInstances returns the managed object instances created in the destination store for the named entity mapping for the given array of source instances.
-func (x *MigrationManager) DestinationInstancesForEntityMappingNamedSourceInstances(mappingName string, sourceInstances []*ManagedObject) []*ManagedObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationInstancesForEntityMappingNamed:sourceInstances:"), purego.NSString(mappingName), purego.SliceToNSArray(sourceInstances, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }))
+func (mm *MigrationManager) DestinationInstancesForEntityMappingNamedSourceInstances(mappingName string, sourceInstances []*ManagedObject) []*ManagedObject {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationInstancesForEntityMappingNamed:sourceInstances:"), purego.NSString(mappingName), purego.SliceToNSArray(sourceInstances, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
 // SourceInstancesForEntityMappingNamedDestinationInstances returns the managed object instances in the source store used to create the given destination instances for the passed in property mapping.
-func (x *MigrationManager) SourceInstancesForEntityMappingNamedDestinationInstances(mappingName string, destinationInstances []*ManagedObject) []*ManagedObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceInstancesForEntityMappingNamed:destinationInstances:"), purego.NSString(mappingName), purego.SliceToNSArray(destinationInstances, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }))
+func (mm *MigrationManager) SourceInstancesForEntityMappingNamedDestinationInstances(mappingName string, destinationInstances []*ManagedObject) []*ManagedObject {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceInstancesForEntityMappingNamed:destinationInstances:"), purego.NSString(mappingName), purego.SliceToNSArray(destinationInstances, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
 // UsesStoreSpecificMigrationManager wraps the corresponding Objective-C method.
-func (x *MigrationManager) UsesStoreSpecificMigrationManager() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesStoreSpecificMigrationManager"))
+func (mm *MigrationManager) UsesStoreSpecificMigrationManager() bool {
+	_r := objc.Send[bool](objref.IDOf(mm), objc.RegisterName("usesStoreSpecificMigrationManager"))
 	return _r
 }
 
-// SetUsesStoreSpecificMigrationManager wraps the corresponding Objective-C method.
-func (x *MigrationManager) SetUsesStoreSpecificMigrationManager(usesStoreSpecificMigrationManager bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStoreSpecificMigrationManager:"), usesStoreSpecificMigrationManager)
-}
-
 // MappingModel wraps the corresponding Objective-C method.
-func (x *MigrationManager) MappingModel() *MappingModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mappingModel"))
+func (mm *MigrationManager) MappingModel() *MappingModel {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("mappingModel"))
 	return MappingModelFromID(_r)
 }
 
 // SourceModel wraps the corresponding Objective-C method.
-func (x *MigrationManager) SourceModel() *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceModel"))
+func (mm *MigrationManager) SourceModel() *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // DestinationModel wraps the corresponding Objective-C method.
-func (x *MigrationManager) DestinationModel() *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationModel"))
+func (mm *MigrationManager) DestinationModel() *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // SourceContext wraps the corresponding Objective-C method.
-func (x *MigrationManager) SourceContext() *ManagedObjectContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceContext"))
+func (mm *MigrationManager) SourceContext() *ManagedObjectContext {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // DestinationContext wraps the corresponding Objective-C method.
-func (x *MigrationManager) DestinationContext() *ManagedObjectContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationContext"))
+func (mm *MigrationManager) DestinationContext() *ManagedObjectContext {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // CurrentEntityMapping wraps the corresponding Objective-C method.
-func (x *MigrationManager) CurrentEntityMapping() *EntityMapping {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentEntityMapping"))
+func (mm *MigrationManager) CurrentEntityMapping() *EntityMapping {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("currentEntityMapping"))
 	return EntityMappingFromID(_r)
 }
 
 // MigrationProgress wraps the corresponding Objective-C method.
-func (x *MigrationManager) MigrationProgress() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("migrationProgress"))
+func (mm *MigrationManager) MigrationProgress() float32 {
+	_r := objc.Send[float32](objref.IDOf(mm), objc.RegisterName("migrationProgress"))
 	return _r
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *MigrationManager) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (mm *MigrationManager) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
-
-// SetUserInfo wraps the corresponding Objective-C method.
-func (x *MigrationManager) SetUserInfo(userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-}
-
-// MigrationManagerable is the interface implemented by [MigrationManager], for mocking and DI.
-type MigrationManagerable interface {
-	obj.Object
-	WithUsesStoreSpecificMigrationManager(usesStoreSpecificMigrationManager bool) *MigrationManager
-	WithUserInfo(userInfo obj.Object) *MigrationManager
-	MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptions(sourceURL string, sStoreType string, sOptions obj.Object, mappings *MappingModel, dURL string, dStoreType string, dOptions obj.Object) error
-	Reset()
-	SourceEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription
-	DestinationEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription
-	AssociateSourceInstanceWithDestinationInstanceForEntityMapping(sourceInstance *ManagedObject, destinationInstance *ManagedObject, entityMapping *EntityMapping)
-	DestinationInstancesForEntityMappingNamedSourceInstances(mappingName string, sourceInstances []*ManagedObject) []*ManagedObject
-	SourceInstancesForEntityMappingNamedDestinationInstances(mappingName string, destinationInstances []*ManagedObject) []*ManagedObject
-	UsesStoreSpecificMigrationManager() bool
-	SetUsesStoreSpecificMigrationManager(usesStoreSpecificMigrationManager bool)
-	MappingModel() *MappingModel
-	SourceModel() *ManagedObjectModel
-	DestinationModel() *ManagedObjectModel
-	SourceContext() *ManagedObjectContext
-	DestinationContext() *ManagedObjectContext
-	CurrentEntityMapping() *EntityMapping
-	MigrationProgress() float32
-	UserInfo() obj.Object
-	SetUserInfo(userInfo obj.Object)
-}
-
-var _ MigrationManagerable = (*MigrationManager)(nil)

@@ -7,7 +7,6 @@ package cinematic
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,17 +55,9 @@ func NewCustomDetectionTrackWithDetectionsSmooth(detections []*Detection, applyS
 // AllDetections wraps the corresponding Objective-C method.
 //
 // AllDetections returns the collection as a Go slice.
-func (x *CustomDetectionTrack) AllDetections() []*Detection {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDetections"))
+func (cdt *CustomDetectionTrack) AllDetections() []*Detection {
+	_arr := objc.Send[objc.ID](objref.IDOf(cdt), objc.RegisterName("allDetections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }
-
-// CustomDetectionTrackable is the interface implemented by [CustomDetectionTrack], for mocking and DI.
-type CustomDetectionTrackable interface {
-	obj.Object
-	AllDetections() []*Detection
-}
-
-var _ CustomDetectionTrackable = (*CustomDetectionTrack)(nil)
 
 var _ DetectionTrackProvider = (*CustomDetectionTrack)(nil)

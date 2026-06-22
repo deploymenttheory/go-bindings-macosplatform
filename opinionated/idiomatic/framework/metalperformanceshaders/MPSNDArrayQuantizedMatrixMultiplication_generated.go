@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,33 +49,23 @@ func NewNDArrayQuantizedMatrixMultiplication() *NDArrayQuantizedMatrixMultiplica
 	return nDArrayQuantizedMatrixMultiplicationAdopt(_id)
 }
 
-// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *NDArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (naqmm *NDArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(naqmm), objc.RegisterName("setAlpha:"), alpha)
+	return naqmm
 }
 
-// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *NDArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (naqmm *NDArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(naqmm), objc.RegisterName("setBeta:"), beta)
+	return naqmm
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayQuantizedMatrixMultiplication) WithLabel(label string) *NDArrayQuantizedMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (naqmm *NDArrayQuantizedMatrixMultiplication) WithLabel(label string) *NDArrayQuantizedMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(naqmm), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return naqmm
 }
-
-// NDArrayQuantizedMatrixMultiplicationable is the interface implemented by [NDArrayQuantizedMatrixMultiplication], for mocking and DI.
-type NDArrayQuantizedMatrixMultiplicationable interface {
-	obj.Object
-	WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication
-	WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication
-	WithLabel(label string) *NDArrayQuantizedMatrixMultiplication
-}
-
-var _ NDArrayQuantizedMatrixMultiplicationable = (*NDArrayQuantizedMatrixMultiplication)(nil)
 
 var _ NDArrayMatrixMultiplicationProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)
 

@@ -68,60 +68,46 @@ func NewDecimalNumberWithStringLocale(numberValue string, locale obj.Object) *De
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DecimalNumber) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (dn *DecimalNumber) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber {
+	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return dn
 }
 
 // DecimalNumberByAdding adds this number to another given number.
-func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *DecimalNumber) *DecimalNumber {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByAdding:"), objref.IDOf(decimalNumber))
+func (dn *DecimalNumber) DecimalNumberByAdding(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByAdding:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberBySubtracting subtracts another given number from this one.
-func (x *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *DecimalNumber) *DecimalNumber {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberBySubtracting:"), objref.IDOf(decimalNumber))
+func (dn *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberBySubtracting:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByMultiplyingBy multiplies the number by another given number.
-func (x *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *DecimalNumber) *DecimalNumber {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByMultiplyingBy:"), objref.IDOf(decimalNumber))
+func (dn *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByMultiplyingBy:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByDividingBy divides the number by another given number.
-func (x *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *DecimalNumber) *DecimalNumber {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByDividingBy:"), objref.IDOf(decimalNumber))
+func (dn *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByDividingBy:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByRaisingToPower raises the number to a given power.
-func (x *DecimalNumber) DecimalNumberByRaisingToPower(power int) *DecimalNumber {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByRaisingToPower:"), power)
+func (dn *DecimalNumber) DecimalNumberByRaisingToPower(power int) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByRaisingToPower:"), power)
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByMultiplyingByPowerOf10 multiplies the number by 10 raised to the given power.
-func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:"), power)
+func (dn *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:"), power)
 	return DecimalNumberFromID(_r)
 }
-
-// DecimalNumberable is the interface implemented by [DecimalNumber], for mocking and DI.
-type DecimalNumberable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber
-	DecimalNumberByAdding(decimalNumber *DecimalNumber) *DecimalNumber
-	DecimalNumberBySubtracting(decimalNumber *DecimalNumber) *DecimalNumber
-	DecimalNumberByMultiplyingBy(decimalNumber *DecimalNumber) *DecimalNumber
-	DecimalNumberByDividingBy(decimalNumber *DecimalNumber) *DecimalNumber
-	DecimalNumberByRaisingToPower(power int) *DecimalNumber
-	DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber
-}
-
-var _ DecimalNumberable = (*DecimalNumber)(nil)
 
 var _ NumberProvider = (*DecimalNumber)(nil)
 

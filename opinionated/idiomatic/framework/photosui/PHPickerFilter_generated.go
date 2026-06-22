@@ -44,24 +44,24 @@ func pickerFilterAdopt(id objc.ID) *PickerFilter {
 }
 
 // Description returns the object's -description text.
-func (x *PickerFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pf *PickerFilter) Description() string {
+	return rt.Description(objref.IDOf(pf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PickerFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pf *PickerFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PickerFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pf *PickerFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PickerFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pf *PickerFilter) String() string {
+	return rt.Description(objref.IDOf(pf))
 }
 
 // NewPickerFilter creates a new PickerFilter.
@@ -69,10 +69,3 @@ func NewPickerFilter() *PickerFilter {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("new"))
 	return pickerFilterAdopt(_id)
 }
-
-// PickerFilterable is the interface implemented by [PickerFilter], for mocking and DI.
-type PickerFilterable interface {
-	obj.Object
-}
-
-var _ PickerFilterable = (*PickerFilter)(nil)

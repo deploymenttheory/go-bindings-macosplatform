@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,60 +51,46 @@ func NewConvolutionLayer() *ConvolutionLayer {
 	return convolutionLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ConvolutionLayer) WithLabel(label string) *ConvolutionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (cl *ConvolutionLayer) WithLabel(label string) *ConvolutionLayer {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ConvolutionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (cl *ConvolutionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return cl
 }
 
-// Descriptor the convolution descriptor
-func (x *ConvolutionLayer) Descriptor() *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the convolution descriptor
+func (cl *ConvolutionLayer) Descriptor() *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("descriptor"))
 	return ConvolutionDescriptorFromID(_r)
 }
 
-// Weights the weights tensor used by the convolution layer
-func (x *ConvolutionLayer) Weights() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+// Weights returns the weights tensor used by the convolution layer
+func (cl *ConvolutionLayer) Weights() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
-// Biases the bias tensor used by the convolution layer
-func (x *ConvolutionLayer) Biases() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biases"))
+// Biases returns the bias tensor used by the convolution layer
+func (cl *ConvolutionLayer) Biases() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("biases"))
 	return TensorFromID(_r)
 }
 
-// WeightsParameter the weights tensor parameter used for optimizer update
-func (x *ConvolutionLayer) WeightsParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
+// WeightsParameter returns the weights tensor parameter used for optimizer update
+func (cl *ConvolutionLayer) WeightsParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// BiasesParameter the bias tensor parameter used for optimizer update
-func (x *ConvolutionLayer) BiasesParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasesParameter"))
+// BiasesParameter returns the bias tensor parameter used for optimizer update
+func (cl *ConvolutionLayer) BiasesParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("biasesParameter"))
 	return TensorParameterFromID(_r)
 }
-
-// ConvolutionLayerable is the interface implemented by [ConvolutionLayer], for mocking and DI.
-type ConvolutionLayerable interface {
-	obj.Object
-	WithLabel(label string) *ConvolutionLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer
-	Descriptor() *ConvolutionDescriptor
-	Weights() *Tensor
-	Biases() *Tensor
-	WeightsParameter() *TensorParameter
-	BiasesParameter() *TensorParameter
-}
-
-var _ ConvolutionLayerable = (*ConvolutionLayer)(nil)
 
 var _ LayerProvider = (*ConvolutionLayer)(nil)

@@ -46,24 +46,24 @@ func filterGeneratorAdopt(id objc.ID) *FilterGenerator {
 }
 
 // Description returns the object's -description text.
-func (x *FilterGenerator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fg *FilterGenerator) Description() string {
+	return rt.Description(objref.IDOf(fg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FilterGenerator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fg *FilterGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FilterGenerator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fg *FilterGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FilterGenerator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fg *FilterGenerator) String() string {
+	return rt.Description(objref.IDOf(fg))
 }
 
 // NewFilterGeneratorWithContentsOfURL initializes a filter generator object with the contents of a filter generator file.
@@ -73,86 +73,62 @@ func NewFilterGeneratorWithContentsOfURL(aURL string) *FilterGenerator {
 	return filterGeneratorAdopt(_id)
 }
 
-// WithClassAttributes the class attributes associated with the filter.
-func (x *FilterGenerator) WithClassAttributes(classAttributes obj.Object) *FilterGenerator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassAttributes:"), objref.IDOf(classAttributes))
-	return x
+// WithClassAttributes sets the class attributes associated with the filter.
+func (fg *FilterGenerator) WithClassAttributes(classAttributes obj.Object) *FilterGenerator {
+	objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("setClassAttributes:"), objref.IDOf(classAttributes))
+	return fg
 }
 
 // ConnectObjectWithKeyToObjectWithKey adds an object to the filter chain.
-func (x *FilterGenerator) ConnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectObject:withKey:toObject:withKey:"), objref.IDOf(sourceObject), purego.NSString(sourceKey), objref.IDOf(targetObject), purego.NSString(targetKey))
+func (fg *FilterGenerator) ConnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string) {
+	objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("connectObject:withKey:toObject:withKey:"), objref.IDOf(sourceObject), purego.NSString(sourceKey), objref.IDOf(targetObject), purego.NSString(targetKey))
 }
 
 // DisconnectObjectWithKeyToObjectWithKey removes the connection between two objects in the filter chain.
-func (x *FilterGenerator) DisconnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectObject:withKey:toObject:withKey:"), objref.IDOf(sourceObject), purego.NSString(sourceKey), objref.IDOf(targetObject), purego.NSString(targetKey))
+func (fg *FilterGenerator) DisconnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string) {
+	objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("disconnectObject:withKey:toObject:withKey:"), objref.IDOf(sourceObject), purego.NSString(sourceKey), objref.IDOf(targetObject), purego.NSString(targetKey))
 }
 
 // ExportKeyFromObjectWithName exports an input or output key of an object in the filter chain.
-func (x *FilterGenerator) ExportKeyFromObjectWithName(key string, targetObject obj.Object, exportedKeyName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportKey:fromObject:withName:"), purego.NSString(key), objref.IDOf(targetObject), purego.NSString(exportedKeyName))
+func (fg *FilterGenerator) ExportKeyFromObjectWithName(key string, targetObject obj.Object, exportedKeyName string) {
+	objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("exportKey:fromObject:withName:"), purego.NSString(key), objref.IDOf(targetObject), purego.NSString(exportedKeyName))
 }
 
 // RemoveExportedKey removes a key that was previously exported.
-func (x *FilterGenerator) RemoveExportedKey(exportedKeyName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeExportedKey:"), purego.NSString(exportedKeyName))
+func (fg *FilterGenerator) RemoveExportedKey(exportedKeyName string) {
+	objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("removeExportedKey:"), purego.NSString(exportedKeyName))
 }
 
 // SetAttributesForExportedKey sets a dictionary of attributes for an exported key.
-func (x *FilterGenerator) SetAttributesForExportedKey(attributes obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:forExportedKey:"), objref.IDOf(attributes), purego.NSString(key))
+func (fg *FilterGenerator) SetAttributesForExportedKey(attributes obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("setAttributes:forExportedKey:"), objref.IDOf(attributes), purego.NSString(key))
 }
 
 // Filter creates a filter object based on the filter chain.
-func (x *FilterGenerator) Filter() *Filter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
+func (fg *FilterGenerator) Filter() *Filter {
+	_r := objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("filter"))
 	return FilterFromID(_r)
 }
 
 // RegisterFilterName registers the name associated with a filter chain.
-func (x *FilterGenerator) RegisterFilterName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerFilterName:"), purego.NSString(name))
+func (fg *FilterGenerator) RegisterFilterName(name string) {
+	objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("registerFilterName:"), purego.NSString(name))
 }
 
 // WriteToURLAtomically archives a filter generator object to a filter generator file.
-func (x *FilterGenerator) WriteToURLAtomically(aURL string, flag bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(aURL), flag)
+func (fg *FilterGenerator) WriteToURLAtomically(aURL string, flag bool) bool {
+	_r := objc.Send[bool](objref.IDOf(fg), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(aURL), flag)
 	return _r
 }
 
-// ExportedKeys an array of the exported keys. Use this method to get an NSArray of all the keys that you have exported using exportKey:fromObject:withName: or that were exported before written to a file from which you read the filter chain.
-func (x *FilterGenerator) ExportedKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportedKeys"))
+// ExportedKeys returns an array of the exported keys. Use this method to get an NSArray of all the keys that you have exported using exportKey:fromObject:withName: or that were exported before written to a file from which you read the filter chain.
+func (fg *FilterGenerator) ExportedKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("exportedKeys"))
 	return obj.Wrap(_r)
 }
 
-// ClassAttributes retrieve or Set the class attributes that will be used to register the filter using the registerFilterName method. Make sure you set the class attributes before using the registerFilterName method. See CIFilter for a description of the classAttributes that are needed to register a filter.
-func (x *FilterGenerator) ClassAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classAttributes"))
+// ClassAttributes returns retrieve or Set the class attributes that will be used to register the filter using the registerFilterName method. Make sure you set the class attributes before using the registerFilterName method. See CIFilter for a description of the classAttributes that are needed to register a filter.
+func (fg *FilterGenerator) ClassAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fg), objc.RegisterName("classAttributes"))
 	return obj.Wrap(_r)
 }
-
-// SetClassAttributes wraps the corresponding Objective-C method.
-func (x *FilterGenerator) SetClassAttributes(classAttributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassAttributes:"), objref.IDOf(classAttributes))
-}
-
-// FilterGeneratorable is the interface implemented by [FilterGenerator], for mocking and DI.
-type FilterGeneratorable interface {
-	obj.Object
-	WithClassAttributes(classAttributes obj.Object) *FilterGenerator
-	ConnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string)
-	DisconnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string)
-	ExportKeyFromObjectWithName(key string, targetObject obj.Object, exportedKeyName string)
-	RemoveExportedKey(exportedKeyName string)
-	SetAttributesForExportedKey(attributes obj.Object, key string)
-	Filter() *Filter
-	RegisterFilterName(name string)
-	WriteToURLAtomically(aURL string, flag bool) bool
-	ExportedKeys() obj.Object
-	ClassAttributes() obj.Object
-	SetClassAttributes(classAttributes obj.Object)
-}
-
-var _ FilterGeneratorable = (*FilterGenerator)(nil)

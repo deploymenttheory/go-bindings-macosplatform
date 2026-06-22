@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DetectBarcodesRequest is an idiomatic wrapper over the Objective-C class VNDetectBarcodesRequest.
@@ -55,96 +56,68 @@ func NewDetectBarcodesRequest() *DetectBarcodesRequest {
 	return detectBarcodesRequestAdopt(_id)
 }
 
-// WithSymbologies the barcode symbologies that the request detects in an image.
-func (x *DetectBarcodesRequest) WithSymbologies(items ...obj.Object) *DetectBarcodesRequest {
+// WithSymbologies sets the barcode symbologies that the request detects in an image.
+func (dbr *DetectBarcodesRequest) WithSymbologies(items ...obj.Object) *DetectBarcodesRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbologies:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("setSymbologies:"), _arr)
+	return dbr
 }
 
-// WithCoalesceCompositeSymbologies a Boolean value that indicates whether to coalesce multiple codes based on the symbology.
-func (x *DetectBarcodesRequest) WithCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) *DetectBarcodesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoalesceCompositeSymbologies:"), coalesceCompositeSymbologies)
-	return x
+// WithCoalesceCompositeSymbologies sets a Boolean value that indicates whether to coalesce multiple codes based on the symbology.
+func (dbr *DetectBarcodesRequest) WithCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) *DetectBarcodesRequest {
+	objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("setCoalesceCompositeSymbologies:"), coalesceCompositeSymbologies)
+	return dbr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectBarcodesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectBarcodesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dbr *DetectBarcodesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectBarcodesRequest {
+	objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dbr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectBarcodesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectBarcodesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dbr *DetectBarcodesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectBarcodesRequest {
+	objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dbr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectBarcodesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectBarcodesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dbr *DetectBarcodesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectBarcodesRequest {
+	objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dbr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectBarcodesRequest) WithRevision(revision int) *DetectBarcodesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dbr *DetectBarcodesRequest) WithRevision(revision int) *DetectBarcodesRequest {
+	objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("setRevision:"), revision)
+	return dbr
 }
 
 // SupportedSymbologies returns the barcode symbologies that the request supports.
 //
 // SupportedSymbologies returns the collection as a Go slice.
-func (x *DetectBarcodesRequest) SupportedSymbologies() (result []obj.Object, err error) {
+func (dbr *DetectBarcodesRequest) SupportedSymbologies() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedSymbologiesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("supportedSymbologiesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Symbologies the collection of barcode symbologies that are to be detected in the image.  The default is to scan for all possible symbologies. Setting a revision on the request will reset the symbologies to all symbologies for the specified revision.
+// Symbologies returns the collection of barcode symbologies that are to be detected in the image.  The default is to scan for all possible symbologies. Setting a revision on the request will reset the symbologies to all symbologies for the specified revision.
 //
 // Symbologies returns the collection as a Go slice.
-func (x *DetectBarcodesRequest) Symbologies() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbologies"))
+func (dbr *DetectBarcodesRequest) Symbologies() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("symbologies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSymbologies wraps the corresponding Objective-C method.
-func (x *DetectBarcodesRequest) SetSymbologies(symbologies []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbologies:"), purego.SliceToNSArray(symbologies, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// CoalesceCompositeSymbologies an option to coalesce multiple codes if applicable based on the symbology
-func (x *DetectBarcodesRequest) CoalesceCompositeSymbologies() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("coalesceCompositeSymbologies"))
+// CoalesceCompositeSymbologies reports whether an option to coalesce multiple codes if applicable based on the symbology
+func (dbr *DetectBarcodesRequest) CoalesceCompositeSymbologies() bool {
+	_r := objc.Send[bool](objref.IDOf(dbr), objc.RegisterName("coalesceCompositeSymbologies"))
 	return _r
 }
-
-// SetCoalesceCompositeSymbologies wraps the corresponding Objective-C method.
-func (x *DetectBarcodesRequest) SetCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoalesceCompositeSymbologies:"), coalesceCompositeSymbologies)
-}
-
-// DetectBarcodesRequestable is the interface implemented by [DetectBarcodesRequest], for mocking and DI.
-type DetectBarcodesRequestable interface {
-	obj.Object
-	WithSymbologies(items ...obj.Object) *DetectBarcodesRequest
-	WithCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) *DetectBarcodesRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectBarcodesRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectBarcodesRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectBarcodesRequest
-	WithRevision(revision int) *DetectBarcodesRequest
-	SupportedSymbologies() ([]obj.Object, error)
-	Symbologies() []obj.Object
-	SetSymbologies(symbologies []obj.Object)
-	CoalesceCompositeSymbologies() bool
-	SetCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool)
-}
-
-var _ DetectBarcodesRequestable = (*DetectBarcodesRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectBarcodesRequest)(nil)
 

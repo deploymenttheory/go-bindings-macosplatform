@@ -44,24 +44,24 @@ func barcodeEventSignatureRequestAdopt(id objc.ID) *BarcodeEventSignatureRequest
 }
 
 // Description returns the object's -description text.
-func (x *BarcodeEventSignatureRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (besr *BarcodeEventSignatureRequest) Description() string {
+	return rt.Description(objref.IDOf(besr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BarcodeEventSignatureRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (besr *BarcodeEventSignatureRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(besr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BarcodeEventSignatureRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (besr *BarcodeEventSignatureRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(besr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BarcodeEventSignatureRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (besr *BarcodeEventSignatureRequest) String() string {
+	return rt.Description(objref.IDOf(besr))
 }
 
 // NewBarcodeEventSignatureRequest creates a new BarcodeEventSignatureRequest.
@@ -71,8 +71,8 @@ func NewBarcodeEventSignatureRequest() *BarcodeEventSignatureRequest {
 }
 
 // DeviceAccountIdentifier wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+func (besr *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,8 +80,8 @@ func (x *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
 }
 
 // TransactionIdentifier wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) TransactionIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionIdentifier"))
+func (besr *BarcodeEventSignatureRequest) TransactionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,8 +89,8 @@ func (x *BarcodeEventSignatureRequest) TransactionIdentifier() string {
 }
 
 // BarcodeIdentifier wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("barcodeIdentifier"))
+func (besr *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("barcodeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -98,8 +98,8 @@ func (x *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
 }
 
 // RawMerchantName wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) RawMerchantName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawMerchantName"))
+func (besr *BarcodeEventSignatureRequest) RawMerchantName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("rawMerchantName"))
 	if _r == 0 {
 		return ""
 	}
@@ -107,8 +107,8 @@ func (x *BarcodeEventSignatureRequest) RawMerchantName() string {
 }
 
 // MerchantName wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) MerchantName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("merchantName"))
+func (besr *BarcodeEventSignatureRequest) MerchantName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("merchantName"))
 	if _r == 0 {
 		return ""
 	}
@@ -116,14 +116,14 @@ func (x *BarcodeEventSignatureRequest) MerchantName() string {
 }
 
 // TransactionDate wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) TransactionDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionDate"))
+func (besr *BarcodeEventSignatureRequest) TransactionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionDate"))
 	return obj.Wrap(_r)
 }
 
 // CurrencyCode wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) CurrencyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+func (besr *BarcodeEventSignatureRequest) CurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -131,14 +131,14 @@ func (x *BarcodeEventSignatureRequest) CurrencyCode() string {
 }
 
 // Amount wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) Amount() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+func (besr *BarcodeEventSignatureRequest) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
 // TransactionStatus wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) TransactionStatus() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionStatus"))
+func (besr *BarcodeEventSignatureRequest) TransactionStatus() string {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionStatus"))
 	if _r == 0 {
 		return ""
 	}
@@ -146,24 +146,7 @@ func (x *BarcodeEventSignatureRequest) TransactionStatus() string {
 }
 
 // PartialSignature wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureRequest) PartialSignature() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partialSignature"))
+func (besr *BarcodeEventSignatureRequest) PartialSignature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("partialSignature"))
 	return obj.Wrap(_r)
 }
-
-// BarcodeEventSignatureRequestable is the interface implemented by [BarcodeEventSignatureRequest], for mocking and DI.
-type BarcodeEventSignatureRequestable interface {
-	obj.Object
-	DeviceAccountIdentifier() string
-	TransactionIdentifier() string
-	BarcodeIdentifier() string
-	RawMerchantName() string
-	MerchantName() string
-	TransactionDate() obj.Object
-	CurrencyCode() string
-	Amount() obj.Object
-	TransactionStatus() string
-	PartialSignature() obj.Object
-}
-
-var _ BarcodeEventSignatureRequestable = (*BarcodeEventSignatureRequest)(nil)

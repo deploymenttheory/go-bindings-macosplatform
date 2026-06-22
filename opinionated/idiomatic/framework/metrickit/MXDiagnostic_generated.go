@@ -48,47 +48,47 @@ func diagnosticAdopt(id objc.ID) *Diagnostic {
 }
 
 // Description returns the object's -description text.
-func (x *Diagnostic) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Diagnostic) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Diagnostic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Diagnostic) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Diagnostic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Diagnostic) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Diagnostic) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Diagnostic) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // JSONRepresentation returns the contents of the diagnostic in JSON format.
-func (x *Diagnostic) JSONRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+func (d *Diagnostic) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // DictionaryRepresentation returns the contents of a diagnostic as a dictionary.
-func (x *Diagnostic) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+func (d *Diagnostic) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // MetaData wraps the corresponding Objective-C method.
-func (x *Diagnostic) MetaData() *MetaData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
+func (d *Diagnostic) MetaData() *MetaData {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("metaData"))
 	return MetaDataFromID(_r)
 }
 
-// ApplicationVersion an NSString representation of the application version from which this diagnostic was generated.
-func (x *Diagnostic) ApplicationVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationVersion"))
+// ApplicationVersion returns an NSString representation of the application version from which this diagnostic was generated.
+func (d *Diagnostic) ApplicationVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("applicationVersion"))
 	if _r == 0 {
 		return ""
 	}
@@ -98,26 +98,14 @@ func (x *Diagnostic) ApplicationVersion() string {
 // SignpostData wraps the corresponding Objective-C method.
 //
 // SignpostData returns the collection as a Go slice.
-func (x *Diagnostic) SignpostData() []*SignpostRecord {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostData"))
+func (d *Diagnostic) SignpostData() []*SignpostRecord {
+	_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("signpostData"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SignpostRecord { return SignpostRecordFromID(_id) })
 }
-
-// Diagnosticable is the interface implemented by [Diagnostic], for mocking and DI.
-type Diagnosticable interface {
-	obj.Object
-	JSONRepresentation() obj.Object
-	DictionaryRepresentation() obj.Object
-	MetaData() *MetaData
-	ApplicationVersion() string
-	SignpostData() []*SignpostRecord
-}
-
-var _ Diagnosticable = (*Diagnostic)(nil)
 
 // isDiagnostic marks Diagnostic — and, by embedding promotion, its
 // subclasses — as a member of the Diagnostic hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Diagnostic) isDiagnostic() {}
+func (d *Diagnostic) isDiagnostic() {}
 
 var _ DiagnosticProvider = (*Diagnostic)(nil)

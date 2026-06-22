@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Contour is an idiomatic wrapper over the Objective-C class VNContour.
@@ -48,24 +49,24 @@ func contourAdopt(id objc.ID) *Contour {
 }
 
 // Description returns the object's -description text.
-func (x *Contour) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Contour) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Contour) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Contour) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Contour) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Contour) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Contour) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Contour) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewContour creates a new Contour.
@@ -75,9 +76,9 @@ func NewContour() *Contour {
 }
 
 // ChildContourAtIndexError retrieves the child contour object at the specified index.
-func (x *Contour) ChildContourAtIndexError(childContourIndex int) (result *Contour, err error) {
+func (c *Contour) ChildContourAtIndexError(childContourIndex int) (result *Contour, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childContourAtIndex:error:"), childContourIndex, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("childContourAtIndex:error:"), childContourIndex, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,64 +86,49 @@ func (x *Contour) ChildContourAtIndexError(childContourIndex int) (result *Conto
 }
 
 // PolygonApproximationWithEpsilonError simplifies the contour to a polygon using a Ramer-Douglas-Peucker algorithm.
-func (x *Contour) PolygonApproximationWithEpsilonError(epsilon float32) (result *Contour, err error) {
+func (c *Contour) PolygonApproximationWithEpsilonError(epsilon float32) (result *Contour, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polygonApproximationWithEpsilon:error:"), epsilon, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("polygonApproximationWithEpsilon:error:"), epsilon, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return ContourFromID(_r), nil
 }
 
-// IndexPath the path to the target VNContour as it is stored in the owning VNContoursObservation's hierarchy of contours.
-func (x *Contour) IndexPath() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPath"))
+// IndexPath returns the path to the target VNContour as it is stored in the owning VNContoursObservation's hierarchy of contours.
+func (c *Contour) IndexPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("indexPath"))
 	return obj.Wrap(_r)
 }
 
-// ChildContourCount the total number of child contours in the target contour. The use of this property is preferred over childContours.count due to the cost of building the child objects.
-func (x *Contour) ChildContourCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("childContourCount"))
+// ChildContourCount returns the total number of child contours in the target contour. The use of this property is preferred over childContours.count due to the cost of building the child objects.
+func (c *Contour) ChildContourCount() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("childContourCount"))
 	return _r
 }
 
-// ChildContours the array of the contours enclosed by the target contour. This property may come with the cost of instantiating new VNContour objects; therefore, clients are strongly encouraged to hold the results in a local variable instead of repeatedly invoking it.
+// ChildContours returns the array of the contours enclosed by the target contour. This property may come with the cost of instantiating new VNContour objects; therefore, clients are strongly encouraged to hold the results in a local variable instead of repeatedly invoking it.
 //
 // ChildContours returns the collection as a Go slice.
-func (x *Contour) ChildContours() []*Contour {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childContours"))
+func (c *Contour) ChildContours() []*Contour {
+	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("childContours"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Contour { return ContourFromID(_id) })
 }
 
-// PointCount the number of points that describe the contour.
-func (x *Contour) PointCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointCount"))
+// PointCount returns the number of points that describe the contour.
+func (c *Contour) PointCount() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("pointCount"))
 	return _r
 }
 
-// NormalizedPath the contour represented as a CGPath in normalized coordinates. The path is owned by this object and therefore will be alive as long as the the observation is alive.
-func (x *Contour) NormalizedPath() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizedPath"))
+// NormalizedPath returns the contour represented as a CGPath in normalized coordinates. The path is owned by this object and therefore will be alive as long as the the observation is alive.
+func (c *Contour) NormalizedPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("normalizedPath"))
 	return obj.Wrap(_r)
 }
 
-// AspectRatio the aspect ratio of the contour from the original image aspect ratio expressed as width/height
-func (x *Contour) AspectRatio() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("aspectRatio"))
+// AspectRatio returns the aspect ratio of the contour from the original image aspect ratio expressed as width/height
+func (c *Contour) AspectRatio() float32 {
+	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("aspectRatio"))
 	return _r
 }
-
-// Contourable is the interface implemented by [Contour], for mocking and DI.
-type Contourable interface {
-	obj.Object
-	ChildContourAtIndexError(childContourIndex int) (result *Contour, err error)
-	PolygonApproximationWithEpsilonError(epsilon float32) (result *Contour, err error)
-	IndexPath() obj.Object
-	ChildContourCount() int
-	ChildContours() []*Contour
-	PointCount() int
-	NormalizedPath() obj.Object
-	AspectRatio() float32
-}
-
-var _ Contourable = (*Contour)(nil)

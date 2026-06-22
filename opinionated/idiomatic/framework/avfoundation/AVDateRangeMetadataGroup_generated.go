@@ -54,30 +54,21 @@ func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items []*MetadataItem, s
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *DateRangeMetadataGroup) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (drmg *DateRangeMetadataGroup) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(drmg), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *DateRangeMetadataGroup) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (drmg *DateRangeMetadataGroup) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(drmg), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
-
-// DateRangeMetadataGroupable is the interface implemented by [DateRangeMetadataGroup], for mocking and DI.
-type DateRangeMetadataGroupable interface {
-	obj.Object
-	StartDate() obj.Object
-	EndDate() obj.Object
-}
-
-var _ DateRangeMetadataGroupable = (*DateRangeMetadataGroup)(nil)
 
 // isDateRangeMetadataGroup marks DateRangeMetadataGroup — and, by embedding promotion, its
 // subclasses — as a member of the DateRangeMetadataGroup hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DateRangeMetadataGroup) isDateRangeMetadataGroup() {}
+func (drmg *DateRangeMetadataGroup) isDateRangeMetadataGroup() {}
 
 var _ DateRangeMetadataGroupProvider = (*DateRangeMetadataGroup)(nil)
 

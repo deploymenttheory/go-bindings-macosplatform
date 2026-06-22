@@ -5,13 +5,14 @@
 package coreimage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RenderTask is an idiomatic wrapper over the Objective-C class CIRenderTask.
@@ -48,24 +49,24 @@ func renderTaskAdopt(id objc.ID) *RenderTask {
 }
 
 // Description returns the object's -description text.
-func (x *RenderTask) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rt_ *RenderTask) Description() string {
+	return rt.Description(objref.IDOf(rt_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rt_ *RenderTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rt_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rt_ *RenderTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rt_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderTask) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rt_ *RenderTask) String() string {
+	return rt.Description(objref.IDOf(rt_))
 }
 
 // NewRenderTask creates a new RenderTask.
@@ -75,19 +76,11 @@ func NewRenderTask() *RenderTask {
 }
 
 // WaitUntilCompletedAndReturnError waits until the CIRenderTask finishes and returns.
-func (x *RenderTask) WaitUntilCompletedAndReturnError() (result *RenderInfo, err error) {
+func (rt_ *RenderTask) WaitUntilCompletedAndReturnError() (result *RenderInfo, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitUntilCompletedAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("waitUntilCompletedAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return RenderInfoFromID(_r), nil
 }
-
-// RenderTaskable is the interface implemented by [RenderTask], for mocking and DI.
-type RenderTaskable interface {
-	obj.Object
-	WaitUntilCompletedAndReturnError() (result *RenderInfo, err error)
-}
-
-var _ RenderTaskable = (*RenderTask)(nil)

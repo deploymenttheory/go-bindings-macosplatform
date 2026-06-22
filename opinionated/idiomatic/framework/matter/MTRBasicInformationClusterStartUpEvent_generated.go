@@ -46,56 +46,41 @@ func mTRBasicInformationClusterStartUpEventAdopt(id objc.ID) *MTRBasicInformatio
 }
 
 // Description returns the object's -description text.
-func (x *MTRBasicInformationClusterStartUpEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) Description() string {
+	return rt.Description(objref.IDOf(mbicsue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBasicInformationClusterStartUpEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbicsue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBasicInformationClusterStartUpEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbicsue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBasicInformationClusterStartUpEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) String() string {
+	return rt.Description(objref.IDOf(mbicsue))
 }
 
 // WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicInformationClusterStartUpEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-	return x
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicInformationClusterStartUpEvent {
+	objc.Send[objc.ID](objref.IDOf(mbicsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return mbicsue
 }
 
 // SoftwareVersion wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbicsue), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
-
-// SetSoftwareVersion wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-}
-
-// MTRBasicInformationClusterStartUpEventable is the interface implemented by [MTRBasicInformationClusterStartUpEvent], for mocking and DI.
-type MTRBasicInformationClusterStartUpEventable interface {
-	obj.Object
-	WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicInformationClusterStartUpEvent
-	SoftwareVersion() obj.Object
-	SetSoftwareVersion(softwareVersion obj.Object)
-}
-
-var _ MTRBasicInformationClusterStartUpEventable = (*MTRBasicInformationClusterStartUpEvent)(nil)
 
 // isMTRBasicInformationClusterStartUpEvent marks MTRBasicInformationClusterStartUpEvent — and, by embedding promotion, its
 // subclasses — as a member of the MTRBasicInformationClusterStartUpEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBasicInformationClusterStartUpEvent) isMTRBasicInformationClusterStartUpEvent() {}
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) isMTRBasicInformationClusterStartUpEvent() {}
 
 var _ MTRBasicInformationClusterStartUpEventProvider = (*MTRBasicInformationClusterStartUpEvent)(nil)

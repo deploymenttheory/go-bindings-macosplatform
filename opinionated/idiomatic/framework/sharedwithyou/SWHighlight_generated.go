@@ -48,50 +48,41 @@ func highlightAdopt(id objc.ID) *Highlight {
 }
 
 // Description returns the object's -description text.
-func (x *Highlight) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Highlight) Description() string {
+	return rt.Description(objref.IDOf(h))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Highlight) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (h *Highlight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(h), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Highlight) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (h *Highlight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(h), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Highlight) String() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Highlight) String() string {
+	return rt.Description(objref.IDOf(h))
 }
 
-// Identifier the unique identifier for this highlight
-func (x *Highlight) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the unique identifier for this highlight
+func (h *Highlight) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// URL the surfaced content URL
-func (x *Highlight) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the surfaced content URL
+func (h *Highlight) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// Highlightable is the interface implemented by [Highlight], for mocking and DI.
-type Highlightable interface {
-	obj.Object
-	Identifier() obj.Object
-	URL() obj.Object
-}
-
-var _ Highlightable = (*Highlight)(nil)
 
 // isHighlight marks Highlight — and, by embedding promotion, its
 // subclasses — as a member of the Highlight hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Highlight) isHighlight() {}
+func (h *Highlight) isHighlight() {}
 
 var _ HighlightProvider = (*Highlight)(nil)

@@ -7,7 +7,6 @@ package coremotion
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewGyroData() *GyroData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMGyroData")), objc.RegisterName("new"))
 	return gyroDataAdopt(_id)
 }
-
-// GyroDataable is the interface implemented by [GyroData], for mocking and DI.
-type GyroDataable interface {
-	obj.Object
-}
-
-var _ GyroDataable = (*GyroData)(nil)
 
 var _ LogItemProvider = (*GyroData)(nil)

@@ -46,24 +46,24 @@ func computePlanDeviceUsageAdopt(id objc.ID) *ComputePlanDeviceUsage {
 }
 
 // Description returns the object's -description text.
-func (x *ComputePlanDeviceUsage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpdu *ComputePlanDeviceUsage) Description() string {
+	return rt.Description(objref.IDOf(cpdu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComputePlanDeviceUsage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpdu *ComputePlanDeviceUsage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpdu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComputePlanDeviceUsage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpdu *ComputePlanDeviceUsage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpdu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComputePlanDeviceUsage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpdu *ComputePlanDeviceUsage) String() string {
+	return rt.Description(objref.IDOf(cpdu))
 }
 
 // NewComputePlanDeviceUsage creates a new ComputePlanDeviceUsage.
@@ -72,16 +72,8 @@ func NewComputePlanDeviceUsage() *ComputePlanDeviceUsage {
 	return computePlanDeviceUsageAdopt(_id)
 }
 
-// SupportedComputeDevices the compute devices that can execute the layer/operation.
-func (x *ComputePlanDeviceUsage) SupportedComputeDevices() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedComputeDevices"))
+// SupportedComputeDevices returns the compute devices that can execute the layer/operation.
+func (cpdu *ComputePlanDeviceUsage) SupportedComputeDevices() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpdu), objc.RegisterName("supportedComputeDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ComputePlanDeviceUsageable is the interface implemented by [ComputePlanDeviceUsage], for mocking and DI.
-type ComputePlanDeviceUsageable interface {
-	obj.Object
-	SupportedComputeDevices() []obj.Object
-}
-
-var _ ComputePlanDeviceUsageable = (*ComputePlanDeviceUsage)(nil)

@@ -5,12 +5,13 @@
 package photos
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PersistentChangeFetchResult is an idiomatic wrapper over the Objective-C class PHPersistentChangeFetchResult.
@@ -47,24 +48,24 @@ func persistentChangeFetchResultAdopt(id objc.ID) *PersistentChangeFetchResult {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentChangeFetchResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pcfr *PersistentChangeFetchResult) Description() string {
+	return rt.Description(objref.IDOf(pcfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentChangeFetchResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pcfr *PersistentChangeFetchResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pcfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentChangeFetchResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pcfr *PersistentChangeFetchResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pcfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentChangeFetchResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pcfr *PersistentChangeFetchResult) String() string {
+	return rt.Description(objref.IDOf(pcfr))
 }
 
 // NewPersistentChangeFetchResult creates a new PersistentChangeFetchResult.
@@ -74,14 +75,6 @@ func NewPersistentChangeFetchResult() *PersistentChangeFetchResult {
 }
 
 // EnumerateChangesWith executes the block you specify by using the objects in the fetch result.
-func (x *PersistentChangeFetchResult) EnumerateChangesWith(block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateChangesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (pcfr *PersistentChangeFetchResult) EnumerateChangesWith(block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(pcfr), objc.RegisterName("enumerateChangesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
-
-// PersistentChangeFetchResultable is the interface implemented by [PersistentChangeFetchResult], for mocking and DI.
-type PersistentChangeFetchResultable interface {
-	obj.Object
-	EnumerateChangesWith(block func(obj.Object, *bool))
-}
-
-var _ PersistentChangeFetchResultable = (*PersistentChangeFetchResult)(nil)

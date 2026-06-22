@@ -6,6 +6,7 @@ package shazamkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func mediaLibraryAdopt(id objc.ID) *MediaLibrary {
 }
 
 // Description returns the object's -description text.
-func (x *MediaLibrary) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ml *MediaLibrary) Description() string {
+	return rt.Description(objref.IDOf(ml))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaLibrary) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ml *MediaLibrary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ml), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaLibrary) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ml *MediaLibrary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ml), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaLibrary) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ml *MediaLibrary) String() string {
+	return rt.Description(objref.IDOf(ml))
 }
 
 // NewMediaLibrary creates a new MediaLibrary.
@@ -77,14 +78,14 @@ func NewMediaLibrary() *MediaLibrary {
 // AddMediaItems adds an array of songs to the user’s Shazam library.
 //
 // AddMediaItems blocks until the operation completes or ctx is cancelled.
-func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems []*MediaItem) error {
+func (ml *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems []*MediaItem) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMediaItems:completionHandler:"), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("addMediaItems:completionHandler:"), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -92,11 +93,3 @@ func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems []*MediaIte
 		return ctx.Err()
 	}
 }
-
-// MediaLibraryable is the interface implemented by [MediaLibrary], for mocking and DI.
-type MediaLibraryable interface {
-	obj.Object
-	AddMediaItems(ctx context.Context, mediaItems []*MediaItem) error
-}
-
-var _ MediaLibraryable = (*MediaLibrary)(nil)

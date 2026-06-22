@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,79 +51,52 @@ func NewGRUDescriptor() *GRUDescriptor {
 	return gRUDescriptorAdopt(_id)
 }
 
-// WithGatePnormValue the p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
-func (x *GRUDescriptor) WithGatePnormValue(gatePnormValue float32) *GRUDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatePnormValue:"), gatePnormValue)
-	return x
+// WithGatePnormValue sets the p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
+func (gd *GRUDescriptor) WithGatePnormValue(gatePnormValue float32) *GRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("setGatePnormValue:"), gatePnormValue)
+	return gd
 }
 
-// WithFlipOutputGates if YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
-func (x *GRUDescriptor) WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipOutputGates:"), flipOutputGates)
-	return x
+// WithFlipOutputGates sets if YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
+func (gd *GRUDescriptor) WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("setFlipOutputGates:"), flipOutputGates)
+	return gd
 }
 
-// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
-func (x *GRUDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *GRUDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
-	return x
+// WithInputFeatureChannels sets the number of feature channels per pixel in the input image or number of rows in the input matrix.
+func (gd *GRUDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *GRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
+	return gd
 }
 
-// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-func (x *GRUDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *GRUDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
-	return x
+// WithOutputFeatureChannels sets the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+func (gd *GRUDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *GRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
+	return gd
 }
 
-// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-func (x *GRUDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
-	return x
+// WithUseLayerInputUnitTransformMode sets if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
+func (gd *GRUDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
+	return gd
 }
 
-// WithUseFloat32Weights if YES, then
-func (x *GRUDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
-	return x
+// WithUseFloat32Weights sets if YES, then
+func (gd *GRUDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
+	return gd
 }
 
-// GatePnormValue the p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
-func (x *GRUDescriptor) GatePnormValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gatePnormValue"))
+// GatePnormValue returns the p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
+func (gd *GRUDescriptor) GatePnormValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(gd), objc.RegisterName("gatePnormValue"))
 	return _r
 }
 
-// SetGatePnormValue wraps the corresponding Objective-C method.
-func (x *GRUDescriptor) SetGatePnormValue(gatePnormValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatePnormValue:"), gatePnormValue)
-}
-
-// FlipOutputGates if YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
-func (x *GRUDescriptor) FlipOutputGates() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("flipOutputGates"))
+// FlipOutputGates reports whether if true then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to false.
+func (gd *GRUDescriptor) FlipOutputGates() bool {
+	_r := objc.Send[bool](objref.IDOf(gd), objc.RegisterName("flipOutputGates"))
 	return _r
 }
-
-// SetFlipOutputGates wraps the corresponding Objective-C method.
-func (x *GRUDescriptor) SetFlipOutputGates(flipOutputGates bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipOutputGates:"), flipOutputGates)
-}
-
-// GRUDescriptorable is the interface implemented by [GRUDescriptor], for mocking and DI.
-type GRUDescriptorable interface {
-	obj.Object
-	WithGatePnormValue(gatePnormValue float32) *GRUDescriptor
-	WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor
-	WithInputFeatureChannels(inputFeatureChannels int) *GRUDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels int) *GRUDescriptor
-	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor
-	WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor
-	GatePnormValue() float32
-	SetGatePnormValue(gatePnormValue float32)
-	FlipOutputGates() bool
-	SetFlipOutputGates(flipOutputGates bool)
-}
-
-var _ GRUDescriptorable = (*GRUDescriptor)(nil)
 
 var _ RNNDescriptorProvider = (*GRUDescriptor)(nil)

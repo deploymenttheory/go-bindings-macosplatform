@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,39 +49,23 @@ func NewNDArrayVectorLUTDequantize() *NDArrayVectorLUTDequantize {
 	return nDArrayVectorLUTDequantizeAdopt(_id)
 }
 
-// WithVectorAxis which axis in the destination will receive the vector component, must be less than 4.
-func (x *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *NDArrayVectorLUTDequantize {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
-	return x
+// WithVectorAxis sets which axis in the destination will receive the vector component, must be less than 4.
+func (navld *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *NDArrayVectorLUTDequantize {
+	objc.Send[objc.ID](objref.IDOf(navld), objc.RegisterName("setVectorAxis:"), vectorAxis)
+	return navld
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayVectorLUTDequantize) WithLabel(label string) *NDArrayVectorLUTDequantize {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (navld *NDArrayVectorLUTDequantize) WithLabel(label string) *NDArrayVectorLUTDequantize {
+	objc.Send[objc.ID](objref.IDOf(navld), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return navld
 }
 
-// VectorAxis which axis in the destination will receive the vector component, must be less than 4.
-func (x *NDArrayVectorLUTDequantize) VectorAxis() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorAxis"))
+// VectorAxis returns which axis in the destination will receive the vector component, must be less than 4.
+func (navld *NDArrayVectorLUTDequantize) VectorAxis() int {
+	_r := objc.Send[int](objref.IDOf(navld), objc.RegisterName("vectorAxis"))
 	return _r
 }
-
-// SetVectorAxis wraps the corresponding Objective-C method.
-func (x *NDArrayVectorLUTDequantize) SetVectorAxis(vectorAxis int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
-}
-
-// NDArrayVectorLUTDequantizeable is the interface implemented by [NDArrayVectorLUTDequantize], for mocking and DI.
-type NDArrayVectorLUTDequantizeable interface {
-	obj.Object
-	WithVectorAxis(vectorAxis int) *NDArrayVectorLUTDequantize
-	WithLabel(label string) *NDArrayVectorLUTDequantize
-	VectorAxis() int
-	SetVectorAxis(vectorAxis int)
-}
-
-var _ NDArrayVectorLUTDequantizeable = (*NDArrayVectorLUTDequantize)(nil)
 
 var _ NDArrayMultiaryKernelProvider = (*NDArrayVectorLUTDequantize)(nil)
 

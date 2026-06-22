@@ -60,103 +60,74 @@ func NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles(local
 	return captureIndexPickerAdopt(_id)
 }
 
-// WithSelectedIndex the currently selected index.
-func (x *CaptureIndexPicker) WithSelectedIndex(selectedIndex int) *CaptureIndexPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
-	return x
+// WithSelectedIndex sets the currently selected index.
+func (cip *CaptureIndexPicker) WithSelectedIndex(selectedIndex int) *CaptureIndexPicker {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setSelectedIndex:"), selectedIndex)
+	return cip
 }
 
-// WithAccessibilityIdentifier a string identifier for this control.
-func (x *CaptureIndexPicker) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
-	return x
+// WithAccessibilityIdentifier sets a string identifier for this control.
+func (cip *CaptureIndexPicker) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
+	return cip
 }
 
-// WithEnabled a Boolean value that indicates whether this control supports user interaction.
-func (x *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether this control supports user interaction.
+func (cip *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setEnabled:"), enabled)
+	return cip
 }
 
 // SetActionQueueAction sets the action to perform on the specified dispatch queue when the control’s value changes.
-func (x *CaptureIndexPicker) SetActionQueueAction(actionQueue obj.Object, action func(int)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 int) { action(_b0) }))
+func (cip *CaptureIndexPicker) SetActionQueueAction(actionQueue obj.Object, action func(int)) {
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 int) { action(_b0) }))
 }
 
-// SelectedIndex the currently selected index. Because the camera system may be independent from the main thread or `
-func (x *CaptureIndexPicker) SelectedIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
+// SelectedIndex returns the currently selected index. Because the camera system may be independent from the main thread or `
+func (cip *CaptureIndexPicker) SelectedIndex() int {
+	_r := objc.Send[int](objref.IDOf(cip), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
-// SetSelectedIndex wraps the corresponding Objective-C method.
-func (x *CaptureIndexPicker) SetSelectedIndex(selectedIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
-}
-
-// LocalizedTitle a localized string that describes the picker's `action`.
-func (x *CaptureIndexPicker) LocalizedTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+// LocalizedTitle returns a localized string that describes the picker's `action`.
+func (cip *CaptureIndexPicker) LocalizedTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SymbolName the name of a symbol to represent the picker.
-func (x *CaptureIndexPicker) SymbolName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolName"))
+// SymbolName returns the name of a symbol to represent the picker.
+func (cip *CaptureIndexPicker) SymbolName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("symbolName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// NumberOfIndexes the number of indexes to pick between.
-func (x *CaptureIndexPicker) NumberOfIndexes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfIndexes"))
+// NumberOfIndexes returns the number of indexes to pick between.
+func (cip *CaptureIndexPicker) NumberOfIndexes() int {
+	_r := objc.Send[int](objref.IDOf(cip), objc.RegisterName("numberOfIndexes"))
 	return _r
 }
 
-// LocalizedIndexTitles the titles used for each index.
+// LocalizedIndexTitles returns the titles used for each index.
 //
 // LocalizedIndexTitles returns the collection as a Go slice.
-func (x *CaptureIndexPicker) LocalizedIndexTitles() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedIndexTitles"))
+func (cip *CaptureIndexPicker) LocalizedIndexTitles() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("localizedIndexTitles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AccessibilityIdentifier a string that identifies the picker.
-func (x *CaptureIndexPicker) AccessibilityIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityIdentifier"))
+// AccessibilityIdentifier returns a string that identifies the picker.
+func (cip *CaptureIndexPicker) AccessibilityIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("accessibilityIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetAccessibilityIdentifier wraps the corresponding Objective-C method.
-func (x *CaptureIndexPicker) SetAccessibilityIdentifier(accessibilityIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
-}
-
-// CaptureIndexPickerable is the interface implemented by [CaptureIndexPicker], for mocking and DI.
-type CaptureIndexPickerable interface {
-	obj.Object
-	WithSelectedIndex(selectedIndex int) *CaptureIndexPicker
-	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker
-	WithEnabled(enabled bool) *CaptureIndexPicker
-	SetActionQueueAction(actionQueue obj.Object, action func(int))
-	SelectedIndex() int
-	SetSelectedIndex(selectedIndex int)
-	LocalizedTitle() string
-	SymbolName() string
-	NumberOfIndexes() int
-	LocalizedIndexTitles() []string
-	AccessibilityIdentifier() string
-	SetAccessibilityIdentifier(accessibilityIdentifier string)
-}
-
-var _ CaptureIndexPickerable = (*CaptureIndexPicker)(nil)
 
 var _ CaptureControlProvider = (*CaptureIndexPicker)(nil)

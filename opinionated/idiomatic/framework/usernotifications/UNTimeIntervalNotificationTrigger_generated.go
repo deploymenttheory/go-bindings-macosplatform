@@ -52,25 +52,16 @@ func NewTimeIntervalNotificationTrigger() *TimeIntervalNotificationTrigger {
 	return timeIntervalNotificationTriggerAdopt(_id)
 }
 
-// NextTriggerDate the next date at which the trigger conditions are met.
-func (x *TimeIntervalNotificationTrigger) NextTriggerDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTriggerDate"))
+// NextTriggerDate returns the next date at which the trigger conditions are met.
+func (tint *TimeIntervalNotificationTrigger) NextTriggerDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tint), objc.RegisterName("nextTriggerDate"))
 	return obj.Wrap(_r)
 }
 
 // TimeInterval wraps the corresponding Objective-C method.
-func (x *TimeIntervalNotificationTrigger) TimeInterval() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
+func (tint *TimeIntervalNotificationTrigger) TimeInterval() float64 {
+	_r := objc.Send[float64](objref.IDOf(tint), objc.RegisterName("timeInterval"))
 	return _r
 }
-
-// TimeIntervalNotificationTriggerable is the interface implemented by [TimeIntervalNotificationTrigger], for mocking and DI.
-type TimeIntervalNotificationTriggerable interface {
-	obj.Object
-	NextTriggerDate() obj.Object
-	TimeInterval() float64
-}
-
-var _ TimeIntervalNotificationTriggerable = (*TimeIntervalNotificationTrigger)(nil)
 
 var _ NotificationTriggerProvider = (*TimeIntervalNotificationTrigger)(nil)

@@ -46,24 +46,24 @@ func dateComponentsRangeAdopt(id objc.ID) *DateComponentsRange {
 }
 
 // Description returns the object's -description text.
-func (x *DateComponentsRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dcr *DateComponentsRange) Description() string {
+	return rt.Description(objref.IDOf(dcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DateComponentsRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dcr *DateComponentsRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DateComponentsRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dcr *DateComponentsRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DateComponentsRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dcr *DateComponentsRange) String() string {
+	return rt.Description(objref.IDOf(dcr))
 }
 
 // NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new time range with the start and end dates and times that you specify.
@@ -74,22 +74,13 @@ func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateCom
 }
 
 // StartDateComponents wraps the corresponding Objective-C method.
-func (x *DateComponentsRange) StartDateComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDateComponents"))
+func (dcr *DateComponentsRange) StartDateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("startDateComponents"))
 	return obj.Wrap(_r)
 }
 
 // EndDateComponents wraps the corresponding Objective-C method.
-func (x *DateComponentsRange) EndDateComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDateComponents"))
+func (dcr *DateComponentsRange) EndDateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("endDateComponents"))
 	return obj.Wrap(_r)
 }
-
-// DateComponentsRangeable is the interface implemented by [DateComponentsRange], for mocking and DI.
-type DateComponentsRangeable interface {
-	obj.Object
-	StartDateComponents() obj.Object
-	EndDateComponents() obj.Object
-}
-
-var _ DateComponentsRangeable = (*DateComponentsRange)(nil)

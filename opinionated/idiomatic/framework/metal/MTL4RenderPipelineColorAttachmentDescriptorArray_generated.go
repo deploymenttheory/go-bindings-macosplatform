@@ -46,24 +46,24 @@ func mTL4RenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *MTL4Rend
 }
 
 // Description returns the object's -description text.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(mrpcada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mrpcada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mrpcada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(mrpcada))
 }
 
 // NewMTL4RenderPipelineColorAttachmentDescriptorArray creates a new MTL4RenderPipelineColorAttachmentDescriptorArray.
@@ -73,27 +73,17 @@ func NewMTL4RenderPipelineColorAttachmentDescriptorArray() *MTL4RenderPipelineCo
 }
 
 // ObjectAtIndexedSubscript accesses a color attachment at a specific index.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *MTL4RenderPipelineColorAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *MTL4RenderPipelineColorAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mrpcada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return MTL4RenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets an attachment at an index.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(mrpcada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // Reset resets the elements of the descriptor array
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
+	objc.Send[objc.ID](objref.IDOf(mrpcada), objc.RegisterName("reset"))
 }
-
-// MTL4RenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [MTL4RenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
-type MTL4RenderPipelineColorAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *MTL4RenderPipelineColorAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex int)
-	Reset()
-}
-
-var _ MTL4RenderPipelineColorAttachmentDescriptorArrayable = (*MTL4RenderPipelineColorAttachmentDescriptorArray)(nil)

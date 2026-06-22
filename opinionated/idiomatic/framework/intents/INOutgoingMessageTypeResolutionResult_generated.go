@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewOutgoingMessageTypeResolutionResult() *OutgoingMessageTypeResolutionResu
 	_id := objc.Send[objc.ID](objc.ID(_class("INOutgoingMessageTypeResolutionResult")), objc.RegisterName("new"))
 	return outgoingMessageTypeResolutionResultAdopt(_id)
 }
-
-// OutgoingMessageTypeResolutionResultable is the interface implemented by [OutgoingMessageTypeResolutionResult], for mocking and DI.
-type OutgoingMessageTypeResolutionResultable interface {
-	obj.Object
-}
-
-var _ OutgoingMessageTypeResolutionResultable = (*OutgoingMessageTypeResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*OutgoingMessageTypeResolutionResult)(nil)

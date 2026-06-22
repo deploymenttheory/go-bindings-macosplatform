@@ -7,7 +7,6 @@ package cryptotokenkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewSmartCardTokenDriver() *SmartCardTokenDriver {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardTokenDriver")), objc.RegisterName("new"))
 	return smartCardTokenDriverAdopt(_id)
 }
-
-// SmartCardTokenDriverable is the interface implemented by [SmartCardTokenDriver], for mocking and DI.
-type SmartCardTokenDriverable interface {
-	obj.Object
-}
-
-var _ SmartCardTokenDriverable = (*SmartCardTokenDriver)(nil)
 
 var _ TokenDriverProvider = (*SmartCardTokenDriver)(nil)

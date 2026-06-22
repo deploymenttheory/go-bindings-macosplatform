@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,84 +51,52 @@ func NewFeedbackCommand() *FeedbackCommand {
 	return feedbackCommandAdopt(_id)
 }
 
-// WithActive a Boolean value that indicates whether the feedback’s action is on or off.
-func (x *FeedbackCommand) WithActive(active bool) *FeedbackCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
-	return x
+// WithActive sets a Boolean value that indicates whether the feedback’s action is on or off.
+func (fc *FeedbackCommand) WithActive(active bool) *FeedbackCommand {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setActive:"), active)
+	return fc
 }
 
-// WithLocalizedTitle a localized string used to describe the context of a command.
-func (x *FeedbackCommand) WithLocalizedTitle(localizedTitle string) *FeedbackCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedTitle:"), purego.NSString(localizedTitle))
-	return x
+// WithLocalizedTitle sets a localized string used to describe the context of a command.
+func (fc *FeedbackCommand) WithLocalizedTitle(localizedTitle string) *FeedbackCommand {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setLocalizedTitle:"), purego.NSString(localizedTitle))
+	return fc
 }
 
-// WithLocalizedShortTitle a shortened version of the string used to describe the context of a command.
-func (x *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedShortTitle:"), purego.NSString(localizedShortTitle))
-	return x
+// WithLocalizedShortTitle sets a shortened version of the string used to describe the context of a command.
+func (fc *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setLocalizedShortTitle:"), purego.NSString(localizedShortTitle))
+	return fc
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *FeedbackCommand) WithEnabled(enabled bool) *FeedbackCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (fc *FeedbackCommand) WithEnabled(enabled bool) *FeedbackCommand {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setEnabled:"), enabled)
+	return fc
 }
 
-// IsActive whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
-func (x *FeedbackCommand) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+// IsActive reports whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
+func (fc *FeedbackCommand) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(fc), objc.RegisterName("isActive"))
 	return _r
 }
 
-// SetActive wraps the corresponding Objective-C method.
-func (x *FeedbackCommand) SetActive(active bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
-}
-
-// LocalizedTitle a localized string briefly describing the context of the command.
-func (x *FeedbackCommand) LocalizedTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+// LocalizedTitle returns a localized string briefly describing the context of the command.
+func (fc *FeedbackCommand) LocalizedTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLocalizedTitle wraps the corresponding Objective-C method.
-func (x *FeedbackCommand) SetLocalizedTitle(localizedTitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedTitle:"), purego.NSString(localizedTitle))
-}
-
-// LocalizedShortTitle an optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
-func (x *FeedbackCommand) LocalizedShortTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedShortTitle"))
+// LocalizedShortTitle returns an optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
+func (fc *FeedbackCommand) LocalizedShortTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("localizedShortTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLocalizedShortTitle wraps the corresponding Objective-C method.
-func (x *FeedbackCommand) SetLocalizedShortTitle(localizedShortTitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedShortTitle:"), purego.NSString(localizedShortTitle))
-}
-
-// FeedbackCommandable is the interface implemented by [FeedbackCommand], for mocking and DI.
-type FeedbackCommandable interface {
-	obj.Object
-	WithActive(active bool) *FeedbackCommand
-	WithLocalizedTitle(localizedTitle string) *FeedbackCommand
-	WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand
-	WithEnabled(enabled bool) *FeedbackCommand
-	IsActive() bool
-	SetActive(active bool)
-	LocalizedTitle() string
-	SetLocalizedTitle(localizedTitle string)
-	LocalizedShortTitle() string
-	SetLocalizedShortTitle(localizedShortTitle string)
-}
-
-var _ FeedbackCommandable = (*FeedbackCommand)(nil)
 
 var _ RemoteCommandProvider = (*FeedbackCommand)(nil)

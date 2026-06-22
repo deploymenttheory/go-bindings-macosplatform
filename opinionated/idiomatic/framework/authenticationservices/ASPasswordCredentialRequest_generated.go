@@ -46,24 +46,24 @@ func passwordCredentialRequestAdopt(id objc.ID) *PasswordCredentialRequest {
 }
 
 // Description returns the object's -description text.
-func (x *PasswordCredentialRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pcr *PasswordCredentialRequest) Description() string {
+	return rt.Description(objref.IDOf(pcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PasswordCredentialRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pcr *PasswordCredentialRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PasswordCredentialRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pcr *PasswordCredentialRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PasswordCredentialRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pcr *PasswordCredentialRequest) String() string {
+	return rt.Description(objref.IDOf(pcr))
 }
 
 // NewPasswordCredentialRequestWithCredentialIdentity initializes a password credential request object.
@@ -72,10 +72,3 @@ func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *Pass
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), objref.IDOf(credentialIdentity))
 	return passwordCredentialRequestAdopt(_id)
 }
-
-// PasswordCredentialRequestable is the interface implemented by [PasswordCredentialRequest], for mocking and DI.
-type PasswordCredentialRequestable interface {
-	obj.Object
-}
-
-var _ PasswordCredentialRequestable = (*PasswordCredentialRequest)(nil)

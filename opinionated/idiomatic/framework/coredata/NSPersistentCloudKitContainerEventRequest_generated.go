@@ -7,7 +7,6 @@ package coredata
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,23 @@ func NewPersistentCloudKitContainerEventRequest() *PersistentCloudKitContainerEv
 	return persistentCloudKitContainerEventRequestAdopt(_id)
 }
 
-// WithResultType the type of result that the request returns.
-func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType PersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-	return x
+// WithResultType sets the type of result that the request returns.
+func (pckcer *PersistentCloudKitContainerEventRequest) WithResultType(resultType PersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest {
+	objc.Send[objc.ID](objref.IDOf(pckcer), objc.RegisterName("setResultType:"), resultType)
+	return pckcer
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (pckcer *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pckcer), objc.RegisterName("setAffectedStores:"), _arr)
+	return pckcer
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEventRequest) ResultType() PersistentCloudKitContainerEventResultType {
-	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (pckcer *PersistentCloudKitContainerEventRequest) ResultType() PersistentCloudKitContainerEventResultType {
+	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(pckcer), objc.RegisterName("resultType"))
 	return _r
 }
-
-// SetResultType wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEventRequest) SetResultType(resultType PersistentCloudKitContainerEventResultType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-}
-
-// PersistentCloudKitContainerEventRequestable is the interface implemented by [PersistentCloudKitContainerEventRequest], for mocking and DI.
-type PersistentCloudKitContainerEventRequestable interface {
-	obj.Object
-	WithResultType(resultType PersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest
-	WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest
-	ResultType() PersistentCloudKitContainerEventResultType
-	SetResultType(resultType PersistentCloudKitContainerEventResultType)
-}
-
-var _ PersistentCloudKitContainerEventRequestable = (*PersistentCloudKitContainerEventRequest)(nil)
 
 var _ PersistentStoreRequestProvider = (*PersistentCloudKitContainerEventRequest)(nil)

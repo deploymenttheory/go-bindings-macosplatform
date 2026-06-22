@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *RNNMatrixTrainingState) WithReadCount(readCount int) *RNNMatrixTrainingState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (rmts *RNNMatrixTrainingState) WithReadCount(readCount int) *RNNMatrixTrainingState {
+	objc.Send[objc.ID](objref.IDOf(rmts), objc.RegisterName("setReadCount:"), readCount)
+	return rmts
 }
 
-// WithLabel a string to help identify this object.
-func (x *RNNMatrixTrainingState) WithLabel(label string) *RNNMatrixTrainingState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (rmts *RNNMatrixTrainingState) WithLabel(label string) *RNNMatrixTrainingState {
+	objc.Send[objc.ID](objref.IDOf(rmts), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rmts
 }
-
-// RNNMatrixTrainingStateable is the interface implemented by [RNNMatrixTrainingState], for mocking and DI.
-type RNNMatrixTrainingStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *RNNMatrixTrainingState
-	WithLabel(label string) *RNNMatrixTrainingState
-}
-
-var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)
 
 var _ StateProvider = (*RNNMatrixTrainingState)(nil)

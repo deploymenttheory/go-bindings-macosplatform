@@ -45,24 +45,24 @@ func imageHistogramAdopt(id objc.ID) *ImageHistogram {
 }
 
 // Description returns the object's -description text.
-func (x *ImageHistogram) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ih *ImageHistogram) Description() string {
+	return rt.Description(objref.IDOf(ih))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageHistogram) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ih *ImageHistogram) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ih), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageHistogram) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ih *ImageHistogram) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ih), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageHistogram) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ih *ImageHistogram) String() string {
+	return rt.Description(objref.IDOf(ih))
 }
 
 // NewImageHistogram creates a new ImageHistogram.
@@ -71,49 +71,26 @@ func NewImageHistogram() *ImageHistogram {
 	return imageHistogramAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-func (x *ImageHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+func (ih *ImageHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram {
+	objc.Send[objc.ID](objref.IDOf(ih), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return ih
 }
 
-// WithZeroHistogram zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
-func (x *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
-	return x
+// WithZeroHistogram sets zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
+func (ih *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
+	objc.Send[objc.ID](objref.IDOf(ih), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
+	return ih
 }
 
-// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-func (x *ImageHistogram) ClipRectSource() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+// ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+func (ih *ImageHistogram) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(ih), objc.RegisterName("clipRectSource"))
 	return _r
 }
 
-// SetClipRectSource wraps the corresponding Objective-C method.
-func (x *ImageHistogram) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-}
-
-// ZeroHistogram zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
-func (x *ImageHistogram) ZeroHistogram() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("zeroHistogram"))
+// ZeroHistogram reports whether zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: true.
+func (ih *ImageHistogram) ZeroHistogram() bool {
+	_r := objc.Send[bool](objref.IDOf(ih), objc.RegisterName("zeroHistogram"))
 	return _r
 }
-
-// SetZeroHistogram wraps the corresponding Objective-C method.
-func (x *ImageHistogram) SetZeroHistogram(zeroHistogram bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
-}
-
-// ImageHistogramable is the interface implemented by [ImageHistogram], for mocking and DI.
-type ImageHistogramable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram
-	WithZeroHistogram(zeroHistogram bool) *ImageHistogram
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-	ZeroHistogram() bool
-	SetZeroHistogram(zeroHistogram bool)
-}
-
-var _ ImageHistogramable = (*ImageHistogram)(nil)

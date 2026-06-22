@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewCorrelationType() *CorrelationType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKCorrelationType")), objc.RegisterName("new"))
 	return correlationTypeAdopt(_id)
 }
-
-// CorrelationTypeable is the interface implemented by [CorrelationType], for mocking and DI.
-type CorrelationTypeable interface {
-	obj.Object
-}
-
-var _ CorrelationTypeable = (*CorrelationType)(nil)
 
 var _ SampleTypeProvider = (*CorrelationType)(nil)
 

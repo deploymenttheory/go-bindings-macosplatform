@@ -52,147 +52,116 @@ func NewCompositeAttributeDescription() *CompositeAttributeDescription {
 	return compositeAttributeDescriptionAdopt(_id)
 }
 
-// WithElements the composed attribute descriptions.
-func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription {
+// WithElements sets the composed attribute descriptions.
+func (cad *CompositeAttributeDescription) WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription {
 	_arr := purego.SliceToNSArray(items, func(_v AttributeDescriptionProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setElements:"), _arr)
+	return cad
 }
 
-// WithAttributeType the attribute’s type.
-func (x *CompositeAttributeDescription) WithAttributeType(attributeType AttributeType) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeType:"), attributeType)
-	return x
+// WithAttributeType sets the attribute’s type.
+func (cad *CompositeAttributeDescription) WithAttributeType(attributeType AttributeType) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setAttributeType:"), attributeType)
+	return cad
 }
 
-// WithAttributeValueClassName the class name that represents the attribute’s value.
-func (x *CompositeAttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValueClassName:"), purego.NSString(attributeValueClassName))
-	return x
+// WithAttributeValueClassName sets the class name that represents the attribute’s value.
+func (cad *CompositeAttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setAttributeValueClassName:"), purego.NSString(attributeValueClassName))
+	return cad
 }
 
-// WithDefaultValue the default value of the attribute.
-func (x *CompositeAttributeDescription) WithDefaultValue(defaultValue obj.Object) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
-	return x
+// WithDefaultValue sets the default value of the attribute.
+func (cad *CompositeAttributeDescription) WithDefaultValue(defaultValue obj.Object) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
+	return cad
 }
 
-// WithValueTransformerName the name of the transformer to use for the attribute value.
-func (x *CompositeAttributeDescription) WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueTransformerName:"), purego.NSString(valueTransformerName))
-	return x
+// WithValueTransformerName sets the name of the transformer to use for the attribute value.
+func (cad *CompositeAttributeDescription) WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setValueTransformerName:"), purego.NSString(valueTransformerName))
+	return cad
 }
 
-// WithAllowsExternalBinaryDataStorage a Boolean value that indicates whether the attribute allows external binary storage.
-func (x *CompositeAttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalBinaryDataStorage:"), allowsExternalBinaryDataStorage)
-	return x
+// WithAllowsExternalBinaryDataStorage sets a Boolean value that indicates whether the attribute allows external binary storage.
+func (cad *CompositeAttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setAllowsExternalBinaryDataStorage:"), allowsExternalBinaryDataStorage)
+	return cad
 }
 
-// WithPreservesValueInHistoryOnDeletion a Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
-func (x *CompositeAttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesValueInHistoryOnDeletion:"), preservesValueInHistoryOnDeletion)
-	return x
+// WithPreservesValueInHistoryOnDeletion sets a Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
+func (cad *CompositeAttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setPreservesValueInHistoryOnDeletion:"), preservesValueInHistoryOnDeletion)
+	return cad
 }
 
-// WithAllowsCloudEncryption a Boolean value that determines whether to encrypt the attribute’s value.
-func (x *CompositeAttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCloudEncryption:"), allowsCloudEncryption)
-	return x
+// WithAllowsCloudEncryption sets a Boolean value that determines whether to encrypt the attribute’s value.
+func (cad *CompositeAttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setAllowsCloudEncryption:"), allowsCloudEncryption)
+	return cad
 }
 
-// WithName the name of the receiver.
-func (x *CompositeAttributeDescription) WithName(name string) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (cad *CompositeAttributeDescription) WithName(name string) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setName:"), purego.NSString(name))
+	return cad
 }
 
-// WithOptional a Boolean value that indicates whether the receiver is optional.
-func (x *CompositeAttributeDescription) WithOptional(optional bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
-	return x
+// WithOptional sets a Boolean value that indicates whether the receiver is optional.
+func (cad *CompositeAttributeDescription) WithOptional(optional bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setOptional:"), optional)
+	return cad
 }
 
-// WithTransient a Boolean value that indicates whether the receiver is transient.
-func (x *CompositeAttributeDescription) WithTransient(transient bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
-	return x
+// WithTransient sets a Boolean value that indicates whether the receiver is transient.
+func (cad *CompositeAttributeDescription) WithTransient(transient bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setTransient:"), transient)
+	return cad
 }
 
-// WithUserInfo the user info dictionary of the receiver.
-func (x *CompositeAttributeDescription) WithUserInfo(userInfo obj.Object) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info dictionary of the receiver.
+func (cad *CompositeAttributeDescription) WithUserInfo(userInfo obj.Object) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return cad
 }
 
-// WithIndexed a Boolean value that indicates whether the receiver should be indexed for searching.
-func (x *CompositeAttributeDescription) WithIndexed(indexed bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
-	return x
+// WithIndexed sets a Boolean value that indicates whether the receiver should be indexed for searching.
+func (cad *CompositeAttributeDescription) WithIndexed(indexed bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setIndexed:"), indexed)
+	return cad
 }
 
-// WithVersionHashModifier the version hash modifier for the receiver.
-func (x *CompositeAttributeDescription) WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
-	return x
+// WithVersionHashModifier sets the version hash modifier for the receiver.
+func (cad *CompositeAttributeDescription) WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
+	return cad
 }
 
-// WithIndexedBySpotlight a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
-func (x *CompositeAttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
-	return x
+// WithIndexedBySpotlight sets a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+func (cad *CompositeAttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
+	return cad
 }
 
-// WithStoredInExternalRecord a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
-func (x *CompositeAttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
-	return x
+// WithStoredInExternalRecord sets a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+func (cad *CompositeAttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
+	return cad
 }
 
-// WithRenamingIdentifier the renaming identifier for the receiver.
-func (x *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
-	return x
+// WithRenamingIdentifier sets the renaming identifier for the receiver.
+func (cad *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
+	return cad
 }
 
 // Elements wraps the corresponding Objective-C method.
 //
 // Elements returns the collection as a Go slice.
-func (x *CompositeAttributeDescription) Elements() []*AttributeDescription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
+func (cad *CompositeAttributeDescription) Elements() []*AttributeDescription {
+	_arr := objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("elements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AttributeDescription { return AttributeDescriptionFromID(_id) })
 }
-
-// SetElements wraps the corresponding Objective-C method.
-func (x *CompositeAttributeDescription) SetElements(elements []*AttributeDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), purego.SliceToNSArray(elements, func(_v *AttributeDescription) objc.ID { return objref.IDOf(_v) }))
-}
-
-// CompositeAttributeDescriptionable is the interface implemented by [CompositeAttributeDescription], for mocking and DI.
-type CompositeAttributeDescriptionable interface {
-	obj.Object
-	WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription
-	WithAttributeType(attributeType AttributeType) *CompositeAttributeDescription
-	WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription
-	WithDefaultValue(defaultValue obj.Object) *CompositeAttributeDescription
-	WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription
-	WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription
-	WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription
-	WithAllowsCloudEncryption(allowsCloudEncryption bool) *CompositeAttributeDescription
-	WithName(name string) *CompositeAttributeDescription
-	WithOptional(optional bool) *CompositeAttributeDescription
-	WithTransient(transient bool) *CompositeAttributeDescription
-	WithUserInfo(userInfo obj.Object) *CompositeAttributeDescription
-	WithIndexed(indexed bool) *CompositeAttributeDescription
-	WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription
-	WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription
-	WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription
-	WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription
-	Elements() []*AttributeDescription
-	SetElements(elements []*AttributeDescription)
-}
-
-var _ CompositeAttributeDescriptionable = (*CompositeAttributeDescription)(nil)
 
 var _ AttributeDescriptionProvider = (*CompositeAttributeDescription)(nil)
 

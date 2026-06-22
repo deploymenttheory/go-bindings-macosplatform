@@ -44,24 +44,24 @@ func centralManagerAdopt(id objc.ID) *CentralManager {
 }
 
 // Description returns the object's -description text.
-func (x *CentralManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cm *CentralManager) Description() string {
+	return rt.Description(objref.IDOf(cm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CentralManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cm *CentralManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CentralManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cm *CentralManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CentralManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cm *CentralManager) String() string {
+	return rt.Description(objref.IDOf(cm))
 }
 
 // NewCentralManager creates a new CentralManager.
@@ -71,33 +71,22 @@ func NewCentralManager() *CentralManager {
 }
 
 // StartControllerMatching this method triggers the IOKit matching for the network controllers. This is usually called by a subclass as the last thing in it's init method. This call is broken out of the AVBCentralManager's init method so that subclasses can finish their setup before calling it.
-func (x *CentralManager) StartControllerMatching() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerMatching"))
+func (cm *CentralManager) StartControllerMatching() {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("startControllerMatching"))
 }
 
 // DidAddInterface this method is called when an AVBInterface object is created for a NIC, either when the central manager is first started up or when the NIC is added later. The AVBCentralManager maintains it's own internal reference to the interface object until <code>didRemoveInterface:<code> is called with the same interface object, subclasses do not need to maintain another reference to this. A subclass does not need to call the AVBCentralManager implementation. Note this method is not called on the main thread and is not safe for performing UI actions.
-func (x *CentralManager) DidAddInterface(interface_ *Interface) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAddInterface:"), objref.IDOf(interface_))
+func (cm *CentralManager) DidAddInterface(interface_ *Interface) {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("didAddInterface:"), objref.IDOf(interface_))
 }
 
 // DidRemoveInterface this method is called when a NIC has been removed from the system and the central manager is cleaning it up. Note this method is not called on the main thread and is not safe for performing UI actions.
-func (x *CentralManager) DidRemoveInterface(interface_ *Interface) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didRemoveInterface:"), objref.IDOf(interface_))
+func (cm *CentralManager) DidRemoveInterface(interface_ *Interface) {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("didRemoveInterface:"), objref.IDOf(interface_))
 }
 
-// StreamingEnabledInterfacesOnly this method is used to control if the central manager will create and process AVBInterface objects for non streaming interfaces. The default value returned is YES and as such didAddInterface: will be called for all AVB Enabled network interfaces only.
-func (x *CentralManager) StreamingEnabledInterfacesOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("streamingEnabledInterfacesOnly"))
+// StreamingEnabledInterfacesOnly reports whether this method is used to control if the central manager will create and process AVBInterface objects for non streaming interfaces. The default value returned is true and as such didAddInterface: will be called for all AVB Enabled network interfaces only.
+func (cm *CentralManager) StreamingEnabledInterfacesOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("streamingEnabledInterfacesOnly"))
 	return _r
 }
-
-// CentralManagerable is the interface implemented by [CentralManager], for mocking and DI.
-type CentralManagerable interface {
-	obj.Object
-	StartControllerMatching()
-	DidAddInterface(interface_ *Interface)
-	DidRemoveInterface(interface_ *Interface)
-	StreamingEnabledInterfacesOnly() bool
-}
-
-var _ CentralManagerable = (*CentralManager)(nil)

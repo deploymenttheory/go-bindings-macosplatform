@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRQRCodeSetupPayloadParser is an idiomatic wrapper over the Objective-C class MTRQRCodeSetupPayloadParser.
@@ -46,24 +47,24 @@ func mTRQRCodeSetupPayloadParserAdopt(id objc.ID) *MTRQRCodeSetupPayloadParser {
 }
 
 // Description returns the object's -description text.
-func (x *MTRQRCodeSetupPayloadParser) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcspp *MTRQRCodeSetupPayloadParser) Description() string {
+	return rt.Description(objref.IDOf(mcspp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRQRCodeSetupPayloadParser) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcspp *MTRQRCodeSetupPayloadParser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcspp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRQRCodeSetupPayloadParser) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcspp *MTRQRCodeSetupPayloadParser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcspp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRQRCodeSetupPayloadParser) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcspp *MTRQRCodeSetupPayloadParser) String() string {
+	return rt.Description(objref.IDOf(mcspp))
 }
 
 // NewMTRQRCodeSetupPayloadParserWithBase38Representation creates a new MTRQRCodeSetupPayloadParser.
@@ -74,19 +75,11 @@ func NewMTRQRCodeSetupPayloadParserWithBase38Representation(base38Representation
 }
 
 // PopulatePayload wraps the corresponding Objective-C method.
-func (x *MTRQRCodeSetupPayloadParser) PopulatePayload() (result *MTRSetupPayload, err error) {
+func (mcspp *MTRQRCodeSetupPayloadParser) PopulatePayload() (result *MTRSetupPayload, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(mcspp), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return MTRSetupPayloadFromID(_r), nil
 }
-
-// MTRQRCodeSetupPayloadParserable is the interface implemented by [MTRQRCodeSetupPayloadParser], for mocking and DI.
-type MTRQRCodeSetupPayloadParserable interface {
-	obj.Object
-	PopulatePayload() (result *MTRSetupPayload, err error)
-}
-
-var _ MTRQRCodeSetupPayloadParserable = (*MTRQRCodeSetupPayloadParser)(nil)

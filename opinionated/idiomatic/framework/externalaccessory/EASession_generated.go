@@ -46,24 +46,24 @@ func sessionAdopt(id objc.ID) *Session {
 }
 
 // Description returns the object's -description text.
-func (x *Session) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Session) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Session) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Session) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Session) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Session) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Session) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Session) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSessionWithAccessoryForProtocol initializes the session for the specified accessory and protocol.
@@ -72,10 +72,3 @@ func NewSessionWithAccessoryForProtocol(accessory *Accessory, protocolString str
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessory:forProtocol:"), objref.IDOf(accessory), purego.NSString(protocolString))
 	return sessionAdopt(_id)
 }
-
-// Sessionable is the interface implemented by [Session], for mocking and DI.
-type Sessionable interface {
-	obj.Object
-}
-
-var _ Sessionable = (*Session)(nil)

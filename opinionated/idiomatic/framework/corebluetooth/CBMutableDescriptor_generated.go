@@ -53,13 +53,6 @@ func NewMutableDescriptorWithTypeValue(uUID *UUID, value obj.Object) *MutableDes
 	return mutableDescriptorAdopt(_id)
 }
 
-// MutableDescriptorable is the interface implemented by [MutableDescriptor], for mocking and DI.
-type MutableDescriptorable interface {
-	obj.Object
-}
-
-var _ MutableDescriptorable = (*MutableDescriptor)(nil)
-
 var _ DescriptorProvider = (*MutableDescriptor)(nil)
 
 var _ AttributeProvider = (*MutableDescriptor)(nil)

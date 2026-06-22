@@ -46,24 +46,24 @@ func entityAdopt(id objc.ID) *Entity {
 }
 
 // Description returns the object's -description text.
-func (x *Entity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Entity) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Entity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Entity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Entity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Entity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Entity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Entity) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewEntity creates a new Entity.
@@ -73,29 +73,19 @@ func NewEntity() *Entity {
 }
 
 // UpdateWithDeltaTime performs periodic updates for each of the entity’s components.
-func (x *Entity) UpdateWithDeltaTime(seconds float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
+func (e *Entity) UpdateWithDeltaTime(seconds float64) {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
 // AddComponent adds a component to the entity.
-func (x *Entity) AddComponent(component *Component) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponent:"), objref.IDOf(component))
+func (e *Entity) AddComponent(component *Component) {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("addComponent:"), objref.IDOf(component))
 }
 
-// Components access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
+// Components returns access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
 //
 // Components returns the collection as a Go slice.
-func (x *Entity) Components() []*Component {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+func (e *Entity) Components() []*Component {
+	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Component { return ComponentFromID(_id) })
 }
-
-// Entityable is the interface implemented by [Entity], for mocking and DI.
-type Entityable interface {
-	obj.Object
-	UpdateWithDeltaTime(seconds float64)
-	AddComponent(component *Component)
-	Components() []*Component
-}
-
-var _ Entityable = (*Entity)(nil)

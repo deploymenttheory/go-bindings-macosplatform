@@ -54,702 +54,570 @@ func NewScroller() *Scroller {
 	return scrollerAdopt(_id)
 }
 
-// WithScrollerStyle the scroller style for this scroller.
-func (x *Scroller) WithScrollerStyle(scrollerStyle ScrollerStyle) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
-	return x
+// WithScrollerStyle sets the scroller style for this scroller.
+func (s *Scroller) WithScrollerStyle(scrollerStyle ScrollerStyle) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
+	return s
 }
 
-// WithKnobStyle the scroller’s knob style.
-func (x *Scroller) WithKnobStyle(knobStyle ScrollerKnobStyle) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobStyle:"), knobStyle)
-	return x
+// WithKnobStyle sets the scroller’s knob style.
+func (s *Scroller) WithKnobStyle(knobStyle ScrollerKnobStyle) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setKnobStyle:"), knobStyle)
+	return s
 }
 
-// WithKnobProportion the proportion of the knob slot that the knob should fill.
-func (x *Scroller) WithKnobProportion(knobProportion float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobProportion:"), knobProportion)
-	return x
+// WithKnobProportion sets the proportion of the knob slot that the knob should fill.
+func (s *Scroller) WithKnobProportion(knobProportion float64) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setKnobProportion:"), knobProportion)
+	return s
 }
 
-// WithArrowsPosition the location of the scroll buttons within the scroller, as described in NSScrollArrowPosition.
-func (x *Scroller) WithArrowsPosition(arrowsPosition ScrollArrowPosition) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrowsPosition:"), arrowsPosition)
-	return x
+// WithArrowsPosition sets the location of the scroll buttons within the scroller, as described in NSScrollArrowPosition.
+func (s *Scroller) WithArrowsPosition(arrowsPosition ScrollArrowPosition) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setArrowsPosition:"), arrowsPosition)
+	return s
 }
 
-// WithControlTint the scroller’s control tint.
-func (x *Scroller) WithControlTint(controlTint ControlTint) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the scroller’s control tint.
+func (s *Scroller) WithControlTint(controlTint ControlTint) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlTint:"), controlTint)
+	return s
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *Scroller) WithTarget(target obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (s *Scroller) WithTarget(target obj.Object) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return s
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *Scroller) WithTag(tag int) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (s *Scroller) WithTag(tag int) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTag:"), tag)
+	return s
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *Scroller) WithIgnoresMultiClick(ignoresMultiClick bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (s *Scroller) WithIgnoresMultiClick(ignoresMultiClick bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return s
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *Scroller) WithContinuous(continuous bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (s *Scroller) WithContinuous(continuous bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContinuous:"), continuous)
+	return s
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *Scroller) WithEnabled(enabled bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (s *Scroller) WithEnabled(enabled bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEnabled:"), enabled)
+	return s
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *Scroller) WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (s *Scroller) WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return s
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *Scroller) WithHighlighted(highlighted bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (s *Scroller) WithHighlighted(highlighted bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHighlighted:"), highlighted)
+	return s
 }
 
-// WithControlSize the size of the control.
-func (x *Scroller) WithControlSize(controlSize ControlSize) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (s *Scroller) WithControlSize(controlSize ControlSize) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlSize:"), controlSize)
+	return s
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *Scroller) WithFormatter(formatter obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (s *Scroller) WithFormatter(formatter obj.Object) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return s
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *Scroller) WithObjectValue(objectValue obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (s *Scroller) WithObjectValue(objectValue obj.Object) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return s
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *Scroller) WithStringValue(stringValue string) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (s *Scroller) WithStringValue(stringValue string) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return s
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *Scroller) WithAttributedStringValue(attributedStringValue obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (s *Scroller) WithAttributedStringValue(attributedStringValue obj.Object) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return s
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *Scroller) WithIntValue(intValue int) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (s *Scroller) WithIntValue(intValue int) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntValue:"), intValue)
+	return s
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *Scroller) WithIntegerValue(integerValue int) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (s *Scroller) WithIntegerValue(integerValue int) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntegerValue:"), integerValue)
+	return s
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *Scroller) WithFloatValue(floatValue float32) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (s *Scroller) WithFloatValue(floatValue float32) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:"), floatValue)
+	return s
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *Scroller) WithDoubleValue(doubleValue float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (s *Scroller) WithDoubleValue(doubleValue float64) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return s
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *Scroller) WithFont(font *Font) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (s *Scroller) WithFont(font *Font) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return s
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *Scroller) WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (s *Scroller) WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return s
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *Scroller) WithLineBreakMode(lineBreakMode LineBreakMode) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (s *Scroller) WithLineBreakMode(lineBreakMode LineBreakMode) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return s
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *Scroller) WithAlignment(alignment TextAlignment) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (s *Scroller) WithAlignment(alignment TextAlignment) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlignment:"), alignment)
+	return s
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *Scroller) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (s *Scroller) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return s
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *Scroller) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (s *Scroller) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return s
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithCell(cell CellProvider) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (s *Scroller) WithCell(cell CellProvider) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return s
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithSubviews(items ...ViewProvider) *Scroller {
+func (s *Scroller) WithSubviews(items ...ViewProvider) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
+	return s
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithHidden(hidden bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (s *Scroller) WithHidden(hidden bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	return s
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (s *Scroller) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return s
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (s *Scroller) WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return s
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (s *Scroller) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return s
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *Scroller) WithFrame(frame corefoundation.CGRect) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (s *Scroller) WithFrame(frame corefoundation.CGRect) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrame:"), frame)
+	return s
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithFrameRotation(frameRotation float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (s *Scroller) WithFrameRotation(frameRotation float64) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return s
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithFrameCenterRotation(frameCenterRotation float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (s *Scroller) WithFrameCenterRotation(frameCenterRotation float64) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return s
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithBoundsRotation(boundsRotation float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (s *Scroller) WithBoundsRotation(boundsRotation float64) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return s
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *Scroller) WithBounds(bounds corefoundation.CGRect) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (s *Scroller) WithBounds(bounds corefoundation.CGRect) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBounds:"), bounds)
+	return s
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (s *Scroller) WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return s
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *Scroller) WithNeedsDisplay(needsDisplay bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (s *Scroller) WithNeedsDisplay(needsDisplay bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return s
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (s *Scroller) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return s
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithWantsRestingTouches(wantsRestingTouches bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (s *Scroller) WithWantsRestingTouches(wantsRestingTouches bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return s
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (s *Scroller) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return s
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (s *Scroller) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return s
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithWantsLayer(wantsLayer bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (s *Scroller) WithWantsLayer(wantsLayer bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return s
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithLayer(layer obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (s *Scroller) WithLayer(layer obj.Object) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return s
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (s *Scroller) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return s
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithNeedsLayout(needsLayout bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (s *Scroller) WithNeedsLayout(needsLayout bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return s
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithAlphaValue(alphaValue float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (s *Scroller) WithAlphaValue(alphaValue float64) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return s
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (s *Scroller) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return s
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithBackgroundFilters(items ...obj.Object) *Scroller {
+func (s *Scroller) WithBackgroundFilters(items ...obj.Object) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return s
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithCompositingFilter(compositingFilter obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (s *Scroller) WithCompositingFilter(compositingFilter obj.Object) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return s
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithContentFilters(items ...obj.Object) *Scroller {
+func (s *Scroller) WithContentFilters(items ...obj.Object) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
+	return s
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithShadow(shadow *Shadow) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (s *Scroller) WithShadow(shadow *Shadow) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return s
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithClipsToBounds(clipsToBounds bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (s *Scroller) WithClipsToBounds(clipsToBounds bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return s
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (s *Scroller) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return s
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithToolTip(toolTip string) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (s *Scroller) WithToolTip(toolTip string) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return s
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (s *Scroller) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return s
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (s *Scroller) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return s
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithNextKeyView(nextKeyView ViewProvider) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (s *Scroller) WithNextKeyView(nextKeyView ViewProvider) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return s
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithFocusRingType(focusRingType FocusRingType) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (s *Scroller) WithFocusRingType(focusRingType FocusRingType) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return s
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller {
+func (s *Scroller) WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return s
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (s *Scroller) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return s
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (s *Scroller) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return s
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (s *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return s
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (s *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return s
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (s *Scroller) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return s
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (s *Scroller) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return s
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (s *Scroller) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return s
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (s *Scroller) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return s
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (s *Scroller) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return s
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (s *Scroller) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return s
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (s *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return s
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (s *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return s
 }
 
-// WithMenu returns the responder’s menu.
-func (x *Scroller) WithMenu(menu *Menu) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (s *Scroller) WithMenu(menu *Menu) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return s
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *Scroller) WithUserActivity(userActivity obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (s *Scroller) WithUserActivity(userActivity obj.Object) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return s
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (s *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return s
 }
 
 // RectForPart returns the rectangle occupied by aPart, which for this method is interpreted literally rather than as an indicator of scrolling direction.
-func (x *Scroller) RectForPart(partCode ScrollerPart) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForPart:"), partCode)
+func (s *Scroller) RectForPart(partCode ScrollerPart) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("rectForPart:"), partCode)
 	return _r
 }
 
 // CheckSpaceForParts checks to see if there is enough room in the receiver to display the knob and buttons.
-func (x *Scroller) CheckSpaceForParts() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkSpaceForParts"))
+func (s *Scroller) CheckSpaceForParts() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("checkSpaceForParts"))
 }
 
 // DrawKnob draws the knob.
-func (x *Scroller) DrawKnob() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawKnob"))
+func (s *Scroller) DrawKnob() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnob"))
 }
 
 // DrawKnobSlotInRectHighlight draws the portion of the scroller’s track, possibly including the line increment and decrement arrow buttons, that falls in the given rectangle.
-func (x *Scroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawKnobSlotInRect:highlight:"), slotRect, flag)
+func (s *Scroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnobSlotInRect:highlight:"), slotRect, flag)
 }
 
 // TestPart returns the part that would be hit by a mouse-down event at aPoint (expressed in the window’s coordinate system).
-func (x *Scroller) TestPart(point corefoundation.CGPoint) ScrollerPart {
-	_r := objc.Send[ScrollerPart](objref.IDOf(x), objc.RegisterName("testPart:"), point)
+func (s *Scroller) TestPart(point corefoundation.CGPoint) ScrollerPart {
+	_r := objc.Send[ScrollerPart](objref.IDOf(s), objc.RegisterName("testPart:"), point)
 	return _r
 }
 
 // TrackKnob tracks the knob and sends action messages to the receiver’s target.
-func (x *Scroller) TrackKnob(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackKnob:"), objref.IDOf(event))
-}
-
-// SetKnobProportion wraps the corresponding Objective-C method.
-func (x *Scroller) SetKnobProportion(proportion float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobProportion:"), proportion)
+func (s *Scroller) TrackKnob(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackKnob:"), objref.IDOf(event))
 }
 
 // ScrollerStyle wraps the corresponding Objective-C method.
-func (x *Scroller) ScrollerStyle() ScrollerStyle {
-	_r := objc.Send[ScrollerStyle](objref.IDOf(x), objc.RegisterName("scrollerStyle"))
+func (s *Scroller) ScrollerStyle() ScrollerStyle {
+	_r := objc.Send[ScrollerStyle](objref.IDOf(s), objc.RegisterName("scrollerStyle"))
 	return _r
-}
-
-// SetScrollerStyle wraps the corresponding Objective-C method.
-func (x *Scroller) SetScrollerStyle(scrollerStyle ScrollerStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
 }
 
 // KnobStyle wraps the corresponding Objective-C method.
-func (x *Scroller) KnobStyle() ScrollerKnobStyle {
-	_r := objc.Send[ScrollerKnobStyle](objref.IDOf(x), objc.RegisterName("knobStyle"))
+func (s *Scroller) KnobStyle() ScrollerKnobStyle {
+	_r := objc.Send[ScrollerKnobStyle](objref.IDOf(s), objc.RegisterName("knobStyle"))
 	return _r
 }
 
-// SetKnobStyle wraps the corresponding Objective-C method.
-func (x *Scroller) SetKnobStyle(knobStyle ScrollerKnobStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobStyle:"), knobStyle)
-}
-
 // UsableParts wraps the corresponding Objective-C method.
-func (x *Scroller) UsableParts() UsableScrollerParts {
-	_r := objc.Send[UsableScrollerParts](objref.IDOf(x), objc.RegisterName("usableParts"))
+func (s *Scroller) UsableParts() UsableScrollerParts {
+	_r := objc.Send[UsableScrollerParts](objref.IDOf(s), objc.RegisterName("usableParts"))
 	return _r
 }
 
 // HitPart wraps the corresponding Objective-C method.
-func (x *Scroller) HitPart() ScrollerPart {
-	_r := objc.Send[ScrollerPart](objref.IDOf(x), objc.RegisterName("hitPart"))
+func (s *Scroller) HitPart() ScrollerPart {
+	_r := objc.Send[ScrollerPart](objref.IDOf(s), objc.RegisterName("hitPart"))
 	return _r
 }
 
 // KnobProportion wraps the corresponding Objective-C method.
-func (x *Scroller) KnobProportion() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("knobProportion"))
+func (s *Scroller) KnobProportion() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("knobProportion"))
 	return _r
 }
 
 // SetFloatValueKnobProportion sets the position of the knob to aFloat, which is a value from 0.0 (indicating the top or left end) to 1.0 (the bottom or right end).
-func (x *Scroller) SetFloatValueKnobProportion(value float32, proportion float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:knobProportion:"), value, proportion)
+func (s *Scroller) SetFloatValueKnobProportion(value float32, proportion float64) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:knobProportion:"), value, proportion)
 }
 
 // Highlight highlights or unhighlights the scroll button the user clicked.
-func (x *Scroller) Highlight(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlight:"), flag)
+func (s *Scroller) Highlight(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("highlight:"), flag)
 }
 
 // TrackScrollButtons tracks the scroll buttons and sends action messages to the receiver’s target.
-func (x *Scroller) TrackScrollButtons(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackScrollButtons:"), objref.IDOf(event))
+func (s *Scroller) TrackScrollButtons(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackScrollButtons:"), objref.IDOf(event))
 }
 
 // DrawParts caches images for the scroll buttons and knob.
-func (x *Scroller) DrawParts() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawParts"))
+func (s *Scroller) DrawParts() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawParts"))
 }
 
 // DrawArrowHighlight draws the scroll button indicated by arrow, which is either NSScrollerIncrementArrow (the down or right scroll button) or NSScrollerDecrementArrow (up or left).
-func (x *Scroller) DrawArrowHighlight(whichArrow ScrollerArrow, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawArrow:highlight:"), whichArrow, flag)
+func (s *Scroller) DrawArrowHighlight(whichArrow ScrollerArrow, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawArrow:highlight:"), whichArrow, flag)
 }
 
 // ArrowsPosition wraps the corresponding Objective-C method.
-func (x *Scroller) ArrowsPosition() ScrollArrowPosition {
-	_r := objc.Send[ScrollArrowPosition](objref.IDOf(x), objc.RegisterName("arrowsPosition"))
+func (s *Scroller) ArrowsPosition() ScrollArrowPosition {
+	_r := objc.Send[ScrollArrowPosition](objref.IDOf(s), objc.RegisterName("arrowsPosition"))
 	return _r
-}
-
-// SetArrowsPosition wraps the corresponding Objective-C method.
-func (x *Scroller) SetArrowsPosition(arrowsPosition ScrollArrowPosition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrowsPosition:"), arrowsPosition)
 }
 
 // ControlTint wraps the corresponding Objective-C method.
-func (x *Scroller) ControlTint() ControlTint {
-	_r := objc.Send[ControlTint](objref.IDOf(x), objc.RegisterName("controlTint"))
+func (s *Scroller) ControlTint() ControlTint {
+	_r := objc.Send[ControlTint](objref.IDOf(s), objc.RegisterName("controlTint"))
 	return _r
 }
-
-// SetControlTint wraps the corresponding Objective-C method.
-func (x *Scroller) SetControlTint(controlTint ControlTint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-}
-
-// Scrollerable is the interface implemented by [Scroller], for mocking and DI.
-type Scrollerable interface {
-	obj.Object
-	WithScrollerStyle(scrollerStyle ScrollerStyle) *Scroller
-	WithKnobStyle(knobStyle ScrollerKnobStyle) *Scroller
-	WithKnobProportion(knobProportion float64) *Scroller
-	WithArrowsPosition(arrowsPosition ScrollArrowPosition) *Scroller
-	WithControlTint(controlTint ControlTint) *Scroller
-	WithTarget(target obj.Object) *Scroller
-	WithTag(tag int) *Scroller
-	WithIgnoresMultiClick(ignoresMultiClick bool) *Scroller
-	WithContinuous(continuous bool) *Scroller
-	WithEnabled(enabled bool) *Scroller
-	WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller
-	WithHighlighted(highlighted bool) *Scroller
-	WithControlSize(controlSize ControlSize) *Scroller
-	WithFormatter(formatter obj.Object) *Scroller
-	WithObjectValue(objectValue obj.Object) *Scroller
-	WithStringValue(stringValue string) *Scroller
-	WithAttributedStringValue(attributedStringValue obj.Object) *Scroller
-	WithIntValue(intValue int) *Scroller
-	WithIntegerValue(integerValue int) *Scroller
-	WithFloatValue(floatValue float32) *Scroller
-	WithDoubleValue(doubleValue float64) *Scroller
-	WithFont(font *Font) *Scroller
-	WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller
-	WithLineBreakMode(lineBreakMode LineBreakMode) *Scroller
-	WithAlignment(alignment TextAlignment) *Scroller
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Scroller
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller
-	WithCell(cell CellProvider) *Scroller
-	WithSubviews(items ...ViewProvider) *Scroller
-	WithHidden(hidden bool) *Scroller
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller
-	WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Scroller
-	WithFrame(frame corefoundation.CGRect) *Scroller
-	WithFrameRotation(frameRotation float64) *Scroller
-	WithFrameCenterRotation(frameCenterRotation float64) *Scroller
-	WithBoundsRotation(boundsRotation float64) *Scroller
-	WithBounds(bounds corefoundation.CGRect) *Scroller
-	WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller
-	WithNeedsDisplay(needsDisplay bool) *Scroller
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller
-	WithWantsRestingTouches(wantsRestingTouches bool) *Scroller
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Scroller
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Scroller
-	WithWantsLayer(wantsLayer bool) *Scroller
-	WithLayer(layer obj.Object) *Scroller
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller
-	WithNeedsLayout(needsLayout bool) *Scroller
-	WithAlphaValue(alphaValue float64) *Scroller
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scroller
-	WithBackgroundFilters(items ...obj.Object) *Scroller
-	WithCompositingFilter(compositingFilter obj.Object) *Scroller
-	WithContentFilters(items ...obj.Object) *Scroller
-	WithShadow(shadow *Shadow) *Scroller
-	WithClipsToBounds(clipsToBounds bool) *Scroller
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller
-	WithToolTip(toolTip string) *Scroller
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Scroller
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller
-	WithNextKeyView(nextKeyView ViewProvider) *Scroller
-	WithFocusRingType(focusRingType FocusRingType) *Scroller
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Scroller
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller
-	WithNextResponder(nextResponder ResponderProvider) *Scroller
-	WithMenu(menu *Menu) *Scroller
-	WithUserActivity(userActivity obj.Object) *Scroller
-	WithTouchBar(touchBar *TouchBar) *Scroller
-	RectForPart(partCode ScrollerPart) corefoundation.CGRect
-	CheckSpaceForParts()
-	DrawKnob()
-	DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool)
-	TestPart(point corefoundation.CGPoint) ScrollerPart
-	TrackKnob(event *Event)
-	SetKnobProportion(proportion float64)
-	ScrollerStyle() ScrollerStyle
-	SetScrollerStyle(scrollerStyle ScrollerStyle)
-	KnobStyle() ScrollerKnobStyle
-	SetKnobStyle(knobStyle ScrollerKnobStyle)
-	UsableParts() UsableScrollerParts
-	HitPart() ScrollerPart
-	KnobProportion() float64
-	SetFloatValueKnobProportion(value float32, proportion float64)
-	Highlight(flag bool)
-	TrackScrollButtons(event *Event)
-	DrawParts()
-	DrawArrowHighlight(whichArrow ScrollerArrow, flag bool)
-	ArrowsPosition() ScrollArrowPosition
-	SetArrowsPosition(arrowsPosition ScrollArrowPosition)
-	ControlTint() ControlTint
-	SetControlTint(controlTint ControlTint)
-}
-
-var _ Scrollerable = (*Scroller)(nil)
 
 var _ ControlProvider = (*Scroller)(nil)
 

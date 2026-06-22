@@ -46,24 +46,24 @@ func envelopeAdopt(id objc.ID) *Envelope {
 }
 
 // Description returns the object's -description text.
-func (x *Envelope) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Envelope) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Envelope) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Envelope) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Envelope) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Envelope) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Envelope) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Envelope) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewEnvelope creates a new Envelope.
@@ -73,38 +73,27 @@ func NewEnvelope() *Envelope {
 }
 
 // EvaluateForValue provides the height of the envelope for an input value.
-func (x *Envelope) EvaluateForValue(x_ float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("evaluateForValue:"), x_)
+func (e *Envelope) EvaluateForValue(x_ float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("evaluateForValue:"), x_)
 	return _r
 }
 
-// Segments the segments of the envelope.
+// Segments returns the segments of the envelope.
 //
 // Segments returns the collection as a Go slice.
-func (x *Envelope) Segments() []*EnvelopeSegment {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("segments"))
+func (e *Envelope) Segments() []*EnvelopeSegment {
+	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("segments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvelopeSegment { return EnvelopeSegmentFromID(_id) })
 }
 
-// Domain the domain (along the x-axis). The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
-func (x *Envelope) Domain() *NumericPair {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+// Domain returns the domain (along the x-axis). The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
+func (e *Envelope) Domain() *NumericPair {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("domain"))
 	return NumericPairFromID(_r)
 }
 
-// Range the range (along the y-axis). The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
-func (x *Envelope) Range() *NumericPair {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("range"))
+// Range returns the range (along the y-axis). The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
+func (e *Envelope) Range() *NumericPair {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("range"))
 	return NumericPairFromID(_r)
 }
-
-// Envelopeable is the interface implemented by [Envelope], for mocking and DI.
-type Envelopeable interface {
-	obj.Object
-	EvaluateForValue(x_ float64) float64
-	Segments() []*EnvelopeSegment
-	Domain() *NumericPair
-	Range() *NumericPair
-}
-
-var _ Envelopeable = (*Envelope)(nil)

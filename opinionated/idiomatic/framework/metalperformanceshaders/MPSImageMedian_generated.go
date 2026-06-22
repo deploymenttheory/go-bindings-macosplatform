@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,40 +53,29 @@ func NewImageMedian() *ImageMedian {
 	return imageMedianAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageMedian) WithOffset(offset mpscore.MPSOffset) *ImageMedian {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (im *ImageMedian) WithOffset(offset mpscore.MPSOffset) *ImageMedian {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setOffset:"), offset)
+	return im
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageMedian) WithClipRect(clipRect metal.MTLRegion) *ImageMedian {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (im *ImageMedian) WithClipRect(clipRect metal.MTLRegion) *ImageMedian {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setClipRect:"), clipRect)
+	return im
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageMedian) WithLabel(label string) *ImageMedian {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (im *ImageMedian) WithLabel(label string) *ImageMedian {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return im
 }
 
-// KernelDiameter the diameter in pixels of the filter window. The median filter is applied to a kernelDiameter x kernelDiameter window of pixels centered on the corresponding source pixel for each destination pixel.  The kernel diameter must be an odd number.
-func (x *ImageMedian) KernelDiameter() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelDiameter"))
+// KernelDiameter returns the diameter in pixels of the filter window. The median filter is applied to a kernelDiameter x kernelDiameter window of pixels centered on the corresponding source pixel for each destination pixel.  The kernel diameter must be an odd number.
+func (im *ImageMedian) KernelDiameter() int {
+	_r := objc.Send[int](objref.IDOf(im), objc.RegisterName("kernelDiameter"))
 	return _r
 }
-
-// ImageMedianable is the interface implemented by [ImageMedian], for mocking and DI.
-type ImageMedianable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageMedian
-	WithClipRect(clipRect metal.MTLRegion) *ImageMedian
-	WithLabel(label string) *ImageMedian
-	KernelDiameter() int
-}
-
-var _ ImageMedianable = (*ImageMedian)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageMedian)(nil)
 

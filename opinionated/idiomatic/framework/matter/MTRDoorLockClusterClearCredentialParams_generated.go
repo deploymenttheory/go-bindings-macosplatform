@@ -44,24 +44,24 @@ func mTRDoorLockClusterClearCredentialParamsAdopt(id objc.ID) *MTRDoorLockCluste
 }
 
 // Description returns the object's -description text.
-func (x *MTRDoorLockClusterClearCredentialParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) Description() string {
+	return rt.Description(objref.IDOf(mdlcccp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDoorLockClusterClearCredentialParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlcccp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDoorLockClusterClearCredentialParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlcccp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDoorLockClusterClearCredentialParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) String() string {
+	return rt.Description(objref.IDOf(mdlcccp))
 }
 
 // NewMTRDoorLockClusterClearCredentialParams creates a new MTRDoorLockClusterClearCredentialParams.
@@ -71,68 +71,37 @@ func NewMTRDoorLockClusterClearCredentialParams() *MTRDoorLockClusterClearCreden
 }
 
 // WithCredential sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterClearCredentialParams) WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterClearCredentialParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
-	return x
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterClearCredentialParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcccp), objc.RegisterName("setCredential:"), objref.IDOf(credential))
+	return mdlcccp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDoorLockClusterClearCredentialParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearCredentialParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearCredentialParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcccp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mdlcccp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDoorLockClusterClearCredentialParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearCredentialParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearCredentialParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcccp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mdlcccp
 }
 
 // Credential wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterClearCredentialParams) Credential() *MTRDoorLockClusterCredentialStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credential"))
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) Credential() *MTRDoorLockClusterCredentialStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcccp), objc.RegisterName("credential"))
 	return MTRDoorLockClusterCredentialStructFromID(_r)
 }
 
-// SetCredential wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterClearCredentialParams) SetCredential(credential *MTRDoorLockClusterCredentialStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDoorLockClusterClearCredentialParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcccp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterClearCredentialParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDoorLockClusterClearCredentialParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdlcccp *MTRDoorLockClusterClearCredentialParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcccp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterClearCredentialParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRDoorLockClusterClearCredentialParamsable is the interface implemented by [MTRDoorLockClusterClearCredentialParams], for mocking and DI.
-type MTRDoorLockClusterClearCredentialParamsable interface {
-	obj.Object
-	WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterClearCredentialParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearCredentialParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearCredentialParams
-	Credential() *MTRDoorLockClusterCredentialStruct
-	SetCredential(credential *MTRDoorLockClusterCredentialStruct)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRDoorLockClusterClearCredentialParamsable = (*MTRDoorLockClusterClearCredentialParams)(nil)

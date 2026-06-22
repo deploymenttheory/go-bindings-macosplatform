@@ -44,24 +44,24 @@ func mTRGeneralDiagnosticsClusterRadioFaultChangeEventAdopt(id objc.ID) *MTRGene
 }
 
 // Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(mgdcrfce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgdcrfce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgdcrfce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(mgdcrfce))
 }
 
 // NewMTRGeneralDiagnosticsClusterRadioFaultChangeEvent creates a new MTRGeneralDiagnosticsClusterRadioFaultChangeEvent.
@@ -71,34 +71,23 @@ func NewMTRGeneralDiagnosticsClusterRadioFaultChangeEvent() *MTRGeneralDiagnosti
 }
 
 // Current wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Current() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcrfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetCurrent(current obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdcrfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Previous() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcrfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetPrevious(previous obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
+func (mgdcrfce *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdcrfce), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
-
-// MTRGeneralDiagnosticsClusterRadioFaultChangeEventable is the interface implemented by [MTRGeneralDiagnosticsClusterRadioFaultChangeEvent], for mocking and DI.
-type MTRGeneralDiagnosticsClusterRadioFaultChangeEventable interface {
-	obj.Object
-	Current() obj.Object
-	SetCurrent(current obj.Object)
-	Previous() obj.Object
-	SetPrevious(previous obj.Object)
-}
-
-var _ MTRGeneralDiagnosticsClusterRadioFaultChangeEventable = (*MTRGeneralDiagnosticsClusterRadioFaultChangeEvent)(nil)

@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -57,14 +58,14 @@ func NewNEDNSProxyProvider() *NEDNSProxyProvider {
 // StartProxyWithOptions starts the DNS proxy.
 //
 // StartProxyWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *NEDNSProxyProvider) StartProxyWithOptions(ctx context.Context, options obj.Object) error {
+func (npp *NEDNSProxyProvider) StartProxyWithOptions(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startProxyWithOptions:completionHandler:"), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(npp), objc.RegisterName("startProxyWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -76,12 +77,12 @@ func (x *NEDNSProxyProvider) StartProxyWithOptions(ctx context.Context, options 
 // StopProxyWithReason stops the DNS proxy.
 //
 // StopProxyWithReason blocks until the operation completes or ctx is cancelled.
-func (x *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error {
+func (npp *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopProxyWithReason:completionHandler:"), reason, _block)
+	objc.Send[objc.ID](objref.IDOf(npp), objc.RegisterName("stopProxyWithReason:completionHandler:"), reason, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -91,35 +92,23 @@ func (x *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason NEP
 }
 
 // HandleNewFlow handles a new flow of DNS traffic.
-func (x *NEDNSProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
+func (npp *NEDNSProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
+	_r := objc.Send[bool](objref.IDOf(npp), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
 	return _r
 }
 
 // HandleNewUDPFlowInitialRemoteFlowEndpoint this function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
-func (x *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:"), objref.IDOf(flow), objref.IDOf(remoteEndpoint))
+func (npp *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(npp), objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:"), objref.IDOf(flow), objref.IDOf(remoteEndpoint))
 	return _r
 }
 
 // SystemDNSSettings wraps the corresponding Objective-C method.
 //
 // SystemDNSSettings returns the collection as a Go slice.
-func (x *NEDNSProxyProvider) SystemDNSSettings() []*NEDNSSettings {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemDNSSettings"))
+func (npp *NEDNSProxyProvider) SystemDNSSettings() []*NEDNSSettings {
+	_arr := objc.Send[objc.ID](objref.IDOf(npp), objc.RegisterName("systemDNSSettings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEDNSSettings { return NEDNSSettingsFromID(_id) })
 }
-
-// NEDNSProxyProviderable is the interface implemented by [NEDNSProxyProvider], for mocking and DI.
-type NEDNSProxyProviderable interface {
-	obj.Object
-	StartProxyWithOptions(ctx context.Context, options obj.Object) error
-	StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error
-	HandleNewFlow(flow *NEAppProxyFlow) bool
-	HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool
-	SystemDNSSettings() []*NEDNSSettings
-}
-
-var _ NEDNSProxyProviderable = (*NEDNSProxyProvider)(nil)
 
 var _ NEProviderProvider = (*NEDNSProxyProvider)(nil)

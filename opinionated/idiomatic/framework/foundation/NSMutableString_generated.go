@@ -54,41 +54,29 @@ func NewMutableStringWithCapacity(capacity int) *MutableString {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableString) WithScriptingProperties(scriptingProperties obj.Object) *MutableString {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ms *MutableString) WithScriptingProperties(scriptingProperties obj.Object) *MutableString {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ms
 }
 
 // InsertStringAtIndex inserts into the receiver the characters of a given string at a given location.
-func (x *MutableString) InsertStringAtIndex(aString string, loc int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertString:atIndex:"), purego.NSString(aString), loc)
+func (ms *MutableString) InsertStringAtIndex(aString string, loc int) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("insertString:atIndex:"), purego.NSString(aString), loc)
 }
 
 // AppendString adds to the end of the receiver the characters of a given string.
-func (x *MutableString) AppendString(aString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendString:"), purego.NSString(aString))
+func (ms *MutableString) AppendString(aString string) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("appendString:"), purego.NSString(aString))
 }
 
 // AppendFormat adds a constructed string to the receiver.
-func (x *MutableString) AppendFormat(format string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendFormat:"), purego.NSString(format))
+func (ms *MutableString) AppendFormat(format string) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("appendFormat:"), purego.NSString(format))
 }
 
 // SetString replaces the characters of the receiver with those in a given string.
-func (x *MutableString) SetString(aString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(aString))
+func (ms *MutableString) SetString(aString string) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setString:"), purego.NSString(aString))
 }
-
-// MutableStringable is the interface implemented by [MutableString], for mocking and DI.
-type MutableStringable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableString
-	InsertStringAtIndex(aString string, loc int)
-	AppendString(aString string)
-	AppendFormat(format string)
-	SetString(aString string)
-}
-
-var _ MutableStringable = (*MutableString)(nil)
 
 var _ StringProvider = (*MutableString)(nil)

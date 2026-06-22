@@ -53,38 +53,27 @@ func NewMetricContentKeyRequestEvent() *MetricContentKeyRequestEvent {
 }
 
 // ContentKeySpecifier returns the content key specifier for the request.
-func (x *MetricContentKeyRequestEvent) ContentKeySpecifier() *ContentKeySpecifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeySpecifier"))
+func (mckre *MetricContentKeyRequestEvent) ContentKeySpecifier() *ContentKeySpecifier {
+	_r := objc.Send[objc.ID](objref.IDOf(mckre), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
 // MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
-func (x *MetricContentKeyRequestEvent) MediaType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+func (mckre *MetricContentKeyRequestEvent) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mckre), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
-// IsClientInitiated returns whether the content key resource request was initiated by the client.
-func (x *MetricContentKeyRequestEvent) IsClientInitiated() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isClientInitiated"))
+// IsClientInitiated reports whether the content key resource request was initiated by the client.
+func (mckre *MetricContentKeyRequestEvent) IsClientInitiated() bool {
+	_r := objc.Send[bool](objref.IDOf(mckre), objc.RegisterName("isClientInitiated"))
 	return _r
 }
 
 // MediaResourceRequestEvent returns the media resource request event which was used to satisfy the content key.
-func (x *MetricContentKeyRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaResourceRequestEvent"))
+func (mckre *MetricContentKeyRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(mckre), objc.RegisterName("mediaResourceRequestEvent"))
 	return MetricMediaResourceRequestEventFromID(_r)
 }
-
-// MetricContentKeyRequestEventable is the interface implemented by [MetricContentKeyRequestEvent], for mocking and DI.
-type MetricContentKeyRequestEventable interface {
-	obj.Object
-	ContentKeySpecifier() *ContentKeySpecifier
-	MediaType() obj.Object
-	IsClientInitiated() bool
-	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
-}
-
-var _ MetricContentKeyRequestEventable = (*MetricContentKeyRequestEvent)(nil)
 
 var _ MetricEventProvider = (*MetricContentKeyRequestEvent)(nil)

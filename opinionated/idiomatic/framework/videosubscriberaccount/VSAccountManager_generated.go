@@ -46,24 +46,24 @@ func vSAccountManagerAdopt(id objc.ID) *VSAccountManager {
 }
 
 // Description returns the object's -description text.
-func (x *VSAccountManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vam *VSAccountManager) Description() string {
+	return rt.Description(objref.IDOf(vam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSAccountManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vam *VSAccountManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSAccountManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vam *VSAccountManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSAccountManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vam *VSAccountManager) String() string {
+	return rt.Description(objref.IDOf(vam))
 }
 
 // NewVSAccountManager creates a new VSAccountManager.
@@ -71,10 +71,3 @@ func NewVSAccountManager() *VSAccountManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountManager")), objc.RegisterName("new"))
 	return vSAccountManagerAdopt(_id)
 }
-
-// VSAccountManagerable is the interface implemented by [VSAccountManager], for mocking and DI.
-type VSAccountManagerable interface {
-	obj.Object
-}
-
-var _ VSAccountManagerable = (*VSAccountManager)(nil)

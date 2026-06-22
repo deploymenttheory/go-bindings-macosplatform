@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewSymbolBreatheEffect() *SymbolBreatheEffect {
 }
 
 // EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
-func (x *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+func (sbe *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithByLayer"))
 	return SymbolBreatheEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
-func (x *SymbolBreatheEffect) EffectWithWholeSymbol() *SymbolBreatheEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+func (sbe *SymbolBreatheEffect) EffectWithWholeSymbol() *SymbolBreatheEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolBreatheEffectFromID(_r)
 }
-
-// SymbolBreatheEffectable is the interface implemented by [SymbolBreatheEffect], for mocking and DI.
-type SymbolBreatheEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolBreatheEffect
-	EffectWithWholeSymbol() *SymbolBreatheEffect
-}
-
-var _ SymbolBreatheEffectable = (*SymbolBreatheEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolBreatheEffect)(nil)

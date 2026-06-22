@@ -46,24 +46,24 @@ func labeledValueAdopt(id objc.ID) *LabeledValue {
 }
 
 // Description returns the object's -description text.
-func (x *LabeledValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lv *LabeledValue) Description() string {
+	return rt.Description(objref.IDOf(lv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LabeledValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lv *LabeledValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LabeledValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lv *LabeledValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LabeledValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lv *LabeledValue) String() string {
+	return rt.Description(objref.IDOf(lv))
 }
 
 // NewLabeledValueWithLabelValue instantiates a new labeled value object with the specified label and value strings.
@@ -74,8 +74,8 @@ func NewLabeledValueWithLabelValue(label string, value string) *LabeledValue {
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *LabeledValue) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (lv *LabeledValue) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,19 +83,10 @@ func (x *LabeledValue) Label() string {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *LabeledValue) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (lv *LabeledValue) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// LabeledValueable is the interface implemented by [LabeledValue], for mocking and DI.
-type LabeledValueable interface {
-	obj.Object
-	Label() string
-	Value() string
-}
-
-var _ LabeledValueable = (*LabeledValue)(nil)

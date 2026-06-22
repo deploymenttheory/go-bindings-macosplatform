@@ -51,18 +51,10 @@ func NewConstantString() *ConstantString {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ConstantString) WithScriptingProperties(scriptingProperties obj.Object) *ConstantString {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cs *ConstantString) WithScriptingProperties(scriptingProperties obj.Object) *ConstantString {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cs
 }
-
-// ConstantStringable is the interface implemented by [ConstantString], for mocking and DI.
-type ConstantStringable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ConstantString
-}
-
-var _ ConstantStringable = (*ConstantString)(nil)
 
 var _ SimpleCStringProvider = (*ConstantString)(nil)
 

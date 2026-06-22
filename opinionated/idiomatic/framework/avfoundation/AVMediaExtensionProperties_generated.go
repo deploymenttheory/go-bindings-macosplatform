@@ -46,24 +46,24 @@ func mediaExtensionPropertiesAdopt(id objc.ID) *MediaExtensionProperties {
 }
 
 // Description returns the object's -description text.
-func (x *MediaExtensionProperties) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mep *MediaExtensionProperties) Description() string {
+	return rt.Description(objref.IDOf(mep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaExtensionProperties) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mep *MediaExtensionProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaExtensionProperties) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mep *MediaExtensionProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaExtensionProperties) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mep *MediaExtensionProperties) String() string {
+	return rt.Description(objref.IDOf(mep))
 }
 
 // NewMediaExtensionProperties creates a new MediaExtensionProperties.
@@ -72,53 +72,41 @@ func NewMediaExtensionProperties() *MediaExtensionProperties {
 	return mediaExtensionPropertiesAdopt(_id)
 }
 
-// ExtensionIdentifier the identifier of the Media Extension. The extension identifier string, corresponding to the ClassImplementationID value from the EXAppExtensionAttributes dictionary in the Info.plist file.
-func (x *MediaExtensionProperties) ExtensionIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionIdentifier"))
+// ExtensionIdentifier returns the identifier of the Media Extension. The extension identifier string, corresponding to the ClassImplementationID value from the EXAppExtensionAttributes dictionary in the Info.plist file.
+func (mep *MediaExtensionProperties) ExtensionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("extensionIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ExtensionName the name of the MediaExtension. The localized name of the MediaExtension format reader or video decoder, corresponding to the CFBundleDisplayName.
-func (x *MediaExtensionProperties) ExtensionName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionName"))
+// ExtensionName returns the name of the MediaExtension. The localized name of the MediaExtension format reader or video decoder, corresponding to the CFBundleDisplayName.
+func (mep *MediaExtensionProperties) ExtensionName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("extensionName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ContainingBundleName the name of the containing application bundle. The localized name of the application that hosts the MediaExtension.
-func (x *MediaExtensionProperties) ContainingBundleName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containingBundleName"))
+// ContainingBundleName returns the name of the containing application bundle. The localized name of the application that hosts the MediaExtension.
+func (mep *MediaExtensionProperties) ContainingBundleName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("containingBundleName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ExtensionURL the file URL of the MediaExtension bundle.
-func (x *MediaExtensionProperties) ExtensionURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionURL"))
+// ExtensionURL returns the file URL of the MediaExtension bundle.
+func (mep *MediaExtensionProperties) ExtensionURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("extensionURL"))
 	return obj.Wrap(_r)
 }
 
-// ContainingBundleURL the file URL of the host application for the MediaExtension.
-func (x *MediaExtensionProperties) ContainingBundleURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containingBundleURL"))
+// ContainingBundleURL returns the file URL of the host application for the MediaExtension.
+func (mep *MediaExtensionProperties) ContainingBundleURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("containingBundleURL"))
 	return obj.Wrap(_r)
 }
-
-// MediaExtensionPropertiesable is the interface implemented by [MediaExtensionProperties], for mocking and DI.
-type MediaExtensionPropertiesable interface {
-	obj.Object
-	ExtensionIdentifier() string
-	ExtensionName() string
-	ContainingBundleName() string
-	ExtensionURL() obj.Object
-	ContainingBundleURL() obj.Object
-}
-
-var _ MediaExtensionPropertiesable = (*MediaExtensionProperties)(nil)

@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewGraphVariableOp() *GraphVariableOp {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphVariableOp")), objc.RegisterName("new"))
 	return graphVariableOpAdopt(_id)
 }
-
-// GraphVariableOpable is the interface implemented by [GraphVariableOp], for mocking and DI.
-type GraphVariableOpable interface {
-	obj.Object
-}
-
-var _ GraphVariableOpable = (*GraphVariableOp)(nil)
 
 var _ GraphOperationProvider = (*GraphVariableOp)(nil)
 

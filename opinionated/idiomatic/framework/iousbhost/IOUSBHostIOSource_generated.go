@@ -48,57 +48,47 @@ func hostIOSourceAdopt(id objc.ID) *HostIOSource {
 }
 
 // Description returns the object's -description text.
-func (x *HostIOSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (his *HostIOSource) Description() string {
+	return rt.Description(objref.IDOf(his))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostIOSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (his *HostIOSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(his), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostIOSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (his *HostIOSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(his), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HostIOSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (his *HostIOSource) String() string {
+	return rt.Description(objref.IDOf(his))
 }
 
-// HostInterface retrieve the source's IOUSBHostInterface
-func (x *HostIOSource) HostInterface() *HostInterface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostInterface"))
+// HostInterface returns retrieve the source's IOUSBHostInterface
+func (his *HostIOSource) HostInterface() *HostInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(his), objc.RegisterName("hostInterface"))
 	return HostInterfaceFromID(_r)
 }
 
-// DeviceAddress retrieve the device's address
-func (x *HostIOSource) DeviceAddress() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
+// DeviceAddress returns retrieve the device's address
+func (his *HostIOSource) DeviceAddress() int {
+	_r := objc.Send[int](objref.IDOf(his), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
-// EndpointAddress retrieve the IOSource's endpoint address
-func (x *HostIOSource) EndpointAddress() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endpointAddress"))
+// EndpointAddress returns retrieve the IOSource's endpoint address
+func (his *HostIOSource) EndpointAddress() int {
+	_r := objc.Send[int](objref.IDOf(his), objc.RegisterName("endpointAddress"))
 	return _r
 }
-
-// HostIOSourceable is the interface implemented by [HostIOSource], for mocking and DI.
-type HostIOSourceable interface {
-	obj.Object
-	HostInterface() *HostInterface
-	DeviceAddress() int
-	EndpointAddress() int
-}
-
-var _ HostIOSourceable = (*HostIOSource)(nil)
 
 // isHostIOSource marks HostIOSource — and, by embedding promotion, its
 // subclasses — as a member of the HostIOSource hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *HostIOSource) isHostIOSource() {}
+func (his *HostIOSource) isHostIOSource() {}
 
 var _ HostIOSourceProvider = (*HostIOSource)(nil)

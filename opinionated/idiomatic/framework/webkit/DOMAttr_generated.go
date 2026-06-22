@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,32 +50,32 @@ func NewDOMAttr() *DOMAttr {
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMAttr) WithValue(value string) *DOMAttr {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (da *DOMAttr) WithValue(value string) *DOMAttr {
+	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setValue:"), purego.NSString(value))
+	return da
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMAttr) WithNodeValue(nodeValue string) *DOMAttr {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (da *DOMAttr) WithNodeValue(nodeValue string) *DOMAttr {
+	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return da
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMAttr) WithPrefix(prefix string) *DOMAttr {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (da *DOMAttr) WithPrefix(prefix string) *DOMAttr {
+	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return da
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMAttr) WithTextContent(textContent string) *DOMAttr {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (da *DOMAttr) WithTextContent(textContent string) *DOMAttr {
+	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return da
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *DOMAttr) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (da *DOMAttr) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -84,53 +83,31 @@ func (x *DOMAttr) Name() string {
 }
 
 // Specified wraps the corresponding Objective-C method.
-func (x *DOMAttr) Specified() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("specified"))
+func (da *DOMAttr) Specified() bool {
+	_r := objc.Send[bool](objref.IDOf(da), objc.RegisterName("specified"))
 	return _r
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *DOMAttr) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (da *DOMAttr) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetValue wraps the corresponding Objective-C method.
-func (x *DOMAttr) SetValue(value string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-}
-
 // OwnerElement wraps the corresponding Objective-C method.
-func (x *DOMAttr) OwnerElement() *DOMElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerElement"))
+func (da *DOMAttr) OwnerElement() *DOMElement {
+	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("ownerElement"))
 	return DOMElementFromID(_r)
 }
 
 // Style wraps the corresponding Objective-C method.
-func (x *DOMAttr) Style() *DOMCSSStyleDeclaration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
+func (da *DOMAttr) Style() *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
-
-// DOMAttrable is the interface implemented by [DOMAttr], for mocking and DI.
-type DOMAttrable interface {
-	obj.Object
-	WithValue(value string) *DOMAttr
-	WithNodeValue(nodeValue string) *DOMAttr
-	WithPrefix(prefix string) *DOMAttr
-	WithTextContent(textContent string) *DOMAttr
-	Name() string
-	Specified() bool
-	Value() string
-	SetValue(value string)
-	OwnerElement() *DOMElement
-	Style() *DOMCSSStyleDeclaration
-}
-
-var _ DOMAttrable = (*DOMAttr)(nil)
 
 var _ DOMNodeProvider = (*DOMAttr)(nil)
 

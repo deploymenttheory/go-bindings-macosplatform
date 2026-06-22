@@ -46,24 +46,24 @@ func modelStructureProgramNamedValueTypeAdopt(id objc.ID) *ModelStructureProgram
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureProgramNamedValueType) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mspnvt *ModelStructureProgramNamedValueType) Description() string {
+	return rt.Description(objref.IDOf(mspnvt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureProgramNamedValueType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mspnvt *ModelStructureProgramNamedValueType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mspnvt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureProgramNamedValueType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mspnvt *ModelStructureProgramNamedValueType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mspnvt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureProgramNamedValueType) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mspnvt *ModelStructureProgramNamedValueType) String() string {
+	return rt.Description(objref.IDOf(mspnvt))
 }
 
 // NewModelStructureProgramNamedValueType creates a new ModelStructureProgramNamedValueType.
@@ -72,26 +72,17 @@ func NewModelStructureProgramNamedValueType() *ModelStructureProgramNamedValueTy
 	return modelStructureProgramNamedValueTypeAdopt(_id)
 }
 
-// Name the name of the parameter.
-func (x *ModelStructureProgramNamedValueType) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of the parameter.
+func (mspnvt *ModelStructureProgramNamedValueType) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mspnvt), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Type the type of the parameter.
-func (x *ModelStructureProgramNamedValueType) Type() *ModelStructureProgramValueType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of the parameter.
+func (mspnvt *ModelStructureProgramNamedValueType) Type() *ModelStructureProgramValueType {
+	_r := objc.Send[objc.ID](objref.IDOf(mspnvt), objc.RegisterName("type"))
 	return ModelStructureProgramValueTypeFromID(_r)
 }
-
-// ModelStructureProgramNamedValueTypeable is the interface implemented by [ModelStructureProgramNamedValueType], for mocking and DI.
-type ModelStructureProgramNamedValueTypeable interface {
-	obj.Object
-	Name() string
-	Type() *ModelStructureProgramValueType
-}
-
-var _ ModelStructureProgramNamedValueTypeable = (*ModelStructureProgramNamedValueType)(nil)

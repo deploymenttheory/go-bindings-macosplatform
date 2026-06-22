@@ -44,24 +44,24 @@ func mTRFixedLabelClusterLabelStructAdopt(id objc.ID) *MTRFixedLabelClusterLabel
 }
 
 // Description returns the object's -description text.
-func (x *MTRFixedLabelClusterLabelStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mflcls *MTRFixedLabelClusterLabelStruct) Description() string {
+	return rt.Description(objref.IDOf(mflcls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRFixedLabelClusterLabelStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mflcls *MTRFixedLabelClusterLabelStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mflcls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRFixedLabelClusterLabelStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mflcls *MTRFixedLabelClusterLabelStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mflcls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRFixedLabelClusterLabelStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mflcls *MTRFixedLabelClusterLabelStruct) String() string {
+	return rt.Description(objref.IDOf(mflcls))
 }
 
 // NewMTRFixedLabelClusterLabelStruct creates a new MTRFixedLabelClusterLabelStruct.
@@ -71,54 +71,31 @@ func NewMTRFixedLabelClusterLabelStruct() *MTRFixedLabelClusterLabelStruct {
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRFixedLabelClusterLabelStruct) WithLabel(label string) *MTRFixedLabelClusterLabelStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mflcls *MTRFixedLabelClusterLabelStruct) WithLabel(label string) *MTRFixedLabelClusterLabelStruct {
+	objc.Send[objc.ID](objref.IDOf(mflcls), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mflcls
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRFixedLabelClusterLabelStruct) WithValue(value string) *MTRFixedLabelClusterLabelStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (mflcls *MTRFixedLabelClusterLabelStruct) WithValue(value string) *MTRFixedLabelClusterLabelStruct {
+	objc.Send[objc.ID](objref.IDOf(mflcls), objc.RegisterName("setValue:"), purego.NSString(value))
+	return mflcls
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTRFixedLabelClusterLabelStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mflcls *MTRFixedLabelClusterLabelStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mflcls), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRFixedLabelClusterLabelStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRFixedLabelClusterLabelStruct) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mflcls *MTRFixedLabelClusterLabelStruct) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mflcls), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRFixedLabelClusterLabelStruct) SetValue(value string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-}
-
-// MTRFixedLabelClusterLabelStructable is the interface implemented by [MTRFixedLabelClusterLabelStruct], for mocking and DI.
-type MTRFixedLabelClusterLabelStructable interface {
-	obj.Object
-	WithLabel(label string) *MTRFixedLabelClusterLabelStruct
-	WithValue(value string) *MTRFixedLabelClusterLabelStruct
-	Label() string
-	SetLabel(label string)
-	Value() string
-	SetValue(value string)
-}
-
-var _ MTRFixedLabelClusterLabelStructable = (*MTRFixedLabelClusterLabelStruct)(nil)

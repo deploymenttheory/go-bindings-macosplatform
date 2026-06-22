@@ -49,24 +49,24 @@ func imageRepAdopt(id objc.ID) *ImageRep {
 }
 
 // Description returns the object's -description text.
-func (x *ImageRep) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ir *ImageRep) Description() string {
+	return rt.Description(objref.IDOf(ir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageRep) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ir *ImageRep) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageRep) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ir *ImageRep) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageRep) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ir *ImageRep) String() string {
+	return rt.Description(objref.IDOf(ir))
 }
 
 // NewImageRepWithCoder creates and returns an image representation object from data in an unarchiver.
@@ -76,204 +76,129 @@ func NewImageRepWithCoder(coder obj.Object) *ImageRep {
 	return imageRepAdopt(_id)
 }
 
-// WithSize the size of the image representation, measured in points in the user coordinate space.
-func (x *ImageRep) WithSize(size corefoundation.CGSize) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the size of the image representation, measured in points in the user coordinate space.
+func (ir *ImageRep) WithSize(size corefoundation.CGSize) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setSize:"), size)
+	return ir
 }
 
-// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
-func (x *ImageRep) WithAlpha(alpha bool) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets a Boolean value that indicates whether the image data has an alpha channel.
+func (ir *ImageRep) WithAlpha(alpha bool) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setAlpha:"), alpha)
+	return ir
 }
 
-// WithOpaque a Boolean value that indicates whether the image is opaque.
-func (x *ImageRep) WithOpaque(opaque bool) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that indicates whether the image is opaque.
+func (ir *ImageRep) WithOpaque(opaque bool) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setOpaque:"), opaque)
+	return ir
 }
 
-// WithColorSpaceName the name of the color space used by the image data.
-func (x *ImageRep) WithColorSpaceName(colorSpaceName obj.Object) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-	return x
+// WithColorSpaceName sets the name of the color space used by the image data.
+func (ir *ImageRep) WithColorSpaceName(colorSpaceName obj.Object) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return ir
 }
 
-// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-func (x *ImageRep) WithBitsPerSample(bitsPerSample int) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
-	return x
+// WithBitsPerSample sets the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+func (ir *ImageRep) WithBitsPerSample(bitsPerSample int) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
+	return ir
 }
 
-// WithPixelsWide the width of the image, measured in pixels.
-func (x *ImageRep) WithPixelsWide(pixelsWide int) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
-	return x
+// WithPixelsWide sets the width of the image, measured in pixels.
+func (ir *ImageRep) WithPixelsWide(pixelsWide int) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setPixelsWide:"), pixelsWide)
+	return ir
 }
 
-// WithPixelsHigh the height of the image, measured in pixels.
-func (x *ImageRep) WithPixelsHigh(pixelsHigh int) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
-	return x
+// WithPixelsHigh sets the height of the image, measured in pixels.
+func (ir *ImageRep) WithPixelsHigh(pixelsHigh int) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
+	return ir
 }
 
-// WithLayoutDirection the layout direction for the image.
-func (x *ImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *ImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
-	return x
+// WithLayoutDirection sets the layout direction for the image.
+func (ir *ImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *ImageRep {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setLayoutDirection:"), layoutDirection)
+	return ir
 }
 
-// Draw implemented by subclasses to draw the image in the current coordinate system.
-func (x *ImageRep) Draw() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("draw"))
+// Draw reports whether implemented by subclasses to draw the image in the current coordinate system.
+func (ir *ImageRep) Draw() bool {
+	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("draw"))
 	return _r
 }
 
 // DrawAtPoint draws the image representation’s image data at the specified point in the current coordinate system.
-func (x *ImageRep) DrawAtPoint(point corefoundation.CGPoint) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawAtPoint:"), point)
+func (ir *ImageRep) DrawAtPoint(point corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("drawAtPoint:"), point)
 	return _r
 }
 
 // DrawInRect draws the image, scaling it (as needed) to fit the specified rectangle.
-func (x *ImageRep) DrawInRect(rect corefoundation.CGRect) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawInRect:"), rect)
+func (ir *ImageRep) DrawInRect(rect corefoundation.CGRect) bool {
+	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("drawInRect:"), rect)
 	return _r
 }
 
 // DrawInRectFromRectOperationFractionRespectFlippedHints draws all or part of the image in the specified rectangle in the current coordinate system.
-func (x *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op CompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, objref.IDOf(hints))
+func (ir *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op CompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, objref.IDOf(hints))
 	return _r
 }
 
 // Size wraps the corresponding Objective-C method.
-func (x *ImageRep) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+func (ir *ImageRep) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ir), objc.RegisterName("size"))
 	return _r
-}
-
-// SetSize wraps the corresponding Objective-C method.
-func (x *ImageRep) SetSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
 // HasAlpha wraps the corresponding Objective-C method.
-func (x *ImageRep) HasAlpha() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAlpha"))
+func (ir *ImageRep) HasAlpha() bool {
+	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("hasAlpha"))
 	return _r
-}
-
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *ImageRep) SetAlpha(alpha bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // IsOpaque wraps the corresponding Objective-C method.
-func (x *ImageRep) IsOpaque() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpaque"))
+func (ir *ImageRep) IsOpaque() bool {
+	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("isOpaque"))
 	return _r
-}
-
-// SetOpaque wraps the corresponding Objective-C method.
-func (x *ImageRep) SetOpaque(opaque bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 }
 
 // ColorSpaceName wraps the corresponding Objective-C method.
-func (x *ImageRep) ColorSpaceName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpaceName"))
+func (ir *ImageRep) ColorSpaceName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("colorSpaceName"))
 	return obj.Wrap(_r)
 }
 
-// SetColorSpaceName wraps the corresponding Objective-C method.
-func (x *ImageRep) SetColorSpaceName(colorSpaceName obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-}
-
 // BitsPerSample wraps the corresponding Objective-C method.
-func (x *ImageRep) BitsPerSample() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerSample"))
+func (ir *ImageRep) BitsPerSample() int {
+	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("bitsPerSample"))
 	return _r
-}
-
-// SetBitsPerSample wraps the corresponding Objective-C method.
-func (x *ImageRep) SetBitsPerSample(bitsPerSample int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 }
 
 // PixelsWide wraps the corresponding Objective-C method.
-func (x *ImageRep) PixelsWide() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsWide"))
+func (ir *ImageRep) PixelsWide() int {
+	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("pixelsWide"))
 	return _r
-}
-
-// SetPixelsWide wraps the corresponding Objective-C method.
-func (x *ImageRep) SetPixelsWide(pixelsWide int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 }
 
 // PixelsHigh wraps the corresponding Objective-C method.
-func (x *ImageRep) PixelsHigh() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
+func (ir *ImageRep) PixelsHigh() int {
+	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("pixelsHigh"))
 	return _r
-}
-
-// SetPixelsHigh wraps the corresponding Objective-C method.
-func (x *ImageRep) SetPixelsHigh(pixelsHigh int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 }
 
 // LayoutDirection wraps the corresponding Objective-C method.
-func (x *ImageRep) LayoutDirection() ImageLayoutDirection {
-	_r := objc.Send[ImageLayoutDirection](objref.IDOf(x), objc.RegisterName("layoutDirection"))
+func (ir *ImageRep) LayoutDirection() ImageLayoutDirection {
+	_r := objc.Send[ImageLayoutDirection](objref.IDOf(ir), objc.RegisterName("layoutDirection"))
 	return _r
 }
-
-// SetLayoutDirection wraps the corresponding Objective-C method.
-func (x *ImageRep) SetLayoutDirection(layoutDirection ImageLayoutDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
-}
-
-// ImageRepable is the interface implemented by [ImageRep], for mocking and DI.
-type ImageRepable interface {
-	obj.Object
-	WithSize(size corefoundation.CGSize) *ImageRep
-	WithAlpha(alpha bool) *ImageRep
-	WithOpaque(opaque bool) *ImageRep
-	WithColorSpaceName(colorSpaceName obj.Object) *ImageRep
-	WithBitsPerSample(bitsPerSample int) *ImageRep
-	WithPixelsWide(pixelsWide int) *ImageRep
-	WithPixelsHigh(pixelsHigh int) *ImageRep
-	WithLayoutDirection(layoutDirection ImageLayoutDirection) *ImageRep
-	Draw() bool
-	DrawAtPoint(point corefoundation.CGPoint) bool
-	DrawInRect(rect corefoundation.CGRect) bool
-	DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op CompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints obj.Object) bool
-	Size() corefoundation.CGSize
-	SetSize(size corefoundation.CGSize)
-	HasAlpha() bool
-	SetAlpha(alpha bool)
-	IsOpaque() bool
-	SetOpaque(opaque bool)
-	ColorSpaceName() obj.Object
-	SetColorSpaceName(colorSpaceName obj.Object)
-	BitsPerSample() int
-	SetBitsPerSample(bitsPerSample int)
-	PixelsWide() int
-	SetPixelsWide(pixelsWide int)
-	PixelsHigh() int
-	SetPixelsHigh(pixelsHigh int)
-	LayoutDirection() ImageLayoutDirection
-	SetLayoutDirection(layoutDirection ImageLayoutDirection)
-}
-
-var _ ImageRepable = (*ImageRep)(nil)
 
 // isImageRep marks ImageRep — and, by embedding promotion, its
 // subclasses — as a member of the ImageRep hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageRep) isImageRep() {}
+func (ir *ImageRep) isImageRep() {}
 
 var _ ImageRepProvider = (*ImageRep)(nil)

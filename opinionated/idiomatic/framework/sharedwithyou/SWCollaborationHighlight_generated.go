@@ -52,45 +52,34 @@ func NewCollaborationHighlight() *CollaborationHighlight {
 	return collaborationHighlightAdopt(_id)
 }
 
-// CollaborationIdentifier unique identifier as provided by the app hosting the collaboration This identifier is unique across platforms and shares
-func (x *CollaborationHighlight) CollaborationIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationIdentifier"))
+// CollaborationIdentifier returns unique identifier as provided by the app hosting the collaboration This identifier is unique across platforms and shares
+func (ch *CollaborationHighlight) CollaborationIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("collaborationIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Title title of the collaboration highlight Title of the collaboration if provided by the app hosting the collaboration
-func (x *CollaborationHighlight) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns title of the collaboration highlight Title of the collaboration if provided by the app hosting the collaboration
+func (ch *CollaborationHighlight) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CreationDate date when the file was created
-func (x *CollaborationHighlight) CreationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+// CreationDate returns date when the file was created
+func (ch *CollaborationHighlight) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// ContentType UTI type for this collaboration highlight
-func (x *CollaborationHighlight) ContentType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+// ContentType returns UTI type for this collaboration highlight
+func (ch *CollaborationHighlight) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
-
-// CollaborationHighlightable is the interface implemented by [CollaborationHighlight], for mocking and DI.
-type CollaborationHighlightable interface {
-	obj.Object
-	CollaborationIdentifier() string
-	Title() string
-	CreationDate() obj.Object
-	ContentType() obj.Object
-}
-
-var _ CollaborationHighlightable = (*CollaborationHighlight)(nil)
 
 var _ HighlightProvider = (*CollaborationHighlight)(nil)

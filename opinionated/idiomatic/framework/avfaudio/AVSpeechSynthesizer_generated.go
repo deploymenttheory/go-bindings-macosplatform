@@ -46,24 +46,24 @@ func speechSynthesizerAdopt(id objc.ID) *SpeechSynthesizer {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechSynthesizer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpeechSynthesizer) Description() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechSynthesizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ss *SpeechSynthesizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechSynthesizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ss *SpeechSynthesizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechSynthesizer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *SpeechSynthesizer) String() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // NewSpeechSynthesizer creates a new SpeechSynthesizer.
@@ -73,49 +73,36 @@ func NewSpeechSynthesizer() *SpeechSynthesizer {
 }
 
 // SpeakUtterance adds the utterance you specify to the speech synthesizer’s queue.
-func (x *SpeechSynthesizer) SpeakUtterance(utterance *SpeechUtterance) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakUtterance:"), objref.IDOf(utterance))
+func (ss *SpeechSynthesizer) SpeakUtterance(utterance *SpeechUtterance) {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("speakUtterance:"), objref.IDOf(utterance))
 }
 
 // StopSpeakingAtBoundary stops speech at the boundary you specify.
-func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
+func (ss *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
 	return _r
 }
 
 // PauseSpeakingAtBoundary pauses speech at the boundary you specify.
-func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
+func (ss *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
 	return _r
 }
 
-// ContinueSpeaking resumes speech from its paused point.
-func (x *SpeechSynthesizer) ContinueSpeaking() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("continueSpeaking"))
+// ContinueSpeaking reports whether resumes speech from its paused point.
+func (ss *SpeechSynthesizer) ContinueSpeaking() bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("continueSpeaking"))
 	return _r
 }
 
 // IsSpeaking wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) IsSpeaking() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpeaking"))
+func (ss *SpeechSynthesizer) IsSpeaking() bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isSpeaking"))
 	return _r
 }
 
 // IsPaused wraps the corresponding Objective-C method.
-func (x *SpeechSynthesizer) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+func (ss *SpeechSynthesizer) IsPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isPaused"))
 	return _r
 }
-
-// SpeechSynthesizerable is the interface implemented by [SpeechSynthesizer], for mocking and DI.
-type SpeechSynthesizerable interface {
-	obj.Object
-	SpeakUtterance(utterance *SpeechUtterance)
-	StopSpeakingAtBoundary(boundary SpeechBoundary) bool
-	PauseSpeakingAtBoundary(boundary SpeechBoundary) bool
-	ContinueSpeaking() bool
-	IsSpeaking() bool
-	IsPaused() bool
-}
-
-var _ SpeechSynthesizerable = (*SpeechSynthesizer)(nil)

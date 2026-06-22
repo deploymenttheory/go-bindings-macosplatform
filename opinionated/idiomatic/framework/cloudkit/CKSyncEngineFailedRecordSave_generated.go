@@ -46,24 +46,24 @@ func syncEngineFailedRecordSaveAdopt(id objc.ID) *SyncEngineFailedRecordSave {
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineFailedRecordSave) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sefrs *SyncEngineFailedRecordSave) Description() string {
+	return rt.Description(objref.IDOf(sefrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineFailedRecordSave) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sefrs *SyncEngineFailedRecordSave) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sefrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineFailedRecordSave) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sefrs *SyncEngineFailedRecordSave) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sefrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineFailedRecordSave) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sefrs *SyncEngineFailedRecordSave) String() string {
+	return rt.Description(objref.IDOf(sefrs))
 }
 
 // NewSyncEngineFailedRecordSave creates a new SyncEngineFailedRecordSave.
@@ -72,16 +72,8 @@ func NewSyncEngineFailedRecordSave() *SyncEngineFailedRecordSave {
 	return syncEngineFailedRecordSaveAdopt(_id)
 }
 
-// Record the record that CloudKit is unable to modify.
-func (x *SyncEngineFailedRecordSave) Record() *Record {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("record"))
+// Record returns the record that CloudKit is unable to modify.
+func (sefrs *SyncEngineFailedRecordSave) Record() *Record {
+	_r := objc.Send[objc.ID](objref.IDOf(sefrs), objc.RegisterName("record"))
 	return RecordFromID(_r)
 }
-
-// SyncEngineFailedRecordSaveable is the interface implemented by [SyncEngineFailedRecordSave], for mocking and DI.
-type SyncEngineFailedRecordSaveable interface {
-	obj.Object
-	Record() *Record
-}
-
-var _ SyncEngineFailedRecordSaveable = (*SyncEngineFailedRecordSave)(nil)

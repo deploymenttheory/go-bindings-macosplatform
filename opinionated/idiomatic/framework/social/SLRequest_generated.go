@@ -46,24 +46,24 @@ func requestAdopt(id objc.ID) *Request {
 }
 
 // Description returns the object's -description text.
-func (x *Request) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Request) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Request) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Request) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Request) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Request) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Request) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Request) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRequest creates a new Request.
@@ -72,69 +72,48 @@ func NewRequest() *Request {
 	return requestAdopt(_id)
 }
 
-// WithAccount account information used to authenticate the request.
-func (x *Request) WithAccount(account obj.Object) *Request {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccount:"), objref.IDOf(account))
-	return x
+// WithAccount sets account information used to authenticate the request.
+func (r *Request) WithAccount(account obj.Object) *Request {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setAccount:"), objref.IDOf(account))
+	return r
 }
 
 // AddMultipartDataWithNameTypeFilename specifies a named multipart POST body for this request.
-func (x *Request) AddMultipartDataWithNameTypeFilename(data obj.Object, name string, type_ string, filename string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMultipartData:withName:type:filename:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_), purego.NSString(filename))
+func (r *Request) AddMultipartDataWithNameTypeFilename(data obj.Object, name string, type_ string, filename string) {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("addMultipartData:withName:type:filename:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_), purego.NSString(filename))
 }
 
 // AddMultipartDataWithNameType specifies a named multipart POST body for this request.
-func (x *Request) AddMultipartDataWithNameType(data obj.Object, name string, type_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMultipartData:withName:type:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_))
+func (r *Request) AddMultipartDataWithNameType(data obj.Object, name string, type_ string) {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("addMultipartData:withName:type:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_))
 }
 
 // PreparedURLRequest returns an authorized URL request that can be sent using an NSURLConnection object.
-func (x *Request) PreparedURLRequest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preparedURLRequest"))
+func (r *Request) PreparedURLRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("preparedURLRequest"))
 	return obj.Wrap(_r)
 }
 
 // Account wraps the corresponding Objective-C method.
-func (x *Request) Account() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("account"))
+func (r *Request) Account() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("account"))
 	return obj.Wrap(_r)
 }
 
-// SetAccount wraps the corresponding Objective-C method.
-func (x *Request) SetAccount(account obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccount:"), objref.IDOf(account))
-}
-
 // RequestMethod wraps the corresponding Objective-C method.
-func (x *Request) RequestMethod() RequestMethod {
-	_r := objc.Send[RequestMethod](objref.IDOf(x), objc.RegisterName("requestMethod"))
+func (r *Request) RequestMethod() RequestMethod {
+	_r := objc.Send[RequestMethod](objref.IDOf(r), objc.RegisterName("requestMethod"))
 	return _r
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *Request) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (r *Request) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
 // Parameters wraps the corresponding Objective-C method.
-func (x *Request) Parameters() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
+func (r *Request) Parameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }
-
-// Requestable is the interface implemented by [Request], for mocking and DI.
-type Requestable interface {
-	obj.Object
-	WithAccount(account obj.Object) *Request
-	AddMultipartDataWithNameTypeFilename(data obj.Object, name string, type_ string, filename string)
-	AddMultipartDataWithNameType(data obj.Object, name string, type_ string)
-	PreparedURLRequest() obj.Object
-	Account() obj.Object
-	SetAccount(account obj.Object)
-	RequestMethod() RequestMethod
-	URL() obj.Object
-	Parameters() obj.Object
-}
-
-var _ Requestable = (*Request)(nil)

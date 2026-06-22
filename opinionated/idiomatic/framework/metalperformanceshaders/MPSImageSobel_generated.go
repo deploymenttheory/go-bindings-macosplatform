@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageSobel() *ImageSobel {
 	return imageSobelAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (is *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setOffset:"), offset)
+	return is
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (is *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setClipRect:"), clipRect)
+	return is
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageSobel) WithLabel(label string) *ImageSobel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (is *ImageSobel) WithLabel(label string) *ImageSobel {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return is
 }
-
-// ImageSobelable is the interface implemented by [ImageSobel], for mocking and DI.
-type ImageSobelable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageSobel
-	WithClipRect(clipRect metal.MTLRegion) *ImageSobel
-	WithLabel(label string) *ImageSobel
-}
-
-var _ ImageSobelable = (*ImageSobel)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageSobel)(nil)
 

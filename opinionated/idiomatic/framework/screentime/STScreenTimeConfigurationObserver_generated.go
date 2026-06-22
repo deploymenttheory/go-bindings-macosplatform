@@ -46,24 +46,24 @@ func screenTimeConfigurationObserverAdopt(id objc.ID) *ScreenTimeConfigurationOb
 }
 
 // Description returns the object's -description text.
-func (x *ScreenTimeConfigurationObserver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (stco *ScreenTimeConfigurationObserver) Description() string {
+	return rt.Description(objref.IDOf(stco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScreenTimeConfigurationObserver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (stco *ScreenTimeConfigurationObserver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(stco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScreenTimeConfigurationObserver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (stco *ScreenTimeConfigurationObserver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(stco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScreenTimeConfigurationObserver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (stco *ScreenTimeConfigurationObserver) String() string {
+	return rt.Description(objref.IDOf(stco))
 }
 
 // NewScreenTimeConfigurationObserverWithUpdateQueue creates a configuration observer that reports updates on the queue you specify.
@@ -74,27 +74,17 @@ func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue obj.Object) *
 }
 
 // StartObserving starts observing changes to the current configuration.
-func (x *ScreenTimeConfigurationObserver) StartObserving() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startObserving"))
+func (stco *ScreenTimeConfigurationObserver) StartObserving() {
+	objc.Send[objc.ID](objref.IDOf(stco), objc.RegisterName("startObserving"))
 }
 
 // StopObserving stops observing changes to the current configuration.
-func (x *ScreenTimeConfigurationObserver) StopObserving() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopObserving"))
+func (stco *ScreenTimeConfigurationObserver) StopObserving() {
+	objc.Send[objc.ID](objref.IDOf(stco), objc.RegisterName("stopObserving"))
 }
 
-// Configuration the configuration being observed.
-func (x *ScreenTimeConfigurationObserver) Configuration() *ScreenTimeConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+// Configuration returns the configuration being observed.
+func (stco *ScreenTimeConfigurationObserver) Configuration() *ScreenTimeConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(stco), objc.RegisterName("configuration"))
 	return ScreenTimeConfigurationFromID(_r)
 }
-
-// ScreenTimeConfigurationObserverable is the interface implemented by [ScreenTimeConfigurationObserver], for mocking and DI.
-type ScreenTimeConfigurationObserverable interface {
-	obj.Object
-	StartObserving()
-	StopObserving()
-	Configuration() *ScreenTimeConfiguration
-}
-
-var _ ScreenTimeConfigurationObserverable = (*ScreenTimeConfigurationObserver)(nil)

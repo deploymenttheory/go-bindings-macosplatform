@@ -44,24 +44,24 @@ func mTRBooleanStateConfigurationClusterSensorFaultEventAdopt(id objc.ID) *MTRBo
 }
 
 // Description returns the object's -description text.
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) Description() string {
+	return rt.Description(objref.IDOf(mbsccsfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbsccsfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbsccsfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) String() string {
+	return rt.Description(objref.IDOf(mbsccsfe))
 }
 
 // NewMTRBooleanStateConfigurationClusterSensorFaultEvent creates a new MTRBooleanStateConfigurationClusterSensorFaultEvent.
@@ -71,28 +71,13 @@ func NewMTRBooleanStateConfigurationClusterSensorFaultEvent() *MTRBooleanStateCo
 }
 
 // WithSensorFault sets the property and returns the receiver so calls can be chained.
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) WithSensorFault(sensorFault obj.Object) *MTRBooleanStateConfigurationClusterSensorFaultEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorFault:"), objref.IDOf(sensorFault))
-	return x
+func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) WithSensorFault(sensorFault obj.Object) *MTRBooleanStateConfigurationClusterSensorFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(mbsccsfe), objc.RegisterName("setSensorFault:"), objref.IDOf(sensorFault))
+	return mbsccsfe
 }
 
 // SensorFault wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sensorFault"))
+func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbsccsfe), objc.RegisterName("sensorFault"))
 	return obj.Wrap(_r)
 }
-
-// SetSensorFault wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) SetSensorFault(sensorFault obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorFault:"), objref.IDOf(sensorFault))
-}
-
-// MTRBooleanStateConfigurationClusterSensorFaultEventable is the interface implemented by [MTRBooleanStateConfigurationClusterSensorFaultEvent], for mocking and DI.
-type MTRBooleanStateConfigurationClusterSensorFaultEventable interface {
-	obj.Object
-	WithSensorFault(sensorFault obj.Object) *MTRBooleanStateConfigurationClusterSensorFaultEvent
-	SensorFault() obj.Object
-	SetSensorFault(sensorFault obj.Object)
-}
-
-var _ MTRBooleanStateConfigurationClusterSensorFaultEventable = (*MTRBooleanStateConfigurationClusterSensorFaultEvent)(nil)

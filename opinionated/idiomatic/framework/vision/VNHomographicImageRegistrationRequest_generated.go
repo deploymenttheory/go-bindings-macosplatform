@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewHomographicImageRegistrationRequest() *HomographicImageRegistrationReque
 	return homographicImageRegistrationRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *HomographicImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *HomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (hirr *HomographicImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *HomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(hirr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return hirr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *HomographicImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *HomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (hirr *HomographicImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *HomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(hirr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return hirr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *HomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *HomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (hirr *HomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *HomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(hirr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return hirr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *HomographicImageRegistrationRequest) WithRevision(revision int) *HomographicImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (hirr *HomographicImageRegistrationRequest) WithRevision(revision int) *HomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(hirr), objc.RegisterName("setRevision:"), revision)
+	return hirr
 }
-
-// HomographicImageRegistrationRequestable is the interface implemented by [HomographicImageRegistrationRequest], for mocking and DI.
-type HomographicImageRegistrationRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *HomographicImageRegistrationRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *HomographicImageRegistrationRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *HomographicImageRegistrationRequest
-	WithRevision(revision int) *HomographicImageRegistrationRequest
-}
-
-var _ HomographicImageRegistrationRequestable = (*HomographicImageRegistrationRequest)(nil)
 
 var _ ImageRegistrationRequestProvider = (*HomographicImageRegistrationRequest)(nil)
 

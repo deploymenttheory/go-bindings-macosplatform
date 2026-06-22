@@ -48,24 +48,24 @@ func touchBarItemAdopt(id objc.ID) *TouchBarItem {
 }
 
 // Description returns the object's -description text.
-func (x *TouchBarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tbi *TouchBarItem) Description() string {
+	return rt.Description(objref.IDOf(tbi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TouchBarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tbi *TouchBarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tbi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TouchBarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tbi *TouchBarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tbi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TouchBarItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tbi *TouchBarItem) String() string {
+	return rt.Description(objref.IDOf(tbi))
 }
 
 // NewTouchBarItemWithIdentifier creates a new item with the specified identifier.
@@ -82,44 +82,39 @@ func NewTouchBarItemWithCoder(coder obj.Object) *TouchBarItem {
 	return touchBarItemAdopt(_id)
 }
 
-// WithVisibilityPriority determines which items are shown in a bar when space is limited.
-func (x *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *TouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-	return x
+// WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
+func (tbi *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *TouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return tbi
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *TouchBarItem) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (tbi *TouchBarItem) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // VisibilityPriority wraps the corresponding Objective-C method.
-func (x *TouchBarItem) VisibilityPriority() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("visibilityPriority"))
+func (tbi *TouchBarItem) VisibilityPriority() float32 {
+	_r := objc.Send[float32](objref.IDOf(tbi), objc.RegisterName("visibilityPriority"))
 	return _r
 }
 
-// SetVisibilityPriority wraps the corresponding Objective-C method.
-func (x *TouchBarItem) SetVisibilityPriority(visibilityPriority float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-}
-
 // View wraps the corresponding Objective-C method.
-func (x *TouchBarItem) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (tbi *TouchBarItem) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
 // ViewController wraps the corresponding Objective-C method.
-func (x *TouchBarItem) ViewController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewController"))
+func (tbi *TouchBarItem) ViewController() *ViewController {
+	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("viewController"))
 	return ViewControllerFromID(_r)
 }
 
-// CustomizationLabel the user visible string identifying this item during customization. By default this method returns the empty string.
-func (x *TouchBarItem) CustomizationLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customizationLabel"))
+// CustomizationLabel returns the user visible string identifying this item during customization. By default this method returns the empty string.
+func (tbi *TouchBarItem) CustomizationLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("customizationLabel"))
 	if _r == 0 {
 		return ""
 	}
@@ -127,29 +122,14 @@ func (x *TouchBarItem) CustomizationLabel() string {
 }
 
 // IsVisible wraps the corresponding Objective-C method.
-func (x *TouchBarItem) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+func (tbi *TouchBarItem) IsVisible() bool {
+	_r := objc.Send[bool](objref.IDOf(tbi), objc.RegisterName("isVisible"))
 	return _r
 }
-
-// TouchBarItemable is the interface implemented by [TouchBarItem], for mocking and DI.
-type TouchBarItemable interface {
-	obj.Object
-	WithVisibilityPriority(visibilityPriority float32) *TouchBarItem
-	Identifier() obj.Object
-	VisibilityPriority() float32
-	SetVisibilityPriority(visibilityPriority float32)
-	View() *View
-	ViewController() *ViewController
-	CustomizationLabel() string
-	IsVisible() bool
-}
-
-var _ TouchBarItemable = (*TouchBarItem)(nil)
 
 // isTouchBarItem marks TouchBarItem — and, by embedding promotion, its
 // subclasses — as a member of the TouchBarItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TouchBarItem) isTouchBarItem() {}
+func (tbi *TouchBarItem) isTouchBarItem() {}
 
 var _ TouchBarItemProvider = (*TouchBarItem)(nil)

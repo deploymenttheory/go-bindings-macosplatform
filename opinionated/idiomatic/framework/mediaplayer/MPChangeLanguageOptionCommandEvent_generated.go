@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewChangeLanguageOptionCommandEvent() *ChangeLanguageOptionCommandEvent {
 	return changeLanguageOptionCommandEventAdopt(_id)
 }
 
-// LanguageOption the requested language option to change. The supplied language option may be the Automatic Legible Language Option which would mean that best legible language option based on user preferences is being requested. See MPNowPlayingInfoLanguageOption isAutomaticLegibleLanguageOption
-func (x *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLanguageOption {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageOption"))
+// LanguageOption returns the requested language option to change. The supplied language option may be the Automatic Legible Language Option which would mean that best legible language option based on user preferences is being requested. See MPNowPlayingInfoLanguageOption isAutomaticLegibleLanguageOption
+func (cloce *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLanguageOption {
+	_r := objc.Send[objc.ID](objref.IDOf(cloce), objc.RegisterName("languageOption"))
 	return NowPlayingInfoLanguageOptionFromID(_r)
 }
 
 // Setting describes the extent of the changed language option
-func (x *ChangeLanguageOptionCommandEvent) Setting() ChangeLanguageOptionSetting {
-	_r := objc.Send[ChangeLanguageOptionSetting](objref.IDOf(x), objc.RegisterName("setting"))
+func (cloce *ChangeLanguageOptionCommandEvent) Setting() ChangeLanguageOptionSetting {
+	_r := objc.Send[ChangeLanguageOptionSetting](objref.IDOf(cloce), objc.RegisterName("setting"))
 	return _r
 }
-
-// ChangeLanguageOptionCommandEventable is the interface implemented by [ChangeLanguageOptionCommandEvent], for mocking and DI.
-type ChangeLanguageOptionCommandEventable interface {
-	obj.Object
-	LanguageOption() *NowPlayingInfoLanguageOption
-	Setting() ChangeLanguageOptionSetting
-}
-
-var _ ChangeLanguageOptionCommandEventable = (*ChangeLanguageOptionCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*ChangeLanguageOptionCommandEvent)(nil)

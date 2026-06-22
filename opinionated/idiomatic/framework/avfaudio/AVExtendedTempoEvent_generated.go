@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
 	return extendedTempoEventAdopt(_id)
 }
 
-// WithTempo the tempo in beats per minute as a positive value.
-func (x *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), tempo)
-	return x
+// WithTempo sets the tempo in beats per minute as a positive value.
+func (ete *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
+	objc.Send[objc.ID](objref.IDOf(ete), objc.RegisterName("setTempo:"), tempo)
+	return ete
 }
 
 // Tempo wraps the corresponding Objective-C method.
-func (x *ExtendedTempoEvent) Tempo() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tempo"))
+func (ete *ExtendedTempoEvent) Tempo() float64 {
+	_r := objc.Send[float64](objref.IDOf(ete), objc.RegisterName("tempo"))
 	return _r
 }
-
-// SetTempo wraps the corresponding Objective-C method.
-func (x *ExtendedTempoEvent) SetTempo(tempo float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), tempo)
-}
-
-// ExtendedTempoEventable is the interface implemented by [ExtendedTempoEvent], for mocking and DI.
-type ExtendedTempoEventable interface {
-	obj.Object
-	WithTempo(tempo float64) *ExtendedTempoEvent
-	Tempo() float64
-	SetTempo(tempo float64)
-}
-
-var _ ExtendedTempoEventable = (*ExtendedTempoEvent)(nil)
 
 var _ MusicEventProvider = (*ExtendedTempoEvent)(nil)

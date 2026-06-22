@@ -46,24 +46,24 @@ func playbackCoordinationMediumAdopt(id objc.ID) *PlaybackCoordinationMedium {
 }
 
 // Description returns the object's -description text.
-func (x *PlaybackCoordinationMedium) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pcm *PlaybackCoordinationMedium) Description() string {
+	return rt.Description(objref.IDOf(pcm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlaybackCoordinationMedium) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pcm *PlaybackCoordinationMedium) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pcm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlaybackCoordinationMedium) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pcm *PlaybackCoordinationMedium) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pcm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlaybackCoordinationMedium) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pcm *PlaybackCoordinationMedium) String() string {
+	return rt.Description(objref.IDOf(pcm))
 }
 
 // NewPlaybackCoordinationMedium creates a new PlaybackCoordinationMedium.
@@ -75,15 +75,7 @@ func NewPlaybackCoordinationMedium() *PlaybackCoordinationMedium {
 // ConnectedPlaybackCoordinators wraps the corresponding Objective-C method.
 //
 // ConnectedPlaybackCoordinators returns the collection as a Go slice.
-func (x *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedPlaybackCoordinators"))
+func (pcm *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator {
+	_arr := objc.Send[objc.ID](objref.IDOf(pcm), objc.RegisterName("connectedPlaybackCoordinators"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerPlaybackCoordinator { return PlayerPlaybackCoordinatorFromID(_id) })
 }
-
-// PlaybackCoordinationMediumable is the interface implemented by [PlaybackCoordinationMedium], for mocking and DI.
-type PlaybackCoordinationMediumable interface {
-	obj.Object
-	ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator
-}
-
-var _ PlaybackCoordinationMediumable = (*PlaybackCoordinationMedium)(nil)

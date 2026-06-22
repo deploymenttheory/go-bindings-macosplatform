@@ -50,133 +50,88 @@ func NewAVB17221AECPAEMMessage() *AVB17221AECPAEMMessage {
 	return aVB17221AECPAEMMessageAdopt(_id)
 }
 
-// WithCommandType the command_type field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) WithCommandType(commandType AVB17221AEMCommandType) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandType:"), commandType)
-	return x
+// WithCommandType sets the command_type field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) WithCommandType(commandType AVB17221AEMCommandType) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setCommandType:"), commandType)
+	return aam
 }
 
-// WithUnsolicited the u field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) WithUnsolicited(unsolicited bool) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnsolicited:"), unsolicited)
-	return x
+// WithUnsolicited sets the u field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) WithUnsolicited(unsolicited bool) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setUnsolicited:"), unsolicited)
+	return aam
 }
 
-// WithControllerRequest the cr field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) WithControllerRequest(controllerRequest bool) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerRequest:"), controllerRequest)
-	return x
+// WithControllerRequest sets the cr field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) WithControllerRequest(controllerRequest bool) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setControllerRequest:"), controllerRequest)
+	return aam
 }
 
-// WithCommandSpecificData the command_specific_data field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData obj.Object) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandSpecificData:"), objref.IDOf(commandSpecificData))
-	return x
+// WithCommandSpecificData sets the command_specific_data field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData obj.Object) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setCommandSpecificData:"), objref.IDOf(commandSpecificData))
+	return aam
 }
 
-// WithMessageType the message_type field of the AECP message.
-func (x *AVB17221AECPAEMMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
-	return x
+// WithMessageType sets the message_type field of the AECP message.
+func (aam *AVB17221AECPAEMMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setMessageType:"), messageType)
+	return aam
 }
 
-// WithStatus the status field of the AECP message.
-func (x *AVB17221AECPAEMMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status field of the AECP message.
+func (aam *AVB17221AECPAEMMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setStatus:"), status)
+	return aam
 }
 
-// WithTargetEntityID the target_entity_id field of the AECP message.
-func (x *AVB17221AECPAEMMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetEntityID:"), targetEntityID)
-	return x
+// WithTargetEntityID sets the target_entity_id field of the AECP message.
+func (aam *AVB17221AECPAEMMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setTargetEntityID:"), targetEntityID)
+	return aam
 }
 
-// WithControllerEntityID the controller_entity_id field of the AECP message.
-func (x *AVB17221AECPAEMMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
-	return x
+// WithControllerEntityID sets the controller_entity_id field of the AECP message.
+func (aam *AVB17221AECPAEMMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
+	return aam
 }
 
-// WithSequenceID the sequence_id field of the AECP message.
-func (x *AVB17221AECPAEMMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
-	return x
+// WithSequenceID sets the sequence_id field of the AECP message.
+func (aam *AVB17221AECPAEMMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSequenceID:"), sequenceID)
+	return aam
 }
 
-// WithSourceMAC the source_mac field of the AECP message.
-func (x *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
-	return x
+// WithSourceMAC sets the source_mac field of the AECP message.
+func (aam *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
+	return aam
 }
 
-// CommandType the command_type field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) CommandType() AVB17221AEMCommandType {
-	_r := objc.Send[AVB17221AEMCommandType](objref.IDOf(x), objc.RegisterName("commandType"))
+// CommandType returns the command_type field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) CommandType() AVB17221AEMCommandType {
+	_r := objc.Send[AVB17221AEMCommandType](objref.IDOf(aam), objc.RegisterName("commandType"))
 	return _r
 }
 
-// SetCommandType wraps the corresponding Objective-C method.
-func (x *AVB17221AECPAEMMessage) SetCommandType(commandType AVB17221AEMCommandType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandType:"), commandType)
-}
-
-// IsUnsolicited the u field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) IsUnsolicited() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnsolicited"))
+// IsUnsolicited reports whether the u field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) IsUnsolicited() bool {
+	_r := objc.Send[bool](objref.IDOf(aam), objc.RegisterName("isUnsolicited"))
 	return _r
 }
 
-// SetUnsolicited wraps the corresponding Objective-C method.
-func (x *AVB17221AECPAEMMessage) SetUnsolicited(unsolicited bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnsolicited:"), unsolicited)
-}
-
-// IsControllerRequest the cr field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) IsControllerRequest() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isControllerRequest"))
+// IsControllerRequest reports whether the cr field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) IsControllerRequest() bool {
+	_r := objc.Send[bool](objref.IDOf(aam), objc.RegisterName("isControllerRequest"))
 	return _r
 }
 
-// SetControllerRequest wraps the corresponding Objective-C method.
-func (x *AVB17221AECPAEMMessage) SetControllerRequest(controllerRequest bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerRequest:"), controllerRequest)
-}
-
-// CommandSpecificData the command_specific_data field of the AECP AEM message.
-func (x *AVB17221AECPAEMMessage) CommandSpecificData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandSpecificData"))
+// CommandSpecificData returns the command_specific_data field of the AECP AEM message.
+func (aam *AVB17221AECPAEMMessage) CommandSpecificData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("commandSpecificData"))
 	return obj.Wrap(_r)
 }
-
-// SetCommandSpecificData wraps the corresponding Objective-C method.
-func (x *AVB17221AECPAEMMessage) SetCommandSpecificData(commandSpecificData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandSpecificData:"), objref.IDOf(commandSpecificData))
-}
-
-// AVB17221AECPAEMMessageable is the interface implemented by [AVB17221AECPAEMMessage], for mocking and DI.
-type AVB17221AECPAEMMessageable interface {
-	obj.Object
-	WithCommandType(commandType AVB17221AEMCommandType) *AVB17221AECPAEMMessage
-	WithUnsolicited(unsolicited bool) *AVB17221AECPAEMMessage
-	WithControllerRequest(controllerRequest bool) *AVB17221AECPAEMMessage
-	WithCommandSpecificData(commandSpecificData obj.Object) *AVB17221AECPAEMMessage
-	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAEMMessage
-	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAEMMessage
-	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage
-	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage
-	WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage
-	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage
-	CommandType() AVB17221AEMCommandType
-	SetCommandType(commandType AVB17221AEMCommandType)
-	IsUnsolicited() bool
-	SetUnsolicited(unsolicited bool)
-	IsControllerRequest() bool
-	SetControllerRequest(controllerRequest bool)
-	CommandSpecificData() obj.Object
-	SetCommandSpecificData(commandSpecificData obj.Object)
-}
-
-var _ AVB17221AECPAEMMessageable = (*AVB17221AECPAEMMessage)(nil)
 
 var _ AVB17221AECPMessageProvider = (*AVB17221AECPAEMMessage)(nil)

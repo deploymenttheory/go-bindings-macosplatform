@@ -54,399 +54,327 @@ func NewBackgroundExtensionView() *BackgroundExtensionView {
 	return backgroundExtensionViewAdopt(_id)
 }
 
-// WithContentView the content view to extend to fill the NSBackgroundExtensionView.
-func (x *BackgroundExtensionView) WithContentView(contentView ViewProvider) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
-	return x
+// WithContentView sets the content view to extend to fill the NSBackgroundExtensionView.
+func (bev *BackgroundExtensionView) WithContentView(contentView ViewProvider) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	return bev
 }
 
-// WithAutomaticallyPlacesContentView controls the automatic safe area placement of the contentView within the container.
-func (x *BackgroundExtensionView) WithAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPlacesContentView:"), automaticallyPlacesContentView)
-	return x
+// WithAutomaticallyPlacesContentView sets controls the automatic safe area placement of the contentView within the container.
+func (bev *BackgroundExtensionView) WithAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setAutomaticallyPlacesContentView:"), automaticallyPlacesContentView)
+	return bev
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithSubviews(items ...ViewProvider) *BackgroundExtensionView {
+func (bev *BackgroundExtensionView) WithSubviews(items ...ViewProvider) *BackgroundExtensionView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setSubviews:"), _arr)
+	return bev
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithHidden(hidden bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (bev *BackgroundExtensionView) WithHidden(hidden bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setHidden:"), hidden)
+	return bev
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (bev *BackgroundExtensionView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return bev
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithAutoresizesSubviews(autoresizesSubviews bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (bev *BackgroundExtensionView) WithAutoresizesSubviews(autoresizesSubviews bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return bev
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (bev *BackgroundExtensionView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return bev
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *BackgroundExtensionView) WithFrame(frame corefoundation.CGRect) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (bev *BackgroundExtensionView) WithFrame(frame corefoundation.CGRect) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setFrame:"), frame)
+	return bev
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithFrameRotation(frameRotation float64) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (bev *BackgroundExtensionView) WithFrameRotation(frameRotation float64) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return bev
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithFrameCenterRotation(frameCenterRotation float64) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (bev *BackgroundExtensionView) WithFrameCenterRotation(frameCenterRotation float64) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return bev
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithBoundsRotation(boundsRotation float64) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (bev *BackgroundExtensionView) WithBoundsRotation(boundsRotation float64) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return bev
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *BackgroundExtensionView) WithBounds(bounds corefoundation.CGRect) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (bev *BackgroundExtensionView) WithBounds(bounds corefoundation.CGRect) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setBounds:"), bounds)
+	return bev
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithCanDrawConcurrently(canDrawConcurrently bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (bev *BackgroundExtensionView) WithCanDrawConcurrently(canDrawConcurrently bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return bev
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *BackgroundExtensionView) WithNeedsDisplay(needsDisplay bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (bev *BackgroundExtensionView) WithNeedsDisplay(needsDisplay bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return bev
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (bev *BackgroundExtensionView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return bev
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithWantsRestingTouches(wantsRestingTouches bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (bev *BackgroundExtensionView) WithWantsRestingTouches(wantsRestingTouches bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return bev
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (bev *BackgroundExtensionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return bev
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (bev *BackgroundExtensionView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return bev
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithWantsLayer(wantsLayer bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (bev *BackgroundExtensionView) WithWantsLayer(wantsLayer bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return bev
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithLayer(layer obj.Object) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (bev *BackgroundExtensionView) WithLayer(layer obj.Object) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return bev
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (bev *BackgroundExtensionView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return bev
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithNeedsLayout(needsLayout bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (bev *BackgroundExtensionView) WithNeedsLayout(needsLayout bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return bev
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithAlphaValue(alphaValue float64) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (bev *BackgroundExtensionView) WithAlphaValue(alphaValue float64) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return bev
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (bev *BackgroundExtensionView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return bev
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithBackgroundFilters(items ...obj.Object) *BackgroundExtensionView {
+func (bev *BackgroundExtensionView) WithBackgroundFilters(items ...obj.Object) *BackgroundExtensionView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return bev
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithCompositingFilter(compositingFilter obj.Object) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (bev *BackgroundExtensionView) WithCompositingFilter(compositingFilter obj.Object) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return bev
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithContentFilters(items ...obj.Object) *BackgroundExtensionView {
+func (bev *BackgroundExtensionView) WithContentFilters(items ...obj.Object) *BackgroundExtensionView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setContentFilters:"), _arr)
+	return bev
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithShadow(shadow *Shadow) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (bev *BackgroundExtensionView) WithShadow(shadow *Shadow) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return bev
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithClipsToBounds(clipsToBounds bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (bev *BackgroundExtensionView) WithClipsToBounds(clipsToBounds bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return bev
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (bev *BackgroundExtensionView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return bev
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithToolTip(toolTip string) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (bev *BackgroundExtensionView) WithToolTip(toolTip string) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return bev
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (bev *BackgroundExtensionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return bev
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (bev *BackgroundExtensionView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return bev
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithNextKeyView(nextKeyView ViewProvider) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (bev *BackgroundExtensionView) WithNextKeyView(nextKeyView ViewProvider) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return bev
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithFocusRingType(focusRingType FocusRingType) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (bev *BackgroundExtensionView) WithFocusRingType(focusRingType FocusRingType) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return bev
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *BackgroundExtensionView {
+func (bev *BackgroundExtensionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *BackgroundExtensionView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return bev
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (bev *BackgroundExtensionView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return bev
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (bev *BackgroundExtensionView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return bev
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *BackgroundExtensionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (bev *BackgroundExtensionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return bev
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (bev *BackgroundExtensionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return bev
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (bev *BackgroundExtensionView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return bev
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (bev *BackgroundExtensionView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return bev
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (bev *BackgroundExtensionView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return bev
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (bev *BackgroundExtensionView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return bev
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (bev *BackgroundExtensionView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return bev
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (bev *BackgroundExtensionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return bev
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *BackgroundExtensionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (bev *BackgroundExtensionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return bev
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *BackgroundExtensionView) WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (bev *BackgroundExtensionView) WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return bev
 }
 
-// WithMenu returns the responder’s menu.
-func (x *BackgroundExtensionView) WithMenu(menu *Menu) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (bev *BackgroundExtensionView) WithMenu(menu *Menu) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return bev
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *BackgroundExtensionView) WithUserActivity(userActivity obj.Object) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (bev *BackgroundExtensionView) WithUserActivity(userActivity obj.Object) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return bev
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *BackgroundExtensionView) WithTouchBar(touchBar *TouchBar) *BackgroundExtensionView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (bev *BackgroundExtensionView) WithTouchBar(touchBar *TouchBar) *BackgroundExtensionView {
+	objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return bev
 }
 
-// ContentView the content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
-func (x *BackgroundExtensionView) ContentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+// ContentView returns the content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
+func (bev *BackgroundExtensionView) ContentView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
-// SetContentView the content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
-func (x *BackgroundExtensionView) SetContentView(contentView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
-}
-
-// AutomaticallyPlacesContentView controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
-func (x *BackgroundExtensionView) AutomaticallyPlacesContentView() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyPlacesContentView"))
+// AutomaticallyPlacesContentView reports whether controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
+func (bev *BackgroundExtensionView) AutomaticallyPlacesContentView() bool {
+	_r := objc.Send[bool](objref.IDOf(bev), objc.RegisterName("automaticallyPlacesContentView"))
 	return _r
 }
-
-// SetAutomaticallyPlacesContentView controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
-func (x *BackgroundExtensionView) SetAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPlacesContentView:"), automaticallyPlacesContentView)
-}
-
-// BackgroundExtensionViewable is the interface implemented by [BackgroundExtensionView], for mocking and DI.
-type BackgroundExtensionViewable interface {
-	obj.Object
-	WithContentView(contentView ViewProvider) *BackgroundExtensionView
-	WithAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) *BackgroundExtensionView
-	WithSubviews(items ...ViewProvider) *BackgroundExtensionView
-	WithHidden(hidden bool) *BackgroundExtensionView
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *BackgroundExtensionView
-	WithAutoresizesSubviews(autoresizesSubviews bool) *BackgroundExtensionView
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *BackgroundExtensionView
-	WithFrame(frame corefoundation.CGRect) *BackgroundExtensionView
-	WithFrameRotation(frameRotation float64) *BackgroundExtensionView
-	WithFrameCenterRotation(frameCenterRotation float64) *BackgroundExtensionView
-	WithBoundsRotation(boundsRotation float64) *BackgroundExtensionView
-	WithBounds(bounds corefoundation.CGRect) *BackgroundExtensionView
-	WithCanDrawConcurrently(canDrawConcurrently bool) *BackgroundExtensionView
-	WithNeedsDisplay(needsDisplay bool) *BackgroundExtensionView
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *BackgroundExtensionView
-	WithWantsRestingTouches(wantsRestingTouches bool) *BackgroundExtensionView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *BackgroundExtensionView
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *BackgroundExtensionView
-	WithWantsLayer(wantsLayer bool) *BackgroundExtensionView
-	WithLayer(layer obj.Object) *BackgroundExtensionView
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *BackgroundExtensionView
-	WithNeedsLayout(needsLayout bool) *BackgroundExtensionView
-	WithAlphaValue(alphaValue float64) *BackgroundExtensionView
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *BackgroundExtensionView
-	WithBackgroundFilters(items ...obj.Object) *BackgroundExtensionView
-	WithCompositingFilter(compositingFilter obj.Object) *BackgroundExtensionView
-	WithContentFilters(items ...obj.Object) *BackgroundExtensionView
-	WithShadow(shadow *Shadow) *BackgroundExtensionView
-	WithClipsToBounds(clipsToBounds bool) *BackgroundExtensionView
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *BackgroundExtensionView
-	WithToolTip(toolTip string) *BackgroundExtensionView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BackgroundExtensionView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *BackgroundExtensionView
-	WithNextKeyView(nextKeyView ViewProvider) *BackgroundExtensionView
-	WithFocusRingType(focusRingType FocusRingType) *BackgroundExtensionView
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *BackgroundExtensionView
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *BackgroundExtensionView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *BackgroundExtensionView
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *BackgroundExtensionView
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *BackgroundExtensionView
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *BackgroundExtensionView
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *BackgroundExtensionView
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *BackgroundExtensionView
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *BackgroundExtensionView
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *BackgroundExtensionView
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *BackgroundExtensionView
-	WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView
-	WithMenu(menu *Menu) *BackgroundExtensionView
-	WithUserActivity(userActivity obj.Object) *BackgroundExtensionView
-	WithTouchBar(touchBar *TouchBar) *BackgroundExtensionView
-	ContentView() *View
-	SetContentView(contentView *View)
-	AutomaticallyPlacesContentView() bool
-	SetAutomaticallyPlacesContentView(automaticallyPlacesContentView bool)
-}
-
-var _ BackgroundExtensionViewable = (*BackgroundExtensionView)(nil)
 
 var _ ViewProvider = (*BackgroundExtensionView)(nil)
 

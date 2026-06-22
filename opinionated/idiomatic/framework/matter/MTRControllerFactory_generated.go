@@ -44,24 +44,24 @@ func mTRControllerFactoryAdopt(id objc.ID) *MTRControllerFactory {
 }
 
 // Description returns the object's -description text.
-func (x *MTRControllerFactory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcf *MTRControllerFactory) Description() string {
+	return rt.Description(objref.IDOf(mcf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRControllerFactory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcf *MTRControllerFactory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRControllerFactory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcf *MTRControllerFactory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRControllerFactory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcf *MTRControllerFactory) String() string {
+	return rt.Description(objref.IDOf(mcf))
 }
 
 // NewMTRControllerFactory creates a new MTRControllerFactory.
@@ -71,42 +71,30 @@ func NewMTRControllerFactory() *MTRControllerFactory {
 }
 
 // Startup wraps the corresponding Objective-C method.
-func (x *MTRControllerFactory) Startup(startupParams *MTRControllerFactoryParams) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startup:"), objref.IDOf(startupParams))
+func (mcf *MTRControllerFactory) Startup(startupParams *MTRControllerFactoryParams) bool {
+	_r := objc.Send[bool](objref.IDOf(mcf), objc.RegisterName("startup:"), objref.IDOf(startupParams))
 	return _r
 }
 
 // Shutdown wraps the corresponding Objective-C method.
-func (x *MTRControllerFactory) Shutdown() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shutdown"))
+func (mcf *MTRControllerFactory) Shutdown() {
+	objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("shutdown"))
 }
 
 // StartControllerOnExistingFabric wraps the corresponding Objective-C method.
-func (x *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerOnExistingFabric:"), objref.IDOf(startupParams))
+func (mcf *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
+	_r := objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("startControllerOnExistingFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
 // StartControllerOnNewFabric wraps the corresponding Objective-C method.
-func (x *MTRControllerFactory) StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerOnNewFabric:"), objref.IDOf(startupParams))
+func (mcf *MTRControllerFactory) StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
+	_r := objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("startControllerOnNewFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
 // IsRunning wraps the corresponding Objective-C method.
-func (x *MTRControllerFactory) IsRunning() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+func (mcf *MTRControllerFactory) IsRunning() bool {
+	_r := objc.Send[bool](objref.IDOf(mcf), objc.RegisterName("isRunning"))
 	return _r
 }
-
-// MTRControllerFactoryable is the interface implemented by [MTRControllerFactory], for mocking and DI.
-type MTRControllerFactoryable interface {
-	obj.Object
-	Startup(startupParams *MTRControllerFactoryParams) bool
-	Shutdown()
-	StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController
-	StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController
-	IsRunning() bool
-}
-
-var _ MTRControllerFactoryable = (*MTRControllerFactory)(nil)

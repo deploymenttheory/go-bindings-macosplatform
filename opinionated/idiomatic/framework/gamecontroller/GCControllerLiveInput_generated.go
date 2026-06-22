@@ -7,7 +7,6 @@ package gamecontroller
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,21 @@ func NewControllerLiveInput() *ControllerLiveInput {
 }
 
 // Capture returns a snapshot of the physical device inputs.
-func (x *ControllerLiveInput) Capture() *ControllerInputState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
+func (cli *ControllerLiveInput) Capture() *ControllerInputState {
+	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("capture"))
 	return ControllerInputStateFromID(_r)
 }
 
 // NextInputState returns the next device input state from the queue.
-func (x *ControllerLiveInput) NextInputState() *ControllerInputState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextInputState"))
+func (cli *ControllerLiveInput) NextInputState() *ControllerInputState {
+	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("nextInputState"))
 	return ControllerInputStateFromID(_r)
 }
 
 // UnmappedInput get a view of the controller's input without any system-level control remapping applied. Developers should avoid implementing their own control remapping functionality and to instead direct users to the system game controller settings to remap controls.  If you choose to implement your own control remapping functionality, or if your app streams controller input to a remote device that implements control remapping functionality, you should access controller physical input through this interface.
-func (x *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmappedInput"))
+func (cli *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
+	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("unmappedInput"))
 	return ControllerLiveInputFromID(_r)
 }
-
-// ControllerLiveInputable is the interface implemented by [ControllerLiveInput], for mocking and DI.
-type ControllerLiveInputable interface {
-	obj.Object
-	Capture() *ControllerInputState
-	NextInputState() *ControllerInputState
-	UnmappedInput() *ControllerLiveInput
-}
-
-var _ ControllerLiveInputable = (*ControllerLiveInput)(nil)
 
 var _ ControllerInputStateProvider = (*ControllerLiveInput)(nil)

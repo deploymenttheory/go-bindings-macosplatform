@@ -48,36 +48,29 @@ func pointingDeviceConfigurationAdopt(id objc.ID) *PointingDeviceConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *PointingDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pdc *PointingDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(pdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PointingDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pdc *PointingDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PointingDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pdc *PointingDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PointingDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pdc *PointingDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(pdc))
 }
-
-// PointingDeviceConfigurationable is the interface implemented by [PointingDeviceConfiguration], for mocking and DI.
-type PointingDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ PointingDeviceConfigurationable = (*PointingDeviceConfiguration)(nil)
 
 // isPointingDeviceConfiguration marks PointingDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the PointingDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PointingDeviceConfiguration) isPointingDeviceConfiguration() {}
+func (pdc *PointingDeviceConfiguration) isPointingDeviceConfiguration() {}
 
 var _ PointingDeviceConfigurationProvider = (*PointingDeviceConfiguration)(nil)

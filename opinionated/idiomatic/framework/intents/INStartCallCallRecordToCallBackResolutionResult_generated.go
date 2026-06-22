@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,13 +51,6 @@ func NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionRes
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordResolutionResult:"), objref.IDOf(callRecordResolutionResult))
 	return startCallCallRecordToCallBackResolutionResultAdopt(_id)
 }
-
-// StartCallCallRecordToCallBackResolutionResultable is the interface implemented by [StartCallCallRecordToCallBackResolutionResult], for mocking and DI.
-type StartCallCallRecordToCallBackResolutionResultable interface {
-	obj.Object
-}
-
-var _ StartCallCallRecordToCallBackResolutionResultable = (*StartCallCallRecordToCallBackResolutionResult)(nil)
 
 var _ CallRecordResolutionResultProvider = (*StartCallCallRecordToCallBackResolutionResult)(nil)
 

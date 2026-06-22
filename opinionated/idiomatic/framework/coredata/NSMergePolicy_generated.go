@@ -5,13 +5,14 @@
 package coredata
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MergePolicy is an idiomatic wrapper over the Objective-C class NSMergePolicy.
@@ -48,24 +49,24 @@ func mergePolicyAdopt(id objc.ID) *MergePolicy {
 }
 
 // Description returns the object's -description text.
-func (x *MergePolicy) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MergePolicy) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MergePolicy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MergePolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MergePolicy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MergePolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MergePolicy) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MergePolicy) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMergePolicyWithMergeType returns a merge policy initialized with a given policy type.
@@ -76,9 +77,9 @@ func NewMergePolicyWithMergeType(ty MergePolicyType) *MergePolicy {
 }
 
 // ResolveConflicts resolves the conflicts in a given list.
-func (x *MergePolicy) ResolveConflicts(list obj.Object) error {
+func (mp *MergePolicy) ResolveConflicts(list obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveConflicts:error:"), objref.IDOf(list), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(mp), objc.RegisterName("resolveConflicts:error:"), objref.IDOf(list), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -86,9 +87,9 @@ func (x *MergePolicy) ResolveConflicts(list obj.Object) error {
 }
 
 // ResolveOptimisticLockingVersionConflicts resolves the conflicts in a given list.
-func (x *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeConflict) error {
+func (mp *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeConflict) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveOptimisticLockingVersionConflicts:error:"), purego.SliceToNSArray(list, func(_v *MergeConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(mp), objc.RegisterName("resolveOptimisticLockingVersionConflicts:error:"), purego.SliceToNSArray(list, func(_v *MergeConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -96,9 +97,9 @@ func (x *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeConf
 }
 
 // ResolveConstraintConflicts resolves the conflicts in a given list.
-func (x *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) error {
+func (mp *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveConstraintConflicts:error:"), purego.SliceToNSArray(list, func(_v *ConstraintConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(mp), objc.RegisterName("resolveConstraintConflicts:error:"), purego.SliceToNSArray(list, func(_v *ConstraintConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -106,18 +107,7 @@ func (x *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) err
 }
 
 // MergeType wraps the corresponding Objective-C method.
-func (x *MergePolicy) MergeType() MergePolicyType {
-	_r := objc.Send[MergePolicyType](objref.IDOf(x), objc.RegisterName("mergeType"))
+func (mp *MergePolicy) MergeType() MergePolicyType {
+	_r := objc.Send[MergePolicyType](objref.IDOf(mp), objc.RegisterName("mergeType"))
 	return _r
 }
-
-// MergePolicyable is the interface implemented by [MergePolicy], for mocking and DI.
-type MergePolicyable interface {
-	obj.Object
-	ResolveConflicts(list obj.Object) error
-	ResolveOptimisticLockingVersionConflicts(list []*MergeConflict) error
-	ResolveConstraintConflicts(list []*ConstraintConflict) error
-	MergeType() MergePolicyType
-}
-
-var _ MergePolicyable = (*MergePolicy)(nil)

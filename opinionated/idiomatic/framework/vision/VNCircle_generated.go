@@ -46,24 +46,24 @@ func circleAdopt(id objc.ID) *Circle {
 }
 
 // Description returns the object's -description text.
-func (x *Circle) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Circle) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Circle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Circle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Circle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Circle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Circle) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Circle) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewCircleWithCenterRadius creates a circle with the specified center and radius.
@@ -81,43 +81,31 @@ func NewCircleWithCenterDiameter(center *Point, diameter float64) *Circle {
 }
 
 // ContainsPoint determines if this circle, including its boundary, contains the specified point.
-func (x *Circle) ContainsPoint(point *Point) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:"), objref.IDOf(point))
+func (c *Circle) ContainsPoint(point *Point) bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("containsPoint:"), objref.IDOf(point))
 	return _r
 }
 
 // ContainsPointInCircumferentialRingOfWidth determines if a ring around this circle’s circumference contains the specified point.
-func (x *Circle) ContainsPointInCircumferentialRingOfWidth(point *Point, ringWidth float64) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:inCircumferentialRingOfWidth:"), objref.IDOf(point), ringWidth)
+func (c *Circle) ContainsPointInCircumferentialRingOfWidth(point *Point, ringWidth float64) bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("containsPoint:inCircumferentialRingOfWidth:"), objref.IDOf(point), ringWidth)
 	return _r
 }
 
 // Center returns circle center.
-func (x *Circle) Center() *Point {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("center"))
+func (c *Circle) Center() *Point {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("center"))
 	return PointFromID(_r)
 }
 
 // Radius returns circle radius.
-func (x *Circle) Radius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+func (c *Circle) Radius() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("radius"))
 	return _r
 }
 
 // Diameter returns circle diameter.
-func (x *Circle) Diameter() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("diameter"))
+func (c *Circle) Diameter() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("diameter"))
 	return _r
 }
-
-// Circleable is the interface implemented by [Circle], for mocking and DI.
-type Circleable interface {
-	obj.Object
-	ContainsPoint(point *Point) bool
-	ContainsPointInCircumferentialRingOfWidth(point *Point, ringWidth float64) bool
-	Center() *Point
-	Radius() float64
-	Diameter() float64
-}
-
-var _ Circleable = (*Circle)(nil)

@@ -47,24 +47,24 @@ func captureVideoPreviewLayerAdopt(id objc.ID) *CaptureVideoPreviewLayer {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureVideoPreviewLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvpl *CaptureVideoPreviewLayer) Description() string {
+	return rt.Description(objref.IDOf(cvpl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureVideoPreviewLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvpl *CaptureVideoPreviewLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvpl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureVideoPreviewLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvpl *CaptureVideoPreviewLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvpl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureVideoPreviewLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvpl *CaptureVideoPreviewLayer) String() string {
+	return rt.Description(objref.IDOf(cvpl))
 }
 
 // NewCaptureVideoPreviewLayerWithSession creates a layer to preview the visual output of a capture session.
@@ -81,124 +81,85 @@ func NewCaptureVideoPreviewLayerWithSessionWithNoConnection(session *CaptureSess
 	return captureVideoPreviewLayerAdopt(_id)
 }
 
-// WithSession a capture session with visual output to preview.
-func (x *CaptureVideoPreviewLayer) WithSession(session *CaptureSession) *CaptureVideoPreviewLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
-	return x
+// WithSession sets a capture session with visual output to preview.
+func (cvpl *CaptureVideoPreviewLayer) WithSession(session *CaptureSession) *CaptureVideoPreviewLayer {
+	objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("setSession:"), objref.IDOf(session))
+	return cvpl
 }
 
-// WithVideoGravity a value that indicates how the layer displays video content within its bounds.
-func (x *CaptureVideoPreviewLayer) WithVideoGravity(videoGravity obj.Object) *CaptureVideoPreviewLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-	return x
+// WithVideoGravity sets a value that indicates how the layer displays video content within its bounds.
+func (cvpl *CaptureVideoPreviewLayer) WithVideoGravity(videoGravity obj.Object) *CaptureVideoPreviewLayer {
+	objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
+	return cvpl
 }
 
-// WithDeferredStartEnabled a BOOL value that indicates whether to defer starting this preview layer.
-func (x *CaptureVideoPreviewLayer) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoPreviewLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
-	return x
+// WithDeferredStartEnabled sets a BOOL value that indicates whether to defer starting this preview layer.
+func (cvpl *CaptureVideoPreviewLayer) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoPreviewLayer {
+	objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
+	return cvpl
 }
 
 // SetSessionWithNoConnection associates a session with the layer without automatically forming a connection to an eligible input port.
-func (x *CaptureVideoPreviewLayer) SetSessionWithNoConnection(session *CaptureSession) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionWithNoConnection:"), objref.IDOf(session))
+func (cvpl *CaptureVideoPreviewLayer) SetSessionWithNoConnection(session *CaptureSession) {
+	objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("setSessionWithNoConnection:"), objref.IDOf(session))
 }
 
 // CaptureDevicePointOfInterestForPoint converts a point from layer coordinates to the coordinate space of the capture device.
-func (x *CaptureVideoPreviewLayer) CaptureDevicePointOfInterestForPoint(pointInLayer corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("captureDevicePointOfInterestForPoint:"), pointInLayer)
+func (cvpl *CaptureVideoPreviewLayer) CaptureDevicePointOfInterestForPoint(pointInLayer corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvpl), objc.RegisterName("captureDevicePointOfInterestForPoint:"), pointInLayer)
 	return _r
 }
 
 // PointForCaptureDevicePointOfInterest converts a point from the coordinate space of the capture device to the coordinate space of the layer.
-func (x *CaptureVideoPreviewLayer) PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("pointForCaptureDevicePointOfInterest:"), captureDevicePointOfInterest)
+func (cvpl *CaptureVideoPreviewLayer) PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvpl), objc.RegisterName("pointForCaptureDevicePointOfInterest:"), captureDevicePointOfInterest)
 	return _r
 }
 
 // MetadataOutputRectOfInterestForRect converts a rectangle from layer coordinates to the coordinate space of the metadata output.
-func (x *CaptureVideoPreviewLayer) MetadataOutputRectOfInterestForRect(rectInLayerCoordinates corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("metadataOutputRectOfInterestForRect:"), rectInLayerCoordinates)
+func (cvpl *CaptureVideoPreviewLayer) MetadataOutputRectOfInterestForRect(rectInLayerCoordinates corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cvpl), objc.RegisterName("metadataOutputRectOfInterestForRect:"), rectInLayerCoordinates)
 	return _r
 }
 
 // RectForMetadataOutputRectOfInterest converts a rectangle from metadata output coordinates to the coordinate space of the layer.
-func (x *CaptureVideoPreviewLayer) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForMetadataOutputRectOfInterest:"), rectInMetadataOutputCoordinates)
+func (cvpl *CaptureVideoPreviewLayer) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cvpl), objc.RegisterName("rectForMetadataOutputRectOfInterest:"), rectInMetadataOutputCoordinates)
 	return _r
 }
 
 // TransformedMetadataObjectForMetadataObject converts a metadata object’s visual properties to layer coordinates.
-func (x *CaptureVideoPreviewLayer) TransformedMetadataObjectForMetadataObject(metadataObject *MetadataObject) *MetadataObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformedMetadataObjectForMetadataObject:"), objref.IDOf(metadataObject))
+func (cvpl *CaptureVideoPreviewLayer) TransformedMetadataObjectForMetadataObject(metadataObject *MetadataObject) *MetadataObject {
+	_r := objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("transformedMetadataObjectForMetadataObject:"), objref.IDOf(metadataObject))
 	return MetadataObjectFromID(_r)
 }
 
-// Session the AVCaptureSession instance being previewed by the receiver. The session is retained by the preview layer.
-func (x *CaptureVideoPreviewLayer) Session() *CaptureSession {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+// Session returns the AVCaptureSession instance being previewed by the receiver. The session is retained by the preview layer.
+func (cvpl *CaptureVideoPreviewLayer) Session() *CaptureSession {
+	_r := objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("session"))
 	return CaptureSessionFromID(_r)
 }
 
-// SetSession wraps the corresponding Objective-C method.
-func (x *CaptureVideoPreviewLayer) SetSession(session *CaptureSession) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
-}
-
-// Connection the AVCaptureConnection instance describing the AVCaptureInputPort to which the receiver is connected. When calling initWithSession: or setSession: with a valid AVCaptureSession instance, a connection is formed to the first eligible video AVCaptureInput. If the receiver is detached from a session, the connection property becomes nil.
-func (x *CaptureVideoPreviewLayer) Connection() *CaptureConnection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
+// Connection returns the AVCaptureConnection instance describing the AVCaptureInputPort to which the receiver is connected. When calling initWithSession: or setSession: with a valid AVCaptureSession instance, a connection is formed to the first eligible video AVCaptureInput. If the receiver is detached from a session, the connection property becomes nil.
+func (cvpl *CaptureVideoPreviewLayer) Connection() *CaptureConnection {
+	_r := objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("connection"))
 	return CaptureConnectionFromID(_r)
 }
 
-// VideoGravity a string defining how the video is displayed within an AVCaptureVideoPreviewLayer bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
-func (x *CaptureVideoPreviewLayer) VideoGravity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoGravity"))
+// VideoGravity returns a string defining how the video is displayed within an AVCaptureVideoPreviewLayer bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+func (cvpl *CaptureVideoPreviewLayer) VideoGravity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvpl), objc.RegisterName("videoGravity"))
 	return obj.Wrap(_r)
 }
 
-// SetVideoGravity wraps the corresponding Objective-C method.
-func (x *CaptureVideoPreviewLayer) SetVideoGravity(videoGravity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
-}
-
-// IsDeferredStartSupported a `BOOL` value that indicates whether the preview layer supports deferred start. You can only set the “deferredStartEnabled“ property to `true` if the preview layer supports deferred start.
-func (x *CaptureVideoPreviewLayer) IsDeferredStartSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeferredStartSupported"))
+// IsDeferredStartSupported reports whether a `BOOL` value that indicates whether the preview layer supports deferred start. You can only set the “deferredStartEnabled“ property to `true` if the preview layer supports deferred start.
+func (cvpl *CaptureVideoPreviewLayer) IsDeferredStartSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cvpl), objc.RegisterName("isDeferredStartSupported"))
 	return _r
 }
 
-// IsDeferredStartEnabled a `BOOL` value that indicates whether to defer starting this preview layer. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` if your app needs video preview immediately for startup, and `true` if it does not. By default, this value is `false` for “AVCaptureVideoPreviewLayer“ objects, since this object is used to display preview. For best session start performance, set “deferredStartEnabled“ to `false` for preview layers. If your app contains multiple preview layers, you may want to display the main preview layer as soon as possible and allow the remaining layers to display subsequently. In this case, set “deferredStartEnabled“ to `true` for the remaining layers. - Note: Setting this property to the same value for all outputs, including “AVCaptureVideoPreviewLayer“ and “AVCaptureOutput“, is equivalent to not using deferred start. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
-func (x *CaptureVideoPreviewLayer) IsDeferredStartEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeferredStartEnabled"))
+// IsDeferredStartEnabled reports whether a `BOOL` value that indicates whether to defer starting this preview layer. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` if your app needs video preview immediately for startup, and `true` if it does not. By default, this value is `false` for “AVCaptureVideoPreviewLayer“ objects, since this object is used to display preview. For best session start performance, set “deferredStartEnabled“ to `false` for preview layers. If your app contains multiple preview layers, you may want to display the main preview layer as soon as possible and allow the remaining layers to display subsequently. In this case, set “deferredStartEnabled“ to `true` for the remaining layers. - Note: Setting this property to the same value for all outputs, including “AVCaptureVideoPreviewLayer“ and “AVCaptureOutput“, is equivalent to not using deferred start. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+func (cvpl *CaptureVideoPreviewLayer) IsDeferredStartEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cvpl), objc.RegisterName("isDeferredStartEnabled"))
 	return _r
 }
-
-// SetDeferredStartEnabled wraps the corresponding Objective-C method.
-func (x *CaptureVideoPreviewLayer) SetDeferredStartEnabled(deferredStartEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
-}
-
-// CaptureVideoPreviewLayerable is the interface implemented by [CaptureVideoPreviewLayer], for mocking and DI.
-type CaptureVideoPreviewLayerable interface {
-	obj.Object
-	WithSession(session *CaptureSession) *CaptureVideoPreviewLayer
-	WithVideoGravity(videoGravity obj.Object) *CaptureVideoPreviewLayer
-	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoPreviewLayer
-	SetSessionWithNoConnection(session *CaptureSession)
-	CaptureDevicePointOfInterestForPoint(pointInLayer corefoundation.CGPoint) corefoundation.CGPoint
-	PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest corefoundation.CGPoint) corefoundation.CGPoint
-	MetadataOutputRectOfInterestForRect(rectInLayerCoordinates corefoundation.CGRect) corefoundation.CGRect
-	RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
-	TransformedMetadataObjectForMetadataObject(metadataObject *MetadataObject) *MetadataObject
-	Session() *CaptureSession
-	SetSession(session *CaptureSession)
-	Connection() *CaptureConnection
-	VideoGravity() obj.Object
-	SetVideoGravity(videoGravity obj.Object)
-	IsDeferredStartSupported() bool
-	IsDeferredStartEnabled() bool
-	SetDeferredStartEnabled(deferredStartEnabled bool)
-}
-
-var _ CaptureVideoPreviewLayerable = (*CaptureVideoPreviewLayer)(nil)

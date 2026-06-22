@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,30 +46,21 @@ func movieTrackAdopt(id objc.ID) *MovieTrack {
 }
 
 // AlternateGroupID wraps the corresponding Objective-C method.
-func (x *MovieTrack) AlternateGroupID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("alternateGroupID"))
+func (mt *MovieTrack) AlternateGroupID() int {
+	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("alternateGroupID"))
 	return _r
 }
 
 // MediaDataStorage wraps the corresponding Objective-C method.
-func (x *MovieTrack) MediaDataStorage() *MediaDataStorage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaDataStorage"))
+func (mt *MovieTrack) MediaDataStorage() *MediaDataStorage {
+	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("mediaDataStorage"))
 	return MediaDataStorageFromID(_r)
 }
-
-// MovieTrackable is the interface implemented by [MovieTrack], for mocking and DI.
-type MovieTrackable interface {
-	obj.Object
-	AlternateGroupID() int
-	MediaDataStorage() *MediaDataStorage
-}
-
-var _ MovieTrackable = (*MovieTrack)(nil)
 
 // isMovieTrack marks MovieTrack — and, by embedding promotion, its
 // subclasses — as a member of the MovieTrack hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MovieTrack) isMovieTrack() {}
+func (mt *MovieTrack) isMovieTrack() {}
 
 var _ MovieTrackProvider = (*MovieTrack)(nil)
 

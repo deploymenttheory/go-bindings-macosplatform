@@ -46,24 +46,24 @@ func functionStitchingInputNodeAdopt(id objc.ID) *FunctionStitchingInputNode {
 }
 
 // Description returns the object's -description text.
-func (x *FunctionStitchingInputNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fsin *FunctionStitchingInputNode) Description() string {
+	return rt.Description(objref.IDOf(fsin))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FunctionStitchingInputNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fsin *FunctionStitchingInputNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fsin), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FunctionStitchingInputNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fsin *FunctionStitchingInputNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fsin), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FunctionStitchingInputNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fsin *FunctionStitchingInputNode) String() string {
+	return rt.Description(objref.IDOf(fsin))
 }
 
 // NewFunctionStitchingInputNodeWithArgumentIndex creates a new input node.
@@ -73,29 +73,14 @@ func NewFunctionStitchingInputNodeWithArgumentIndex(argument int) *FunctionStitc
 	return functionStitchingInputNodeAdopt(_id)
 }
 
-// WithArgumentIndex the index in the command’s buffer argument table that declares which data to read for this input node.
-func (x *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex int) *FunctionStitchingInputNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArgumentIndex:"), argumentIndex)
-	return x
+// WithArgumentIndex sets the index in the command’s buffer argument table that declares which data to read for this input node.
+func (fsin *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex int) *FunctionStitchingInputNode {
+	objc.Send[objc.ID](objref.IDOf(fsin), objc.RegisterName("setArgumentIndex:"), argumentIndex)
+	return fsin
 }
 
 // ArgumentIndex wraps the corresponding Objective-C method.
-func (x *FunctionStitchingInputNode) ArgumentIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("argumentIndex"))
+func (fsin *FunctionStitchingInputNode) ArgumentIndex() int {
+	_r := objc.Send[int](objref.IDOf(fsin), objc.RegisterName("argumentIndex"))
 	return _r
 }
-
-// SetArgumentIndex wraps the corresponding Objective-C method.
-func (x *FunctionStitchingInputNode) SetArgumentIndex(argumentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArgumentIndex:"), argumentIndex)
-}
-
-// FunctionStitchingInputNodeable is the interface implemented by [FunctionStitchingInputNode], for mocking and DI.
-type FunctionStitchingInputNodeable interface {
-	obj.Object
-	WithArgumentIndex(argumentIndex int) *FunctionStitchingInputNode
-	ArgumentIndex() int
-	SetArgumentIndex(argumentIndex int)
-}
-
-var _ FunctionStitchingInputNodeable = (*FunctionStitchingInputNode)(nil)

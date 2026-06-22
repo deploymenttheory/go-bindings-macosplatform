@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,40 +53,29 @@ func NewImageReduceRowMean() *ImageReduceRowMean {
 	return imageReduceRowMeanAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-func (x *ImageReduceRowMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (irrm *ImageReduceRowMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean {
+	objc.Send[objc.ID](objref.IDOf(irrm), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return irrm
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageReduceRowMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (irrm *ImageReduceRowMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean {
+	objc.Send[objc.ID](objref.IDOf(irrm), objc.RegisterName("setOffset:"), offset)
+	return irrm
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageReduceRowMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (irrm *ImageReduceRowMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean {
+	objc.Send[objc.ID](objref.IDOf(irrm), objc.RegisterName("setClipRect:"), clipRect)
+	return irrm
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageReduceRowMean) WithLabel(label string) *ImageReduceRowMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (irrm *ImageReduceRowMean) WithLabel(label string) *ImageReduceRowMean {
+	objc.Send[objc.ID](objref.IDOf(irrm), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return irrm
 }
-
-// ImageReduceRowMeanable is the interface implemented by [ImageReduceRowMean], for mocking and DI.
-type ImageReduceRowMeanable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean
-	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean
-	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean
-	WithLabel(label string) *ImageReduceRowMean
-}
-
-var _ ImageReduceRowMeanable = (*ImageReduceRowMean)(nil)
 
 var _ ImageReduceUnaryProvider = (*ImageReduceRowMean)(nil)
 

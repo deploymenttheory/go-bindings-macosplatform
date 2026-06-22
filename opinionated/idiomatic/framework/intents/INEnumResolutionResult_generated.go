@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewEnumResolutionResult() *EnumResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INEnumResolutionResult")), objc.RegisterName("new"))
 	return enumResolutionResultAdopt(_id)
 }
-
-// EnumResolutionResultable is the interface implemented by [EnumResolutionResult], for mocking and DI.
-type EnumResolutionResultable interface {
-	obj.Object
-}
-
-var _ EnumResolutionResultable = (*EnumResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*EnumResolutionResult)(nil)

@@ -60,67 +60,47 @@ func NewPushStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *Mixer
 	return pushStreamNodeDefinitionAdopt(_id)
 }
 
-// WithNormalize an option that resizes loudness of the audio stream for consistency.
-func (x *PushStreamNodeDefinition) WithNormalize(normalize bool) *PushStreamNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalize:"), normalize)
-	return x
+// WithNormalize sets an option that resizes loudness of the audio stream for consistency.
+func (psnd *PushStreamNodeDefinition) WithNormalize(normalize bool) *PushStreamNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setNormalize:"), normalize)
+	return psnd
 }
 
-// WithRate a playback speed for the node’s audio.
-func (x *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets a playback speed for the node’s audio.
+func (psnd *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setRate:"), rate)
+	return psnd
 }
 
-// WithGroup a group this node conforms to for gain and rate control.
-func (x *PushStreamNodeDefinition) WithGroup(group *Group) *PushStreamNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets a group this node conforms to for gain and rate control.
+func (psnd *PushStreamNodeDefinition) WithGroup(group *Group) *PushStreamNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return psnd
 }
 
-// WithGainMetaParameterDefinition a meta parameter that dynamically changes the audio’s loudness.
-func (x *PushStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
-	return x
+// WithGainMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s loudness.
+func (psnd *PushStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
+	return psnd
 }
 
-// WithRateMetaParameterDefinition a meta parameter that dynamically changes the audio’s rate.
-func (x *PushStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
-	return x
+// WithRateMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s rate.
+func (psnd *PushStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
+	return psnd
 }
 
-// Format the readonly property that returns the AVAudioFormat that this stream was initialized with
-func (x *PushStreamNodeDefinition) Format() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+// Format returns the readonly property that returns the AVAudioFormat that this stream was initialized with
+func (psnd *PushStreamNodeDefinition) Format() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("format"))
 	return obj.Wrap(_r)
 }
 
-// Normalize determines whether or not the engine should normalize the stream. The default value is NO. In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
-func (x *PushStreamNodeDefinition) Normalize() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("normalize"))
+// Normalize reports whether or not the engine should normalize the stream. The default value is false. In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to false, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
+func (psnd *PushStreamNodeDefinition) Normalize() bool {
+	_r := objc.Send[bool](objref.IDOf(psnd), objc.RegisterName("normalize"))
 	return _r
 }
-
-// SetNormalize wraps the corresponding Objective-C method.
-func (x *PushStreamNodeDefinition) SetNormalize(normalize bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalize:"), normalize)
-}
-
-// PushStreamNodeDefinitionable is the interface implemented by [PushStreamNodeDefinition], for mocking and DI.
-type PushStreamNodeDefinitionable interface {
-	obj.Object
-	WithNormalize(normalize bool) *PushStreamNodeDefinition
-	WithRate(rate float64) *PushStreamNodeDefinition
-	WithGroup(group *Group) *PushStreamNodeDefinition
-	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
-	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
-	Format() obj.Object
-	Normalize() bool
-	SetNormalize(normalize bool)
-}
-
-var _ PushStreamNodeDefinitionable = (*PushStreamNodeDefinition)(nil)
 
 var _ GeneratorNodeDefinitionProvider = (*PushStreamNodeDefinition)(nil)
 

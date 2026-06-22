@@ -46,24 +46,24 @@ func noiseAdopt(id objc.ID) *Noise {
 }
 
 // Description returns the object's -description text.
-func (x *Noise) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Noise) Description() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Noise) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (n *Noise) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Noise) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (n *Noise) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Noise) String() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Noise) String() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // NewNoise creates a new Noise.
@@ -86,107 +86,79 @@ func NewNoiseWithNoiseSourceGradientColors(noiseSource *NoiseSource, gradientCol
 	return noiseAdopt(_id)
 }
 
-// WithGradientColors a dictionary mapping noise values to colors for use in colorizing generated noise.
-func (x *Noise) WithGradientColors(gradientColors obj.Object) *Noise {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientColors:"), objref.IDOf(gradientColors))
-	return x
+// WithGradientColors sets a dictionary mapping noise values to colors for use in colorizing generated noise.
+func (n *Noise) WithGradientColors(gradientColors obj.Object) *Noise {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setGradientColors:"), objref.IDOf(gradientColors))
+	return n
 }
 
 // ApplyAbsoluteValue replaces all negative values in the noise field with their positive absolute values.
-func (x *Noise) ApplyAbsoluteValue() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyAbsoluteValue"))
+func (n *Noise) ApplyAbsoluteValue() {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("applyAbsoluteValue"))
 }
 
 // ClampWithLowerBoundUpperBound replaces values in the noise field outside the specified range with the values at the endpoints of that range.
-func (x *Noise) ClampWithLowerBoundUpperBound(lowerBound float64, upperBound float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clampWithLowerBound:upperBound:"), lowerBound, upperBound)
+func (n *Noise) ClampWithLowerBoundUpperBound(lowerBound float64, upperBound float64) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("clampWithLowerBound:upperBound:"), lowerBound, upperBound)
 }
 
 // RaiseToPower replaces all values in the noise field by raising each value to the specified power.
-func (x *Noise) RaiseToPower(power float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("raiseToPower:"), power)
+func (n *Noise) RaiseToPower(power float64) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("raiseToPower:"), power)
 }
 
 // Invert replaces all values in the noise field with their opposite, reversing the range of noise values.
-func (x *Noise) Invert() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invert"))
+func (n *Noise) Invert() {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("invert"))
 }
 
 // ApplyTurbulenceWithFrequencyPowerRoughnessSeed replaces values in the noise field by applying a randomized distortion effect.
-func (x *Noise) ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency float64, power float64, roughness int, seed int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyTurbulenceWithFrequency:power:roughness:seed:"), frequency, power, roughness, seed)
+func (n *Noise) ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency float64, power float64, roughness int, seed int32) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("applyTurbulenceWithFrequency:power:roughness:seed:"), frequency, power, roughness, seed)
 }
 
 // RemapValuesToCurveWithControlPoints replaces values in the noise field by mapping them to a curve that passes through the specified control points.
-func (x *Noise) RemapValuesToCurveWithControlPoints(controlPoints obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remapValuesToCurveWithControlPoints:"), objref.IDOf(controlPoints))
+func (n *Noise) RemapValuesToCurveWithControlPoints(controlPoints obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("remapValuesToCurveWithControlPoints:"), objref.IDOf(controlPoints))
 }
 
 // RemapValuesToTerracesWithPeaksTerracesInverted replaces values in the noise field by mapping them to a terrace-like curve that passes through the specified control points.
-func (x *Noise) RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues []obj.Object, inverted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remapValuesToTerracesWithPeaks:terracesInverted:"), purego.SliceToNSArray(peakInputValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inverted)
+func (n *Noise) RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues []obj.Object, inverted bool) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("remapValuesToTerracesWithPeaks:terracesInverted:"), purego.SliceToNSArray(peakInputValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inverted)
 }
 
 // AddWithNoise replaces values in the noise field by adding them to values from the specified noise object.
-func (x *Noise) AddWithNoise(noise *Noise) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addWithNoise:"), objref.IDOf(noise))
+func (n *Noise) AddWithNoise(noise *Noise) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("addWithNoise:"), objref.IDOf(noise))
 }
 
 // MultiplyWithNoise replaces values in the noise field by multiplying them with values from the specified noise object.
-func (x *Noise) MultiplyWithNoise(noise *Noise) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiplyWithNoise:"), objref.IDOf(noise))
+func (n *Noise) MultiplyWithNoise(noise *Noise) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("multiplyWithNoise:"), objref.IDOf(noise))
 }
 
 // MinimumWithNoise replaces values in the noise field by choosing the lesser of each value and a corresponding value in the specified noise object.
-func (x *Noise) MinimumWithNoise(noise *Noise) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumWithNoise:"), objref.IDOf(noise))
+func (n *Noise) MinimumWithNoise(noise *Noise) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("minimumWithNoise:"), objref.IDOf(noise))
 }
 
 // MaximumWithNoise replaces values in the noise field by choosing the lesser of each value and a corresponding value in the specified noise object.
-func (x *Noise) MaximumWithNoise(noise *Noise) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumWithNoise:"), objref.IDOf(noise))
+func (n *Noise) MaximumWithNoise(noise *Noise) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("maximumWithNoise:"), objref.IDOf(noise))
 }
 
 // RaiseToPowerWithNoise replaces values in the noise field by exponentiating them with values from the specified noise object.
-func (x *Noise) RaiseToPowerWithNoise(noise *Noise) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("raiseToPowerWithNoise:"), objref.IDOf(noise))
+func (n *Noise) RaiseToPowerWithNoise(noise *Noise) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("raiseToPowerWithNoise:"), objref.IDOf(noise))
 }
 
 // DisplaceXWithNoiseYWithNoiseZWithNoise replaces values in the noise field by shifting each value along a vector whose x-, y-, and z-components are based on the specified noise objects.
-func (x *Noise) DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise *Noise, yDisplacementNoise *Noise, zDisplacementNoise *Noise) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displaceXWithNoise:yWithNoise:zWithNoise:"), objref.IDOf(xDisplacementNoise), objref.IDOf(yDisplacementNoise), objref.IDOf(zDisplacementNoise))
+func (n *Noise) DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise *Noise, yDisplacementNoise *Noise, zDisplacementNoise *Noise) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("displaceXWithNoise:yWithNoise:zWithNoise:"), objref.IDOf(xDisplacementNoise), objref.IDOf(yDisplacementNoise), objref.IDOf(zDisplacementNoise))
 }
 
-// GradientColors color gradient of this noise, represented as 'value : color' pairs.  Utilized when this noise is rendered to a texture.
-func (x *Noise) GradientColors() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientColors"))
+// GradientColors returns color gradient of this noise, represented as 'value : color' pairs.  Utilized when this noise is rendered to a texture.
+func (n *Noise) GradientColors() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("gradientColors"))
 	return obj.Wrap(_r)
 }
-
-// SetGradientColors wraps the corresponding Objective-C method.
-func (x *Noise) SetGradientColors(gradientColors obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientColors:"), objref.IDOf(gradientColors))
-}
-
-// Noiseable is the interface implemented by [Noise], for mocking and DI.
-type Noiseable interface {
-	obj.Object
-	WithGradientColors(gradientColors obj.Object) *Noise
-	ApplyAbsoluteValue()
-	ClampWithLowerBoundUpperBound(lowerBound float64, upperBound float64)
-	RaiseToPower(power float64)
-	Invert()
-	ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency float64, power float64, roughness int, seed int32)
-	RemapValuesToCurveWithControlPoints(controlPoints obj.Object)
-	RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues []obj.Object, inverted bool)
-	AddWithNoise(noise *Noise)
-	MultiplyWithNoise(noise *Noise)
-	MinimumWithNoise(noise *Noise)
-	MaximumWithNoise(noise *Noise)
-	RaiseToPowerWithNoise(noise *Noise)
-	DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise *Noise, yDisplacementNoise *Noise, zDisplacementNoise *Noise)
-	GradientColors() obj.Object
-	SetGradientColors(gradientColors obj.Object)
-}
-
-var _ Noiseable = (*Noise)(nil)

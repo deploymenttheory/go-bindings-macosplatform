@@ -53,24 +53,15 @@ func NewCompositionTrackSegment() *CompositionTrackSegment {
 }
 
 // SourceURL wraps the corresponding Objective-C method.
-func (x *CompositionTrackSegment) SourceURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceURL"))
+func (cts *CompositionTrackSegment) SourceURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cts), objc.RegisterName("sourceURL"))
 	return obj.Wrap(_r)
 }
 
 // SourceTrackID wraps the corresponding Objective-C method.
-func (x *CompositionTrackSegment) SourceTrackID() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("sourceTrackID"))
+func (cts *CompositionTrackSegment) SourceTrackID() int32 {
+	_r := objc.Send[int32](objref.IDOf(cts), objc.RegisterName("sourceTrackID"))
 	return _r
 }
-
-// CompositionTrackSegmentable is the interface implemented by [CompositionTrackSegment], for mocking and DI.
-type CompositionTrackSegmentable interface {
-	obj.Object
-	SourceURL() obj.Object
-	SourceTrackID() int32
-}
-
-var _ CompositionTrackSegmentable = (*CompositionTrackSegment)(nil)
 
 var _ AssetTrackSegmentProvider = (*CompositionTrackSegment)(nil)

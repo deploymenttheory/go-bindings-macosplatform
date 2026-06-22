@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,24 +43,16 @@ func nDArrayUnaryKernelAdopt(id objc.ID) *NDArrayUnaryKernel {
 	return x
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayUnaryKernel) WithLabel(label string) *NDArrayUnaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nauk *NDArrayUnaryKernel) WithLabel(label string) *NDArrayUnaryKernel {
+	objc.Send[objc.ID](objref.IDOf(nauk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nauk
 }
-
-// NDArrayUnaryKernelable is the interface implemented by [NDArrayUnaryKernel], for mocking and DI.
-type NDArrayUnaryKernelable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayUnaryKernel
-}
-
-var _ NDArrayUnaryKernelable = (*NDArrayUnaryKernel)(nil)
 
 // isNDArrayUnaryKernel marks NDArrayUnaryKernel — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayUnaryKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayUnaryKernel) isNDArrayUnaryKernel() {}
+func (nauk *NDArrayUnaryKernel) isNDArrayUnaryKernel() {}
 
 var _ NDArrayUnaryKernelProvider = (*NDArrayUnaryKernel)(nil)
 

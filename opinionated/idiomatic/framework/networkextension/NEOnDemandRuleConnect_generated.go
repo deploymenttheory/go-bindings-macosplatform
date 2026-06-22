@@ -53,49 +53,37 @@ func NewNEOnDemandRuleConnect() *NEOnDemandRuleConnect {
 	return nEOnDemandRuleConnectAdopt(_id)
 }
 
-// WithDNSSearchDomainMatch DNS search domains that identify a network.
-func (x *NEOnDemandRuleConnect) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleConnect {
+// WithDNSSearchDomainMatch sets DNS search domains that identify a network.
+func (nodrc *NEOnDemandRuleConnect) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleConnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrc), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
+	return nodrc
 }
 
-// WithDNSServerAddressMatch DNS server addresses that identify a network.
-func (x *NEOnDemandRuleConnect) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleConnect {
+// WithDNSServerAddressMatch sets DNS server addresses that identify a network.
+func (nodrc *NEOnDemandRuleConnect) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleConnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrc), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
+	return nodrc
 }
 
-// WithInterfaceTypeMatch an interface type to identify a network.
-func (x *NEOnDemandRuleConnect) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleConnect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
-	return x
+// WithInterfaceTypeMatch sets an interface type to identify a network.
+func (nodrc *NEOnDemandRuleConnect) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleConnect {
+	objc.Send[objc.ID](objref.IDOf(nodrc), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
+	return nodrc
 }
 
-// WithSSIDMatch SSIDs that identify a network.
-func (x *NEOnDemandRuleConnect) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleConnect {
+// WithSSIDMatch sets SSIDs that identify a network.
+func (nodrc *NEOnDemandRuleConnect) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleConnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrc), objc.RegisterName("setSSIDMatch:"), _arr)
+	return nodrc
 }
 
-// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
-func (x *NEOnDemandRuleConnect) WithProbeURL(probeURL string) *NEOnDemandRuleConnect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
-	return x
+// WithProbeURL sets a URL to probe when all other network identifiers match to validate that an expected resource is available.
+func (nodrc *NEOnDemandRuleConnect) WithProbeURL(probeURL string) *NEOnDemandRuleConnect {
+	objc.Send[objc.ID](objref.IDOf(nodrc), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
+	return nodrc
 }
-
-// NEOnDemandRuleConnectable is the interface implemented by [NEOnDemandRuleConnect], for mocking and DI.
-type NEOnDemandRuleConnectable interface {
-	obj.Object
-	WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleConnect
-	WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleConnect
-	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleConnect
-	WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleConnect
-	WithProbeURL(probeURL string) *NEOnDemandRuleConnect
-}
-
-var _ NEOnDemandRuleConnectable = (*NEOnDemandRuleConnect)(nil)
 
 var _ NEOnDemandRuleProvider = (*NEOnDemandRuleConnect)(nil)

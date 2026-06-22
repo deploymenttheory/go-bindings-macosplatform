@@ -6,6 +6,8 @@ package spritekit
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -13,7 +15,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NodeWithViewportSize creates and initializes a new 3D node.
@@ -1381,7 +1382,7 @@ func VideoNodeWithURL(videoURL string) *VideoNode {
 	return VideoNodeFromID(_r)
 }
 
-// Grid initializes a new empty grid.
+// Grid returns initializes a new empty grid.
 func Grid() *WarpGeometryGrid {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("grid"))
 	return WarpGeometryGridFromID(_r)

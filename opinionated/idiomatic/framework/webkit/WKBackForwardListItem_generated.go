@@ -46,24 +46,24 @@ func wKBackForwardListItemAdopt(id objc.ID) *WKBackForwardListItem {
 }
 
 // Description returns the object's -description text.
-func (x *WKBackForwardListItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wbfli *WKBackForwardListItem) Description() string {
+	return rt.Description(objref.IDOf(wbfli))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKBackForwardListItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wbfli *WKBackForwardListItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wbfli), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKBackForwardListItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wbfli *WKBackForwardListItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wbfli), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKBackForwardListItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wbfli *WKBackForwardListItem) String() string {
+	return rt.Description(objref.IDOf(wbfli))
 }
 
 // NewWKBackForwardListItem creates a new WKBackForwardListItem.
@@ -72,26 +72,17 @@ func NewWKBackForwardListItem() *WKBackForwardListItem {
 	return wKBackForwardListItemAdopt(_id)
 }
 
-// URL the URL of the webpage represented by this item.
-func (x *WKBackForwardListItem) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the URL of the webpage represented by this item.
+func (wbfli *WKBackForwardListItem) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wbfli), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Title the title of the webpage represented by this item.
-func (x *WKBackForwardListItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns the title of the webpage represented by this item.
+func (wbfli *WKBackForwardListItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wbfli), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// WKBackForwardListItemable is the interface implemented by [WKBackForwardListItem], for mocking and DI.
-type WKBackForwardListItemable interface {
-	obj.Object
-	URL() obj.Object
-	Title() string
-}
-
-var _ WKBackForwardListItemable = (*WKBackForwardListItem)(nil)

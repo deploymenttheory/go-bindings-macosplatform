@@ -53,170 +53,115 @@ func NewReminder() *Reminder {
 	return reminderAdopt(_id)
 }
 
-// WithStartDateComponents the start date of the task.
-func (x *Reminder) WithStartDateComponents(startDateComponents obj.Object) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDateComponents:"), objref.IDOf(startDateComponents))
-	return x
+// WithStartDateComponents sets the start date of the task.
+func (r *Reminder) WithStartDateComponents(startDateComponents obj.Object) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setStartDateComponents:"), objref.IDOf(startDateComponents))
+	return r
 }
 
-// WithDueDateComponents the date by which the reminder should be completed.
-func (x *Reminder) WithDueDateComponents(dueDateComponents obj.Object) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDateComponents:"), objref.IDOf(dueDateComponents))
-	return x
+// WithDueDateComponents sets the date by which the reminder should be completed.
+func (r *Reminder) WithDueDateComponents(dueDateComponents obj.Object) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setDueDateComponents:"), objref.IDOf(dueDateComponents))
+	return r
 }
 
-// WithCompleted a Boolean value determining whether or not the reminder is marked completed.
-func (x *Reminder) WithCompleted(completed bool) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompleted:"), completed)
-	return x
+// WithCompleted sets a Boolean value determining whether or not the reminder is marked completed.
+func (r *Reminder) WithCompleted(completed bool) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setCompleted:"), completed)
+	return r
 }
 
-// WithCompletionDate the date on which the reminder was completed.
-func (x *Reminder) WithCompletionDate(completionDate obj.Object) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDate:"), objref.IDOf(completionDate))
-	return x
+// WithCompletionDate sets the date on which the reminder was completed.
+func (r *Reminder) WithCompletionDate(completionDate obj.Object) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setCompletionDate:"), objref.IDOf(completionDate))
+	return r
 }
 
-// WithPriority the reminder’s priority.
-func (x *Reminder) WithPriority(priority int) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-	return x
+// WithPriority sets the reminder’s priority.
+func (r *Reminder) WithPriority(priority int) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setPriority:"), priority)
+	return r
 }
 
-// WithCalendar the calendar for the calendar item.
-func (x *Reminder) WithCalendar(calendar *Calendar) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
-	return x
+// WithCalendar sets the calendar for the calendar item.
+func (r *Reminder) WithCalendar(calendar *Calendar) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+	return r
 }
 
-// WithTitle the title for the calendar item.
-func (x *Reminder) WithTitle(title string) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title for the calendar item.
+func (r *Reminder) WithTitle(title string) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return r
 }
 
-// WithLocation the location associated with the calendar item.
-func (x *Reminder) WithLocation(location string) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
-	return x
+// WithLocation sets the location associated with the calendar item.
+func (r *Reminder) WithLocation(location string) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setLocation:"), purego.NSString(location))
+	return r
 }
 
-// WithNotes the notes associated with the calendar item.
-func (x *Reminder) WithNotes(notes string) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
-	return x
+// WithNotes sets the notes associated with the calendar item.
+func (r *Reminder) WithNotes(notes string) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setNotes:"), purego.NSString(notes))
+	return r
 }
 
-// WithURL the URL for the calendar item.
-func (x *Reminder) WithURL(uRL string) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets the URL for the calendar item.
+func (r *Reminder) WithURL(uRL string) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return r
 }
 
-// WithTimeZone the time zone for the calendar item.
-func (x *Reminder) WithTimeZone(timeZone obj.Object) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
-	return x
+// WithTimeZone sets the time zone for the calendar item.
+func (r *Reminder) WithTimeZone(timeZone obj.Object) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+	return r
 }
 
-// WithAlarms the alarms associated with the calendar item, as an array of EKAlarm objects.
-func (x *Reminder) WithAlarms(items ...*Alarm) *Reminder {
+// WithAlarms sets the alarms associated with the calendar item, as an array of EKAlarm objects.
+func (r *Reminder) WithAlarms(items ...*Alarm) *Reminder {
 	_arr := purego.SliceToNSArray(items, func(_v *Alarm) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarms:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setAlarms:"), _arr)
+	return r
 }
 
-// WithRecurrenceRules the recurrence rules for the calendar item.
-func (x *Reminder) WithRecurrenceRules(items ...*RecurrenceRule) *Reminder {
+// WithRecurrenceRules sets the recurrence rules for the calendar item.
+func (r *Reminder) WithRecurrenceRules(items ...*RecurrenceRule) *Reminder {
 	_arr := purego.SliceToNSArray(items, func(_v *RecurrenceRule) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceRules:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setRecurrenceRules:"), _arr)
+	return r
 }
 
-// StartDateComponents the start date of the task, as date components. The use of date components allows the start date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
-func (x *Reminder) StartDateComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDateComponents"))
+// StartDateComponents returns the start date of the task, as date components. The use of date components allows the start date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
+func (r *Reminder) StartDateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("startDateComponents"))
 	return obj.Wrap(_r)
 }
 
-// SetStartDateComponents wraps the corresponding Objective-C method.
-func (x *Reminder) SetStartDateComponents(startDateComponents obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDateComponents:"), objref.IDOf(startDateComponents))
-}
-
-// DueDateComponents the date by which this reminder should be completed. The use of date components allows the due date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise. On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
-func (x *Reminder) DueDateComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dueDateComponents"))
+// DueDateComponents returns the date by which this reminder should be completed. The use of date components allows the due date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise. On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
+func (r *Reminder) DueDateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("dueDateComponents"))
 	return obj.Wrap(_r)
 }
 
-// SetDueDateComponents wraps the corresponding Objective-C method.
-func (x *Reminder) SetDueDateComponents(dueDateComponents obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDateComponents:"), objref.IDOf(dueDateComponents))
-}
-
-// IsCompleted whether or not the reminder is completed. Setting it to YES will set the completed date to the current date. Setting it to NO will set the completed date to nil.
-func (x *Reminder) IsCompleted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompleted"))
+// IsCompleted reports whether the reminder is completed. Setting it to true will set the completed date to the current date. Setting it to false will set the completed date to nil.
+func (r *Reminder) IsCompleted() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("isCompleted"))
 	return _r
 }
 
-// SetCompleted wraps the corresponding Objective-C method.
-func (x *Reminder) SetCompleted(completed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompleted:"), completed)
-}
-
-// CompletionDate the date on which this reminder was completed.
-func (x *Reminder) CompletionDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDate"))
+// CompletionDate returns the date on which this reminder was completed.
+func (r *Reminder) CompletionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("completionDate"))
 	return obj.Wrap(_r)
 }
 
-// SetCompletionDate wraps the corresponding Objective-C method.
-func (x *Reminder) SetCompletionDate(completionDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDate:"), objref.IDOf(completionDate))
-}
-
-// Priority the priority of the reminder. Priorities run from 1 (highest) to 9 (lowest).  A priority of 0 means no priority. Saving a reminder with any other priority will fail. Per RFC 5545, priorities of 1-4 are considered "high," a priority of 5 is "medium," and priorities of 6-9 are "low."
-func (x *Reminder) Priority() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("priority"))
+// Priority returns the priority of the reminder. Priorities run from 1 (highest) to 9 (lowest).  A priority of 0 means no priority. Saving a reminder with any other priority will fail. Per RFC 5545, priorities of 1-4 are considered "high," a priority of 5 is "medium," and priorities of 6-9 are "low."
+func (r *Reminder) Priority() int {
+	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("priority"))
 	return _r
 }
-
-// SetPriority wraps the corresponding Objective-C method.
-func (x *Reminder) SetPriority(priority int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-}
-
-// Reminderable is the interface implemented by [Reminder], for mocking and DI.
-type Reminderable interface {
-	obj.Object
-	WithStartDateComponents(startDateComponents obj.Object) *Reminder
-	WithDueDateComponents(dueDateComponents obj.Object) *Reminder
-	WithCompleted(completed bool) *Reminder
-	WithCompletionDate(completionDate obj.Object) *Reminder
-	WithPriority(priority int) *Reminder
-	WithCalendar(calendar *Calendar) *Reminder
-	WithTitle(title string) *Reminder
-	WithLocation(location string) *Reminder
-	WithNotes(notes string) *Reminder
-	WithURL(uRL string) *Reminder
-	WithTimeZone(timeZone obj.Object) *Reminder
-	WithAlarms(items ...*Alarm) *Reminder
-	WithRecurrenceRules(items ...*RecurrenceRule) *Reminder
-	StartDateComponents() obj.Object
-	SetStartDateComponents(startDateComponents obj.Object)
-	DueDateComponents() obj.Object
-	SetDueDateComponents(dueDateComponents obj.Object)
-	IsCompleted() bool
-	SetCompleted(completed bool)
-	CompletionDate() obj.Object
-	SetCompletionDate(completionDate obj.Object)
-	Priority() int
-	SetPriority(priority int)
-}
-
-var _ Reminderable = (*Reminder)(nil)
 
 var _ CalendarItemProvider = (*Reminder)(nil)
 

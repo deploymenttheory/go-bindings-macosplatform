@@ -46,24 +46,24 @@ func speechUtteranceAdopt(id objc.ID) *SpeechUtterance {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechUtterance) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (su *SpeechUtterance) Description() string {
+	return rt.Description(objref.IDOf(su))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechUtterance) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (su *SpeechUtterance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(su), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechUtterance) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (su *SpeechUtterance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(su), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechUtterance) String() string {
-	return rt.Description(objref.IDOf(x))
+func (su *SpeechUtterance) String() string {
+	return rt.Description(objref.IDOf(su))
 }
 
 // NewSpeechUtteranceWithString creates an utterance with the text string that you specify for the speech synthesizer to speak.
@@ -87,62 +87,57 @@ func NewSpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
 	return speechUtteranceAdopt(_id)
 }
 
-// WithVoice the voice the speech synthesizer uses when speaking the utterance.
-func (x *SpeechUtterance) WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoice:"), objref.IDOf(voice))
-	return x
+// WithVoice sets the voice the speech synthesizer uses when speaking the utterance.
+func (su *SpeechUtterance) WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance {
+	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setVoice:"), objref.IDOf(voice))
+	return su
 }
 
-// WithRate the rate the speech synthesizer uses when speaking the utterance.
-func (x *SpeechUtterance) WithRate(rate float32) *SpeechUtterance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the rate the speech synthesizer uses when speaking the utterance.
+func (su *SpeechUtterance) WithRate(rate float32) *SpeechUtterance {
+	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setRate:"), rate)
+	return su
 }
 
-// WithPitchMultiplier the baseline pitch the speech synthesizer uses when speaking the utterance.
-func (x *SpeechUtterance) WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchMultiplier:"), pitchMultiplier)
-	return x
+// WithPitchMultiplier sets the baseline pitch the speech synthesizer uses when speaking the utterance.
+func (su *SpeechUtterance) WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance {
+	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setPitchMultiplier:"), pitchMultiplier)
+	return su
 }
 
-// WithVolume the volume the speech synthesizer uses when speaking the utterance.
-func (x *SpeechUtterance) WithVolume(volume float32) *SpeechUtterance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the volume the speech synthesizer uses when speaking the utterance.
+func (su *SpeechUtterance) WithVolume(volume float32) *SpeechUtterance {
+	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setVolume:"), volume)
+	return su
 }
 
-// WithPrefersAssistiveTechnologySettings a Boolean that specifies whether assistive technology settings take precedence over the property values of this utterance.
-func (x *SpeechUtterance) WithPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) *SpeechUtterance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersAssistiveTechnologySettings:"), prefersAssistiveTechnologySettings)
-	return x
+// WithPrefersAssistiveTechnologySettings sets a Boolean that specifies whether assistive technology settings take precedence over the property values of this utterance.
+func (su *SpeechUtterance) WithPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) *SpeechUtterance {
+	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setPrefersAssistiveTechnologySettings:"), prefersAssistiveTechnologySettings)
+	return su
 }
 
-// WithPreUtteranceDelay the amount of time the speech synthesizer pauses before speaking the utterance.
-func (x *SpeechUtterance) WithPreUtteranceDelay(preUtteranceDelay float64) *SpeechUtterance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreUtteranceDelay:"), preUtteranceDelay)
-	return x
+// WithPreUtteranceDelay sets the amount of time the speech synthesizer pauses before speaking the utterance.
+func (su *SpeechUtterance) WithPreUtteranceDelay(preUtteranceDelay float64) *SpeechUtterance {
+	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setPreUtteranceDelay:"), preUtteranceDelay)
+	return su
 }
 
-// WithPostUtteranceDelay the amount of time the speech synthesizer pauses after speaking an utterance before handling the next utterance in the queue.
-func (x *SpeechUtterance) WithPostUtteranceDelay(postUtteranceDelay float64) *SpeechUtterance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostUtteranceDelay:"), postUtteranceDelay)
-	return x
+// WithPostUtteranceDelay sets the amount of time the speech synthesizer pauses after speaking an utterance before handling the next utterance in the queue.
+func (su *SpeechUtterance) WithPostUtteranceDelay(postUtteranceDelay float64) *SpeechUtterance {
+	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setPostUtteranceDelay:"), postUtteranceDelay)
+	return su
 }
 
 // Voice wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) Voice() *SpeechSynthesisVoice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voice"))
+func (su *SpeechUtterance) Voice() *SpeechSynthesisVoice {
+	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("voice"))
 	return SpeechSynthesisVoiceFromID(_r)
 }
 
-// SetVoice wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SetVoice(voice *SpeechSynthesisVoice) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoice:"), objref.IDOf(voice))
-}
-
 // SpeechString wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SpeechString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechString"))
+func (su *SpeechUtterance) SpeechString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("speechString"))
 	if _r == 0 {
 		return ""
 	}
@@ -150,103 +145,43 @@ func (x *SpeechUtterance) SpeechString() string {
 }
 
 // AttributedSpeechString wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) AttributedSpeechString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedSpeechString"))
+func (su *SpeechUtterance) AttributedSpeechString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("attributedSpeechString"))
 	return obj.Wrap(_r)
 }
 
 // Rate wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+func (su *SpeechUtterance) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("rate"))
 	return _r
-}
-
-// SetRate wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SetRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
 // PitchMultiplier wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) PitchMultiplier() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pitchMultiplier"))
+func (su *SpeechUtterance) PitchMultiplier() float32 {
+	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("pitchMultiplier"))
 	return _r
-}
-
-// SetPitchMultiplier wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SetPitchMultiplier(pitchMultiplier float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchMultiplier:"), pitchMultiplier)
 }
 
 // Volume wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+func (su *SpeechUtterance) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("volume"))
 	return _r
-}
-
-// SetVolume wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
 // PrefersAssistiveTechnologySettings wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) PrefersAssistiveTechnologySettings() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersAssistiveTechnologySettings"))
+func (su *SpeechUtterance) PrefersAssistiveTechnologySettings() bool {
+	_r := objc.Send[bool](objref.IDOf(su), objc.RegisterName("prefersAssistiveTechnologySettings"))
 	return _r
-}
-
-// SetPrefersAssistiveTechnologySettings wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersAssistiveTechnologySettings:"), prefersAssistiveTechnologySettings)
 }
 
 // PreUtteranceDelay wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) PreUtteranceDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preUtteranceDelay"))
+func (su *SpeechUtterance) PreUtteranceDelay() float64 {
+	_r := objc.Send[float64](objref.IDOf(su), objc.RegisterName("preUtteranceDelay"))
 	return _r
-}
-
-// SetPreUtteranceDelay wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SetPreUtteranceDelay(preUtteranceDelay float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreUtteranceDelay:"), preUtteranceDelay)
 }
 
 // PostUtteranceDelay wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) PostUtteranceDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("postUtteranceDelay"))
+func (su *SpeechUtterance) PostUtteranceDelay() float64 {
+	_r := objc.Send[float64](objref.IDOf(su), objc.RegisterName("postUtteranceDelay"))
 	return _r
 }
-
-// SetPostUtteranceDelay wraps the corresponding Objective-C method.
-func (x *SpeechUtterance) SetPostUtteranceDelay(postUtteranceDelay float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostUtteranceDelay:"), postUtteranceDelay)
-}
-
-// SpeechUtteranceable is the interface implemented by [SpeechUtterance], for mocking and DI.
-type SpeechUtteranceable interface {
-	obj.Object
-	WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance
-	WithRate(rate float32) *SpeechUtterance
-	WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance
-	WithVolume(volume float32) *SpeechUtterance
-	WithPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) *SpeechUtterance
-	WithPreUtteranceDelay(preUtteranceDelay float64) *SpeechUtterance
-	WithPostUtteranceDelay(postUtteranceDelay float64) *SpeechUtterance
-	Voice() *SpeechSynthesisVoice
-	SetVoice(voice *SpeechSynthesisVoice)
-	SpeechString() string
-	AttributedSpeechString() obj.Object
-	Rate() float32
-	SetRate(rate float32)
-	PitchMultiplier() float32
-	SetPitchMultiplier(pitchMultiplier float32)
-	Volume() float32
-	SetVolume(volume float32)
-	PrefersAssistiveTechnologySettings() bool
-	SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool)
-	PreUtteranceDelay() float64
-	SetPreUtteranceDelay(preUtteranceDelay float64)
-	PostUtteranceDelay() float64
-	SetPostUtteranceDelay(postUtteranceDelay float64)
-}
-
-var _ SpeechUtteranceable = (*SpeechUtterance)(nil)

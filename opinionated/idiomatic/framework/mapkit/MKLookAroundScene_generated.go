@@ -46,24 +46,24 @@ func lookAroundSceneAdopt(id objc.ID) *LookAroundScene {
 }
 
 // Description returns the object's -description text.
-func (x *LookAroundScene) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (las *LookAroundScene) Description() string {
+	return rt.Description(objref.IDOf(las))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LookAroundScene) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (las *LookAroundScene) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(las), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LookAroundScene) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (las *LookAroundScene) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(las), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LookAroundScene) String() string {
-	return rt.Description(objref.IDOf(x))
+func (las *LookAroundScene) String() string {
+	return rt.Description(objref.IDOf(las))
 }
 
 // NewLookAroundScene creates a new LookAroundScene.
@@ -71,10 +71,3 @@ func NewLookAroundScene() *LookAroundScene {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKLookAroundScene")), objc.RegisterName("new"))
 	return lookAroundSceneAdopt(_id)
 }
-
-// LookAroundSceneable is the interface implemented by [LookAroundScene], for mocking and DI.
-type LookAroundSceneable interface {
-	obj.Object
-}
-
-var _ LookAroundSceneable = (*LookAroundScene)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewImageThresholdBinaryInverse() *ImageThresholdBinaryInverse {
 	return imageThresholdBinaryInverseAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageThresholdBinaryInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinaryInverse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (itbi *ImageThresholdBinaryInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinaryInverse {
+	objc.Send[objc.ID](objref.IDOf(itbi), objc.RegisterName("setOffset:"), offset)
+	return itbi
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageThresholdBinaryInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinaryInverse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (itbi *ImageThresholdBinaryInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinaryInverse {
+	objc.Send[objc.ID](objref.IDOf(itbi), objc.RegisterName("setClipRect:"), clipRect)
+	return itbi
 }
 
-// ThresholdValue the threshold value used to init the threshold filter
-func (x *ImageThresholdBinaryInverse) ThresholdValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
+// ThresholdValue returns the threshold value used to init the threshold filter
+func (itbi *ImageThresholdBinaryInverse) ThresholdValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(itbi), objc.RegisterName("thresholdValue"))
 	return _r
 }
 
-// MaximumValue the maximum value used to init the threshold filter
-func (x *ImageThresholdBinaryInverse) MaximumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
+// MaximumValue returns the maximum value used to init the threshold filter
+func (itbi *ImageThresholdBinaryInverse) MaximumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(itbi), objc.RegisterName("maximumValue"))
 	return _r
 }
-
-// ImageThresholdBinaryInverseable is the interface implemented by [ImageThresholdBinaryInverse], for mocking and DI.
-type ImageThresholdBinaryInverseable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinaryInverse
-	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinaryInverse
-	ThresholdValue() float32
-	MaximumValue() float32
-}
-
-var _ ImageThresholdBinaryInverseable = (*ImageThresholdBinaryInverse)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageThresholdBinaryInverse)(nil)

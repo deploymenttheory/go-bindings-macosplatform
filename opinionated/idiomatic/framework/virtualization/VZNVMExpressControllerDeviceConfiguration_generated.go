@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,12 +51,5 @@ func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *Storag
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
 	return nVMExpressControllerDeviceConfigurationAdopt(_id)
 }
-
-// NVMExpressControllerDeviceConfigurationable is the interface implemented by [NVMExpressControllerDeviceConfiguration], for mocking and DI.
-type NVMExpressControllerDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ NVMExpressControllerDeviceConfigurationable = (*NVMExpressControllerDeviceConfiguration)(nil)
 
 var _ StorageDeviceConfigurationProvider = (*NVMExpressControllerDeviceConfiguration)(nil)

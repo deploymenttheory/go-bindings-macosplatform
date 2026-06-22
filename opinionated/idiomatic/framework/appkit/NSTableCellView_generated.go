@@ -54,468 +54,371 @@ func NewTableCellView() *TableCellView {
 	return tableCellViewAdopt(_id)
 }
 
-// WithObjectValue the object that represents the cell data.
-func (x *TableCellView) WithObjectValue(objectValue obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the object that represents the cell data.
+func (tcv *TableCellView) WithObjectValue(objectValue obj.Object) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return tcv
 }
 
-// WithTextField text displayed by the cell.
-func (x *TableCellView) WithTextField(textField TextFieldProvider) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextField:"), objref.IDOf(textField))
-	return x
+// WithTextField sets text displayed by the cell.
+func (tcv *TableCellView) WithTextField(textField TextFieldProvider) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTextField:"), objref.IDOf(textField))
+	return tcv
 }
 
-// WithImageView image displayed by the cell.
-func (x *TableCellView) WithImageView(imageView *ImageView) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
-	return x
+// WithImageView sets image displayed by the cell.
+func (tcv *TableCellView) WithImageView(imageView *ImageView) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
+	return tcv
 }
 
-// WithBackgroundStyle this property is automatically set by the enclosing row view to let this view know what its background looks like.
-func (x *TableCellView) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets this property is automatically set by the enclosing row view to let this view know what its background looks like.
+func (tcv *TableCellView) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return tcv
 }
 
-// WithRowSizeStyle returns the row size style.
-func (x *TableCellView) WithRowSizeStyle(rowSizeStyle TableViewRowSizeStyle) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowSizeStyle:"), rowSizeStyle)
-	return x
+// WithRowSizeStyle sets returns the row size style.
+func (tcv *TableCellView) WithRowSizeStyle(rowSizeStyle TableViewRowSizeStyle) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setRowSizeStyle:"), rowSizeStyle)
+	return tcv
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithSubviews(items ...ViewProvider) *TableCellView {
+func (tcv *TableCellView) WithSubviews(items ...ViewProvider) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setSubviews:"), _arr)
+	return tcv
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithHidden(hidden bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (tcv *TableCellView) WithHidden(hidden bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHidden:"), hidden)
+	return tcv
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (tcv *TableCellView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return tcv
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (tcv *TableCellView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return tcv
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (tcv *TableCellView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return tcv
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *TableCellView) WithFrame(frame corefoundation.CGRect) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (tcv *TableCellView) WithFrame(frame corefoundation.CGRect) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrame:"), frame)
+	return tcv
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithFrameRotation(frameRotation float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (tcv *TableCellView) WithFrameRotation(frameRotation float64) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return tcv
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithFrameCenterRotation(frameCenterRotation float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (tcv *TableCellView) WithFrameCenterRotation(frameCenterRotation float64) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return tcv
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithBoundsRotation(boundsRotation float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (tcv *TableCellView) WithBoundsRotation(boundsRotation float64) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return tcv
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *TableCellView) WithBounds(bounds corefoundation.CGRect) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (tcv *TableCellView) WithBounds(bounds corefoundation.CGRect) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBounds:"), bounds)
+	return tcv
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (tcv *TableCellView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return tcv
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *TableCellView) WithNeedsDisplay(needsDisplay bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (tcv *TableCellView) WithNeedsDisplay(needsDisplay bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return tcv
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (tcv *TableCellView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return tcv
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (tcv *TableCellView) WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return tcv
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (tcv *TableCellView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return tcv
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (tcv *TableCellView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return tcv
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithWantsLayer(wantsLayer bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (tcv *TableCellView) WithWantsLayer(wantsLayer bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return tcv
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithLayer(layer obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (tcv *TableCellView) WithLayer(layer obj.Object) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return tcv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (tcv *TableCellView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return tcv
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithNeedsLayout(needsLayout bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (tcv *TableCellView) WithNeedsLayout(needsLayout bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return tcv
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithAlphaValue(alphaValue float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (tcv *TableCellView) WithAlphaValue(alphaValue float64) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return tcv
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (tcv *TableCellView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return tcv
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithBackgroundFilters(items ...obj.Object) *TableCellView {
+func (tcv *TableCellView) WithBackgroundFilters(items ...obj.Object) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return tcv
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithCompositingFilter(compositingFilter obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (tcv *TableCellView) WithCompositingFilter(compositingFilter obj.Object) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return tcv
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithContentFilters(items ...obj.Object) *TableCellView {
+func (tcv *TableCellView) WithContentFilters(items ...obj.Object) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setContentFilters:"), _arr)
+	return tcv
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithShadow(shadow *Shadow) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (tcv *TableCellView) WithShadow(shadow *Shadow) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return tcv
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithClipsToBounds(clipsToBounds bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (tcv *TableCellView) WithClipsToBounds(clipsToBounds bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return tcv
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (tcv *TableCellView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return tcv
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithToolTip(toolTip string) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (tcv *TableCellView) WithToolTip(toolTip string) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return tcv
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (tcv *TableCellView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return tcv
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (tcv *TableCellView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return tcv
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithNextKeyView(nextKeyView ViewProvider) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (tcv *TableCellView) WithNextKeyView(nextKeyView ViewProvider) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return tcv
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithFocusRingType(focusRingType FocusRingType) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (tcv *TableCellView) WithFocusRingType(focusRingType FocusRingType) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return tcv
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView {
+func (tcv *TableCellView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return tcv
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (tcv *TableCellView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return tcv
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (tcv *TableCellView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return tcv
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (tcv *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return tcv
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (tcv *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return tcv
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (tcv *TableCellView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return tcv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (tcv *TableCellView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return tcv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (tcv *TableCellView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return tcv
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (tcv *TableCellView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return tcv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (tcv *TableCellView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return tcv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (tcv *TableCellView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return tcv
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *TableCellView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (tcv *TableCellView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return tcv
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *TableCellView) WithNextResponder(nextResponder ResponderProvider) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (tcv *TableCellView) WithNextResponder(nextResponder ResponderProvider) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return tcv
 }
 
-// WithMenu returns the responder’s menu.
-func (x *TableCellView) WithMenu(menu *Menu) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (tcv *TableCellView) WithMenu(menu *Menu) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return tcv
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *TableCellView) WithUserActivity(userActivity obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (tcv *TableCellView) WithUserActivity(userActivity obj.Object) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return tcv
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (tcv *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
+	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return tcv
 }
 
 // ObjectValue wraps the corresponding Objective-C method.
-func (x *TableCellView) ObjectValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectValue"))
+func (tcv *TableCellView) ObjectValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("objectValue"))
 	return obj.Wrap(_r)
 }
 
-// SetObjectValue wraps the corresponding Objective-C method.
-func (x *TableCellView) SetObjectValue(objectValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-}
-
 // TextField wraps the corresponding Objective-C method.
-func (x *TableCellView) TextField() *TextField {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textField"))
+func (tcv *TableCellView) TextField() *TextField {
+	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("textField"))
 	return TextFieldFromID(_r)
 }
 
-// SetTextField wraps the corresponding Objective-C method.
-func (x *TableCellView) SetTextField(textField *TextField) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextField:"), objref.IDOf(textField))
-}
-
 // ImageView wraps the corresponding Objective-C method.
-func (x *TableCellView) ImageView() *ImageView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageView"))
+func (tcv *TableCellView) ImageView() *ImageView {
+	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("imageView"))
 	return ImageViewFromID(_r)
 }
 
-// SetImageView wraps the corresponding Objective-C method.
-func (x *TableCellView) SetImageView(imageView *ImageView) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
-}
-
 // BackgroundStyle wraps the corresponding Objective-C method.
-func (x *TableCellView) BackgroundStyle() BackgroundStyle {
-	_r := objc.Send[BackgroundStyle](objref.IDOf(x), objc.RegisterName("backgroundStyle"))
+func (tcv *TableCellView) BackgroundStyle() BackgroundStyle {
+	_r := objc.Send[BackgroundStyle](objref.IDOf(tcv), objc.RegisterName("backgroundStyle"))
 	return _r
-}
-
-// SetBackgroundStyle wraps the corresponding Objective-C method.
-func (x *TableCellView) SetBackgroundStyle(backgroundStyle BackgroundStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 }
 
 // RowSizeStyle wraps the corresponding Objective-C method.
-func (x *TableCellView) RowSizeStyle() TableViewRowSizeStyle {
-	_r := objc.Send[TableViewRowSizeStyle](objref.IDOf(x), objc.RegisterName("rowSizeStyle"))
+func (tcv *TableCellView) RowSizeStyle() TableViewRowSizeStyle {
+	_r := objc.Send[TableViewRowSizeStyle](objref.IDOf(tcv), objc.RegisterName("rowSizeStyle"))
 	return _r
-}
-
-// SetRowSizeStyle wraps the corresponding Objective-C method.
-func (x *TableCellView) SetRowSizeStyle(rowSizeStyle TableViewRowSizeStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowSizeStyle:"), rowSizeStyle)
 }
 
 // DraggingImageComponents wraps the corresponding Objective-C method.
 //
 // DraggingImageComponents returns the collection as a Go slice.
-func (x *TableCellView) DraggingImageComponents() []*DraggingImageComponent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draggingImageComponents"))
+func (tcv *TableCellView) DraggingImageComponents() []*DraggingImageComponent {
+	_arr := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("draggingImageComponents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
 }
-
-// TableCellViewable is the interface implemented by [TableCellView], for mocking and DI.
-type TableCellViewable interface {
-	obj.Object
-	WithObjectValue(objectValue obj.Object) *TableCellView
-	WithTextField(textField TextFieldProvider) *TableCellView
-	WithImageView(imageView *ImageView) *TableCellView
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *TableCellView
-	WithRowSizeStyle(rowSizeStyle TableViewRowSizeStyle) *TableCellView
-	WithSubviews(items ...ViewProvider) *TableCellView
-	WithHidden(hidden bool) *TableCellView
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView
-	WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableCellView
-	WithFrame(frame corefoundation.CGRect) *TableCellView
-	WithFrameRotation(frameRotation float64) *TableCellView
-	WithFrameCenterRotation(frameCenterRotation float64) *TableCellView
-	WithBoundsRotation(boundsRotation float64) *TableCellView
-	WithBounds(bounds corefoundation.CGRect) *TableCellView
-	WithCanDrawConcurrently(canDrawConcurrently bool) *TableCellView
-	WithNeedsDisplay(needsDisplay bool) *TableCellView
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView
-	WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TableCellView
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TableCellView
-	WithWantsLayer(wantsLayer bool) *TableCellView
-	WithLayer(layer obj.Object) *TableCellView
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView
-	WithNeedsLayout(needsLayout bool) *TableCellView
-	WithAlphaValue(alphaValue float64) *TableCellView
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableCellView
-	WithBackgroundFilters(items ...obj.Object) *TableCellView
-	WithCompositingFilter(compositingFilter obj.Object) *TableCellView
-	WithContentFilters(items ...obj.Object) *TableCellView
-	WithShadow(shadow *Shadow) *TableCellView
-	WithClipsToBounds(clipsToBounds bool) *TableCellView
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView
-	WithToolTip(toolTip string) *TableCellView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableCellView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView
-	WithNextKeyView(nextKeyView ViewProvider) *TableCellView
-	WithFocusRingType(focusRingType FocusRingType) *TableCellView
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableCellView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView
-	WithNextResponder(nextResponder ResponderProvider) *TableCellView
-	WithMenu(menu *Menu) *TableCellView
-	WithUserActivity(userActivity obj.Object) *TableCellView
-	WithTouchBar(touchBar *TouchBar) *TableCellView
-	ObjectValue() obj.Object
-	SetObjectValue(objectValue obj.Object)
-	TextField() *TextField
-	SetTextField(textField *TextField)
-	ImageView() *ImageView
-	SetImageView(imageView *ImageView)
-	BackgroundStyle() BackgroundStyle
-	SetBackgroundStyle(backgroundStyle BackgroundStyle)
-	RowSizeStyle() TableViewRowSizeStyle
-	SetRowSizeStyle(rowSizeStyle TableViewRowSizeStyle)
-	DraggingImageComponents() []*DraggingImageComponent
-}
-
-var _ TableCellViewable = (*TableCellView)(nil)
 
 var _ ViewProvider = (*TableCellView)(nil)
 

@@ -55,17 +55,9 @@ func NewScannerFeatureTemplate() *ScannerFeatureTemplate {
 // Targets wraps the corresponding Objective-C method.
 //
 // Targets returns the collection as a Go slice.
-func (x *ScannerFeatureTemplate) Targets() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targets"))
+func (sft *ScannerFeatureTemplate) Targets() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sft), objc.RegisterName("targets"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ScannerFeatureTemplateable is the interface implemented by [ScannerFeatureTemplate], for mocking and DI.
-type ScannerFeatureTemplateable interface {
-	obj.Object
-	Targets() []obj.Object
-}
-
-var _ ScannerFeatureTemplateable = (*ScannerFeatureTemplate)(nil)
 
 var _ ScannerFeatureProvider = (*ScannerFeatureTemplate)(nil)

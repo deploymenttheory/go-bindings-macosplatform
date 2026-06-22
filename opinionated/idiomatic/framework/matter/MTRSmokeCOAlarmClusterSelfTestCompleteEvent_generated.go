@@ -44,24 +44,24 @@ func mTRSmokeCOAlarmClusterSelfTestCompleteEventAdopt(id objc.ID) *MTRSmokeCOAla
 }
 
 // Description returns the object's -description text.
-func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacstce *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) Description() string {
+	return rt.Description(objref.IDOf(mscacstce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscacstce *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscacstce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscacstce *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscacstce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacstce *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) String() string {
+	return rt.Description(objref.IDOf(mscacstce))
 }
 
 // NewMTRSmokeCOAlarmClusterSelfTestCompleteEvent creates a new MTRSmokeCOAlarmClusterSelfTestCompleteEvent.
@@ -69,10 +69,3 @@ func NewMTRSmokeCOAlarmClusterSelfTestCompleteEvent() *MTRSmokeCOAlarmClusterSel
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterSelfTestCompleteEvent")), objc.RegisterName("new"))
 	return mTRSmokeCOAlarmClusterSelfTestCompleteEventAdopt(_id)
 }
-
-// MTRSmokeCOAlarmClusterSelfTestCompleteEventable is the interface implemented by [MTRSmokeCOAlarmClusterSelfTestCompleteEvent], for mocking and DI.
-type MTRSmokeCOAlarmClusterSelfTestCompleteEventable interface {
-	obj.Object
-}
-
-var _ MTRSmokeCOAlarmClusterSelfTestCompleteEventable = (*MTRSmokeCOAlarmClusterSelfTestCompleteEvent)(nil)

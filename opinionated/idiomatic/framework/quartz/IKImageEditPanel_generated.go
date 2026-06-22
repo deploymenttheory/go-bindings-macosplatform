@@ -46,24 +46,24 @@ func iKImageEditPanelAdopt(id objc.ID) *IKImageEditPanel {
 }
 
 // Description returns the object's -description text.
-func (x *IKImageEditPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (iiep *IKImageEditPanel) Description() string {
+	return rt.Description(objref.IDOf(iiep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IKImageEditPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (iiep *IKImageEditPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(iiep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IKImageEditPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (iiep *IKImageEditPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(iiep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IKImageEditPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (iiep *IKImageEditPanel) String() string {
+	return rt.Description(objref.IDOf(iiep))
 }
 
 // NewIKImageEditPanel creates a new IKImageEditPanel.
@@ -72,42 +72,25 @@ func NewIKImageEditPanel() *IKImageEditPanel {
 	return iKImageEditPanelAdopt(_id)
 }
 
-// WithDataSource specifies the edit panel’s dataSource.
-func (x *IKImageEditPanel) WithDataSource(dataSource obj.Object) *IKImageEditPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
-	return x
+// WithDataSource sets specifies the edit panel’s dataSource.
+func (iiep *IKImageEditPanel) WithDataSource(dataSource obj.Object) *IKImageEditPanel {
+	objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
+	return iiep
 }
 
 // ReloadData reloads the data from the data associated with an image editing panel.
-func (x *IKImageEditPanel) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
+func (iiep *IKImageEditPanel) ReloadData() {
+	objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("reloadData"))
 }
 
-// DataSource data source associated with an image editing panel
-func (x *IKImageEditPanel) DataSource() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataSource"))
+// DataSource returns data source associated with an image editing panel
+func (iiep *IKImageEditPanel) DataSource() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("dataSource"))
 	return obj.Wrap(_r)
 }
 
-// SetDataSource wraps the corresponding Objective-C method.
-func (x *IKImageEditPanel) SetDataSource(dataSource obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
-}
-
-// FilterArray array of filters reflecting the current user adjustments in the adjust or effects tab.
-func (x *IKImageEditPanel) FilterArray() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterArray"))
+// FilterArray returns array of filters reflecting the current user adjustments in the adjust or effects tab.
+func (iiep *IKImageEditPanel) FilterArray() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("filterArray"))
 	return obj.Wrap(_r)
 }
-
-// IKImageEditPanelable is the interface implemented by [IKImageEditPanel], for mocking and DI.
-type IKImageEditPanelable interface {
-	obj.Object
-	WithDataSource(dataSource obj.Object) *IKImageEditPanel
-	ReloadData()
-	DataSource() obj.Object
-	SetDataSource(dataSource obj.Object)
-	FilterArray() obj.Object
-}
-
-var _ IKImageEditPanelable = (*IKImageEditPanel)(nil)

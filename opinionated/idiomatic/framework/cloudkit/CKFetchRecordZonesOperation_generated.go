@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,98 +58,74 @@ func NewFetchRecordZonesOperationWithRecordZoneIDs(zoneIDs []*RecordZoneID) *Fet
 	return fetchRecordZonesOperationAdopt(_id)
 }
 
-// WithRecordZoneIDs the IDs of the record zones to retrieve.
-func (x *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZonesOperation {
+// WithRecordZoneIDs sets the IDs of the record zones to retrieve.
+func (frzo *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZonesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setRecordZoneIDs:"), _arr)
+	return frzo
 }
 
-// WithDatabase the database that the operation uses.
-func (x *FetchRecordZonesOperation) WithDatabase(database *Database) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (frzo *FetchRecordZonesOperation) WithDatabase(database *Database) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return frzo
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *FetchRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (frzo *FetchRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return frzo
 }
 
-// WithGroup the operation’s group.
-func (x *FetchRecordZonesOperation) WithGroup(group *OperationGroup) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (frzo *FetchRecordZonesOperation) WithGroup(group *OperationGroup) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return frzo
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *FetchRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (frzo *FetchRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return frzo
 }
 
-// WithContainer the operation's container.
-func (x *FetchRecordZonesOperation) WithContainer(container *Container) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (frzo *FetchRecordZonesOperation) WithContainer(container *Container) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return frzo
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *FetchRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (frzo *FetchRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return frzo
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *FetchRecordZonesOperation) WithLongLived(longLived bool) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (frzo *FetchRecordZonesOperation) WithLongLived(longLived bool) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setLongLived:"), longLived)
+	return frzo
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *FetchRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (frzo *FetchRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return frzo
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *FetchRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZonesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (frzo *FetchRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return frzo
 }
 
-// RecordZoneIDs the IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that “CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`.
+// RecordZoneIDs returns the IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that “CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`.
 //
 // RecordZoneIDs returns the collection as a Go slice.
-func (x *FetchRecordZonesOperation) RecordZoneIDs() []*RecordZoneID {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneIDs"))
+func (frzo *FetchRecordZonesOperation) RecordZoneIDs() []*RecordZoneID {
+	_arr := objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("recordZoneIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
-
-// SetRecordZoneIDs wraps the corresponding Objective-C method.
-func (x *FetchRecordZonesOperation) SetRecordZoneIDs(recordZoneIDs []*RecordZoneID) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
-}
-
-// FetchRecordZonesOperationable is the interface implemented by [FetchRecordZonesOperation], for mocking and DI.
-type FetchRecordZonesOperationable interface {
-	obj.Object
-	WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZonesOperation
-	WithDatabase(database *Database) *FetchRecordZonesOperation
-	WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation
-	WithGroup(group *OperationGroup) *FetchRecordZonesOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZonesOperation
-	WithContainer(container *Container) *FetchRecordZonesOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZonesOperation
-	WithLongLived(longLived bool) *FetchRecordZonesOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZonesOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZonesOperation
-	RecordZoneIDs() []*RecordZoneID
-	SetRecordZoneIDs(recordZoneIDs []*RecordZoneID)
-}
-
-var _ FetchRecordZonesOperationable = (*FetchRecordZonesOperation)(nil)
 
 var _ DatabaseOperationProvider = (*FetchRecordZonesOperation)(nil)
 

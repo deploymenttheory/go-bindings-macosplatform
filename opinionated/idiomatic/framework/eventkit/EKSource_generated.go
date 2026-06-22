@@ -53,14 +53,14 @@ func NewSource() *Source {
 }
 
 // CalendarsForEntityType returns the calendars that belong to this source object that support a particular entity type.
-func (x *Source) CalendarsForEntityType(entityType EntityType) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarsForEntityType:"), entityType)
+func (s *Source) CalendarsForEntityType(entityType EntityType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("calendarsForEntityType:"), entityType)
 	return obj.Wrap(_r)
 }
 
 // SourceIdentifier wraps the corresponding Objective-C method.
-func (x *Source) SourceIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifier"))
+func (s *Source) SourceIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sourceIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -68,36 +68,24 @@ func (x *Source) SourceIdentifier() string {
 }
 
 // SourceType wraps the corresponding Objective-C method.
-func (x *Source) SourceType() SourceType {
-	_r := objc.Send[SourceType](objref.IDOf(x), objc.RegisterName("sourceType"))
+func (s *Source) SourceType() SourceType {
+	_r := objc.Send[SourceType](objref.IDOf(s), objc.RegisterName("sourceType"))
 	return _r
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *Source) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (s *Source) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsDelegate returns YES if this EKSource represents an account delegated by another user.
-func (x *Source) IsDelegate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDelegate"))
+// IsDelegate reports whether this EKSource represents an account delegated by another user.
+func (s *Source) IsDelegate() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isDelegate"))
 	return _r
 }
-
-// Sourceable is the interface implemented by [Source], for mocking and DI.
-type Sourceable interface {
-	obj.Object
-	CalendarsForEntityType(entityType EntityType) obj.Object
-	SourceIdentifier() string
-	SourceType() SourceType
-	Title() string
-	IsDelegate() bool
-}
-
-var _ Sourceable = (*Source)(nil)
 
 var _ ObjectProvider = (*Source)(nil)

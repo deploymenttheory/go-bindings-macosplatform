@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,31 +43,22 @@ func nNGradientStateNodeAdopt(id objc.ID) *NNGradientStateNode {
 	return x
 }
 
-// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *NNGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-	return x
+// WithExportFromGraph sets tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+func (ngsn *NNGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(ngsn), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
+	return ngsn
 }
 
-// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
-func (x *NNGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-	return x
+// WithSynchronizeResource sets set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
+func (ngsn *NNGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(ngsn), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
+	return ngsn
 }
-
-// NNGradientStateNodeable is the interface implemented by [NNGradientStateNode], for mocking and DI.
-type NNGradientStateNodeable interface {
-	obj.Object
-	WithExportFromGraph(exportFromGraph bool) *NNGradientStateNode
-	WithSynchronizeResource(synchronizeResource bool) *NNGradientStateNode
-}
-
-var _ NNGradientStateNodeable = (*NNGradientStateNode)(nil)
 
 // isNNGradientStateNode marks NNGradientStateNode — and, by embedding promotion, its
 // subclasses — as a member of the NNGradientStateNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNGradientStateNode) isNNGradientStateNode() {}
+func (ngsn *NNGradientStateNode) isNNGradientStateNode() {}
 
 var _ NNGradientStateNodeProvider = (*NNGradientStateNode)(nil)
 

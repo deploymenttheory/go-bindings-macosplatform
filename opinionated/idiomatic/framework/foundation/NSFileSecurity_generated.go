@@ -46,24 +46,24 @@ func fileSecurityAdopt(id objc.ID) *FileSecurity {
 }
 
 // Description returns the object's -description text.
-func (x *FileSecurity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FileSecurity) Description() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileSecurity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fs *FileSecurity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileSecurity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fs *FileSecurity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileSecurity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FileSecurity) String() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // NewFileSecurityWithCoder creates a new FileSecurity.
@@ -74,15 +74,7 @@ func NewFileSecurityWithCoder(coder *Coder) *FileSecurity {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *FileSecurity) WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (fs *FileSecurity) WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity {
+	objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return fs
 }
-
-// FileSecurityable is the interface implemented by [FileSecurity], for mocking and DI.
-type FileSecurityable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity
-}
-
-var _ FileSecurityable = (*FileSecurity)(nil)

@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,71 +49,40 @@ func NewArrayAffineQuantizationDescriptor() *ArrayAffineQuantizationDescriptor {
 	return arrayAffineQuantizationDescriptorAdopt(_id)
 }
 
-// WithHasZeroPoint if yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
-func (x *ArrayAffineQuantizationDescriptor) WithHasZeroPoint(hasZeroPoint bool) *ArrayAffineQuantizationDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasZeroPoint:"), hasZeroPoint)
-	return x
+// WithHasZeroPoint sets if yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
+func (aaqd *ArrayAffineQuantizationDescriptor) WithHasZeroPoint(hasZeroPoint bool) *ArrayAffineQuantizationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(aaqd), objc.RegisterName("setHasZeroPoint:"), hasZeroPoint)
+	return aaqd
 }
 
-// WithHasMinValue if yes then offset is used. See MPSNDArrayQuantizationScheme.
-func (x *ArrayAffineQuantizationDescriptor) WithHasMinValue(hasMinValue bool) *ArrayAffineQuantizationDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasMinValue:"), hasMinValue)
-	return x
+// WithHasMinValue sets if yes then offset is used. See MPSNDArrayQuantizationScheme.
+func (aaqd *ArrayAffineQuantizationDescriptor) WithHasMinValue(hasMinValue bool) *ArrayAffineQuantizationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(aaqd), objc.RegisterName("setHasMinValue:"), hasMinValue)
+	return aaqd
 }
 
-// WithImplicitZeroPoint if true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
-func (x *ArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicitZeroPoint bool) *ArrayAffineQuantizationDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImplicitZeroPoint:"), implicitZeroPoint)
-	return x
+// WithImplicitZeroPoint sets if true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
+func (aaqd *ArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicitZeroPoint bool) *ArrayAffineQuantizationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(aaqd), objc.RegisterName("setImplicitZeroPoint:"), implicitZeroPoint)
+	return aaqd
 }
 
-// HasZeroPoint if yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
-func (x *ArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasZeroPoint"))
+// HasZeroPoint reports whether if yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
+func (aaqd *ArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
+	_r := objc.Send[bool](objref.IDOf(aaqd), objc.RegisterName("hasZeroPoint"))
 	return _r
 }
 
-// SetHasZeroPoint wraps the corresponding Objective-C method.
-func (x *ArrayAffineQuantizationDescriptor) SetHasZeroPoint(hasZeroPoint bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasZeroPoint:"), hasZeroPoint)
-}
-
-// HasMinValue if yes then offset is used. See MPSNDArrayQuantizationScheme.
-func (x *ArrayAffineQuantizationDescriptor) HasMinValue() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMinValue"))
+// HasMinValue reports whether if yes then offset is used. See MPSNDArrayQuantizationScheme.
+func (aaqd *ArrayAffineQuantizationDescriptor) HasMinValue() bool {
+	_r := objc.Send[bool](objref.IDOf(aaqd), objc.RegisterName("hasMinValue"))
 	return _r
 }
 
-// SetHasMinValue wraps the corresponding Objective-C method.
-func (x *ArrayAffineQuantizationDescriptor) SetHasMinValue(hasMinValue bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasMinValue:"), hasMinValue)
-}
-
-// ImplicitZeroPoint if true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
-func (x *ArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("implicitZeroPoint"))
+// ImplicitZeroPoint reports whether if true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
+func (aaqd *ArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
+	_r := objc.Send[bool](objref.IDOf(aaqd), objc.RegisterName("implicitZeroPoint"))
 	return _r
 }
-
-// SetImplicitZeroPoint wraps the corresponding Objective-C method.
-func (x *ArrayAffineQuantizationDescriptor) SetImplicitZeroPoint(implicitZeroPoint bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImplicitZeroPoint:"), implicitZeroPoint)
-}
-
-// ArrayAffineQuantizationDescriptorable is the interface implemented by [ArrayAffineQuantizationDescriptor], for mocking and DI.
-type ArrayAffineQuantizationDescriptorable interface {
-	obj.Object
-	WithHasZeroPoint(hasZeroPoint bool) *ArrayAffineQuantizationDescriptor
-	WithHasMinValue(hasMinValue bool) *ArrayAffineQuantizationDescriptor
-	WithImplicitZeroPoint(implicitZeroPoint bool) *ArrayAffineQuantizationDescriptor
-	HasZeroPoint() bool
-	SetHasZeroPoint(hasZeroPoint bool)
-	HasMinValue() bool
-	SetHasMinValue(hasMinValue bool)
-	ImplicitZeroPoint() bool
-	SetImplicitZeroPoint(implicitZeroPoint bool)
-}
-
-var _ ArrayAffineQuantizationDescriptorable = (*ArrayAffineQuantizationDescriptor)(nil)
 
 var _ ArrayQuantizationDescriptorProvider = (*ArrayAffineQuantizationDescriptor)(nil)

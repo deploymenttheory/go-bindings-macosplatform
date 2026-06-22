@@ -46,24 +46,24 @@ func contactPropertyAdopt(id objc.ID) *ContactProperty {
 }
 
 // Description returns the object's -description text.
-func (x *ContactProperty) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *ContactProperty) Description() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactProperty) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cp *ContactProperty) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactProperty) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cp *ContactProperty) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContactProperty) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *ContactProperty) String() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // NewContactProperty creates a new ContactProperty.
@@ -73,52 +73,40 @@ func NewContactProperty() *ContactProperty {
 }
 
 // Contact wraps the corresponding Objective-C method.
-func (x *ContactProperty) Contact() *Contact {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+func (cp *ContactProperty) Contact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("contact"))
 	return ContactFromID(_r)
 }
 
-// Key the key of the contact property, as defined in CNContact.h.
-func (x *ContactProperty) Key() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+// Key returns the key of the contact property, as defined in CNContact.h.
+func (cp *ContactProperty) Key() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Value the value of the property.
-func (x *ContactProperty) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the value of the property.
+func (cp *ContactProperty) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Identifier the identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
-func (x *ContactProperty) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
+func (cp *ContactProperty) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Label the label of the labeled value if the property is an array of labeled values, otherwise is nil.
-func (x *ContactProperty) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns the label of the labeled value if the property is an array of labeled values, otherwise is nil.
+func (cp *ContactProperty) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ContactPropertyable is the interface implemented by [ContactProperty], for mocking and DI.
-type ContactPropertyable interface {
-	obj.Object
-	Contact() *Contact
-	Key() string
-	Value() obj.Object
-	Identifier() string
-	Label() string
-}
-
-var _ ContactPropertyable = (*ContactProperty)(nil)

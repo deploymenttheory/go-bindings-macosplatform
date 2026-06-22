@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNDArrayGatherGradient() *NDArrayGatherGradient {
 	return nDArrayGatherGradientAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayGatherGradient) WithLabel(label string) *NDArrayGatherGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nagg *NDArrayGatherGradient) WithLabel(label string) *NDArrayGatherGradient {
+	objc.Send[objc.ID](objref.IDOf(nagg), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nagg
 }
-
-// NDArrayGatherGradientable is the interface implemented by [NDArrayGatherGradient], for mocking and DI.
-type NDArrayGatherGradientable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayGatherGradient
-}
-
-var _ NDArrayGatherGradientable = (*NDArrayGatherGradient)(nil)
 
 var _ NDArrayBinaryPrimaryGradientKernelProvider = (*NDArrayGatherGradient)(nil)
 

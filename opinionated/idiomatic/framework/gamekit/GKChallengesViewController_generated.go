@@ -44,24 +44,24 @@ func challengesViewControllerAdopt(id objc.ID) *ChallengesViewController {
 }
 
 // Description returns the object's -description text.
-func (x *ChallengesViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvc *ChallengesViewController) Description() string {
+	return rt.Description(objref.IDOf(cvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChallengesViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvc *ChallengesViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChallengesViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvc *ChallengesViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ChallengesViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvc *ChallengesViewController) String() string {
+	return rt.Description(objref.IDOf(cvc))
 }
 
 // NewChallengesViewController creates a new ChallengesViewController.
@@ -69,10 +69,3 @@ func NewChallengesViewController() *ChallengesViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKChallengesViewController")), objc.RegisterName("new"))
 	return challengesViewControllerAdopt(_id)
 }
-
-// ChallengesViewControllerable is the interface implemented by [ChallengesViewController], for mocking and DI.
-type ChallengesViewControllerable interface {
-	obj.Object
-}
-
-var _ ChallengesViewControllerable = (*ChallengesViewController)(nil)

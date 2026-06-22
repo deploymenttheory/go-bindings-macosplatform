@@ -53,402 +53,334 @@ func NewScrollLayer() *ScrollLayer {
 	return scrollLayerAdopt(_id)
 }
 
-// WithScrollMode defines the axes in which the layer may be scrolled.
-func (x *ScrollLayer) WithScrollMode(scrollMode obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollMode:"), objref.IDOf(scrollMode))
-	return x
+// WithScrollMode sets defines the axes in which the layer may be scrolled.
+func (sl *ScrollLayer) WithScrollMode(scrollMode obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setScrollMode:"), objref.IDOf(scrollMode))
+	return sl
 }
 
-// WithBounds the layer’s bounds rectangle. Animatable.
-func (x *ScrollLayer) WithBounds(bounds corefoundation.CGRect) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the layer’s bounds rectangle. Animatable.
+func (sl *ScrollLayer) WithBounds(bounds corefoundation.CGRect) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBounds:"), bounds)
+	return sl
 }
 
-// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
-func (x *ScrollLayer) WithPosition(position corefoundation.CGPoint) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the layer’s position in its superlayer’s coordinate space. Animatable.
+func (sl *ScrollLayer) WithPosition(position corefoundation.CGPoint) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPosition:"), position)
+	return sl
 }
 
-// WithZPosition the layer’s position on the z axis. Animatable.
-func (x *ScrollLayer) WithZPosition(zPosition float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the layer’s position on the z axis. Animatable.
+func (sl *ScrollLayer) WithZPosition(zPosition float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setZPosition:"), zPosition)
+	return sl
 }
 
-// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
-func (x *ScrollLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (sl *ScrollLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return sl
 }
 
-// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
-func (x *ScrollLayer) WithAnchorPointZ(anchorPointZ float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
-	return x
+// WithAnchorPointZ sets the anchor point for the layer’s position along the z axis. Animatable.
+func (sl *ScrollLayer) WithAnchorPointZ(anchorPointZ float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return sl
 }
 
-// WithFrame the layer’s frame rectangle.
-func (x *ScrollLayer) WithFrame(frame corefoundation.CGRect) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the layer’s frame rectangle.
+func (sl *ScrollLayer) WithFrame(frame corefoundation.CGRect) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFrame:"), frame)
+	return sl
 }
 
-// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
-func (x *ScrollLayer) WithHidden(hidden bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean indicating whether the layer is displayed. Animatable.
+func (sl *ScrollLayer) WithHidden(hidden bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setHidden:"), hidden)
+	return sl
 }
 
-// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-func (x *ScrollLayer) WithDoubleSided(doubleSided bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
-	return x
+// WithDoubleSided sets a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (sl *ScrollLayer) WithDoubleSided(doubleSided bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return sl
 }
 
-// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-func (x *ScrollLayer) WithGeometryFlipped(geometryFlipped bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
-	return x
+// WithGeometryFlipped sets a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (sl *ScrollLayer) WithGeometryFlipped(geometryFlipped bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return sl
 }
 
-// WithSublayers an array containing the layer’s sublayers.
-func (x *ScrollLayer) WithSublayers(items ...LayerProvider) *ScrollLayer {
+// WithSublayers sets an array containing the layer’s sublayers.
+func (sl *ScrollLayer) WithSublayers(items ...LayerProvider) *ScrollLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setSublayers:"), _arr)
+	return sl
 }
 
-// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
-func (x *ScrollLayer) WithMask(mask LayerProvider) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-	return x
+// WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
+func (sl *ScrollLayer) WithMask(mask LayerProvider) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return sl
 }
 
-// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-func (x *ScrollLayer) WithMasksToBounds(masksToBounds bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
-	return x
+// WithMasksToBounds sets a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (sl *ScrollLayer) WithMasksToBounds(masksToBounds bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return sl
 }
 
-// WithContents an object that provides the contents of the layer. Animatable.
-func (x *ScrollLayer) WithContents(contents obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
-	return x
+// WithContents sets an object that provides the contents of the layer. Animatable.
+func (sl *ScrollLayer) WithContents(contents obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return sl
 }
 
-// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-func (x *ScrollLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-	return x
+// WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (sl *ScrollLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsRect:"), contentsRect)
+	return sl
 }
 
-// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-func (x *ScrollLayer) WithContentsGravity(contentsGravity obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
-	return x
+// WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (sl *ScrollLayer) WithContentsGravity(contentsGravity obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return sl
 }
 
-// WithContentsScale the scale factor applied to the layer.
-func (x *ScrollLayer) WithContentsScale(contentsScale float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
-	return x
+// WithContentsScale sets the scale factor applied to the layer.
+func (sl *ScrollLayer) WithContentsScale(contentsScale float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsScale:"), contentsScale)
+	return sl
 }
 
-// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-func (x *ScrollLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
-	return x
+// WithContentsCenter sets the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (sl *ScrollLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return sl
 }
 
-// WithContentsFormat a hint for the desired storage format of the layer contents.
-func (x *ScrollLayer) WithContentsFormat(contentsFormat obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
-	return x
+// WithContentsFormat sets a hint for the desired storage format of the layer contents.
+func (sl *ScrollLayer) WithContentsFormat(contentsFormat obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return sl
 }
 
 // WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
-func (x *ScrollLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
-	return x
+func (sl *ScrollLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return sl
 }
 
 // WithToneMapMode sets the property and returns the receiver so calls can be chained.
-func (x *ScrollLayer) WithToneMapMode(toneMapMode obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
-	return x
+func (sl *ScrollLayer) WithToneMapMode(toneMapMode obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return sl
 }
 
 // WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
-func (x *ScrollLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
-	return x
+func (sl *ScrollLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return sl
 }
 
 // WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
-func (x *ScrollLayer) WithContentsHeadroom(contentsHeadroom float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
-	return x
+func (sl *ScrollLayer) WithContentsHeadroom(contentsHeadroom float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return sl
 }
 
-// WithMinificationFilter the filter used when reducing the size of the content.
-func (x *ScrollLayer) WithMinificationFilter(minificationFilter obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
-	return x
+// WithMinificationFilter sets the filter used when reducing the size of the content.
+func (sl *ScrollLayer) WithMinificationFilter(minificationFilter obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return sl
 }
 
-// WithMagnificationFilter the filter used when increasing the size of the content.
-func (x *ScrollLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
-	return x
+// WithMagnificationFilter sets the filter used when increasing the size of the content.
+func (sl *ScrollLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return sl
 }
 
-// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
-func (x *ScrollLayer) WithMinificationFilterBias(minificationFilterBias float32) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
-	return x
+// WithMinificationFilterBias sets the bias factor used by the minification filter to determine the levels of detail.
+func (sl *ScrollLayer) WithMinificationFilterBias(minificationFilterBias float32) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return sl
 }
 
-// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
-func (x *ScrollLayer) WithOpaque(opaque bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value indicating whether the layer contains completely opaque content.
+func (sl *ScrollLayer) WithOpaque(opaque bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setOpaque:"), opaque)
+	return sl
 }
 
-// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-func (x *ScrollLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
-	return x
+// WithNeedsDisplayOnBoundsChange sets a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (sl *ScrollLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return sl
 }
 
-// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-func (x *ScrollLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
-	return x
+// WithDrawsAsynchronously sets a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (sl *ScrollLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return sl
 }
 
-// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
-func (x *ScrollLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
-	return x
+// WithEdgeAntialiasingMask sets a bitmask defining how the edges of the receiver are rasterized.
+func (sl *ScrollLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return sl
 }
 
-// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
-func (x *ScrollLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
-	return x
+// WithAllowsEdgeAntialiasing sets a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (sl *ScrollLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return sl
 }
 
-// WithBackgroundColor the background color of the receiver. Animatable.
-func (x *ScrollLayer) WithBackgroundColor(backgroundColor obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the receiver. Animatable.
+func (sl *ScrollLayer) WithBackgroundColor(backgroundColor obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return sl
 }
 
-// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
-func (x *ScrollLayer) WithCornerRadius(cornerRadius float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (sl *ScrollLayer) WithCornerRadius(cornerRadius float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return sl
 }
 
 // WithMaskedCorners sets the property and returns the receiver so calls can be chained.
-func (x *ScrollLayer) WithMaskedCorners(maskedCorners CornerMask) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
-	return x
+func (sl *ScrollLayer) WithMaskedCorners(maskedCorners CornerMask) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return sl
 }
 
 // WithCornerCurve sets the property and returns the receiver so calls can be chained.
-func (x *ScrollLayer) WithCornerCurve(cornerCurve obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
-	return x
+func (sl *ScrollLayer) WithCornerCurve(cornerCurve obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return sl
 }
 
-// WithBorderWidth the width of the layer’s border. Animatable.
-func (x *ScrollLayer) WithBorderWidth(borderWidth float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
-	return x
+// WithBorderWidth sets the width of the layer’s border. Animatable.
+func (sl *ScrollLayer) WithBorderWidth(borderWidth float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return sl
 }
 
-// WithBorderColor the color of the layer’s border. Animatable.
-func (x *ScrollLayer) WithBorderColor(borderColor obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the color of the layer’s border. Animatable.
+func (sl *ScrollLayer) WithBorderColor(borderColor obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return sl
 }
 
-// WithOpacity the opacity of the receiver. Animatable.
-func (x *ScrollLayer) WithOpacity(opacity float32) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
-	return x
+// WithOpacity sets the opacity of the receiver. Animatable.
+func (sl *ScrollLayer) WithOpacity(opacity float32) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setOpacity:"), opacity)
+	return sl
 }
 
-// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-func (x *ScrollLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
-	return x
+// WithAllowsGroupOpacity sets a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (sl *ScrollLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return sl
 }
 
-// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
-func (x *ScrollLayer) WithCompositingFilter(compositingFilter obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+// WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (sl *ScrollLayer) WithCompositingFilter(compositingFilter obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return sl
 }
 
-// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-func (x *ScrollLayer) WithShouldRasterize(shouldRasterize bool) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (sl *ScrollLayer) WithShouldRasterize(shouldRasterize bool) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return sl
 }
 
-// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-func (x *ScrollLayer) WithRasterizationScale(rasterizationScale float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
-	return x
+// WithRasterizationScale sets the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (sl *ScrollLayer) WithRasterizationScale(rasterizationScale float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return sl
 }
 
-// WithShadowColor the color of the layer’s shadow. Animatable.
-func (x *ScrollLayer) WithShadowColor(shadowColor obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
-	return x
+// WithShadowColor sets the color of the layer’s shadow. Animatable.
+func (sl *ScrollLayer) WithShadowColor(shadowColor obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return sl
 }
 
-// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
-func (x *ScrollLayer) WithShadowOpacity(shadowOpacity float32) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
-	return x
+// WithShadowOpacity sets the opacity of the layer’s shadow. Animatable.
+func (sl *ScrollLayer) WithShadowOpacity(shadowOpacity float32) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return sl
 }
 
-// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
-func (x *ScrollLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
-	return x
+// WithShadowOffset sets the offset (in points) of the layer’s shadow. Animatable.
+func (sl *ScrollLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return sl
 }
 
-// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
-func (x *ScrollLayer) WithShadowRadius(shadowRadius float64) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
-	return x
+// WithShadowRadius sets the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (sl *ScrollLayer) WithShadowRadius(shadowRadius float64) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return sl
 }
 
-// WithShadowPath the shape of the layer’s shadow. Animatable.
-func (x *ScrollLayer) WithShadowPath(shadowPath obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
-	return x
+// WithShadowPath sets the shape of the layer’s shadow. Animatable.
+func (sl *ScrollLayer) WithShadowPath(shadowPath obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return sl
 }
 
-// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
-func (x *ScrollLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+// WithAutoresizingMask sets a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (sl *ScrollLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return sl
 }
 
-// WithActions a dictionary containing layer actions.
-func (x *ScrollLayer) WithActions(actions obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
-	return x
+// WithActions sets a dictionary containing layer actions.
+func (sl *ScrollLayer) WithActions(actions obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return sl
 }
 
-// WithName the name of the receiver.
-func (x *ScrollLayer) WithName(name string) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (sl *ScrollLayer) WithName(name string) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setName:"), purego.NSString(name))
+	return sl
 }
 
-// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
-func (x *ScrollLayer) WithStyle(style obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
-	return x
+// WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (sl *ScrollLayer) WithStyle(style obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return sl
 }
 
-// WithConstraints the constraints used to position current layer’s sublayers.
-func (x *ScrollLayer) WithConstraints(items ...*Constraint) *ScrollLayer {
+// WithConstraints sets the constraints used to position current layer’s sublayers.
+func (sl *ScrollLayer) WithConstraints(items ...*Constraint) *ScrollLayer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setConstraints:"), _arr)
+	return sl
 }
 
 // ScrollToPoint changes the origin of the receiver to the specified point.
-func (x *ScrollLayer) ScrollToPoint(p corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToPoint:"), p)
+func (sl *ScrollLayer) ScrollToPoint(p corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollToPoint:"), p)
 }
 
 // ScrollToRect scroll the contents of the receiver to ensure that the rectangle is visible.
-func (x *ScrollLayer) ScrollToRect(r corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToRect:"), r)
+func (sl *ScrollLayer) ScrollToRect(r corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollToRect:"), r)
 }
 
 // ScrollMode wraps the corresponding Objective-C method.
-func (x *ScrollLayer) ScrollMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollMode"))
+func (sl *ScrollLayer) ScrollMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollMode"))
 	return obj.Wrap(_r)
 }
-
-// SetScrollMode wraps the corresponding Objective-C method.
-func (x *ScrollLayer) SetScrollMode(scrollMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollMode:"), objref.IDOf(scrollMode))
-}
-
-// ScrollLayerable is the interface implemented by [ScrollLayer], for mocking and DI.
-type ScrollLayerable interface {
-	obj.Object
-	WithScrollMode(scrollMode obj.Object) *ScrollLayer
-	WithBounds(bounds corefoundation.CGRect) *ScrollLayer
-	WithPosition(position corefoundation.CGPoint) *ScrollLayer
-	WithZPosition(zPosition float64) *ScrollLayer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ScrollLayer
-	WithAnchorPointZ(anchorPointZ float64) *ScrollLayer
-	WithFrame(frame corefoundation.CGRect) *ScrollLayer
-	WithHidden(hidden bool) *ScrollLayer
-	WithDoubleSided(doubleSided bool) *ScrollLayer
-	WithGeometryFlipped(geometryFlipped bool) *ScrollLayer
-	WithSublayers(items ...LayerProvider) *ScrollLayer
-	WithMask(mask LayerProvider) *ScrollLayer
-	WithMasksToBounds(masksToBounds bool) *ScrollLayer
-	WithContents(contents obj.Object) *ScrollLayer
-	WithContentsRect(contentsRect corefoundation.CGRect) *ScrollLayer
-	WithContentsGravity(contentsGravity obj.Object) *ScrollLayer
-	WithContentsScale(contentsScale float64) *ScrollLayer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *ScrollLayer
-	WithContentsFormat(contentsFormat obj.Object) *ScrollLayer
-	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ScrollLayer
-	WithToneMapMode(toneMapMode obj.Object) *ScrollLayer
-	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ScrollLayer
-	WithContentsHeadroom(contentsHeadroom float64) *ScrollLayer
-	WithMinificationFilter(minificationFilter obj.Object) *ScrollLayer
-	WithMagnificationFilter(magnificationFilter obj.Object) *ScrollLayer
-	WithMinificationFilterBias(minificationFilterBias float32) *ScrollLayer
-	WithOpaque(opaque bool) *ScrollLayer
-	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ScrollLayer
-	WithDrawsAsynchronously(drawsAsynchronously bool) *ScrollLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ScrollLayer
-	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ScrollLayer
-	WithBackgroundColor(backgroundColor obj.Object) *ScrollLayer
-	WithCornerRadius(cornerRadius float64) *ScrollLayer
-	WithMaskedCorners(maskedCorners CornerMask) *ScrollLayer
-	WithCornerCurve(cornerCurve obj.Object) *ScrollLayer
-	WithBorderWidth(borderWidth float64) *ScrollLayer
-	WithBorderColor(borderColor obj.Object) *ScrollLayer
-	WithOpacity(opacity float32) *ScrollLayer
-	WithAllowsGroupOpacity(allowsGroupOpacity bool) *ScrollLayer
-	WithCompositingFilter(compositingFilter obj.Object) *ScrollLayer
-	WithShouldRasterize(shouldRasterize bool) *ScrollLayer
-	WithRasterizationScale(rasterizationScale float64) *ScrollLayer
-	WithShadowColor(shadowColor obj.Object) *ScrollLayer
-	WithShadowOpacity(shadowOpacity float32) *ScrollLayer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *ScrollLayer
-	WithShadowRadius(shadowRadius float64) *ScrollLayer
-	WithShadowPath(shadowPath obj.Object) *ScrollLayer
-	WithAutoresizingMask(autoresizingMask AutoresizingMask) *ScrollLayer
-	WithActions(actions obj.Object) *ScrollLayer
-	WithName(name string) *ScrollLayer
-	WithStyle(style obj.Object) *ScrollLayer
-	WithConstraints(items ...*Constraint) *ScrollLayer
-	ScrollToPoint(p corefoundation.CGPoint)
-	ScrollToRect(r corefoundation.CGRect)
-	ScrollMode() obj.Object
-	SetScrollMode(scrollMode obj.Object)
-}
-
-var _ ScrollLayerable = (*ScrollLayer)(nil)
 
 var _ LayerProvider = (*ScrollLayer)(nil)

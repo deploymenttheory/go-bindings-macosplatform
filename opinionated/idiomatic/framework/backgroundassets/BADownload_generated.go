@@ -48,84 +48,71 @@ func downloadAdopt(id objc.ID) *Download {
 }
 
 // Description returns the object's -description text.
-func (x *Download) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Download) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Download) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Download) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Download) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Download) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Download) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Download) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
-// CopyAsNonEssential copies an existing download ensuring that it has `isEssential == false`. This serves as a convenience method for constructing a non-essential representation of an existing download. It is important to note that essential downloads can only be enqueued by the app extension during a content request. If an essential download fails, `copyAsNonEssential` can be used to create a copy with `isEssential == false` that can be re-queued with `BADownloadManager`.
-func (x *Download) CopyAsNonEssential() *Download {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyAsNonEssential"))
+// CopyAsNonEssential returns copies an existing download ensuring that it has `isEssential == false`. This serves as a convenience method for constructing a non-essential representation of an existing download. It is important to note that essential downloads can only be enqueued by the app extension during a content request. If an essential download fails, `copyAsNonEssential` can be used to create a copy with `isEssential == false` that can be re-queued with `BADownloadManager`.
+func (d *Download) CopyAsNonEssential() *Download {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("copyAsNonEssential"))
 	return DownloadFromID(_r)
 }
 
-// State the current state of the respresented download.
-func (x *Download) State() DownloadState {
-	_r := objc.Send[DownloadState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the current state of the respresented download.
+func (d *Download) State() DownloadState {
+	_r := objc.Send[DownloadState](objref.IDOf(d), objc.RegisterName("state"))
 	return _r
 }
 
-// Identifier a client defined identifier that uniquely identifies this asset.
-func (x *Download) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a client defined identifier that uniquely identifies this asset.
+func (d *Download) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UniqueIdentifier a UUID that uniquely identifies the download object.
-func (x *Download) UniqueIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+// UniqueIdentifier returns a UUID that uniquely identifies the download object.
+func (d *Download) UniqueIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("uniqueIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Priority a client set priority to try to order downloads in order of importance
-func (x *Download) Priority() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("priority"))
+// Priority returns a client set priority to try to order downloads in order of importance
+func (d *Download) Priority() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("priority"))
 	return _r
 }
 
-// IsEssential whether this download is essential. Essential downloads will occur while the app is being installed. Users cannot launch the app while these downloads are occurring. Essential downloads cannot be scheduled with `BADownloadManager`, they may only be scheduled from the extension with a `BAContentRequest` type of `Update` or `Install`. Essential downloads must have an accurate `fileSize` or they will fail.
-func (x *Download) IsEssential() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEssential"))
+// IsEssential reports whether this download is essential. Essential downloads will occur while the app is being installed. Users cannot launch the app while these downloads are occurring. Essential downloads cannot be scheduled with `BADownloadManager`, they may only be scheduled from the extension with a `BAContentRequest` type of `Update` or `Install`. Essential downloads must have an accurate `fileSize` or they will fail.
+func (d *Download) IsEssential() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEssential"))
 	return _r
 }
-
-// Downloadable is the interface implemented by [Download], for mocking and DI.
-type Downloadable interface {
-	obj.Object
-	CopyAsNonEssential() *Download
-	State() DownloadState
-	Identifier() string
-	UniqueIdentifier() string
-	Priority() int
-	IsEssential() bool
-}
-
-var _ Downloadable = (*Download)(nil)
 
 // isDownload marks Download — and, by embedding promotion, its
 // subclasses — as a member of the Download hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Download) isDownload() {}
+func (d *Download) isDownload() {}
 
 var _ DownloadProvider = (*Download)(nil)

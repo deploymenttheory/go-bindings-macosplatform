@@ -46,24 +46,24 @@ func iOBluetoothSDPServiceAttributeAdopt(id objc.ID) *IOBluetoothSDPServiceAttri
 }
 
 // Description returns the object's -description text.
-func (x *IOBluetoothSDPServiceAttribute) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ibssa *IOBluetoothSDPServiceAttribute) Description() string {
+	return rt.Description(objref.IDOf(ibssa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothSDPServiceAttribute) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ibssa *IOBluetoothSDPServiceAttribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ibssa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothSDPServiceAttribute) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ibssa *IOBluetoothSDPServiceAttribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ibssa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IOBluetoothSDPServiceAttribute) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ibssa *IOBluetoothSDPServiceAttribute) String() string {
+	return rt.Description(objref.IDOf(ibssa))
 }
 
 // NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue initializes a new service attribute with the given ID and element value.
@@ -81,29 +81,19 @@ func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint
 }
 
 // GetAttributeID returns the attribute ID for the target service attribute.
-func (x *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAttributeID"))
+func (ibssa *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ibssa), objc.RegisterName("getAttributeID"))
 	return _r
 }
 
 // GetDataElement returns the data element for the target service attribute.
-func (x *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDataElement"))
+func (ibssa *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
+	_r := objc.Send[objc.ID](objref.IDOf(ibssa), objc.RegisterName("getDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)
 }
 
 // GetIDDataElement returns the data element representing the attribute ID for the target service attribute.
-func (x *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getIDDataElement"))
+func (ibssa *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
+	_r := objc.Send[objc.ID](objref.IDOf(ibssa), objc.RegisterName("getIDDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)
 }
-
-// IOBluetoothSDPServiceAttributeable is the interface implemented by [IOBluetoothSDPServiceAttribute], for mocking and DI.
-type IOBluetoothSDPServiceAttributeable interface {
-	obj.Object
-	GetAttributeID() uint16
-	GetDataElement() *IOBluetoothSDPDataElement
-	GetIDDataElement() *IOBluetoothSDPDataElement
-}
-
-var _ IOBluetoothSDPServiceAttributeable = (*IOBluetoothSDPServiceAttribute)(nil)

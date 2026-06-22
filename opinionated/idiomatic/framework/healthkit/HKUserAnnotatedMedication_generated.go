@@ -46,24 +46,24 @@ func userAnnotatedMedicationAdopt(id objc.ID) *UserAnnotatedMedication {
 }
 
 // Description returns the object's -description text.
-func (x *UserAnnotatedMedication) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uam *UserAnnotatedMedication) Description() string {
+	return rt.Description(objref.IDOf(uam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserAnnotatedMedication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uam *UserAnnotatedMedication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserAnnotatedMedication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uam *UserAnnotatedMedication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UserAnnotatedMedication) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uam *UserAnnotatedMedication) String() string {
+	return rt.Description(objref.IDOf(uam))
 }
 
 // NewUserAnnotatedMedication creates a new UserAnnotatedMedication.
@@ -72,40 +72,29 @@ func NewUserAnnotatedMedication() *UserAnnotatedMedication {
 	return userAnnotatedMedicationAdopt(_id)
 }
 
-// Nickname the nickname that a person added to a medication during the entry experience. This can be edited at any point.
-func (x *UserAnnotatedMedication) Nickname() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nickname"))
+// Nickname returns the nickname that a person added to a medication during the entry experience. This can be edited at any point.
+func (uam *UserAnnotatedMedication) Nickname() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uam), objc.RegisterName("nickname"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsArchived a Boolean value that indicates whether a medication is archived. The value is `true` if a person moves a medication to the archived section in the Health App. The value is `false` if a medication isn't in the archived section.
-func (x *UserAnnotatedMedication) IsArchived() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isArchived"))
+// IsArchived reports whether a medication is archived. The value is `true` if a person moves a medication to the archived section in the Health App. The value is `false` if a medication isn't in the archived section.
+func (uam *UserAnnotatedMedication) IsArchived() bool {
+	_r := objc.Send[bool](objref.IDOf(uam), objc.RegisterName("isArchived"))
 	return _r
 }
 
-// HasSchedule a Boolean value that indicates whether a medication has a schedule set up. The value is `true` for medications for which a person has set up reminders and `false` for medications that are only taken as needed. > Note: Scheduled medications can still be taken as needed.
-func (x *UserAnnotatedMedication) HasSchedule() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSchedule"))
+// HasSchedule reports whether a medication has a schedule set up. The value is `true` for medications for which a person has set up reminders and `false` for medications that are only taken as needed. > Note: Scheduled medications can still be taken as needed.
+func (uam *UserAnnotatedMedication) HasSchedule() bool {
+	_r := objc.Send[bool](objref.IDOf(uam), objc.RegisterName("hasSchedule"))
 	return _r
 }
 
-// Medication a reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
-func (x *UserAnnotatedMedication) Medication() *MedicationConcept {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("medication"))
+// Medication returns a reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
+func (uam *UserAnnotatedMedication) Medication() *MedicationConcept {
+	_r := objc.Send[objc.ID](objref.IDOf(uam), objc.RegisterName("medication"))
 	return MedicationConceptFromID(_r)
 }
-
-// UserAnnotatedMedicationable is the interface implemented by [UserAnnotatedMedication], for mocking and DI.
-type UserAnnotatedMedicationable interface {
-	obj.Object
-	Nickname() string
-	IsArchived() bool
-	HasSchedule() bool
-	Medication() *MedicationConcept
-}
-
-var _ UserAnnotatedMedicationable = (*UserAnnotatedMedication)(nil)

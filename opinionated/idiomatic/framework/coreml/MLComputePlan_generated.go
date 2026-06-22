@@ -46,24 +46,24 @@ func computePlanAdopt(id objc.ID) *ComputePlan {
 }
 
 // Description returns the object's -description text.
-func (x *ComputePlan) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *ComputePlan) Description() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComputePlan) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cp *ComputePlan) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComputePlan) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cp *ComputePlan) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComputePlan) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *ComputePlan) String() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // NewComputePlan creates a new ComputePlan.
@@ -73,36 +73,25 @@ func NewComputePlan() *ComputePlan {
 }
 
 // EstimatedCostOfMLProgramOperation returns the estimated cost of executing an ML Program operation.
-func (x *ComputePlan) EstimatedCostOfMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanCost {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("estimatedCostOfMLProgramOperation:"), objref.IDOf(operation))
+func (cp *ComputePlan) EstimatedCostOfMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanCost {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("estimatedCostOfMLProgramOperation:"), objref.IDOf(operation))
 	return ComputePlanCostFromID(_r)
 }
 
 // ComputeDeviceUsageForNeuralNetworkLayer returns the anticipated compute devices that would be used for executing a NeuralNetwork layer.
-func (x *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *ModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computeDeviceUsageForNeuralNetworkLayer:"), objref.IDOf(layer))
+func (cp *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *ModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("computeDeviceUsageForNeuralNetworkLayer:"), objref.IDOf(layer))
 	return ComputePlanDeviceUsageFromID(_r)
 }
 
 // ComputeDeviceUsageForMLProgramOperation returns The anticipated compute devices that would be used for executing an ML Program operation.
-func (x *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanDeviceUsage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computeDeviceUsageForMLProgramOperation:"), objref.IDOf(operation))
+func (cp *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanDeviceUsage {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("computeDeviceUsageForMLProgramOperation:"), objref.IDOf(operation))
 	return ComputePlanDeviceUsageFromID(_r)
 }
 
 // ModelStructure wraps the corresponding Objective-C method.
-func (x *ComputePlan) ModelStructure() *ModelStructure {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelStructure"))
+func (cp *ComputePlan) ModelStructure() *ModelStructure {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("modelStructure"))
 	return ModelStructureFromID(_r)
 }
-
-// ComputePlanable is the interface implemented by [ComputePlan], for mocking and DI.
-type ComputePlanable interface {
-	obj.Object
-	EstimatedCostOfMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanCost
-	ComputeDeviceUsageForNeuralNetworkLayer(layer *ModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage
-	ComputeDeviceUsageForMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanDeviceUsage
-	ModelStructure() *ModelStructure
-}
-
-var _ ComputePlanable = (*ComputePlan)(nil)

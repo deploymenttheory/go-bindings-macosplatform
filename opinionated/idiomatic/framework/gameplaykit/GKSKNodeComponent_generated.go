@@ -53,31 +53,16 @@ func NewSKNodeComponentWithNode(node obj.Object) *SKNodeComponent {
 	return sKNodeComponentAdopt(_id)
 }
 
-// WithNode the SpriteKit node managed by the component.
-func (x *SKNodeComponent) WithNode(node obj.Object) *SKNodeComponent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
-	return x
+// WithNode sets the SpriteKit node managed by the component.
+func (snc *SKNodeComponent) WithNode(node obj.Object) *SKNodeComponent {
+	objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("setNode:"), objref.IDOf(node))
+	return snc
 }
 
 // Node wraps the corresponding Objective-C method.
-func (x *SKNodeComponent) Node() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+func (snc *SKNodeComponent) Node() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }
-
-// SetNode wraps the corresponding Objective-C method.
-func (x *SKNodeComponent) SetNode(node obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
-}
-
-// SKNodeComponentable is the interface implemented by [SKNodeComponent], for mocking and DI.
-type SKNodeComponentable interface {
-	obj.Object
-	WithNode(node obj.Object) *SKNodeComponent
-	Node() obj.Object
-	SetNode(node obj.Object)
-}
-
-var _ SKNodeComponentable = (*SKNodeComponent)(nil)
 
 var _ ComponentProvider = (*SKNodeComponent)(nil)

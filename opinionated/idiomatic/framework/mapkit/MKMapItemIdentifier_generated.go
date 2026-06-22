@@ -46,24 +46,24 @@ func mapItemIdentifierAdopt(id objc.ID) *MapItemIdentifier {
 }
 
 // Description returns the object's -description text.
-func (x *MapItemIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mii *MapItemIdentifier) Description() string {
+	return rt.Description(objref.IDOf(mii))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapItemIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mii *MapItemIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mii), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapItemIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mii *MapItemIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mii), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapItemIdentifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mii *MapItemIdentifier) String() string {
+	return rt.Description(objref.IDOf(mii))
 }
 
 // NewMapItemIdentifierWithIdentifierString creates a new MapItemIdentifier.
@@ -74,18 +74,10 @@ func NewMapItemIdentifierWithIdentifierString(string_ string) *MapItemIdentifier
 }
 
 // IdentifierString wraps the corresponding Objective-C method.
-func (x *MapItemIdentifier) IdentifierString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifierString"))
+func (mii *MapItemIdentifier) IdentifierString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mii), objc.RegisterName("identifierString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MapItemIdentifierable is the interface implemented by [MapItemIdentifier], for mocking and DI.
-type MapItemIdentifierable interface {
-	obj.Object
-	IdentifierString() string
-}
-
-var _ MapItemIdentifierable = (*MapItemIdentifier)(nil)

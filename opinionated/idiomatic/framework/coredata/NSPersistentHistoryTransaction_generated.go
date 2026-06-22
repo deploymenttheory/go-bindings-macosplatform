@@ -46,24 +46,24 @@ func persistentHistoryTransactionAdopt(id objc.ID) *PersistentHistoryTransaction
 }
 
 // Description returns the object's -description text.
-func (x *PersistentHistoryTransaction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pht *PersistentHistoryTransaction) Description() string {
+	return rt.Description(objref.IDOf(pht))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentHistoryTransaction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pht *PersistentHistoryTransaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pht), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentHistoryTransaction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pht *PersistentHistoryTransaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pht), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentHistoryTransaction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pht *PersistentHistoryTransaction) String() string {
+	return rt.Description(objref.IDOf(pht))
 }
 
 // NewPersistentHistoryTransaction creates a new PersistentHistoryTransaction.
@@ -72,35 +72,35 @@ func NewPersistentHistoryTransaction() *PersistentHistoryTransaction {
 	return persistentHistoryTransactionAdopt(_id)
 }
 
-// ObjectIDNotification obtains a notification for use in merging the transaction’s changes into a managed object context.
-func (x *PersistentHistoryTransaction) ObjectIDNotification() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectIDNotification"))
+// ObjectIDNotification returns obtains a notification for use in merging the transaction’s changes into a managed object context.
+func (pht *PersistentHistoryTransaction) ObjectIDNotification() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("objectIDNotification"))
 	return obj.Wrap(_r)
 }
 
 // Timestamp wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) Timestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+func (pht *PersistentHistoryTransaction) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
 // Changes wraps the corresponding Objective-C method.
 //
 // Changes returns the collection as a Go slice.
-func (x *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
+func (pht *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
+	_arr := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("changes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentHistoryChange { return PersistentHistoryChangeFromID(_id) })
 }
 
 // TransactionNumber wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) TransactionNumber() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("transactionNumber"))
+func (pht *PersistentHistoryTransaction) TransactionNumber() int64 {
+	_r := objc.Send[int64](objref.IDOf(pht), objc.RegisterName("transactionNumber"))
 	return _r
 }
 
 // StoreID wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) StoreID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storeID"))
+func (pht *PersistentHistoryTransaction) StoreID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("storeID"))
 	if _r == 0 {
 		return ""
 	}
@@ -108,8 +108,8 @@ func (x *PersistentHistoryTransaction) StoreID() string {
 }
 
 // BundleID wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) BundleID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleID"))
+func (pht *PersistentHistoryTransaction) BundleID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("bundleID"))
 	if _r == 0 {
 		return ""
 	}
@@ -117,8 +117,8 @@ func (x *PersistentHistoryTransaction) BundleID() string {
 }
 
 // ProcessID wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) ProcessID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processID"))
+func (pht *PersistentHistoryTransaction) ProcessID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("processID"))
 	if _r == 0 {
 		return ""
 	}
@@ -126,8 +126,8 @@ func (x *PersistentHistoryTransaction) ProcessID() string {
 }
 
 // ContextName wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) ContextName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextName"))
+func (pht *PersistentHistoryTransaction) ContextName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("contextName"))
 	if _r == 0 {
 		return ""
 	}
@@ -135,8 +135,8 @@ func (x *PersistentHistoryTransaction) ContextName() string {
 }
 
 // Author wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) Author() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("author"))
+func (pht *PersistentHistoryTransaction) Author() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("author"))
 	if _r == 0 {
 		return ""
 	}
@@ -144,24 +144,7 @@ func (x *PersistentHistoryTransaction) Author() string {
 }
 
 // Token wraps the corresponding Objective-C method.
-func (x *PersistentHistoryTransaction) Token() *PersistentHistoryToken {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+func (pht *PersistentHistoryTransaction) Token() *PersistentHistoryToken {
+	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)
 }
-
-// PersistentHistoryTransactionable is the interface implemented by [PersistentHistoryTransaction], for mocking and DI.
-type PersistentHistoryTransactionable interface {
-	obj.Object
-	ObjectIDNotification() obj.Object
-	Timestamp() obj.Object
-	Changes() []*PersistentHistoryChange
-	TransactionNumber() int64
-	StoreID() string
-	BundleID() string
-	ProcessID() string
-	ContextName() string
-	Author() string
-	Token() *PersistentHistoryToken
-}
-
-var _ PersistentHistoryTransactionable = (*PersistentHistoryTransaction)(nil)

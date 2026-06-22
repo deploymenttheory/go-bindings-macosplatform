@@ -44,24 +44,24 @@ func scannerDeviceViewAdopt(id objc.ID) *ScannerDeviceView {
 }
 
 // Description returns the object's -description text.
-func (x *ScannerDeviceView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sdv *ScannerDeviceView) Description() string {
+	return rt.Description(objref.IDOf(sdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScannerDeviceView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sdv *ScannerDeviceView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScannerDeviceView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sdv *ScannerDeviceView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScannerDeviceView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sdv *ScannerDeviceView) String() string {
+	return rt.Description(objref.IDOf(sdv))
 }
 
 // NewScannerDeviceView creates a new ScannerDeviceView.
@@ -70,258 +70,155 @@ func NewScannerDeviceView() *ScannerDeviceView {
 	return scannerDeviceViewAdopt(_id)
 }
 
-// WithScannerDevice the scanner device.
-func (x *ScannerDeviceView) WithScannerDevice(scannerDevice obj.Object) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
-	return x
+// WithScannerDevice sets the scanner device.
+func (sdv *ScannerDeviceView) WithScannerDevice(scannerDevice obj.Object) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
+	return sdv
 }
 
-// WithMode current display mode.
-func (x *ScannerDeviceView) WithMode(mode ScannerDeviceViewDisplayMode) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
-	return x
+// WithMode sets current display mode.
+func (sdv *ScannerDeviceView) WithMode(mode ScannerDeviceViewDisplayMode) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setMode:"), mode)
+	return sdv
 }
 
-// WithHasDisplayModeSimple support a simple scanning UI.
-func (x *ScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
-	return x
+// WithHasDisplayModeSimple sets support a simple scanning UI.
+func (sdv *ScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
+	return sdv
 }
 
-// WithHasDisplayModeAdvanced support advanced scanning UI.
-func (x *ScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
-	return x
+// WithHasDisplayModeAdvanced sets support advanced scanning UI.
+func (sdv *ScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
+	return sdv
 }
 
-// WithTransferMode transfer mode either file based - or - in memory.
-func (x *ScannerDeviceView) WithTransferMode(transferMode ScannerDeviceViewTransferMode) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
-	return x
+// WithTransferMode sets transfer mode either file based - or - in memory.
+func (sdv *ScannerDeviceView) WithTransferMode(transferMode ScannerDeviceViewTransferMode) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setTransferMode:"), transferMode)
+	return sdv
 }
 
-// WithScanControlLabel label for the 'Scan' control.
-func (x *ScannerDeviceView) WithScanControlLabel(scanControlLabel string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
-	return x
+// WithScanControlLabel sets label for the 'Scan' control.
+func (sdv *ScannerDeviceView) WithScanControlLabel(scanControlLabel string) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
+	return sdv
 }
 
-// WithOverviewControlLabel label for the 'Overview' control.
-func (x *ScannerDeviceView) WithOverviewControlLabel(overviewControlLabel string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
-	return x
+// WithOverviewControlLabel sets label for the 'Overview' control.
+func (sdv *ScannerDeviceView) WithOverviewControlLabel(overviewControlLabel string) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
+	return sdv
 }
 
-// WithDisplaysDownloadsDirectoryControl show a downloads directory control.
-func (x *ScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
-	return x
+// WithDisplaysDownloadsDirectoryControl sets show a downloads directory control.
+func (sdv *ScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
+	return sdv
 }
 
-// WithDownloadsDirectory downloads directory.
-func (x *ScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
-	return x
+// WithDownloadsDirectory sets downloads directory.
+func (sdv *ScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
+	return sdv
 }
 
-// WithDocumentName document name.
-func (x *ScannerDeviceView) WithDocumentName(documentName string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
-	return x
+// WithDocumentName sets document name.
+func (sdv *ScannerDeviceView) WithDocumentName(documentName string) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
+	return sdv
 }
 
-// WithDisplaysPostProcessApplicationControl show a postprocessing application control.
-func (x *ScannerDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
-	return x
+// WithDisplaysPostProcessApplicationControl sets show a postprocessing application control.
+func (sdv *ScannerDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
+	return sdv
 }
 
-// WithPostProcessApplication postprocessing application.
-func (x *ScannerDeviceView) WithPostProcessApplication(postProcessApplication string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
-	return x
+// WithPostProcessApplication sets postprocessing application.
+func (sdv *ScannerDeviceView) WithPostProcessApplication(postProcessApplication string) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
+	return sdv
 }
 
-// ScannerDevice the scanner device.
-func (x *ScannerDeviceView) ScannerDevice() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scannerDevice"))
+// ScannerDevice returns the scanner device.
+func (sdv *ScannerDeviceView) ScannerDevice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("scannerDevice"))
 	return obj.Wrap(_r)
 }
 
-// SetScannerDevice wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetScannerDevice(scannerDevice obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
-}
-
-// Mode current display mode.
-func (x *ScannerDeviceView) Mode() ScannerDeviceViewDisplayMode {
-	_r := objc.Send[ScannerDeviceViewDisplayMode](objref.IDOf(x), objc.RegisterName("mode"))
+// Mode returns current display mode.
+func (sdv *ScannerDeviceView) Mode() ScannerDeviceViewDisplayMode {
+	_r := objc.Send[ScannerDeviceViewDisplayMode](objref.IDOf(sdv), objc.RegisterName("mode"))
 	return _r
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetMode(mode ScannerDeviceViewDisplayMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
-}
-
-// HasDisplayModeSimple support a simple scanning UI.
-func (x *ScannerDeviceView) HasDisplayModeSimple() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeSimple"))
+// HasDisplayModeSimple reports whether support a simple scanning UI.
+func (sdv *ScannerDeviceView) HasDisplayModeSimple() bool {
+	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("hasDisplayModeSimple"))
 	return _r
 }
 
-// SetHasDisplayModeSimple wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetHasDisplayModeSimple(hasDisplayModeSimple bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
-}
-
-// HasDisplayModeAdvanced support advanced scanning UI.
-func (x *ScannerDeviceView) HasDisplayModeAdvanced() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeAdvanced"))
+// HasDisplayModeAdvanced reports whether support advanced scanning UI.
+func (sdv *ScannerDeviceView) HasDisplayModeAdvanced() bool {
+	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("hasDisplayModeAdvanced"))
 	return _r
 }
 
-// SetHasDisplayModeAdvanced wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
-}
-
-// TransferMode transfer mode either file based - or - in memory.
-func (x *ScannerDeviceView) TransferMode() ScannerDeviceViewTransferMode {
-	_r := objc.Send[ScannerDeviceViewTransferMode](objref.IDOf(x), objc.RegisterName("transferMode"))
+// TransferMode returns transfer mode either file based - or - in memory.
+func (sdv *ScannerDeviceView) TransferMode() ScannerDeviceViewTransferMode {
+	_r := objc.Send[ScannerDeviceViewTransferMode](objref.IDOf(sdv), objc.RegisterName("transferMode"))
 	return _r
 }
 
-// SetTransferMode wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetTransferMode(transferMode ScannerDeviceViewTransferMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
-}
-
-// ScanControlLabel label for the 'Scan' control.
-func (x *ScannerDeviceView) ScanControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanControlLabel"))
+// ScanControlLabel returns label for the 'Scan' control.
+func (sdv *ScannerDeviceView) ScanControlLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("scanControlLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetScanControlLabel wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetScanControlLabel(scanControlLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
-}
-
-// OverviewControlLabel label for the 'Overview' control.
-func (x *ScannerDeviceView) OverviewControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overviewControlLabel"))
+// OverviewControlLabel returns label for the 'Overview' control.
+func (sdv *ScannerDeviceView) OverviewControlLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("overviewControlLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetOverviewControlLabel wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetOverviewControlLabel(overviewControlLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
-}
-
-// DisplaysDownloadsDirectoryControl show a downloads directory control.
-func (x *ScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysDownloadsDirectoryControl"))
+// DisplaysDownloadsDirectoryControl reports whether show a downloads directory control.
+func (sdv *ScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
+	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("displaysDownloadsDirectoryControl"))
 	return _r
 }
 
-// SetDisplaysDownloadsDirectoryControl wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
-}
-
-// DownloadsDirectory downloads directory.
-func (x *ScannerDeviceView) DownloadsDirectory() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadsDirectory"))
+// DownloadsDirectory returns downloads directory.
+func (sdv *ScannerDeviceView) DownloadsDirectory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("downloadsDirectory"))
 	return obj.Wrap(_r)
 }
 
-// SetDownloadsDirectory wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetDownloadsDirectory(downloadsDirectory string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
-}
-
-// DocumentName document name.
-func (x *ScannerDeviceView) DocumentName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentName"))
+// DocumentName returns document name.
+func (sdv *ScannerDeviceView) DocumentName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("documentName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDocumentName wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetDocumentName(documentName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
-}
-
-// DisplaysPostProcessApplicationControl show a postprocessing application control.
-func (x *ScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysPostProcessApplicationControl"))
+// DisplaysPostProcessApplicationControl reports whether show a postprocessing application control.
+func (sdv *ScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
+	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("displaysPostProcessApplicationControl"))
 	return _r
 }
 
-// SetDisplaysPostProcessApplicationControl wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
-}
-
-// PostProcessApplication postprocessing application.
-func (x *ScannerDeviceView) PostProcessApplication() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postProcessApplication"))
+// PostProcessApplication returns postprocessing application.
+func (sdv *ScannerDeviceView) PostProcessApplication() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("postProcessApplication"))
 	return obj.Wrap(_r)
 }
-
-// SetPostProcessApplication wraps the corresponding Objective-C method.
-func (x *ScannerDeviceView) SetPostProcessApplication(postProcessApplication string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
-}
-
-// ScannerDeviceViewable is the interface implemented by [ScannerDeviceView], for mocking and DI.
-type ScannerDeviceViewable interface {
-	obj.Object
-	WithScannerDevice(scannerDevice obj.Object) *ScannerDeviceView
-	WithMode(mode ScannerDeviceViewDisplayMode) *ScannerDeviceView
-	WithHasDisplayModeSimple(hasDisplayModeSimple bool) *ScannerDeviceView
-	WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *ScannerDeviceView
-	WithTransferMode(transferMode ScannerDeviceViewTransferMode) *ScannerDeviceView
-	WithScanControlLabel(scanControlLabel string) *ScannerDeviceView
-	WithOverviewControlLabel(overviewControlLabel string) *ScannerDeviceView
-	WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *ScannerDeviceView
-	WithDownloadsDirectory(downloadsDirectory string) *ScannerDeviceView
-	WithDocumentName(documentName string) *ScannerDeviceView
-	WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *ScannerDeviceView
-	WithPostProcessApplication(postProcessApplication string) *ScannerDeviceView
-	ScannerDevice() obj.Object
-	SetScannerDevice(scannerDevice obj.Object)
-	Mode() ScannerDeviceViewDisplayMode
-	SetMode(mode ScannerDeviceViewDisplayMode)
-	HasDisplayModeSimple() bool
-	SetHasDisplayModeSimple(hasDisplayModeSimple bool)
-	HasDisplayModeAdvanced() bool
-	SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool)
-	TransferMode() ScannerDeviceViewTransferMode
-	SetTransferMode(transferMode ScannerDeviceViewTransferMode)
-	ScanControlLabel() string
-	SetScanControlLabel(scanControlLabel string)
-	OverviewControlLabel() string
-	SetOverviewControlLabel(overviewControlLabel string)
-	DisplaysDownloadsDirectoryControl() bool
-	SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool)
-	DownloadsDirectory() obj.Object
-	SetDownloadsDirectory(downloadsDirectory string)
-	DocumentName() string
-	SetDocumentName(documentName string)
-	DisplaysPostProcessApplicationControl() bool
-	SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool)
-	PostProcessApplication() obj.Object
-	SetPostProcessApplication(postProcessApplication string)
-}
-
-var _ ScannerDeviceViewable = (*ScannerDeviceView)(nil)

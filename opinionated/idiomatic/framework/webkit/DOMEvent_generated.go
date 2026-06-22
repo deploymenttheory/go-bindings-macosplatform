@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,30 +58,30 @@ func NewDOMEventEvent(eventTypeArg string, canBubbleArg bool, cancelableArg bool
 }
 
 // WithReturnValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMEvent) WithReturnValue(returnValue bool) *DOMEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
-	return x
+func (de *DOMEvent) WithReturnValue(returnValue bool) *DOMEvent {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setReturnValue:"), returnValue)
+	return de
 }
 
 // WithCancelBubble sets the property and returns the receiver so calls can be chained.
-func (x *DOMEvent) WithCancelBubble(cancelBubble bool) *DOMEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
-	return x
+func (de *DOMEvent) WithCancelBubble(cancelBubble bool) *DOMEvent {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return de
 }
 
 // StopPropagation wraps the corresponding Objective-C method.
-func (x *DOMEvent) StopPropagation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPropagation"))
+func (de *DOMEvent) StopPropagation() {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("stopPropagation"))
 }
 
 // PreventDefault wraps the corresponding Objective-C method.
-func (x *DOMEvent) PreventDefault() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preventDefault"))
+func (de *DOMEvent) PreventDefault() {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("preventDefault"))
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *DOMEvent) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (de *DOMEvent) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,75 +89,45 @@ func (x *DOMEvent) Type() string {
 }
 
 // EventPhase wraps the corresponding Objective-C method.
-func (x *DOMEvent) EventPhase() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("eventPhase"))
+func (de *DOMEvent) EventPhase() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(de), objc.RegisterName("eventPhase"))
 	return _r
 }
 
 // Bubbles wraps the corresponding Objective-C method.
-func (x *DOMEvent) Bubbles() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bubbles"))
+func (de *DOMEvent) Bubbles() bool {
+	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("bubbles"))
 	return _r
 }
 
 // Cancelable wraps the corresponding Objective-C method.
-func (x *DOMEvent) Cancelable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelable"))
+func (de *DOMEvent) Cancelable() bool {
+	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("cancelable"))
 	return _r
 }
 
 // TimeStamp wraps the corresponding Objective-C method.
-func (x *DOMEvent) TimeStamp() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("timeStamp"))
+func (de *DOMEvent) TimeStamp() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(de), objc.RegisterName("timeStamp"))
 	return _r
 }
 
 // ReturnValue wraps the corresponding Objective-C method.
-func (x *DOMEvent) ReturnValue() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnValue"))
+func (de *DOMEvent) ReturnValue() bool {
+	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("returnValue"))
 	return _r
-}
-
-// SetReturnValue wraps the corresponding Objective-C method.
-func (x *DOMEvent) SetReturnValue(returnValue bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 }
 
 // CancelBubble wraps the corresponding Objective-C method.
-func (x *DOMEvent) CancelBubble() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelBubble"))
+func (de *DOMEvent) CancelBubble() bool {
+	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("cancelBubble"))
 	return _r
 }
-
-// SetCancelBubble wraps the corresponding Objective-C method.
-func (x *DOMEvent) SetCancelBubble(cancelBubble bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
-}
-
-// DOMEventable is the interface implemented by [DOMEvent], for mocking and DI.
-type DOMEventable interface {
-	obj.Object
-	WithReturnValue(returnValue bool) *DOMEvent
-	WithCancelBubble(cancelBubble bool) *DOMEvent
-	StopPropagation()
-	PreventDefault()
-	Type() string
-	EventPhase() uint16
-	Bubbles() bool
-	Cancelable() bool
-	TimeStamp() uint64
-	ReturnValue() bool
-	SetReturnValue(returnValue bool)
-	CancelBubble() bool
-	SetCancelBubble(cancelBubble bool)
-}
-
-var _ DOMEventable = (*DOMEvent)(nil)
 
 // isDOMEvent marks DOMEvent — and, by embedding promotion, its
 // subclasses — as a member of the DOMEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMEvent) isDOMEvent() {}
+func (de *DOMEvent) isDOMEvent() {}
 
 var _ DOMEventProvider = (*DOMEvent)(nil)
 

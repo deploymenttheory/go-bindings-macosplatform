@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,46 +49,34 @@ func NewRNNSingleGateDescriptor() *RNNSingleGateDescriptor {
 	return rNNSingleGateDescriptorAdopt(_id)
 }
 
-// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
-func (x *RNNSingleGateDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNSingleGateDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
-	return x
+// WithInputFeatureChannels sets the number of feature channels per pixel in the input image or number of rows in the input matrix.
+func (rsgd *RNNSingleGateDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rsgd), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
+	return rsgd
 }
 
-// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-func (x *RNNSingleGateDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNSingleGateDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
-	return x
+// WithOutputFeatureChannels sets the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+func (rsgd *RNNSingleGateDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rsgd), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
+	return rsgd
 }
 
-// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-func (x *RNNSingleGateDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
-	return x
+// WithUseLayerInputUnitTransformMode sets if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
+func (rsgd *RNNSingleGateDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rsgd), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
+	return rsgd
 }
 
-// WithUseFloat32Weights if YES, then
-func (x *RNNSingleGateDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
-	return x
+// WithUseFloat32Weights sets if YES, then
+func (rsgd *RNNSingleGateDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rsgd), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
+	return rsgd
 }
 
-// WithLayerSequenceDirection when the layer specified with this descriptor is used to process a sequence of inputs by calling
-func (x *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection RNNSequenceDirection) *RNNSingleGateDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerSequenceDirection:"), layerSequenceDirection)
-	return x
+// WithLayerSequenceDirection sets when the layer specified with this descriptor is used to process a sequence of inputs by calling
+func (rsgd *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection RNNSequenceDirection) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rsgd), objc.RegisterName("setLayerSequenceDirection:"), layerSequenceDirection)
+	return rsgd
 }
-
-// RNNSingleGateDescriptorable is the interface implemented by [RNNSingleGateDescriptor], for mocking and DI.
-type RNNSingleGateDescriptorable interface {
-	obj.Object
-	WithInputFeatureChannels(inputFeatureChannels int) *RNNSingleGateDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels int) *RNNSingleGateDescriptor
-	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor
-	WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor
-	WithLayerSequenceDirection(layerSequenceDirection RNNSequenceDirection) *RNNSingleGateDescriptor
-}
-
-var _ RNNSingleGateDescriptorable = (*RNNSingleGateDescriptor)(nil)
 
 var _ RNNDescriptorProvider = (*RNNSingleGateDescriptor)(nil)

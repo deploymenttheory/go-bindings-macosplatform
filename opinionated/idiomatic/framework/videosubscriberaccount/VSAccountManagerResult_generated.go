@@ -46,24 +46,24 @@ func vSAccountManagerResultAdopt(id objc.ID) *VSAccountManagerResult {
 }
 
 // Description returns the object's -description text.
-func (x *VSAccountManagerResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vamr *VSAccountManagerResult) Description() string {
+	return rt.Description(objref.IDOf(vamr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSAccountManagerResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vamr *VSAccountManagerResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vamr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSAccountManagerResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vamr *VSAccountManagerResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vamr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSAccountManagerResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vamr *VSAccountManagerResult) String() string {
+	return rt.Description(objref.IDOf(vamr))
 }
 
 // NewVSAccountManagerResult creates a new VSAccountManagerResult.
@@ -73,14 +73,6 @@ func NewVSAccountManagerResult() *VSAccountManagerResult {
 }
 
 // Cancel cancels an in-progress request for subscriber account information.
-func (x *VSAccountManagerResult) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (vamr *VSAccountManagerResult) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("cancel"))
 }
-
-// VSAccountManagerResultable is the interface implemented by [VSAccountManagerResult], for mocking and DI.
-type VSAccountManagerResultable interface {
-	obj.Object
-	Cancel()
-}
-
-var _ VSAccountManagerResultable = (*VSAccountManagerResult)(nil)

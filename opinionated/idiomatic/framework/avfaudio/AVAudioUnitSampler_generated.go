@@ -5,13 +5,14 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AudioUnitSampler is an idiomatic wrapper over the Objective-C class AVAudioUnitSampler.
@@ -55,34 +56,34 @@ func NewAudioUnitSampler() *AudioUnitSampler {
 	return audioUnitSamplerAdopt(_id)
 }
 
-// WithStereoPan an adjustment for the stereo panning of all the played notes.
-func (x *AudioUnitSampler) WithStereoPan(stereoPan float32) *AudioUnitSampler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStereoPan:"), stereoPan)
-	return x
+// WithStereoPan sets an adjustment for the stereo panning of all the played notes.
+func (aus *AudioUnitSampler) WithStereoPan(stereoPan float32) *AudioUnitSampler {
+	objc.Send[objc.ID](objref.IDOf(aus), objc.RegisterName("setStereoPan:"), stereoPan)
+	return aus
 }
 
-// WithOverallGain an adjustment for the gain of all the played notes, in decibels.
-func (x *AudioUnitSampler) WithOverallGain(overallGain float32) *AudioUnitSampler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverallGain:"), overallGain)
-	return x
+// WithOverallGain sets an adjustment for the gain of all the played notes, in decibels.
+func (aus *AudioUnitSampler) WithOverallGain(overallGain float32) *AudioUnitSampler {
+	objc.Send[objc.ID](objref.IDOf(aus), objc.RegisterName("setOverallGain:"), overallGain)
+	return aus
 }
 
-// WithMasterGain an adjustment for the gain of all the played notes, in decibels.
-func (x *AudioUnitSampler) WithMasterGain(masterGain float32) *AudioUnitSampler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasterGain:"), masterGain)
-	return x
+// WithMasterGain sets an adjustment for the gain of all the played notes, in decibels.
+func (aus *AudioUnitSampler) WithMasterGain(masterGain float32) *AudioUnitSampler {
+	objc.Send[objc.ID](objref.IDOf(aus), objc.RegisterName("setMasterGain:"), masterGain)
+	return aus
 }
 
-// WithGlobalTuning an adjustment for the tuning of all the played notes.
-func (x *AudioUnitSampler) WithGlobalTuning(globalTuning float32) *AudioUnitSampler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalTuning:"), globalTuning)
-	return x
+// WithGlobalTuning sets an adjustment for the tuning of all the played notes.
+func (aus *AudioUnitSampler) WithGlobalTuning(globalTuning float32) *AudioUnitSampler {
+	objc.Send[objc.ID](objref.IDOf(aus), objc.RegisterName("setGlobalTuning:"), globalTuning)
+	return aus
 }
 
 // LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB loads a specific instrument from the specified soundbank.
-func (x *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) error {
+func (aus *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error:"), rt.FileURL(bankURL), program, bankMSB, bankLSB, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(aus), objc.RegisterName("loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error:"), rt.FileURL(bankURL), program, bankMSB, bankLSB, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -90,9 +91,9 @@ func (x *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(ban
 }
 
 // LoadInstrumentAtURL configures the sampler with the specified instrument file.
-func (x *AudioUnitSampler) LoadInstrumentAtURL(instrumentURL string) error {
+func (aus *AudioUnitSampler) LoadInstrumentAtURL(instrumentURL string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadInstrumentAtURL:error:"), rt.FileURL(instrumentURL), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(aus), objc.RegisterName("loadInstrumentAtURL:error:"), rt.FileURL(instrumentURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -100,80 +101,38 @@ func (x *AudioUnitSampler) LoadInstrumentAtURL(instrumentURL string) error {
 }
 
 // LoadAudioFilesAtURLs configures the sampler by loading the specified audio files.
-func (x *AudioUnitSampler) LoadAudioFilesAtURLs(audioFiles []obj.Object) error {
+func (aus *AudioUnitSampler) LoadAudioFilesAtURLs(audioFiles []obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadAudioFilesAtURLs:error:"), purego.SliceToNSArray(audioFiles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(aus), objc.RegisterName("loadAudioFilesAtURLs:error:"), purego.SliceToNSArray(audioFiles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// StereoPan adjusts the pan for all the notes played. Range:     -100 -> +100 Default:   0
-func (x *AudioUnitSampler) StereoPan() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("stereoPan"))
+// StereoPan returns adjusts the pan for all the notes played. Range:     -100 -> +100 Default:   0
+func (aus *AudioUnitSampler) StereoPan() float32 {
+	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("stereoPan"))
 	return _r
 }
 
-// SetStereoPan wraps the corresponding Objective-C method.
-func (x *AudioUnitSampler) SetStereoPan(stereoPan float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStereoPan:"), stereoPan)
-}
-
-// OverallGain adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
-func (x *AudioUnitSampler) OverallGain() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overallGain"))
+// OverallGain returns adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
+func (aus *AudioUnitSampler) OverallGain() float32 {
+	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("overallGain"))
 	return _r
 }
 
-// SetOverallGain wraps the corresponding Objective-C method.
-func (x *AudioUnitSampler) SetOverallGain(overallGain float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverallGain:"), overallGain)
-}
-
-// MasterGain adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
-func (x *AudioUnitSampler) MasterGain() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("masterGain"))
+// MasterGain returns adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
+func (aus *AudioUnitSampler) MasterGain() float32 {
+	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("masterGain"))
 	return _r
 }
 
-// SetMasterGain wraps the corresponding Objective-C method.
-func (x *AudioUnitSampler) SetMasterGain(masterGain float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasterGain:"), masterGain)
-}
-
-// GlobalTuning adjusts the tuning of all the notes played. Range:     -2400 -> +2400 cents Default:   0
-func (x *AudioUnitSampler) GlobalTuning() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("globalTuning"))
+// GlobalTuning returns adjusts the tuning of all the notes played. Range:     -2400 -> +2400 cents Default:   0
+func (aus *AudioUnitSampler) GlobalTuning() float32 {
+	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("globalTuning"))
 	return _r
 }
-
-// SetGlobalTuning wraps the corresponding Objective-C method.
-func (x *AudioUnitSampler) SetGlobalTuning(globalTuning float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalTuning:"), globalTuning)
-}
-
-// AudioUnitSamplerable is the interface implemented by [AudioUnitSampler], for mocking and DI.
-type AudioUnitSamplerable interface {
-	obj.Object
-	WithStereoPan(stereoPan float32) *AudioUnitSampler
-	WithOverallGain(overallGain float32) *AudioUnitSampler
-	WithMasterGain(masterGain float32) *AudioUnitSampler
-	WithGlobalTuning(globalTuning float32) *AudioUnitSampler
-	LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) error
-	LoadInstrumentAtURL(instrumentURL string) error
-	LoadAudioFilesAtURLs(audioFiles []obj.Object) error
-	StereoPan() float32
-	SetStereoPan(stereoPan float32)
-	OverallGain() float32
-	SetOverallGain(overallGain float32)
-	MasterGain() float32
-	SetMasterGain(masterGain float32)
-	GlobalTuning() float32
-	SetGlobalTuning(globalTuning float32)
-}
-
-var _ AudioUnitSamplerable = (*AudioUnitSampler)(nil)
 
 var _ AudioUnitMIDIInstrumentProvider = (*AudioUnitSampler)(nil)
 

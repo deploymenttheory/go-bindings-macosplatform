@@ -46,24 +46,24 @@ func fileProviderRequestAdopt(id objc.ID) *FileProviderRequest {
 }
 
 // Description returns the object's -description text.
-func (x *FileProviderRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpr *FileProviderRequest) Description() string {
+	return rt.Description(objref.IDOf(fpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileProviderRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpr *FileProviderRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileProviderRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpr *FileProviderRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileProviderRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpr *FileProviderRequest) String() string {
+	return rt.Description(objref.IDOf(fpr))
 }
 
 // NewFileProviderRequest creates a new FileProviderRequest.
@@ -72,37 +72,26 @@ func NewFileProviderRequest() *FileProviderRequest {
 	return fileProviderRequestAdopt(_id)
 }
 
-// IsSystemRequest the request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
-func (x *FileProviderRequest) IsSystemRequest() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSystemRequest"))
+// IsSystemRequest reports whether the request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
+func (fpr *FileProviderRequest) IsSystemRequest() bool {
+	_r := objc.Send[bool](objref.IDOf(fpr), objc.RegisterName("isSystemRequest"))
 	return _r
 }
 
-// IsFileViewerRequest the request was made by Finder or one of its helpers. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
-func (x *FileProviderRequest) IsFileViewerRequest() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFileViewerRequest"))
+// IsFileViewerRequest reports whether the request was made by Finder or one of its helpers. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
+func (fpr *FileProviderRequest) IsFileViewerRequest() bool {
+	_r := objc.Send[bool](objref.IDOf(fpr), objc.RegisterName("isFileViewerRequest"))
 	return _r
 }
 
-// RequestingExecutable the URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
-func (x *FileProviderRequest) RequestingExecutable() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestingExecutable"))
+// RequestingExecutable returns the URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
+func (fpr *FileProviderRequest) RequestingExecutable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("requestingExecutable"))
 	return obj.Wrap(_r)
 }
 
-// DomainVersion the version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
-func (x *FileProviderRequest) DomainVersion() *FileProviderDomainVersion {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainVersion"))
+// DomainVersion returns the version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
+func (fpr *FileProviderRequest) DomainVersion() *FileProviderDomainVersion {
+	_r := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("domainVersion"))
 	return FileProviderDomainVersionFromID(_r)
 }
-
-// FileProviderRequestable is the interface implemented by [FileProviderRequest], for mocking and DI.
-type FileProviderRequestable interface {
-	obj.Object
-	IsSystemRequest() bool
-	IsFileViewerRequest() bool
-	RequestingExecutable() obj.Object
-	DomainVersion() *FileProviderDomainVersion
-}
-
-var _ FileProviderRequestable = (*FileProviderRequest)(nil)

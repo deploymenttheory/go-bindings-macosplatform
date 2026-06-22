@@ -54,17 +54,9 @@ func NewSCNNodeComponentWithNode(node obj.Object) *SCNNodeComponent {
 }
 
 // Node wraps the corresponding Objective-C method.
-func (x *SCNNodeComponent) Node() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+func (snc *SCNNodeComponent) Node() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }
-
-// SCNNodeComponentable is the interface implemented by [SCNNodeComponent], for mocking and DI.
-type SCNNodeComponentable interface {
-	obj.Object
-	Node() obj.Object
-}
-
-var _ SCNNodeComponentable = (*SCNNodeComponent)(nil)
 
 var _ ComponentProvider = (*SCNNodeComponent)(nil)

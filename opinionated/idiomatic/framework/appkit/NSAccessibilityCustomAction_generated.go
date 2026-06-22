@@ -46,24 +46,24 @@ func accessibilityCustomActionAdopt(id objc.ID) *AccessibilityCustomAction {
 }
 
 // Description returns the object's -description text.
-func (x *AccessibilityCustomAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aca *AccessibilityCustomAction) Description() string {
+	return rt.Description(objref.IDOf(aca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessibilityCustomAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aca *AccessibilityCustomAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessibilityCustomAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aca *AccessibilityCustomAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessibilityCustomAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aca *AccessibilityCustomAction) String() string {
+	return rt.Description(objref.IDOf(aca))
 }
 
 // NewAccessibilityCustomActionWithNameHandler creates a custom action object with the specified name and handler.
@@ -73,45 +73,23 @@ func NewAccessibilityCustomActionWithNameHandler(name string, handler func() boo
 	return accessibilityCustomActionAdopt(_id)
 }
 
-// WithName a localized name that describes the action.
-func (x *AccessibilityCustomAction) WithName(name string) *AccessibilityCustomAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a localized name that describes the action.
+func (aca *AccessibilityCustomAction) WithName(name string) *AccessibilityCustomAction {
+	objc.Send[objc.ID](objref.IDOf(aca), objc.RegisterName("setName:"), purego.NSString(name))
+	return aca
 }
 
-// WithHandler the closure that handles the execution of the action.
-func (x *AccessibilityCustomAction) WithHandler(handler func() bool) *AccessibilityCustomAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHandler:"), objc.NewBlock(func(_ objc.Block) bool { return handler() }))
-	return x
+// WithHandler sets the closure that handles the execution of the action.
+func (aca *AccessibilityCustomAction) WithHandler(handler func() bool) *AccessibilityCustomAction {
+	objc.Send[objc.ID](objref.IDOf(aca), objc.RegisterName("setHandler:"), objc.NewBlock(func(_ objc.Block) bool { return handler() }))
+	return aca
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *AccessibilityCustomAction) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (aca *AccessibilityCustomAction) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aca), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *AccessibilityCustomAction) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// SetHandler wraps the corresponding Objective-C method.
-func (x *AccessibilityCustomAction) SetHandler(handler func() bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHandler:"), objc.NewBlock(func(_ objc.Block) bool { return handler() }))
-}
-
-// AccessibilityCustomActionable is the interface implemented by [AccessibilityCustomAction], for mocking and DI.
-type AccessibilityCustomActionable interface {
-	obj.Object
-	WithName(name string) *AccessibilityCustomAction
-	WithHandler(handler func() bool) *AccessibilityCustomAction
-	Name() string
-	SetName(name string)
-	SetHandler(handler func() bool)
-}
-
-var _ AccessibilityCustomActionable = (*AccessibilityCustomAction)(nil)

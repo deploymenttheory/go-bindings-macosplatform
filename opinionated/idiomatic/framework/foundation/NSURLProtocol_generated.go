@@ -46,24 +46,24 @@ func uRLProtocolAdopt(id objc.ID) *URLProtocol {
 }
 
 // Description returns the object's -description text.
-func (x *URLProtocol) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (up *URLProtocol) Description() string {
+	return rt.Description(objref.IDOf(up))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLProtocol) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (up *URLProtocol) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(up), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLProtocol) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (up *URLProtocol) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(up), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLProtocol) String() string {
-	return rt.Description(objref.IDOf(x))
+func (up *URLProtocol) String() string {
+	return rt.Description(objref.IDOf(up))
 }
 
 // NewURLProtocol creates a new URLProtocol.
@@ -73,48 +73,35 @@ func NewURLProtocol() *URLProtocol {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLProtocol) WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (up *URLProtocol) WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol {
+	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return up
 }
 
 // StartLoading starts protocol-specific loading of a request. When this method is called, the protocol implementation should start loading a request.
-func (x *URLProtocol) StartLoading() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startLoading"))
+func (up *URLProtocol) StartLoading() {
+	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("startLoading"))
 }
 
 // StopLoading stops protocol-specific loading of a request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
-func (x *URLProtocol) StopLoading() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopLoading"))
+func (up *URLProtocol) StopLoading() {
+	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("stopLoading"))
 }
 
 // Request returns the NSURLRequest of the receiver.
-func (x *URLProtocol) Request() *URLRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+func (up *URLProtocol) Request() *URLRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
 // CachedResponse returns the NSCachedURLResponse of the receiver.
-func (x *URLProtocol) CachedResponse() *CachedURLResponse {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cachedResponse"))
+func (up *URLProtocol) CachedResponse() *CachedURLResponse {
+	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("cachedResponse"))
 	return CachedURLResponseFromID(_r)
 }
 
 // Task wraps the corresponding Objective-C method.
-func (x *URLProtocol) Task() *URLSessionTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("task"))
+func (up *URLProtocol) Task() *URLSessionTask {
+	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("task"))
 	return URLSessionTaskFromID(_r)
 }
-
-// URLProtocolable is the interface implemented by [URLProtocol], for mocking and DI.
-type URLProtocolable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol
-	StartLoading()
-	StopLoading()
-	Request() *URLRequest
-	CachedResponse() *CachedURLResponse
-	Task() *URLSessionTask
-}
-
-var _ URLProtocolable = (*URLProtocol)(nil)

@@ -46,24 +46,24 @@ func currencyAmountAdopt(id objc.ID) *CurrencyAmount {
 }
 
 // Description returns the object's -description text.
-func (x *CurrencyAmount) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *CurrencyAmount) Description() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CurrencyAmount) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ca *CurrencyAmount) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CurrencyAmount) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ca *CurrencyAmount) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CurrencyAmount) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *CurrencyAmount) String() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // NewCurrencyAmountWithAmountCurrencyCode initializes a currency amount object with the specified values.
@@ -74,25 +74,16 @@ func NewCurrencyAmountWithAmountCurrencyCode(amount obj.Object, currencyCode str
 }
 
 // Amount wraps the corresponding Objective-C method.
-func (x *CurrencyAmount) Amount() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+func (ca *CurrencyAmount) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
 // CurrencyCode wraps the corresponding Objective-C method.
-func (x *CurrencyAmount) CurrencyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+func (ca *CurrencyAmount) CurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CurrencyAmountable is the interface implemented by [CurrencyAmount], for mocking and DI.
-type CurrencyAmountable interface {
-	obj.Object
-	Amount() obj.Object
-	CurrencyCode() string
-}
-
-var _ CurrencyAmountable = (*CurrencyAmount)(nil)

@@ -46,24 +46,24 @@ func localIdentifierMappingAdopt(id objc.ID) *LocalIdentifierMapping {
 }
 
 // Description returns the object's -description text.
-func (x *LocalIdentifierMapping) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lim *LocalIdentifierMapping) Description() string {
+	return rt.Description(objref.IDOf(lim))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalIdentifierMapping) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lim *LocalIdentifierMapping) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lim), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalIdentifierMapping) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lim *LocalIdentifierMapping) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lim), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocalIdentifierMapping) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lim *LocalIdentifierMapping) String() string {
+	return rt.Description(objref.IDOf(lim))
 }
 
 // NewLocalIdentifierMapping creates a new LocalIdentifierMapping.
@@ -72,19 +72,11 @@ func NewLocalIdentifierMapping() *LocalIdentifierMapping {
 	return localIdentifierMappingAdopt(_id)
 }
 
-// LocalIdentifier the \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
-func (x *LocalIdentifierMapping) LocalIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
+// LocalIdentifier returns the \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
+func (lim *LocalIdentifierMapping) LocalIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lim), objc.RegisterName("localIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// LocalIdentifierMappingable is the interface implemented by [LocalIdentifierMapping], for mocking and DI.
-type LocalIdentifierMappingable interface {
-	obj.Object
-	LocalIdentifier() string
-}
-
-var _ LocalIdentifierMappingable = (*LocalIdentifierMapping)(nil)

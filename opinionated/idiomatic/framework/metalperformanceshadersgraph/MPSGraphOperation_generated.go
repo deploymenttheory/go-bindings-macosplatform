@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,61 +45,49 @@ func graphOperationAdopt(id objc.ID) *GraphOperation {
 	return x
 }
 
-// InputTensors the input tensors of the operation.
+// InputTensors returns the input tensors of the operation.
 //
 // InputTensors returns the collection as a Go slice.
-func (x *GraphOperation) InputTensors() []*GraphTensor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputTensors"))
+func (go_ *GraphOperation) InputTensors() []*GraphTensor {
+	_arr := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("inputTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// OutputTensors the output tensors of the operation.
+// OutputTensors returns the output tensors of the operation.
 //
 // OutputTensors returns the collection as a Go slice.
-func (x *GraphOperation) OutputTensors() []*GraphTensor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputTensors"))
+func (go_ *GraphOperation) OutputTensors() []*GraphTensor {
+	_arr := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("outputTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// ControlDependencies the set of operations guaranteed to execute before this operation.
+// ControlDependencies returns the set of operations guaranteed to execute before this operation.
 //
 // ControlDependencies returns the collection as a Go slice.
-func (x *GraphOperation) ControlDependencies() []*GraphOperation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlDependencies"))
+func (go_ *GraphOperation) ControlDependencies() []*GraphOperation {
+	_arr := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("controlDependencies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphOperation { return GraphOperationFromID(_id) })
 }
 
-// Graph the graph on which the operation is defined.
-func (x *GraphOperation) Graph() *Graph {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graph"))
+// Graph returns the graph on which the operation is defined.
+func (go_ *GraphOperation) Graph() *Graph {
+	_r := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("graph"))
 	return GraphFromID(_r)
 }
 
-// Name name of the operation.
-func (x *GraphOperation) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name of the operation.
+func (go_ *GraphOperation) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// GraphOperationable is the interface implemented by [GraphOperation], for mocking and DI.
-type GraphOperationable interface {
-	obj.Object
-	InputTensors() []*GraphTensor
-	OutputTensors() []*GraphTensor
-	ControlDependencies() []*GraphOperation
-	Graph() *Graph
-	Name() string
-}
-
-var _ GraphOperationable = (*GraphOperation)(nil)
-
 // isGraphOperation marks GraphOperation — and, by embedding promotion, its
 // subclasses — as a member of the GraphOperation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GraphOperation) isGraphOperation() {}
+func (go_ *GraphOperation) isGraphOperation() {}
 
 var _ GraphOperationProvider = (*GraphOperation)(nil)
 

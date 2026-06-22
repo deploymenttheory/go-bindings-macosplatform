@@ -46,24 +46,24 @@ func morphologyCustomPronounAdopt(id objc.ID) *MorphologyCustomPronoun {
 }
 
 // Description returns the object's -description text.
-func (x *MorphologyCustomPronoun) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcp *MorphologyCustomPronoun) Description() string {
+	return rt.Description(objref.IDOf(mcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MorphologyCustomPronoun) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcp *MorphologyCustomPronoun) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MorphologyCustomPronoun) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcp *MorphologyCustomPronoun) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MorphologyCustomPronoun) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcp *MorphologyCustomPronoun) String() string {
+	return rt.Description(objref.IDOf(mcp))
 }
 
 // NewMorphologyCustomPronoun creates a new MorphologyCustomPronoun.
@@ -72,131 +72,83 @@ func NewMorphologyCustomPronoun() *MorphologyCustomPronoun {
 	return morphologyCustomPronounAdopt(_id)
 }
 
-// WithSubjectForm the subject pronoun form to apply when using this custom pronoun behavior.
-func (x *MorphologyCustomPronoun) WithSubjectForm(subjectForm StringProvider) *MorphologyCustomPronoun {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubjectForm:"), objref.IDOf(subjectForm))
-	return x
+// WithSubjectForm sets the subject pronoun form to apply when using this custom pronoun behavior.
+func (mcp *MorphologyCustomPronoun) WithSubjectForm(subjectForm StringProvider) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setSubjectForm:"), objref.IDOf(subjectForm))
+	return mcp
 }
 
-// WithObjectForm the object pronoun form to apply when using this custom pronoun behavior.
-func (x *MorphologyCustomPronoun) WithObjectForm(objectForm StringProvider) *MorphologyCustomPronoun {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectForm:"), objref.IDOf(objectForm))
-	return x
+// WithObjectForm sets the object pronoun form to apply when using this custom pronoun behavior.
+func (mcp *MorphologyCustomPronoun) WithObjectForm(objectForm StringProvider) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setObjectForm:"), objref.IDOf(objectForm))
+	return mcp
 }
 
-// WithPossessiveForm the posessive pronoun form to apply when using this custom pronoun behavior.
-func (x *MorphologyCustomPronoun) WithPossessiveForm(possessiveForm StringProvider) *MorphologyCustomPronoun {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossessiveForm:"), objref.IDOf(possessiveForm))
-	return x
+// WithPossessiveForm sets the posessive pronoun form to apply when using this custom pronoun behavior.
+func (mcp *MorphologyCustomPronoun) WithPossessiveForm(possessiveForm StringProvider) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setPossessiveForm:"), objref.IDOf(possessiveForm))
+	return mcp
 }
 
-// WithPossessiveAdjectiveForm the posessive adjective pronoun form to apply when using this custom pronoun behavior.
-func (x *MorphologyCustomPronoun) WithPossessiveAdjectiveForm(possessiveAdjectiveForm StringProvider) *MorphologyCustomPronoun {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossessiveAdjectiveForm:"), objref.IDOf(possessiveAdjectiveForm))
-	return x
+// WithPossessiveAdjectiveForm sets the posessive adjective pronoun form to apply when using this custom pronoun behavior.
+func (mcp *MorphologyCustomPronoun) WithPossessiveAdjectiveForm(possessiveAdjectiveForm StringProvider) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setPossessiveAdjectiveForm:"), objref.IDOf(possessiveAdjectiveForm))
+	return mcp
 }
 
-// WithReflexiveForm the reflexive pronoun form to apply when using this custom pronoun behavior.
-func (x *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm StringProvider) *MorphologyCustomPronoun {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflexiveForm:"), objref.IDOf(reflexiveForm))
-	return x
+// WithReflexiveForm sets the reflexive pronoun form to apply when using this custom pronoun behavior.
+func (mcp *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm StringProvider) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setReflexiveForm:"), objref.IDOf(reflexiveForm))
+	return mcp
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MorphologyCustomPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyCustomPronoun {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mcp *MorphologyCustomPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mcp
 }
 
 // SubjectForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) SubjectForm() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subjectForm"))
+func (mcp *MorphologyCustomPronoun) SubjectForm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("subjectForm"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetSubjectForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) SetSubjectForm(subjectForm string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubjectForm:"), purego.NSString(subjectForm))
 }
 
 // ObjectForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) ObjectForm() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForm"))
+func (mcp *MorphologyCustomPronoun) ObjectForm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("objectForm"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetObjectForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) SetObjectForm(objectForm string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectForm:"), purego.NSString(objectForm))
 }
 
 // PossessiveForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) PossessiveForm() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("possessiveForm"))
+func (mcp *MorphologyCustomPronoun) PossessiveForm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("possessiveForm"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPossessiveForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) SetPossessiveForm(possessiveForm string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossessiveForm:"), purego.NSString(possessiveForm))
 }
 
 // PossessiveAdjectiveForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) PossessiveAdjectiveForm() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("possessiveAdjectiveForm"))
+func (mcp *MorphologyCustomPronoun) PossessiveAdjectiveForm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("possessiveAdjectiveForm"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPossessiveAdjectiveForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) SetPossessiveAdjectiveForm(possessiveAdjectiveForm string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossessiveAdjectiveForm:"), purego.NSString(possessiveAdjectiveForm))
 }
 
 // ReflexiveForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) ReflexiveForm() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reflexiveForm"))
+func (mcp *MorphologyCustomPronoun) ReflexiveForm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("reflexiveForm"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetReflexiveForm wraps the corresponding Objective-C method.
-func (x *MorphologyCustomPronoun) SetReflexiveForm(reflexiveForm string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflexiveForm:"), purego.NSString(reflexiveForm))
-}
-
-// MorphologyCustomPronounable is the interface implemented by [MorphologyCustomPronoun], for mocking and DI.
-type MorphologyCustomPronounable interface {
-	obj.Object
-	WithSubjectForm(subjectForm StringProvider) *MorphologyCustomPronoun
-	WithObjectForm(objectForm StringProvider) *MorphologyCustomPronoun
-	WithPossessiveForm(possessiveForm StringProvider) *MorphologyCustomPronoun
-	WithPossessiveAdjectiveForm(possessiveAdjectiveForm StringProvider) *MorphologyCustomPronoun
-	WithReflexiveForm(reflexiveForm StringProvider) *MorphologyCustomPronoun
-	WithScriptingProperties(scriptingProperties obj.Object) *MorphologyCustomPronoun
-	SubjectForm() string
-	SetSubjectForm(subjectForm string)
-	ObjectForm() string
-	SetObjectForm(objectForm string)
-	PossessiveForm() string
-	SetPossessiveForm(possessiveForm string)
-	PossessiveAdjectiveForm() string
-	SetPossessiveAdjectiveForm(possessiveAdjectiveForm string)
-	ReflexiveForm() string
-	SetReflexiveForm(reflexiveForm string)
-}
-
-var _ MorphologyCustomPronounable = (*MorphologyCustomPronoun)(nil)

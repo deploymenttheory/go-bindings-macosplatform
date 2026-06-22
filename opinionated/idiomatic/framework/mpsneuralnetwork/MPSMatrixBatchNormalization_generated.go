@@ -44,24 +44,24 @@ func matrixBatchNormalizationAdopt(id objc.ID) *MatrixBatchNormalization {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixBatchNormalization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbn *MatrixBatchNormalization) Description() string {
+	return rt.Description(objref.IDOf(mbn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixBatchNormalization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbn *MatrixBatchNormalization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixBatchNormalization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbn *MatrixBatchNormalization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixBatchNormalization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbn *MatrixBatchNormalization) String() string {
+	return rt.Description(objref.IDOf(mbn))
 }
 
 // NewMatrixBatchNormalization creates a new MatrixBatchNormalization.
@@ -70,123 +70,79 @@ func NewMatrixBatchNormalization() *MatrixBatchNormalization {
 	return matrixBatchNormalizationAdopt(_id)
 }
 
-// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
-func (x *MatrixBatchNormalization) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-	return x
+// WithSourceNumberOfFeatureVectors sets the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
+func (mbn *MatrixBatchNormalization) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(mbn), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return mbn
 }
 
-// WithSourceInputFeatureChannels the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
-func (x *MatrixBatchNormalization) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-	return x
+// WithSourceInputFeatureChannels sets the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
+func (mbn *MatrixBatchNormalization) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(mbn), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return mbn
 }
 
-// WithEpsilon a small value to add to the variance when normalizing the inputs.  Defaults to FLT_MIN upon initialization.
-func (x *MatrixBatchNormalization) WithEpsilon(epsilon float32) *MatrixBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-	return x
+// WithEpsilon sets a small value to add to the variance when normalizing the inputs.  Defaults to FLT_MIN upon initialization.
+func (mbn *MatrixBatchNormalization) WithEpsilon(epsilon float32) *MatrixBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(mbn), objc.RegisterName("setEpsilon:"), epsilon)
+	return mbn
 }
 
-// WithComputeStatistics if YES the batch statistics will be computed prior to performing the normalization. Otherwise the provided statistics will be used.  Defaults to NO at initialization time.
-func (x *MatrixBatchNormalization) WithComputeStatistics(computeStatistics bool) *MatrixBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeStatistics:"), computeStatistics)
-	return x
+// WithComputeStatistics sets if YES the batch statistics will be computed prior to performing the normalization. Otherwise the provided statistics will be used.  Defaults to NO at initialization time.
+func (mbn *MatrixBatchNormalization) WithComputeStatistics(computeStatistics bool) *MatrixBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(mbn), objc.RegisterName("setComputeStatistics:"), computeStatistics)
+	return mbn
 }
 
 // SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
-func (x *MatrixBatchNormalization) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
+func (mbn *MatrixBatchNormalization) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	objc.Send[objc.ID](objref.IDOf(mbn), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
-// NeuronType getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalization) NeuronType() CNNNeuronType {
-	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
+// NeuronType returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbn *MatrixBatchNormalization) NeuronType() CNNNeuronType {
+	_r := objc.Send[CNNNeuronType](objref.IDOf(mbn), objc.RegisterName("neuronType"))
 	return _r
 }
 
-// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalization) NeuronParameterA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+// NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbn *MatrixBatchNormalization) NeuronParameterA() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalization) NeuronParameterB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+// NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbn *MatrixBatchNormalization) NeuronParameterB() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-func (x *MatrixBatchNormalization) NeuronParameterC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+// NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (mbn *MatrixBatchNormalization) NeuronParameterC() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
-func (x *MatrixBatchNormalization) SourceNumberOfFeatureVectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+// SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
+func (mbn *MatrixBatchNormalization) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(mbn), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
-// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalization) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-}
-
-// SourceInputFeatureChannels the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
-func (x *MatrixBatchNormalization) SourceInputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+// SourceInputFeatureChannels returns the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
+func (mbn *MatrixBatchNormalization) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mbn), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
-// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalization) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-}
-
-// Epsilon a small value to add to the variance when normalizing the inputs.  Defaults to FLT_MIN upon initialization.
-func (x *MatrixBatchNormalization) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns a small value to add to the variance when normalizing the inputs.  Defaults to FLT_MIN upon initialization.
+func (mbn *MatrixBatchNormalization) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// SetEpsilon wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalization) SetEpsilon(epsilon float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-}
-
-// ComputeStatistics if YES the batch statistics will be computed prior to performing the normalization. Otherwise the provided statistics will be used.  Defaults to NO at initialization time.
-func (x *MatrixBatchNormalization) ComputeStatistics() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("computeStatistics"))
+// ComputeStatistics reports whether if true the batch statistics will be computed prior to performing the normalization. Otherwise the provided statistics will be used. Defaults to false at initialization time.
+func (mbn *MatrixBatchNormalization) ComputeStatistics() bool {
+	_r := objc.Send[bool](objref.IDOf(mbn), objc.RegisterName("computeStatistics"))
 	return _r
 }
-
-// SetComputeStatistics wraps the corresponding Objective-C method.
-func (x *MatrixBatchNormalization) SetComputeStatistics(computeStatistics bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeStatistics:"), computeStatistics)
-}
-
-// MatrixBatchNormalizationable is the interface implemented by [MatrixBatchNormalization], for mocking and DI.
-type MatrixBatchNormalizationable interface {
-	obj.Object
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalization
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalization
-	WithEpsilon(epsilon float32) *MatrixBatchNormalization
-	WithComputeStatistics(computeStatistics bool) *MatrixBatchNormalization
-	SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() CNNNeuronType
-	NeuronParameterA() float32
-	NeuronParameterB() float32
-	NeuronParameterC() float32
-	SourceNumberOfFeatureVectors() int
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
-	SourceInputFeatureChannels() int
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
-	Epsilon() float32
-	SetEpsilon(epsilon float32)
-	ComputeStatistics() bool
-	SetComputeStatistics(computeStatistics bool)
-}
-
-var _ MatrixBatchNormalizationable = (*MatrixBatchNormalization)(nil)

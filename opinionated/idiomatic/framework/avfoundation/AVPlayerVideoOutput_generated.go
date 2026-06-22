@@ -46,24 +46,24 @@ func playerVideoOutputAdopt(id objc.ID) *PlayerVideoOutput {
 }
 
 // Description returns the object's -description text.
-func (x *PlayerVideoOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pvo *PlayerVideoOutput) Description() string {
+	return rt.Description(objref.IDOf(pvo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerVideoOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pvo *PlayerVideoOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pvo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerVideoOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pvo *PlayerVideoOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pvo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerVideoOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pvo *PlayerVideoOutput) String() string {
+	return rt.Description(objref.IDOf(pvo))
 }
 
 // NewPlayerVideoOutputWithSpecification creates a video output from a specification.
@@ -72,10 +72,3 @@ func NewPlayerVideoOutputWithSpecification(specification *VideoOutputSpecificati
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpecification:"), objref.IDOf(specification))
 	return playerVideoOutputAdopt(_id)
 }
-
-// PlayerVideoOutputable is the interface implemented by [PlayerVideoOutput], for mocking and DI.
-type PlayerVideoOutputable interface {
-	obj.Object
-}
-
-var _ PlayerVideoOutputable = (*PlayerVideoOutput)(nil)

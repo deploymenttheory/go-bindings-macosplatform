@@ -7,7 +7,6 @@ package metrickit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,45 +51,34 @@ func NewSignpostMetric() *SignpostMetric {
 	return signpostMetricAdopt(_id)
 }
 
-// SignpostName the name associated with this aggregated signpost.
-func (x *SignpostMetric) SignpostName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostName"))
+// SignpostName returns the name associated with this aggregated signpost.
+func (sm *SignpostMetric) SignpostName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("signpostName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SignpostCategory the category associated with this aggregated signpost.
-func (x *SignpostMetric) SignpostCategory() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostCategory"))
+// SignpostCategory returns the category associated with this aggregated signpost.
+func (sm *SignpostMetric) SignpostCategory() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("signpostCategory"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SignpostIntervalData a class that encapsulates metrics associated with app specific signpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no intervals.
-func (x *SignpostMetric) SignpostIntervalData() *SignpostIntervalData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostIntervalData"))
+// SignpostIntervalData returns a class that encapsulates metrics associated with app specific signpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no intervals.
+func (sm *SignpostMetric) SignpostIntervalData() *SignpostIntervalData {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("signpostIntervalData"))
 	return SignpostIntervalDataFromID(_r)
 }
 
-// TotalCount the total number of signposts emit with the given signpostName in the aggregation period of the parent payload.
-func (x *SignpostMetric) TotalCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalCount"))
+// TotalCount returns the total number of signposts emit with the given signpostName in the aggregation period of the parent payload.
+func (sm *SignpostMetric) TotalCount() int {
+	_r := objc.Send[int](objref.IDOf(sm), objc.RegisterName("totalCount"))
 	return _r
 }
-
-// SignpostMetricable is the interface implemented by [SignpostMetric], for mocking and DI.
-type SignpostMetricable interface {
-	obj.Object
-	SignpostName() string
-	SignpostCategory() string
-	SignpostIntervalData() *SignpostIntervalData
-	TotalCount() int
-}
-
-var _ SignpostMetricable = (*SignpostMetric)(nil)
 
 var _ MetricProvider = (*SignpostMetric)(nil)

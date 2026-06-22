@@ -53,74 +53,74 @@ func NewIOBluetoothDevice() *IOBluetoothDevice {
 }
 
 // GetDeviceRef returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
-func (x *IOBluetoothDevice) GetDeviceRef() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDeviceRef"))
+func (ibd *IOBluetoothDevice) GetDeviceRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getDeviceRef"))
 	return obj.Wrap(_r)
 }
 
 // OpenL2CAPChannelSyncWithPSMDelegate opens a new L2CAP channel to the target device. Returns only after the channel is opened.
-func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelSync:withPSM:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelDelegate))
+func (ibd *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openL2CAPChannelSync:withPSM:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelDelegate))
 	return _r
 }
 
 // OpenL2CAPChannelAsyncWithPSMDelegate opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
-func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelAsync:withPSM:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelDelegate))
+func (ibd *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openL2CAPChannelAsync:withPSM:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelDelegate))
 	return _r
 }
 
 // OpenL2CAPChannelFindExistingNewChannel opens a new L2CAP channel to the target device. Returns immedialty after starting the opening process.
-func (x *IOBluetoothDevice) OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *IOBluetoothL2CAPChannel) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannel:findExisting:newChannel:"), psm, findExisting, objref.IDOf(newChannel))
+func (ibd *IOBluetoothDevice) OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *IOBluetoothL2CAPChannel) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openL2CAPChannel:findExisting:newChannel:"), psm, findExisting, objref.IDOf(newChannel))
 	return _r
 }
 
 // OpenRFCOMMChannelChannel opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
-func (x *IOBluetoothDevice) OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *IOBluetoothRFCOMMChannel) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openRFCOMMChannel:channel:"), channelID, objref.IDOf(rfcommChannel))
+func (ibd *IOBluetoothDevice) OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *IOBluetoothRFCOMMChannel) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openRFCOMMChannel:channel:"), channelID, objref.IDOf(rfcommChannel))
 	return _r
 }
 
 // OpenRFCOMMChannelSyncWithChannelIDDelegate opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
-func (x *IOBluetoothDevice) OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openRFCOMMChannelSync:withChannelID:delegate:"), objref.IDOf(rfcommChannel), channelID, objref.IDOf(channelDelegate))
+func (ibd *IOBluetoothDevice) OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openRFCOMMChannelSync:withChannelID:delegate:"), objref.IDOf(rfcommChannel), channelID, objref.IDOf(channelDelegate))
 	return _r
 }
 
 // OpenRFCOMMChannelAsyncWithChannelIDDelegate opens a new RFCOMM channel to the target device. Returns immediately.
-func (x *IOBluetoothDevice) OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openRFCOMMChannelAsync:withChannelID:delegate:"), objref.IDOf(rfcommChannel), channelID, objref.IDOf(channelDelegate))
+func (ibd *IOBluetoothDevice) OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openRFCOMMChannelAsync:withChannelID:delegate:"), objref.IDOf(rfcommChannel), channelID, objref.IDOf(channelDelegate))
 	return _r
 }
 
 // GetClassOfDevice gets the full class of device value for the remote device.
-func (x *IOBluetoothDevice) GetClassOfDevice() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getClassOfDevice"))
+func (ibd *IOBluetoothDevice) GetClassOfDevice() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("getClassOfDevice"))
 	return _r
 }
 
 // GetServiceClassMajor get the major service class of the device.
-func (x *IOBluetoothDevice) GetServiceClassMajor() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getServiceClassMajor"))
+func (ibd *IOBluetoothDevice) GetServiceClassMajor() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("getServiceClassMajor"))
 	return _r
 }
 
 // GetDeviceClassMajor get the major device class of the device.
-func (x *IOBluetoothDevice) GetDeviceClassMajor() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getDeviceClassMajor"))
+func (ibd *IOBluetoothDevice) GetDeviceClassMajor() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("getDeviceClassMajor"))
 	return _r
 }
 
 // GetDeviceClassMinor get the minor service class of the device.
-func (x *IOBluetoothDevice) GetDeviceClassMinor() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getDeviceClassMinor"))
+func (ibd *IOBluetoothDevice) GetDeviceClassMinor() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("getDeviceClassMinor"))
 	return _r
 }
 
 // GetName get the human readable name of the remote device.
-func (x *IOBluetoothDevice) GetName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getName"))
+func (ibd *IOBluetoothDevice) GetName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getName"))
 	if _r == 0 {
 		return ""
 	}
@@ -128,8 +128,8 @@ func (x *IOBluetoothDevice) GetName() string {
 }
 
 // GetNameOrAddress get the human readable name of the remote device. If the name is not present, it will return a string containing the device’s address.
-func (x *IOBluetoothDevice) GetNameOrAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNameOrAddress"))
+func (ibd *IOBluetoothDevice) GetNameOrAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getNameOrAddress"))
 	if _r == 0 {
 		return ""
 	}
@@ -137,14 +137,14 @@ func (x *IOBluetoothDevice) GetNameOrAddress() string {
 }
 
 // GetLastNameUpdate get the date/time of the last successful remote name request.
-func (x *IOBluetoothDevice) GetLastNameUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLastNameUpdate"))
+func (ibd *IOBluetoothDevice) GetLastNameUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getLastNameUpdate"))
 	return obj.Wrap(_r)
 }
 
 // GetAddressString get a string representation of the Bluetooth device address for the target device. The format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
-func (x *IOBluetoothDevice) GetAddressString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAddressString"))
+func (ibd *IOBluetoothDevice) GetAddressString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getAddressString"))
 	if _r == 0 {
 		return ""
 	}
@@ -152,224 +152,224 @@ func (x *IOBluetoothDevice) GetAddressString() string {
 }
 
 // GetPageScanRepetitionMode get the value of the page scan repetition mode for the device.
-func (x *IOBluetoothDevice) GetPageScanRepetitionMode() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getPageScanRepetitionMode"))
+func (ibd *IOBluetoothDevice) GetPageScanRepetitionMode() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getPageScanRepetitionMode"))
 	return _r
 }
 
 // GetPageScanPeriodMode get the value of the page scan period mode for the device.
-func (x *IOBluetoothDevice) GetPageScanPeriodMode() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getPageScanPeriodMode"))
+func (ibd *IOBluetoothDevice) GetPageScanPeriodMode() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getPageScanPeriodMode"))
 	return _r
 }
 
 // GetPageScanMode get the page scan mode for the device.
-func (x *IOBluetoothDevice) GetPageScanMode() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getPageScanMode"))
+func (ibd *IOBluetoothDevice) GetPageScanMode() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getPageScanMode"))
 	return _r
 }
 
 // GetClockOffset get the clock offset value of the device.
-func (x *IOBluetoothDevice) GetClockOffset() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getClockOffset"))
+func (ibd *IOBluetoothDevice) GetClockOffset() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ibd), objc.RegisterName("getClockOffset"))
 	return _r
 }
 
 // GetLastInquiryUpdate get the date/time of the last time the device was returned during an inquiry.
-func (x *IOBluetoothDevice) GetLastInquiryUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLastInquiryUpdate"))
+func (ibd *IOBluetoothDevice) GetLastInquiryUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getLastInquiryUpdate"))
 	return obj.Wrap(_r)
 }
 
 // RSSI get the RSSI device (if connected), above or below the golden range. If the RSSI is within the golden range, a value of 0 is returned. For the actual RSSI value, use getRawRSSI. For more information, see the Bluetooth 4.0 Core Specification.
-func (x *IOBluetoothDevice) RSSI() int8 {
-	_r := objc.Send[int8](objref.IDOf(x), objc.RegisterName("RSSI"))
+func (ibd *IOBluetoothDevice) RSSI() int8 {
+	_r := objc.Send[int8](objref.IDOf(ibd), objc.RegisterName("RSSI"))
 	return _r
 }
 
 // RawRSSI get the raw RSSI device (if connected).
-func (x *IOBluetoothDevice) RawRSSI() int8 {
-	_r := objc.Send[int8](objref.IDOf(x), objc.RegisterName("rawRSSI"))
+func (ibd *IOBluetoothDevice) RawRSSI() int8 {
+	_r := objc.Send[int8](objref.IDOf(ibd), objc.RegisterName("rawRSSI"))
 	return _r
 }
 
-// IsConnected indicates whether a baseband connection to the device exists.
-func (x *IOBluetoothDevice) IsConnected() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
+// IsConnected reports whether a baseband connection to the device exists.
+func (ibd *IOBluetoothDevice) IsConnected() bool {
+	_r := objc.Send[bool](objref.IDOf(ibd), objc.RegisterName("isConnected"))
 	return _r
 }
 
 // OpenConnection create a baseband connection to the device.
-func (x *IOBluetoothDevice) OpenConnection() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openConnection"))
+func (ibd *IOBluetoothDevice) OpenConnection() int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openConnection"))
 	return _r
 }
 
 // OpenConnection2 create a baseband connection to the device.
-func (x *IOBluetoothDevice) OpenConnection2(target obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openConnection:"), objref.IDOf(target))
+func (ibd *IOBluetoothDevice) OpenConnection2(target obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openConnection:"), objref.IDOf(target))
 	return _r
 }
 
 // OpenConnectionWithPageTimeoutAuthenticationRequired create a baseband connection to the device.
-func (x *IOBluetoothDevice) OpenConnectionWithPageTimeoutAuthenticationRequired(target obj.Object, pageTimeoutValue uint16, authenticationRequired bool) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openConnection:withPageTimeout:authenticationRequired:"), objref.IDOf(target), pageTimeoutValue, authenticationRequired)
+func (ibd *IOBluetoothDevice) OpenConnectionWithPageTimeoutAuthenticationRequired(target obj.Object, pageTimeoutValue uint16, authenticationRequired bool) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openConnection:withPageTimeout:authenticationRequired:"), objref.IDOf(target), pageTimeoutValue, authenticationRequired)
 	return _r
 }
 
-// CloseConnection close down the baseband connection to the device.
-func (x *IOBluetoothDevice) CloseConnection() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("closeConnection"))
+// CloseConnection returns close down the baseband connection to the device.
+func (ibd *IOBluetoothDevice) CloseConnection() int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("closeConnection"))
 	return _r
 }
 
 // RemoteNameRequest issues a remote name request to the target device.
-func (x *IOBluetoothDevice) RemoteNameRequest(target obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("remoteNameRequest:"), objref.IDOf(target))
+func (ibd *IOBluetoothDevice) RemoteNameRequest(target obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("remoteNameRequest:"), objref.IDOf(target))
 	return _r
 }
 
 // RemoteNameRequestWithPageTimeout issues a remote name request to the target device.
-func (x *IOBluetoothDevice) RemoteNameRequestWithPageTimeout(target obj.Object, pageTimeoutValue uint16) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("remoteNameRequest:withPageTimeout:"), objref.IDOf(target), pageTimeoutValue)
+func (ibd *IOBluetoothDevice) RemoteNameRequestWithPageTimeout(target obj.Object, pageTimeoutValue uint16) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("remoteNameRequest:withPageTimeout:"), objref.IDOf(target), pageTimeoutValue)
 	return _r
 }
 
-// RequestAuthentication requests that the existing baseband connection be authenticated.
-func (x *IOBluetoothDevice) RequestAuthentication() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestAuthentication"))
+// RequestAuthentication returns requests that the existing baseband connection be authenticated.
+func (ibd *IOBluetoothDevice) RequestAuthentication() int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("requestAuthentication"))
 	return _r
 }
 
 // GetConnectionHandle get the connection handle for the baseband connection.
-func (x *IOBluetoothDevice) GetConnectionHandle() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getConnectionHandle"))
+func (ibd *IOBluetoothDevice) GetConnectionHandle() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ibd), objc.RegisterName("getConnectionHandle"))
 	return _r
 }
 
-// IsIncoming returns TRUE if the device connection was generated by the remote host.
-func (x *IOBluetoothDevice) IsIncoming() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncoming"))
+// IsIncoming reports whether the device connection was generated by the remote host.
+func (ibd *IOBluetoothDevice) IsIncoming() bool {
+	_r := objc.Send[bool](objref.IDOf(ibd), objc.RegisterName("isIncoming"))
 	return _r
 }
 
 // GetLinkType get the link type for the baseband connection.
-func (x *IOBluetoothDevice) GetLinkType() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getLinkType"))
+func (ibd *IOBluetoothDevice) GetLinkType() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getLinkType"))
 	return _r
 }
 
 // GetEncryptionMode get the encryption mode for the baseband connection.
-func (x *IOBluetoothDevice) GetEncryptionMode() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getEncryptionMode"))
+func (ibd *IOBluetoothDevice) GetEncryptionMode() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getEncryptionMode"))
 	return _r
 }
 
 // PerformSDPQuery performs an SDP query on the target device.
-func (x *IOBluetoothDevice) PerformSDPQuery(target obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("performSDPQuery:"), objref.IDOf(target))
+func (ibd *IOBluetoothDevice) PerformSDPQuery(target obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("performSDPQuery:"), objref.IDOf(target))
 	return _r
 }
 
 // PerformSDPQueryUuids performs an SDP query on the target device with the specified service UUIDs.
-func (x *IOBluetoothDevice) PerformSDPQueryUuids(target obj.Object, uuidArray obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("performSDPQuery:uuids:"), objref.IDOf(target), objref.IDOf(uuidArray))
+func (ibd *IOBluetoothDevice) PerformSDPQueryUuids(target obj.Object, uuidArray obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("performSDPQuery:uuids:"), objref.IDOf(target), objref.IDOf(uuidArray))
 	return _r
 }
 
 // GetServices wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) GetServices() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getServices"))
+func (ibd *IOBluetoothDevice) GetServices() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getServices"))
 	return obj.Wrap(_r)
 }
 
 // GetLastServicesUpdate get the date/time of the last SDP query.
-func (x *IOBluetoothDevice) GetLastServicesUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLastServicesUpdate"))
+func (ibd *IOBluetoothDevice) GetLastServicesUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getLastServicesUpdate"))
 	return obj.Wrap(_r)
 }
 
 // GetServiceRecordForUUID search for a service record containing the given UUID.
-func (x *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getServiceRecordForUUID:"), objref.IDOf(sdpUUID))
+func (ibd *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getServiceRecordForUUID:"), objref.IDOf(sdpUUID))
 	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// IsFavorite reports whether the target device is a favorite for the user.
-func (x *IOBluetoothDevice) IsFavorite() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFavorite"))
+// IsFavorite reports whether reports whether the target device is a favorite for the user.
+func (ibd *IOBluetoothDevice) IsFavorite() bool {
+	_r := objc.Send[bool](objref.IDOf(ibd), objc.RegisterName("isFavorite"))
 	return _r
 }
 
-// AddToFavorites adds the target device to the user’s favorite devices list.
-func (x *IOBluetoothDevice) AddToFavorites() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("addToFavorites"))
+// AddToFavorites returns adds the target device to the user’s favorite devices list.
+func (ibd *IOBluetoothDevice) AddToFavorites() int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("addToFavorites"))
 	return _r
 }
 
-// RemoveFromFavorites removes the target device from the user’s favorite devices list.
-func (x *IOBluetoothDevice) RemoveFromFavorites() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("removeFromFavorites"))
+// RemoveFromFavorites returns removes the target device from the user’s favorite devices list.
+func (ibd *IOBluetoothDevice) RemoveFromFavorites() int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("removeFromFavorites"))
 	return _r
 }
 
 // RecentAccessDate returns the date/time of the most recent access of the target device.
-func (x *IOBluetoothDevice) RecentAccessDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recentAccessDate"))
+func (ibd *IOBluetoothDevice) RecentAccessDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("recentAccessDate"))
 	return obj.Wrap(_r)
 }
 
-// IsPaired returns whether the target device is paired.
-func (x *IOBluetoothDevice) IsPaired() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaired"))
+// IsPaired reports whether the target device is paired.
+func (ibd *IOBluetoothDevice) IsPaired() bool {
+	_r := objc.Send[bool](objref.IDOf(ibd), objc.RegisterName("isPaired"))
 	return _r
 }
 
 // SetSupervisionTimeout sets the connection supervision timeout.
-func (x *IOBluetoothDevice) SetSupervisionTimeout(timeout uint16) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setSupervisionTimeout:"), timeout)
+func (ibd *IOBluetoothDevice) SetSupervisionTimeout(timeout uint16) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("setSupervisionTimeout:"), timeout)
 	return _r
 }
 
 // OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate opens a new L2CAP channel to the target device. Returns only after the channel is opened.
-func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelSync:withPSM:withConfiguration:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelConfiguration), objref.IDOf(channelDelegate))
+func (ibd *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openL2CAPChannelSync:withPSM:withConfiguration:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelConfiguration), objref.IDOf(channelDelegate))
 	return _r
 }
 
 // OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
-func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelAsync:withPSM:withConfiguration:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelConfiguration), objref.IDOf(channelDelegate))
+func (ibd *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openL2CAPChannelAsync:withPSM:withConfiguration:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelConfiguration), objref.IDOf(channelDelegate))
 	return _r
 }
 
 // ClassOfDevice wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) ClassOfDevice() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("classOfDevice"))
+func (ibd *IOBluetoothDevice) ClassOfDevice() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("classOfDevice"))
 	return _r
 }
 
 // ServiceClassMajor wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) ServiceClassMajor() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("serviceClassMajor"))
+func (ibd *IOBluetoothDevice) ServiceClassMajor() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("serviceClassMajor"))
 	return _r
 }
 
 // DeviceClassMajor wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) DeviceClassMajor() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("deviceClassMajor"))
+func (ibd *IOBluetoothDevice) DeviceClassMajor() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("deviceClassMajor"))
 	return _r
 }
 
 // DeviceClassMinor wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) DeviceClassMinor() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("deviceClassMinor"))
+func (ibd *IOBluetoothDevice) DeviceClassMinor() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("deviceClassMinor"))
 	return _r
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (ibd *IOBluetoothDevice) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -377,8 +377,8 @@ func (x *IOBluetoothDevice) Name() string {
 }
 
 // NameOrAddress wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) NameOrAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameOrAddress"))
+func (ibd *IOBluetoothDevice) NameOrAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("nameOrAddress"))
 	if _r == 0 {
 		return ""
 	}
@@ -386,14 +386,14 @@ func (x *IOBluetoothDevice) NameOrAddress() string {
 }
 
 // LastNameUpdate wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) LastNameUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastNameUpdate"))
+func (ibd *IOBluetoothDevice) LastNameUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("lastNameUpdate"))
 	return obj.Wrap(_r)
 }
 
 // AddressString wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) AddressString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressString"))
+func (ibd *IOBluetoothDevice) AddressString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("addressString"))
 	if _r == 0 {
 		return ""
 	}
@@ -401,127 +401,57 @@ func (x *IOBluetoothDevice) AddressString() string {
 }
 
 // ConnectionHandle wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) ConnectionHandle() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("connectionHandle"))
+func (ibd *IOBluetoothDevice) ConnectionHandle() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ibd), objc.RegisterName("connectionHandle"))
 	return _r
 }
 
 // Services wraps the corresponding Objective-C method.
-func (x *IOBluetoothDevice) Services() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("services"))
+func (ibd *IOBluetoothDevice) Services() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("services"))
 	return obj.Wrap(_r)
 }
 
-// HandsFreeAudioGatewayDriverID return the hands free gateway driver ID Returns the hands free gateway driver ID which is unique based on BT Address.
-func (x *IOBluetoothDevice) HandsFreeAudioGatewayDriverID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeAudioGatewayDriverID"))
+// HandsFreeAudioGatewayDriverID returns the hands free gateway driver ID Returns the hands free gateway driver ID which is unique based on BT Address.
+func (ibd *IOBluetoothDevice) HandsFreeAudioGatewayDriverID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("handsFreeAudioGatewayDriverID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// HandsFreeAudioGatewayServiceRecord return the hands free gateway SDP record Returns the hands free gateway SDP record.
-func (x *IOBluetoothDevice) HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDPServiceRecord {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeAudioGatewayServiceRecord"))
+// HandsFreeAudioGatewayServiceRecord returns the hands free gateway SDP record Returns the hands free gateway SDP record.
+func (ibd *IOBluetoothDevice) HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDPServiceRecord {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("handsFreeAudioGatewayServiceRecord"))
 	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// HandsFreeDeviceDriverID return the hands free device driver ID Returns the hands free device driver ID which is unique based on BT Address.
-func (x *IOBluetoothDevice) HandsFreeDeviceDriverID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeDeviceDriverID"))
+// HandsFreeDeviceDriverID returns the hands free device driver ID Returns the hands free device driver ID which is unique based on BT Address.
+func (ibd *IOBluetoothDevice) HandsFreeDeviceDriverID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("handsFreeDeviceDriverID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// HandsFreeDeviceServiceRecord return the hands free device SDP record Returns the hands free device SDP record.
-func (x *IOBluetoothDevice) HandsFreeDeviceServiceRecord() *IOBluetoothSDPServiceRecord {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeDeviceServiceRecord"))
+// HandsFreeDeviceServiceRecord returns the hands free device SDP record Returns the hands free device SDP record.
+func (ibd *IOBluetoothDevice) HandsFreeDeviceServiceRecord() *IOBluetoothSDPServiceRecord {
+	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("handsFreeDeviceServiceRecord"))
 	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// IsHandsFreeAudioGateway return the devices support for hands free gateway Returns the devices support for hands free gateway (obtained from the devices SDP record).
-func (x *IOBluetoothDevice) IsHandsFreeAudioGateway() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHandsFreeAudioGateway"))
+// IsHandsFreeAudioGateway reports whether return the devices support for hands free gateway Returns the devices support for hands free gateway (obtained from the devices SDP record).
+func (ibd *IOBluetoothDevice) IsHandsFreeAudioGateway() bool {
+	_r := objc.Send[bool](objref.IDOf(ibd), objc.RegisterName("isHandsFreeAudioGateway"))
 	return _r
 }
 
-// IsHandsFreeDevice return the devices support for hands free device Returns the devices support for hands free device (obtained from the devices SDP record).
-func (x *IOBluetoothDevice) IsHandsFreeDevice() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHandsFreeDevice"))
+// IsHandsFreeDevice reports whether return the devices support for hands free device Returns the devices support for hands free device (obtained from the devices SDP record).
+func (ibd *IOBluetoothDevice) IsHandsFreeDevice() bool {
+	_r := objc.Send[bool](objref.IDOf(ibd), objc.RegisterName("isHandsFreeDevice"))
 	return _r
 }
-
-// IOBluetoothDeviceable is the interface implemented by [IOBluetoothDevice], for mocking and DI.
-type IOBluetoothDeviceable interface {
-	obj.Object
-	GetDeviceRef() obj.Object
-	OpenL2CAPChannelSyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int
-	OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int
-	OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *IOBluetoothL2CAPChannel) int
-	OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *IOBluetoothRFCOMMChannel) int
-	OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int
-	OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int
-	GetClassOfDevice() uint32
-	GetServiceClassMajor() uint32
-	GetDeviceClassMajor() uint32
-	GetDeviceClassMinor() uint32
-	GetName() string
-	GetNameOrAddress() string
-	GetLastNameUpdate() obj.Object
-	GetAddressString() string
-	GetPageScanRepetitionMode() uint8
-	GetPageScanPeriodMode() uint8
-	GetPageScanMode() uint8
-	GetClockOffset() uint16
-	GetLastInquiryUpdate() obj.Object
-	RSSI() int8
-	RawRSSI() int8
-	IsConnected() bool
-	OpenConnection() int
-	OpenConnection2(target obj.Object) int
-	OpenConnectionWithPageTimeoutAuthenticationRequired(target obj.Object, pageTimeoutValue uint16, authenticationRequired bool) int
-	CloseConnection() int
-	RemoteNameRequest(target obj.Object) int
-	RemoteNameRequestWithPageTimeout(target obj.Object, pageTimeoutValue uint16) int
-	RequestAuthentication() int
-	GetConnectionHandle() uint16
-	IsIncoming() bool
-	GetLinkType() uint8
-	GetEncryptionMode() uint8
-	PerformSDPQuery(target obj.Object) int
-	PerformSDPQueryUuids(target obj.Object, uuidArray obj.Object) int
-	GetServices() obj.Object
-	GetLastServicesUpdate() obj.Object
-	GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord
-	IsFavorite() bool
-	AddToFavorites() int
-	RemoveFromFavorites() int
-	RecentAccessDate() obj.Object
-	IsPaired() bool
-	SetSupervisionTimeout(timeout uint16) int
-	OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int
-	OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int
-	ClassOfDevice() uint32
-	ServiceClassMajor() uint32
-	DeviceClassMajor() uint32
-	DeviceClassMinor() uint32
-	Name() string
-	NameOrAddress() string
-	LastNameUpdate() obj.Object
-	AddressString() string
-	ConnectionHandle() uint16
-	Services() obj.Object
-	HandsFreeAudioGatewayDriverID() string
-	HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDPServiceRecord
-	HandsFreeDeviceDriverID() string
-	HandsFreeDeviceServiceRecord() *IOBluetoothSDPServiceRecord
-	IsHandsFreeAudioGateway() bool
-	IsHandsFreeDevice() bool
-}
-
-var _ IOBluetoothDeviceable = (*IOBluetoothDevice)(nil)
 
 var _ IOBluetoothObjectProvider = (*IOBluetoothDevice)(nil)

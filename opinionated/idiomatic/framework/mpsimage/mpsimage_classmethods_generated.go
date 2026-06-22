@@ -8,13 +8,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// MaxKernelDiameter the maximum diameter in pixels of the filter window supported by the median filter.
+// MaxKernelDiameter returns the maximum diameter in pixels of the filter window supported by the median filter.
 func MaxKernelDiameter() int {
 	_r := objc.Send[int](objc.ID(_class("MPSImageMedian")), objc.RegisterName("maxKernelDiameter"))
 	return _r
 }
 
-// MinKernelDiameter the minimum diameter in pixels of the filter window supported by the median filter.
+// MinKernelDiameter returns the minimum diameter in pixels of the filter window supported by the median filter.
 func MinKernelDiameter() int {
 	_r := objc.Send[int](objc.ID(_class("MPSImageMedian")), objc.RegisterName("minKernelDiameter"))
 	return _r

@@ -46,24 +46,24 @@ func renderPipelineReflectionAdopt(id objc.ID) *RenderPipelineReflection {
 }
 
 // Description returns the object's -description text.
-func (x *RenderPipelineReflection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpr *RenderPipelineReflection) Description() string {
+	return rt.Description(objref.IDOf(rpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderPipelineReflection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpr *RenderPipelineReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderPipelineReflection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpr *RenderPipelineReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderPipelineReflection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpr *RenderPipelineReflection) String() string {
+	return rt.Description(objref.IDOf(rpr))
 }
 
 // NewRenderPipelineReflection creates a new RenderPipelineReflection.
@@ -73,70 +73,55 @@ func NewRenderPipelineReflection() *RenderPipelineReflection {
 }
 
 // VertexBindings wraps the corresponding Objective-C method.
-func (x *RenderPipelineReflection) VertexBindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexBindings"))
+func (rpr *RenderPipelineReflection) VertexBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("vertexBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FragmentBindings wraps the corresponding Objective-C method.
-func (x *RenderPipelineReflection) FragmentBindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentBindings"))
+func (rpr *RenderPipelineReflection) FragmentBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("fragmentBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TileBindings wraps the corresponding Objective-C method.
-func (x *RenderPipelineReflection) TileBindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileBindings"))
+func (rpr *RenderPipelineReflection) TileBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("tileBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ObjectBindings wraps the corresponding Objective-C method.
-func (x *RenderPipelineReflection) ObjectBindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBindings"))
+func (rpr *RenderPipelineReflection) ObjectBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("objectBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MeshBindings wraps the corresponding Objective-C method.
-func (x *RenderPipelineReflection) MeshBindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meshBindings"))
+func (rpr *RenderPipelineReflection) MeshBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("meshBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VertexArguments wraps the corresponding Objective-C method.
 //
 // VertexArguments returns the collection as a Go slice.
-func (x *RenderPipelineReflection) VertexArguments() []*Argument {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexArguments"))
+func (rpr *RenderPipelineReflection) VertexArguments() []*Argument {
+	_arr := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("vertexArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
 // FragmentArguments wraps the corresponding Objective-C method.
 //
 // FragmentArguments returns the collection as a Go slice.
-func (x *RenderPipelineReflection) FragmentArguments() []*Argument {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentArguments"))
+func (rpr *RenderPipelineReflection) FragmentArguments() []*Argument {
+	_arr := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("fragmentArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
 // TileArguments wraps the corresponding Objective-C method.
 //
 // TileArguments returns the collection as a Go slice.
-func (x *RenderPipelineReflection) TileArguments() []*Argument {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileArguments"))
+func (rpr *RenderPipelineReflection) TileArguments() []*Argument {
+	_arr := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("tileArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
-
-// RenderPipelineReflectionable is the interface implemented by [RenderPipelineReflection], for mocking and DI.
-type RenderPipelineReflectionable interface {
-	obj.Object
-	VertexBindings() []obj.Object
-	FragmentBindings() []obj.Object
-	TileBindings() []obj.Object
-	ObjectBindings() []obj.Object
-	MeshBindings() []obj.Object
-	VertexArguments() []*Argument
-	FragmentArguments() []*Argument
-	TileArguments() []*Argument
-}
-
-var _ RenderPipelineReflectionable = (*RenderPipelineReflection)(nil)

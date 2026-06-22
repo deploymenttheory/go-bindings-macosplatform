@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,60 +51,46 @@ func NewFullyConnectedLayer() *FullyConnectedLayer {
 	return fullyConnectedLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *FullyConnectedLayer) WithLabel(label string) *FullyConnectedLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (fcl *FullyConnectedLayer) WithLabel(label string) *FullyConnectedLayer {
+	objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return fcl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *FullyConnectedLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (fcl *FullyConnectedLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer {
+	objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return fcl
 }
 
-// Descriptor the convolution descriptor
-func (x *FullyConnectedLayer) Descriptor() *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the convolution descriptor
+func (fcl *FullyConnectedLayer) Descriptor() *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("descriptor"))
 	return ConvolutionDescriptorFromID(_r)
 }
 
-// Weights the weights tensor used by the convolution layer
-func (x *FullyConnectedLayer) Weights() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+// Weights returns the weights tensor used by the convolution layer
+func (fcl *FullyConnectedLayer) Weights() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
-// Biases the bias tensor used by the convolution layer
-func (x *FullyConnectedLayer) Biases() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biases"))
+// Biases returns the bias tensor used by the convolution layer
+func (fcl *FullyConnectedLayer) Biases() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("biases"))
 	return TensorFromID(_r)
 }
 
-// WeightsParameter the weights tensor parameter used for optimizer update
-func (x *FullyConnectedLayer) WeightsParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
+// WeightsParameter returns the weights tensor parameter used for optimizer update
+func (fcl *FullyConnectedLayer) WeightsParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// BiasesParameter the bias tensor parameter used for optimizer update
-func (x *FullyConnectedLayer) BiasesParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasesParameter"))
+// BiasesParameter returns the bias tensor parameter used for optimizer update
+func (fcl *FullyConnectedLayer) BiasesParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("biasesParameter"))
 	return TensorParameterFromID(_r)
 }
-
-// FullyConnectedLayerable is the interface implemented by [FullyConnectedLayer], for mocking and DI.
-type FullyConnectedLayerable interface {
-	obj.Object
-	WithLabel(label string) *FullyConnectedLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer
-	Descriptor() *ConvolutionDescriptor
-	Weights() *Tensor
-	Biases() *Tensor
-	WeightsParameter() *TensorParameter
-	BiasesParameter() *TensorParameter
-}
-
-var _ FullyConnectedLayerable = (*FullyConnectedLayer)(nil)
 
 var _ LayerProvider = (*FullyConnectedLayer)(nil)

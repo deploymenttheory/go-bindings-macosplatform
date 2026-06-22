@@ -47,24 +47,24 @@ func cursorAdopt(id objc.ID) *Cursor {
 }
 
 // Description returns the object's -description text.
-func (x *Cursor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Cursor) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Cursor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Cursor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Cursor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Cursor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Cursor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Cursor) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewCursorWithImageHotSpot initializes a cursor with the given image and hot spot.
@@ -89,78 +89,60 @@ func NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot(newImage *I
 }
 
 // Pop sends a pop message to the receiver’s class.
-func (x *Cursor) Pop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pop"))
+func (c *Cursor) Pop() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("pop"))
 }
 
 // Push puts the receiver on top of the cursor stack and makes it the current cursor.
-func (x *Cursor) Push() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("push"))
+func (c *Cursor) Push() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("push"))
 }
 
 // Set makes the receiver the current cursor.
-func (x *Cursor) Set() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+func (c *Cursor) Set() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("set"))
 }
 
 // Image wraps the corresponding Objective-C method.
-func (x *Cursor) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (c *Cursor) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // HotSpot wraps the corresponding Objective-C method.
-func (x *Cursor) HotSpot() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("hotSpot"))
+func (c *Cursor) HotSpot() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(c), objc.RegisterName("hotSpot"))
 	return _r
 }
 
 // SetOnMouseExited sets whether the receiver accepts mouseExited: events.
-func (x *Cursor) SetOnMouseExited(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnMouseExited:"), flag)
+func (c *Cursor) SetOnMouseExited(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setOnMouseExited:"), flag)
 }
 
 // SetOnMouseEntered specifies whether the receiver accepts mouseEntered: events.
-func (x *Cursor) SetOnMouseEntered(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnMouseEntered:"), flag)
+func (c *Cursor) SetOnMouseEntered(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setOnMouseEntered:"), flag)
 }
 
 // MouseEntered automatically sent to the receiver when the cursor enters a cursor rectangle owned by the receiver.
-func (x *Cursor) MouseEntered(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
+func (c *Cursor) MouseEntered(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
 }
 
 // MouseExited automatically sent to the receiver when the cursor exits a cursor rectangle owned by the receiver.
-func (x *Cursor) MouseExited(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseExited:"), objref.IDOf(event))
+func (c *Cursor) MouseExited(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("mouseExited:"), objref.IDOf(event))
 }
 
 // IsSetOnMouseExited wraps the corresponding Objective-C method.
-func (x *Cursor) IsSetOnMouseExited() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSetOnMouseExited"))
+func (c *Cursor) IsSetOnMouseExited() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isSetOnMouseExited"))
 	return _r
 }
 
 // IsSetOnMouseEntered wraps the corresponding Objective-C method.
-func (x *Cursor) IsSetOnMouseEntered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSetOnMouseEntered"))
+func (c *Cursor) IsSetOnMouseEntered() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isSetOnMouseEntered"))
 	return _r
 }
-
-// Cursorable is the interface implemented by [Cursor], for mocking and DI.
-type Cursorable interface {
-	obj.Object
-	Pop()
-	Push()
-	Set()
-	Image() *Image
-	HotSpot() corefoundation.CGPoint
-	SetOnMouseExited(flag bool)
-	SetOnMouseEntered(flag bool)
-	MouseEntered(event *Event)
-	MouseExited(event *Event)
-	IsSetOnMouseExited() bool
-	IsSetOnMouseEntered() bool
-}
-
-var _ Cursorable = (*Cursor)(nil)

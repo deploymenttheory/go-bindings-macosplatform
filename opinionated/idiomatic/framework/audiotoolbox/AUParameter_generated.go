@@ -5,11 +5,12 @@
 package audiotoolbox
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Parameter is an idiomatic wrapper over the Objective-C class AUParameter.
@@ -53,16 +54,16 @@ func NewParameter() *Parameter {
 	return parameterAdopt(_id)
 }
 
-// WithValue the parameter’s current value.
-func (x *Parameter) WithValue(value float32) *Parameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the parameter’s current value.
+func (p *Parameter) WithValue(value float32) *Parameter {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setValue:"), value)
+	return p
 }
 
 // StringFromValue gets the string representation of a parameter value.
-func (x *Parameter) StringFromValue() (result string, value float32) {
+func (p *Parameter) StringFromValue() (result string, value float32) {
 	var _out0 float32
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("stringFromValue:"), unsafe.Pointer(&_out0))
 	_v := ""
 	if _r != 0 {
 		_v = purego.GoString(_r)
@@ -71,95 +72,70 @@ func (x *Parameter) StringFromValue() (result string, value float32) {
 }
 
 // ValueFromString converts a string into a parameter value.
-func (x *Parameter) ValueFromString(string_ string) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("valueFromString:"), purego.NSString(string_))
+func (p *Parameter) ValueFromString(string_ string) float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("valueFromString:"), purego.NSString(string_))
 	return _r
 }
 
-// MinValue the parameter's minimum value.
-func (x *Parameter) MinValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minValue"))
+// MinValue returns the parameter's minimum value.
+func (p *Parameter) MinValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("minValue"))
 	return _r
 }
 
-// MaxValue the parameter's maximum value.
-func (x *Parameter) MaxValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxValue"))
+// MaxValue returns the parameter's maximum value.
+func (p *Parameter) MaxValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("maxValue"))
 	return _r
 }
 
-// Unit the parameter's unit of measurement.
-func (x *Parameter) Unit() AudioUnitParameterUnit {
-	_r := objc.Send[AudioUnitParameterUnit](objref.IDOf(x), objc.RegisterName("unit"))
+// Unit returns the parameter's unit of measurement.
+func (p *Parameter) Unit() AudioUnitParameterUnit {
+	_r := objc.Send[AudioUnitParameterUnit](objref.IDOf(p), objc.RegisterName("unit"))
 	return _r
 }
 
-// UnitName a localized name for the parameter's unit. Supplied by the AU if kAudioUnitParameterUnit_CustomUnit; else by the framework.
-func (x *Parameter) UnitName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitName"))
+// UnitName returns a localized name for the parameter's unit. Supplied by the AU if kAudioUnitParameterUnit_CustomUnit; else by the framework.
+func (p *Parameter) UnitName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("unitName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Flags various details of the parameter.
-func (x *Parameter) Flags() AudioUnitParameterOptions {
-	_r := objc.Send[AudioUnitParameterOptions](objref.IDOf(x), objc.RegisterName("flags"))
+// Flags returns various details of the parameter.
+func (p *Parameter) Flags() AudioUnitParameterOptions {
+	_r := objc.Send[AudioUnitParameterOptions](objref.IDOf(p), objc.RegisterName("flags"))
 	return _r
 }
 
-// Address the parameter's address.
-func (x *Parameter) Address() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("address"))
+// Address returns the parameter's address.
+func (p *Parameter) Address() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(p), objc.RegisterName("address"))
 	return _r
 }
 
-// ValueStrings for parameters with kAudioUnitParameterUnit_Indexed, localized strings corresponding to the values.
+// ValueStrings returns for parameters with kAudioUnitParameterUnit_Indexed, localized strings corresponding to the values.
 //
 // ValueStrings returns the collection as a Go slice.
-func (x *Parameter) ValueStrings() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueStrings"))
+func (p *Parameter) ValueStrings() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("valueStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DependentParameters parameters whose values may change as a side effect of this parameter's value changing. Each array value is an NSNumber representing AUParameterAddress.
+// DependentParameters returns parameters whose values may change as a side effect of this parameter's value changing. Each array value is an NSNumber representing AUParameterAddress.
 //
 // DependentParameters returns the collection as a Go slice.
-func (x *Parameter) DependentParameters() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dependentParameters"))
+func (p *Parameter) DependentParameters() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("dependentParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Value the parameter's current value.
-func (x *Parameter) Value() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the parameter's current value.
+func (p *Parameter) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("value"))
 	return _r
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *Parameter) SetValue(value float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// Parameterable is the interface implemented by [Parameter], for mocking and DI.
-type Parameterable interface {
-	obj.Object
-	WithValue(value float32) *Parameter
-	StringFromValue() (result string, value float32)
-	ValueFromString(string_ string) float32
-	MinValue() float32
-	MaxValue() float32
-	Unit() AudioUnitParameterUnit
-	UnitName() string
-	Flags() AudioUnitParameterOptions
-	Address() uint64
-	ValueStrings() []string
-	DependentParameters() []obj.Object
-	Value() float32
-	SetValue(value float32)
-}
-
-var _ Parameterable = (*Parameter)(nil)
 
 var _ ParameterNodeProvider = (*Parameter)(nil)

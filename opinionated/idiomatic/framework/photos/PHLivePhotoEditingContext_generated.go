@@ -6,6 +6,7 @@ package photos
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -49,24 +50,24 @@ func livePhotoEditingContextAdopt(id objc.ID) *LivePhotoEditingContext {
 }
 
 // Description returns the object's -description text.
-func (x *LivePhotoEditingContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lpec *LivePhotoEditingContext) Description() string {
+	return rt.Description(objref.IDOf(lpec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LivePhotoEditingContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lpec *LivePhotoEditingContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lpec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LivePhotoEditingContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lpec *LivePhotoEditingContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lpec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LivePhotoEditingContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lpec *LivePhotoEditingContext) String() string {
+	return rt.Description(objref.IDOf(lpec))
 }
 
 // NewLivePhotoEditingContextWithLivePhotoEditingInput creates a Live Photo editing context for the specified editing input.
@@ -76,16 +77,16 @@ func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *Content
 	return livePhotoEditingContextAdopt(_id)
 }
 
-// WithAudioVolume the audio gain to apply to the processed Live Photo.
-func (x *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LivePhotoEditingContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioVolume:"), audioVolume)
-	return x
+// WithAudioVolume sets the audio gain to apply to the processed Live Photo.
+func (lpec *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LivePhotoEditingContext {
+	objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("setAudioVolume:"), audioVolume)
+	return lpec
 }
 
 // PrepareLivePhotoForPlaybackWithTargetSizeOptions processes a Live Photo with your edits for viewing.
 //
 // PrepareLivePhotoForPlaybackWithTargetSizeOptions blocks until the operation completes or ctx is cancelled.
-func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options obj.Object) (result *LivePhoto, err error) {
+func (lpec *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options obj.Object) (result *LivePhoto, err error) {
 	type _result struct {
 		val *LivePhoto
 		err error
@@ -97,7 +98,7 @@ func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptio
 		_o.val = LivePhotoFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:"), targetSize, objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:"), targetSize, objref.IDOf(options), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -108,36 +109,18 @@ func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptio
 }
 
 // Cancel aborts any Live Photo processing in progress.
-func (x *LivePhotoEditingContext) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (lpec *LivePhotoEditingContext) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("cancel"))
 }
 
-// FullSizeImage the original full-size image from the input live photo
-func (x *LivePhotoEditingContext) FullSizeImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullSizeImage"))
+// FullSizeImage returns the original full-size image from the input live photo
+func (lpec *LivePhotoEditingContext) FullSizeImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("fullSizeImage"))
 	return obj.Wrap(_r)
 }
 
 // AudioVolume specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
-func (x *LivePhotoEditingContext) AudioVolume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("audioVolume"))
+func (lpec *LivePhotoEditingContext) AudioVolume() float32 {
+	_r := objc.Send[float32](objref.IDOf(lpec), objc.RegisterName("audioVolume"))
 	return _r
 }
-
-// SetAudioVolume specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
-func (x *LivePhotoEditingContext) SetAudioVolume(audioVolume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioVolume:"), audioVolume)
-}
-
-// LivePhotoEditingContextable is the interface implemented by [LivePhotoEditingContext], for mocking and DI.
-type LivePhotoEditingContextable interface {
-	obj.Object
-	WithAudioVolume(audioVolume float32) *LivePhotoEditingContext
-	PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options obj.Object) (*LivePhoto, error)
-	Cancel()
-	FullSizeImage() obj.Object
-	AudioVolume() float32
-	SetAudioVolume(audioVolume float32)
-}
-
-var _ LivePhotoEditingContextable = (*LivePhotoEditingContext)(nil)

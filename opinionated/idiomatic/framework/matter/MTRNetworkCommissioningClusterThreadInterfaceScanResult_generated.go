@@ -50,60 +50,46 @@ func NewMTRNetworkCommissioningClusterThreadInterfaceScanResult() *MTRNetworkCom
 	return mTRNetworkCommissioningClusterThreadInterfaceScanResultAdopt(_id)
 }
 
-// WithPanId sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithPanId(panId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPanId:"), objref.IDOf(panId))
-	return x
+// WithPanID sets the property and returns the receiver so calls can be chained.
+func (mncctisr *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithPanID(panId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mncctisr), objc.RegisterName("setPanId:"), objref.IDOf(panId))
+	return mncctisr
 }
 
-// WithExtendedPanId sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedPanId(extendedPanId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanId:"), objref.IDOf(extendedPanId))
-	return x
+// WithExtendedPanID sets the property and returns the receiver so calls can be chained.
+func (mncctisr *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedPanID(extendedPanId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mncctisr), objc.RegisterName("setExtendedPanId:"), objref.IDOf(extendedPanId))
+	return mncctisr
 }
 
 // WithNetworkName sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
-	return x
+func (mncctisr *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mncctisr), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
+	return mncctisr
 }
 
 // WithChannel sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
-	return x
+func (mncctisr *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mncctisr), objc.RegisterName("setChannel:"), objref.IDOf(channel))
+	return mncctisr
 }
 
 // WithExtendedAddress sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedAddress(extendedAddress obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedAddress:"), objref.IDOf(extendedAddress))
-	return x
+func (mncctisr *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedAddress(extendedAddress obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mncctisr), objc.RegisterName("setExtendedAddress:"), objref.IDOf(extendedAddress))
+	return mncctisr
 }
 
 // WithRssi sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
-	return x
+func (mncctisr *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mncctisr), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
+	return mncctisr
 }
 
 // WithLqi sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithLqi(lqi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
-	return x
+func (mncctisr *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithLqi(lqi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mncctisr), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
+	return mncctisr
 }
-
-// MTRNetworkCommissioningClusterThreadInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterThreadInterfaceScanResult], for mocking and DI.
-type MTRNetworkCommissioningClusterThreadInterfaceScanResultable interface {
-	obj.Object
-	WithPanId(panId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
-	WithExtendedPanId(extendedPanId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
-	WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
-	WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
-	WithExtendedAddress(extendedAddress obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
-	WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
-	WithLqi(lqi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
-}
-
-var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResult)(nil)
 
 var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultStructProvider = (*MTRNetworkCommissioningClusterThreadInterfaceScanResult)(nil)

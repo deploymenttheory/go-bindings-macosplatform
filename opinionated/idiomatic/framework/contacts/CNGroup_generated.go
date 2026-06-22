@@ -48,29 +48,29 @@ func groupAdopt(id objc.ID) *Group {
 }
 
 // Description returns the object's -description text.
-func (x *Group) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Group) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Group) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Group) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Group) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Group) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Group) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Group) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
-// Identifier the identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
-func (x *Group) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
+func (g *Group) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -78,26 +78,17 @@ func (x *Group) Identifier() string {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Group) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (g *Group) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Groupable is the interface implemented by [Group], for mocking and DI.
-type Groupable interface {
-	obj.Object
-	Identifier() string
-	Name() string
-}
-
-var _ Groupable = (*Group)(nil)
-
 // isGroup marks Group — and, by embedding promotion, its
 // subclasses — as a member of the Group hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Group) isGroup() {}
+func (g *Group) isGroup() {}
 
 var _ GroupProvider = (*Group)(nil)
