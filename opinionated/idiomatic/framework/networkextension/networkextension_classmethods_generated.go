@@ -12,10 +12,10 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Load all of the App Proxy configurations associated with the calling app that have previously been saved to the Network Extension preferences.
+// LoadAllFromPreferences load all of the App Proxy configurations associated with the calling app that have previously been saved to the Network Extension preferences.
 //
 // LoadAllFromPreferences blocks until the operation completes or ctx is cancelled.
-func LoadAllFromPreferences(ctx context.Context) (obj.Object, error) {
+func LoadAllFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -37,87 +37,87 @@ func LoadAllFromPreferences(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Returns a singleton DNS proxy manager instance.
+// SharedManager returns a singleton DNS proxy manager instance.
 func SharedManager() *NEDNSProxyManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEDNSProxyManager")), objc.RegisterName("sharedManager"))
 	return NEDNSProxyManagerFromID(_r)
 }
 
-// Access the single instance of a DNS settings manager.
+// NEDNSSettingsManagerSharedManager access the single instance of a DNS settings manager.
 func NEDNSSettingsManagerSharedManager() *NEDNSSettingsManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEDNSSettingsManager")), objc.RegisterName("sharedManager"))
 	return NEDNSSettingsManagerFromID(_r)
 }
 
-// Creates a verdict that tells the system to pass the current chunk of network data and all subsequent data for the current flow to its final destination.
+// AllowVerdict creates a verdict that tells the system to pass the current chunk of network data and all subsequent data for the current flow to its final destination.
 func AllowVerdict() *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("allowVerdict"))
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Creates a verdict that tells the system to drop the current chunk of network data and all subsequent data for the current flow.
+// DropVerdict creates a verdict that tells the system to drop the current chunk of network data and all subsequent data for the current flow.
 func DropVerdict() *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("dropVerdict"))
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Creates a verdict that tells the system to pass a chunk of network data to its final destination, and specifies the next chunk of data to provide.
+// DataVerdictWithPassBytesPeekBytes creates a verdict that tells the system to pass a chunk of network data to its final destination, and specifies the next chunk of data to provide.
 func DataVerdictWithPassBytesPeekBytes(passBytes int, peekBytes int) *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("dataVerdictWithPassBytes:peekBytes:"), passBytes, peekBytes)
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Creates a verdict that tells the system to pause the flow.
+// PauseVerdict creates a verdict that tells the system to pause the flow.
 func PauseVerdict() *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("pauseVerdict"))
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Access the single instance of NEFilterManager.
+// NEFilterManagerSharedManager access the single instance of NEFilterManager.
 func NEFilterManagerSharedManager() *NEFilterManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterManager")), objc.RegisterName("sharedManager"))
 	return NEFilterManagerFromID(_r)
 }
 
-// Create a verdict that indicates to the system that the all of the new flow’s data should be allowed to pass to its final destination.
+// NEFilterNewFlowVerdictAllowVerdict create a verdict that indicates to the system that the all of the new flow’s data should be allowed to pass to its final destination.
 func NEFilterNewFlowVerdictAllowVerdict() *NEFilterNewFlowVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("allowVerdict"))
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// Create a verdict that indicates to the system that all of the new flow’s data should dropped, and the user should not be given the opportunity to request access.
+// NEFilterNewFlowVerdictDropVerdict create a verdict that indicates to the system that all of the new flow’s data should dropped, and the user should not be given the opportunity to request access.
 func NEFilterNewFlowVerdictDropVerdict() *NEFilterNewFlowVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("dropVerdict"))
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// Create a verdict that indicates to the system that the filter needs to make a decision about a new flow after seeing a portion of the flow’s data.
+// FilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes create a verdict that indicates to the system that the filter needs to make a decision about a new flow after seeing a portion of the flow’s data.
 func FilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes(filterInbound bool, peekInboundBytes int, filterOutbound bool, peekOutboundBytes int) *NEFilterNewFlowVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("filterDataVerdictWithFilterInbound:peekInboundBytes:filterOutbound:peekOutboundBytes:"), filterInbound, peekInboundBytes, filterOutbound, peekOutboundBytes)
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// Creates a verdict that tells the system to pause the flow.
+// NEFilterNewFlowVerdictPauseVerdict creates a verdict that tells the system to pause the flow.
 func NEFilterNewFlowVerdictPauseVerdict() *NEFilterNewFlowVerdict {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("pauseVerdict"))
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// Starts the Network Extension machinery from inside a System Extension.
+// StartSystemExtensionMode starts the Network Extension machinery from inside a System Extension.
 func StartSystemExtensionMode() {
 	objc.Send[objc.ID](objc.ID(_class("NEProvider")), objc.RegisterName("startSystemExtensionMode"))
 }
 
-// Access the single instance of a network relay manager.
+// NERelayManagerSharedManager access the single instance of a network relay manager.
 func NERelayManagerSharedManager() *NERelayManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NERelayManager")), objc.RegisterName("sharedManager"))
 	return NERelayManagerFromID(_r)
 }
 
-// Asynchronously reads all the relay configurations previously created and saved by the calling app.
+// LoadAllManagersFromPreferences asynchronously reads all the relay configurations previously created and saved by the calling app.
 //
 // LoadAllManagersFromPreferences blocks until the operation completes or ctx is cancelled.
-func LoadAllManagersFromPreferences(ctx context.Context) (obj.Object, error) {
+func LoadAllManagersFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -139,10 +139,10 @@ func LoadAllManagersFromPreferences(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Loads all previously-saved transparent proxy configurations.
+// NETransparentProxyManagerLoadAllFromPreferences loads all previously-saved transparent proxy configurations.
 //
 // NETransparentProxyManagerLoadAllFromPreferences blocks until the operation completes or ctx is cancelled.
-func NETransparentProxyManagerLoadAllFromPreferences(ctx context.Context) (obj.Object, error) {
+func NETransparentProxyManagerLoadAllFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -164,10 +164,10 @@ func NETransparentProxyManagerLoadAllFromPreferences(ctx context.Context) (obj.O
 	}
 }
 
-// Read all of the VPN configurations created by the calling app that have previously been saved to the Network Extension preferences.
+// NETunnelProviderManagerLoadAllFromPreferences read all of the VPN configurations created by the calling app that have previously been saved to the Network Extension preferences.
 //
 // NETunnelProviderManagerLoadAllFromPreferences blocks until the operation completes or ctx is cancelled.
-func NETunnelProviderManagerLoadAllFromPreferences(ctx context.Context) (obj.Object, error) {
+func NETunnelProviderManagerLoadAllFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,25 +189,25 @@ func NETunnelProviderManagerLoadAllFromPreferences(ctx context.Context) (obj.Obj
 	}
 }
 
-// Returns a tunnel provider manager for managing a per-app VPN configuration.
+// ForPerAppVPN returns a tunnel provider manager for managing a per-app VPN configuration.
 func ForPerAppVPN() *NETunnelProviderManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NETunnelProviderManager")), objc.RegisterName("forPerAppVPN"))
 	return NETunnelProviderManagerFromID(_r)
 }
 
-// Access the single instance of NEVPNManager.
+// NEVPNManagerSharedManager access the single instance of NEVPNManager.
 func NEVPNManagerSharedManager() *NEVPNManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NEVPNManager")), objc.RegisterName("sharedManager"))
 	return NEVPNManagerFromID(_r)
 }
 
-// Create an endpoint with a Bonjour service name, type, and domain. All fields must be specified.
+// EndpointWithNameTypeDomain create an endpoint with a Bonjour service name, type, and domain. All fields must be specified.
 func EndpointWithNameTypeDomain(name string, type_ string, domain string) *NWBonjourServiceEndpoint {
 	_r := objc.Send[objc.ID](objc.ID(_class("NWBonjourServiceEndpoint")), objc.RegisterName("endpointWithName:type:domain:"), purego.NSString(name), purego.NSString(type_), purego.NSString(domain))
 	return NWBonjourServiceEndpointFromID(_r)
 }
 
-// Create a host endpoint with a hostname and port.
+// EndpointWithHostnamePort create a host endpoint with a hostname and port.
 func EndpointWithHostnamePort(hostname string, port string) *NWHostEndpoint {
 	_r := objc.Send[objc.ID](objc.ID(_class("NWHostEndpoint")), objc.RegisterName("endpointWithHostname:port:"), purego.NSString(hostname), purego.NSString(port))
 	return NWHostEndpointFromID(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVCustomMediaSelectionScheme provides a collection of custom settings for controlling the presentation of the media.
-//
 // CustomMediaSelectionScheme is an idiomatic wrapper over the Objective-C class AVCustomMediaSelectionScheme.
+//
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVCustomMediaSelectionScheme provides a collection of custom settings for controlling the presentation of the media.
 type CustomMediaSelectionScheme struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CustomMediaSelectionSchemeFromID(id objc.ID) *CustomMediaSelectionScheme {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomMediaSelectionScheme{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CustomMediaSelectionScheme{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func customMediaSelectionSchemeAdopt(id objc.ID) *CustomMediaSelectionScheme {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomMediaSelectionScheme{Handle: objref.Wrap(id)}
+	x := &CustomMediaSelectionScheme{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *CustomMediaSelectionScheme) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CustomMediaSelectionScheme) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCustomMediaSelectionScheme creates a new CustomMediaSelectionScheme.
 func NewCustomMediaSelectionScheme() *CustomMediaSelectionScheme {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCustomMediaSelectionScheme")), objc.RegisterName("new"))
 	return customMediaSelectionSchemeAdopt(_id)
 }
 
-// Provides an array of media presentation settings that can be effective at the same time as the specified language and settings for other selectors of the receiver.
+// MediaPresentationSettingsForSelectorComplementaryToLanguageSettings provides an array of media presentation settings that can be effective at the same time as the specified language and settings for other selectors of the receiver.
 func (x *CustomMediaSelectionScheme) MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *MediaPresentationSelector, language string, settings []*MediaPresentationSetting) []*MediaPresentationSetting {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationSettingsForSelector:complementaryToLanguage:settings:"), objref.IDOf(selector), purego.NSString(language), purego.SliceToNSArray(settings, func(_v *MediaPresentationSetting) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaPresentationSetting { return MediaPresentationSettingFromID(_id) })
 }
 
-// Indicates whether an alternative selection interface should provide a menu of language choices.
+// ShouldOfferLanguageSelection indicates whether an alternative selection interface should provide a menu of language choices.
 func (x *CustomMediaSelectionScheme) ShouldOfferLanguageSelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldOfferLanguageSelection"))
 	return _r
 }
 
-// Provides available language choices. Each string in the array is intended to be interpreted as a BCP 47 language tag.
+// AvailableLanguages provides available language choices. Each string in the array is intended to be interpreted as a BCP 47 language tag.
 //
 // AvailableLanguages returns the collection as a Go slice.
 func (x *CustomMediaSelectionScheme) AvailableLanguages() []string {
@@ -84,7 +92,7 @@ func (x *CustomMediaSelectionScheme) AvailableLanguages() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Provides custom settings.
+// Selectors provides custom settings.
 //
 // Selectors returns the collection as a Go slice.
 func (x *CustomMediaSelectionScheme) Selectors() []*MediaPresentationSelector {

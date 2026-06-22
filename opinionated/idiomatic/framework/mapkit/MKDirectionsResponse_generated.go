@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The route information that Apple servers return in response to your request for directions.
-//
 // DirectionsResponse is an idiomatic wrapper over the Objective-C class MKDirectionsResponse.
+//
+// The route information that Apple servers return in response to your request for directions.
 type DirectionsResponse struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DirectionsResponseFromID(id objc.ID) *DirectionsResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectionsResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectionsResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func directionsResponseAdopt(id objc.ID) *DirectionsResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectionsResponse{Handle: objref.Wrap(id)}
+	x := &DirectionsResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,32 @@ func (x *DirectionsResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectionsResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDirectionsResponse creates a new DirectionsResponse.
 func NewDirectionsResponse() *DirectionsResponse {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKDirectionsResponse")), objc.RegisterName("new"))
 	return directionsResponseAdopt(_id)
 }
 
+// Source wraps the corresponding Objective-C method.
 func (x *DirectionsResponse) Source() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
+// Destination wraps the corresponding Objective-C method.
 func (x *DirectionsResponse) Destination() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
+// Routes wraps the corresponding Objective-C method.
+//
 // Routes returns the collection as a Go slice.
 func (x *DirectionsResponse) Routes() []*Route {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("routes"))

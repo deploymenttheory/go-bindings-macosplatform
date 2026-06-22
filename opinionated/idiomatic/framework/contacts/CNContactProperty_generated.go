@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a property of a contact.
-//
 // ContactProperty is an idiomatic wrapper over the Objective-C class CNContactProperty.
+//
+// An object that represents a property of a contact.
 type ContactProperty struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactPropertyFromID(id objc.ID) *ContactProperty {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactProperty{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactProperty{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactPropertyAdopt(id objc.ID) *ContactProperty {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactProperty{Handle: objref.Wrap(id)}
+	x := &ContactProperty{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,25 @@ func (x *ContactProperty) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactProperty) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContactProperty creates a new ContactProperty.
 func NewContactProperty() *ContactProperty {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNContactProperty")), objc.RegisterName("new"))
 	return contactPropertyAdopt(_id)
 }
 
+// Contact wraps the corresponding Objective-C method.
 func (x *ContactProperty) Contact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
 	return ContactFromID(_r)
 }
 
-// The key of the contact property, as defined in CNContact.h.
+// Key the key of the contact property, as defined in CNContact.h.
 func (x *ContactProperty) Key() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
 	if _r == 0 {
@@ -78,13 +87,13 @@ func (x *ContactProperty) Key() string {
 	return purego.GoString(_r)
 }
 
-// The value of the property.
+// Value the value of the property.
 func (x *ContactProperty) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// The identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
+// Identifier the identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (x *ContactProperty) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -93,7 +102,7 @@ func (x *ContactProperty) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The label of the labeled value if the property is an array of labeled values, otherwise is nil.
+// Label the label of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (x *ContactProperty) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {

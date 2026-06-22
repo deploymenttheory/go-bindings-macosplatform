@@ -8,12 +8,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the default subscription registration center object.
+// DefaultSubscriptionRegistrationCenter returns the default subscription registration center object.
 func DefaultSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("VSSubscriptionRegistrationCenter")), objc.RegisterName("defaultSubscriptionRegistrationCenter"))
 	return VSSubscriptionRegistrationCenterFromID(_r)
 }
 
+// SharedUserAccountManager wraps the corresponding Objective-C method.
 func SharedUserAccountManager() *VSUserAccountManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("VSUserAccountManager")), objc.RegisterName("sharedUserAccountManager"))
 	return VSUserAccountManagerFromID(_r)

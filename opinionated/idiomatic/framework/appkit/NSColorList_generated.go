@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An ordered list of color objects, identified by keys.
-//
 // ColorList is an idiomatic wrapper over the Objective-C class NSColorList.
+//
+// An ordered list of color objects, identified by keys.
 type ColorList struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ColorListFromID(id objc.ID) *ColorList {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ColorList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func colorListAdopt(id objc.ID) *ColorList {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorList{Handle: objref.Wrap(id)}
+	x := &ColorList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,46 +62,48 @@ func (x *ColorList) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a color list, registering it under the specified name if it isn’t in use already.
-//
-// NewColorListWithName creates a new ColorList.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ColorList) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewColorListWithName initializes and returns a color list, registering it under the specified name if it isn’t in use already.
 func NewColorListWithName(name obj.Object) *ColorList {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), objref.IDOf(name))
 	return colorListAdopt(_id)
 }
 
-// Initializes and returns a color list from the specified file, registering it under the specified name if it isn’t in use already.
-//
-// NewColorListWithNameFromFile creates a new ColorList.
+// NewColorListWithNameFromFile initializes and returns a color list from the specified file, registering it under the specified name if it isn’t in use already.
 func NewColorListWithNameFromFile(name obj.Object, path string) *ColorList {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:fromFile:"), objref.IDOf(name), purego.NSString(path))
 	return colorListAdopt(_id)
 }
 
-// Associates the specified color object with the specified key.
+// SetColorForKey associates the specified color object with the specified key.
 func (x *ColorList) SetColorForKey(color *Color, key obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:forKey:"), objref.IDOf(color), objref.IDOf(key))
 }
 
-// Inserts the specified color at the specified location in the color list.
+// InsertColorKeyAtIndex inserts the specified color at the specified location in the color list.
 func (x *ColorList) InsertColorKeyAtIndex(color *Color, key obj.Object, loc int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertColor:key:atIndex:"), objref.IDOf(color), objref.IDOf(key), loc)
 }
 
-// Removes the color associated with the specified key from the color list.
+// RemoveColorWithKey removes the color associated with the specified key from the color list.
 func (x *ColorList) RemoveColorWithKey(key obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeColorWithKey:"), objref.IDOf(key))
 }
 
-// Returns the color object associated with the specified key.
+// ColorWithKey returns the color object associated with the specified key.
 func (x *ColorList) ColorWithKey(key obj.Object) *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorWithKey:"), objref.IDOf(key))
 	return ColorFromID(_r)
 }
 
-// Saves the color list to the file at the specified URL.
+// WriteToURL saves the color list to the file at the specified URL.
 func (x *ColorList) WriteToURL(url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -109,28 +113,32 @@ func (x *ColorList) WriteToURL(url string) error {
 	return nil
 }
 
-// Saves the color list to the file at the specified path.
+// WriteToFile saves the color list to the file at the specified path.
 func (x *ColorList) WriteToFile(path string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:"), purego.NSString(path))
 	return _r
 }
 
-// Removes the file from which the list was created, if the file is in a standard search path and owned by the user.
+// RemoveFile removes the file from which the list was created, if the file is in a standard search path and owned by the user.
 func (x *ColorList) RemoveFile() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFile"))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *ColorList) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
+// AllKeys wraps the corresponding Objective-C method.
+//
 // AllKeys returns the collection as a Go slice.
 func (x *ColorList) AllKeys() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// IsEditable wraps the corresponding Objective-C method.
 func (x *ColorList) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
 	return _r

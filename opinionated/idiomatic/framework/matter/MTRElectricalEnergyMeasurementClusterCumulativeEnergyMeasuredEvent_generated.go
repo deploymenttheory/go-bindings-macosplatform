@@ -23,7 +23,8 @@ func MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEventFromID(id
 	if id == 0 {
 		return nil
 	}
-	x := &MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEventAdopt(id 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent{Handle: objref.Wrap(id)}
+	x := &MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) IsK
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent creates a new MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent.
 func NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent() *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent")), objc.RegisterName("new"))
 	return mTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEventAdopt(_id)
 }
 
-// WithEnergyImported sets energyImported and returns the receiver so calls can be chained.
+// WithEnergyImported sets the property and returns the receiver so calls can be chained.
 func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) WithEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyImported:"), objref.IDOf(energyImported))
 	return x
 }
 
-// WithEnergyExported sets energyExported and returns the receiver so calls can be chained.
+// WithEnergyExported sets the property and returns the receiver so calls can be chained.
 func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) WithEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyExported:"), objref.IDOf(energyExported))
 	return x
 }
 
+// EnergyImported wraps the corresponding Objective-C method.
 func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energyImported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)
 }
 
+// SetEnergyImported wraps the corresponding Objective-C method.
 func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) SetEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyImported:"), objref.IDOf(energyImported))
 }
 
+// EnergyExported wraps the corresponding Objective-C method.
 func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energyExported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)
 }
 
+// SetEnergyExported wraps the corresponding Objective-C method.
 func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) SetEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyExported:"), objref.IDOf(energyExported))
 }
